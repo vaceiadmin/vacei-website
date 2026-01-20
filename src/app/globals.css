@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  /* Enforce light theme */
+  color-scheme: light;
+  --background: #ECF0F0;
+  --background-secondary: #ffffff;
+  --foreground: #171717;
+  /* Primary color definition */
+  --primary: #242748;
+
+  /* Theme colors from design */
+  --primary-blue: #3B49E6;
+  --gradient-blue-1: #A9B0FF;
+  --gradient-blue-2: #A3AAFF;
+  --text-dark: #26294A;
+  --purple-logo: #8B5CF6;
+  --purple-bg: #6F74B8;
+  /* Purple for VACEI logo */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-blue: var(--primary-blue);
+  --color-gradient-blue-1: var(--gradient-blue-1);
+  --color-gradient-blue-2: var(--gradient-blue-2);
+  --color-text-dark: var(--text-dark);
+  --color-purple-logo: var(--purple-logo);
+  --color-purple-bg: var(--purple-bg);
+  --color-background-secondary: var(--background-secondary);
+
+  /* Set Mona Sans as the default sans font */
+  --font-sans: "Mona Sans", system-ui, sans-serif;
+  
+  /* Custom breakpoint at 1200px */
+  --breakpoint-1200: 1200px;
+}
+
+/* Custom media query for 1200px breakpoint - default smaller, larger only at 1200px+ */
+.nav-link-text {
+  font-size: 0.875rem; /* text-sm - default smaller for 100% zoom */
+  line-height: 1.25rem;
+}
+
+@media (min-width: 1200px) {
+  .nav-link-text {
+    font-size: 1rem; /* text-base - only at 1200px and above */
+    line-height: 1.5rem;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Hide scrollbar for sidebar */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Sidebar slide in animation */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Overlay fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
