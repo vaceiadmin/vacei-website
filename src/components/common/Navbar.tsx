@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import GetInstantQuoteButton from './GetInstantQuoteButton'
+import { servicesData } from '@/data/servicesData'
 
 // Logo path from assets
 const Logo = '/assets/images/Logo.png'
@@ -11,14 +12,15 @@ const Logo = '/assets/images/Logo.png'
 const Navbar = () => {
   const [servicesOpen, setServicesOpen] = useState(false)
   const [portalsOpen, setPortalsOpen] = useState(false)
+  const [resourcesOpen, setResourcesOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [hamburgerHover, setHamburgerHover] = useState(false)
-  
+
   // Check if mobile screen
   const [isMobile, setIsMobile] = useState(false)
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024)
@@ -29,7 +31,7 @@ const Navbar = () => {
   }, [])
 
   const navLinks = [
-    { label: 'Home', href: '/' },
+    { label: 'Products', href: '/products' },
     {
       label: 'Services',
       href: '/services',
@@ -45,14 +47,19 @@ const Navbar = () => {
       isOpen: portalsOpen,
       setIsOpen: setPortalsOpen
     },
-    { label: 'CPE & Podcast', href: '/cpe-podcast' },
     { label: 'Pricing', href: '/pricing' },
-    { label: 'AI Review', href: '/ai-review' },
+    {
+      label: 'Resources',
+      href: '/resources',
+      hasDropdown: true,
+      isOpen: resourcesOpen,
+      setIsOpen: setResourcesOpen
+    },
   ]
 
   return (
     <>
-      <nav className="w-full sticky top-0 z-50 py-4 px-4 ">
+      <nav className="w-full sticky top-0 z-60 py-4 px-4 ">
         {/* Navbar Container with margin, width, and border radius */}
         <div className=" mx-auto bg-white rounded-2xl shadow-sm border border-gray-100">
           <div className="flex items-center justify-between h-20 px-6 lg:px-8">
@@ -71,19 +78,27 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Navigation Links - Tight spacing with responsive font */}
-            <div className="hidden lg:flex items-center gap-5 xl:gap-6 flex-1 justify-center px-6 xl:px-8">
+            <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-center px-4">
               {navLinks.map((link) => (
-                <div key={link.label} className="relative">
+                <div
+                  key={link.label}
+                  className="relative group h-full flex items-center"
+                  onMouseEnter={() => link.hasDropdown && link.setIsOpen?.(true)}
+                  onMouseLeave={() => link.hasDropdown && link.setIsOpen?.(false)}
+                >
                   <Link
                     href={link.href}
-                    className="text-[var(--text-dark)] font-normal nav-link-text hover:text-[var(--primary-blue)] transition-colors flex items-center gap-1"
-                    onMouseEnter={() => link.hasDropdown && link.setIsOpen?.(true)}
-                    onMouseLeave={() => link.hasDropdown && link.setIsOpen?.(false)}
+                    className={`text-[var(--text-dark)] font-normal text-[15px] hover:text-[var(--primary-blue)] transition-colors flex items-center gap-1 ${link.isOpen ? 'text-[var(--primary-blue)]' : ''}`}
+                    onClick={(e) => {
+                      if (link.hasDropdown) {
+                        e.preventDefault(); // Optional: prevent navigation on parent click if it just opens dropdown
+                      }
+                    }}
                   >
                     {link.label}
                     {link.hasDropdown && (
                       <svg
-                        className={`w-4 h-4 xl:w-5 xl:h-5 transition-transform ${link.isOpen ? 'rotate-180' : ''}`}
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${link.isOpen ? 'rotate-180' : ''}`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -97,40 +112,76 @@ const Navbar = () => {
                       </svg>
                     )}
                   </Link>
+
+                  {/* Dropdown Menu */}
+                  {link.hasDropdown && link.isOpen && (
+                    <div
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-max z-50 transform transition-all duration-200 ease-out origin-top"
+                      style={{
+                        animation: 'fadeIn 0.2s ease-out'
+                      }}
+                    >
+                      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-2 overflow-hidden min-w-[260px]">
+                        {link.label === 'Services' ? (
+                          <div className="grid grid-cols-1 gap-1 p-1">
+                            {servicesData.map((service) => (
+                              <Link
+                                key={service.id}
+                                href={`/services/${service.slug}`}
+                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
+                                onClick={() => link.setIsOpen?.(false)}
+                              >
+                                <div className="text-[15px] font-medium text-[var(--text-dark)] group-hover/item:text-[var(--primary-blue)] transition-colors">
+                                  {service.title}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        ) : (
+                          /* Placeholder for other dropdowns */
+                          <div className="p-4 text-sm text-gray-500 text-center">
+                            Coming Soon
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
 
             {/* Right Side Actions - Tight spacing */}
             <div className="flex items-center gap-3 lg:gap-4 flex-shrink-0">
-              {/* Search Button with gray bg circle */}
-              <button
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
-                aria-label="Search"
-              >
-                <svg
-                  className="w-6 h-6 text-[var(--text-dark)]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </button>
 
-              {/* Get Instant Quote Button */}
-              <div className="hidden md:block">
-                <GetInstantQuoteButton />
+              <div className="hidden lg:flex items-center gap-3">
+                {/* Try The Client Portal Button */}
+                <Link
+                  href="/client-portal"
+                  className="flex items-center justify-center gap-2 rounded-full border border-[var(--primary-blue)] text-[var(--text-dark)] font-normal text-[15px] hover:bg-gray-50 transition-all px-6 h-[44px]"
+                >
+                  <span>Try The Client Portal</span>
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </Link>
+
+                {/* Get Instant Quote Button */}
+                <GetInstantQuoteButton hasShadow={false} />
               </div>
 
               {/* Custom Hamburger Menu Button */}
               <button
-                className="w-12 h-12 flex flex-col items-center justify-center gap-1.5 relative"
+                className="w-12 h-12 flex flex-col items-center justify-center gap-1.5 relative lg:hidden"
                 onClick={() => {
                   if (isMobile) {
                     setMobileMenuOpen(!mobileMenuOpen)
@@ -168,6 +219,27 @@ const Navbar = () => {
                   }}
                 />
               </button>
+              {/* Desktop Sidebar Toggle (Hamburger for desktop) if requested, but image implies just buttons. keeping it for mobile only or extra menu if intended. 
+                   The image has a hamburger on the far right. So I will keep the hamburger button but maybe adjust visibility. 
+                   If the image shows a hamburger on DESKTOP too, then I should remove lg:hidden.
+                   The prompt says "make this responsive". Usually means: Logo | Links | Buttons | Hamburger (on mobile) OR Logo | Links | Buttons (on desktop).
+                   BUT the image provided in user metadata is usually the TARGET design.
+                   Lets assume the hamburger is for the drawer/sidebar which might contain extra things.
+                   I will keep the hamburger VISIBLE on desktop if the design has it.
+                   The current code had `lg:flex` for links and `lg:hidden` for something? No, it had `hidden lg:flex` for links.
+                   It had a sidebar available.
+                   Step 0 image shows: Logo | Links | Try Client Portal | Get Instant Quote | Hamburger.
+                   So Hamburger IS VISIBLE ON DESKTOP.
+               */}
+              <button
+                className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 relative ml-2"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                aria-label="Menu"
+              >
+                <div className="w-6 h-0.5 bg-[var(--text-dark)]"></div>
+                <div className="w-6 h-0.5 bg-[var(--text-dark)]"></div>
+                <div className="w-6 h-0.5 bg-[var(--text-dark)]"></div>
+              </button>
             </div>
           </div>
 
@@ -184,8 +256,8 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <div className="mt-4">
-                <GetInstantQuoteButton variant="mobile" onClick={() => setMobileMenuOpen(false)} />
+              <div className="mt-4" onClick={() => setMobileMenuOpen(false)}>
+                <GetInstantQuoteButton hasShadow={false} className="w-full justify-center" />
               </div>
             </div>
           )}
@@ -232,7 +304,7 @@ const Navbar = () => {
                         className="object-contain"
                       />
                     </div>
-                   \
+                    \
                   </Link>
                   <button
                     onClick={() => setSidebarOpen(false)}

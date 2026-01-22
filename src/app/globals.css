@@ -17,6 +17,10 @@
   --purple-logo: #8B5CF6;
   --purple-bg: #6F74B8;
   /* Purple for VACEI logo */
+
+  /* Navbar Button Colors */
+  --navbar-btn-bg: #3640AD;
+  --navbar-btn-border: #8993FF;
 }
 
 @theme inline {
@@ -29,24 +33,28 @@
   --color-text-dark: var(--text-dark);
   --color-purple-logo: var(--purple-logo);
   --color-purple-bg: var(--purple-bg);
+  --color-navbar-btn-bg: var(--navbar-btn-bg);
+  --color-navbar-btn-border: var(--navbar-btn-border);
   --color-background-secondary: var(--background-secondary);
 
   /* Set Mona Sans as the default sans font */
   --font-sans: "Mona Sans", system-ui, sans-serif;
-  
+
   /* Custom breakpoint at 1200px */
   --breakpoint-1200: 1200px;
 }
 
 /* Custom media query for 1200px breakpoint - default smaller, larger only at 1200px+ */
 .nav-link-text {
-  font-size: 0.875rem; /* text-sm - default smaller for 100% zoom */
+  font-size: 0.875rem;
+  /* text-sm - default smaller for 100% zoom */
   line-height: 1.25rem;
 }
 
 @media (min-width: 1200px) {
   .nav-link-text {
-    font-size: 1rem; /* text-base - only at 1200px and above */
+    font-size: 1rem;
+    /* text-base - only at 1200px and above */
     line-height: 1.5rem;
   }
 }
@@ -59,12 +67,15 @@ body {
 
 /* Hide scrollbar for sidebar */
 .hide-scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 /* Sidebar slide in animation */
@@ -73,6 +84,7 @@ body {
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -84,6 +96,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

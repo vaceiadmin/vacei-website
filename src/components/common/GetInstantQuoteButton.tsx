@@ -1,112 +1,45 @@
+import React from 'react'
 import Link from 'next/link'
 
 interface GetInstantQuoteButtonProps {
-  href?: string
+  hasShadow?: boolean
   className?: string
-  onClick?: () => void
-  variant?: 'default' | 'mobile' | 'book-demo'
-  text?: string
+  variant?: 'default' | 'book-demo'
 }
 
-const GetInstantQuoteButton = ({
-  href = '/quote',
-  className = '',
-  onClick,
-  variant = 'default',
-  text
-}: GetInstantQuoteButtonProps) => {
-  const isBookDemo = variant === 'book-demo'
-  const buttonWidth = variant === 'mobile' ? '100%' : isBookDemo ? 'auto' : '221px'
-  const buttonHeight = '48px'
-  const buttonText = text || (isBookDemo ? 'Book a Demo' : 'Get Instant Quote')
-
-  if (isBookDemo) {
-    // Book a Demo button - white outline style
+const GetInstantQuoteButton = ({ hasShadow = true, className = "", variant = 'default' }: GetInstantQuoteButtonProps) => {
+  if (variant === 'book-demo') {
     return (
       <Link
-        href={href}
-        className={`flex items-center justify-center gap-3 rounded-[24px] border-2 border-white text-white font-normal text-[17px] leading-6 transition-all hover:bg-white/10 ${className}`}
-        style={{
-          width: buttonWidth,
-          height: buttonHeight,
-          paddingLeft: '24px',
-          paddingRight: '24px',
-        }}
-        onClick={onClick}
+        href="/demo"
+        className={`
+          inline-flex items-center gap-2 bg-transparent border-2 border-white hover:bg-white/10 text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
+          ${className}
+        `}
       >
-        <span>{buttonText}</span>
-        <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center">
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </div>
+        Book a Demo
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
       </Link>
     )
   }
 
-  // Get Instant Quote button - blue gradient style
   return (
-    <div
-      className={`relative flex items-center justify-center ${className}`}
-      style={{
-        width: buttonWidth,
-        height: buttonHeight,
-        background: 'linear-gradient(180deg, var(--gradient-blue-1), var(--gradient-blue-2))',
-        borderRadius: '24px',
-        padding: '1px',
-      }}
+    <Link
+      href="/quote"
+      className={`
+        inline-flex items-center gap-2 bg-[var(--primary-blue)] hover:bg-[#2F3BC4] text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
+        ${hasShadow ? 'shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5' : ''}
+        ${className}
+      `}
     >
-      <Link
-        href={href}
-        className="flex items-center w-full h-full rounded-[24px] text-white font-normal text-[17px] leading-6 transition-all hover:opacity-90 relative overflow-hidden"
-        style={{
-          background: 'var(--primary-blue)',
-          boxShadow: 'inset 4px 4px 16px 0px var(--gradient-blue-1)',
-          paddingLeft: '24px',
-          paddingRight: '8px',
-        }}
-        onClick={onClick}
-      >
-        <span className="flex-shrink-0">{buttonText}</span>
-        {/* Arrow with gradient circle background matching button border gradient */}
-        <div
-          className="flex items-center justify-center rounded-full flex-shrink-0 ml-auto"
-          style={{
-            width: '32px',
-            height: '32px',
-            background: '#3B49E6',
-            borderColor: 'linear-gradient(180deg, #A9B0FF 0%, #A3AAFF 100%)',
-            boxShadow: '4px 4px 16px 0px #A9B0FF inset'
-          }}
-        >
-          <svg
-            className="w-4 h-4 text-white"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2.5}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </div>
-      </Link>
-    </div>
+      Get Instant Quote
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </Link>
   )
 }
 
 export default GetInstantQuoteButton
-

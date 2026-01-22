@@ -8,37 +8,35 @@ import GetStartedHero from './GetStartedHero'
 const Logo = '/assets/images/Logo.png'
 
 const Footer = () => {
-  const RadialImage = '/assets/images/Radial.png'
-  
   return (
     <footer className="bg-white w-full relative overflow-visible mt-48">
       {/* GetStartedHero - Positioned above footer content with spacing */}
       <div className="relative w-full -mt-48 md:-mt-56 mb-16 flex justify-center">
         <GetStartedHero />
       </div>
-      
+
       {/* Radial Gradient Pattern Images - Bottom left and right */}
       <div className="pointer-events-none">
-        <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-56 sm:h-56 opacity-30">
+        <div className="absolute bottom-0 left-0 w-[350px] h-[330px]  transform -rotate-360">
           <Image
-            src={RadialImage}
+            src="/assets/images/radial3.png"
             alt="Radial Gradient Pattern"
             fill
-            className="object-contain"
+
           />
         </div>
-        <div className="absolute bottom-0 right-0 w-48 h-48 sm:w-56 sm:h-56 opacity-30">
+        <div className="absolute bottom-0 right-0 w-[350px] h-[330px]  transform -rotate-90">
           <Image
-            src={RadialImage}
+            src="/assets/images/radial3.png"
             alt="Radial Gradient Pattern"
             fill
-            className="object-contain"
+
           />
         </div>
       </div>
-      
+
       {/* Main Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  pb-12 lg:pb-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8  pb-12 lg:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
           {/* Column 1 - Logo and Description */}
           <div className="space-y-4">
@@ -53,11 +51,11 @@ const Footer = () => {
                 />
               </div>
             </Link>
-            
+
             <p className="text-sm text-gray-600 leading-relaxed">
               A modern accounting, audit and corporate services firm delivering clarity through a structured digital platform.
             </p>
-            
+
             {/* Social Media - LinkedIn */}
             <div className="flex items-center gap-4 pt-2">
               <a
@@ -71,7 +69,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
+
           {/* Column 2 - VACEI */}
           <div className="space-y-4">
             <h3 className="text-[var(--text-dark)] font-bold text-base">VACEI</h3>
@@ -98,7 +96,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Column 3 - Partner With VACEI */}
           <div className="space-y-4">
             <h3 className="text-[var(--text-dark)] font-bold text-base">Partner With VACEI</h3>
@@ -130,7 +128,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Column 4 - Resources */}
           <div className="space-y-4">
             <h3 className="text-[var(--text-dark)] font-bold text-base">Resources</h3>
@@ -150,7 +148,7 @@ const Footer = () => {
               <h3 className="text-[var(--text-dark)] font-bold text-base">Our Technology</h3>
             </div>
           </div>
-          
+
           {/* Column 5 - Contact Us */}
           <div className="space-y-4">
             <h3 className="text-[var(--text-dark)] font-bold text-base">Contact Us</h3>
@@ -179,10 +177,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Bottom Bar */}
-      <div className="relative z-10 border-t border-gray-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className=" max-w-6xl mx-auto relative z-10 border-t border-gray-200 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
             <div className="flex flex-wrap items-center gap-4">
               <Link href="/terms" className="hover:text-[var(--primary-blue)] transition-colors">
