@@ -21,6 +21,9 @@
   /* Navbar Button Colors */
   --navbar-btn-bg: #3640AD;
   --navbar-btn-border: #8993FF;
+
+  /* Section Background Colors */
+  --section-bg-light: #D8E5E5;
 }
 
 @theme inline {
@@ -36,6 +39,7 @@
   --color-navbar-btn-bg: var(--navbar-btn-bg);
   --color-navbar-btn-border: var(--navbar-btn-border);
   --color-background-secondary: var(--background-secondary);
+  --color-section-bg-light: var(--section-bg-light);
 
   /* Set Mona Sans as the default sans font */
   --font-sans: "Mona Sans", system-ui, sans-serif;

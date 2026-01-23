@@ -32,6 +32,7 @@ const HeroLeftPanel = () => {
             <GetInstantQuoteButton className="h-[60px] w-[230px] shadow-[0_12px_40px_rgba(59,73,230,0.4)] hover:shadow-[0_12px_50px_rgba(59,73,230,0.5)] transition-shadow" />
             <GetInstantQuoteButton
               variant="book-demo"
+              href="/demo"
               className="h-[60px] w-[190px] border-white/20 hover:bg-white/5"
             />
           </div>
