@@ -1,263 +1,228 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import GradientContainer from '../common/GradientContainer'
 import GetInstantQuoteButton from '../common/GetInstantQuoteButton'
 
-interface ServiceCard {
+interface BaseCard {
   id: number
   title: string
-  illustration: React.ReactNode
-  content?: React.ReactNode
+  subtitle?: string
+  image: string
+  hoverImage?: string
+  link: string
 }
 
 const ServicesSection = () => {
   const [activeTab, setActiveTab] = useState<'services' | 'experts' | 'products'>('services')
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const services: ServiceCard[] = [
+  const services: BaseCard[] = [
+    { id: 1, title: 'Corporate Service', image: '/assets/images/placeholder.png', link: '/services/corporate' },
+    { id: 2, title: 'Accounting and Finance', image: '/assets/images/placeholder.png', link: '/services/accounting' },
+    { id: 3, title: 'Tax and Compliance', image: '/assets/images/placeholder.png', link: '/services/tax' },
+    { id: 4, title: 'Audit and Assurance', image: '/assets/images/placeholder.png', link: '/services/audit' },
+  ]
+
+  const experts: BaseCard[] = [
+    { id: 1, title: 'Accountants', image: '/assets/images/pngegg (2) 1.png', link: '/experts/accountants' },
+    { id: 2, title: 'Bookkeepers', image: '/assets/images/pngegg (3) 1.png', link: '/experts/bookkeepers' },
+    { id: 3, title: 'Tax specialists', image: '/assets/images/pngegg (1) 1.png', link: '/experts/tax' },
+    { id: 4, title: 'Audit team', image: '/assets/images/pngegg (4) 1.png', link: '/experts/audit' },
+  ]
+
+  const products: BaseCard[] = [
     {
       id: 1,
-      title: 'Accounting and Finance',
-      illustration: (
-        <div className="flex gap-3 mb-4">
-          <div className="flex-1 bg-[#C2C7FF] rounded-lg p-4 flex flex-col gap-2">
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[var(--purple-bg)] opacity-60"></div>
-              <div className="w-12 h-8 bg-[var(--purple-bg)] rounded opacity-40"></div>
-            </div>
-            <div className="w-full h-2 bg-[var(--purple-bg)] rounded opacity-30"></div>
-            <div className="w-3/4 h-2 bg-[var(--purple-bg)] rounded opacity-30"></div>
-          </div>
-          <div className="flex-1 bg-[#C2C7FF] rounded-lg p-4 flex flex-col gap-2">
-            <div className="w-full h-3 bg-[var(--purple-bg)] rounded opacity-40"></div>
-            <div className="w-full h-3 bg-[var(--purple-bg)] rounded opacity-30"></div>
-            <div className="w-2/3 h-3 bg-[var(--purple-bg)] rounded opacity-30"></div>
-            <div className="w-full h-8 bg-[var(--purple-bg)] rounded mt-2 opacity-20"></div>
-          </div>
-        </div>
-      ),
-      content: (
-        <div className="text-sm text-[var(--text-dark)] space-y-1">
-          <p className="font-medium">Transaction Joel Kenley -$68.00</p>
-          <p className="text-xs text-gray-500">$3280 Spent this month 56% &gt;</p>
-        </div>
-      ),
+      title: 'VACEI Accounting Portal',
+      subtitle: 'Your entire business, in one place.',
+      image: '/assets/images/Cube 1.png',
+      hoverImage: '/assets/images/Accounting 1.png',
+      link: '/products/accounting'
     },
     {
       id: 2,
-      title: 'Tax and Compliance',
-      illustration: (
-        <div className="mb-4 space-y-3">
-          <div className="bg-[#C2C7FF] rounded-lg p-4">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-xs font-semibold text-[var(--primary)]">Tax Form List</h4>
-              <div className="flex items-center gap-1 bg-green-100 px-2 py-1 rounded">
-                <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span className="text-xs font-semibold text-green-600">Approved</span>
-              </div>
-            </div>
-            <div className="space-y-2">
-              {['Tax Form Update', 'Compliance Review', 'Audit Preparation', 'Audit Preparation'].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs text-[var(--primary)]">
-                  <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-3 pt-3 border-t border-gray-200">
-              <p className="text-xs font-semibold text-[var(--primary)] mb-2">Documents</p>
-              <div className="space-y-1">
-                <div className="w-full h-1 bg-gray-200 rounded"></div>
-                <div className="w-full h-1 bg-gray-200 rounded"></div>
-                <div className="w-3/4 h-1 bg-gray-200 rounded"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      title: 'VACEI Client Portal',
+      subtitle: 'Your entire business, in one place.',
+      image: '/assets/images/Pyramid 2.png',
+      hoverImage: '/assets/images/portal.png',
+      link: '/products/client'
     },
     {
       id: 3,
-      title: 'Audit and Assurance',
-      illustration: (
-        <div className="mb-4 space-y-3">
-          <div className="bg-[#C2C7FF] rounded-lg p-4">
-            <div className="flex gap-3 mb-3">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <svg className="w-4 h-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  <span className="text-xs font-semibold text-[var(--primary)]">€8,232.61</span>
-                </div>
-                <p className="text-xs text-gray-500 mb-2">0% vs last month</p>
-                <div className="w-full h-8 bg-[var(--purple-bg)] rounded opacity-30"></div>
-              </div>
-              <div className="flex-1 flex flex-col items-center">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                  <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="space-y-1 text-xs text-[var(--primary)]">
-                  <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 bg-[var(--purple-bg)] rounded-full"></div>
-                    <span>Checklist 1</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 bg-[var(--purple-bg)] rounded-full"></div>
-                    <span>Checklist 2</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <div className="w-1.5 h-1.5 bg-[var(--purple-bg)] rounded-full"></div>
-                    <span>Checklist 3</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-2 justify-center mt-3">
-              {['70%', '30%', '50%'].map((percent, idx) => (
-                <div key={idx} className="w-12 h-12 rounded-full bg-[var(--purple-bg)] opacity-20 flex items-center justify-center">
-                  <span className="text-xs font-semibold text-[var(--primary)]">{percent}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      id: 4,
-      title: 'Regulated and Licensing',
-      illustration: (
-        <div className="mb-4 space-y-3">
-          <div className="bg-[#C2C7FF] rounded-lg p-4">
-            <div className="flex items-center justify-center mb-3">
-              <div className="bg-blue-100 px-4 py-2 rounded-lg flex items-center gap-2">
-                <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <span className="text-xs font-bold text-blue-600">License Approved</span>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <div className="flex-1 bg-white rounded p-3 flex items-center justify-center">
-                <svg className="w-8 h-8 text-[var(--purple-bg)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="flex-1 bg-white rounded p-3 flex flex-col items-center justify-center gap-2">
-                <svg className="w-6 h-6 text-[var(--purple-bg)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                  <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                </svg>
-                <div className="w-8 h-1 bg-[var(--purple-bg)] rounded opacity-30"></div>
-                <div className="w-6 h-1 bg-[var(--purple-bg)] rounded opacity-30"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      title: 'VACEI Audit Portal',
+      subtitle: 'Your entire business, in one place.',
+      image: '/assets/images/Thorus Knot.png',
+      hoverImage: '/assets/images/Audit 1.png',
+      link: '/products/audit'
     },
   ]
 
+  const getActiveData = () => {
+    switch (activeTab) {
+      case 'experts': return experts
+      case 'products': return products
+      case 'services': default: return services
+    }
+  }
+
+  const activeData = getActiveData()
+  const visibleCards = activeTab === 'products' ? 3 : 4
+
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % services.length)
+    setCurrentIndex((prev) => (prev + 1) % activeData.length)
   }
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)
+    setCurrentIndex((prev) => (prev - 1 + activeData.length) % activeData.length)
   }
 
-  // Show all 4 cards at once, carousel can cycle through them
-  const visibleCards = 4
   const displayServices = []
-
-  for (let i = 0; i < visibleCards; i++) {
-    const index = (currentIndex + i) % services.length
-    displayServices.push(services[index])
+  if (activeData.length <= visibleCards) {
+    displayServices.push(...activeData)
+  } else {
+    for (let i = 0; i < visibleCards; i++) {
+      const index = (currentIndex + i) % activeData.length
+      displayServices.push(activeData[index])
+    }
   }
 
   return (
     <section className="w-full py-16 lg:py-20">
       <div className="mx-auto px-4 md:px-6 lg:px-8">
-        <GradientContainer className="py-12 lg:py-16 bg-[var(--primary)]">
+        <GradientContainer
+          className="py-12 lg:py-16 relative"
+          backgroundColor="bg-[#1e1e2f]"
+        >
           {/* Navigation Tabs */}
-          <div className="flex justify-center mb-10 lg:mb-12">
-            <div className="inline-flex bg-white/10 rounded-lg p-1 gap-1">
-              <button
-                onClick={() => setActiveTab('services')}
-                className={`px-6 py-2.5 rounded-md text-sm font-medium transition-all ${activeTab === 'services'
-                  ? 'bg-[var(--primary-blue)] text-white'
-                  : 'text-white/80 hover:text-white'
-                  }`}
-              >
-                Services
-              </button>
-              <button
-                onClick={() => setActiveTab('experts')}
-                className={`px-6 py-2.5 rounded-md text-sm font-medium transition-all ${activeTab === 'experts'
-                  ? 'bg-[var(--primary-blue)] text-white'
-                  : 'text-white/80 hover:text-white'
-                  }`}
-              >
-                Experts
-              </button>
-              <button
-                onClick={() => setActiveTab('products')}
-                className={`px-6 py-2.5 rounded-md text-sm font-medium transition-all ${activeTab === 'products'
-                  ? 'bg-[var(--primary-blue)] text-white'
-                  : 'text-white/80 hover:text-white'
-                  }`}
-              >
-                Products
-              </button>
+          <div className="flex justify-center mb-12 relative z-20">
+            <div className="inline-flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1.5 gap-2">
+              {(['services', 'experts', 'products'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setActiveTab(tab); setCurrentIndex(0); }}
+                  className={`px-8 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === tab
+                    ? 'bg-[#525CEB] text-white shadow-lg shadow-blue-500/25'
+                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Service Cards Carousel */}
+          {/* Cards Carousel */}
           <div className="relative">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8">
-              {displayServices.map((service) => (
-                <div
-                  key={service.id}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  {/* Illustration */}
-                  <div className="mb-4">{service.illustration}</div>
+            <div className={`flex justify-center gap-6 lg:gap-8 mb-8 relative z-10 min-h-[500px]`}>
+              {displayServices.map((item) => (
+                activeTab === 'products' ? (
+                  // Product Card Design
+                  <div
+                    key={item.id}
+                    className="group relative w-[350px] lg:w-[400px] h-[500px] bg-[#2A2D55]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer"
+                  >
+                    {/* Default Content (Bottom Layer) */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-between p-8 z-0">
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                        <p className="text-sm text-gray-300">{item.subtitle}</p>
+                      </div>
 
-                  {/* Content */}
-                  {service.content && <div className="mb-4">{service.content}</div>}
+                      <div className="relative w-48 h-48">
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
+                        />
+                      </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-[var(--primary)] mb-4">
-                    {service.title}
-                  </h3>
+                      <GetInstantQuoteButton
+                        variant="custom"
+                        text="Get Instant Quote"
+                        href={item.link}
+                        bgColor="#4F46E5"
+                        textColor="white"
+                        className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
+                      />
+                    </div>
 
-                  {/* Request Service Button */}
-                  <GetInstantQuoteButton
-                    variant="custom"
-                    text="Request Service"
-                    href={`/services/${service.id}`}
-                    bgColor="var(--primary)"
-                    textColor="white"
-                    className="w-full justify-center text-sm py-2.5"
-                    hasShadow={false}
-                  />
-                </div>
+                    {/* Hover Content - Portal UI Image Overlay (Top Layer) */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none group-hover:pointer-events-auto"
+                      style={{ backgroundColor: '#3D4494' }}
+                    >
+                      <GradientContainer className="w-full h-full flex flex-col items-center pt-8" backgroundColor="bg-transparent">
+                        <div className="text-center mb-6 relative z-10 px-6">
+                          <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                          <p className="text-xs text-white/80 mb-4">{item.subtitle}</p>
+                          <GetInstantQuoteButton
+                            variant="custom"
+                            text="Get Instant Quote"
+                            href={item.link}
+                            bgColor="#4F46E5"
+                            textColor="white"
+                            className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
+                          />
+                        </div>
+
+                        <div className="relative w-full flex-1 mt-2 transform translate-y-4 transition-transform duration-500 group-hover:translate-y-0 px-4 pb-0">
+                          {item.hoverImage && (
+                            <div className="relative w-full h-full rounded-t-xl overflow-hidden shadow-2xl bg-white/5 border-t border-l border-r border-white/20">
+                              <Image
+                                src={item.hoverImage}
+                                alt={`${item.title} Interface`}
+                                fill
+                                className="object-cover object-top"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </GradientContainer>
+                    </div>
+                  </div>
+                ) : (
+                  // Expert & Service Card Design
+                  <div
+                    key={item.id}
+                    className="group relative w-[300px] h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                  >
+                    {/* Image Area */}
+                    <div className={`relative w-full h-[60%] overflow-hidden ${activeTab === 'experts' ? 'bg-[#3D4494]' : 'bg-gray-100'}`}>
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className={`object-contain p-4 transition-transform duration-500 group-hover:scale-105 ${activeTab === 'experts' ? 'object-bottom pb-0' : 'object-center'}`}
+                      />
+                    </div>
+
+                    {/* Content Area */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-white h-[40%] p-6 flex flex-col justify-between border-t border-gray-100">
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">{item.title}</h3>
+                        <div className="w-12 h-1 bg-[#525CEB] rounded mb-3"></div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-[#525CEB] font-semibold text-sm group-hover:text-[#4048B8] cursor-pointer transition-colors">
+                        <span>Request Service</span>
+                        <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                )
               ))}
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex justify-center items-center gap-3">
+            <div className="flex justify-center items-center gap-3 mt-4">
               <button
                 onClick={prevSlide}
-                className="w-10 h-10 rounded-full bg-[var(--purple-bg)] text-white flex items-center justify-center hover:bg-[var(--primary-blue)] transition-colors"
+                className="w-10 h-10 rounded-full bg-[#525CEB] text-white flex items-center justify-center hover:bg-[#4048B8] transition-all shadow-lg hover:shadow-[#525CEB]/25"
                 aria-label="Previous"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -266,7 +231,7 @@ const ServicesSection = () => {
               </button>
               <button
                 onClick={nextSlide}
-                className="w-10 h-10 rounded-full border-2 border-[var(--purple-bg)] text-[var(--purple-bg)] flex items-center justify-center hover:bg-[var(--purple-bg)] hover:text-white transition-colors"
+                className="w-10 h-10 rounded-full border-2 border-[#525CEB] text-[#525CEB] flex items-center justify-center hover:bg-[#525CEB] hover:text-white transition-all shadow-lg hover:shadow-[#525CEB]/25"
                 aria-label="Next"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -282,4 +247,3 @@ const ServicesSection = () => {
 }
 
 export default ServicesSection
-
