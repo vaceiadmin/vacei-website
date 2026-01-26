@@ -1,0 +1,227 @@
+"use client"
+import React, { useState } from 'react'
+import { Mail, Phone, MapPin, PhoneCall } from 'lucide-react'
+import { motion } from 'framer-motion'
+
+const ContactForm = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    })
+    const [errors, setErrors] = useState<{ [key: string]: string }>({})
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
+        setFormData(prev => ({ ...prev, [name]: value }))
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: '' }))
+        }
+    }
+
+    const validate = () => {
+        const newErrors: { [key: string]: string } = {}
+        
+        if (!formData.name.trim()) {
+            newErrors.name = 'Name is required'
+        }
+        
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required'
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email'
+        }
+        
+        if (!formData.message.trim()) {
+            newErrors.message = 'Message is required'
+        }
+        
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        
+        if (!validate()) {
+            return
+        }
+        
+        setIsSubmitting(true)
+        // Handle form submission here
+        setTimeout(() => {
+            setIsSubmitting(false)
+            alert('Message sent successfully!')
+            setFormData({ name: '', email: '', message: '' })
+        }, 1000)
+    }
+
+    return (
+        <section className="py-16 lg:py-24 ">
+            <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+                <div className=" rounded-2xl  p-6 md:p-8 lg:p-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                        {/* Left Column: Contact Form */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="bg-white rounded-xl p-6 md:p-8 shadow-md"
+                        >
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#181C42] mb-3">
+                                Send Us a Message
+                            </h2>
+                            <p className="text-sm md:text-base text-[#52525B] mb-6 leading-relaxed">
+                                Use this form to request a quote, ask a question, or get more information about our services.
+                            </p>
+
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                {/* Name Field */}
+                                <div>
+                              
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                            errors.name ? 'border-red-500' : 'border-gray-300'
+                                        }`}
+                                        placeholder="Your name"
+                                    />
+                                    {errors.name && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                                    )}
+                                </div>
+
+                                {/* Email Field */}
+                                <div>
+                           
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                            errors.email ? 'border-red-500' : 'border-gray-300'
+                                        }`}
+                                        placeholder="your.email@example.com"
+                                    />
+                                    {errors.email && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                                    )}
+                                </div>
+
+                                {/* Message Field */}
+                                <div>
+
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        rows={5}
+                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors resize-none ${
+                                            errors.message ? 'border-red-500' : 'border-gray-300'
+                                        }`}
+                                        placeholder="Your message"
+                                    />
+                                    {errors.message && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                                    )}
+                                </div>
+
+                                {/* Submit Button */}
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-[#181C42] hover:bg-[#0f1229] text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                                </button>
+                            </form>
+                        </motion.div>
+
+                        {/* Right Column: Contact Information */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="flex flex-col justify-start"
+                        >
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#181C42] mb-8">
+                                Contact Information
+                            </h2>
+
+                            <div className="space-y-6 mb-8">
+                                {/* Email */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-[#181C42] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <Mail className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-[#181C42] mb-1">Email</p>
+                                        <a 
+                                            href="mailto:info@vacei.com" 
+                                            className="text-sm md:text-base text-[#52525B] hover:text-[#6F74B8] transition-colors"
+                                        >
+                                            info@vacei.com
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {/* Phone */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-[#181C42] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <Phone className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-[#181C42] mb-1">Phone</p>
+                                        <a 
+                                            href="tel:+35677142418" 
+                                            className="text-sm md:text-base text-[#52525B] hover:text-[#6F74B8] transition-colors"
+                                        >
+                                            +356 77142418
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {/* Address */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-[#181C42] rounded-full flex items-center justify-center flex-shrink-0">
+                                        <MapPin className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-semibold text-[#181C42] mb-1">Address</p>
+                                        <p className="text-sm md:text-base text-[#52525B]">
+                                            Triq San Giljan, San Gwann SGN 2801, Malta
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Call to Action */}
+                            <div className="mt-auto">
+                                <p className="text-base md:text-lg font-semibold text-[#181C42] mb-4">
+                                    Prefer to talk?
+                                </p>
+                                <button className=" bg-[#6F74B8] hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2">
+                                    <span>Book a free 15-minute call</span>
+                                    <PhoneCall className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default ContactForm
+

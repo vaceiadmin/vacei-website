@@ -6,17 +6,30 @@ interface GradientContainerProps {
     className?: string
     showRadials?: boolean
     backgroundColor?: string
+    radialImage?: string
+    topLeftRotation?: string
+    bottomRightRotation?: string
 }
 
-const GradientContainer = ({ children, className = "", showRadials = true, backgroundColor }: GradientContainerProps) => {
+const GradientContainer = ({ 
+    children, 
+    className = "", 
+    showRadials = true, 
+    backgroundColor, 
+    radialImage,
+    topLeftRotation = "-rotate-90",
+    bottomRightRotation = "rotate-90"
+}: GradientContainerProps) => {
     const bgColor = backgroundColor || 'bg-[var(--primary)]'
+    const radialSrc = radialImage || '/assets/images/radial2.png'
+    
     return (
         <div className={`relative w-full ${bgColor} overflow-hidden rounded-2xl ${className}`}>
             {/* Background Radial Image - Top Left */}
             {showRadials && (
-                <div className="absolute top-0 left-0 w-[350px] h-[330px] z-0 pointer-events-none transform -rotate-90">
+                <div className={`absolute top-0 left-0 w-[350px] h-[330px] z-0 pointer-events-none transform ${topLeftRotation}`}>
                     <Image
-                        src="/assets/images/radial2.png"
+                        src={radialSrc}
                         alt="Radial Gradient"
                         fill
                         className="object-cover"
@@ -26,9 +39,9 @@ const GradientContainer = ({ children, className = "", showRadials = true, backg
 
             {/* Background Radial Image - Bottom Right */}
             {showRadials && (
-                <div className="absolute bottom-0 right-0 w-[350px] h-[330px] z-0 pointer-events-none transform rotate-90">
+                <div className={`absolute bottom-0 right-0 w-[350px] h-[330px] z-0 pointer-events-none transform ${bottomRightRotation}`}>
                     <Image
-                        src="/assets/images/radial2.png"
+                        src={radialSrc}
                         alt="Radial Gradient"
                         fill
                         className="object-cover"
