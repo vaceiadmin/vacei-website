@@ -70,10 +70,10 @@ const ContactForm = () => {
                             transition={{ duration: 0.6 }}
                             className="bg-white rounded-xl p-6 md:p-8 shadow-md"
                         >
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#181C42] mb-3">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-3">
                                 Send Us a Message
                             </h2>
-                            <p className="text-sm md:text-base text-[#52525B] mb-6 leading-relaxed">
+                            <p className="text-sm md:text-base text-gray mb-6 leading-relaxed">
                                 Use this form to request a quote, ask a question, or get more information about our services.
                             </p>
 
@@ -87,7 +87,7 @@ const ContactForm = () => {
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
                                             errors.name ? 'border-red-500' : 'border-gray-300'
                                         }`}
                                         placeholder="Your name"
@@ -106,7 +106,7 @@ const ContactForm = () => {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                        className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
                                             errors.email ? 'border-red-500' : 'border-gray-300'
                                         }`}
                                         placeholder="your.email@example.com"
@@ -139,7 +139,7 @@ const ContactForm = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full bg-[#181C42] hover:bg-[#0f1229] text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-text-heading hover:bg-dark-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isSubmitting ? 'Submitting...' : 'Submit'}
                                 </button>
@@ -154,21 +154,21 @@ const ContactForm = () => {
                             transition={{ duration: 0.6 }}
                             className="flex flex-col justify-start"
                         >
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#181C42] mb-8">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-8">
                                 Contact Information
                             </h2>
 
                             <div className="space-y-6 mb-8">
                                 {/* Email */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-[#181C42] rounded-full flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 bg-text-heading rounded-full flex items-center justify-center flex-shrink-0">
                                         <Mail className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-semibold text-[#181C42] mb-1">Email</p>
+                                        <p className="text-sm font-semibold text-heading mb-1">Email</p>
                                         <a 
                                             href="mailto:info@vacei.com" 
-                                            className="text-sm md:text-base text-[#52525B] hover:text-[#6F74B8] transition-colors"
+                                            className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
                                         >
                                             info@vacei.com
                                         </a>
@@ -177,14 +177,14 @@ const ContactForm = () => {
 
                                 {/* Phone */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-[#181C42] rounded-full flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 bg-text-heading rounded-full flex items-center justify-center flex-shrink-0">
                                         <Phone className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-semibold text-[#181C42] mb-1">Phone</p>
+                                        <p className="text-sm font-semibold text-heading mb-1">Phone</p>
                                         <a 
                                             href="tel:+35677142418" 
-                                            className="text-sm md:text-base text-[#52525B] hover:text-[#6F74B8] transition-colors"
+                                            className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
                                         >
                                             +356 77142418
                                         </a>
@@ -193,12 +193,12 @@ const ContactForm = () => {
 
                                 {/* Address */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-[#181C42] rounded-full flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 bg-text-heading rounded-full flex items-center justify-center flex-shrink-0">
                                         <MapPin className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-semibold text-[#181C42] mb-1">Address</p>
-                                        <p className="text-sm md:text-base text-[#52525B]">
+                                        <p className="text-sm font-semibold text-heading mb-1">Address</p>
+                                        <p className="text-sm md:text-base text-gray">
                                             Triq San Giljan, San Gwann SGN 2801, Malta
                                         </p>
                                     </div>
@@ -207,10 +207,10 @@ const ContactForm = () => {
 
                             {/* Call to Action */}
                             <div className="mt-auto">
-                                <p className="text-base md:text-lg font-semibold text-[#181C42] mb-4">
+                                <p className="text-base md:text-lg font-semibold text-heading mb-4">
                                     Prefer to talk?
                                 </p>
-                                <button className=" bg-[#6F74B8] hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2">
+                                <button className="bg-purple-bg hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2">
                                     <span>Book a free 15-minute call</span>
                                     <PhoneCall className="w-5 h-5" />
                                 </button>

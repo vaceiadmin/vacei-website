@@ -25,19 +25,19 @@ const GetInstantQuoteButton = ({
   if (variant === 'custom') {
     return (
       <Link
-        href={href || "/"}
+        href={href || "/quote"}
         className={`
           inline-flex items-center gap-2 px-6 py-3 rounded-full transition-all text-[15px] font-medium 
-          ${bgColor ? `bg-[${bgColor}]` : 'bg-[var(--primary)]'}
-          ${textColor ? `text-[${textColor}]` : 'text-white'}
-          ${borderColor ? `border-2 border-[${borderColor}]` : ''}
-          ${hasShadow ? 'shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5' : ''}
+          ${bgColor ? '' : 'bg-primary-blue hover:bg-primary-blue-hover'}
+          ${textColor ? '' : 'text-white'}
+          ${borderColor ? 'border-2' : ''}
+          ${hasShadow ? 'shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5' : 'hover:shadow-md hover:-translate-y-0.5'}
           ${className}
         `}
         style={{
-          backgroundColor: bgColor || 'var(--primary)',
-          color: textColor || 'white',
-          borderColor: borderColor || 'transparent'
+          backgroundColor: bgColor || undefined,
+          color: textColor || undefined,
+          borderColor: borderColor || undefined
         }}
       >
         {text || "Button"}
@@ -53,7 +53,7 @@ const GetInstantQuoteButton = ({
       <Link
         href={href || "/demo"}
         className={`
-          inline-flex items-center gap-2 bg-transparent border-2 border-white hover:bg-white/10 text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
+          inline-flex items-center gap-2 bg-transparent border-2 border-white hover:bg-white/10 text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium transform hover:-translate-y-0.5
           ${className}
         `}
       >
@@ -69,7 +69,7 @@ const GetInstantQuoteButton = ({
     <Link
       href={href || "/quote"}
       className={`
-        inline-flex items-center gap-2 bg-[var(--primary-blue)] hover:bg-[#2F3BC4] text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
+        inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
         ${hasShadow ? 'shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5' : ''}
         ${className}
       `}

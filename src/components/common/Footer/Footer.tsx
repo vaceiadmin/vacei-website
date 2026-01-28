@@ -9,7 +9,10 @@ const Logo = '/assets/images/Logo.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-white w-full relative overflow-visible mt-48">
+    <footer className="w-full relative overflow-visible mt-48">
+      {/* Split background: top white, bottom light grey */}
+      <div className="absolute inset-0 -z-20 bg-white " />
+      <div className="absolute top-0 left-0 right-0 h-[260px] md:h-[300px] -z-10  bg-[#ECF0F0]" />
       {/* GetStartedHero - Positioned above footer content with spacing */}
       <div className="relative w-full -mt-48 md:-mt-56 mb-16 flex justify-center">
         <GetStartedHero />
@@ -60,7 +63,7 @@ const Footer = () => {
             <div className="flex items-center gap-4 pt-2">
               <a
                 href="#"
-                className="w-10 h-10 flex items-center justify-center bg-[#6F74B8] rounded-full text-white transition-colors"
+                className="w-10 h-10 flex items-center justify-center bg-purple-bg rounded-full text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -72,25 +75,25 @@ const Footer = () => {
 
           {/* Column 2 - VACEI */}
           <div className="space-y-4">
-            <h3 className="text-[var(--text-dark)] font-bold text-base">VACEI</h3>
+            <h3 className="text-text-dark font-bold text-base">VACEI</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/about" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   About VACEI
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/coming-soon" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Our Team
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/coming-soon" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Careers
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/quote" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Contact
                 </Link>
               </li>
@@ -99,30 +102,30 @@ const Footer = () => {
 
           {/* Column 3 - Partner With VACEI */}
           <div className="space-y-4">
-            <h3 className="text-[var(--text-dark)] font-bold text-base">Partner With VACEI</h3>
+            <h3 className="text-text-dark font-bold text-base">Partner With VACEI</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/partner" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/coming-soon" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Partner Overview
                 </Link>
               </li>
               <li>
-                <Link href="/white-label" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/coming-soon" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   White-Label Solutions
                 </Link>
               </li>
               <li>
-                <Link href="/technology" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/technology" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Technology Licensing
                 </Link>
               </li>
               <li>
-                <Link href="/become-partner" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/coming-soon" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Become a Partner Firm
                 </Link>
               </li>
               <li>
-                <Link href="/reseller" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/coming-soon" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Reseller Program
                 </Link>
               </li>
@@ -131,45 +134,45 @@ const Footer = () => {
 
           {/* Column 4 - Resources */}
           <div className="space-y-4">
-            <h3 className="text-[var(--text-dark)] font-bold text-base">Resources</h3>
+            <h3 className="text-text-dark font-bold text-base">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/faqs" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/faq" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/security" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <Link href="/security-compliance" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   Security & Compliance
                 </Link>
               </li>
             </ul>
             <div className="pt-2">
-              <h3 className="text-[var(--text-dark)] font-bold text-base">Our Technology</h3>
+              <h3 className="text-text-dark font-bold text-base">Our Technology</h3>
             </div>
           </div>
 
           {/* Column 5 - Contact Us */}
           <div className="space-y-4">
-            <h3 className="text-[var(--text-dark)] font-bold text-base">Contact Us</h3>
+            <h3 className="text-text-dark font-bold text-base">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-2">
-                <span className="w-10 h-10 rounded-full bg-[#6F74B8] text-white flex items-center justify-center flex-shrink-0">
+                <span className="w-10 h-10 rounded-full bg-purple-bg text-white flex items-center justify-center flex-shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </span>
-                <a href="tel:+35677142418" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <a href="tel:+35677142418" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   +356 77142418
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-10 h-10 rounded-full bg-[#6F74B8] text-white flex items-center justify-center flex-shrink-0">
+                <span className="w-10 h-10 rounded-full bg-purple-bg text-white flex items-center justify-center flex-shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <a href="mailto:info@vacei.com" className="text-sm text-gray-600 hover:text-[var(--primary-blue)] transition-colors">
+                <a href="mailto:info@vacei.com" className="text-sm text-gray-600 hover:text-primary-blue transition-colors">
                   info@vacei.com
                 </a>
               </li>
@@ -183,15 +186,15 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-600">
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/terms" className="hover:text-[var(--primary-blue)] transition-colors">
+              <Link href="/coming-soon" className="hover:text-primary-blue transition-colors">
                 Terms & Conditions
               </Link>
               <span className="text-gray-400">|</span>
-              <Link href="/privacy" className="hover:text-[var(--primary-blue)] transition-colors">
+              <Link href="/coming-soon" className="hover:text-primary-blue transition-colors">
                 Privacy Policy
               </Link>
               <span className="text-gray-400">|</span>
-              <Link href="/cookies" className="hover:text-[var(--primary-blue)] transition-colors">
+              <Link href="/coming-soon" className="hover:text-primary-blue transition-colors">
                 Cookie Policy
               </Link>
             </div>

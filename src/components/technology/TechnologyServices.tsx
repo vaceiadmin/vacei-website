@@ -36,7 +36,7 @@ const TechnologyServices = () => {
     ]
 
     return (
-        <section className="py-16 lg:py-24 bg-[#D8E5E5]">
+        <section className="py-16 lg:py-24 bg-section-light">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 {/* Main Grid: Left and Right Sections */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 lg:mb-16">
@@ -58,12 +58,12 @@ const TechnologyServices = () => {
                             </div>
 
                             {/* Main Title */}
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-[#181C42] mb-4">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-heading mb-4">
                                 How our technology supports delivery
                             </h2>
 
                             {/* Introductory Text */}
-                            <p className="text-sm md:text-base text-[#52525B] mb-6 leading-relaxed">
+                            <p className="text-sm md:text-base text-gray mb-6 leading-relaxed">
                                 Each client is managed through a defined monthly accounting cycle.
                             </p>
 
@@ -76,7 +76,7 @@ const TechnologyServices = () => {
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        className="flex items-start gap-3 text-sm md:text-base text-[#52525B]"
+                                        className="flex items-start gap-3 text-sm md:text-base text-gray"
                                     >
                                         <div className="mt-1 flex-shrink-0">
                                             <Image
@@ -108,7 +108,7 @@ const TechnologyServices = () => {
                                 transition={{ duration: 0.6 }}
                                 className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm flex flex-col justify-center"
                             >
-                                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-[#181C42] mb-3">
+                                <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-heading mb-3">
                                     Our Technology
                                 </h3>
                                 <p className="text-sm md:text-base text-[#52525B] leading-relaxed">
@@ -122,7 +122,7 @@ const TechnologyServices = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6 }}
-                                className="bg-[#6F74B8] rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col justify-center relative overflow-hidden"
+                                className="bg-purple-bg rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col justify-center relative overflow-hidden"
                             >
                                 {/* Quote Icon Top Left */}
                                 <motion.div
@@ -184,16 +184,16 @@ const TechnologyServices = () => {
                                         <span className="text-white text-xs font-bold">+</span>
                                     </div>
                                 </div>
-                                <h3 className="text-base lg:text-lg font-semibold text-[#181C42] text-center">Analyzing Financial Statement</h3>
+                                <h3 className="text-base lg:text-lg font-semibold text-heading text-center">Analyzing Financial Statement</h3>
                             </div>
 
                             {/* Subtitle */}
-                            <p className="text-xs lg:text-sm text-[#52525B] mb-3 text-center">Generate AI report on financial statements.</p>
+                            <p className="text-xs lg:text-sm text-gray mb-3 text-center">Generate AI report on financial statements.</p>
 
                             {/* Progress Bar */}
                             <div className="mb-4">
                                 <div className="flex items-center justify-between mb-2">
-                                    <span className="text-xs lg:text-sm text-[#52525B]">Setup 100% complete</span>
+                                    <span className="text-xs lg:text-sm text-gray">Setup 100% complete</span>
                                 </div>
                                 <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                                     <div className="h-full bg-blue-600 rounded-full" style={{ width: '100%' }}></div>
@@ -204,7 +204,7 @@ const TechnologyServices = () => {
                             <ul className="space-y-2">
                                 {processSteps.map((step, index) => (
                                     <li key={index} className="flex items-start gap-2">
-                                        <span className={`text-xs lg:text-sm ${index === processSteps.length - 1 ? 'text-[#181C42] font-medium' : 'text-gray-400'}`}>
+                                        <span className={`text-xs lg:text-sm ${index === processSteps.length - 1 ? 'text-heading font-medium' : 'text-gray-400'}`}>
                                             • {step}
                                         </span>
                                     </li>
@@ -221,21 +221,21 @@ const TechnologyServices = () => {
                             className="bg-white rounded-2xl p-4 lg:p-6"
                         >
                             {/* Title */}
-                            <h3 className="text-base lg:text-lg font-semibold text-[#181C42] mb-4">Analyze your Finance Document</h3>
+                            <h3 className="text-base lg:text-lg font-semibold text-heading mb-4">Analyze your Finance Document</h3>
 
                             {/* Upload Area */}
                             <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 lg:p-6 mb-4 text-center bg-gray-50">
                                 <Upload className="mx-auto mb-2 w-10 h-10 text-gray-400" />
-                                <p className="text-sm font-medium text-[#181C42] mb-1">Drop your Document</p>
-                                <p className="text-xs text-[#52525B]">Support PDF files up to 10MB</p>
+                                <p className="text-sm font-medium text-heading mb-1">Drop your Document</p>
+                                <p className="text-xs text-gray">Support PDF files up to 10MB</p>
                             </div>
 
                             {/* Buttons */}
                             <div className="flex gap-2 mb-4">
-                                <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-[#181C42] text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
+                                <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-heading text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
                                     Choose File
                                 </button>
-                                <button className="flex-1 bg-[#181C42] hover:bg-[#0f1229] text-white text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
+                                <button className="flex-1 bg-text-heading hover:bg-dark-hover text-white text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
                                     Analyze Document
                                 </button>
                             </div>
@@ -246,22 +246,22 @@ const TechnologyServices = () => {
                                     <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-1">
                                         <CheckCircle2 className="w-6 h-6 text-white" />
                                     </div>
-                                    <p className="text-xs lg:text-sm font-semibold text-[#181C42]">99%</p>
-                                    <p className="text-xs text-[#52525B]">Success</p>
+                                    <p className="text-xs lg:text-sm font-semibold text-heading">99%</p>
+                                    <p className="text-xs text-gray">Success</p>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-1">
                                         <Clock className="w-6 h-6 text-white" />
                                     </div>
-                                    <p className="text-xs lg:text-sm font-semibold text-[#181C42]">&lt;2s</p>
-                                    <p className="text-xs text-[#52525B]">Time</p>
+                                    <p className="text-xs lg:text-sm font-semibold text-heading">&lt;2s</p>
+                                    <p className="text-xs text-gray">Time</p>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <div className="w-12 h-12 bg-slate-500 rounded-full flex items-center justify-center mb-1">
                                         <FileText className="w-6 h-6 text-white" />
                                     </div>
-                                    <p className="text-xs lg:text-sm font-semibold text-[#181C42]">150+</p>
-                                    <p className="text-xs text-[#52525B]">Document</p>
+                                    <p className="text-xs lg:text-sm font-semibold text-heading">150+</p>
+                                    <p className="text-xs text-gray">Document</p>
                                 </div>
                             </div>
 
@@ -273,7 +273,7 @@ const TechnologyServices = () => {
                                         <div className="bg-gray-100 rounded-lg p-2 mb-1 flex items-center justify-center">
                                             <Brain className="w-5 h-5 text-blue-600" />
                                         </div>
-                                        <p className="text-xs text-[#52525B] leading-tight text-center max-w-[100px]">Advance text recognition</p>
+                                        <p className="text-xs text-gray leading-tight text-center max-w-[100px]">Advance text recognition</p>
                                     </div>
                                     
                                     {/* VectorC.png connecting lines - positioned between all elements */}
@@ -292,8 +292,8 @@ const TechnologyServices = () => {
                                         <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-1">
                                             <Zap className="w-5 h-5 text-blue-600" />
                                         </div>
-                                        <p className="text-xs text-[#52525B] text-center leading-tight">Super fast</p>
-                                        <p className="text-xs text-[#52525B] text-center leading-tight">Processing</p>
+                                        <p className="text-xs text-gray text-center leading-tight">Super fast</p>
+                                        <p className="text-xs text-gray text-center leading-tight">Processing</p>
                                     </div>
                                     
                                     {/* Right: Structure preservation */}
@@ -301,7 +301,7 @@ const TechnologyServices = () => {
                                         <div className="bg-gray-100 rounded-lg p-2 mb-1 flex items-center justify-center">
                                             <Building2 className="w-5 h-5 text-blue-600" />
                                         </div>
-                                        <p className="text-xs text-[#52525B] leading-tight text-center max-w-[100px]">Structure preservation</p>
+                                        <p className="text-xs text-gray leading-tight text-center max-w-[100px]">Structure preservation</p>
                                     </div>
                                 </div>
                             </div>
@@ -338,11 +338,11 @@ const TechnologyServices = () => {
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2 mb-1">
-                                                <span className="text-xs lg:text-sm font-medium text-[#181C42]">
+                                                <span className="text-xs lg:text-sm font-medium text-heading">
                                                     {error.code} - {error.text}
                                                 </span>
                                             </div>
-                                            <span className="text-xs text-[#52525B] bg-gray-100 px-2 py-0.5 rounded">
+                                            <span className="text-xs text-gray bg-gray-100 px-2 py-0.5 rounded">
                                                 {error.tag}
                                             </span>
                                         </div>
@@ -382,11 +382,11 @@ const TechnologyServices = () => {
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex items-center gap-2 mb-1">
-                                                <span className="text-xs lg:text-sm font-medium text-[#181C42]">
+                                                <span className="text-xs lg:text-sm font-medium text-heading">
                                                     {item.code} - {item.text}
                                                 </span>
                                             </div>
-                                            <span className="text-xs text-[#52525B] bg-gray-100 px-2 py-0.5 rounded">
+                                            <span className="text-xs text-gray bg-gray-100 px-2 py-0.5 rounded">
                                                 {item.tag}
                                             </span>
                                         </div>

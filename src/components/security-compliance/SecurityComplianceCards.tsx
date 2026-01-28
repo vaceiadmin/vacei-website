@@ -86,7 +86,7 @@ const SecurityComplianceCards = () => {
     ]
 
     return (
-        <section className="py-16 lg:py-24 bg-[#D8E5E5] mx-2">
+        <section className="py-16 lg:py-24 bg-section-light mx-2">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
                     {cards.map((card, index) => {
@@ -125,12 +125,12 @@ const SecurityComplianceCards = () => {
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-[#181C42] mb-3">
+                            <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-heading mb-3">
                                 {card.title}
                             </h3>
 
                             {/* Description */}
-                            <p className="text-sm md:text-base text-[#52525B] leading-relaxed mb-4 flex-grow">
+                            <p className="text-sm md:text-base text-gray leading-relaxed mb-4 flex-grow">
                                 {card.description}
                             </p>
 
@@ -138,8 +138,8 @@ const SecurityComplianceCards = () => {
                             {card.points && card.points.length > 0 && (
                                 <ul className="space-y-2 mt-auto">
                                     {card.points.map((point, pointIndex) => (
-                                        <li key={pointIndex} className="flex items-start gap-2 text-sm md:text-base text-[#52525B]">
-                                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#52525B] flex-shrink-0"></span>
+                                        <li key={pointIndex} className="flex items-start gap-2 text-sm md:text-base text-gray">
+                                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-text-gray flex-shrink-0"></span>
                                             <span>{point}</span>
                                         </li>
                                     ))}

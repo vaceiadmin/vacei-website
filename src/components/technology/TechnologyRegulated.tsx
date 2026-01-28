@@ -44,7 +44,7 @@ const TechnologyRegulated = () => {
         <section className="py-16 lg:py-24 w-full">
             <GradientContainer
                 className="w-full"
-                backgroundColor="bg-[#D8E5E5]"
+                backgroundColor="bg-section-light"
                 showRadials={true}
                 radialImage="/assets/images/radial4.png.png"
                 topLeftRotation="rotate-180"
@@ -60,12 +60,12 @@ const TechnologyRegulated = () => {
                             transition={{ duration: 0.6 }}
                             className="space-y-6"
                         >
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#181C42] leading-tight">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading leading-tight">
                                 Designed for regulated environments
                             </h2>
 
                             <div className="space-y-4">
-                                <p className="text-sm md:text-base text-[#52525B] leading-relaxed">
+                                <p className="text-sm md:text-base text-gray leading-relaxed">
                                     All technology used by VACEI is designed to support:
                                 </p>
 
@@ -77,7 +77,7 @@ const TechnologyRegulated = () => {
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                                            className="flex items-start gap-3 text-sm md:text-base text-[#52525B]"
+                                            className="flex items-start gap-3 text-sm md:text-base text-gray"
                                         >
                                             <div className="mt-1 flex-shrink-0">
                                                 <Image
@@ -99,10 +99,10 @@ const TechnologyRegulated = () => {
                             </p>
 
                             <div className="space-y-3 pt-4">
-                                <h3 className="text-lg md:text-xl font-semibold text-[#181C42]">
+                                <h3 className="text-lg md:text-xl font-semibold text-heading">
                                     Availability for firms
                                 </h3>
-                                <p className="text-sm md:text-base text-[#52525B] leading-relaxed">
+                                <p className="text-sm md:text-base text-gray leading-relaxed">
                                     Selected components of our technology environment may also be made available to firms through partnerships, licensing, or reseller arrangements.
                                 </p>
                             </div>
@@ -158,7 +158,7 @@ const TechnologyRegulated = () => {
                                         }}
                                     >
                                     {/* Title */}
-                                    <h3 className="text-lg font-semibold text-[#181C42] mb-6">
+                                    <h3 className="text-lg font-semibold text-heading mb-6">
                                         WE Carefully Handle
                                     </h3>
 
@@ -188,7 +188,7 @@ const TechnologyRegulated = () => {
                                                     {/* Content */}
                                                     <div className="flex-1 min-w-0">
                                                         <div className="flex items-start justify-between gap-2 mb-1">
-                                                            <h4 className="text-sm font-semibold text-[#181C42]">
+                                                            <h4 className="text-sm font-semibold text-heading">
                                                                 {card.title}
                                                             </h4>
                                                             {card.status && (
@@ -197,14 +197,14 @@ const TechnologyRegulated = () => {
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        <p className="text-xs text-[#52525B] mb-2 leading-relaxed">
+                                                        <p className="text-xs text-gray mb-2 leading-relaxed">
                                                             {card.description}
                                                         </p>
                                                         <div className="flex items-center gap-3 mt-1.5 flex-wrap">
                                                             {card.links.map((link, linkIndex) => (
                                                                 <button 
                                                                     key={linkIndex}
-                                                                    className="text-xs text-[#6F74B8] hover:underline font-medium"
+                                                                    className="text-xs text-purple-bg hover:underline font-medium"
                                                                 >
                                                                     {link}
                                                                 </button>

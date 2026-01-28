@@ -63,7 +63,7 @@ const QuoteFormSection = () => {
         <section className="py-16 lg:py-24">
             <GradientContainer
                 className="w-full"
-                backgroundColor="bg-[#181C42]"
+                backgroundColor="bg-text-heading"
                 showRadials={true}
             >
                 <div className="max-w-6xl mx-auto py-12 lg:py-16">
@@ -95,7 +95,7 @@ const QuoteFormSection = () => {
                                 transition={{ duration: 0.6 }}
                                 className="flex flex-col justify-center bg-white rounded-2xl p-6 md:p-8 lg:p-12"
                             >
-                                <h2 className="text-2xl md:text-3xl font-medium text-[#181C42] mb-6">
+                                <h2 className="text-2xl md:text-3xl font-medium text-heading mb-6">
                                     Complete the form below to receive your tailored quote
                                 </h2>
 
@@ -109,7 +109,7 @@ const QuoteFormSection = () => {
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
                                                 errors.name ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                             placeholder="Enter your name"
@@ -128,7 +128,7 @@ const QuoteFormSection = () => {
                                             name="email"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
                                                 errors.email ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                             placeholder="Enter your email"
@@ -147,7 +147,7 @@ const QuoteFormSection = () => {
                                             name="subject"
                                             value={formData.subject}
                                             onChange={handleChange}
-                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors ${
+                                            className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
                                                 errors.subject ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                             placeholder="Enter subject"
@@ -166,7 +166,7 @@ const QuoteFormSection = () => {
                                             value={formData.message}
                                             onChange={handleChange}
                                             rows={5}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F74B8] transition-colors resize-none"
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors resize-none"
                                             placeholder="Enter your message (optional)"
                                         />
                                     </div>
@@ -176,7 +176,7 @@ const QuoteFormSection = () => {
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="w-full inline-flex items-center gap-2 bg-[var(--primary-blue)] hover:bg-[#2F3BC4] text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed justify-center"
+                                            className="w-full inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed justify-center"
                                         >
                                             {isSubmitting ? "Sending..." : "Send a Quote"}
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

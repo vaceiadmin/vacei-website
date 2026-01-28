@@ -1,0 +1,38 @@
+import React from 'react'
+import Link from 'next/link'
+import GetInstantQuoteButton from '@/components/common/GetInstantQuoteButton'
+
+const ComingSoonPage = () => {
+    return (
+        <main className="min-h-screen bg-background flex items-center justify-center px-4">
+            <div className="max-w-2xl w-full text-center bg-white rounded-3xl shadow-[0_24px_60px_rgba(15,23,42,0.18)] border border-gray-100 px-8 py-12">
+                <p className="inline-flex items-center px-4 py-1 rounded-full text-xs font-semibold tracking-[0.18em] uppercase bg-[#EEF0FF] text-[#4F46E5] mb-4">
+                    Working on this
+                </p>
+                <h1 className="text-2xl md:text-3xl font-semibold text-heading mb-3">
+                    This page is coming soon
+                </h1>
+                <p className="text-sm md:text-base text-gray mb-6 leading-relaxed">
+                    We&apos;re finalising the details for this section of the VACEI platform. In the meantime, you can
+                    explore our existing products and portals or request a clear quote based on your business.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <GetInstantQuoteButton hasShadow={true} />
+                    <Link
+                        href="/ai-review"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-gray-300 text-sm font-medium text-text-dark hover:bg-gray-50 transition-colors"
+                    >
+                        View AI Review
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 12h14" />
+                        </svg>
+                    </Link>
+                </div>
+            </div>
+        </main>
+    )
+}
+
+export default ComingSoonPage
+
+

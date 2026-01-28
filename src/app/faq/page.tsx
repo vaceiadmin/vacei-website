@@ -83,7 +83,7 @@ const FaqPage = () => {
     ]
 
     return (
-        <main className="min-h-screen bg-[var(--background)]">
+        <main className="min-h-screen bg-background">
             <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
                 <PageHeader
                     title="FAQ"
@@ -95,7 +95,7 @@ const FaqPage = () => {
             
             <FaqAccordion 
                 faqItems={faqItems}
-                backgroundColor="bg-[#181C42]"
+                backgroundColor="bg-text-heading"
                 showRadials={false}
             />
             

@@ -20,11 +20,11 @@ const GradientContainer = ({
     topLeftRotation = "-rotate-90",
     bottomRightRotation = "rotate-90"
 }: GradientContainerProps) => {
-    const bgColor = backgroundColor || 'bg-[var(--primary)]'
+    const bgColor = backgroundColor || 'bg-primary'
     const radialSrc = radialImage || '/assets/images/radial2.png'
     
     return (
-        <div className={`relative w-full ${bgColor} overflow-hidden rounded-2xl ${className}`}>
+        <div className={`relative w-full ${bgColor} overflow-hidden  ${className}`}>
             {/* Background Radial Image - Top Left */}
             {showRadials && (
                 <div className={`absolute top-0 left-0 w-[350px] h-[330px] z-0 pointer-events-none transform ${topLeftRotation}`}>

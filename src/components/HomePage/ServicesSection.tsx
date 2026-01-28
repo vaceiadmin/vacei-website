@@ -39,7 +39,7 @@ const ServicesSection = () => {
       subtitle: 'Your entire business, in one place.',
       image: '/assets/images/Cube 1.png',
       hoverImage: '/assets/images/Accounting 1.png',
-      link: '/products/accounting'
+      link: '/portal/accounting-portal'
     },
     {
       id: 2,
@@ -47,7 +47,7 @@ const ServicesSection = () => {
       subtitle: 'Your entire business, in one place.',
       image: '/assets/images/Pyramid 2.png',
       hoverImage: '/assets/images/portal.png',
-      link: '/products/client'
+      link: '/portal/client-portal'
     },
     {
       id: 3,
@@ -55,7 +55,7 @@ const ServicesSection = () => {
       subtitle: 'Your entire business, in one place.',
       image: '/assets/images/Thorus Knot.png',
       hoverImage: '/assets/images/Audit 1.png',
-      link: '/products/audit'
+      link: '/portal/audit-portal'
     },
   ]
 
@@ -93,7 +93,7 @@ const ServicesSection = () => {
       <div className="mx-auto px-4 md:px-6 lg:px-8">
         <GradientContainer
           className="py-12 lg:py-16 relative"
-          backgroundColor="bg-[#1e1e2f]"
+          backgroundColor="bg-gradient-container"
         >
           {/* Navigation Tabs */}
           <div className="flex justify-center mb-12 relative z-20">
@@ -103,7 +103,7 @@ const ServicesSection = () => {
                   key={tab}
                   onClick={() => { setActiveTab(tab); setCurrentIndex(0); }}
                   className={`px-8 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === tab
-                    ? 'bg-[#525CEB] text-white shadow-lg shadow-blue-500/25'
+                    ? 'bg-tab-active text-white shadow-lg shadow-blue-500/25'
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                 >
@@ -121,7 +121,7 @@ const ServicesSection = () => {
                   // Product Card Design
                   <div
                     key={item.id}
-                    className="group relative w-[350px] lg:w-[400px] h-[500px] bg-[#2A2D55]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer"
+                    className="group relative w-[350px] lg:w-[400px] h-[500px] bg-card/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer"
                   >
                     {/* Default Content (Bottom Layer) */}
                     <div className="absolute inset-0 flex flex-col items-center justify-between p-8 z-0">
@@ -143,7 +143,7 @@ const ServicesSection = () => {
                         variant="custom"
                         text="Get Instant Quote"
                         href={item.link}
-                        bgColor="#4F46E5"
+                        bgColor="var(--button-indigo)"
                         textColor="white"
                         className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
                       />
@@ -151,8 +151,7 @@ const ServicesSection = () => {
 
                     {/* Hover Content - Portal UI Image Overlay (Top Layer) */}
                     <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none group-hover:pointer-events-auto"
-                      style={{ backgroundColor: '#3D4494' }}
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none group-hover:pointer-events-auto bg-card-hover-overlay"
                     >
                       <GradientContainer className="w-full h-full flex flex-col items-center pt-8" backgroundColor="bg-transparent">
                         <div className="text-center mb-6 relative z-10 px-6">
@@ -162,7 +161,7 @@ const ServicesSection = () => {
                             variant="custom"
                             text="Get Instant Quote"
                             href={item.link}
-                            bgColor="#4F46E5"
+                            bgColor="var(--button-indigo)"
                             textColor="white"
                             className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
                           />
@@ -190,7 +189,7 @@ const ServicesSection = () => {
                     className="group relative w-[300px] h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
                   >
                     {/* Image Area */}
-                    <div className={`relative w-full h-[60%] overflow-hidden ${activeTab === 'experts' ? 'bg-[#3D4494]' : 'bg-gray-100'}`}>
+                    <div className={`relative w-full h-[60%] overflow-hidden ${activeTab === 'experts' ? 'bg-card-hover-overlay' : 'bg-gray-100'}`}>
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -203,10 +202,10 @@ const ServicesSection = () => {
                     <div className="absolute bottom-0 left-0 right-0 bg-white h-[40%] p-6 flex flex-col justify-between border-t border-gray-100">
                       <div>
                         <h3 className="text-xl font-bold text-slate-800 mb-2">{item.title}</h3>
-                        <div className="w-12 h-1 bg-[#525CEB] rounded mb-3"></div>
+                        <div className="w-12 h-1 bg-tab-active rounded mb-3"></div>
                       </div>
 
-                      <div className="flex items-center gap-2 text-[#525CEB] font-semibold text-sm group-hover:text-[#4048B8] cursor-pointer transition-colors">
+                      <div className="flex items-center gap-2 text-tab-active font-semibold text-sm group-hover:text-tab-active-hover cursor-pointer transition-colors">
                         <span>Request Service</span>
                         <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -222,7 +221,7 @@ const ServicesSection = () => {
             <div className="flex justify-center items-center gap-3 mt-4">
               <button
                 onClick={prevSlide}
-                className="w-10 h-10 rounded-full bg-[#525CEB] text-white flex items-center justify-center hover:bg-[#4048B8] transition-all shadow-lg hover:shadow-[#525CEB]/25"
+                className="w-10 h-10 rounded-full bg-tab-active text-white flex items-center justify-center hover:bg-tab-active-hover transition-all shadow-lg hover:shadow-[#525CEB]/25"
                 aria-label="Previous"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,7 +230,7 @@ const ServicesSection = () => {
               </button>
               <button
                 onClick={nextSlide}
-                className="w-10 h-10 rounded-full border-2 border-[#525CEB] text-[#525CEB] flex items-center justify-center hover:bg-[#525CEB] hover:text-white transition-all shadow-lg hover:shadow-[#525CEB]/25"
+                className="w-10 h-10 rounded-full border-2 border-tab-active text-tab-active flex items-center justify-center hover:bg-tab-active hover:text-white transition-all shadow-lg hover:shadow-[#525CEB]/25"
                 aria-label="Next"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -23,12 +23,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
 
                 {/* Breadcrumbs */}
                 <div
-                    className="flex items-center gap-4 rounded-full px-6 py-2.5 shadow-sm"
-                    style={{
-                        backgroundColor: '#181C42',
-                        border: '1px solid #323766',
-                        backdropFilter: 'blur(16px)'
-                    }}
+                    className="flex items-center gap-4 rounded-full px-6 py-2.5 shadow-sm bg-text-heading border border-gray-600 backdrop-blur-md"
                 >
                     <Link href="/" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group">
                         <svg

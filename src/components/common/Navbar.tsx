@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [])
 
   const navLinks = [
-    { label: 'Products', href: '/products' },
+    { label: 'AI Review', href: '/ai-review' },
     {
       label: 'Services',
       href: '/services',
@@ -42,7 +42,7 @@ const Navbar = () => {
     { label: 'How It Works', href: '/how-it-works' },
     {
       label: 'Portals',
-      href: '/portals',
+      href: '/portal/client-portal',
       hasDropdown: true,
       isOpen: portalsOpen,
       setIsOpen: setPortalsOpen
@@ -55,6 +55,28 @@ const Navbar = () => {
       isOpen: resourcesOpen,
       setIsOpen: setResourcesOpen
     },
+  ]
+
+  const productLinks = [
+    { label: 'AI Review', href: '/ai-review' },
+    { label: 'Our Technology', href: '/technology' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'CPE & Podcast', href: '/cpe' },
+  ]
+
+  const portalLinks = [
+    { label: 'Client Portal', href: '/portal/client-portal' },
+    { label: 'Accounting Portal', href: '/portal/accounting-portal' },
+    { label: 'Audit Portal', href: '/portal/audit-portal' },
+  ]
+
+  const resourceLinks = [
+    { label: 'How It Works', href: '/how-it-works' },
+    { label: 'About VACEI', href: '/about' },
+    { label: 'FAQs', href: '/faq' },
+    { label: 'Security & Compliance', href: '/security-compliance' },
+    { label: 'Get Instant Quote', href: '/quote' },
+    {label: 'CPE & Podcast', href: '/cpe'}
   ]
 
   return (
@@ -88,7 +110,7 @@ const Navbar = () => {
                 >
                   <Link
                     href={link.href}
-                    className={`text-[var(--text-dark)] font-normal text-[15px] hover:text-[var(--primary-blue)] transition-colors flex items-center gap-1 ${link.isOpen ? 'text-[var(--primary-blue)]' : ''}`}
+                    className={`text-text-dark font-normal text-[15px] hover:text-primary-blue transition-colors flex items-center gap-1 ${link.isOpen ? 'text-primary-blue' : ''}`}
                     onClick={(e) => {
                       if (link.hasDropdown) {
                         e.preventDefault(); // Optional: prevent navigation on parent click if it just opens dropdown
@@ -131,14 +153,58 @@ const Navbar = () => {
                                 className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
                                 onClick={() => link.setIsOpen?.(false)}
                               >
-                                <div className="text-[15px] font-medium text-[var(--text-dark)] group-hover/item:text-[var(--primary-blue)] transition-colors">
+                                <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
                                   {service.title}
                                 </div>
                               </Link>
                             ))}
                           </div>
+                        ) : link.label === 'Portals' ? (
+                          <div className="grid grid-cols-1 gap-1 p-1">
+                            {portalLinks.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                                onClick={() => link.setIsOpen?.(false)}
+                              >
+                                <div className="text-[15px] font-medium text-text-dark hover:text-primary-blue transition-colors">
+                                  {item.label}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        ) : link.label === 'Products' ? (
+                          <div className="grid grid-cols-1 gap-1 p-1">
+                            {productLinks.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                                onClick={() => link.setIsOpen?.(false)}
+                              >
+                                <div className="text-[15px] font-medium text-text-dark hover:text-primary-blue transition-colors">
+                                  {item.label}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        ) : link.label === 'Resources' ? (
+                          <div className="grid grid-cols-1 gap-1 p-1">
+                            {resourceLinks.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                                onClick={() => link.setIsOpen?.(false)}
+                              >
+                                <div className="text-[15px] font-medium text-text-dark hover:text-primary-blue transition-colors">
+                                  {item.label}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
                         ) : (
-                          /* Placeholder for other dropdowns */
                           <div className="p-4 text-sm text-gray-500 text-center">
                             Coming Soon
                           </div>
@@ -156,8 +222,8 @@ const Navbar = () => {
               <div className="hidden lg:flex items-center gap-3">
                 {/* Try The Client Portal Button */}
                 <Link
-                  href="/client-portal"
-                  className="flex items-center justify-center gap-2 rounded-full border border-[var(--primary-blue)] text-[var(--text-dark)] font-normal text-[15px] hover:bg-gray-50 transition-all px-6 h-[44px]"
+                  href="/portal/client-portal"
+                  className="flex items-center justify-center gap-2 rounded-full border border-primary-blue text-text-dark font-normal text-[15px] hover:bg-gray-50 transition-all px-6 h-[44px]"
                 >
                   <span>Try The Client Portal</span>
                   <svg
@@ -197,7 +263,7 @@ const Navbar = () => {
               >
                 {/* Top line - equal length */}
                 <div
-                  className="h-0.5 bg-[var(--text-dark)] transition-all duration-300"
+                  className="h-0.5 bg-text-dark transition-all duration-300"
                   style={{
                     width: '24px',
                   }}
@@ -205,7 +271,7 @@ const Navbar = () => {
                 {/* Middle line - 30% cut on right, fills on hover */}
                 <div className="relative w-6 h-0.5">
                   <div
-                    className="absolute left-0 h-full bg-[var(--text-dark)] transition-all duration-300 ease-out"
+                    className="absolute left-0 h-full bg-text-dark transition-all duration-300 ease-out"
                     style={{
                       width: hamburgerHover ? '24px' : '16.8px', // 70% = 16.8px, 100% = 24px
                     }}
@@ -213,7 +279,7 @@ const Navbar = () => {
                 </div>
                 {/* Bottom line - equal length */}
                 <div
-                  className="h-0.5 bg-[var(--text-dark)] transition-all duration-300"
+                  className="h-0.5 bg-text-dark transition-all duration-300"
                   style={{
                     width: '24px',
                   }}
@@ -236,9 +302,9 @@ const Navbar = () => {
                 onClick={() => setSidebarOpen(!sidebarOpen)}
                 aria-label="Menu"
               >
-                <div className="w-6 h-0.5 bg-[var(--text-dark)]"></div>
-                <div className="w-6 h-0.5 bg-[var(--text-dark)]"></div>
-                <div className="w-6 h-0.5 bg-[var(--text-dark)]"></div>
+                <div className="w-6 h-0.5 bg-text-dark"></div>
+                <div className="w-6 h-0.5 bg-text-dark"></div>
+                <div className="w-6 h-0.5 bg-text-dark"></div>
               </button>
             </div>
           </div>
@@ -250,7 +316,7 @@ const Navbar = () => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="block py-3 text-[var(--text-dark)] font-normal text-[17px] leading-6 hover:text-[var(--primary-blue)] transition-colors"
+                  className="block py-3 text-text-dark font-normal text-[17px] leading-6 hover:text-primary-blue transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -343,10 +409,10 @@ const Navbar = () => {
                       placeholder="Search here.."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full px-4 py-3 pr-12 bg-white rounded-lg text-[var(--text-dark)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
+                      className="w-full px-4 py-3 pr-12 bg-white rounded-lg text-text-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-blue"
                     />
                     <button
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[var(--text-dark)] transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-text-dark transition-colors"
                       aria-label="Search"
                     >
                       <svg
@@ -374,7 +440,7 @@ const Navbar = () => {
                       <p className="text-white text-sm mb-1 opacity-80">Phone</p>
                       <a
                         href="tel:+35677142418"
-                        className="text-white text-base hover:text-[var(--primary-blue)] transition-colors"
+                        className="text-white text-base hover:text-primary-blue transition-colors"
                       >
                         +356 77142418
                       </a>
@@ -383,7 +449,7 @@ const Navbar = () => {
                       <p className="text-white text-sm mb-1 opacity-80">Email</p>
                       <a
                         href="mailto:info@vacei.com"
-                        className="text-white text-base hover:text-[var(--primary-blue)] transition-colors"
+                        className="text-white text-base hover:text-primary-blue transition-colors"
                       >
                         info@vacei.com
                       </a>
@@ -398,7 +464,7 @@ const Navbar = () => {
                     {/* Facebook */}
                     <a
                       href="#"
-                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[var(--primary-blue)] rounded-full text-white transition-colors"
+                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-primary-blue rounded-full text-white transition-colors"
                       aria-label="Facebook"
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -409,7 +475,7 @@ const Navbar = () => {
                     {/* Instagram */}
                     <a
                       href="#"
-                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[var(--primary-blue)] rounded-full text-white transition-colors"
+                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-primary-blue rounded-full text-white transition-colors"
                       aria-label="Instagram"
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -420,7 +486,7 @@ const Navbar = () => {
                     {/* X (Twitter) */}
                     <a
                       href="#"
-                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[var(--primary-blue)] rounded-full text-white transition-colors"
+                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-primary-blue rounded-full text-white transition-colors"
                       aria-label="X (Twitter)"
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -431,7 +497,7 @@ const Navbar = () => {
                     {/* LinkedIn */}
                     <a
                       href="#"
-                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[var(--primary-blue)] rounded-full text-white transition-colors"
+                      className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-primary-blue rounded-full text-white transition-colors"
                       aria-label="LinkedIn"
                     >
                       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

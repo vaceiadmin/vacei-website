@@ -308,7 +308,7 @@ const ProcessStepsSection = () => {
                             onChange={(event) => handleChange(field.key, event.target.value)}
                             placeholder={field.placeholder}
                             rows={field.rows ?? 3}
-                            className="mt-1.5 w-full rounded-md border border-[#E1E5EE] px-3 py-2 text-sm text-[var(--text-dark)] placeholder-[#B0B6C6] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
+                            className="mt-1.5 w-full rounded-md border border-[#E1E5EE] px-3 py-2 text-sm text-text-dark placeholder-[#B0B6C6] focus:outline-none focus:ring-2 focus:ring-primary-blue"
                           />
                         ) : field.type === "select" ? (
                           <div className="relative mt-1.5">
@@ -316,7 +316,7 @@ const ProcessStepsSection = () => {
                               id={`quote-${field.key}`}
                               value={fieldValue}
                               onChange={(event) => handleChange(field.key, event.target.value)}
-                              className="w-full appearance-none rounded-md border border-[#E1E5EE] bg-white px-3 py-2 pr-9 text-sm text-[var(--text-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
+                              className="w-full appearance-none rounded-md border border-[#E1E5EE] bg-white px-3 py-2 pr-9 text-sm text-text-dark focus:outline-none focus:ring-2 focus:ring-primary-blue"
                             >
                               <option value="" disabled>
                                 {field.placeholder || "Select one"}
@@ -345,7 +345,7 @@ const ProcessStepsSection = () => {
                             accept={field.accept}
                             multiple={field.multiple}
                             onChange={(event) => handleChange(field.key, event.target.files || null)}
-                            className="mt-1.5 w-full rounded-md border border-dashed border-[#E1E5EE] bg-white px-3 py-2 text-sm text-[#6a7089] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--primary)] file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
+                            className="mt-1.5 w-full rounded-md border border-dashed border-[#E1E5EE] bg-white px-3 py-2 text-sm text-[#6a7089] file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
                           />
                         ) : (
                           <input
@@ -355,7 +355,7 @@ const ProcessStepsSection = () => {
                             value={fieldValue}
                             onChange={(event) => handleChange(field.key, event.target.value)}
                             placeholder={field.placeholder}
-                            className="mt-1.5 w-full rounded-md border border-[#E1E5EE] px-3 py-2 text-sm text-[var(--text-dark)] placeholder-[#B0B6C6] focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)]"
+                            className="mt-1.5 w-full rounded-md border border-[#E1E5EE] px-3 py-2 text-sm text-text-dark placeholder-[#B0B6C6] focus:outline-none focus:ring-2 focus:ring-primary-blue"
                           />
                         )}
                       </div>
@@ -370,7 +370,7 @@ const ProcessStepsSection = () => {
 
                   <button
                     type="submit"
-                    className="mt-2 w-full rounded-md bg-[var(--primary)] py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+                    className="mt-2 w-full rounded-md bg-primary py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
                   >
                     {step.primaryLabel || "Submit"}
                   </button>
@@ -387,13 +387,13 @@ const ProcessStepsSection = () => {
                 </form>
               ) : (
                 <div className="space-y-4">
-                  <p className="text-sm text-[var(--text-dark)]">
+                  <p className="text-sm text-text-dark">
                     Thanks! We received your request and will reply within one business day.
                   </p>
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="w-full rounded-md bg-[var(--primary)] py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+                    className="w-full rounded-md bg-primary py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
                   >
                     Start another request
                   </button>
@@ -455,7 +455,7 @@ const ProcessStepsSection = () => {
       {submitted ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl" role="dialog" aria-modal="true">
-            <h3 className="text-lg font-semibold text-[var(--text-dark)]">Request sent</h3>
+            <h3 className="text-lg font-semibold text-text-dark">Request sent</h3>
             <p className="mt-2 text-sm text-black/70">
               Thanks! We received your details and will reply within one business day.
             </p>
@@ -463,7 +463,7 @@ const ProcessStepsSection = () => {
               <button
                 type="button"
                 onClick={handleReset}
-                className="w-full rounded-md bg-[var(--primary)] py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+                className="w-full rounded-md bg-primary py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
               >
                 Start another request
               </button>

@@ -39,7 +39,7 @@ const ServicesSection = () => {
       subtitle: 'Your entire business, in one place.',
       image: '/assets/images/Cube 1.png',
       hoverImage: '/assets/images/Accounting 1.png',
-      link: '/products/accounting'
+      link: '/portal/accounting-portal'
     },
     {
       id: 2,
@@ -47,7 +47,7 @@ const ServicesSection = () => {
       subtitle: 'Your entire business, in one place.',
       image: '/assets/images/Pyramid 2.png',
       hoverImage: '/assets/images/portal.png',
-      link: '/products/client'
+      link: '/portal/client-portal'
     },
     {
       id: 3,
@@ -55,7 +55,7 @@ const ServicesSection = () => {
       subtitle: 'Your entire business, in one place.',
       image: '/assets/images/Thorus Knot.png',
       hoverImage: '/assets/images/Audit 1.png',
-      link: '/products/audit'
+      link: '/portal/audit-portal'
     },
   ]
 

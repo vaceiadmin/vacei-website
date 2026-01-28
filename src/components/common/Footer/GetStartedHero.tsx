@@ -17,7 +17,7 @@ const GetStartedHero = () => {
       <div className="relative z-10 w-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-6xl">
           <GradientContainer 
-            className="min-h-[28rem] sm:min-h-[24rem] lg:h-[22.5rem] lg:max-h-[22.5rem] rounded-lg shadow-[inset_4px_4px_24px_rgba(36,39,72,0.24),inset_-4px_-4px_24px_rgba(36,39,72,0.24)] bg-[#1e174a]"
+            className="min-h-[28rem] sm:min-h-[24rem] lg:h-[22.5rem] lg:max-h-[22.5rem] rounded-lg shadow-[inset_4px_4px_24px_rgba(36,39,72,0.24),inset_-4px_-4px_24px_rgba(36,39,72,0.24)] bg-footer-hero"
             showRadials={false}
           >
             <div className="relative z-10 w-full h-full flex items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-0">

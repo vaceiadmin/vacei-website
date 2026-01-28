@@ -39,7 +39,7 @@ const HeroLeftPanel = () => {
 
           {/* Description Text (Right) */}
           <div className="max-w-[480px] lg:text-right lg:mr-4 lg:mb-4">
-            <p className="text-[16px] leading-[1.8] text-[#9EA3C0] font-normal">
+            <p className="text-[16px] leading-[1.8] text-light-gray font-normal">
               VACEI is a modern accounting, audit and corporate services firm built around one structured
               digital platform. We handle accounting, compliance, corporate and audit work end to end,
               using our own technology to deliver clarity, speed and visibility. VACEI is not DIY software
@@ -59,7 +59,7 @@ const HeroLeftPanel = () => {
             </div>
             <div>
               <h3 className="text-[15px] font-semibold text-white">Dedicated teams. Clear accountability.</h3>
-              <p className="mt-1 text-[13px] text-[#9EA3C0] leading-relaxed">
+              <p className="mt-1 text-[13px] text-light-gray leading-relaxed">
                 Every client is supported by a named VACEI team.
               </p>
             </div>

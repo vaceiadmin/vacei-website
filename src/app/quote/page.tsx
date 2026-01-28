@@ -6,7 +6,7 @@ import QuoteFormSection from '@/components/quote/QuoteFormSection'
 
 const QuotePage = () => {
     return (
-        <main className="min-h-screen bg-[var(--background)]">
+        <main className="min-h-screen bg-background">
             <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
                 <PageHeader
                     title="Get a Quote"

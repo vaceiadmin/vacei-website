@@ -5,79 +5,65 @@ import { motion } from "framer-motion"
 
 const HeroSection = () => {
     return (
-        <section className="relative w-full h-[1080px] min-h-screen bg-[#111235] overflow-hidden flex flex-col items-center pt-32">
+        <section className="relative w-full h-[1080px] min-h-screen bg-hero overflow-hidden flex flex-col items-center pt-32">
 
             {/* Background Elements based on User Specs */}
 
             {/* Top Right Large Wash - Adjusted opacity/mix-blend for usability, assuming it's a glow */}
             <div
+                className="absolute top-[110px] left-5 w-[1880px] h-[1080px] bg-hero-glow blur-[50px] opacity-15 pointer-events-none z-0"
                 style={{
                     width: '1880px',
                     height: '1080px',
                     top: '110px',
                     left: '20px',
-                    background: '#989FEA',
                     filter: 'blur(50px)',
                     opacity: 0.15,
-                    position: 'absolute',
-                    zIndex: 0,
-                    pointerEvents: 'none'
                 }}
             />
 
             {/* Top Left Beam */}
             <div
+                className="absolute -top-[50px] -left-[50px] w-[116px] h-[470px] bg-hero-glow blur-[50px] opacity-60 pointer-events-none z-[1]"
                 style={{
                     width: '116px',
                     height: '470px',
                     top: '-50px',
                     left: '-50px',
                     transform: 'rotate(-135deg)',
-                    background: '#989FEA',
                     filter: 'blur(50px)',
-                    position: 'absolute',
-                    zIndex: 1,
-                    pointerEvents: 'none',
                     opacity: 0.6
                 }}
             />
 
             {/* Behind Image Left - "Shadow" */}
             <div
+                className="hidden xl:block absolute top-[607px] left-[464px] w-[116px] h-[470px] bg-hero-glow blur-[50px] rounded-lg opacity-50 pointer-events-none z-0"
                 style={{
                     width: '116px',
                     height: '470px',
                     top: '607px',
                     left: '464px', // This is absolute, might drift on wide screens. Keeping per spec for now but might need media query
                     transform: 'rotate(180deg)',
-                    background: '#989FEA',
                     filter: 'blur(50px)',
-                    position: 'absolute',
-                    zIndex: 0,
                     borderRadius: '8px',
-                    pointerEvents: 'none',
                     opacity: 0.5
                 }}
-                className="hidden xl:block" // Hide on small screens where absolute pixels break layout
             />
 
             {/* Behind Image Right */}
             <div
+                className="hidden 2xl:block absolute top-[607px] left-[1300px] w-[116px] h-[470px] bg-hero-glow blur-[50px] rounded-lg opacity-50 pointer-events-none z-0"
                 style={{
                     width: '116px',
                     height: '470px',
                     top: '607px',
                     left: '1300px',
                     transform: 'rotate(180deg)',
-                    background: '#989FEA',
                     filter: 'blur(50px)',
-                    position: 'absolute',
-                    zIndex: 0,
                     borderRadius: '8px',
-                    pointerEvents: 'none',
                     opacity: 0.5
                 }}
-                className="hidden 2xl:block" // Hide on small screens
             />
 
             {/* Content */}
@@ -106,7 +92,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="flex flex-wrap gap-4 mb-20"
                 >
-                    <button className="px-8 py-3 bg-[#3B49E6] hover:bg-[#2f3bc0] text-white rounded-full font-medium transition-all shadow-[0_0_20px_rgba(59,73,230,0.5)]">
+                    <button className="px-8 py-3 bg-primary-blue hover:bg-primary-blue-hover text-white rounded-full font-medium transition-all shadow-[0_0_20px_rgba(59,73,230,0.5)]">
                         Get Instant Quote &rarr;
                     </button>
                     <button className="px-8 py-3 bg-transparent border border-white/20 hover:bg-white/10 text-white rounded-full font-medium transition-all">
@@ -121,7 +107,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="relative w-full max-w-[904px]"
                 >
-                    <div className="aspect-[904/582] relative rounded-t-xl overflow-hidden shadow-2xl border border-white/10 bg-[#1e2040]">
+                    <div className="aspect-[904/582] relative rounded-t-xl overflow-hidden shadow-2xl border border-white/10 bg-hero-dark">
                         {/* Using a placeholder or the provided frame if suitable */}
                         <Image
                             src="/assets/images/Frame 1618872628 1.png"
@@ -148,7 +134,7 @@ const HeroSection = () => {
             </div>
 
             {/* Gradient overlay for bottom fade if needed */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#111235] to-transparent z-20"></div>
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-hero to-transparent z-20"></div>
 
         </section>
     )

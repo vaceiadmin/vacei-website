@@ -1,17 +1,20 @@
 import React from 'react'
+import Image from 'next/image'
 import GradientContainer from '../common/GradientContainer'
 import GetInstantQuoteButton from '../common/GetInstantQuoteButton'
 
 interface ServiceFeatureProps {
-    title: string
-    subtitle: string
+    title: React.ReactNode
+    subtitle: React.ReactNode
     features: {
-        title: string
+        title: React.ReactNode
         items: string[]
     }[]
+    bulletIconSrc?: string
+    bulletIconAlt?: string
 }
 
-const ServiceFeatures = ({ title, subtitle, features }: ServiceFeatureProps) => {
+const ServiceFeatures = ({ title, subtitle, features, bulletIconSrc, bulletIconAlt = 'Item' }: ServiceFeatureProps) => {
     return (
         <GradientContainer className="py-20 bg-[#1e174a]">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
@@ -42,13 +45,37 @@ const ServiceFeatures = ({ title, subtitle, features }: ServiceFeatureProps) => 
                                     </h3>
                                     <ul className="space-y-5 flex-1">
                                         {feature.items.map((item, idx) => (
-                                            <li key={idx} className="flex items-start gap-4 text-[15px] text-[#E2E3F1] leading-relaxed">
-                                                {/* Circle Container with Diamond Bullet */}
+                                            <li
+                                                key={idx}
+                                                className="flex items-start gap-4 text-[15px] text-[#E2E3F1] leading-relaxed"
+                                            >
                                                 <div className="mt-1 flex-shrink-0">
-                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <circle opacity="0.2" cx="10" cy="10" r="9" stroke="white" />
-                                                        <path d="M10 6L14 10L10 14L6 10Z" fill="white" />
-                                                    </svg>
+                                                    {bulletIconSrc ? (
+                                                        <Image
+                                                            src={bulletIconSrc}
+                                                            alt={bulletIconAlt}
+                                                            width={16}
+                                                            height={16}
+                                                            className="w-4 h-4"
+                                                        />
+                                                    ) : (
+                                                        <svg
+                                                            width="20"
+                                                            height="20"
+                                                            viewBox="0 0 20 20"
+                                                            fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <circle
+                                                                opacity="0.2"
+                                                                cx="10"
+                                                                cy="10"
+                                                                r="9"
+                                                                stroke="white"
+                                                            />
+                                                            <path d="M10 6L14 10L10 14L6 10Z" fill="white" />
+                                                        </svg>
+                                                    )}
                                                 </div>
                                                 {item}
                                             </li>
