@@ -1,11 +1,15 @@
-import React from 'react'
-import Link from 'next/link'
-import GetInstantQuoteButton from '@/components/common/GetInstantQuoteButton'
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
+import AnimatedSection from "@/components/common/AnimatedSection";
 
 const ComingSoonPage = () => {
-    return (
-        <main className="min-h-screen bg-background flex items-center justify-center px-4">
-            <div className="max-w-2xl w-full text-center bg-white rounded-3xl shadow-[0_24px_60px_rgba(15,23,42,0.18)] border border-gray-100 px-8 py-12">
+  return (
+    <main className="min-h-screen bg-background flex items-center justify-center px-4">
+      <AnimatedSection className="max-w-2xl w-full">
+        <div className="w-full text-center bg-white rounded-3xl shadow-xl border border-input px-8 py-12">
                 <p className="inline-flex items-center px-4 py-1 rounded-full text-xs font-semibold tracking-[0.18em] uppercase bg-[#EEF0FF] text-[#4F46E5] mb-4">
                     Working on this
                 </p>
@@ -27,12 +31,13 @@ const ComingSoonPage = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 12h14" />
                         </svg>
                     </Link>
-                </div>
-            </div>
-        </main>
-    )
-}
+          </div>
+        </div>
+      </AnimatedSection>
+    </main>
+  );
+};
 
-export default ComingSoonPage
+export default ComingSoonPage;
 
 

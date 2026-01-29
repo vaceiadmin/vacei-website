@@ -1,38 +1,40 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
 interface FaqQuestion {
-  question: string
-  answer: string
+  question: string;
+  answer: string;
 }
 
 interface FaqCategory {
-  title: string
-  titleHighlight?: string // The word to highlight in purple
-  questions: FaqQuestion[]
+  title: string;
+  titleHighlight?: string; // The word to highlight in purple
+  questions: FaqQuestion[];
 }
 
 interface FaqCategorizedProps {
-  categories: FaqCategory[]
-  showLabel?: boolean
-  labelText?: string
+  categories: FaqCategory[];
+  showLabel?: boolean;
+  labelText?: string;
 }
 
 const FaqCategorized = ({
   categories,
   showLabel = true,
-  labelText = "COMMON QUESTIONS"
+  labelText = "COMMON QUESTIONS",
 }: FaqCategorizedProps) => {
-  const [openItems, setOpenItems] = useState<{ [key: string]: number | null }>({})
+  const [openItems, setOpenItems] = useState<{ [key: string]: number | null }>(
+    {},
+  );
 
   const toggleItem = (categoryIndex: number, questionIndex: number) => {
-    const key = `${categoryIndex}-${questionIndex}`
-    setOpenItems(prev => ({
+    const key = `${categoryIndex}-${questionIndex}`;
+    setOpenItems((prev) => ({
       ...prev,
-      [key]: prev[key] === questionIndex ? null : questionIndex
-    }))
-  }
+      [key]: prev[key] === questionIndex ? null : questionIndex,
+    }));
+  };
 
   return (
     <section className="w-full py-16 lg:py-24 ">
@@ -49,24 +51,28 @@ const FaqCategorized = ({
         {/* Categories */}
         <div className="space-y-12 lg:space-y-16">
           {categories.map((category, categoryIndex) => {
-            const titleParts = category.titleHighlight 
+            const titleParts = category.titleHighlight
               ? category.title.split(category.titleHighlight)
-              : [category.title]
-            
+              : [category.title];
+
             // First category (Services & Delivery) gets larger text, others are one size smaller
-            const isFirstCategory = categoryIndex === 0
-            const titleSize = isFirstCategory 
+            const isFirstCategory = categoryIndex === 0;
+            const titleSize = isFirstCategory
               ? "text-3xl md:text-4xl lg:text-5xl"
-              : "text-2xl md:text-3xl lg:text-4xl"
-            
+              : "text-2xl md:text-3xl lg:text-4xl";
+
             return (
               <div key={categoryIndex} className="space-y-6">
                 {/* Category Heading */}
-                <h2 className={`${titleSize} font-medium text-[#181C42] text-center`}>
+                <h2
+                  className={`${titleSize} font-medium text-heading text-center`}
+                >
                   {category.titleHighlight ? (
                     <>
                       {titleParts[0]}
-                      <span className="text-[#6F74B8]">{category.titleHighlight}</span>
+                      <span className="text-purple-bg">
+                        {category.titleHighlight}
+                      </span>
                       {titleParts[1]}
                     </>
                   ) : (
@@ -77,35 +83,50 @@ const FaqCategorized = ({
                 {/* Questions */}
                 <div className="space-y-4 lg:space-y-5">
                   {category.questions.map((faq, questionIndex) => {
-                    const key = `${categoryIndex}-${questionIndex}`
-                    const isOpen = openItems[key] === questionIndex
-                    
+                    const key = `${categoryIndex}-${questionIndex}`;
+                    const isOpen = openItems[key] === questionIndex;
+
                     return (
                       <div
                         key={questionIndex}
                         onClick={() => toggleItem(categoryIndex, questionIndex)}
                         className={`overflow-hidden rounded-[18px] shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group ${
-                          isOpen 
-                            ? 'bg-[#6F74B8] text-white' 
-                            : 'bg-white text-[#181C42]'
+                          isOpen
+                            ? "bg-purple-bg text-white"
+                            : "bg-white text-heading"
                         }`}
                       >
                         <div className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6">
-                          <h3 className={`text-base lg:text-[18px] font-semibold tracking-tight pr-4 ${
-                            isOpen ? 'text-white' : 'text-[#181C42]'
-                          }`}>
+                          <h3
+                            className={`text-base lg:text-[18px] font-semibold tracking-tight pr-4 ${
+                              isOpen ? "text-white" : "text-heading"
+                            }`}
+                          >
                             {faq.question}
                           </h3>
                           <button
                             type="button"
                             className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 flex-shrink-0 ${
-                              isOpen 
-                                ? 'border-white text-white' 
-                                : 'border-[#6F74B8] text-[#6F74B8] group-hover:bg-[#6F74B8]/10'
+                              isOpen
+                                ? "border-white text-white"
+                                : "border-purple-bg text-purple-bg group-hover:bg-purple-bg/10"
                             }`}
                           >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              {isOpen ? <path d="M5 12h14" /> : <path d="M12 5v14M5 12h14" />}
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              {isOpen ? (
+                                <path d="M5 12h14" />
+                              ) : (
+                                <path d="M12 5v14M5 12h14" />
+                              )}
                             </svg>
                           </button>
                         </div>
@@ -119,7 +140,7 @@ const FaqCategorized = ({
                           </div>
                         )}
                       </div>
-                    )
+                    );
                   })}
                 </div>
 
@@ -128,13 +149,12 @@ const FaqCategorized = ({
                   <div className="border-t-4 border-white mt-12"></div>
                 )}
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default FaqCategorized
-
+export default FaqCategorized;

@@ -283,11 +283,11 @@ const ProcessStepsSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,480px)_1fr] gap-10 lg:gap-14 lg:items-start">
           <GradientContainer
             showRadials={false}
-            backgroundColor="bg-[linear-gradient(135deg,#1f224a_0%,#1d2042_50%,#171a34_100%)]"
+            backgroundColor="bg-gradient-quote-panel"
             className="p-6 md:p-8 shadow-lg"
           >
             <div className="mx-auto w-full max-w-[360px] rounded-xl bg-white px-6 py-5 shadow-sm">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#6a7089] font-semibold mb-4">
+              <p className="text-[11px] uppercase tracking-[0.28em] text-form-label font-semibold mb-4">
                 Get Instant Quote
               </p>
 
@@ -298,7 +298,7 @@ const ProcessStepsSection = () => {
                     const fieldValue = (typeof rawValue === "string" ? rawValue : "") as string
                     return (
                       <div key={field.key}>
-                        <label className="text-xs font-semibold text-[#6a7089]" htmlFor={`quote-${field.key}`}>
+                        <label className="text-xs font-semibold text-form-label" htmlFor={`quote-${field.key}`}>
                           {field.label}
                         </label>
                         {field.type === "textarea" ? (
@@ -308,7 +308,7 @@ const ProcessStepsSection = () => {
                             onChange={(event) => handleChange(field.key, event.target.value)}
                             placeholder={field.placeholder}
                             rows={field.rows ?? 3}
-                            className="mt-1.5 w-full rounded-md border border-[#E1E5EE] px-3 py-2 text-sm text-text-dark placeholder-[#B0B6C6] focus:outline-none focus:ring-2 focus:ring-primary-blue"
+                            className="mt-1.5 w-full rounded-md border border-input px-3 py-2 text-sm text-text-dark placeholder:text-form-label focus:outline-none focus:ring-2 focus:ring-primary-blue"
                           />
                         ) : field.type === "select" ? (
                           <div className="relative mt-1.5">
@@ -316,7 +316,7 @@ const ProcessStepsSection = () => {
                               id={`quote-${field.key}`}
                               value={fieldValue}
                               onChange={(event) => handleChange(field.key, event.target.value)}
-                              className="w-full appearance-none rounded-md border border-[#E1E5EE] bg-white px-3 py-2 pr-9 text-sm text-text-dark focus:outline-none focus:ring-2 focus:ring-primary-blue"
+                              className="w-full appearance-none rounded-md border border-input bg-white px-3 py-2 pr-9 text-sm text-text-dark focus:outline-none focus:ring-2 focus:ring-primary-blue"
                             >
                               <option value="" disabled>
                                 {field.placeholder || "Select one"}
@@ -327,7 +327,7 @@ const ProcessStepsSection = () => {
                                 </option>
                               ))}
                             </select>
-                            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#8d94a8]">
+                            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-light-gray">
                               <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
                                 <path
                                   d="M1 1.5L6 6.5L11 1.5"
@@ -345,7 +345,7 @@ const ProcessStepsSection = () => {
                             accept={field.accept}
                             multiple={field.multiple}
                             onChange={(event) => handleChange(field.key, event.target.files || null)}
-                            className="mt-1.5 w-full rounded-md border border-dashed border-[#E1E5EE] bg-white px-3 py-2 text-sm text-[#6a7089] file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
+                            className="mt-1.5 w-full rounded-md border border-dashed border-input bg-white px-3 py-2 text-sm text-form-label file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-white"
                           />
                         ) : (
                           <input
@@ -355,7 +355,7 @@ const ProcessStepsSection = () => {
                             value={fieldValue}
                             onChange={(event) => handleChange(field.key, event.target.value)}
                             placeholder={field.placeholder}
-                            className="mt-1.5 w-full rounded-md border border-[#E1E5EE] px-3 py-2 text-sm text-text-dark placeholder-[#B0B6C6] focus:outline-none focus:ring-2 focus:ring-primary-blue"
+                            className="mt-1.5 w-full rounded-md border border-input px-3 py-2 text-sm text-text-dark placeholder:text-form-label focus:outline-none focus:ring-2 focus:ring-primary-blue"
                           />
                         )}
                       </div>
@@ -363,7 +363,7 @@ const ProcessStepsSection = () => {
                   })}
 
                   {error ? (
-                    <p className="text-xs text-red-500" role="alert">
+                    <p className="text-xs text-error" role="alert">
                       {error}
                     </p>
                   ) : null}
@@ -379,7 +379,7 @@ const ProcessStepsSection = () => {
                     <button
                       type="button"
                       onClick={handleBack}
-                      className="w-full text-center text-xs font-semibold text-[#9aa3ba] transition-colors hover:text-[#6a7089]"
+                      className="w-full text-center text-xs font-semibold text-light-gray transition-colors hover:text-form-label"
                     >
                       Back
                     </button>
@@ -406,16 +406,16 @@ const ProcessStepsSection = () => {
             {processSteps.map((item, index) => {
               const isActive = index === currentStep
               return (
-                <div key={item.title} className="border-b border-black/10 py-4">
+                <div key={item.title} className="border-b border-input py-4">
                   <div className="flex items-start gap-3">
-                    <span className={`text-sm font-normal ${isActive ? "text-black" : "text-black/50"}`}>
+                    <span className={`text-sm font-normal ${isActive ? "text-heading" : "text-gray"}`}>
                       {index + 1}
                     </span>
                     <div>
-                      <p className={`text-2xl font-normal leading-tight ${isActive ? "text-black" : "text-black/50"}`}>
+                      <p className={`text-2xl font-normal leading-tight ${isActive ? "text-heading" : "text-gray"}`}>
                         {item.title}
                       </p>
-                      {isActive ? <p className="text-sm text-black/70">{item.description}</p> : null}
+                      {isActive ? <p className="text-sm text-gray">{item.description}</p> : null}
                     </div>
                   </div>
                 </div>
@@ -426,27 +426,18 @@ const ProcessStepsSection = () => {
 
        
       </div>
-      <div className="mt-12 border-t border-black/10 pt-8 mx-auto w-full max-w-6xl px-4 md:px-6 lg:px-8">
+        <div className="mt-12 border-t border-input pt-8 mx-auto w-full max-w-6xl px-4 md:px-6 lg:px-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             {[
-              {
-                title: "Not DIY software",
-                description: "You don't do the work.",
-              },
-              {
-                title: "Not a marketplace",
-                description: "One accountable firm.",
-              },
-              {
-                title: "Not fragmented",
-                description: "All services in one portal.",
-              },
+              { title: "Not DIY software", description: "You don't do the work." },
+              { title: "Not a marketplace", description: "One accountable firm." },
+              { title: "Not fragmented", description: "All services in one portal." },
             ].map((item) => (
               <div key={item.title} className="flex flex-1 items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-black" />
+                <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
                 <div>
-                  <p className="text-sm font-semibold text-black">{item.title}</p>
-                  <p className="text-sm text-black">{item.description}</p>
+                  <p className="text-sm font-semibold text-heading">{item.title}</p>
+                  <p className="text-sm text-gray">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -456,7 +447,7 @@ const ProcessStepsSection = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl" role="dialog" aria-modal="true">
             <h3 className="text-lg font-semibold text-text-dark">Request sent</h3>
-            <p className="mt-2 text-sm text-black/70">
+            <p className="mt-2 text-sm text-gray">
               Thanks! We received your details and will reply within one business day.
             </p>
             <div className="mt-5 flex flex-col gap-3">
@@ -470,7 +461,7 @@ const ProcessStepsSection = () => {
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="w-full rounded-md border border-slate-200 py-2.5 text-sm font-semibold text-slate-600 transition hover:text-slate-800"
+                className="w-full rounded-md border border-input py-2.5 text-sm font-semibold text-gray transition hover:text-heading"
               >
                 Close
               </button>

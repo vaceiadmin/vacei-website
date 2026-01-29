@@ -1,23 +1,25 @@
-import React from 'react'
-import PageHeader from '@/components/common/PageHeader'
-import ClientPortalOverviewSection from '@/components/client-portal/ClientPortalOverviewSection'
-import PortalFeature from '@/components/services/PortalFeature'
-import ServiceFeatures from '@/components/services/ServiceFeatures'
-import RiskAuditSection from '@/components/accounting/RiskAuditSection'
+"use client";
+
+import React from "react";
+import PageHeader from "@/components/common/PageHeader";
+import ClientPortalOverviewSection from "@/components/client-portal/ClientPortalOverviewSection";
+import PortalFeature from "@/components/services/PortalFeature";
+import ServiceFeatures from "@/components/services/ServiceFeatures";
+import RiskAuditSection from "@/components/accounting/RiskAuditSection";
+import AnimatedSection from "@/components/common/AnimatedSection";
 
 const AccountingPortalPage = () => {
-    return (
-        <main className="min-h-screen bg-background">
-            <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
-                <PageHeader
-                    title="Accounting Portal"
-                    breadcrumbs={[
-                        { label: 'Accounting Portal' },
-                    ]}
-                />
-            </div>
+  return (
+    <main className="min-h-screen bg-background">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+        <PageHeader
+          title="Accounting Portal"
+          breadcrumbs={[{ label: "Accounting Portal" }]}
+        />
+      </div>
 
-            <ClientPortalOverviewSection
+      <AnimatedSection>
+        <ClientPortalOverviewSection
                 variant="accounting"
                 heading="How VACEI delivers structured, reliable accounting services"
                 paragraphs={[
@@ -25,10 +27,11 @@ const AccountingPortalPage = () => {
                     'It brings monthly workflows, documents, reviews, and integrations into one system, allowing our teams to work efficiently while maintaining accuracy, consistency, and accountability.',
                     'Clients interact through the Client Portal. All accounting execution and internal controls are managed through the Accounting Portal.',
                 ]}
-            />
+        />
+      </AnimatedSection>
 
-
-            <PortalFeature
+      <AnimatedSection delay>
+        <PortalFeature
                 portalImage="/assets/images/Accounting.jpg"
                 sectionLabel="Our services"
                 heading="Monthly accounting works"
@@ -44,10 +47,14 @@ const AccountingPortalPage = () => {
                 bottomTitle="Accounting Portal"
                 bottomDescription="Documents, tasks, deadlines and communication in one place."
                 quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
-            />
+        />
+      </AnimatedSection>
 
-            <RiskAuditSection variant="accounting" />
-            <ServiceFeatures
+      <AnimatedSection>
+        <RiskAuditSection variant="accounting" />
+      </AnimatedSection>
+      <AnimatedSection delay>
+        <ServiceFeatures
                 title={
                     <>
                         How VACEI delivers structured,
@@ -96,10 +103,11 @@ const AccountingPortalPage = () => {
                         ],
                     },
                 ]}
-            />
+        />
+      </AnimatedSection>
 
-            
-            <ClientPortalOverviewSection
+      <AnimatedSection>
+        <ClientPortalOverviewSection
                 variant="accounting"
                 bulletedSections={[
                     {
@@ -128,11 +136,12 @@ const AccountingPortalPage = () => {
                     },
                 ]}
                 bulletIconSrc="/assets/images/bullet.png"
-            />
-        </main>
-    )
-}
+        />
+      </AnimatedSection>
+    </main>
+  );
+};
 
-export default AccountingPortalPage
+export default AccountingPortalPage;
 
 

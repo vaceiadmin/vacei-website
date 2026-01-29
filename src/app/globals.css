@@ -3,59 +3,82 @@
 :root {
   /* Enforce light theme */
   color-scheme: light;
-  --background: #ECF0F0;
+  --background: #ecf0f0;
   --background-secondary: #ffffff;
   --foreground: #171717;
   /* Primary color definition */
   --primary: #242748;
 
   /* Theme colors from design */
-  --primary-blue: #3B49E6;
-  --gradient-blue-1: #A9B0FF;
-  --gradient-blue-2: #A3AAFF;
-  --text-dark: #26294A;
-  --purple-logo: #8B5CF6;
-  --purple-bg: #6F74B8;
+  --primary-blue: #3b49e6;
+  --gradient-blue-1: #a9b0ff;
+  --gradient-blue-2: #a3aaff;
+  --text-dark: #26294a;
+  --purple-logo: #8b5cf6;
+  --purple-bg: #6f74b8;
   /* Purple for VACEI logo */
 
   /* Navbar Button Colors */
-  --navbar-btn-bg: #3640AD;
-  --navbar-btn-border: #8993FF;
+  --navbar-btn-bg: #3640ad;
+  --navbar-btn-border: #8993ff;
 
   /* Section Background Colors */
-  --section-bg-light: #D8E5E5;
+  --section-bg-light: #d8e5e5;
 
   /* Hero Section Colors */
   --hero-bg: #111235;
   --hero-bg-dark: #1e2040;
-  --hero-glow: #989FEA;
+  --hero-glow: #989fea;
   --gradient-container: #1e1e2f;
 
   /* Button and Interactive Colors */
-  --primary-blue-hover: #2F3BC4;
-  --button-indigo: #4F46E5;
-  --tab-active: #525CEB;
-  --tab-active-hover: #4048B8;
-  --card-hover-overlay: #3D4494;
-  --card-bg: #2A2D55;
+  --primary-blue-hover: #2f3bc4;
+  --button-indigo: #4f46e5;
+  --tab-active: #525ceb;
+  --tab-active-hover: #4048b8;
+  --card-hover-overlay: #3d4494;
+  --card-bg: #2a2d55;
 
   /* Text Colors */
-  --text-heading: #181C42;
-  --text-gray: #52525B;
+  --text-heading: #181c42;
+  --text-gray: #52525b;
 
   /* Background Colors */
-  --icon-bg: #EFF0F6;
+  --icon-bg: #eff0f6;
   --dark-hover: #0f1229;
   --purple-hover: #5a5f9a;
 
   /* Status Colors */
-  --success: #4ADE80;
-  --error: #F87171;
-  --progress-purple: #C2C7FF;
+  --success: #4ade80;
+  --error: #f87171;
+  --progress-purple: #c2c7ff;
 
   /* Additional Colors */
   --footer-hero-bg: #1e174a;
-  --text-light-gray: #9EA3C0;
+  --text-light-gray: #9ea3c0;
+
+  /* Benefit / icon accent (replaces hardcoded #5D63AA, #565CA4) */
+  --benefit-icon-bg: #5d63aa;
+  --benefit-icon-border: #565ca4;
+
+  /* Sidebar / overlay (for glass and panels) */
+  --sidebar-bg-start: #26294a;
+  --sidebar-bg-end: #1a1d35;
+  --overlay-bg: rgba(0, 0, 0, 0.3);
+
+  /* Form / input (no hardcoded hex in components) */
+  --input-border: #e1e5ee;
+  --input-placeholder: #b0b6c6;
+  --form-label: #6a7089;
+
+  /* Shadows (primary-blue glow) */
+  --primary-blue-shadow: rgba(59, 73, 230, 0.5);
+
+  /* Neutral (charts, dividers) */
+  --neutral-200: #e5e7eb;
+
+  /* Shadows (soft card shadow) */
+  --shadow-soft: rgba(0, 0, 0, 0.07);
 }
 
 @theme inline {
@@ -101,58 +124,173 @@
 }
 
 /* Utility Classes for Background Colors */
-.bg-background { background-color: var(--background); }
-.bg-primary { background-color: var(--primary); }
-.bg-primary-blue { background-color: var(--primary-blue); }
-.bg-primary-blue-hover { background-color: var(--primary-blue-hover); }
-.bg-hero { background-color: var(--hero-bg); }
-.bg-hero-dark { background-color: var(--hero-bg-dark); }
-.bg-hero-glow { background-color: var(--hero-glow); }
-.bg-gradient-container { background-color: var(--gradient-container); }
-.bg-button-indigo { background-color: var(--button-indigo); }
-.bg-tab-active { background-color: var(--tab-active); }
-.bg-tab-active-hover { background-color: var(--tab-active-hover); }
-.bg-card-hover-overlay { background-color: var(--card-hover-overlay); }
-.bg-card { background-color: var(--card-bg); }
-.bg-icon { background-color: var(--icon-bg); }
-.bg-dark-hover { background-color: var(--dark-hover); }
-.bg-purple-hover { background-color: var(--purple-hover); }
-.bg-success { background-color: var(--success); }
-.bg-error { background-color: var(--error); }
-.bg-progress-purple { background-color: var(--progress-purple); }
-.bg-purple-bg { background-color: var(--purple-bg); }
-.bg-section-light { background-color: var(--section-bg-light); }
-.bg-text-heading { background-color: var(--text-heading); }
-.bg-text-gray { background-color: var(--text-gray); }
-.bg-footer-hero { background-color: var(--footer-hero-bg); }
-.bg-benefit-icon { background-color: #5D63AA; }
-.border-benefit-icon { border-color: #565CA4; }
-.text-light-gray { color: var(--text-light-gray); }
-.focus-ring-purple { --tw-ring-color: var(--purple-bg); }
+.bg-background {
+  background-color: var(--background);
+}
+.bg-primary {
+  background-color: var(--primary);
+}
+.bg-primary-blue {
+  background-color: var(--primary-blue);
+}
+.bg-primary-blue-hover {
+  background-color: var(--primary-blue-hover);
+}
+.bg-hero {
+  background-color: var(--hero-bg);
+}
+.bg-hero-dark {
+  background-color: var(--hero-bg-dark);
+}
+.bg-hero-glow {
+  background-color: var(--hero-glow);
+}
+.bg-gradient-container {
+  background-color: var(--gradient-container);
+}
+.bg-button-indigo {
+  background-color: var(--button-indigo);
+}
+.bg-tab-active {
+  background-color: var(--tab-active);
+}
+.bg-tab-active-hover {
+  background-color: var(--tab-active-hover);
+}
+.bg-card-hover-overlay {
+  background-color: var(--card-hover-overlay);
+}
+.bg-card {
+  background-color: var(--card-bg);
+}
+.bg-icon {
+  background-color: var(--icon-bg);
+}
+.bg-dark-hover {
+  background-color: var(--dark-hover);
+}
+.bg-purple-hover {
+  background-color: var(--purple-hover);
+}
+.bg-success {
+  background-color: var(--success);
+}
+.bg-error {
+  background-color: var(--error);
+}
+.bg-progress-purple {
+  background-color: var(--progress-purple);
+}
+.bg-purple-bg {
+  background-color: var(--purple-bg);
+}
+.bg-section-light {
+  background-color: var(--section-bg-light);
+}
+.bg-text-heading {
+  background-color: var(--text-heading);
+}
+.bg-text-gray {
+  background-color: var(--text-gray);
+}
+.bg-footer-hero {
+  background-color: var(--footer-hero-bg);
+}
+.bg-benefit-icon {
+  background-color: var(--benefit-icon-bg);
+}
+.border-benefit-icon {
+  border-color: var(--benefit-icon-border);
+}
+.text-light-gray {
+  color: var(--text-light-gray);
+}
+.focus-ring-purple {
+  --tw-ring-color: var(--purple-bg);
+}
+
+.border-input {
+  border-color: var(--input-border);
+}
+.text-form-label {
+  color: var(--form-label);
+}
+.bg-neutral-200 {
+  background-color: var(--neutral-200);
+}
+.shadow-primary-blue {
+  box-shadow: 0 0 20px var(--primary-blue-shadow);
+}
+
+/* Quote/process panel gradient (dark blue gradient) */
+.bg-gradient-quote-panel {
+  background: linear-gradient(
+    135deg,
+    var(--sidebar-bg-start) 0%,
+    var(--gradient-container) 50%,
+    var(--hero-bg) 100%
+  );
+}
 
 /* Utility Classes for Text Colors */
-.text-primary { color: var(--primary); }
-.text-primary-blue { color: var(--primary-blue); }
-.text-heading { color: var(--text-heading); }
-.text-gray { color: var(--text-gray); }
-.text-text-dark { color: var(--text-dark); }
-.text-tab-active { color: var(--tab-active); }
-.text-tab-active-hover { color: var(--tab-active-hover); }
-.text-purple-bg { color: var(--purple-bg); }
-.text-purple-hover { color: var(--purple-hover); }
-.text-success { color: var(--success); }
-.text-error { color: var(--error); }
+.text-primary {
+  color: var(--primary);
+}
+.text-primary-blue {
+  color: var(--primary-blue);
+}
+.text-heading {
+  color: var(--text-heading);
+}
+.text-gray {
+  color: var(--text-gray);
+}
+.text-text-dark {
+  color: var(--text-dark);
+}
+.text-tab-active {
+  color: var(--tab-active);
+}
+.text-tab-active-hover {
+  color: var(--tab-active-hover);
+}
+.text-purple-bg {
+  color: var(--purple-bg);
+}
+.text-purple-hover {
+  color: var(--purple-hover);
+}
+.text-success {
+  color: var(--success);
+}
+.text-error {
+  color: var(--error);
+}
 
 /* Utility Classes for Border Colors */
-.border-primary { border-color: var(--primary); }
-.border-primary-blue { border-color: var(--primary-blue); }
-.border-tab-active { border-color: var(--tab-active); }
-.border-purple-bg { border-color: var(--purple-bg); }
+.border-primary {
+  border-color: var(--primary);
+}
+.border-primary-blue {
+  border-color: var(--primary-blue);
+}
+.border-tab-active {
+  border-color: var(--tab-active);
+}
+.border-purple-bg {
+  border-color: var(--purple-bg);
+}
 
 /* Utility Classes for Ring Colors (focus rings) */
-.focus-ring-primary-blue { --tw-ring-color: var(--primary-blue); }
-.focus-ring-primary-blue:focus { --tw-ring-color: var(--primary-blue); }
-.ring-primary-blue { --tw-ring-color: var(--primary-blue); }
+.focus-ring-primary-blue {
+  --tw-ring-color: var(--primary-blue);
+}
+.focus-ring-primary-blue:focus {
+  --tw-ring-color: var(--primary-blue);
+}
+.ring-primary-blue {
+  --tw-ring-color: var(--primary-blue);
+}
 
 /* Custom media query for 1200px breakpoint - default smaller, larger only at 1200px+ */
 .nav-link-text {

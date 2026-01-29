@@ -78,7 +78,7 @@ const CompanySetupSection = () => {
             variant="custom"
             text="Start a Company in Malta"
             href="/company-setup"
-            bgColor="#3b49e6"
+            bgColor="var(--primary-blue)"
             textColor="white"
             className="px-8 py-3.5 text-base font-medium rounded-full"
             hasShadow={true}
@@ -87,7 +87,7 @@ const CompanySetupSection = () => {
             variant="custom"
             text="Book a Call"
             href="/book-call"
-            bgColor="#242748"
+            bgColor="var(--primary)"
             textColor="white"
             className="px-8 py-3.5 text-base font-medium rounded-full"
             hasShadow={false}

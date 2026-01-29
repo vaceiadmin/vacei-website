@@ -31,7 +31,7 @@ const GetInstantQuoteButton = ({
           ${bgColor ? '' : 'bg-primary-blue hover:bg-primary-blue-hover'}
           ${textColor ? '' : 'text-white'}
           ${borderColor ? 'border-2' : ''}
-          ${hasShadow ? 'shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5' : 'hover:shadow-md hover:-translate-y-0.5'}
+          ${hasShadow ? 'shadow-[0_4px_30px_var(--primary-blue-shadow)] hover:shadow-[0_6px_40px_var(--primary-blue-shadow)] transform hover:-translate-y-0.5' : 'hover:shadow-md hover:-translate-y-0.5'}
           ${className}
         `}
         style={{
@@ -70,7 +70,7 @@ const GetInstantQuoteButton = ({
       href={href || "/quote"}
       className={`
         inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
-        ${hasShadow ? 'shadow-[0_4px_30px_rgba(59,73,230,0.6)] hover:shadow-[0_6px_40px_rgba(59,73,230,0.8)] transform hover:-translate-y-0.5' : ''}
+        ${hasShadow ? 'shadow-[0_4px_30px_var(--primary-blue-shadow)] hover:shadow-[0_6px_40px_var(--primary-blue-shadow)] transform hover:-translate-y-0.5' : ''}
         ${className}
       `}
     >

@@ -1,10 +1,13 @@
-import React from 'react'
-import PageHeader from '@/components/common/PageHeader'
-import ClientPortalOverviewSection from '@/components/client-portal/ClientPortalOverviewSection'
-import PortalFeature from '@/components/services/PortalFeature'
-import RiskAuditSection from '@/components/accounting/RiskAuditSection'
-import HowItWorksTimeline, { HowItWorksStep } from '@/components/how-it-works/HowItWorksTimeline'
-import ServiceFeatures from '@/components/services/ServiceFeatures'
+"use client";
+
+import React from "react";
+import PageHeader from "@/components/common/PageHeader";
+import ClientPortalOverviewSection from "@/components/client-portal/ClientPortalOverviewSection";
+import PortalFeature from "@/components/services/PortalFeature";
+import RiskAuditSection from "@/components/accounting/RiskAuditSection";
+import HowItWorksTimeline, { HowItWorksStep } from "@/components/how-it-works/HowItWorksTimeline";
+import ServiceFeatures from "@/components/services/ServiceFeatures";
+import AnimatedSection from "@/components/common/AnimatedSection";
 
 const auditWorkflowSteps: HowItWorksStep[] = [
     {
@@ -99,18 +102,17 @@ const auditServiceFeatures = {
 }
 
 const AuditPortalPage = () => {
-    return (
-        <main className="min-h-screen bg-background">
-            <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
-                <PageHeader
-                    title="Audit Portal"
-                    breadcrumbs={[
-                        { label: 'Audit Portal' },
-                    ]}
-                />
-            </div>
+  return (
+    <main className="min-h-screen bg-background">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+        <PageHeader
+          title="Audit Portal"
+          breadcrumbs={[{ label: "Audit Portal" }]}
+        />
+      </div>
 
-            <ClientPortalOverviewSection
+      <AnimatedSection>
+        <ClientPortalOverviewSection
                 variant="audit"
                 heading="How VACEI delivers structured, high-quality audits"
                 paragraphs={[
@@ -119,9 +121,11 @@ const AuditPortalPage = () => {
                     'Clients interact through the Client Portal.',
                     'All audit execution and quality control takes place within the Audit Portal.',
                 ]}
-            />
+        />
+      </AnimatedSection>
 
-            <PortalFeature
+      <AnimatedSection delay>
+        <PortalFeature
                 portalImage="/assets/images/Audit.jpg"
                 sectionLabel="Risk-based audit"
                 heading="Audit engagement setup & Planning"
@@ -136,27 +140,34 @@ const AuditPortalPage = () => {
                 bottomTitle="Audit Portal"
                 bottomDescription="Documents, tasks, deadlines and communication in one place."
                 quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
-            />
+        />
+      </AnimatedSection>
 
-            <RiskAuditSection variant="audit" />
+      <AnimatedSection>
+        <RiskAuditSection variant="audit" />
+      </AnimatedSection>
 
-            <HowItWorksTimeline
+      <AnimatedSection delay>
+        <HowItWorksTimeline
                 steps={auditWorkflowSteps}
                 backgroundClassName="bg-[#AAACC8]"
                 mode="dark"
                 showHeader={false}
-            />
+        />
+      </AnimatedSection>
 
-            <ServiceFeatures
+      <AnimatedSection>
+        <ServiceFeatures
                 title={auditServiceFeatures.title}
                 subtitle={auditServiceFeatures.subtitle}
                 features={auditServiceFeatures.features}
                 bulletIconSrc="/assets/images/bullet2.png"
                 bulletIconAlt="Bullet"
-            />
-        </main>
-    )
-}
+        />
+      </AnimatedSection>
+    </main>
+  );
+};
 
-export default AuditPortalPage
+export default AuditPortalPage;
 

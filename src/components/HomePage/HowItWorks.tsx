@@ -99,11 +99,11 @@ const HowItWorks = () => {
 
                 {/* Header */}
                 <div className="text-center mb-10">
-                    <h2 className="text-[#242748] text-2xl md:text-3xl font-bold mb-2">How It Works</h2>
-                    <h3 className="text-[#242748] text-xl md:text-2xl font-semibold mb-2">
+                    <h2 className="text-primary text-2xl md:text-3xl font-bold mb-2">How It Works</h2>
+                    <h3 className="text-primary text-xl md:text-2xl font-semibold mb-2">
                         One portal. One team. Everything handled.
                     </h3>
-                    <p className="text-[#6B7280] text-sm md:text-base max-w-2xl mx-auto">
+                    <p className="text-gray text-sm md:text-base max-w-2xl mx-auto">
                         See how VACEI simplifies accounting, audit, compliance, and corporate services.
                     </p>
                 </div>
@@ -147,7 +147,7 @@ const HowItWorks = () => {
                 </div>
 
                 {/* Steps Grid - Row Layout matching the design */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 border-t border-gray-200/50 pt-8 mt-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 border-t border-input pt-8 mt-8">
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
@@ -158,14 +158,14 @@ const HowItWorks = () => {
                             className="flex flex-row items-center lg:items-start gap-4"
                         >
                             {/* Icon Box */}
-                            <div className="w-12 h-12 rounded-lg bg-[#1C1F37] flex items-center justify-center text-white shrink-0 shadow-sm">
+                            <div className="w-12 h-12 rounded-lg bg-hero-dark flex items-center justify-center text-white shrink-0 shadow-sm">
                                 {step.icon}
                             </div>
 
                             {/* Text Content */}
                             <div className="flex flex-col pt-1">
-                                <h4 className="text-[15px] font-bold text-[#242748] leading-tight mb-1">{step.title}</h4>
-                                <p className="text-[13px] text-gray-500 leading-snug font-medium">{step.description}</p>
+                                <h4 className="text-[15px] font-bold text-primary leading-tight mb-1">{step.title}</h4>
+                                <p className="text-[13px] text-gray leading-snug font-medium">{step.description}</p>
                             </div>
                         </motion.div>
                     ))}

@@ -1,16 +1,16 @@
-import Image from "next/image"
-import { ReactNode } from "react"
+import Image from "next/image";
+import { ReactNode } from "react";
 
 type HeroBackgroundProps = {
-  children: ReactNode
-  className?: string
-}
+  children: ReactNode;
+  className?: string;
+};
 
 const HeroBackground = ({ children, className = "" }: HeroBackgroundProps) => {
   return (
     <div
-      className={`relative w-full h-full  rounded-[8px] bg-[#242748] text-white overflow-hidden ${className}`}
-      style={{ width: "100%", }}
+      className={`relative w-full h-full  rounded-[8px] bg-primary text-white overflow-hidden ${className}`}
+      style={{ width: "100%" }}
     >
       <div
         className="absolute rotate-90 opacity-100 -right-10 -top-10 transform rotate-90"
@@ -42,8 +42,7 @@ const HeroBackground = ({ children, className = "" }: HeroBackgroundProps) => {
 
       <div className="relative z-10 h-full w-full">{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroBackground
-
+export default HeroBackground;

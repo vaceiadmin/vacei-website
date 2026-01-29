@@ -1,68 +1,65 @@
-import React from 'react'
-import Image from 'next/image'
-import GradientContainer from '@/components/common/GradientContainer'
+import React from "react";
+import Image from "next/image";
+import GradientContainer from "@/components/common/GradientContainer";
 
 const OngoingSupportSection = () => {
-    return (
-        <section className="py-16">
-              <GradientContainer
-                    showRadials={true}
-                    backgroundColor="bg-gradient-container"
-                    className="px-4 md:px-8 py-10 md:py-24"
-                >
-            <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-              
-                    <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-16">
-                        {/* Left: Text content */}
-                        <div className="w-full lg:w-1/2 text-left space-y-5">
-                            <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight">
-                                Ongoing Support and Visibility
-                            </h2>
-                            <p className="text-sm md:text-base text-light-gray leading-relaxed max-w-md">
-                                VACEI continues to manage your services on an ongoing basis.
-                            </p>
-                            <p className="text-sm md:text-base text-light-gray leading-relaxed max-w-lg">
-                                The platform tracks deadlines, progress and completed work, giving you continuous
-                                visibility across accounting, compliance, corporate and audit obligations.
-                            </p>
-                        </div>
-
-                        {/* Right: Image composition */}
-                        <div className="w-full lg:w-1/2 flex justify-center">
-                            <div className="relative w-full max-w-xl rounded-2xl overflow-hidden shadow-[0_18px_45px_rgba(0,0,0,0.55)]">
-                                {/* Background image */}
-                                <div className="relative w-full aspect-[16/9]">
-                                    <Image
-                                        src="/assets/images/Rectangle 1072 (1).png"
-                                        alt="Ongoing support background"
-                                        fill
-                                        className="object-cover"
-                                        priority
-                                    />
-                                </div>
-
-                                {/* Overlay card */}
-                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div className="relative w-[78%] md:w-[72%] max-w-lg">
-                                        <Image
-                                            src="/assets/images/Frame 1618872520.png"
-                                            alt="Project progress overlay"
-                                            width={900}
-                                            height={600}
-                                            className="w-full h-auto object-contain drop-shadow-[0_18px_40px_rgba(0,0,0,0.45)]"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-             
+  return (
+    <section className="py-16">
+      <GradientContainer
+        showRadials={true}
+        backgroundColor="bg-gradient-container"
+        className="px-4 md:px-8 py-10 md:py-24"
+      >
+        <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-16">
+            {/* Left: Text content */}
+            <div className="w-full lg:w-1/2 text-left space-y-5">
+              <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight">
+                Ongoing Support and Visibility
+              </h2>
+              <p className="text-sm md:text-base text-light-gray leading-relaxed max-w-md">
+                VACEI continues to manage your services on an ongoing basis.
+              </p>
+              <p className="text-sm md:text-base text-light-gray leading-relaxed max-w-lg">
+                The platform tracks deadlines, progress and completed work,
+                giving you continuous visibility across accounting, compliance,
+                corporate and audit obligations.
+              </p>
             </div>
-            </GradientContainer>
-        </section>
-    )
-}
 
-export default OngoingSupportSection
+            {/* Right: Image composition */}
+            <div className="w-full lg:w-1/2 flex justify-center">
+              <div className="relative w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl">
+                {/* Background image */}
+                <div className="relative w-full aspect-[16/9]">
+                  <Image
+                    src="/assets/images/Rectangle 1072 (1).png"
+                    alt="Ongoing support background"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
 
+                {/* Overlay card */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="relative w-[78%] md:w-[72%] max-w-lg">
+                    <Image
+                      src="/assets/images/Frame 1618872520.png"
+                      alt="Project progress overlay"
+                      width={900}
+                      height={600}
+                      className="w-full h-auto object-contain drop-shadow-xl"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </GradientContainer>
+    </section>
+  );
+};
 
+export default OngoingSupportSection;

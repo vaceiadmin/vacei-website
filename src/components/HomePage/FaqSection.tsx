@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import GradientContainer from "../common/GradientContainer"
+import { useState } from "react";
+import Image from "next/image";
+import GradientContainer from "../common/GradientContainer";
 
 const FaqSection = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const items = [
     {
@@ -18,16 +18,16 @@ const FaqSection = () => {
       desc: "We take ownership of our work and results.",
     },
     { title: "Structure", desc: "Organized processes for maximum efficiency." },
-  ]
+  ];
 
   const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="w-full py-20 pb-32">
       <div className="mx-auto">
-        <GradientContainer 
+        <GradientContainer
           className="py-16 lg:py-20 bg-primary"
           showRadials={false}
         >
@@ -36,8 +36,6 @@ const FaqSection = () => {
             <div className="relative flex-1 py-8 lg:py-10">
               {/* Main square background container */}
               <div className="relative mx-auto h-[500px] w-full max-w-[460px] rounded-[48px] ">
-              
-
                 {/* Man Image - Increased size and breaking out of container */}
                 <div className="absolute bottom-0 left-1/2 flex w-[140%] -translate-x-1/2 justify-center items-end z-30 pointer-events-none">
                   <Image
@@ -53,7 +51,7 @@ const FaqSection = () => {
                 {/* Floating Cards Layer */}
                 <div className="absolute inset-0  pointer-events-none">
                   {/* Financial Overview - Moved left to clear face */}
-                  <div className="absolute left-0 top-10 w-[240px] z-20 rounded-[24px] bg-white p-5 shadow-[0_20px_40px_rgba(23,26,62,0.15)] pointer-events-auto transition-transform hover:scale-105">
+                  <div className="absolute left-0 top-10 w-[240px] z-20 rounded-[24px] bg-white p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105">
                     <div className="mb-4 text-[12px] font-bold text-primary">
                       Financial Overview
                     </div>
@@ -79,7 +77,7 @@ const FaqSection = () => {
                           <p className="text-[11px] font-bold text-primary">
                             Total Asset
                           </p>
-                          <p className="text-[9px] text-gray-400">
+                          <p className="text-[9px] text-light-gray">
                             Jan 2026 (Balance Sheet)
                           </p>
                           <p className="mt-0.5 text-[11px] font-extrabold text-primary">
@@ -112,7 +110,7 @@ const FaqSection = () => {
                           <p className="text-[11px] font-bold text-primary">
                             Cash at End of Perio..
                           </p>
-                          <p className="text-[9px] text-gray-400">
+                          <p className="text-[9px] text-light-gray">
                             Jan 2026 (Cash Flow)
                           </p>
                           <p className="mt-0.5 text-[11px] font-extrabold text-primary">
@@ -127,7 +125,7 @@ const FaqSection = () => {
                   </div>
 
                   {/* Get Started Card */}
-                  <div className="absolute -bottom-8 -left-8 w-[200px] z-40 rounded-[24px] bg-purple-bg p-6 text-white shadow-[0_24px_50px_rgba(0,0,0,0.2)] pointer-events-auto transition-transform hover:scale-105">
+                  <div className="absolute -bottom-8 -left-8 w-[200px] z-40 rounded-[24px] bg-purple-bg p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105">
                     <p className="text-[16px] font-bold leading-tight tracking-wide">
                       Get Started
                       <br />
@@ -157,7 +155,7 @@ const FaqSection = () => {
 
                   {/* Authorized Share Card - Custom Layout */}
                   <div className="absolute bottom-16 -right-10 pointer-events-auto z-40 transition-transform hover:scale-105">
-                    <div className="relative w-[160px] rounded-[24px] bg-white p-5 shadow-[0_20px_40px_rgba(23,26,62,0.15)]">
+                    <div className="relative w-[160px] rounded-[24px] bg-white p-5 shadow-xl">
                       <p className="mb-4 text-[11px] font-bold text-primary">
                         Authorized Share
                       </p>
@@ -170,16 +168,20 @@ const FaqSection = () => {
 
                         {/* Lines */}
                         <div className="flex w-full flex-col gap-1.5 px-1">
-                          <div className="h-1.5 w-full rounded-full bg-[#E5E7EB]"></div>
+                          <div className="h-1.5 w-full rounded-full bg-neutral-200"></div>
                           <div className="h-1.5 w-[70%] rounded-full bg-purple-bg"></div>
                         </div>
                       </div>
 
                       {/* Floating Legend / Tooltip */}
-                      <div className="absolute -right-6 -top-10 bg-white rounded-[14px] px-3 py-2 shadow-[0_10px_20px_rgba(0,0,0,0.08)] border border-gray-50 min-w-[100px]">
+                      <div className="absolute -right-6 -top-10 bg-white rounded-[14px] px-3 py-2 shadow-lg border border-input min-w-[100px]">
                         <div className="flex flex-col gap-1">
-                          <span className="text-[9px] font-bold text-success tracking-wide">Issued Share 50%</span>
-                          <span className="text-[9px] font-bold text-error tracking-wide">Left Share 50%</span>
+                          <span className="text-[9px] font-bold text-success tracking-wide">
+                            Issued Share 50%
+                          </span>
+                          <span className="text-[9px] font-bold text-error tracking-wide">
+                            Left Share 50%
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -192,7 +194,7 @@ const FaqSection = () => {
             <div className="flex-1 lg:pl-12 w-full">
               <div className="space-y-4 lg:space-y-5">
                 {items.map((item, index) => {
-                  const isOpen = openIndex === index
+                  const isOpen = openIndex === index;
                   return (
                     <div
                       key={index}
@@ -200,27 +202,42 @@ const FaqSection = () => {
                       className="overflow-hidden rounded-[18px] bg-white text-primary shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group"
                     >
                       <div className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6">
-                        <span className="text-base lg:text-[18px] font-semibold tracking-tight">{item.title}</span>
+                        <span className="text-base lg:text-[18px] font-semibold tracking-tight">
+                          {item.title}
+                        </span>
                         <button
                           type="button"
-                          className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${isOpen ? 'border-purple-bg text-purple-bg' : 'border-purple-bg text-purple-bg group-hover:bg-purple-bg/10'}`}
+                          className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${isOpen ? "border-purple-bg text-purple-bg" : "border-purple-bg text-purple-bg group-hover:bg-purple-bg/10"}`}
                         >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            {isOpen ? <path d="M5 12h14" /> : <path d="M12 5v14M5 12h14" />}
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            {isOpen ? (
+                              <path d="M5 12h14" />
+                            ) : (
+                              <path d="M12 5v14M5 12h14" />
+                            )}
                           </svg>
                         </button>
                       </div>
                       {isOpen && (
                         <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
                           {/* Dashed line */}
-                          <div className="mb-5 border-t border-dashed border-gray-300/70" />
-                          <p className="text-sm lg:text-[15px] text-gray-500 leading-[1.6] font-medium">
+                          <div className="mb-5 border-t border-dashed border-input" />
+                          <p className="text-sm lg:text-[15px] text-gray leading-[1.6] font-medium">
                             {item.desc}
                           </p>
                         </div>
                       )}
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -228,7 +245,7 @@ const FaqSection = () => {
         </GradientContainer>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default FaqSection
+export default FaqSection;
