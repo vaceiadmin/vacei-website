@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import PageTransition from "@/components/common/PageTransition";
+import { SmoothScroll } from "@/components/common/SmoothScroll";
+import IntroAnimation from "@/components/common/IntroAnimation";
 
 export const metadata: Metadata = {
   title: "VACEI – Accounting, Audit & Corporate Services",
@@ -19,9 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <Navbar />
-        <PageTransition>{children}</PageTransition>
-        <Footer />
+        <IntroAnimation />
+        <SmoothScroll>
+          <Navbar />
+          <PageTransition>{children}</PageTransition>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

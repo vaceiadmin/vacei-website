@@ -1,5 +1,6 @@
 import React from 'react'
 import SectionBadge from '@/components/common/SectionBadge'
+import TextAnimation from '@/components/common/TextAnimation'
 
 const pricingCards = [
     {
@@ -92,9 +93,11 @@ const PricingOverviewSection = () => {
                 {/* Header */}
                 <div className="text-center mb-12 lg:mb-16">
                     <SectionBadge text="Pricing" className="px-6 py-1.5 text-xs text-heading" />
-                    <h2 className="mt-5 text-3xl md:text-4xl font-semibold text-heading leading-tight">
-                        Overview
-                    </h2>
+                    <TextAnimation
+                        text="Overview"
+                        as="h2"
+                        className="mt-5 text-3xl md:text-4xl font-semibold text-heading leading-tight"
+                    />
                     <p className="mt-4 text-sm md:text-base text-gray max-w-2xl mx-auto leading-relaxed">
                         VACEI is designed to be simple to start and easy to work with. From the first enquiry to
                         ongoing delivery, everything follows a clear and structured process.
@@ -109,9 +112,11 @@ const PricingOverviewSection = () => {
                             className="bg-background-secondary rounded-2xl shadow-sm border border-gray-200 px-6 py-6 md:px-7 md:py-7 flex flex-col min-h-[450px]"
                         >
                             <div className="mb-4 min-h-[120px]">
-                                <h3 className="text-lg md:text-xl font-semibold text-heading mb-3">
-                                    {card.title}
-                                </h3>
+                                <TextAnimation
+                                    text={card.title}
+                                    as="h3"
+                                    className="text-lg md:text-xl font-semibold text-heading mb-3"
+                                />
                                 <p className="text-sm text-gray leading-relaxed">
                                     {card.intro}
                                 </p>

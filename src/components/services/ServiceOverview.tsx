@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import Image from "next/image";
+import TextAnimation from "../common/TextAnimation";
 
 interface ServiceOverviewProps {
   title: string;
@@ -32,9 +33,11 @@ const ServiceOverview = ({
 
           {/* Right Column: Content */}
           <div className="flex flex-col pt-2">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-heading mb-4 leading-tight">
-              {title}
-            </h2>
+            <TextAnimation
+              text={title}
+              as="h2"
+              className="text-2xl md:text-3xl lg:text-4xl font-medium text-heading mb-4 leading-tight"
+            />
             <div className="text-sm md:text-base text-gray leading-[1.8]">
               {description}
             </div>

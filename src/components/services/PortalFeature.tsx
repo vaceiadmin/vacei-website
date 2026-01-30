@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionBadge from "@/components/common/SectionBadge";
+import TextAnimation from "@/components/common/TextAnimation";
 
 type PortalFeatureVariant = "default" | "technology";
 
@@ -74,9 +75,11 @@ const PortalFeature = ({
                 <div className="mb-4">
                   <SectionBadge text={sectionLabel} className="text-heading" />
                 </div>
-                <h2 className="text-2xl lg:text-3xl font-medium text-heading mb-3 text-left">
-                  {heading}
-                </h2>
+                <TextAnimation
+                  text={heading}
+                  as="h2"
+                  className="text-2xl lg:text-3xl font-medium text-heading mb-3 text-left"
+                />
                 <p className="text-gray text-sm mb-4 text-left">
                   {description}
                 </p>

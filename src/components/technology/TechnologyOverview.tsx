@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import TextAnimation from "../common/TextAnimation";
 
 const TechnologyOverview = () => {
   return (
@@ -47,9 +48,11 @@ const TechnologyOverview = () => {
 
           {/* Right Column: Content */}
           <div className="flex flex-col justify-center h-full">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-6 leading-tight">
-              Our Technology
-            </h2>
+            <TextAnimation
+              text="Our Technology"
+              as="h2"
+              className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-6 leading-tight"
+            />
 
             <div className="space-y-4 text-sm md:text-base text-gray leading-[1.8]">
               <p>

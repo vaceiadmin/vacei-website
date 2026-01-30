@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import TextAnimation from "./TextAnimation";
 
 interface FaqQuestion {
   question: string;
@@ -37,7 +38,7 @@ const FaqCategorized = ({
   };
 
   return (
-    <section className="w-full py-16 lg:py-24 ">
+    <section className="w-full py-5 lg:py-24 ">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Label */}
         {showLabel && (
@@ -64,21 +65,11 @@ const FaqCategorized = ({
             return (
               <div key={categoryIndex} className="space-y-6">
                 {/* Category Heading */}
-                <h2
+                <TextAnimation
+                  text={category.title}
+                  as="h2"
                   className={`${titleSize} font-medium text-heading text-center`}
-                >
-                  {category.titleHighlight ? (
-                    <>
-                      {titleParts[0]}
-                      <span className="text-purple-bg">
-                        {category.titleHighlight}
-                      </span>
-                      {titleParts[1]}
-                    </>
-                  ) : (
-                    category.title
-                  )}
-                </h2>
+                />
 
                 {/* Questions */}
                 <div className="space-y-4 lg:space-y-5">

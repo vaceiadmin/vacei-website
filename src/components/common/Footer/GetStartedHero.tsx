@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import GradientContainer from "@/components/common/GradientContainer";
+import TextAnimation from "@/components/common/TextAnimation";
 
 const FinancialOverviewImage = "/assets/images/financial-overview.png";
 const CashflowImage = "/assets/images/cashflow.png";
@@ -15,16 +16,18 @@ const GetStartedHero = () => {
       <div className="relative z-10 w-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-6xl">
           <GradientContainer
-            className="min-h-[28rem] sm:min-h-[24rem] lg:h-[22.5rem] lg:max-h-[22.5rem] rounded-lg shadow-[inset_4px_4px_24px_var(--primary-blue-shadow),inset_-4px_-4px_24px_var(--primary-blue-shadow)] bg-footer-hero"
+            className="min-h-80 sm:min-h-[24rem] lg:h-[22.5rem] lg:max-h-[22.5rem] rounded-lg shadow-[inset_4px_4px_24px_var(--primary-blue-shadow),inset_-4px_-4px_24px_var(--primary-blue-shadow)] bg-footer-hero"
             showRadials={false}
           >
             <div className="relative z-10 w-full h-full flex items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-0">
-              <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center w-full">
+              <div className="grid lg:grid-cols-2 gap-20 sm:gap-8 lg:gap-12 items-center w-full">
                 {/* Left Content */}
-                <div className="text-white space-y-4 sm:space-y-5">
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                    Get Started
-                  </h1>
+                <div className="text-white space-y-4 sm:space-y-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+                  <TextAnimation
+                    text="Get Started"
+                    as="h1"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                  />
 
                   <p className="text-sm sm:text-base lg:text-lg leading-relaxed opacity-90 max-w-xl">
                     Modernise how your business handles accounting, audit and
@@ -32,7 +35,7 @@ const GetStartedHero = () => {
                   </p>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 w-full justify-center lg:justify-start">
                     <GetInstantQuoteButton
                       variant="default"
                       className="text-sm sm:text-[15px] px-5 sm:px-6 py-2.5 sm:py-3"

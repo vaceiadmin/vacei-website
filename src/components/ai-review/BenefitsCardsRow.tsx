@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import TextAnimation from '../common/TextAnimation'
 
 export interface BenefitCard {
     icon: string
@@ -37,9 +38,11 @@ const BenefitsCardsRow = ({ cards, columns = 3 }: BenefitsCardsRowProps) => {
                                     className="object-contain"
                                 />
                             </div>
-                            <h3 className="text-xl font-semibold mb-3 leading-snug">
-                                {card.title}
-                            </h3>
+                            <TextAnimation
+                                text={card.title}
+                                as="h3"
+                                className="text-xl font-semibold mb-3 leading-snug"
+                            />
                             <p className="text-sm  leading-relaxed mb-4">
                                 {card.description}
                             </p>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import GetInstantQuoteButton from "./GetInstantQuoteButton";
 import { servicesData } from "@/data/servicesData";
 
@@ -30,11 +31,23 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { label: "AI Review", href: "/ai-review" },
     {
       label: "Services",
-      href: "/services",
+      href: "#",
       hasDropdown: true,
       isOpen: servicesOpen,
       setIsOpen: setServicesOpen,
@@ -83,7 +96,11 @@ const Navbar = () => {
     <>
       <nav className="w-full sticky top-0 z-60 py-3 px-4 sm:py-4 sm:px-6 lg:px-8">
         {/* Navbar Container – full width, rounded corners, responsive horizontal padding */}
-        <div className="w-full rounded-2xl bg-background-secondary/95 backdrop-blur-md shadow-lg border border-input px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={false}
+          animate={{ backgroundColor: "#ffffff" }}
+          className="w-full rounded-2xl bg-white border border-gray-100 shadow-sm px-4 sm:px-6 lg:px-8 transition-all"
+        >
           <div className="flex items-center justify-between min-h-[72px] py-3 lg:min-h-[80px] lg:py-4">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 shrink-0">
@@ -116,14 +133,16 @@ const Navbar = () => {
                     className={`text-text-dark font-normal text-[15px] hover:text-primary-blue transition-colors flex items-center gap-1 ${link.isOpen ? "text-primary-blue" : ""}`}
                     onClick={(e) => {
                       if (link.hasDropdown) {
-                        e.preventDefault(); // Optional: prevent navigation on parent click if it just opens dropdown
+                        e.preventDefault();
+                        link.setIsOpen?.(!link.isOpen);
                       }
                     }}
                   >
                     {link.label}
                     {link.hasDropdown && (
-                      <svg
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${link.isOpen ? "rotate-180" : ""}`}
+                      <motion.svg
+                        animate={{ rotate: link.isOpen ? 180 : 0 }}
+                        className="w-3.5 h-3.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -134,87 +153,75 @@ const Navbar = () => {
                           strokeWidth={2}
                           d="M19 9l-7 7-7-7"
                         />
-                      </svg>
+                      </motion.svg>
                     )}
                   </Link>
 
                   {/* Dropdown Menu */}
-                  {link.hasDropdown && link.isOpen && (
-                    <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-max z-50 transform transition-all duration-200 ease-out origin-top"
-                      style={{
-                        animation: "fadeIn 0.2s ease-out",
-                      }}
-                    >
-                      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-2 overflow-hidden min-w-[260px]">
-                        {link.label === "Services" ? (
-                          <div className="grid grid-cols-1 gap-1 p-1">
-                            {servicesData.map((service) => (
-                              <Link
-                                key={service.id}
-                                href={`/services/${service.slug}`}
-                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
-                                onClick={() => link.setIsOpen?.(false)}
-                              >
-                                <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
-                                  {service.title}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        ) : link.label === "Portals" ? (
-                          <div className="grid grid-cols-1 gap-1 p-1">
-                            {portalLinks.map((item) => (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors"
-                                onClick={() => link.setIsOpen?.(false)}
-                              >
-                                <div className="text-[15px] font-medium text-text-dark hover:text-primary-blue transition-colors">
-                                  {item.label}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        ) : link.label === "Products" ? (
-                          <div className="grid grid-cols-1 gap-1 p-1">
-                            {productLinks.map((item) => (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors"
-                                onClick={() => link.setIsOpen?.(false)}
-                              >
-                                <div className="text-[15px] font-medium text-text-dark hover:text-primary-blue transition-colors">
-                                  {item.label}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        ) : link.label === "Resources" ? (
-                          <div className="grid grid-cols-1 gap-1 p-1">
-                            {resourceLinks.map((item) => (
-                              <Link
-                                key={item.href}
-                                href={item.href}
-                                className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors"
-                                onClick={() => link.setIsOpen?.(false)}
-                              >
-                                <div className="text-[15px] font-medium text-text-dark hover:text-primary-blue transition-colors">
-                                  {item.label}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="p-4 text-sm text-gray-500 text-center">
-                            Coming Soon
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {link.hasDropdown && link.isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-max z-50 origin-top"
+                      >
+                        <div className="bg-white/95 backdrop-blur-[25px] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/50 p-2 overflow-hidden min-w-[260px]">
+                          {link.label === "Services" ? (
+                            <div className="grid grid-cols-1 gap-1 p-1">
+                              {servicesData.map((service) => (
+                                <Link
+                                  key={service.id}
+                                  href={`/services/${service.slug}`}
+                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
+                                  onClick={() => link.setIsOpen?.(false)}
+                                >
+                                  <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                    {service.title}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ) : link.label === "Portals" ? (
+                            <div className="grid grid-cols-1 gap-1 p-1">
+                              {portalLinks.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
+                                  onClick={() => link.setIsOpen?.(false)}
+                                >
+                                  <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                    {item.label}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ) : link.label === "Resources" ? (
+                            <div className="grid grid-cols-1 gap-1 p-1">
+                              {resourceLinks.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
+                                  onClick={() => link.setIsOpen?.(false)}
+                                >
+                                  <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                    {item.label}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="p-4 text-sm text-gray-500 text-center">
+                              Coming Soon
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </div>
@@ -225,7 +232,7 @@ const Navbar = () => {
                 {/* Try The Client Portal Button */}
                 <Link
                   href="/portal/client-portal"
-                  className="flex items-center justify-center gap-2 rounded-full border border-primary-blue text-text-dark font-normal text-[15px] hover:bg-gray-50 transition-all px-6 h-[44px]"
+                  className="flex items-center justify-center gap-2 rounded-full border border-primary-blue text-text-dark font-normal text-[15px] hover:bg-white/40 transition-all px-6 h-[44px] backdrop-blur-sm"
                 >
                   <span>Try The Client Portal</span>
                   <svg
@@ -263,63 +270,159 @@ const Navbar = () => {
                 onMouseLeave={() => !isMobile && setHamburgerHover(false)}
                 aria-label="Menu"
               >
-                <div className="h-0.5 bg-text-dark transition-all duration-300 w-6" />
-                <div className="relative w-6 h-0.5">
+                <motion.div 
+                  animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
+                  className="h-0.5 bg-text-dark w-6" 
+                />
+                <motion.div 
+                  animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
+                  className="relative w-6 h-0.5"
+                >
                   <div
                     className="absolute left-0 h-full bg-text-dark transition-all duration-300 ease-out"
                     style={{ width: !isMobile && hamburgerHover ? 24 : 16.8 }}
                   />
-                </div>
-                <div className="h-0.5 bg-text-dark transition-all duration-300 w-6" />
+                </motion.div>
+                <motion.div 
+                  animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
+                  className="h-0.5 bg-text-dark w-6" 
+                />
               </button>
             </div>
-
-            {/* Mobile dropdown: full-width panel below navbar (Image 1); single hamburger only */}
           </div>
 
           {/* Mobile Menu - inline version */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden pb-4 border-t border-input mt-2 pt-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="block py-3 text-text-dark font-normal text-[17px] leading-6 hover:text-primary-blue transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="mt-4" onClick={() => setMobileMenuOpen(false)}>
-                <GetInstantQuoteButton
-                  hasShadow={false}
-                  className="w-full justify-center"
-                />
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <div className="max-h-[70vh] overflow-y-auto pt-4 pb-12 px-1 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+                  {navLinks.map((link) => (
+                  <div key={link.label} className="border-b border-white/10 last:border-none">
+                    <div className="flex items-center justify-between py-3">
+                      <Link
+                        href={link.href}
+                        className="text-text-dark font-normal text-[17px] leading-6 hover:text-primary-blue transition-colors flex-1"
+                        onClick={(e) => {
+                          if (link.hasDropdown) {
+                            e.preventDefault();
+                            link.setIsOpen?.(!link.isOpen);
+                          } else {
+                            setMobileMenuOpen(false);
+                          }
+                        }}
+                      >
+                        {link.label}
+                      </Link>
+                      {link.hasDropdown && (
+                        <button
+                          onClick={() => link.setIsOpen?.(!link.isOpen)}
+                          className="p-2 text-gray-500"
+                        >
+                          <motion.svg
+                            animate={{ rotate: link.isOpen ? 180 : 0 }}
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </motion.svg>
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Mobile Dropdown Content */}
+                    <AnimatePresence>
+                      {link.hasDropdown && link.isOpen && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="pl-4 pb-3 space-y-2 overflow-hidden mt-1"
+                        >
+                          <div className="bg-white/40 backdrop-blur-xl rounded-xl p-2 space-y-1 border border-white/40">
+                            {link.label === "Services" ? (
+                              servicesData.map((service) => (
+                                <Link
+                                  key={service.id}
+                                  href={`/services/${service.slug}`}
+                                  className="block py-2.5 text-[15px] text-text-dark hover:text-primary-blue hover:bg-white/60 rounded-lg pl-3 transition-all font-medium"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {service.title}
+                                </Link>
+                              ))
+                            ) : link.label === "Portals" ? (
+                              portalLinks.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  className="block py-2.5 text-[15px] text-text-dark hover:text-primary-blue hover:bg-white/60 rounded-lg pl-3 transition-all font-medium"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {item.label}
+                                </Link>
+                              ))
+                            ) : link.label === "Resources" ? (
+                              resourceLinks.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  className="block py-2.5 text-[15px] text-text-dark hover:text-primary-blue hover:bg-white/60 rounded-lg pl-3 transition-all font-medium"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {item.label}
+                                </Link>
+                              ))
+                            ) : null}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+                <div className="mt-6" onClick={() => setMobileMenuOpen(false)}>
+                  <GetInstantQuoteButton
+                    hasShadow={false}
+                    className="w-full justify-center"
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </nav>
 
       {/* Sidebar Overlay & Panel - Only for desktop */}
       {sidebarOpen && !isMobile && (
         <>
           {/* Overlay with blur effect */}
-          <div
-            className="fixed inset-0 z-60 transition-opacity duration-300 backdrop-blur-md"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-60 backdrop-blur-md bg-black/20"
             onClick={() => setSidebarOpen(false)}
-            style={{
-              animation: "fadeIn 0.3s ease-out",
-              backgroundColor: "var(--overlay-bg)",
-            }}
           />
 
           {/* Sidebar Panel with smooth slide animation */}
-          <div
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
             className="fixed top-4 bottom-4 right-0 w-full lg:w-[450px] z-70 overflow-hidden"
-            style={{
-              animation: "slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
           >
             {/* Sidebar Container with gradient background, border radius, and hidden scrollbar */}
             <div
@@ -507,7 +610,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </>
       )}
     </>

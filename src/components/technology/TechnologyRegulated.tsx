@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import GradientContainer from "@/components/common/GradientContainer";
 import { motion } from "framer-motion";
+import TextAnimation from "../common/TextAnimation";
 
 const TechnologyRegulated = () => {
   const features = [
@@ -60,9 +61,11 @@ const TechnologyRegulated = () => {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading leading-tight">
-                Designed for regulated environments
-              </h2>
+              <TextAnimation
+                text="Designed for regulated environments"
+                as="h2"
+                className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading leading-tight"
+              />
 
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-gray leading-relaxed">
@@ -100,9 +103,11 @@ const TechnologyRegulated = () => {
               </p>
 
               <div className="space-y-3 pt-4">
-                <h3 className="text-lg md:text-xl font-semibold text-heading">
-                  Availability for firms
-                </h3>
+                <TextAnimation
+                  text="Availability for firms"
+                  as="h3"
+                  className="text-lg md:text-xl font-semibold text-heading"
+                />
                 <p className="text-sm md:text-base text-gray leading-relaxed">
                   Selected components of our technology environment may also be
                   made available to firms through partnerships, licensing, or
@@ -161,9 +166,11 @@ const TechnologyRegulated = () => {
                     }}
                   >
                     {/* Title */}
-                    <h3 className="text-lg font-semibold text-heading mb-6">
-                      WE Carefully Handle
-                    </h3>
+                    <TextAnimation
+                      text="WE Carefully Handle"
+                      as="h3"
+                      className="text-lg font-semibold text-heading mb-6"
+                    />
 
                     {/* Cards List */}
                     <div className="space-y-3">

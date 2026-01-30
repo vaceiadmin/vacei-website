@@ -25,17 +25,17 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="w-full py-20 pb-32">
-      <div className="mx-auto">
+    <section className="w-full py-12 sm:py-20 pb-20 sm:pb-32">
+      <div className="mx-auto px-4 md:px-0">
         <GradientContainer
-          className="py-16 lg:py-20 bg-primary"
+          className="py-10 sm:py-16 lg:py-20 bg-primary"
           showRadials={false}
         >
           <div className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-center max-w-6xl mx-auto">
             {/* Left: Interactive Image Area */}
-            <div className="relative flex-1 py-8 lg:py-10">
+            <div className="relative flex-1 py-8 lg:py-10 flex justify-center lg:block">
               {/* Main square background container */}
-              <div className="relative mx-auto h-[500px] w-full max-w-[460px] rounded-[48px] ">
+              <div className="relative h-[380px] sm:h-[500px] w-full max-w-[340px] sm:max-w-[460px] rounded-[32px] sm:rounded-[48px] scale-95 sm:scale-100 origin-center">
                 {/* Man Image - Increased size and breaking out of container */}
                 <div className="absolute bottom-0 left-1/2 flex w-[140%] -translate-x-1/2 justify-center items-end z-30 pointer-events-none">
                   <Image
@@ -43,7 +43,7 @@ const FaqSection = () => {
                     alt="Professional"
                     width={600}
                     height={750}
-                    className="w-[480px] max-w-none object-contain translate-y-4"
+                    className="w-[360px] sm:w-[480px] max-w-none object-contain translate-y-4"
                     priority
                   />
                 </div>
@@ -199,7 +199,7 @@ const FaqSection = () => {
                     <div
                       key={index}
                       onClick={() => toggleItem(index)}
-                      className="overflow-hidden rounded-[18px] bg-white text-primary shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group"
+                      className="overflow-hidden rounded-[18px] bg-white text-primary shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group mx-5"
                     >
                       <div className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6">
                         <span className="text-base lg:text-[18px] font-semibold tracking-tight">

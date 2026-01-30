@@ -1,5 +1,6 @@
 import React from 'react'
 import GetInstantQuoteButton from '../common/GetInstantQuoteButton'
+import TextAnimation from '../common/TextAnimation'
 
 const CompanySetupSection = () => {
   return (
@@ -7,12 +8,16 @@ const CompanySetupSection = () => {
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Main Heading */}
         <div className="text-center mb-8 lg:mb-10 max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
-            Start a Company in Malta
-          </h2>
-          <p className="text-base md:text-lg text-text-dark max-w-3xl mx-auto leading-relaxed">
-            We handle incorporation and setup end-to-end – and you manage everything through one client portal.
-          </p>
+          <TextAnimation
+            text="Start a Company in Malta"
+            as="h2"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight"
+          />
+          <TextAnimation
+            text="We handle incorporation and setup end-to-end – and you manage everything through one client portal."
+            as="p"
+            className="text-base md:text-lg text-text-dark max-w-3xl mx-auto leading-relaxed"
+          />
         </div>
 
         {/* Three Content Boxes */}

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import SectionBadge from "@/components/common/SectionBadge";
+import TextAnimation from "../common/TextAnimation";
 
 const ReviewOutputSection = () => {
   return (
@@ -11,9 +12,11 @@ const ReviewOutputSection = () => {
           <div className="space-y-6 text-left">
             <div>
               <SectionBadge text="Review output" className="text-heading" />
-              <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-heading leading-tight">
-                Review output
-              </h2>
+              <TextAnimation
+                text="Review output"
+                as="h2"
+                className="mt-4 text-3xl md:text-4xl font-semibold text-heading leading-tight"
+              />
               <p className="mt-2 text-sm md:text-base text-gray max-w-md leading-relaxed">
                 Within minutes, a structured review report is generated.
               </p>
@@ -22,9 +25,11 @@ const ReviewOutputSection = () => {
             <div className="flex flex-col md:flex-row gap-4">
               {/* The report is */}
               <div className="bg-background-secondary rounded-2xl shadow-sm border border-gray-200 px-5 py-5 flex-1 min-w-[230px]">
-                <h3 className="text-sm md:text-base font-semibold text-heading mb-3">
-                  The report is:
-                </h3>
+                <TextAnimation
+                  text="The report is:"
+                  as="h3"
+                  className="text-sm md:text-base font-semibold text-heading mb-3"
+                />
                 <ul className="space-y-2 text-sm text-gray">
                   {["Clear", "Actionable", "Easy to work through"].map(
                     (item, i) => (
@@ -45,9 +50,11 @@ const ReviewOutputSection = () => {
 
               {/* Each item is marked as */}
               <div className="bg-background-secondary rounded-2xl shadow-sm border border-gray-200 px-5 py-5 flex-1 min-w-[230px]">
-                <h3 className="text-sm md:text-base font-semibold text-heading mb-3">
-                  Each item is marked as:
-                </h3>
+                <TextAnimation
+                  text="Each item is marked as:"
+                  as="h3"
+                  className="text-sm md:text-base font-semibold text-heading mb-3"
+                />
                 <ul className="space-y-2 text-sm text-gray">
                   {["Confirmed", "Disclosed", "Flagged for review"].map(
                     (item, i) => (

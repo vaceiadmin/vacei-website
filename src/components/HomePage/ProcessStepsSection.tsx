@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from "react"
 import GradientContainer from "../common/GradientContainer"
+import GlassyEffect from "../common/GlassyEffect"
 
 type FormData = {
   name: string
@@ -278,15 +279,15 @@ const ProcessStepsSection = () => {
   }
 
   return (
-    <section className="w-full py-16 lg:py-20" style={{ backgroundColor: "var(--section-bg-light)" }}>
+    <section className="w-full py-12 sm:py-16 lg:py-20" style={{ backgroundColor: "var(--section-bg-light)" }}>
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,480px)_1fr] gap-10 lg:gap-14 lg:items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,480px)_1fr] gap-8 lg:gap-14 lg:items-start">
           <GradientContainer
             showRadials={false}
             backgroundColor="bg-gradient-quote-panel"
             className="p-6 md:p-8 shadow-lg"
           >
-            <div className="mx-auto w-full max-w-[360px] rounded-xl bg-white px-6 py-5 shadow-sm">
+            <GlassyEffect className="mx-auto w-full max-w-[360px] px-6 py-5" intensity="high">
               <p className="text-[11px] uppercase tracking-[0.28em] text-form-label font-semibold mb-4">
                 Get Instant Quote
               </p>
@@ -399,7 +400,7 @@ const ProcessStepsSection = () => {
                   </button>
                 </div>
               )}
-            </div>
+            </GlassyEffect>
           </GradientContainer>
 
           <div>
@@ -408,11 +409,11 @@ const ProcessStepsSection = () => {
               return (
                 <div key={item.title} className="border-b border-input py-4">
                   <div className="flex items-start gap-3">
-                    <span className={`text-sm font-normal ${isActive ? "text-heading" : "text-gray"}`}>
+                    <span className={`text-sm font-normal mt-1 md:mt-1.5 ${isActive ? "text-heading" : "text-gray"}`}>
                       {index + 1}
                     </span>
                     <div>
-                      <p className={`text-2xl font-normal leading-tight ${isActive ? "text-heading" : "text-gray"}`}>
+                      <p className={`text-lg sm:text-xl md:text-2xl font-normal leading-tight ${isActive ? "text-heading" : "text-gray"}`}>
                         {item.title}
                       </p>
                       {isActive ? <p className="text-sm text-gray">{item.description}</p> : null}
@@ -426,7 +427,7 @@ const ProcessStepsSection = () => {
 
        
       </div>
-        <div className="mt-12 border-t border-input pt-8 mx-auto w-full max-w-6xl px-4 md:px-6 lg:px-8">
+        <div className="sm:mt-12 border-t border-input pt-4 mx-auto w-full max-w-6xl px-4 md:px-6 lg:px-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             {[
               { title: "Not DIY software", description: "You don't do the work." },

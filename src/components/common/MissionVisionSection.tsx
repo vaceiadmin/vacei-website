@@ -2,6 +2,7 @@
 
 import React from "react";
 import GradientContainer from "./GradientContainer";
+import TextAnimation from "./TextAnimation";
 
 const MissionVisionSection = () => {
   return (
@@ -15,9 +16,11 @@ const MissionVisionSection = () => {
             className="rounded-2xl px-6 py-7 md:px-7 md:py-8 lg:px-8 lg:py-9 shadow-2xl border border-white/5"
           >
             <div className="text-white">
-              <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-4 text-white">
-                Our Mission
-              </h3>
+              <TextAnimation
+                text="Our Mission"
+                as="h3"
+                className="text-xl md:text-2xl font-semibold tracking-tight mb-4 text-white"
+              />
               <p className="text-sm md:text-base leading-relaxed text-light-gray mb-4">
                 VACEI&apos;s mission is to deliver accounting, audit and
                 corporate services in a way that is structured, transparent and
@@ -43,9 +46,11 @@ const MissionVisionSection = () => {
             className="rounded-2xl px-6 py-7 md:px-7 md:py-8 lg:px-8 lg:py-9 shadow-2xl border border-white/5"
           >
             <div className="text-white">
-              <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-4 text-white">
-                Our Vision
-              </h3>
+              <TextAnimation
+                text="Our Vision"
+                as="h3"
+                className="text-xl md:text-2xl font-semibold tracking-tight mb-4 text-white"
+              />
               <p className="text-sm md:text-base leading-relaxed text-light-gray mb-4">
                 Our vision is to redefine how professional accounting and audit
                 services are delivered in a modern, digital-first environment.

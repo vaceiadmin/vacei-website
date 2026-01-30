@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import GradientContainer from './GradientContainer'
 import GetInstantQuoteButton from './GetInstantQuoteButton'
+import TextAnimation from './TextAnimation'
 
 interface FeatureItem {
     title: string
@@ -148,9 +149,11 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
 
                 {/* Text Content */}
                 <div className={`flex-1 space-y-4 lg:space-y-6 w-full flex flex-col justify-center ${getContentOrder()}`}>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-heading leading-tight">
-                        {feature.title}
-                    </h2>
+                    <TextAnimation 
+                        text={feature.title}
+                        as="h2"
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold text-heading leading-tight"
+                    />
                     <p className="text-base lg:text-lg text-gray leading-relaxed">
                         {feature.description}
                     </p>

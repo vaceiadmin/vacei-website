@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
+import GlassyEffect from "../common/GlassyEffect";
 
 interface BaseCard {
   id: number;
@@ -19,6 +20,25 @@ const ServicesSection = () => {
     "services" | "experts" | "products"
   >("services");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVisibleItems(1);
+      } else if (window.innerWidth < 1280) {
+        setVisibleItems(2);
+      } else {
+        setVisibleItems(activeTab === "products" ? 3 : 4);
+      }
+    };
+
+    // Initial call
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeTab]);
 
   const services: BaseCard[] = [
     {
@@ -114,7 +134,6 @@ const ServicesSection = () => {
   };
 
   const activeData = getActiveData();
-  const visibleCards = activeTab === "products" ? 3 : 4;
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % activeData.length);
@@ -127,24 +146,24 @@ const ServicesSection = () => {
   };
 
   const displayServices = [];
-  if (activeData.length <= visibleCards) {
+  if (activeData.length <= visibleItems) {
     displayServices.push(...activeData);
   } else {
-    for (let i = 0; i < visibleCards; i++) {
+    for (let i = 0; i < visibleItems; i++) {
       const index = (currentIndex + i) % activeData.length;
       displayServices.push(activeData[index]);
     }
   }
 
   return (
-    <section className="w-full py-16 lg:py-20">
+    <section className="w-full py-12 sm:py-16 lg:py-20">
       <div className="mx-auto px-4 md:px-6 lg:px-8">
         <GradientContainer
-          className="py-12 lg:py-16 relative"
+          className="py-8 sm:py-12 lg:py-16 relative"
           backgroundColor="bg-gradient-container"
         >
           {/* Navigation Tabs */}
-          <div className="flex justify-center mb-12 relative z-20">
+          <div className="flex justify-center mb-8 sm:mb-12 relative z-20">
             <div className="inline-flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1.5 gap-2">
               {(["services", "experts", "products"] as const).map((tab) => (
                 <button
@@ -153,7 +172,7 @@ const ServicesSection = () => {
                     setActiveTab(tab);
                     setCurrentIndex(0);
                   }}
-                  className={`px-8 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`px-4 sm:px-8 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                     activeTab === tab
                       ? "bg-tab-active text-white shadow-lg shadow-blue-500/25"
                       : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -173,17 +192,18 @@ const ServicesSection = () => {
               {displayServices.map((item) =>
                 activeTab === "products" ? (
                   // Product Card Design
-                  <div
+                  <GlassyEffect
                     key={item.id}
-                    className="group relative w-[350px] lg:w-[400px] h-[500px] bg-card/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer"
+                    className="group relative w-full max-w-[350px] lg:max-w-[400px] h-[500px] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer shrink-0"
+                    intensity="medium"
                   >
                     {/* Default Content (Bottom Layer) */}
                     <div className="absolute inset-0 flex flex-col items-center justify-between p-8 z-0">
                       <div className="text-center">
-                        <h3 className="text-xl font-bold text-white mb-2">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">
                           {item.title}
                         </h3>
-                        <p className="text-sm text-gray-300">{item.subtitle}</p>
+                        <p className="text-sm text-gray-600 font-medium">{item.subtitle}</p>
                       </div>
 
                       <div className="relative w-48 h-48">
@@ -212,10 +232,10 @@ const ServicesSection = () => {
                         backgroundColor="bg-transparent"
                       >
                         <div className="text-center mb-6 relative z-10 px-6">
-                          <h3 className="text-xl font-bold text-white mb-2">
+                          <h3 className="text-xl font-bold text-slate-800 mb-2">
                             {item.title}
                           </h3>
-                          <p className="text-xs text-white/80 mb-4">
+                          <p className="text-xs text-gray-600 font-medium mb-4">
                             {item.subtitle}
                           </p>
                           <GetInstantQuoteButton
@@ -242,12 +262,12 @@ const ServicesSection = () => {
                         </div>
                       </GradientContainer>
                     </div>
-                  </div>
+                  </GlassyEffect>
                 ) : (
                   // Expert & Service Card Design
                   <div
                     key={item.id}
-                    className="group relative w-[300px] h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                    className="group relative w-full max-w-[300px] h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 shrink-0"
                   >
                     {/* Image Area */}
                     <div
@@ -293,46 +313,48 @@ const ServicesSection = () => {
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex justify-center items-center gap-3 mt-4">
-              <button
-                onClick={prevSlide}
-                className="w-10 h-10 rounded-full bg-tab-active text-white flex items-center justify-center hover:bg-tab-active-hover transition-all shadow-lg hover:shadow-primary-blue"
-                aria-label="Previous"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {activeData.length > visibleItems && (
+              <div className="flex justify-center items-center gap-3 mt-4">
+                <button
+                  onClick={prevSlide}
+                  className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all shadow-lg border border-white/10 backdrop-blur-sm"
+                  aria-label="Previous"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-              <button
-                onClick={nextSlide}
-                className="w-10 h-10 rounded-full border-2 border-tab-active text-tab-active flex items-center justify-center hover:bg-tab-active hover:text-white transition-all shadow-lg hover:shadow-primary-blue"
-                aria-label="Next"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all shadow-lg border border-white/10 backdrop-blur-sm"
+                  aria-label="Next"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </div>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
         </GradientContainer>
       </div>

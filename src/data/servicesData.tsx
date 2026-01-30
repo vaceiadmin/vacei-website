@@ -37,7 +37,7 @@ export const servicesData: ServiceData[] = [
     slug: "accounting-finance",
     title: "Accounting & Finance",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Accounting & Finance" },
     ],
     image: "/assets/images/Frame 1618872606.png",
@@ -68,7 +68,7 @@ export const servicesData: ServiceData[] = [
     slug: "tax-compliance",
     title: "Tax & Compliance",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Tax & Compliance" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
@@ -102,7 +102,7 @@ export const servicesData: ServiceData[] = [
     slug: "audit-assurance",
     title: "Audit & Assurance",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Audit & Assurance" },
     ],
     image: "/assets/images/Frame 1618872609.png",
@@ -136,7 +136,7 @@ export const servicesData: ServiceData[] = [
     slug: "corporate-csp-services",
     title: "Corporate & CSP Services",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Corporate & CSP Services" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
@@ -171,7 +171,7 @@ export const servicesData: ServiceData[] = [
     slug: "regulated-licensing",
     title: "Regulated & Licensing",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Regulated & Licensing" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
@@ -205,7 +205,7 @@ export const servicesData: ServiceData[] = [
     slug: "advisory-growth",
     title: "Advisory & Growth",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Advisory & Growth" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
@@ -240,7 +240,7 @@ export const servicesData: ServiceData[] = [
     slug: "company-structure-corporate-changes",
     title: "Company Structure & Corporate Changes",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Company Structure & Corporate Changes" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
@@ -291,7 +291,7 @@ export const servicesData: ServiceData[] = [
     slug: "liquidation-wind-down",
     title: "Liquidation & Wind-Down",
     breadcrumbs: [
-      { label: "Services", href: "/services" },
+      { label: "Services" },
       { label: "Liquidation & Wind-Down" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder

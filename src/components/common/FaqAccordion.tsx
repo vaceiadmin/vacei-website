@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import GradientContainer from "./GradientContainer";
 import { Phone } from "lucide-react";
+import TextAnimation from "./TextAnimation";
 
 interface FaqItem {
   title: string;
@@ -36,7 +37,7 @@ const FaqAccordion = ({
   };
 
   return (
-    <section className="w-full py-20 pb-32">
+    <section className="w-full py-20">
       <div className="mx-auto">
         <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row lg:items-center max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
           {/* Left: Logo Card */}
@@ -66,9 +67,11 @@ const FaqAccordion = ({
                     className="object-contain"
                   />
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-wider">
-                  {companyName}
-                </h2>
+                <TextAnimation
+                  text={companyName}
+                  as="h2"
+                  className="text-4xl md:text-5xl font-bold text-white uppercase tracking-wider"
+                />
               </div>
 
               {/* Get Started Call Card with Curve */}

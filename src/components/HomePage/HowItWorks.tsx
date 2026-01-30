@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import TextAnimation from "../common/TextAnimation"
 
 // Icons matching the reference image closely
 const RequestServiceIcon = () => (
@@ -99,10 +100,17 @@ const HowItWorks = () => {
 
                 {/* Header */}
                 <div className="text-center mb-10">
-                    <h2 className="text-primary text-2xl md:text-3xl font-bold mb-2">How It Works</h2>
-                    <h3 className="text-primary text-xl md:text-2xl font-semibold mb-2">
-                        One portal. One team. Everything handled.
-                    </h3>
+                    <TextAnimation
+                        text="How It Works"
+                        as="h2"
+                        className="text-primary text-2xl md:text-3xl font-bold mb-2"
+                    />
+                    <TextAnimation
+                        text="One portal. One team. Everything handled."
+                        as="h3"
+                        delay={0.3}
+                        className="text-primary text-xl md:text-2xl font-semibold mb-2"
+                    />
                     <p className="text-gray text-sm md:text-base max-w-2xl mx-auto">
                         See how VACEI simplifies accounting, audit, compliance, and corporate services.
                     </p>

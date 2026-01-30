@@ -1,6 +1,7 @@
 import React from "react";
 import GradientContainer from "../common/GradientContainer";
 import { FileText, Upload, Check, AlertTriangle } from "lucide-react";
+import TextAnimation from "../common/TextAnimation";
 
 const AIReviewFeature = () => {
   return (
@@ -16,9 +17,11 @@ const AIReviewFeature = () => {
               {/* Card 1: Analysis Setup */}
               <div className="bg-white rounded-2xl p-6 shadow-sm flex flex-col gap-5 h-full">
                 <div className="text-left space-y-3">
-                  <h3 className="font-semibold text-heading text-[13px] leading-tight">
-                    File ready for analysis
-                  </h3>
+                  <TextAnimation
+                    text="File ready for analysis"
+                    as="h3"
+                    className="font-semibold text-heading text-[13px] leading-tight"
+                  />
                   <div className="flex items-center gap-3 p-3 bg-icon border border-input rounded-xl">
                     <div className="w-8 h-8 rounded-full bg-white border border-input flex items-center justify-center shrink-0 shadow-sm">
                       <FileText className="w-4 h-4 text-gray-500" />
@@ -71,9 +74,11 @@ const AIReviewFeature = () => {
 
               {/* Card 2: Upload */}
               <div className="bg-white rounded-2xl p-6 shadow-sm flex flex-col items-center text-center h-full">
-                <h3 className="font-semibold text-heading text-[13px] mb-5 w-[80%] leading-relaxed">
-                  Upload Financial Statements
-                </h3>
+                <TextAnimation
+                  text="Upload Financial Statements"
+                  as="h3"
+                  className="font-semibold text-heading text-[13px] mb-5 w-[80%] leading-relaxed"
+                />
                 <div className="flex-1 w-full border border-dashed border-input rounded-xl p-4 flex flex-col items-center justify-center gap-3 bg-icon/50 hover:bg-icon transition-colors cursor-pointer group">
                   <div className="w-9 h-9 rounded-full bg-white border border-input flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
                     <Upload className="w-4 h-4 text-gray-400" />
@@ -144,10 +149,12 @@ const AIReviewFeature = () => {
           </GradientContainer>
 
           {/* Right Column - Content */}
-          <div className="space-y-8 text-left">
-            <h2 className="text-3xl md:text-4xl font-semibold text-primary leading-[1.15]">
-              Auditor-designed financial statement review
-            </h2>
+          <div className="space-y-4 text-left">
+            <TextAnimation
+              text="Auditor-designed financial statement review"
+              as="h2"
+              className="text-2xl md:text-4xl font-semibold text-primary leading-[1.15]"
+            />
 
             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
               <p>

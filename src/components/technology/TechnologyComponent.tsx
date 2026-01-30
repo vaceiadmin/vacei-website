@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import TextAnimation from '../common/TextAnimation'
 
 const TechnologyComponent = () => {
     const technologyCards = [
@@ -43,9 +44,11 @@ const TechnologyComponent = () => {
                     </div>
                     
                     {/* Main Title */}
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-heading mb-3 sm:mb-3.5 lg:mb-4">
-                        Technology Component
-                    </h2>
+                    <TextAnimation
+                        text="Technology Component"
+                        as="h2"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-heading mb-3 sm:mb-3.5 lg:mb-4"
+                    />
                     
                     {/* Description */}
                     <p className="text-sm sm:text-base md:text-lg lg:text-lg text-gray max-w-3xl mx-auto px-2 sm:px-0">
@@ -75,9 +78,11 @@ const TechnologyComponent = () => {
                             </div>
 
                             {/* Title - Fixed Height */}
-                            <h3 className="text-lg sm:text-xl lg:text-xl font-medium text-heading mb-3 sm:mb-3.5 lg:mb-4 flex-shrink-0 h-[48px] sm:h-[50px] lg:h-[52px] flex items-start">
-                                {card.title}
-                            </h3>
+                            <TextAnimation
+                                text={card.title}
+                                as="h3"
+                                className="text-lg sm:text-xl lg:text-xl font-medium text-heading mb-3 sm:mb-3.5 lg:mb-4 flex-shrink-0 h-[48px] sm:h-[50px] lg:h-[52px] flex items-start"
+                            />
 
                             {/* Description - Flexible Height */}
                             <p className="text-xs sm:text-sm lg:text-base text-gray leading-relaxed mb-5 sm:mb-5.5 lg:mb-6 flex-grow min-h-[100px] sm:min-h-[110px] lg:min-h-[120px]">

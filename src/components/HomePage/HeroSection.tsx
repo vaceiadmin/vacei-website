@@ -3,10 +3,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import TextAnimation from "../common/TextAnimation";
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full min-h-screen bg-hero overflow-hidden flex flex-col items-center pt-24 md:pt-32 pb-16 md:pb-24">
+    <section className="relative w-full min-h-screen bg-hero overflow-hidden flex flex-col items-center pt-20 sm:pt-24 lg:pt-32 pb-16 md:pb-24">
       {/* Background Elements based on User Specs */}
 
       {/* Top Right Large Wash - Adjusted opacity/mix-blend for usability, assuming it's a glow */}
@@ -67,15 +68,12 @@ const HeroSection = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl px-4 flex flex-col items-center text-center mt-10">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl"
-        >
-          Accounting, Audit & Corporate Services Delivered Through One Portal
-        </motion.h1>
+      <div className="relative z-10 w-full max-w-7xl px-4 flex flex-col items-center text-center mt-6 sm:mt-8 lg:mt-10">
+        <TextAnimation
+          text="Accounting, Audit & Corporate Services Delivered Through One Portal"
+          as="h1"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl"
+        />
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -92,17 +90,17 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap gap-4 mb-20"
+          className="flex md:flex-row flex-col gap-4 mb-20"
         >
           <Link
             href="/quote"
-            className="px-8 py-3 bg-primary-blue hover:bg-primary-blue-hover text-white rounded-full font-medium transition-all shadow-primary-blue"
+            className="px-6 py-2.5 text-sm sm:text-base sm:px-8 sm:py-3 bg-primary-blue hover:bg-primary-blue-hover text-white rounded-full font-medium transition-all shadow-primary-blue"
           >
             Get Instant Quote &rarr;
           </Link>
           <Link
             href="/services/accounting-finance"
-            className="px-8 py-3 bg-transparent border border-white/20 hover:bg-white/10 text-white rounded-full font-medium transition-all"
+            className="px-6 py-2.5 text-sm sm:text-base sm:px-8 sm:py-3 bg-transparent border border-white/20 hover:bg-white/10 text-white rounded-full font-medium transition-all"
           >
             Request a Service &rarr;
           </Link>

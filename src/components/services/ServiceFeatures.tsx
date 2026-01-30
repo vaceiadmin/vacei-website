@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
+import TextAnimation from "../common/TextAnimation";
 
 interface ServiceFeatureProps {
   title: React.ReactNode;
@@ -27,9 +28,11 @@ const ServiceFeatures = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column: Title and CTA */}
           <div className="flex flex-col justify-start pt-0">
-            <h2 className="text-3xl md:text-5xl font-medium text-white mb-6 leading-tight max-w-lg">
-              {title}
-            </h2>
+            <TextAnimation
+              text={typeof title === "string" ? title : ""}
+              as="h2"
+              className="text-3xl md:text-5xl font-medium text-white mb-6 leading-tight max-w-lg"
+            />
             <p className="text-white/70 text-lg mb-10 max-w-md">{subtitle}</p>
             <div>
               <GetInstantQuoteButton hasShadow={true} />
