@@ -25,7 +25,7 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="w-full py-12 sm:py-20 pb-20 sm:pb-32">
+    <section className="w-full py-12 sm:py-20 pb-20 sm:pb-32 overflow-hidden">
       <div className="mx-auto px-4 md:px-0">
         <GradientContainer
           className="py-10 sm:py-16 lg:py-20 bg-primary"
@@ -125,7 +125,7 @@ const FaqSection = () => {
                   </div>
 
                   {/* Get Started Card */}
-                  <div className="absolute -bottom-8 -left-8 w-[200px] z-40 rounded-[24px] bg-purple-bg p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105">
+                  <div className="absolute -bottom-8 -left-8 max-sm:bottom-0 max-sm:left-0 w-[200px] z-40 rounded-[24px] bg-purple-bg p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105">
                     <p className="text-[16px] font-bold leading-tight tracking-wide">
                       Get Started
                       <br />
@@ -154,7 +154,7 @@ const FaqSection = () => {
                   </div>
 
                   {/* Authorized Share Card - Custom Layout */}
-                  <div className="absolute bottom-16 -right-10 pointer-events-auto z-40 transition-transform hover:scale-105">
+                  <div className="absolute bottom-16 -right-10 max-sm:right-0 pointer-events-auto z-20 sm:z-40 transition-transform hover:scale-105">
                     <div className="relative w-[160px] rounded-[24px] bg-white p-5 shadow-xl">
                       <p className="mb-4 text-[11px] font-bold text-primary">
                         Authorized Share

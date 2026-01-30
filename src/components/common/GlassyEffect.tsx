@@ -7,10 +7,10 @@ interface GlassyEffectProps {
   intensity?: "low" | "medium" | "high";
 }
 
-const GlassyEffect = ({ 
-  children, 
+const GlassyEffect = ({
+  children,
   className,
-  intensity = "medium" 
+  intensity = "medium"
 }: GlassyEffectProps) => {
   const intensityClasses = {
     low: "bg-gray-100 bg-opacity-10 backdrop-filter backdrop-blur-sm border border-gray-100",

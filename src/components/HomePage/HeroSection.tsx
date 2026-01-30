@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import TextAnimation from "../common/TextAnimation";
+import GlassyEffect from "../common/GlassyEffect";
 
 const HeroSection = () => {
   return (
@@ -100,9 +101,14 @@ const HeroSection = () => {
           </Link>
           <Link
             href="/services/accounting-finance"
-            className="px-6 py-2.5 text-sm sm:text-base sm:px-8 sm:py-3 bg-transparent border border-white/20 hover:bg-white/10 text-white rounded-full font-medium transition-all"
+            className="group"
           >
-            Request a Service &rarr;
+            <GlassyEffect
+              className="px-6 py-2.5 text-sm sm:text-base sm:px-8 sm:py-3 text-white rounded-full font-medium transition-all hover:bg-white/10 active:bg-white/20 border-white/20 flex items-center gap-2"
+              intensity="high"
+            >
+              Request a Service &rarr;
+            </GlassyEffect>
           </Link>
         </motion.div>
 
