@@ -86,7 +86,7 @@ const SecurityComplianceCards = () => {
     ]
 
     return (
-        <section className="py-16 lg:py-24 bg-section-light mx-2">
+        <section className="py-16 lg:py-24 bg-section-light mx-2 overflow-hidden">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
                     {cards.map((card, index) => {

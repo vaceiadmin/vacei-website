@@ -460,7 +460,7 @@ const ClientPortalOverviewSection = ({
     );
   };
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
           {/* Left: Portal / Accounting preview card */}

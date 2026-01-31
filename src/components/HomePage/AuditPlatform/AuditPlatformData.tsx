@@ -19,8 +19,8 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:top-20 md:left-10 top-10 left-10 max-xs:top-4 max-xs:left-4 shadow-lg bg-white",
-    imgClass: "scale-x-[-1] md:h-6 h-4",
+      "md:top-20 md:left-10 top-12 left-5 max-xs:top-6 max-xs:left-2 shadow-lg bg-white",
+    imgClass: "scale-x-[-1] md:h-6 h-3",
   },
   {
     src: "/sec-2/bookmark_12318485 (1).png",
@@ -31,8 +31,8 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:top-28 md:right-0 top-20 right-0 max-xs:top-20 max-xs:-right-5 py-1.5 px-3 shadow-lg bg-white",
-    imgClass: "md:h-6 h-4",
+      "md:top-28 md:right-0 top-24 right-5 max-xs:top-20 max-xs:-right-3 py-1 px-2 shadow-lg bg-white",
+    imgClass: "md:h-6 h-3",
   },
   {
     src: "",
@@ -41,8 +41,8 @@ export const features: FeatureItem[] = [
       <p className="md:text-sm text-[8px] text-gray-600 font-medium">Audit</p>
     ),
     className:
-      "md:bottom-3 md:-left-10 bottom-2 -left-10 max-xs:bottom-2 max-xs:-left-10 px-4 shadow-lg bg-white",
-    imgClass: "md:h-6 h-4",
+      "md:bottom-3 md:-left-10 bottom-4 -left-6 max-xs:bottom-4 max-xs:-left-8 px-3 shadow-lg bg-white",
+    imgClass: "md:h-6 h-3",
   },
   {
     src: "/sec-2/text-editor_8099665.png",
@@ -53,8 +53,8 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:bottom-10 md:left-20 bottom-10 left-10 max-xs:bottom-14 max-xs:-left-2 px-3 py-2 shadow-lg bg-white",
-    imgClass: "md:h-6 h-4",
+      "md:bottom-10 md:left-20 bottom-12 left-8 max-xs:bottom-12 max-xs:-left-2 px-2 py-1 shadow-lg bg-white",
+    imgClass: "md:h-6 h-3",
   },
   {
     src: "/sec-2/artificial-intelligence_3315017.png",
@@ -67,46 +67,46 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:-bottom-10 md:right-20 -bottom-8 right-15 px-3 py-2 shadow-lg bg-white",
-    imgClass: "md:h-6 h-4",
+      "md:-bottom-10 md:right-20 -bottom-6 right-10 px-2 py-1 shadow-lg bg-white",
+    imgClass: "md:h-6 h-3",
   },
   {
     src: "/sec-2/paper-plane_1012351.png",
     alt: "Audit",
     Text: "",
     className:
-      "md:-top-10 md:left-[30%] -top-12 left-[40%] p-2 shadow-lg bg-white",
-    imgClass: "md:h-6 h-6 max-xs:h-4",
+      "md:-top-10 md:left-[30%] -top-10 left-[35%] p-1.5 shadow-lg bg-white",
+    imgClass: "md:h-6 h-4",
   },
   {
     src: "/sec-2/pdf_4726010.png",
     alt: "PDF",
     Text: "",
     className:
-      "md:-top-10 md:left-[75%] -top-8 left-[80%] max-xs:-top-7 max-xs:left-[80%]",
-    imgClass: "md:h-12 h-10 max-xs:h-8 shadow-lg",
+      "md:-top-10 md:left-[75%] -top-6 left-[75%] max-xs:-top-6 max-xs:left-[75%]",
+    imgClass: "md:h-12 h-8 max-xs:h-7 shadow-lg",
   },
   {
     src: "/sec-2/word_4726038.png",
     alt: "Doc",
     Text: "",
     className:
-      "left-0 top-[45%] max-xs:-left-12 max-xs:top-[30%] bg-transparent shadow-none",
-    imgClass: "md:h-12 h-9 max-xs:h-8 shadow-lg",
+      "left-0 top-[40%] max-xs:-left-8 max-xs:top-[40%] bg-transparent shadow-none",
+    imgClass: "md:h-12 h-8 max-xs:h-7 shadow-lg",
   },
   {
     src: "/sec-2/xls_4726040.png",
     alt: "XLS",
     Text: "",
-    className: "right-28 top-[72%] max-xs:right-16 bg-transparent shadow-none",
-    imgClass: "md:h-12 h-9 max-xs:h-8 shadow-lg",
+    className: "right-24 top-[65%] max-xs:right-12 bg-transparent shadow-none",
+    imgClass: "md:h-12 h-8 max-xs:h-7 shadow-lg",
   },
   {
     src: "/sec-2/chat_769236.png",
     alt: "Chat",
     Text: "",
     className:
-      "md:-right-10 md:top-[65%] -right-14 top-[60%] max-xs:-right-10 p-2 shadow-lg bg-white",
-    imgClass: "md:h-8 h-6 max-xs:h-5",
+      "md:-right-10 md:top-[65%] -right-10 top-[55%] max-xs:-right-6 p-1.5 shadow-lg bg-white",
+    imgClass: "md:h-8 h-5 max-xs:h-4",
   },
 ];

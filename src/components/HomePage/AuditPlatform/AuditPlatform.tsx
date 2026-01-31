@@ -40,7 +40,7 @@ function AnimatedOrbit() {
         <img
           src="/sec-2/Vector Smart Object.png"
           alt="Platform Logo"
-          // className="w-full"
+          className="max-sm:w-[280px] lg:w-auto"
         />
       </div>
 

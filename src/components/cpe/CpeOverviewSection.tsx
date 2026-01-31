@@ -31,7 +31,7 @@ const cpeCards: BenefitCard[] = [
 
 const CpeOverviewSection = () => {
     return (
-         <section className="py-16 lg:py-20">
+         <section className="py-16 lg:py-20 overflow-hidden">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 <div className="text-center mb-10 lg:mb-12">
                      <SectionBadge text="CPE &amp; Podcast" className="text-heading" />

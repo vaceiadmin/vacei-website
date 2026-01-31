@@ -45,7 +45,7 @@ const ServicesSection = () => {
       } else if (window.innerWidth < 1280) {
         setVisibleItems(2);
       } else {
-        setVisibleItems(activeTab === "products" ? 3 : 4);
+        setVisibleItems(4);
       }
     };
 
@@ -116,7 +116,7 @@ const ServicesSection = () => {
       title: "VACEI Accounting Portal",
       subtitle: "Your entire business, in one place.",
       image: "/assets/images/Cube 1.png",
-      hoverImage: "/assets/images/Accounting 1.png",
+      hoverImage: "/assets/images/Accounting.jpg",
       link: "/portal/accounting-portal",
     },
     {
@@ -124,7 +124,7 @@ const ServicesSection = () => {
       title: "VACEI Client Portal",
       subtitle: "Your entire business, in one place.",
       image: "/assets/images/Pyramid 2.png",
-      hoverImage: "/assets/images/portal.png",
+      hoverImage: "/assets/images/Frame 1618872451.png",
       link: "/portal/client-portal",
     },
     {
@@ -132,7 +132,7 @@ const ServicesSection = () => {
       title: "VACEI Audit Portal",
       subtitle: "Your entire business, in one place.",
       image: "/assets/images/Thorus Knot.png",
-      hoverImage: "/assets/images/Audit 1.png",
+      hoverImage: "/assets/images/Audit.jpg",
       link: "/portal/audit-portal",
     },
   ];
@@ -172,7 +172,7 @@ const ServicesSection = () => {
   }
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20">
+    <section className="w-full py-12 sm:py-16 lg:py-20 overflow-hidden">
       <div className="mx-auto px-4 md:px-6 lg:px-8">
         <GradientContainer
           className="py-8 sm:py-12 lg:py-16 relative"
@@ -218,77 +218,61 @@ const ServicesSection = () => {
               {displayServices.map((item) =>
                 activeTab === "products" ? (
                   // Product Card Design
-                  <motion.div key={item.id} variants={fadeInUp} className="shrink-0 w-full max-w-[350px] lg:max-w-[400px]">
-                  <GlassyEffect
-                    className="group relative w-full max-w-[350px] lg:max-w-[400px] h-[500px] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer"
-                    intensity="medium"
+                  <motion.div 
+                    key={item.id} 
+                    variants={fadeInUp} 
+                    className="shrink-0 w-full max-w-[320px] lg:max-w-[400px]"
                   >
-                    {/* Default Content (Bottom Layer) */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-between p-8 z-0">
-                      <div className="text-center">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">
+                    <div
+                      className="group relative w-full h-[500px] bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-primary-blue hover:shadow-[0_0_30px_rgba(59,73,230,0.4)] cursor-pointer"
+                    >
+                      {/* Top Content (Always Visible) */}
+                      <div className="absolute top-0 left-0 right-0 p-8 text-center z-30">
+                        <h3 className="text-xl font-bold text-white mb-2 transition-colors duration-300">
                           {item.title}
                         </h3>
-                        <p className="text-sm text-gray-600 font-medium">{item.subtitle}</p>
-                      </div>
-
-                      <div className="relative w-48 h-48">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          fill
-                          className="object-contain drop-shadow-lg"
-                        />
-                      </div>
-
-                      <GetInstantQuoteButton
-                        variant="custom"
-                        text="Get Instant Quote"
-                        href={item.link}
-                        bgColor="var(--button-indigo)"
-                        textColor="white"
-                        className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
-                      />
-                    </div>
-
-                    {/* Hover Content - Portal UI Image Overlay (Top Layer) */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none group-hover:pointer-events-auto bg-card-hover-overlay">
-                      <GradientContainer
-                        className="w-full h-full flex flex-col items-center pt-8"
-                        backgroundColor="bg-transparent"
-                      >
-                        <div className="text-center mb-6 relative z-10 px-6">
-                          <h3 className="text-xl font-bold text-slate-800 mb-2">
-                            {item.title}
-                          </h3>
-                          <p className="text-xs text-gray-600 font-medium mb-4">
-                            {item.subtitle}
-                          </p>
+                        <p className="text-sm text-white/70 font-medium mb-6">
+                          {item.subtitle}
+                        </p>
+                        <div className="flex justify-center">
                           <GetInstantQuoteButton
                             variant="custom"
                             text="Get Instant Quote"
                             href={item.link}
                             bgColor="var(--button-indigo)"
                             textColor="white"
-                            className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
+                            className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2 group-hover:bg-primary-blue transition-colors duration-300"
                           />
                         </div>
+                      </div>
 
-                        <div className="relative w-full flex-1 mt-2 transform translate-y-4 transition-transform duration-500 group-hover:translate-y-0 px-4 pb-0">
+                      {/* Default View (3D Logo in Center) */}
+                      <div className="absolute inset-x-0 bottom-0 top-[40%] flex items-center justify-center p-8 transition-all duration-500 opacity-100 scale-100 group-hover:opacity-0 group-hover:scale-90 z-10">
+                        <div className="relative w-48 h-48">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-contain drop-shadow-2xl"
+                            priority
+                          />
+                        </div>
+                      </div>
+
+                      {/* Hover View (Portal Image at Bottom) */}
+                      <div className="absolute inset-x-2 bottom-2 top-[35%] opacity-0 translate-y-8 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 z-20">
+                        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl bg-white/10 border border-white/20">
                           {item.hoverImage && (
-                            <div className="relative w-full h-full rounded-t-xl overflow-hidden shadow-2xl bg-white/5 border-t border-l border-r border-white/20">
-                              <Image
-                                src={item.hoverImage}
-                                alt={`${item.title} Interface`}
-                                fill
-                                className="object-cover object-top"
-                              />
-                            </div>
+                            <Image
+                              src={item.hoverImage}
+                              alt={`${item.title} Portal`}
+                              fill
+                              className="object-cover object-top"
+                            />
                           )}
                         </div>
-                      </GradientContainer>
+                      </div>
                     </div>
-                  </GlassyEffect>
                   </motion.div>
                 ) : (
                   // Expert & Service Card Design

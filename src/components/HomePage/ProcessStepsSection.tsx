@@ -306,7 +306,7 @@ const ProcessStepsSection = () => {
   }
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20" style={{ backgroundColor: "var(--section-bg-light)" }}>
+    <section className="w-full py-12 sm:py-16 lg:py-20 overflow-hidden" style={{ backgroundColor: "var(--section-bg-light)" }}>
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,480px)_1fr] gap-8 lg:gap-14 lg:items-start">
           <motion.div 
@@ -448,7 +448,7 @@ const ProcessStepsSection = () => {
             {/* Background blob for glass effect */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-purple-100/40 via-blue-50/40 to-transparent blur-3xl -z-10 rounded-full pointer-events-none" />
             
-            <BoxShadow className="p-6 md:p-8">
+            <BoxShadow className="p-6 md:p-8 mb-5">
             {processSteps.map((item, index) => {
               const isActive = index === currentStep
               return (

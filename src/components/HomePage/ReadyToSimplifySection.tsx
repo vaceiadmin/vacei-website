@@ -6,7 +6,7 @@ import { FadeInUp } from "../common/Animations"
 
 const ReadyToSimplifySection = () => {
   return (
-    <section className="w-full py-5 lg:py-20">
+    <section className="w-full py-5 lg:py-20 overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
         <GradientContainer
           className="rounded-xl bg-footer-hero px-6 py-10 sm:px-10 sm:py-12"

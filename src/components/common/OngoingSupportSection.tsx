@@ -5,7 +5,7 @@ import { FadeInUp } from "../common/Animations";
 
 const OngoingSupportSection = () => {
   return (
-    <section className="py-16">
+    <section className="py-16 overflow-hidden">
       <GradientContainer
         showRadials={true}
         backgroundColor="bg-gradient-container"

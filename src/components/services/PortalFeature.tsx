@@ -65,7 +65,7 @@ const PortalFeature = ({
     };
   }, [variant]);
   return (
-    <section className="bg-section-light py-20 lg:py-28">
+    <section className="bg-section-light py-20 lg:py-28 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-4 lg:h-[658px]">
           {/* Left Column: Text / How it works */}

@@ -209,7 +209,7 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
     }
 
     return (
-        <section className={`w-full py-12 lg:py-20 ${className}`}>
+        <section className={`w-full py-12 lg:py-20 overflow-hidden ${className}`}>
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 <div className="space-y-16 lg:space-y-24">
                     {features.map((feature, index) => (

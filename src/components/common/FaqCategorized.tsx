@@ -38,7 +38,7 @@ const FaqCategorized = ({
   };
 
   return (
-    <section className="w-full py-5 lg:py-24 ">
+    <section className="w-full py-5 lg:py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Label */}
         {showLabel && (

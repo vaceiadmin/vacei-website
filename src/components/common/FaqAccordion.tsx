@@ -37,7 +37,7 @@ const FaqAccordion = ({
   };
 
   return (
-    <section className="w-full py-20">
+    <section className="w-full py-20 overflow-hidden">
       <div className="mx-auto">
         <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row lg:items-center max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
           {/* Left: Logo Card */}

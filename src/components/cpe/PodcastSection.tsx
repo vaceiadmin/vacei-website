@@ -33,7 +33,7 @@ const PodcastSection = () => {
   const [activeRowId, setActiveRowId] = useState<string>("episodes");
 
   return (
-    <section className="py-16 lg:py-20 ">
+    <section className="py-16 lg:py-20 overflow-hidden">
       <GradientContainer
         showRadials={true}
         backgroundColor="bg-gradient-container"

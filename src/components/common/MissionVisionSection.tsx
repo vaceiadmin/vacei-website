@@ -6,7 +6,7 @@ import TextAnimation from "./TextAnimation";
 
 const MissionVisionSection = () => {
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           {/* Our Mission */}

@@ -97,7 +97,7 @@ const HowItWorks = () => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     return (
-        <section className="w-full py-5 lg:py-10 ">
+        <section className="w-full py-5 lg:py-10 overflow-hidden">
             <div className=" mx-auto px-4 md:px-6 lg:px-8">
 
                 {/* Header */}

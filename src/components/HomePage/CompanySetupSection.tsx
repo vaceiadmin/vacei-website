@@ -8,7 +8,7 @@ import { FadeInUp, StaggerContainer } from '../common/Animations'
 
 const CompanySetupSection = () => {
   return (
-    <section className="w-full py-16 lg:py-20 bg-section-light">
+    <section className="w-full py-16 lg:py-20 bg-section-light overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Main Heading */}
         <FadeInUp className="text-center mb-8 lg:mb-10 max-w-2xl mx-auto">

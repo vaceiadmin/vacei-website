@@ -31,7 +31,7 @@ const HowItWorksTimeline = ({
   const isDark = mode === "dark";
 
   return (
-    <section className={`${backgroundClassName} py-16 lg:py-24`}>
+    <section className={`${backgroundClassName} py-16 lg:py-24 overflow-hidden`}>
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Header (optional) */}
         {showHeader && (
