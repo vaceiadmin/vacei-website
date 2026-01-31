@@ -7,7 +7,6 @@ import PortalFeature from "@/components/services/PortalFeature";
 import RiskAuditSection from "@/components/accounting/RiskAuditSection";
 import HowItWorksTimeline, { HowItWorksStep } from "@/components/how-it-works/HowItWorksTimeline";
 import ServiceFeatures from "@/components/services/ServiceFeatures";
-import AnimatedSection from "@/components/common/AnimatedSection";
 
 const auditWorkflowSteps: HowItWorksStep[] = [
     {
@@ -111,60 +110,50 @@ const AuditPortalPage = () => {
         />
       </div>
 
-      <AnimatedSection>
-        <ClientPortalOverviewSection
-                variant="audit"
-                heading="How VACEI delivers structured, high-quality audits"
-                paragraphs={[
-                    'The VACEI Audit Portal is the environment our audit teams use to manage audit engagements from start to finish.',
-                    'It brings planning, documentation, evidence, communication, reviews, and sign-off into one structured workflow, ensuring audits are delivered efficiently, consistently, and in line with professional standards.',
-                    'Clients interact through the Client Portal.',
-                    'All audit execution and quality control takes place within the Audit Portal.',
-                ]}
-        />
-      </AnimatedSection>
+      <ClientPortalOverviewSection
+              variant="audit"
+              heading="How VACEI delivers structured, high-quality audits"
+              paragraphs={[
+                  'The VACEI Audit Portal is the environment our audit teams use to manage audit engagements from start to finish.',
+                  'It brings planning, documentation, evidence, communication, reviews, and sign-off into one structured workflow, ensuring audits are delivered efficiently, consistently, and in line with professional standards.',
+                  'Clients interact through the Client Portal.',
+                  'All audit execution and quality control takes place within the Audit Portal.',
+              ]}
+      />
 
-      <AnimatedSection delay>
-        <PortalFeature
-                portalImage="/assets/images/Audit.jpg"
-                sectionLabel="Risk-based audit"
-                heading="Audit engagement setup & Planning"
-                description="Each audit engagement is set up and managed centrally within the portal."
-                bulletIntro=""
-                bulletItems={[
-                    'Engagement details configured in one place',
-                    'Clear structure from planning through completion',
-                    'Defined ownership and responsibilities across the audit team',
-                ]}
-                closingText="This ensures audits are client-specific, risk-driven, and aligned with professional standards, rather than relying on generic checklists."
-                bottomTitle="Audit Portal"
-                bottomDescription="Documents, tasks, deadlines and communication in one place."
-                quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
-        />
-      </AnimatedSection>
+      <PortalFeature
+              portalImage="/assets/images/Audit.jpg"
+              sectionLabel="Risk-based audit"
+              heading="Audit engagement setup & Planning"
+              description="Each audit engagement is set up and managed centrally within the portal."
+              bulletIntro=""
+              bulletItems={[
+                  'Engagement details configured in one place',
+                  'Clear structure from planning through completion',
+                  'Defined ownership and responsibilities across the audit team',
+              ]}
+              closingText="This ensures audits are client-specific, risk-driven, and aligned with professional standards, rather than relying on generic checklists."
+              bottomTitle="Audit Portal"
+              bottomDescription="Documents, tasks, deadlines and communication in one place."
+              quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
+      />
 
-      <AnimatedSection>
-        <RiskAuditSection variant="audit" />
-      </AnimatedSection>
+      <RiskAuditSection variant="audit" />
 
-      <AnimatedSection delay>
-        <HowItWorksTimeline
-                steps={auditWorkflowSteps}
-                backgroundClassName="bg-[#AAACC8]"
-                mode="dark"
-                showHeader={false}
-        />
-      </AnimatedSection>
+      <HowItWorksTimeline
+              steps={auditWorkflowSteps}
+              backgroundClassName="bg-[#AAACC8]"
+              mode="dark"
+              showHeader={false}
+      />
 
-      <AnimatedSection>
-        <ServiceFeatures
-                title={auditServiceFeatures.title}
-                subtitle={auditServiceFeatures.subtitle}
-                features={auditServiceFeatures.features}
-                bulletIconSrc="/assets/images/bullet2.png"
-                bulletIconAlt="Bullet"
-        />
-      </AnimatedSection>
+      <ServiceFeatures
+              title={auditServiceFeatures.title}
+              subtitle={auditServiceFeatures.subtitle}
+              features={auditServiceFeatures.features}
+              bulletIconSrc="/assets/images/bullet2.png"
+              bulletIconAlt="Bullet"
+      />
     </main>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react'
 import GradientContainer from '@/components/common/GradientContainer'
 import HowItWorksTimeline, { HowItWorksStep } from '@/components/how-it-works/HowItWorksTimeline'
+import { FadeInUp } from '../common/Animations'
 
 const clientPortalSteps: HowItWorksStep[] = [
     {
@@ -49,17 +50,19 @@ const ClientPortalFeaturesTimelineSection = () => {
     return (
         <section className="py-16 lg:py-24">
             <div>
-                <GradientContainer
-                    showRadials={true}
-                    backgroundColor="bg-gradient-container"
-                    className="rounded-2xl px-4 md:px-8 py-10 md:py-12 lg:py-14"
-                >
-                     <HowItWorksTimeline
-                         steps={clientPortalSteps}
-                         backgroundClassName="bg-transparent"
-                         mode="dark"
-                     />
-                </GradientContainer>
+                <FadeInUp>
+                    <GradientContainer
+                        showRadials={true}
+                        backgroundColor="bg-gradient-container"
+                        className="rounded-2xl px-4 md:px-8 py-10 md:py-12 lg:py-14"
+                    >
+                         <HowItWorksTimeline
+                             steps={clientPortalSteps}
+                             backgroundClassName="bg-transparent"
+                             mode="dark"
+                         />
+                    </GradientContainer>
+                </FadeInUp>
             </div>
         </section>
     )

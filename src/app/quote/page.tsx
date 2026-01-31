@@ -5,7 +5,7 @@ import PageHeader from "@/components/common/PageHeader";
 import ContactForm from "@/components/quote/ContactForm";
 import QuoteProcess from "@/components/quote/QuoteProcess";
 import QuoteFormSection from "@/components/quote/QuoteFormSection";
-import AnimatedSection from "@/components/common/AnimatedSection";
+import { FadeInUp } from "@/components/common/Animations";
 
 const QuotePage = () => {
   return (
@@ -16,15 +16,15 @@ const QuotePage = () => {
           breadcrumbs={[{ label: "Get a Quote" }]}
         />
       </div>
-      <AnimatedSection>
+      <FadeInUp>
         <ContactForm />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
         <QuoteProcess />
-      </AnimatedSection>
-      <AnimatedSection>
+      </FadeInUp>
+      <FadeInUp delay={0.4}>
         <QuoteFormSection />
-      </AnimatedSection>
+      </FadeInUp>
     </main>
   );
 };

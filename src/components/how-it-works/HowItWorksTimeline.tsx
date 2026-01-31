@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SectionBadge from "@/components/common/SectionBadge";
+import { FadeInUp } from "@/components/common/Animations";
 
 export interface HowItWorksStep {
   id: string;
@@ -34,7 +35,7 @@ const HowItWorksTimeline = ({
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Header (optional) */}
         {showHeader && (
-          <div className="text-center mb-14 lg:mb-16">
+          <FadeInUp className="text-center mb-14 lg:mb-16">
             <SectionBadge
               text="How it works"
               className={
@@ -59,7 +60,7 @@ const HowItWorksTimeline = ({
               From the first enquiry to ongoing delivery, everything follows a
               clear and structured process.
             </p>
-          </div>
+          </FadeInUp>
         )}
 
         {/* Timeline */}

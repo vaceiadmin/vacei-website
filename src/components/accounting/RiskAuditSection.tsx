@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { CreditCard, PiggyBank } from 'lucide-react'
 import SectionBadge from '@/components/common/SectionBadge'
+import { FadeInUp, StaggerContainer } from '../common/Animations'
 
 interface BulletList {
     items: string[]
@@ -173,7 +174,7 @@ const RiskAuditSection = ({
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1.1fr] gap-10 lg:gap-14 items-center">
                     {/* Left content */}
-                    <div className="space-y-8 text-left">
+                    <FadeInUp className="space-y-8 text-left">
                         <SectionBadge text={effectiveBadge} className="mb-2" />
 
                         <div className="space-y-3">
@@ -208,9 +209,9 @@ const RiskAuditSection = ({
                         </p>
 
                         {/* Two detail cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                             {effectiveLeftCards.map((card, index) => (
-                                <div
+                                <FadeInUp
                                     key={index}
                                     className="bg-white rounded-2xl border border-[#E5E7F1] shadow-[0_10px_28px_rgba(15,23,42,0.08)] px-5 py-5"
                                 >
@@ -236,13 +237,13 @@ const RiskAuditSection = ({
                                             </li>
                                         ))}
                                     </ul>
-                                </div>
+                                </FadeInUp>
                             ))}
-                        </div>
-                    </div>
+                        </StaggerContainer>
+                    </FadeInUp>
 
                     {/* Right image and overlay cards */}
-                    <div className="w-full">
+                    <FadeInUp delay={0.2} className="w-full">
                         <div className="relative w-full rounded-3xl overflow-hidden shadow-[0_24px_60px_rgba(15,23,42,0.45)] bg-[#0B1025]">
                             <div className="relative w-full pt-[115%]">
                                 <Image
@@ -364,7 +365,7 @@ const RiskAuditSection = ({
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </FadeInUp>
                 </div>
             </div>
         </section>

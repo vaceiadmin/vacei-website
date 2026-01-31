@@ -6,7 +6,7 @@ import TechnologyOverview from "@/components/technology/TechnologyOverview";
 import TechnologyComponent from "@/components/technology/TechnologyComponent";
 import TechnologyRegulated from "@/components/technology/TechnologyRegulated";
 import PortalFeature from "@/components/services/PortalFeature";
-import AnimatedSection from "@/components/common/AnimatedSection";
+import { FadeInUp } from "@/components/common/Animations";
 
 const TechnologyPage = () => {
   return (
@@ -18,10 +18,10 @@ const TechnologyPage = () => {
         />
       </div>
 
-      <AnimatedSection>
+      <FadeInUp>
         <TechnologyOverview />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
         <PortalFeature
           variant="technology"
           portalImage="/assets/images/Frame 1618872736.png"
@@ -40,13 +40,13 @@ const TechnologyPage = () => {
           bottomDescription="Documents, tasks, deadlines and communication in one place."
           quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
         />
-      </AnimatedSection>
-      <AnimatedSection>
+      </FadeInUp>
+      <FadeInUp delay={0.4}>
         <TechnologyComponent />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.6}>
         <TechnologyRegulated />
-      </AnimatedSection>
+      </FadeInUp>
     </main>
   );
 };

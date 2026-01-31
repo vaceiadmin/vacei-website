@@ -2,8 +2,10 @@
 
 import React, { useState } from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { FadeInUp, StaggerContainer } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
+import GlassyEffect from "../common/GlassyEffect"
+import BoxShadow from "../common/BoxShadow"
 
 // Icons matching the reference image closely
 const RequestServiceIcon = () => (
@@ -95,11 +97,11 @@ const HowItWorks = () => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     return (
-        <section className="w-full py-12 lg:py-16 ">
+        <section className="w-full py-5 lg:py-10 ">
             <div className=" mx-auto px-4 md:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="text-center mb-10">
+                <FadeInUp className="text-center mb-10">
                     <TextAnimation
                         text="How It Works"
                         as="h2"
@@ -114,10 +116,10 @@ const HowItWorks = () => {
                     <p className="text-gray text-sm md:text-base max-w-2xl mx-auto">
                         See how VACEI simplifies accounting, audit, compliance, and corporate services.
                     </p>
-                </div>
+                </FadeInUp>
 
                 {/* Video Banner */}
-                <div className="relative w-full aspect-video md:aspect-[2.4/1] rounded-2xl overflow-hidden shadow-sm mb-12 group bg-gray-200">
+                <FadeInUp delay={0.2} className="relative w-full aspect-video md:aspect-[2.4/1] rounded-2xl overflow-hidden shadow-sm mb-12 group bg-gray-200">
                     {!isPlaying ? (
                         <>
                             <Image
@@ -152,17 +154,17 @@ const HowItWorks = () => {
                             className="absolute inset-0"
                         ></iframe>
                     )}
-                </div>
+                </FadeInUp>
 
                 {/* Steps Grid - Row Layout matching the design */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 border-t border-input pt-8 mt-8">
+                <div className="relative">
+                    {/* Background blob to make glass effect visible */}
+                    <div className="absolute inset-0 bg-linear-to-r from-blue-100 via-purple-100 to-blue-50 blur-3xl opacity-60 -z-10 rounded-full pointer-events-none" />
+                    
+                    <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 border-t border-input pt-8 mt-8">
                     {steps.map((step, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                            viewport={{ once: true }}
+                        <BoxShadow key={index} className="p-4 flex items-center">
+                        <FadeInUp
                             className="flex flex-row items-center lg:items-start gap-4"
                         >
                             {/* Icon Box */}
@@ -175,9 +177,11 @@ const HowItWorks = () => {
                                 <h4 className="text-[15px] font-bold text-primary leading-tight mb-1">{step.title}</h4>
                                 <p className="text-[13px] text-gray leading-snug font-medium">{step.description}</p>
                             </div>
-                        </motion.div>
+                        </FadeInUp>
+                        </BoxShadow>
                     ))}
-                </div>
+                    </StaggerContainer>
+            </div>
 
             </div>
         </section>

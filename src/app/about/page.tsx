@@ -5,7 +5,7 @@ import PageHeader from "@/components/common/PageHeader";
 import FeatureSection from "@/components/common/FeatureSection";
 import MissionVisionSection from "@/components/common/MissionVisionSection";
 import ServiceFeatures from "@/components/services/ServiceFeatures";
-import AnimatedSection from "@/components/common/AnimatedSection";
+import { FadeInUp } from "@/components/common/Animations";
 
 const aboutFeatures = [
   {
@@ -71,19 +71,19 @@ const AboutPage = () => {
         <PageHeader title="About Us" breadcrumbs={[{ label: "About Us" }]} />
       </div>
 
-      <AnimatedSection>
+      <FadeInUp>
         <FeatureSection features={aboutFeatures} />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
         <MissionVisionSection />
-      </AnimatedSection>
-      <AnimatedSection>
+      </FadeInUp>
+      <FadeInUp delay={0.4}>
         <ServiceFeatures
           title={aboutServiceFeatures.title}
           subtitle={aboutServiceFeatures.subtitle}
           features={aboutServiceFeatures.features}
         />
-      </AnimatedSection>
+      </FadeInUp>
     </main>
   );
 };

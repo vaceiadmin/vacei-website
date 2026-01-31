@@ -3,7 +3,6 @@
 import React from "react";
 import PageHeader from "@/components/common/PageHeader";
 import SecurityComplianceCards from "@/components/security-compliance/SecurityComplianceCards";
-import AnimatedSection from "@/components/common/AnimatedSection";
 
 const SecurityCompliancePage = () => {
   return (
@@ -15,9 +14,7 @@ const SecurityCompliancePage = () => {
         />
       </div>
 
-      <AnimatedSection>
-        <SecurityComplianceCards />
-      </AnimatedSection>
+      <SecurityComplianceCards />
     </main>
   );
 };

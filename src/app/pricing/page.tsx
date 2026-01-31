@@ -3,7 +3,6 @@
 import React from "react";
 import PageHeader from "@/components/common/PageHeader";
 import PricingOverviewSection from "@/components/pricing/PricingOverviewSection";
-import AnimatedSection from "@/components/common/AnimatedSection";
 
 const PricingPage = () => {
   return (
@@ -15,9 +14,7 @@ const PricingPage = () => {
         />
       </div>
 
-      <AnimatedSection>
-        <PricingOverviewSection />
-      </AnimatedSection>
+      <PricingOverviewSection />
     </main>
   );
 };

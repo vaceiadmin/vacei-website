@@ -4,7 +4,7 @@ import React from "react";
 import PageHeader from "@/components/common/PageHeader";
 import FaqAccordion from "@/components/common/FaqAccordion";
 import FaqCategorized from "@/components/common/FaqCategorized";
-import AnimatedSection from "@/components/common/AnimatedSection";
+import { FadeInUp } from "@/components/common/Animations";
 
 const faqItems = [
   {
@@ -103,16 +103,16 @@ const FaqPage = () => {
         <PageHeader title="FAQ" breadcrumbs={[{ label: "FAQ" }]} />
       </div>
 
-      <AnimatedSection>
+      <FadeInUp>
         <FaqAccordion
           faqItems={faqItems}
           backgroundColor="bg-text-heading"
           showRadials={false}
         />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
         <FaqCategorized categories={faqCategories} />
-      </AnimatedSection>
+      </FadeInUp>
     </main>
   );
 };

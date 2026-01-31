@@ -1,6 +1,7 @@
 import React from 'react'
 import SectionBadge from '@/components/common/SectionBadge'
 import TextAnimation from '@/components/common/TextAnimation'
+import { FadeInUp, StaggerContainer } from '@/components/common/Animations'
 
 const pricingCards = [
     {
@@ -91,23 +92,25 @@ const PricingOverviewSection = () => {
         <section className="bg-section-light py-16 lg:py-24">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-12 lg:mb-16">
-                    <SectionBadge text="Pricing" className="px-6 py-1.5 text-xs text-heading" />
-                    <TextAnimation
-                        text="Overview"
-                        as="h2"
-                        className="mt-5 text-3xl md:text-4xl font-semibold text-heading leading-tight"
-                    />
-                    <p className="mt-4 text-sm md:text-base text-gray max-w-2xl mx-auto leading-relaxed">
-                        VACEI is designed to be simple to start and easy to work with. From the first enquiry to
-                        ongoing delivery, everything follows a clear and structured process.
-                    </p>
-                </div>
+                <FadeInUp>
+                    <div className="text-center mb-12 lg:mb-16">
+                        <SectionBadge text="Pricing" className="px-6 py-1.5 text-xs text-heading" />
+                        <TextAnimation
+                            text="Overview"
+                            as="h2"
+                            className="mt-5 text-3xl md:text-4xl font-semibold text-heading leading-tight"
+                        />
+                        <p className="mt-4 text-sm md:text-base text-gray max-w-2xl mx-auto leading-relaxed">
+                            VACEI is designed to be simple to start and easy to work with. From the first enquiry to
+                            ongoing delivery, everything follows a clear and structured process.
+                        </p>
+                    </div>
+                </FadeInUp>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {pricingCards.map((card, index) => (
-                        <div
+                        <FadeInUp
                             key={index}
                             className="bg-background-secondary rounded-2xl shadow-sm border border-gray-200 px-6 py-6 md:px-7 md:py-7 flex flex-col min-h-[450px]"
                         >
@@ -145,9 +148,9 @@ const PricingOverviewSection = () => {
                             <p className="mt-5 text-xs md:text-sm text-gray leading-relaxed">
                                 {card.footer}
                             </p>
-                        </div>
+                        </FadeInUp>
                     ))}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     )

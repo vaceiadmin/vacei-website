@@ -98,8 +98,7 @@ const Navbar = () => {
         {/* Navbar Container – full width, rounded corners, responsive horizontal padding */}
         <motion.div 
           initial={false}
-          animate={{ backgroundColor: "#ffffff" }}
-          className="w-full rounded-2xl bg-white border border-gray-100 shadow-sm px-4 sm:px-6 lg:px-8 transition-all"
+          className="w-full rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm px-4 sm:px-6 lg:px-8 transition-all bg-clip-padding supports-backdrop-filter:bg-white/10"
         >
           <div className="flex items-center justify-between min-h-[72px] py-3 lg:min-h-[80px] lg:py-4">
             {/* Logo */}

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import GradientContainer from "@/components/common/GradientContainer";
+import { FadeInUp } from "../common/Animations";
 
 const OngoingSupportSection = () => {
   return (
@@ -13,7 +14,7 @@ const OngoingSupportSection = () => {
         <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-16">
             {/* Left: Text content */}
-            <div className="w-full lg:w-1/2 text-left space-y-5">
+            <FadeInUp className="w-full lg:w-1/2 text-left space-y-5">
               <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight">
                 Ongoing Support and Visibility
               </h2>
@@ -25,10 +26,10 @@ const OngoingSupportSection = () => {
                 giving you continuous visibility across accounting, compliance,
                 corporate and audit obligations.
               </p>
-            </div>
+            </FadeInUp>
 
             {/* Right: Image composition */}
-            <div className="w-full lg:w-1/2 flex justify-center">
+            <FadeInUp delay={0.2} className="w-full lg:w-1/2 flex justify-center">
               <div className="relative w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl">
                 {/* Background image */}
                 <div className="relative w-full aspect-[16/9]">
@@ -54,7 +55,7 @@ const OngoingSupportSection = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </FadeInUp>
           </div>
         </div>
       </GradientContainer>

@@ -6,7 +6,6 @@ import HowItWorksTimeline, {
   HowItWorksStep,
 } from "@/components/how-it-works/HowItWorksTimeline";
 import OngoingSupportSection from "@/components/common/OngoingSupportSection";
-import AnimatedSection from "@/components/common/AnimatedSection";
 
 const steps: HowItWorksStep[] = [
   {
@@ -61,12 +60,8 @@ const HowItWorksPage = () => {
         />
       </div>
 
-      <AnimatedSection>
-        <HowItWorksTimeline steps={steps} />
-      </AnimatedSection>
-      <AnimatedSection delay>
-        <OngoingSupportSection />
-      </AnimatedSection>
+      <HowItWorksTimeline steps={steps} />
+      <OngoingSupportSection />
     </main>
   );
 };

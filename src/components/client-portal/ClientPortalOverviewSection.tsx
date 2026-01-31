@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import GradientContainer from "@/components/common/GradientContainer";
 import { BellIcon } from "lucide-react";
+import { FadeInUp } from "../common/Animations";
 
 type OverviewVariant = "client" | "accounting" | "audit";
 
@@ -463,10 +464,10 @@ const ClientPortalOverviewSection = ({
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
           {/* Left: Portal / Accounting preview card */}
-          <div className="w-full lg:w-1/2">{renderLeftCard()}</div>
+          <FadeInUp className="w-full lg:w-1/2">{renderLeftCard()}</FadeInUp>
 
           {/* Right: Copy */}
-          <div className="w-full lg:w-1/2 space-y-6 text-left">
+          <FadeInUp delay={0.2} className="w-full lg:w-1/2 space-y-6 text-left">
             {!bulletedSections && (
               <h2 className="text-3xl md:text-4xl font-medium text-heading">
                 {heading}
@@ -526,7 +527,7 @@ const ClientPortalOverviewSection = ({
                 ))}
               </div>
             )}
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>

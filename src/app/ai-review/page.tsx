@@ -7,7 +7,7 @@ import PortalFeature from "@/components/services/PortalFeature";
 import ServiceFeatures from "@/components/services/ServiceFeatures";
 import ReviewOutputSection from "@/components/ai-review/ReviewOutputSection";
 import BenefitsVideoSection from "@/components/ai-review/BenefitsVideoSection";
-import AnimatedSection from "@/components/common/AnimatedSection";
+import { FadeInUp } from "@/components/common/Animations";
 
 const aiReviewServiceFeatures = {
   title: "All advisory activity is organized and accessible in one place",
@@ -71,25 +71,25 @@ const AIReviewPage = () => {
         />
       </div>
 
-      <AnimatedSection>
+      <FadeInUp>
         <AIReviewFeature />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
         <PortalFeature portalImage="/assets/images/Frame 1618872451.png" />
-      </AnimatedSection>
-      <AnimatedSection>
+      </FadeInUp>
+      <FadeInUp delay={0.4}>
         <ServiceFeatures
           title={aiReviewServiceFeatures.title}
           subtitle={aiReviewServiceFeatures.subtitle}
           features={aiReviewServiceFeatures.features}
         />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.6}>
         <ReviewOutputSection />
-      </AnimatedSection>
-      <AnimatedSection>
+      </FadeInUp>
+      <FadeInUp delay={0.8}>
         <BenefitsVideoSection />
-      </AnimatedSection>
+      </FadeInUp>
     </main>
   );
 };

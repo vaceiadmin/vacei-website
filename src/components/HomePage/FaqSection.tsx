@@ -1,8 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import GradientContainer from "../common/GradientContainer";
+
+import GlassyEffect from "../common/GlassyEffect";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
 
 const FaqSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -31,9 +49,15 @@ const FaqSection = () => {
           className="py-10 sm:py-16 lg:py-20 bg-primary"
           showRadials={false}
         >
-          <div className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-center max-w-6xl mx-auto">
+          <div className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start max-w-6xl mx-auto">
             {/* Left: Interactive Image Area */}
-            <div className="relative flex-1 py-8 lg:py-10 flex justify-center lg:block">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="relative flex-1 py-8 lg:py-10 flex justify-center lg:block"
+            >
               {/* Main square background container */}
               <div className="relative h-[380px] sm:h-[500px] w-full max-w-[340px] sm:max-w-[460px] rounded-[32px] sm:rounded-[48px] scale-95 sm:scale-100 origin-center">
                 {/* Man Image - Increased size and breaking out of container */}
@@ -51,7 +75,11 @@ const FaqSection = () => {
                 {/* Floating Cards Layer */}
                 <div className="absolute inset-0  pointer-events-none">
                   {/* Financial Overview - Moved left to clear face */}
-                  <div className="absolute left-0 top-10 w-[240px] z-20 rounded-[24px] bg-white p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105">
+                  <motion.div 
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute left-0 top-10 w-[240px] z-20 rounded-[24px] bg-white p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105"
+                  >
                     <div className="mb-4 text-[12px] font-bold text-primary">
                       Financial Overview
                     </div>
@@ -122,10 +150,14 @@ const FaqSection = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Get Started Card */}
-                  <div className="absolute -bottom-8 -left-8 max-sm:bottom-0 max-sm:left-0 w-[200px] z-40 rounded-[24px] bg-purple-bg p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105">
+                  <motion.div 
+                    animate={{ y: [0, -15, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute -bottom-8 -left-8 max-sm:bottom-0 max-sm:left-0 w-[200px] z-40 rounded-[24px] bg-purple-bg p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105"
+                  >
                     <p className="text-[16px] font-bold leading-tight tracking-wide">
                       Get Started
                       <br />
@@ -151,10 +183,14 @@ const FaqSection = () => {
                         +356 77142418
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Authorized Share Card - Custom Layout */}
-                  <div className="absolute bottom-16 -right-10 max-sm:right-0 pointer-events-auto z-20 sm:z-40 transition-transform hover:scale-105">
+                  <motion.div 
+                    animate={{ y: [0, -12, 0] }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="absolute bottom-16 -right-10 max-sm:right-0 pointer-events-auto z-20 sm:z-40 transition-transform hover:scale-105"
+                  >
                     <div className="relative w-[160px] rounded-[24px] bg-white p-5 shadow-xl">
                       <p className="mb-4 text-[11px] font-bold text-primary">
                         Authorized Share
@@ -185,29 +221,43 @@ const FaqSection = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right: FAQ accordion list */}
-            <div className="flex-1 lg:pl-12 w-full">
-              <div className="space-y-4 lg:space-y-5">
+            <div className="flex-1 lg:pl-12 w-full lg:mt-8">
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+                className="space-y-4 lg:space-y-5"
+              >
                 {items.map((item, index) => {
                   const isOpen = openIndex === index;
+
                   return (
-                    <div
-                      key={index}
-                      onClick={() => toggleItem(index)}
-                      className="overflow-hidden rounded-[18px] bg-white text-primary shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group mx-5"
+                    <motion.div key={index} variants={fadeInUp}>
+                    <GlassyEffect
+                      intensity="premium"
+                      className={`overflow-hidden rounded-[18px] transition-all duration-300 cursor-pointer group mx-5 border-none shadow-none hover:bg-white/10 ${isOpen ? "bg-white/10" : "bg-white/5"}`}
                     >
-                      <div className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6">
-                        <span className="text-base lg:text-[18px] font-semibold tracking-tight">
+                      <div 
+                        className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6"
+                        onClick={() => toggleItem(index)}
+                      >
+                        <span className="text-base lg:text-[18px] font-semibold tracking-tight text-white/90">
                           {item.title}
                         </span>
                         <button
                           type="button"
-                          className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${isOpen ? "border-purple-bg text-purple-bg" : "border-purple-bg text-purple-bg group-hover:bg-purple-bg/10"}`}
+                          className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${
+                            isOpen 
+                              ? "border-white/40 text-white bg-white/20" 
+                              : "border-white/20 text-white/60 group-hover:bg-white/10 group-hover:text-white"
+                          }`}
                         >
                           <svg
                             width="16"
@@ -230,16 +280,17 @@ const FaqSection = () => {
                       {isOpen && (
                         <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
                           {/* Dashed line */}
-                          <div className="mb-5 border-t border-dashed border-input" />
-                          <p className="text-sm lg:text-[15px] text-gray leading-[1.6] font-medium">
+                          <div className="mb-5 border-t border-dashed border-white/20" />
+                          <p className="text-sm lg:text-[15px] text-white/80 leading-[1.6] font-medium">
                             {item.desc}
                           </p>
                         </div>
                       )}
-                    </div>
+                    </GlassyEffect>
+                    </motion.div>
                   );
                 })}
-              </div>
+              </motion.div>
             </div>
           </div>
         </GradientContainer>

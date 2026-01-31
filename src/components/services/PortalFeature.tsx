@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionBadge from "@/components/common/SectionBadge";
 import TextAnimation from "@/components/common/TextAnimation";
+import { FadeInUp } from "@/components/common/Animations";
 
 type PortalFeatureVariant = "default" | "technology";
 
@@ -68,10 +69,10 @@ const PortalFeature = ({
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-4 lg:h-[658px]">
           {/* Left Column: Text / How it works */}
-          <div className="w-full lg:w-1/2 h-full">
+          <FadeInUp className="w-full lg:w-1/2 h-full">
             <div className="flex flex-col gap-4 h-full">
               {/* 1. Top Wide Card: How it is used */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex-grow flex flex-col justify-center">
+              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm grow flex flex-col justify-center">
                 <div className="mb-4">
                   <SectionBadge text={sectionLabel} className="text-heading" />
                 </div>
@@ -93,7 +94,7 @@ const PortalFeature = ({
                       className="flex items-start gap-2 text-sm text-heading font-medium text-left"
                     >
                       {/* Circle Container with Diamond Bullet (Dark) */}
-                      <div className="mt-1 flex-shrink-0 text-heading">
+                      <div className="mt-1 shrink-0 text-heading">
                         <svg
                           width="18"
                           height="18"
@@ -189,10 +190,10 @@ const PortalFeature = ({
                 </div>
               </div>
             </div>
-          </div>
+          </FadeInUp>
 
           {/* Right Column */}
-          <div className="w-full lg:w-1/2 flex flex-col h-full">
+          <FadeInUp delay={0.2} className="w-full lg:w-1/2 flex flex-col h-full">
             {variant === "technology" ? (
               <div className="w-full h-full rounded-3xl bg-background border border-input shadow-xl px-5 py-6 md:px-7 md:py-7 flex flex-col gap-5">
                 {/* Top status row with vector */}
@@ -340,7 +341,7 @@ const PortalFeature = ({
                 />
               </div>
             )}
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>

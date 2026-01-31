@@ -2,6 +2,7 @@ import React from "react"
 import GradientContainer from "../common/GradientContainer"
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
 import TextAnimation from "../common/TextAnimation"
+import { FadeInUp } from "../common/Animations"
 
 const ReadyToSimplifySection = () => {
   return (
@@ -11,7 +12,7 @@ const ReadyToSimplifySection = () => {
           className="rounded-xl bg-footer-hero px-6 py-10 sm:px-10 sm:py-12"
           showRadials={false}
         >
-          <div className="flex flex-col items-center text-center text-white">
+          <FadeInUp className="flex flex-col items-center text-center text-white">
             <TextAnimation
               text="Ready to simplify how your business operates?"
               as="h2"
@@ -33,7 +34,7 @@ const ReadyToSimplifySection = () => {
                 hasShadow={false}
               />
             </div>
-          </div>
+          </FadeInUp>
         </GradientContainer>
       </div>
     </section>

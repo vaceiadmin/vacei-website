@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import GradientContainer from "./GradientContainer";
 import { servicesData } from "@/data/servicesData";
 import TextAnimation from "./TextAnimation";
+import { FadeInUp } from "./Animations";
 
 interface BreadcrumbItem {
   label: string;
@@ -22,7 +23,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
 
   return (
     <GradientContainer className="my-6">
-      <div className="flex flex-col items-center justify-center py-20 md:py-32 lg:py-40 px-4 text-center">
+      <FadeInUp className="flex flex-col items-center justify-center py-20 md:py-32 lg:py-40 px-4 text-center">
         {/* Title */}
         <TextAnimation
           text={title}
@@ -125,7 +126,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
             </React.Fragment>
           ))}
         </div>
-      </div>
+      </FadeInUp>
     </GradientContainer>
   );
 };

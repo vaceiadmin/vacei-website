@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
@@ -13,6 +14,21 @@ interface BaseCard {
   image: string;
   hoverImage?: string;
   link: string;
+}
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
 }
 
 const ServicesSection = () => {
@@ -163,7 +179,13 @@ const ServicesSection = () => {
           backgroundColor="bg-gradient-container"
         >
           {/* Navigation Tabs */}
-          <div className="flex justify-center mb-8 sm:mb-12 relative z-20">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="flex justify-center mb-8 sm:mb-12 relative z-20"
+          >
             <div className="inline-flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1.5 gap-2">
               {(["services", "experts", "products"] as const).map((tab) => (
                 <button
@@ -182,19 +204,23 @@ const ServicesSection = () => {
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Cards Carousel */}
           <div className="relative">
-            <div
+            <motion.div
+              key={activeTab} // Remount animation on tab change
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
               className={`flex justify-center gap-6 lg:gap-8 mb-8 relative z-10 min-h-[500px]`}
             >
               {displayServices.map((item) =>
                 activeTab === "products" ? (
                   // Product Card Design
+                  <motion.div key={item.id} variants={fadeInUp} className="shrink-0 w-full max-w-[350px] lg:max-w-[400px]">
                   <GlassyEffect
-                    key={item.id}
-                    className="group relative w-full max-w-[350px] lg:max-w-[400px] h-[500px] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer shrink-0"
+                    className="group relative w-full max-w-[350px] lg:max-w-[400px] h-[500px] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl hover:border-white/20 hover:-translate-y-2 cursor-pointer"
                     intensity="medium"
                   >
                     {/* Default Content (Bottom Layer) */}
@@ -263,11 +289,16 @@ const ServicesSection = () => {
                       </GradientContainer>
                     </div>
                   </GlassyEffect>
+                  </motion.div>
                 ) : (
                   // Expert & Service Card Design
+                  <motion.div 
+                    key={item.id} 
+                    variants={fadeInUp} 
+                    className="shrink-0 w-full max-w-[300px]"
+                  >
                   <div
-                    key={item.id}
-                    className="group relative w-full max-w-[300px] h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 shrink-0"
+                    className="group relative w-full h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
                   >
                     {/* Image Area */}
                     <div
@@ -308,9 +339,10 @@ const ServicesSection = () => {
                       </div>
                     </div>
                   </div>
+                  </motion.div>
                 ),
               )}
-            </div>
+            </motion.div>
 
             {/* Pagination Controls */}
             {activeData.length > visibleItems && (

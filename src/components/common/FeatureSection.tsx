@@ -5,6 +5,7 @@ import Image from 'next/image'
 import GradientContainer from './GradientContainer'
 import GetInstantQuoteButton from './GetInstantQuoteButton'
 import TextAnimation from './TextAnimation'
+import { FadeInUp, StaggerContainer } from './Animations'
 
 interface FeatureItem {
     title: string
@@ -75,18 +76,20 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
         }
 
         return (
-            <div key={index} className={`flex flex-col h-full ${shouldUseGrid ? 'lg:flex-row' : 'lg:flex-row'} items-center gap-6 lg:gap-8`}>
-                {/* Image Content */}
-                <div className={`flex-1 w-full min-w-0 ${getImageOrder()}`}>
+            <div 
+                key={index} 
+                className={`flex flex-col h-full ${shouldUseGrid ? 'lg:flex-row' : 'lg:flex-row'} items-center gap-6 lg:gap-8`}
+            >
+                <FadeInUp className={`flex-1 w-full min-w-0 ${getImageOrder()}`}>
                     {feature.useImageBackground && feature.backgroundImage ? (
                         // Use image as background - fixed height
                         <div className="relative w-full h-[400px] overflow-hidden rounded-3xl bg-card">
-                            <div className="absolute inset-0 w-full h-full [&>img]:!object-contain [&>img]:!w-full [&>img]:!h-full">
+                            <div className="absolute inset-0 w-full h-full [&>img]:object-contain! [&>img]:w-full! [&>img]:h-full!">
                                 <Image
                                     src={feature.backgroundImage}
                                     alt={feature.title}
                                     fill
-                                    className="!object-contain"
+                                    className="object-contain!"
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                     priority={index === 0}
                                 />
@@ -114,12 +117,12 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                         <div className="relative w-full h-[400px] overflow-hidden rounded-3xl bg-card">
                             {/* Main Image */}
                             {feature.mainImage && (
-                                <div className="absolute inset-0 w-full h-full [&>img]:!object-contain [&>img]:!w-full [&>img]:!h-full">
+                                <div className="absolute inset-0 w-full h-full [&>img]:object-contain! [&>img]:w-full! [&>img]:h-full!">
                                     <Image
                                         src={feature.mainImage}
                                         alt={feature.title}
                                         fill
-                                        className="!object-contain"
+                                        className="object-contain!"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         priority={index === 0}
                                     />
@@ -145,10 +148,10 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                                 ))}
                         </div>
                     )}
-                </div>
+                </FadeInUp>
 
                 {/* Text Content */}
-                <div className={`flex-1 space-y-4 lg:space-y-6 w-full flex flex-col justify-center ${getContentOrder()}`}>
+                <StaggerContainer className={`flex-1 space-y-4 lg:space-y-6 w-full flex flex-col justify-center ${getContentOrder()}`}>
                     <TextAnimation 
                         text={feature.title}
                         as="h2"
@@ -161,29 +164,35 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                     {/* Content: Bullet Points or Paragraph */}
                     {feature.content && feature.content.length > 0 && (
                         <div className="space-y-3 lg:space-y-4 pt-2">
-                            <h3 className="font-bold text-heading text-base lg:text-lg">What clients see in the portal:</h3>
+                            <FadeInUp>
+                                <h3 className="font-bold text-heading text-base lg:text-lg">What clients see in the portal:</h3>
+                            </FadeInUp>
                             <ul className="space-y-2">
                                 {feature.content.map((item, i) => (
-                                    <li key={i} className="flex items-center gap-3 text-gray">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-gray flex-shrink-0"></div>
+                                    <FadeInUp 
+                                        key={i} 
+                                        as="li"
+                                        className="flex items-center gap-3 text-gray"
+                                    >
+                                        <div className="w-1.5 h-1.5 rounded-full bg-gray shrink-0"></div>
                                         <span>{item}</span>
-                                    </li>
+                                    </FadeInUp>
                                 ))}
                             </ul>
                         </div>
                     )}
 
                     {feature.paragraph && (
-                        <div className="text-base lg:text-lg text-gray leading-relaxed pt-2 space-y-3">
+                        <FadeInUp className="text-base lg:text-lg text-gray leading-relaxed pt-2 space-y-3">
                             {feature.paragraph.split('\n\n').map((para, i) => (
                                 <p key={i}>{para}</p>
                             ))}
-                        </div>
+                        </FadeInUp>
                     )}
 
                     {/* Button */}
                     {feature.buttonText && feature.buttonHref && (
-                        <div className="pt-4">
+                        <FadeInUp className="pt-4">
                             <GetInstantQuoteButton
                                 variant="custom"
                                 text={feature.buttonText}
@@ -192,9 +201,9 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                                 textColor="white"
                                 className="px-6 lg:px-8 py-3 rounded-full font-semibold shadow-lg shadow-indigo-500/20"
                             />
-                        </div>
+                        </FadeInUp>
                     )}
-                </div>
+                </StaggerContainer>
             </div>
         )
     }

@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import AnimatedSection from "./AnimatedSection";
-
+import { FadeInUp } from "./Animations";
+ 
 /**
- * Wraps each non-null child in AnimatedSection for use in server-rendered pages
+ * Wraps each non-null child in FadeInUp for use in server-rendered pages
  * (e.g. Services [slug]) where we cannot use "use client" on the page itself.
  */
 export default function AnimatedPageSections({
@@ -16,9 +16,9 @@ export default function AnimatedPageSections({
   return (
     <>
       {items.map((child, index) => (
-        <AnimatedSection key={index} delay={index > 0}>
+        <FadeInUp key={index} delay={index * 0.2}>
           {child}
-        </AnimatedSection>
+        </FadeInUp>
       ))}
     </>
   );

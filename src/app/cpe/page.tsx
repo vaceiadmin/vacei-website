@@ -4,7 +4,7 @@ import React from "react";
 import PageHeader from "@/components/common/PageHeader";
 import CpeOverviewSection from "@/components/cpe/CpeOverviewSection";
 import PodcastSection from "@/components/cpe/PodcastSection";
-import AnimatedSection from "@/components/common/AnimatedSection";
+import { FadeInUp } from "@/components/common/Animations";
 
 const CpePage = () => {
   return (
@@ -16,12 +16,12 @@ const CpePage = () => {
         />
       </div>
 
-      <AnimatedSection>
+      <FadeInUp>
         <CpeOverviewSection />
-      </AnimatedSection>
-      <AnimatedSection delay>
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
         <PodcastSection />
-      </AnimatedSection>
+      </FadeInUp>
     </main>
   );
 };

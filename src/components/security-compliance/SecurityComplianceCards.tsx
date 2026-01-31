@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { FadeInUp, StaggerContainer } from '@/components/common/Animations'
 
 interface SecurityCard {
     id: number
@@ -88,7 +88,7 @@ const SecurityComplianceCards = () => {
     return (
         <section className="py-16 lg:py-24 bg-section-light mx-2">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
+                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
                     {cards.map((card, index) => {
                         // First 4 cards: span 3 columns each (2 cards per row)
                         // Last 3 cards: span 2 columns each (3 cards per row)
@@ -103,12 +103,8 @@ const SecurityComplianceCards = () => {
                         }
 
                         return (
-                        <motion.div
+                        <FadeInUp
                             key={card.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
                             className={`bg-white rounded-2xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col ${getGridColSpan()}`}
                         >
                             {/* Icon */}
@@ -145,10 +141,10 @@ const SecurityComplianceCards = () => {
                                     ))}
                                 </ul>
                             )}
-                        </motion.div>
+                        </FadeInUp>
                         )
                     })}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     )
