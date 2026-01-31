@@ -1,16 +1,39 @@
-import React from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionBadge from "@/components/common/SectionBadge";
 import TextAnimation from "../common/TextAnimation";
+import { FadeInUp, StaggerContainer } from "../common/Animations";
 
 const ReviewOutputSection = () => {
   return (
-    <section className="bg-section-light py-16 lg:py-24">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+    <section className="bg-section-light py-16 lg:py-24 relative overflow-hidden">
+      {/* Background Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <motion.div 
+          animate={{ 
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-primary-blue/5 blur-[120px] rounded-full"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 40, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-purple-500/5 blur-[120px] rounded-full"
+        />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.1fr] gap-12 lg:gap-16 items-center">
           {/* Left: Text and cards */}
-          <div className="space-y-6 text-left">
-            <div>
+          <StaggerContainer className="space-y-6 text-left">
+            <FadeInUp>
               <SectionBadge text="Review output" className="text-heading" />
               <TextAnimation
                 text="Review output"
@@ -20,70 +43,86 @@ const ReviewOutputSection = () => {
               <p className="mt-2 text-sm md:text-base text-gray max-w-md leading-relaxed">
                 Within minutes, a structured review report is generated.
               </p>
-            </div>
+            </FadeInUp>
 
             <div className="flex flex-col md:flex-row gap-4">
               {/* The report is */}
-              <div className="bg-background-secondary rounded-2xl shadow-sm border border-gray-200 px-5 py-5 flex-1 min-w-[230px]">
+              <FadeInUp className="bg-white rounded-2xl shadow-premium border border-gray-100 px-5 py-5 flex-1 min-w-[230px]">
                 <TextAnimation
                   text="The report is:"
                   as="h3"
-                  className="text-sm md:text-base font-semibold text-heading mb-3"
+                  className="text-sm md:text-base font-bold text-heading mb-3"
                 />
-                <ul className="space-y-2 text-sm text-gray">
+                <ul className="space-y-3 text-sm text-gray">
                   {["Clear", "Actionable", "Easy to work through"].map(
                     (item, i) => (
-                      <li key={i} className="flex items-start gap-2">
+                      <motion.li 
+                        key={i} 
+                        initial={{ opacity: 0, x: -5 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + i * 0.1 }}
+                        className="flex items-start gap-3 group"
+                      >
                         <Image
                           src="/assets/images/fluent_shape-intersect-16-filled.png"
                           alt=""
-                          width={16}
-                          height={16}
-                          className="mt-[2px] object-contain"
+                          width={14}
+                          height={14}
+                          className="mt-[3px] object-contain group-hover:scale-125 transition-transform"
                         />
-                        <span>{item}</span>
-                      </li>
+                        <span className="group-hover:text-primary transition-colors font-medium">
+                            {item}
+                        </span>
+                      </motion.li>
                     ),
                   )}
                 </ul>
-              </div>
+              </FadeInUp>
 
               {/* Each item is marked as */}
-              <div className="bg-background-secondary rounded-2xl shadow-sm border border-gray-200 px-5 py-5 flex-1 min-w-[230px]">
+              <FadeInUp delay={0.2} className="bg-white rounded-2xl shadow-premium border border-gray-100 px-5 py-5 flex-1 min-w-[230px]">
                 <TextAnimation
                   text="Each item is marked as:"
                   as="h3"
-                  className="text-sm md:text-base font-semibold text-heading mb-3"
+                  className="text-sm md:text-base font-bold text-heading mb-3"
                 />
-                <ul className="space-y-2 text-sm text-gray">
+                <ul className="space-y-3 text-sm text-gray">
                   {["Confirmed", "Disclosed", "Flagged for review"].map(
                     (item, i) => (
-                      <li key={i} className="flex items-start gap-2">
+                      <motion.li 
+                        key={i} 
+                        initial={{ opacity: 0, x: -5 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.7 + i * 0.1 }}
+                        className="flex items-start gap-3 group"
+                      >
                         <Image
                           src="/assets/images/fluent_shape-intersect-16-filled.png"
                           alt=""
-                          width={16}
-                          height={16}
-                          className="mt-[2px] object-contain"
+                          width={14}
+                          height={14}
+                          className="mt-[3px] object-contain group-hover:scale-125 transition-transform"
                         />
-                        <span>{item}</span>
-                      </li>
+                        <span className="group-hover:text-primary transition-colors font-medium">
+                            {item}
+                        </span>
+                      </motion.li>
                     ),
                   )}
                 </ul>
-              </div>
+              </FadeInUp>
             </div>
 
             <p className="text-xs md:text-sm text-gray max-w-lg leading-relaxed">
               This allows teams to resolve issues efficiently and with
               confidence.
             </p>
-          </div>
+          </StaggerContainer>
 
           {/* Right: Background image with overlay card */}
-          <div className="relative w-full h-[260px] md:h-[320px] lg:h-[360px]">
+          <FadeInUp delay={0.4} className="relative w-full h-[300px] md:h-[400px] lg:h-[450px]">
             {/* Background brain image */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-lg">
+            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
               <Image
                 src="/assets/images/Rectangle 34624219.png"
                 alt="AI Review visual background"
@@ -91,48 +130,59 @@ const ReviewOutputSection = () => {
                 className="object-cover"
                 priority
               />
+              <div className="absolute inset-0 bg-primary-blue/10 backdrop-blur-[2px]"></div>
             </div>
 
             {/* Overlay audit result card */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[78%] max-w-md bg-white/95 rounded-2xl shadow-xl border border-gray-100 px-5 py-4 backdrop-blur">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-[11px] font-semibold text-heading">
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <motion.div 
+                animate={{ 
+                    y: [0, -15, 0],
+                    rotateZ: [-1, 1, -1]
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="w-full max-w-md bg-white rounded-3xl shadow-premium border border-gray-100 p-6 backdrop-blur-md"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-[13px] font-bold text-heading">
                     Audit Result
                   </p>
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
                 </div>
-                <p className="text-[10px] font-semibold text-red-500 mb-2">
+                <p className="text-[11px] font-bold text-red-500 mb-4 bg-red-50 py-1 px-3 rounded-full w-fit">
                   Critical Errors
                 </p>
 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {[
                     "CS01 - Profit for the year does...",
                     "CS01 - Profit for the year does...",
                     "CS01 - Profit for the year does...",
-                    "CS01 - Profit for the year does...",
                   ].map((item, idx) => (
-                    <div
+                    <motion.div
                       key={idx}
-                      className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-error/10 border border-error"
+                      initial={{ opacity: 0, x: 10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 + idx * 0.1 }}
+                      className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-red-50/50 border border-red-100 group hover:bg-red-50 transition-colors"
                     >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center text-[10px] text-red-500">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center text-[11px] text-red-600 font-bold group-hover:scale-110 transition-transform">
                           !
                         </span>
-                        <span className="text-[10px] text-gray-700 truncate">
+                        <span className="text-[11px] font-semibold text-gray-700 truncate group-hover:text-red-700 transition-colors">
                           {item}
                         </span>
                       </div>
-                      <span className="ml-3 px-2 py-0.5 rounded bg-gray-100 text-[9px] font-semibold text-gray-600 uppercase tracking-wide">
-                        Balance sheet
+                      <span className="ml-3 px-2 py-0.5 rounded bg-white text-[9px] font-bold text-gray-500 uppercase tracking-widest border border-gray-100">
+                        Balance
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>

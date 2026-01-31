@@ -1,16 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import GradientContainer from "../common/GradientContainer";
 
 import GlassyEffect from "../common/GlassyEffect";
+import TextAnimation from "../common/TextAnimation";
+import { FadeInUp, StaggerContainer as StaggerEffect } from "../common/Animations";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
-}
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1] 
+    } 
+  }
+} as any;
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -46,10 +56,46 @@ const FaqSection = () => {
     <section className="w-full py-12 sm:py-20 pb-20 sm:pb-32 overflow-hidden">
       <div className="mx-auto px-4 md:px-0">
         <GradientContainer
-          className="py-10 sm:py-16 lg:py-20 bg-primary"
+          className="py-10 sm:py-16 lg:py-20 bg-primary relative"
           showRadials={false}
         >
-          <div className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start max-w-6xl mx-auto">
+          {/* Animated Background Blobs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <motion.div 
+              animate={{ 
+                x: [0, 40, 0],
+                y: [0, 50, 0],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full"
+            />
+            <motion.div 
+              animate={{ 
+                x: [0, -30, 0],
+                y: [0, -40, 0],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full"
+            />
+          </div>
+          
+          <div className="max-w-6xl mx-auto px-4 md:px-0 relative z-10">
+            {/* Section Header */}
+            <FadeInUp className="text-center mb-12 lg:mb-20 max-w-3xl mx-auto">
+              <TextAnimation
+                text="Why Choose VACEI?"
+                as="h2"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+              />
+              <p className="text-base md:text-lg text-white/70 leading-relaxed font-medium">
+                We combine industry-leading expertise with a cutting-edge digital platform 
+                to simplify your corporate and financial operations in Malta.
+              </p>
+            </FadeInUp>
+
+            <StaggerEffect className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start" viewportMargin="-100px">
             {/* Left: Interactive Image Area */}
             <motion.div 
               initial="hidden"
@@ -187,7 +233,10 @@ const FaqSection = () => {
 
                   {/* Authorized Share Card - Custom Layout */}
                   <motion.div 
-                    animate={{ y: [0, -12, 0] }}
+                    animate={{ 
+                        y: [0, -12, 0],
+                        rotate: [0, 1, 0, -1, 0]
+                    }}
                     transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                     className="absolute bottom-16 -right-10 max-sm:right-0 pointer-events-auto z-20 sm:z-40 transition-transform hover:scale-105"
                   >
@@ -197,20 +246,33 @@ const FaqSection = () => {
                       </p>
                       <div className="flex flex-col items-center gap-5">
                         {/* Pie Chart */}
-                        <div className="relative h-16 w-16 shadow-inner rounded-full">
+                        <motion.div 
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="relative h-16 w-16 shadow-inner rounded-full"
+                        >
                           <div className="h-full w-full rounded-full bg-progress-purple" />
                           <div className="absolute bottom-0 left-0 h-[50%] w-full rounded-b-full bg-purple-bg" />
-                        </div>
+                        </motion.div>
 
                         {/* Lines */}
                         <div className="flex w-full flex-col gap-1.5 px-1">
                           <div className="h-1.5 w-full rounded-full bg-neutral-200"></div>
-                          <div className="h-1.5 w-[70%] rounded-full bg-purple-bg"></div>
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "70%" }}
+                            transition={{ duration: 1.5, ease: "easeOut", delay: 1 }}
+                            className="h-1.5 rounded-full bg-purple-bg"
+                          ></motion.div>
                         </div>
                       </div>
 
                       {/* Floating Legend / Tooltip */}
-                      <div className="absolute -right-6 -top-10 bg-white rounded-[14px] px-3 py-2 shadow-lg border border-input min-w-[100px]">
+                      <motion.div 
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute -right-6 -top-10 bg-white rounded-[14px] px-3 py-2 shadow-lg border border-input min-w-[100px]"
+                      >
                         <div className="flex flex-col gap-1">
                           <span className="text-[9px] font-bold text-success tracking-wide">
                             Issued Share 50%
@@ -219,7 +281,7 @@ const FaqSection = () => {
                             Left Share 50%
                           </span>
                         </div>
-                      </div>
+                      </motion.div>
                     </div>
                   </motion.div>
                 </div>
@@ -251,8 +313,10 @@ const FaqSection = () => {
                         <span className="text-base lg:text-[18px] font-semibold tracking-tight text-white/90">
                           {item.title}
                         </span>
-                        <button
+                        <motion.button
                           type="button"
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                           className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${
                             isOpen 
                               ? "border-white/40 text-white bg-white/20" 
@@ -275,23 +339,34 @@ const FaqSection = () => {
                               <path d="M12 5v14M5 12h14" />
                             )}
                           </svg>
-                        </button>
+                        </motion.button>
                       </div>
-                      {isOpen && (
-                        <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
-                          {/* Dashed line */}
-                          <div className="mb-5 border-t border-dashed border-white/20" />
-                          <p className="text-sm lg:text-[15px] text-white/80 leading-[1.6] font-medium">
-                            {item.desc}
-                          </p>
-                        </div>
-                      )}
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div 
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
+                                {/* Dashed line */}
+                                <div className="mb-5 border-t border-dashed border-white/20" />
+                                <p className="text-sm lg:text-[15px] text-white/80 leading-[1.6] font-medium">
+                                    {item.desc}
+                                </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </GlassyEffect>
                     </motion.div>
                   );
                 })}
               </motion.div>
             </div>
+          </StaggerEffect>
           </div>
         </GradientContainer>
       </div>

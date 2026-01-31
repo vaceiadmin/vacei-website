@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import GradientContainer from "@/components/common/GradientContainer";
+import BoxShadow from "@/components/common/BoxShadow";
 
 const QuoteFormSection = () => {
   const [formData, setFormData] = useState({
@@ -69,35 +70,35 @@ const QuoteFormSection = () => {
         showRadials={true}
       >
         <div className="max-w-6xl mx-auto py-12 lg:py-16">
-          <div className=" rounded-2xl shadow-xl p-6 md:p-8 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
-              {/* Left Side: Image */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative w-full h-full min-h-[400px] lg:min-h-[500px] rounded-xl overflow-hidden"
-              >
-                <Image
-                  src="/assets/images/Rectangle 34624273 (1).png"
-                  alt="Quote Form Illustration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-              </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {/* Left Side: Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative w-full h-[400px] lg:h-full min-h-[500px] rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <Image
+                src="/assets/images/Rectangle 34624273 (1).png"
+                alt="Quote Form Illustration"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
+            </motion.div>
 
-              {/* Right Side: Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="flex flex-col justify-center bg-white rounded-2xl p-6 md:p-8 lg:p-12"
-              >
-                <h2 className="text-2xl md:text-3xl font-medium text-heading mb-6">
+            {/* Right Side: Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col"
+            >
+              <BoxShadow className="h-full flex flex-col justify-center bg-transparent border-white/10 p-6 md:p-8 lg:p-12">
+                <h2 className="text-2xl md:text-3xl font-medium text-white mb-6">
                   Complete the form below to receive your tailored quote
                 </h2>
 
@@ -110,9 +111,7 @@ const QuoteFormSection = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
-                        errors.name ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors"
                       placeholder="Enter your name"
                     />
                     {errors.name && (
@@ -128,15 +127,11 @@ const QuoteFormSection = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
-                        errors.email ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors"
                       placeholder="Enter your email"
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-500">
-                        {errors.email}
-                      </p>
+                      <p className="mt-1 text-sm text-red-500">{errors.email}</p>
                     )}
                   </div>
 
@@ -148,9 +143,7 @@ const QuoteFormSection = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
-                        errors.subject ? "border-red-500" : "border-gray-300"
-                      }`}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors"
                       placeholder="Enter subject"
                     />
                     {errors.subject && (
@@ -168,7 +161,7 @@ const QuoteFormSection = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
-                      className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors resize-none"
                       placeholder="Enter your message (optional)"
                     />
                   </div>
@@ -197,8 +190,8 @@ const QuoteFormSection = () => {
                     </button>
                   </div>
                 </form>
-              </motion.div>
-            </div>
+              </BoxShadow>
+            </motion.div>
           </div>
         </div>
       </GradientContainer>

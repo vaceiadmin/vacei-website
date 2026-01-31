@@ -17,8 +17,16 @@ interface BaseCard {
 }
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1],
+    } as any
+  }
 }
 
 const staggerContainer = {
@@ -178,6 +186,27 @@ const ServicesSection = () => {
           className="py-8 sm:py-12 lg:py-16 relative"
           backgroundColor="bg-gradient-container"
         >
+          {/* Animated Background Blobs */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <motion.div 
+              animate={{ 
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary-blue/10 blur-[100px] lg:blur-[120px] rounded-full"
+            />
+            <motion.div 
+              animate={{ 
+                x: [0, -40, 0],
+                y: [0, -20, 0],
+                scale: [1.1, 1, 1.1]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-[10%] -right-[10%] w-[45%] h-[45%] bg-purple-500/10 blur-[100px] lg:blur-[130px] rounded-full"
+            />
+          </div>
           {/* Navigation Tabs */}
           <motion.div 
             initial="hidden"
@@ -248,7 +277,18 @@ const ServicesSection = () => {
 
                       {/* Default View (3D Logo in Center) */}
                       <div className="absolute inset-x-0 bottom-0 top-[40%] flex items-center justify-center p-8 transition-all duration-500 opacity-100 scale-100 group-hover:opacity-0 group-hover:scale-90 z-10">
-                        <div className="relative w-48 h-48">
+                        <motion.div 
+                          animate={{ 
+                            y: [0, -12, 0],
+                            rotateZ: [-1, 1, -1]
+                          }}
+                          transition={{
+                            duration: 4 + (item.id % 3),
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                          className="relative w-48 h-48"
+                        >
                           <Image
                             src={item.image}
                             alt={item.title}
@@ -256,7 +296,7 @@ const ServicesSection = () => {
                             className="object-contain drop-shadow-2xl"
                             priority
                           />
-                        </div>
+                        </motion.div>
                       </div>
 
                       {/* Hover View (Portal Image at Bottom) */}
