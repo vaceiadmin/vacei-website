@@ -316,6 +316,30 @@ body {
   font-family: var(--font-sans);
 }
 
+/* 
+ * Global sizing & zoom behavior
+ * Make 100% browser zoom feel closer to your current “90% looks perfect” setup
+ * by slightly reducing the base font size on the root element. This scales all
+ * Tailwind rem-based typography and spacing down a bit on laptops, without
+ * affecting your breakpoints.
+ */
+html {
+  font-size: 15px; /* ~94% of the default 16px, so 100% zoom ≈ your old 90% */
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 16px; /* Restore full size on very large desktops */
+  }
+}
+
+/* Prevent any decorative absolute elements from causing horizontal scrollbars */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* Hide scrollbar for sidebar */
 .hide-scrollbar {
   scrollbar-width: none;

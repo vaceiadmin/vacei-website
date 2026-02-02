@@ -22,6 +22,10 @@ const Navbar = () => {
   // Check if mobile screen
   const [isMobile, setIsMobile] = useState(false);
 
+  // Detect when the browser is at 100% zoom or above on laptop/desktop
+  // and switch to a "compact" nav where some items move under Resources.
+  const [useCompactNav, setUseCompactNav] = useState(false);
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
@@ -29,6 +33,30 @@ const Navbar = () => {
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Detect zoom level & viewport width to switch nav layout.
+  // We treat "100% zoom and above" as compact mode on typical laptops,
+  // keeping the original layout for 90% zoom users.
+  useEffect(() => {
+    const updateNavMode = () => {
+      // Heuristic: compare outerWidth to innerWidth to infer zoom percentage.
+      // This is not perfect across all browsers, but works well for Chrome-like setups.
+      const zoomApprox =
+        typeof window !== "undefined" && window.innerWidth
+          ? (window.outerWidth / window.innerWidth) * 100
+          : 100;
+
+      const isZoomedOrDefault = zoomApprox >= 100;
+      const isLaptopWidth = window.innerWidth >= 1024 && window.innerWidth <= 1536;
+
+      setUseCompactNav(isZoomedOrDefault && isLaptopWidth);
+    };
+
+    updateNavMode();
+    window.addEventListener("resize", updateNavMode);
+
+    return () => window.removeEventListener("resize", updateNavMode);
   }, []);
 
   // Prevent scrolling when mobile menu is open
@@ -43,32 +71,62 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks = [
-    { label: "AI Review", href: "/ai-review" },
-    {
-      label: "Services",
-      href: "#",
-      hasDropdown: true,
-      isOpen: servicesOpen,
-      setIsOpen: setServicesOpen,
-    },
-    { label: "How It Works", href: "/how-it-works" },
-    {
-      label: "Portals",
-      href: "/portal/client-portal",
-      hasDropdown: true,
-      isOpen: portalsOpen,
-      setIsOpen: setPortalsOpen,
-    },
-    { label: "Pricing", href: "/pricing" },
-    {
-      label: "Resources",
-      href: "/resources",
-      hasDropdown: true,
-      isOpen: resourcesOpen,
-      setIsOpen: setResourcesOpen,
-    },
-  ];
+  // Desktop nav links – switch labels/structure in compact mode.
+  const navLinks = useCompactNav
+    ? [
+        // 100% zoom and above: show About instead of AI Review,
+        // move AI Review + How It Works under Resources.
+        { label: "About Us", href: "/about" },
+        {
+          label: "Services",
+          href: "#",
+          hasDropdown: true,
+          isOpen: servicesOpen,
+          setIsOpen: setServicesOpen,
+        },
+        {
+          label: "Portals",
+          href: "/portal/client-portal",
+          hasDropdown: true,
+          isOpen: portalsOpen,
+          setIsOpen: setPortalsOpen,
+        },
+        { label: "Pricing", href: "/pricing" },
+        {
+          label: "Resources",
+          href: "/resources",
+          hasDropdown: true,
+          isOpen: resourcesOpen,
+          setIsOpen: setResourcesOpen,
+        },
+      ]
+    : [
+        // Default / 90% zoom layout – original structure.
+        { label: "AI Review", href: "/ai-review" },
+        {
+          label: "Services",
+          href: "#",
+          hasDropdown: true,
+          isOpen: servicesOpen,
+          setIsOpen: setServicesOpen,
+        },
+        { label: "How It Works", href: "/how-it-works" },
+        {
+          label: "Portals",
+          href: "/portal/client-portal",
+          hasDropdown: true,
+          isOpen: portalsOpen,
+          setIsOpen: setPortalsOpen,
+        },
+        { label: "Pricing", href: "/pricing" },
+        {
+          label: "Resources",
+          href: "/resources",
+          hasDropdown: true,
+          isOpen: resourcesOpen,
+          setIsOpen: setResourcesOpen,
+        },
+      ];
 
   const productLinks = [
     { label: "AI Review", href: "/ai-review" },
@@ -83,14 +141,26 @@ const Navbar = () => {
     { label: "Audit Portal", href: "/portal/audit-portal" },
   ];
 
-  const resourceLinks = [
-    { label: "How It Works", href: "/how-it-works" },
-    { label: "About VACEI", href: "/about" },
-    { label: "FAQs", href: "/faq" },
-    { label: "Security & Compliance", href: "/security-compliance" },
-    { label: "Get Instant Quote", href: "/quote" },
-    { label: "CPE & Podcast", href: "/cpe" },
-  ];
+  const resourceLinks = useCompactNav
+    ? [
+        // Compact: move AI Review + How It Works under Resources
+        { label: "AI Review", href: "/ai-review" },
+        { label: "How It Works", href: "/how-it-works" },
+        { label: "About VACEI", href: "/about" },
+        { label: "FAQs", href: "/faq" },
+        { label: "Security & Compliance", href: "/security-compliance" },
+        { label: "Get Instant Quote", href: "/quote" },
+        { label: "CPE & Podcast", href: "/cpe" },
+      ]
+    : [
+        // Original Resources content
+        { label: "How It Works", href: "/how-it-works" },
+        { label: "About VACEI", href: "/about" },
+        { label: "FAQs", href: "/faq" },
+        { label: "Security & Compliance", href: "/security-compliance" },
+        { label: "Get Instant Quote", href: "/quote" },
+        { label: "CPE & Podcast", href: "/cpe" },
+      ];
 
   return (
     <>

@@ -9,6 +9,10 @@ interface GradientContainerProps {
     radialImage?: string
     topLeftRotation?: string
     bottomRightRotation?: string
+    /** Optional position classes for the left radial (e.g. 'top-0 left-0', 'bottom-0 left-0') */
+    leftPositionClass?: string
+    /** Optional position classes for the right radial (e.g. 'bottom-0 right-0') */
+    rightPositionClass?: string
 }
 
 const GradientContainer = ({ 
@@ -18,10 +22,14 @@ const GradientContainer = ({
     backgroundColor, 
     radialImage,
     topLeftRotation = "-rotate-90",
-    bottomRightRotation = "rotate-90"
+    bottomRightRotation = "rotate-90",
+    leftPositionClass,
+    rightPositionClass,
 }: GradientContainerProps) => {
     const bgColor = backgroundColor || 'bg-primary'
     const radialSrc = radialImage || '/assets/images/radial2.png'
+    const leftPos = leftPositionClass || 'top-0 left-0'
+    const rightPos = rightPositionClass || 'bottom-0 right-0'
     
     
     return (
@@ -30,7 +38,7 @@ const GradientContainer = ({
             <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
                 {/* Background Radial Image - Top Left */}
                 {showRadials && (
-                    <div className={`absolute top-0 left-0 w-[350px] h-[330px] z-0 transform ${topLeftRotation}`}>
+                    <div className={`absolute ${leftPos} w-[350px] h-[330px] z-0 transform ${topLeftRotation}`}>
                         <Image
                             src={radialSrc}
                             alt="Radial Gradient"
@@ -42,7 +50,7 @@ const GradientContainer = ({
 
                 {/* Background Radial Image - Bottom Right */}
                 {showRadials && (
-                    <div className={`absolute bottom-0 right-0 w-[350px] h-[330px] z-0 transform ${bottomRightRotation}`}>
+                    <div className={`absolute ${rightPos} w-[350px] h-[330px] z-0 transform ${bottomRightRotation}`}>
                         <Image
                             src={radialSrc}
                             alt="Radial Gradient"
