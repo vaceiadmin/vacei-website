@@ -1,138 +1,167 @@
+"use client"
+
 import React from 'react'
 import { motion } from "framer-motion"
-import GetInstantQuoteButton from '../common/GetInstantQuoteButton'
-import TextAnimation from '../common/TextAnimation'
-import GlassyEffect from '../common/GlassyEffect'
-import BoxShadow from '../common/BoxShadow'
-import { FadeInUp, StaggerContainer } from '../common/Animations'
+import Link from 'next/link'
 
 const CompanySetupSection = () => {
   return (
-    <section className="w-full py-16 lg:py-20 bg-section-light overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-        {/* Main Heading */}
-        <FadeInUp className="text-center mb-8 lg:mb-10 max-w-2xl mx-auto">
-          <TextAnimation
-            text="Start a Company in Malta"
-            as="h2"
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight"
-          />
-          <TextAnimation
-            text="We handle incorporation and setup end-to-end – and you manage everything through one client portal."
-            as="p"
-            className="text-base md:text-lg text-text-dark max-w-3xl mx-auto leading-relaxed"
-          />
-        </FadeInUp>
+    <section className="w-full py-20 lg:py-28 relative overflow-hidden bg-[#D8E5E5]"> {/* Light Premium Background */}
+      
+      {/* Wave Background Pattern - Matching AuditPlatform */}
+      <div 
+        className="pointer-events-none absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/Background pattern.svg')",
+          opacity: 0.08, // Subtle visibility
+        }}
+      />
 
-        {/* Three Content Boxes */}
-        <div className="relative mb-10 lg:mb-12">
-            {/* Background blob for glass effect */}
-            <motion.div 
-              animate={{ 
-                scale: [1, 1.1, 1],
-                opacity: [0.6, 0.8, 0.6]
-              }}
-              transition={{ 
-                duration: 8, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-linear-to-r from-blue-50/60 via-purple-50/60 to-blue-50/60 blur-3xl -z-10 rounded-full pointer-events-none" 
-            />
-
-            <StaggerContainer
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
-            >
-            {/* What we handle */}
-            <FadeInUp className="h-full">
-            <BoxShadow className="h-full p-6 lg:p-8">
-                <h3 className="text-lg lg:text-xl font-bold text-primary mb-5">
-                What we handle
-                </h3>
-                <ul className="space-y-3.5">
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Company incorporation and registration
-                </li>
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Statutory setup and compliance onboarding
-                </li>
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Corporate services and ongoing filings
-                </li>
-                </ul>
-            </BoxShadow>
-            </FadeInUp>
-
-            {/* What you do */}
-            <FadeInUp className="h-full">
-            <BoxShadow className="h-full p-6 lg:p-8">
-                <h3 className="text-lg lg:text-xl font-bold text-primary mb-5">
-                What you do
-                </h3>
-                <ul className="space-y-3.5">
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Complete KYC (guided, step-by-step)
-                </li>
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Upload required documents
-                </li>
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Approve key details
-                </li>
-                </ul>
-            </BoxShadow>
-            </FadeInUp>
-
-            {/* What you get */}
-            <FadeInUp className="h-full">
-            <BoxShadow className="h-full p-6 lg:p-8">
-                <h3 className="text-lg lg:text-xl font-bold text-primary mb-5">
-                What you get
-                </h3>
-                <ul className="space-y-3.5">
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • Your company fully set up
-                </li>
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • A compliance calendar from day one
-                </li>
-                <li className="text-sm lg:text-base text-text-dark leading-relaxed">
-                    • One portal to track everything
-                </li>
-                </ul>
-            </BoxShadow>
-            </FadeInUp>
-            </StaggerContainer>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+             <motion.span 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="inline-block px-3 py-1 rounded-full bg-white border border-blue-100 text-xs font-bold tracking-widest text-[#3b49e6] uppercase mb-4 shadow-sm"
+             >
+                Incorporation Made Simple
+             </motion.span>
+             <motion.h2 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="text-3xl md:text-5xl font-bold text-[#1a1c35] mb-6 leading-tight"
+             >
+                Starts with a Company, <br/>
+                <span className="text-[#3b49e6]">Grows with VACEI.</span>
+             </motion.h2>
+             <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-lg text-gray-600 leading-relaxed"
+             >
+                We handle specific incorporation and setup, but our real value lies in the ongoing partnership. Manage everything through one unified portal.
+             </motion.p>
         </div>
 
-        {/* Call-to-Action Buttons */}
-        <FadeInUp 
-          delay={0.4}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <GetInstantQuoteButton
-            variant="custom"
-            text="Start a Company in Malta"
-            href="/company-setup"
-            bgColor="var(--primary-blue)"
-            textColor="white"
-            className="px-8 py-3.5 text-base font-medium rounded-full"
-            hasShadow={true}
-          />
-          <GetInstantQuoteButton
-            variant="custom"
-            text="Book a Call"
-            href="/book-call"
-            bgColor="var(--primary)"
-            textColor="white"
-            className="px-8 py-3.5 text-base font-medium rounded-full"
-            hasShadow={false}
-          />
-        </FadeInUp>
+        {/* 3-Column Glass Grid - Monochromatic Blue Theme */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            
+            {/* Card 1: What We Handle */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative group h-full"
+            >
+                <div className="h-full bg-white/70 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2 transition-all duration-500">
+                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-[#3b49e6] mb-6 group-hover:scale-110 transition-transform duration-500 border border-blue-100">
+                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-[#1a1c35] mb-4 group-hover:text-[#3b49e6] transition-colors">What We Handle</h3>
+                    <ul className="space-y-4">
+                        {[
+                            "Company incorporation & registration",
+                            "Statutory setup & compliance",
+                            "Bank account assistance",
+                            "Corporate services & filings"
+                        ].map((item, i) => (
+                            <li key={i} className="flex gap-3 text-gray-600 text-sm font-medium">
+                                <span className="w-5 h-5 rounded-full bg-blue-100 text-[#3b49e6] flex items-center justify-center shrink-0 text-xs font-bold">✓</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </motion.div>
+
+            {/* Card 2: What You Do */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="relative group h-full"
+            >
+                <div className="h-full bg-white/70 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2 transition-all duration-500">
+                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-[#3b49e6] mb-6 group-hover:scale-110 transition-transform duration-500 border border-blue-100">
+                        {/* Switched to User Icon for 'You Do' */}
+                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-[#1a1c35] mb-4 group-hover:text-[#3b49e6] transition-colors">What You Do</h3>
+                    <ul className="space-y-4">
+                         {[
+                            "Complete KYC (Guided Steps)",
+                            "Upload required documents",
+                            "Approve key details",
+                            "Sign digitally"
+                        ].map((item, i) => (
+                            <li key={i} className="flex gap-3 text-gray-600 text-sm font-medium">
+                                <span className="w-5 h-5 rounded-full bg-white border border-blue-200 text-[#3b49e6] flex items-center justify-center shrink-0 text-xs font-bold">➜</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </motion.div>
+
+            {/* Card 3: What You Get */}
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="relative group h-full"
+            >
+                {/* Dark Blue Gradient Card */}
+                <div className="h-full bg-gradient-to-br from-[#111235] to-[#1e2040] text-white p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(17,18,53,0.3)] hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
+                    {/* Glow Effect */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#3b49e6]/30 blur-[50px] rounded-full" />
+                    
+                    <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-white/10">
+                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-4 relative z-10">What You Get</h3>
+                    <ul className="space-y-4 relative z-10">
+                        {[
+                            "Fully registered company",
+                            "Compliance calendar setup",
+                            "Unified portal access",
+                            "24/7 Support team"
+                        ].map((item, i) => (
+                            <li key={i} className="flex gap-3 text-white/90 text-sm font-medium">
+                                <span className="w-5 h-5 rounded-full bg-[#3b49e6] text-white flex items-center justify-center shrink-0 text-xs">★</span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </motion.div>
+
+        </div>
+
+        {/* CTA */}
+        <div className="flex justify-center gap-4">
+            <Link 
+                href="/company-setup"
+                className="px-8 py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 transition-all"
+            >
+                Start Incorporation
+            </Link>
+            <Link 
+                href="/contact"
+                className="px-8 py-4 rounded-xl bg-white border border-gray-200 text-gray-700 font-bold text-base hover:bg-gray-50 transition-all hover:border-gray-300"
+            >
+                Book a Consultation
+            </Link>
+        </div>
+
       </div>
     </section>
   )
 }
 
 export default CompanySetupSection
-

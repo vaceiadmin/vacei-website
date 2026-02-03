@@ -34,28 +34,32 @@ interface FeatureSectionProps {
 }
 
 const FeatureSection = ({ features, className = '', useGridLayout = false }: FeatureSectionProps) => {
-    const getOverlayPosition = (position: string) => {
+    const getOverlayPosition = (position: string, index: number) => {
         const positions: Record<string, string> = {
-            // Slightly offset positions to create a more dynamic, layered look
-            'top-left': 'top-4 left-2 lg:top-6 lg:left-6',
-            'top-right': 'top-4 right-0 lg:top-6 lg:right-4',
-            'bottom-left': 'bottom-0 left-0 lg:bottom-4 lg:left-4',
-            'bottom-right': 'bottom-1 right-1 lg:bottom-4 lg:right-8',
-            'center-left': 'top-1/2 -translate-y-1/2 -left-2 lg:-left-4',
-            'center-right': 'top-1/2 -translate-y-1/2 -right-2 lg:-right-4',
+            // Overlapping card positions with better spacing for natural overlap
+            'top-left': 'top-4 left-2 lg:top-6 lg:left-4',
+            'top-right': 'top-2 right-2 lg:top-4 lg:right-4',
+            'bottom-left': 'bottom-4 left-4 lg:bottom-6 lg:left-6',
+            'bottom-right': 'bottom-2 right-4 lg:bottom-4 lg:right-6',
+            'center-left': 'top-1/2 -translate-y-1/2 left-2 lg:left-4',
+            'center-right': 'top-1/2 -translate-y-1/2 right-2 lg:right-4',
         }
         return positions[position] || positions['top-right']
     }
 
     const getOverlaySize = (size: string = 'medium') => {
         const sizes: Record<string, string> = {
-            // Make size differences much more pronounced so each overlay feels unique
-            // and better matches the provided reference tiles.
-            'small': 'w-[28%] h-[22%] lg:w-[30%] lg:h-[24%]',
-            'medium': 'w-[46%] h-[32%] lg:w-[50%] lg:h-[34%]',
-            'large': 'w-[68%] h-[44%] lg:w-[70%] lg:h-[46%]',
+            // Sizes for overlapping cards - larger sizes for better visibility
+            'small': 'w-[40%] h-[32%] lg:w-[42%] lg:h-[34%]',
+            'medium': 'w-[50%] h-[42%] lg:w-[52%] lg:h-[44%]',
+            'large': 'w-[60%] h-[55%] lg:w-[62%] lg:h-[57%]',
         }
         return sizes[size] || sizes['medium']
+    }
+
+    const getZIndex = (index: number, total: number) => {
+        // Later images should be on top (higher z-index)
+        return 20 + (total - index)
     }
 
     // Auto-detect grid layout for 4 features (2x2 grid)
@@ -86,7 +90,7 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className={`flex-1 w-full min-w-0 ${getImageOrder()}`}
+                    className={`flex-1 w-full min-w-0 overflow-visible ${getImageOrder()}`}
                 >
                     {feature.useImageBackground && feature.backgroundImage ? (
                         // Use image as background - fixed height
@@ -101,101 +105,101 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                                     priority={index === 0}
                                 />
                             </div>
-                            {/* Overlay Images */}
+                            {/* Overlay Images - Image only, no backgrounds */}
                             <StaggerContainer staggerDelay={0.2}>
                                 {feature.overlayImages &&
-                                    feature.overlayImages.map((overlay, overlayIndex) => (
-                                        <motion.div
-                                            key={overlayIndex}
-                                            variants={{
-                                                hidden: { opacity: 0, scale: 0.8, y: 20 },
-                                                visible: { 
-                                                    opacity: 1, 
-                                                    scale: 1, 
-                                                    y: 0,
-                                                    transition: { duration: 0.8, ease: "easeOut" }
-                                                }
-                                            }}
-                                            animate={{
-                                                y: [0, -10, 0],
-                                            }}
-                                            transition={{
-                                                y: {
-                                                    duration: 3 + overlayIndex,
-                                                    repeat: Infinity,
-                                                    ease: "easeInOut",
-                                                    delay: 0.8
-                                                }
-                                            }}
-                                            className={`absolute ${getOverlayPosition(overlay.position)} ${getOverlaySize(
-                                                overlay.size
-                                            )} z-20 overflow-hidden`}
-                                        >
-                                            <Image
-                                                src={overlay.src}
-                                                alt={overlay.alt}
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </motion.div>
-                                    ))}
+                                    feature.overlayImages.map((overlay, overlayIndex) => {
+                                        const totalImages = feature.overlayImages?.length || 0
+                                        return (
+                                            <motion.div
+                                                key={overlayIndex}
+                                                variants={{
+                                                    hidden: { opacity: 0, scale: 0.8, y: 20 },
+                                                    visible: { 
+                                                        opacity: 1, 
+                                                        scale: 1, 
+                                                        y: 0,
+                                                        transition: { duration: 0.8, ease: "easeOut" }
+                                                    }
+                                                }}
+                                                animate={{
+                                                    y: [0, -10, 0],
+                                                }}
+                                                transition={{
+                                                    y: {
+                                                        duration: 3 + overlayIndex,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut",
+                                                        delay: 0.8
+                                                    }
+                                                }}
+                                                className={`absolute ${getOverlayPosition(overlay.position, overlayIndex)} ${getOverlaySize(
+                                                    overlay.size
+                                                )} overflow-visible`}
+                                                style={{ zIndex: getZIndex(overlayIndex, totalImages) }}
+                                            >
+                                                {/* Image only - no background, no border */}
+                                                <div className="relative w-full h-full">
+                                                    <Image
+                                                        src={overlay.src}
+                                                        alt={overlay.alt}
+                                                        fill
+                                                        className="object-contain drop-shadow-2xl"
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        )
+                                    })}
                             </StaggerContainer>
                         </div>
                     ) : (
-                        // Use image without background container - fixed height
-                        <div className="relative w-full h-[450px] overflow-hidden rounded-[2.5rem] bg-card transition-all duration-700 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
-                            {/* Main Image */}
-                            {feature.mainImage && (
-                                <div className="absolute inset-0 w-full h-full [&>img]:object-contain! [&>img]:w-full! [&>img]:h-full! transition-transform duration-1000 group-hover:scale-105">
-                                    <Image
-                                        src={feature.mainImage}
-                                        alt={feature.title}
-                                        fill
-                                        className="object-contain!"
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                        priority={index === 0}
-                                    />
-                                </div>
-                            )}
-
-                            {/* Overlay Images */}
+                        // Dark blue background card with overlay images only
+                        <div className="relative w-full h-[450px] overflow-visible rounded-[2.5rem] bg-card transition-all duration-700 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
+                            {/* All images as overlays - no main image */}
                             <StaggerContainer staggerDelay={0.2}>
                                 {feature.overlayImages &&
-                                    feature.overlayImages.map((overlay, overlayIndex) => (
-                                        <motion.div
-                                            key={overlayIndex}
-                                            variants={{
-                                                hidden: { opacity: 0, scale: 0.8, y: 20 },
-                                                visible: { 
-                                                    opacity: 1, 
-                                                    scale: 1, 
-                                                    y: 0,
-                                                    transition: { duration: 0.8, ease: "easeOut" }
-                                                }
-                                            }}
-                                            animate={{
-                                                y: [0, -15, 0], // Gentle float
-                                            }}
-                                            transition={{
-                                                y: {
-                                                    duration: 4 + overlayIndex,
-                                                    repeat: Infinity,
-                                                    ease: "easeInOut",
-                                                    delay: 0.8
-                                                }
-                                            }}
-                                            className={`absolute ${getOverlayPosition(overlay.position)} ${getOverlaySize(
-                                                overlay.size
-                                            )} z-20 rounded-3xl bg-white/95 border border-white/60 shadow-xl shadow-slate-900/20 backdrop-blur-sm overflow-hidden`}
-                                        >
-                                            <Image
-                                                src={overlay.src}
-                                                alt={overlay.alt}
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </motion.div>
-                                    ))}
+                                    feature.overlayImages.map((overlay, overlayIndex) => {
+                                        const totalImages = feature.overlayImages?.length || 0
+                                        return (
+                                            <motion.div
+                                                key={overlayIndex}
+                                                variants={{
+                                                    hidden: { opacity: 0, scale: 0.8, y: 20 },
+                                                    visible: { 
+                                                        opacity: 1, 
+                                                        scale: 1, 
+                                                        y: 0,
+                                                        transition: { duration: 0.8, ease: "easeOut" }
+                                                    }
+                                                }}
+                                                animate={{
+                                                    y: [0, -15, 0], // Gentle float
+                                                }}
+                                                transition={{
+                                                    y: {
+                                                        duration: 4 + overlayIndex,
+                                                        repeat: Infinity,
+                                                        ease: "easeInOut",
+                                                        delay: 0.8
+                                                    }
+                                                }}
+                                                className={`absolute ${getOverlayPosition(overlay.position, overlayIndex)} ${getOverlaySize(
+                                                    overlay.size
+                                                )} overflow-visible`}
+                                                style={{ zIndex: getZIndex(overlayIndex, totalImages) }}
+                                            >
+                                                {/* Image only - no background, no border, no shadow */}
+                                                <div className="relative w-full h-full">
+                                                    <Image
+                                                        src={overlay.src}
+                                                        alt={overlay.alt}
+                                                        fill
+                                                        className="object-contain drop-shadow-2xl"
+                                                    />
+                                                </div>
+                                            </motion.div>
+                                        )
+                                    })}
                             </StaggerContainer>
                         </div>
                     )}

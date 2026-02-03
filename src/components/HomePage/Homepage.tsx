@@ -32,11 +32,11 @@ const ParallaxSection = ({
     offset: ["start end", "end start"]
   });
 
-  // Smooth spring animation for better performance
+  // Smooth spring animation for better performance - Tuned for responsiveness
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    mass: 0.5
+    stiffness: 250,
+    damping: 25,
+    mass: 0.2
   });
 
   const directionMultiplier = direction === "up" ? -1 : 1;
@@ -48,28 +48,28 @@ const ParallaxSection = ({
     high: 1.5
   }[intensity];
 
-  // Multiple parallax layers with different speeds
-  const y = useTransform(smoothProgress, [0, 1], [0, directionMultiplier * 150 * speed * intensityMultiplier]);
-  const yFast = useTransform(smoothProgress, [0, 1], [0, directionMultiplier * 200 * speed * intensityMultiplier]);
-  const ySlow = useTransform(smoothProgress, [0, 1], [0, directionMultiplier * 80 * speed * intensityMultiplier]);
+  // Multiple parallax layers with different speeds - Reduced ranges for performance
+  const y = useTransform(smoothProgress, [0, 1], [0, directionMultiplier * 100 * speed * intensityMultiplier]);
+  const yFast = useTransform(smoothProgress, [0, 1], [0, directionMultiplier * 140 * speed * intensityMultiplier]);
+  const ySlow = useTransform(smoothProgress, [0, 1], [0, directionMultiplier * 50 * speed * intensityMultiplier]);
   
   // Enhanced opacity with smoother transitions
-  const opacity = useTransform(smoothProgress, [0, 0.1, 0.3, 0.7, 0.9, 1], [0.3, 0.8, 1, 1, 0.8, 0.3]);
+  // const opacity = useTransform(smoothProgress, [0, 0.1, 0.3, 0.7, 0.9, 1], [0.3, 0.8, 1, 1, 0.8, 0.3]);
   
-  // Scale effect with more range
-  const scale = useTransform(smoothProgress, [0, 0.2, 0.5, 0.8, 1], [0.94, 0.98, 1, 0.98, 0.94]);
+  // Scale effect with more range - Subtle breathing
+  const scale = useTransform(smoothProgress, [0, 0.2, 0.5, 0.8, 1], [0.98, 0.99, 1, 0.99, 0.98]);
   
-  // Rotation for extra depth (subtle 3D effect)
-  const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [1, 0, -1]);
-  const rotateY = useTransform(smoothProgress, [0, 0.5, 1], [-0.5, 0, 0.5]);
-  const innerScale = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.01, 1]);
+  // Rotation for extra depth (subtle 3D effect) - Reduced angles
+  const rotateX = useTransform(smoothProgress, [0, 0.5, 1], [0.5, 0, -0.5]);
+  const rotateY = useTransform(smoothProgress, [0, 0.5, 1], [-0.25, 0, 0.25]);
+  const innerScale = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.005, 1]);
 
   return (
     <motion.div
       ref={ref}
       style={{ 
         y,
-        opacity, 
+        // opacity, 
         scale,
         rotateX,
         rotateY,
@@ -108,12 +108,12 @@ const ParallaxBackground = ({
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, -50 * speed]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.2, 0.5, 0.5, 0.2]);
+  // const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.2, 0.5, 0.5, 0.2]);
 
   return (
     <motion.div
       ref={ref}
-      style={{ y, opacity }}
+      style={{ y }}
       className={`absolute inset-0 pointer-events-none ${className}`}
     >
       {children}

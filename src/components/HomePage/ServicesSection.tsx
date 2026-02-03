@@ -1,419 +1,239 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import GradientContainer from "../common/GradientContainer";
-import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
-import GlassyEffect from "../common/GlassyEffect";
 
 interface BaseCard {
   id: number;
   title: string;
-  subtitle?: string;
+  subtitle: string;
   image: string;
-  hoverImage?: string;
   link: string;
-}
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: { 
-      duration: 0.8, 
-      ease: [0.16, 1, 0.3, 1],
-    } as any
-  }
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
+  category: string;
+  badge?: string;
+  hoverImage?: string;
 }
 
 const ServicesSection = () => {
-  const [activeTab, setActiveTab] = useState<
-    "services" | "experts" | "products"
-  >("services");
+  const [activeTab, setActiveTab] = useState<"services" | "experts" | "products">("services");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleItems, setVisibleItems] = useState(4);
+  const [visibleItems, setVisibleItems] = useState(3);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setVisibleItems(1);
-      } else if (window.innerWidth < 1280) {
-        setVisibleItems(2);
-      } else {
-        setVisibleItems(4);
-      }
+      if (window.innerWidth < 768) setVisibleItems(1);
+      else if (window.innerWidth < 1280) setVisibleItems(2);
+      else setVisibleItems(3);
     };
 
-    // Initial call
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [activeTab]);
+  }, []);
 
+  // --- Data ---
   const services: BaseCard[] = [
-    {
-      id: 1,
-      title: "Corporate & CSP Services",
-      image: "/assets/images/placeholder.png",
-      link: "/services/corporate-csp-services",
-    },
-    {
-      id: 2,
-      title: "Accounting & Finance",
-      image: "/assets/images/placeholder.png",
-      link: "/services/accounting-finance",
-    },
-    {
-      id: 3,
-      title: "Tax & Compliance",
-      image: "/assets/images/placeholder.png",
-      link: "/services/tax-compliance",
-    },
-    {
-      id: 4,
-      title: "Audit & Assurance",
-      image: "/assets/images/placeholder.png",
-      link: "/services/audit-assurance",
-    },
+    { id: 1, title: "Corporate & CSP", subtitle: "Structuring & company services.", image: "/assets/images/placeholder.png", link: "/services/corporate-csp-services", category: "Service", badge: "Core" },
+    { id: 2, title: "Accounting & Finance", subtitle: "Financial management experts.", image: "/assets/images/placeholder.png", link: "/services/accounting-finance", category: "Service" },
+    { id: 3, title: "Tax & Compliance", subtitle: "Staying compliant made easy.", image: "/assets/images/placeholder.png", link: "/services/tax-compliance", category: "Service", badge: "Critical" },
+    { id: 4, title: "Audit & Assurance", subtitle: "Rigorous audit services.", image: "/assets/images/placeholder.png", link: "/services/audit-assurance", category: "Service" },
   ];
 
   const experts: BaseCard[] = [
-    {
-      id: 1,
-      title: "Accountants",
-      image: "/assets/images/pngegg (2) 1.png",
-      link: "/services/accounting-finance",
-    },
-    {
-      id: 2,
-      title: "Bookkeepers",
-      image: "/assets/images/pngegg (3) 1.png",
-      link: "/services/accounting-finance",
-    },
-    {
-      id: 3,
-      title: "Tax specialists",
-      image: "/assets/images/pngegg (1) 1.png",
-      link: "/services/tax-compliance",
-    },
-    {
-      id: 4,
-      title: "Audit team",
-      image: "/assets/images/pngegg (4) 1.png",
-      link: "/services/audit-assurance",
-    },
+    { id: 1, title: "Senior CPAs", subtitle: "Chartered accountants.", image: "/assets/images/pngegg (2) 1.png", link: "/team", category: "Experts", badge: "Elite" },
+    { id: 2, title: "Bookkeepers", subtitle: "Day-to-day accuracy.", image: "/assets/images/pngegg (3) 1.png", link: "/team", category: "Experts" },
+    { id: 3, title: "Tax Advisors", subtitle: "Strategic tax planning.", image: "/assets/images/pngegg (1) 1.png", link: "/team", category: "Experts" },
+    { id: 4, title: "Audit Leads", subtitle: "Compliance assurance.", image: "/assets/images/pngegg (4) 1.png", link: "/team", category: "Experts" },
   ];
 
   const products: BaseCard[] = [
-    {
-      id: 1,
-      title: "VACEI Accounting Portal",
-      subtitle: "Your entire business, in one place.",
-      image: "/assets/images/Cube 1.png",
-      hoverImage: "/assets/images/Accounting.jpg",
-      link: "/portal/accounting-portal",
-    },
-    {
-      id: 2,
-      title: "VACEI Client Portal",
-      subtitle: "Your entire business, in one place.",
-      image: "/assets/images/Pyramid 2.png",
-      hoverImage: "/assets/images/Frame 1618872451.png",
-      link: "/portal/client-portal",
-    },
-    {
-      id: 3,
-      title: "VACEI Audit Portal",
-      subtitle: "Your entire business, in one place.",
-      image: "/assets/images/Thorus Knot.png",
-      hoverImage: "/assets/images/Audit.jpg",
-      link: "/portal/audit-portal",
-    },
+    { id: 1, title: "Bookkeeping Portal", subtitle: "Real-time financial dashboard.", image: "/assets/images/Cube 1.png", hoverImage: "/assets/images/Accounting.jpg", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
+    { id: 2, title: "Client Portal", subtitle: "Documents & communication.", image: "/assets/images/Pyramid 2.png", hoverImage: "/assets/images/Frame 1618872451.png", link: "/portal/client-portal", category: "Platform", badge: "Featured" },
+    { id: 3, title: "Audit Portal", subtitle: "Streamlined audit workflows.", image: "/assets/images/Thorus Knot.png", hoverImage: "/assets/images/Audit.jpg", link: "/portal/audit-portal", category: "Platform" },
   ];
 
   const getActiveData = () => {
     switch (activeTab) {
-      case "experts":
-        return experts;
-      case "products":
-        return products;
-      case "services":
-      default:
-        return services;
+      case "experts": return experts;
+      case "products": return products;
+      case "services": default: return services;
     }
   };
 
   const activeData = getActiveData();
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % activeData.length);
-  };
+  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % activeData.length);
+  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + activeData.length) % activeData.length);
 
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + activeData.length) % activeData.length,
-    );
-  };
-
-  const displayServices = [];
+  const displayItems = [];
   if (activeData.length <= visibleItems) {
-    displayServices.push(...activeData);
+    displayItems.push(...activeData);
   } else {
     for (let i = 0; i < visibleItems; i++) {
-      const index = (currentIndex + i) % activeData.length;
-      displayServices.push(activeData[index]);
+        displayItems.push(activeData[(currentIndex + i) % activeData.length]);
     }
   }
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20 overflow-hidden">
-      <div className="mx-auto px-4 md:px-6 lg:px-8">
-        <GradientContainer
-          className="py-8 sm:py-12 lg:py-16 relative"
-          backgroundColor="bg-gradient-container"
+    <section className="w-full">
+        <GradientContainer 
+            backgroundColor="bg-[#111235]" 
+            showRadials={true} 
+            className="py-20 lg:py-28 overflow-hidden"
         >
-          {/* Animated Background Blobs */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            <motion.div 
-              animate={{ 
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-                scale: [1, 1.2, 1]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary-blue/10 blur-[100px] lg:blur-[120px] rounded-full"
-            />
-            <motion.div 
-              animate={{ 
-                x: [0, -40, 0],
-                y: [0, -20, 0],
-                scale: [1.1, 1, 1.1]
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-[10%] -right-[10%] w-[45%] h-[45%] bg-purple-500/10 blur-[100px] lg:blur-[130px] rounded-full"
-            />
-          </div>
-          {/* Navigation Tabs */}
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="flex justify-center mb-8 sm:mb-12 relative z-20"
-          >
-            <div className="inline-flex bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1.5 gap-2">
-              {(["services", "experts", "products"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => {
-                    setActiveTab(tab);
-                    setCurrentIndex(0);
-                  }}
-                  className={`px-4 sm:px-8 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
-                    activeTab === tab
-                      ? "bg-tab-active text-white shadow-lg shadow-blue-500/25"
-                      : "text-gray-400 hover:text-white hover:bg-white/5"
-                  }`}
-                >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Cards Carousel */}
-          <div className="relative">
-            <motion.div
-              key={activeTab} // Remount animation on tab change
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-              className={`flex justify-center gap-6 lg:gap-8 mb-8 relative z-10 min-h-[500px]`}
-            >
-              {displayServices.map((item) =>
-                activeTab === "products" ? (
-                  // Product Card Design
-                  <motion.div 
-                    key={item.id} 
-                    variants={fadeInUp} 
-                    className="shrink-0 w-full max-w-[320px] lg:max-w-[400px]"
-                  >
-                    <div
-                      className="group relative w-full h-[500px] bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-primary-blue hover:shadow-[0_0_30px_rgba(59,73,230,0.4)] cursor-pointer"
-                    >
-                      {/* Top Content (Always Visible) */}
-                      <div className="absolute top-0 left-0 right-0 p-8 text-center z-30">
-                        <h3 className="text-xl font-bold text-white mb-2 transition-colors duration-300">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-white/70 font-medium mb-6">
-                          {item.subtitle}
-                        </p>
-                        <div className="flex justify-center">
-                          <GetInstantQuoteButton
-                            variant="custom"
-                            text="Get Instant Quote"
-                            href={item.link}
-                            bgColor="var(--button-indigo)"
-                            textColor="white"
-                            className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2 group-hover:bg-primary-blue transition-colors duration-300"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Default View (3D Logo in Center) */}
-                      <div className="absolute inset-x-0 bottom-0 top-[40%] flex items-center justify-center p-8 transition-all duration-500 opacity-100 scale-100 group-hover:opacity-0 group-hover:scale-90 z-10">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                {/* Header Area */}
+                <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+                    <div className="space-y-4">
                         <motion.div 
-                          animate={{ 
-                            y: [0, -12, 0],
-                            rotateZ: [-1, 1, -1]
-                          }}
-                          transition={{
-                            duration: 4 + (item.id % 3),
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                          className="relative w-48 h-48"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-bold tracking-widest text-[#989fea] uppercase"
                         >
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            className="object-contain drop-shadow-2xl"
-                            priority
-                          />
+                            Our Ecosystem
                         </motion.div>
-                      </div>
-
-                      {/* Hover View (Portal Image at Bottom) */}
-                      <div className="absolute inset-x-2 bottom-2 top-[35%] opacity-0 translate-y-8 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 z-20">
-                        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl bg-white/10 border border-white/20">
-                          {item.hoverImage && (
-                            <Image
-                              src={item.hoverImage}
-                              alt={`${item.title} Portal`}
-                              fill
-                              className="object-cover object-top"
-                            />
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  // Expert & Service Card Design
-                  <motion.div 
-                    key={item.id} 
-                    variants={fadeInUp} 
-                    className="shrink-0 w-full max-w-[300px]"
-                  >
-                  <div
-                    className="group relative w-full h-[500px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-                  >
-                    {/* Image Area */}
-                    <div
-                      className={`relative w-full h-[60%] overflow-hidden ${activeTab === "experts" ? "bg-card-hover-overlay" : "bg-gray-100"}`}
-                    >
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className={`object-contain p-4 transition-transform duration-500 group-hover:scale-105 ${activeTab === "experts" ? "object-bottom pb-0" : "object-center"}`}
-                      />
-                    </div>
-
-                    {/* Content Area */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-white h-[40%] p-6 flex flex-col justify-between border-t border-gray-100">
-                      <div>
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">
-                          {item.title}
-                        </h3>
-                        <div className="w-12 h-1 bg-tab-active rounded mb-3"></div>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-tab-active font-semibold text-sm group-hover:text-tab-active-hover cursor-pointer transition-colors">
-                        <span>Request Service</span>
-                        <svg
-                          className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                        <motion.h2 
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="text-3xl md:text-5xl font-bold text-white leading-tight"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
-                      </div>
+                            Everything You Need <br />
+                            <span className="text-white/40">In One Place.</span>
+                        </motion.h2>
                     </div>
-                  </div>
-                  </motion.div>
-                ),
-              )}
-            </motion.div>
 
-            {/* Pagination Controls */}
-            {activeData.length > visibleItems && (
-              <div className="flex justify-center items-center gap-3 mt-4">
-                <button
-                  onClick={prevSlide}
-                  className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all shadow-lg border border-white/10 backdrop-blur-sm"
-                  aria-label="Previous"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all shadow-lg border border-white/10 backdrop-blur-sm"
-                  aria-label="Next"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-            )}
-          </div>
+                    {/* Glass Tabs */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        className="flex p-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full"
+                    >
+                        {(["services", "experts", "products"] as const).map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => { setActiveTab(tab); setCurrentIndex(0); }}
+                                className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
+                                    activeTab === tab ? "text-white" : "text-white/50 hover:text-white"
+                                }`}
+                            >
+                                {activeTab === tab && (
+                                    <motion.div 
+                                        layoutId="activeTab"
+                                        className="absolute inset-0 bg-[#3b49e6] rounded-full shadow-lg shadow-blue-900/40"
+                                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                    />
+                                )}
+                                <span className="relative z-10 capitalize">{tab}</span>
+                            </button>
+                        ))}
+                    </motion.div>
+                </div>
+
+                {/* Carousel Area */}
+                <div className="relative min-h-[500px]">
+                    <div className="flex gap-8 justify-center">
+                        <AnimatePresence mode="popLayout">
+                            {displayItems.map((item, idx) => (
+                                <motion.div
+                                    key={`${item.id}-${activeTab}-${idx}`}
+                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="w-full max-w-[380px] flex-shrink-0"
+                                >
+                                    <div className="group relative h-[480px] w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)] transition-all duration-500">
+                                        
+                                        {/* Image Container (Top Half) */}
+                                        <div className="h-[55%] relative w-full p-8 flex items-center justify-center overflow-hidden">
+                                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                            
+                                            {/* Background Glow */}
+                                            <div className="absolute inset-0 bg-primary-blue/20 blur-[60px] rounded-full scale-0 group-hover:scale-100 transition-transform duration-700 opacity-50" />
+
+                                            {/* Main Image */}
+                                            <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+                                                <Image
+                                                    src={item.image}
+                                                    alt={item.title}
+                                                    fill
+                                                    className={`object-contain ${activeTab === "products" ? "drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]" : "opacity-90 grayscale-[20%] group-hover:grayscale-0"}`}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Content Container (Bottom Half) */}
+                                        <div className="h-[45%] p-8 flex flex-col justify-between relative bg-gradient-to-t from-[#111235] via-[#111235]/80 to-transparent">
+                                            <div>
+                                                {item.badge && (
+                                                    <span className="inline-block px-2 py-0.5 mb-2 rounded text-[10px] font-bold uppercase bg-primary-blue/20 border border-primary-blue/30 text-blue-200">
+                                                        {item.badge}
+                                                    </span>
+                                                )}
+                                                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#989fea] transition-colors">
+                                                    {item.title}
+                                                </h3>
+                                                <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
+                                                    {item.subtitle}
+                                                </p>
+                                            </div>
+
+                                            <Link 
+                                                href={item.link}
+                                                className="flex items-center gap-2 text-sm font-bold text-white group-hover:gap-4 transition-all mt-4"
+                                            >
+                                                Explore
+                                                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary-blue transition-colors">
+                                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7m7-7H3" /></svg>
+                                                </div>
+                                            </Link>
+                                        </div>
+
+                                        {/* Hover Reveal for Products */}
+                                        {activeTab === "products" && item.hoverImage && (
+                                            <div className="absolute inset-0 bg-[#111235] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-col">
+                                                <div className="relative w-full h-full">
+                                                    <Image src={item.hoverImage} alt={item.title} fill className="object-contain opacity-60" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#111235] via-transparent to-transparent" />
+                                                    
+                                                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                                                        <h3 className="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">{item.title}</h3>
+                                                        <p className="text-white/70 text-sm mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-150">{item.subtitle}</p>
+                                                        <Link 
+                                                            href={item.link}
+                                                            className="w-full py-3.5 rounded-xl bg-primary-blue text-white font-bold text-center hover:bg-blue-600 transition-colors shadow-lg translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200"
+                                                        >
+                                                            Launch Portal
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </div>
+                </div>
+
+                {/* Navigation Buttons - Floating */}
+                <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-20">
+                    <button onClick={prevSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                </div>
+                <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-20">
+                    <button onClick={nextSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+
+            </div>
         </GradientContainer>
-      </div>
     </section>
   );
 };

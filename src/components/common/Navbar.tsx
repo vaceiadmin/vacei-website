@@ -18,6 +18,7 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [hamburgerHover, setHamburgerHover] = useState(false);
+  const [isDarkBackground, setIsDarkBackground] = useState(false); // Default to light background
 
   // Check if mobile screen
   const [isMobile, setIsMobile] = useState(false);
@@ -70,6 +71,123 @@ const Navbar = () => {
       document.body.style.overflow = "unset";
     };
   }, [mobileMenuOpen]);
+
+  // Detect dark/light background behind navbar on scroll
+  useEffect(() => {
+    const checkBackground = (element: HTMLElement | null): boolean => {
+      if (!element || element === document.body) return false;
+      
+      const bgColor = window.getComputedStyle(element).backgroundColor;
+      const bgClass = element.className || '';
+      
+      // Check for dark background classes first
+      const isDarkClass = bgClass.includes('bg-hero') || 
+                         bgClass.includes('bg-[#111235]') ||
+                         bgClass.includes('bg-card') ||
+                         bgClass.includes('bg-gradient-container') ||
+                         bgClass.includes('bg-hero-dark') ||
+                         bgClass.includes('bg-[#1e2040]') ||
+                         bgClass.includes('bg-[#2a2d55]') ||
+                         bgClass.includes('bg-[#1e1e2f]');
+      
+      if (isDarkClass) return true;
+      
+      // Check for light background classes
+      const isLightClass = bgClass.includes('bg-background') ||
+                          bgClass.includes('bg-white') ||
+                          bgClass.includes('bg-section-light') ||
+                          bgClass.includes('bg-[#ecf0f0]') ||
+                          bgClass.includes('bg-[#d8e5e5]');
+      
+      if (isLightClass) return false;
+      
+      // Check background color luminance
+      const rgbMatch = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (rgbMatch && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+        const r = parseInt(rgbMatch[1]);
+        const g = parseInt(rgbMatch[2]);
+        const b = parseInt(rgbMatch[3]);
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        
+        if (luminance < 0.5) return true; // Dark
+        if (luminance > 0.7) return false; // Light
+      }
+      
+      // Recursively check parent
+      return checkBackground(element.parentElement);
+    };
+
+    const handleScroll = () => {
+      const navbar = document.querySelector('nav');
+      if (!navbar) {
+        setIsDarkBackground(false);
+        return;
+      }
+
+      const navbarRect = navbar.getBoundingClientRect();
+      const checkY = navbarRect.bottom + 20; // Check further below navbar
+      
+      // Check multiple points for better accuracy
+      const checkPoints = [
+        window.innerWidth / 2, // Center
+        window.innerWidth * 0.25, // Left quarter
+        window.innerWidth * 0.75, // Right quarter
+      ];
+      
+      let darkCount = 0;
+      let lightCount = 0;
+      
+      for (const checkX of checkPoints) {
+        const elementBelow = document.elementFromPoint(checkX, checkY);
+        
+        if (!elementBelow) {
+          lightCount++;
+          continue;
+        }
+        
+        // Skip navbar elements
+        if ((elementBelow as HTMLElement).closest('nav')) {
+          continue;
+        }
+        
+        const isDark = checkBackground(elementBelow as HTMLElement);
+        if (isDark) {
+          darkCount++;
+        } else {
+          lightCount++;
+        }
+      }
+      
+      // Use majority vote, default to light if uncertain
+      setIsDarkBackground(darkCount > lightCount);
+    };
+
+    // Throttle scroll events for performance
+    let ticking = false;
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Initial check with delay to ensure DOM is ready
+    const initialCheck = setTimeout(() => {
+      handleScroll();
+    }, 150);
+    
+    window.addEventListener('scroll', throttledHandleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(initialCheck);
+      window.removeEventListener('scroll', throttledHandleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
 
   // Desktop nav links – switch labels/structure in compact mode.
   const navLinks = useCompactNav
@@ -168,7 +286,7 @@ const Navbar = () => {
         {/* Navbar Container – full width, rounded corners, responsive horizontal padding */}
         <motion.div 
           initial={false}
-          className="w-full rounded-2xl bg-white/70 backdrop-blur-sm shadow-sm px-4 sm:px-6 lg:px-8 transition-all bg-clip-padding supports-backdrop-filter:bg-white/10"
+          className={`w-full rounded-2xl ${isDarkBackground ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-white/70 backdrop-blur-sm"} shadow-sm px-4 sm:px-6 lg:px-8 transition-all duration-300 bg-clip-padding supports-backdrop-filter:${isDarkBackground ? "bg-white/5" : "bg-white/10"}`}
         >
           <div className="flex items-center justify-between min-h-[72px] py-3 lg:min-h-[80px] lg:py-4">
             {/* Logo */}
@@ -199,7 +317,7 @@ const Navbar = () => {
                 >
                   <Link
                     href={link.href}
-                    className={`text-text-dark font-normal text-[15px] hover:text-primary-blue transition-colors flex items-center gap-1 ${link.isOpen ? "text-primary-blue" : ""}`}
+                    className={`${isDarkBackground ? "text-white" : "text-text-dark"} font-normal text-[15px] ${isDarkBackground ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (isDarkBackground ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
                     onClick={(e) => {
                       if (link.hasDropdown) {
                         e.preventDefault();
@@ -301,7 +419,7 @@ const Navbar = () => {
                 {/* Try The Client Portal Button */}
                 <Link
                   href="/portal/client-portal"
-                  className="flex items-center justify-center gap-2 rounded-full border border-primary-blue text-text-dark font-normal text-[15px] hover:bg-white/40 transition-all px-6 h-[44px] backdrop-blur-sm"
+                  className={`flex items-center justify-center gap-2 rounded-full border ${isDarkBackground ? "border-white/40 text-white hover:bg-white/20" : "border-primary-blue text-text-dark hover:bg-white/40"} font-normal text-[15px] transition-all px-6 h-[44px] backdrop-blur-sm`}
                 >
                   <span>Try The Client Portal</span>
                   <svg
@@ -341,20 +459,20 @@ const Navbar = () => {
               >
                 <motion.div 
                   animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
-                  className="h-0.5 bg-text-dark w-6" 
+                  className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`} 
                 />
                 <motion.div 
                   animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
                   className="relative w-6 h-0.5"
                 >
                   <div
-                    className="absolute left-0 h-full bg-text-dark transition-all duration-300 ease-out"
+                    className={`absolute left-0 h-full ${isDarkBackground ? "bg-white" : "bg-text-dark"} transition-all duration-300 ease-out`}
                     style={{ width: !isMobile && hamburgerHover ? 24 : 16.8 }}
                   />
                 </motion.div>
                 <motion.div 
                   animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
-                  className="h-0.5 bg-text-dark w-6" 
+                  className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`} 
                 />
               </button>
             </div>
@@ -375,7 +493,7 @@ const Navbar = () => {
                     <div className="flex items-center justify-between py-3">
                       <Link
                         href={link.href}
-                        className="text-text-dark font-normal text-[17px] leading-6 hover:text-primary-blue transition-colors flex-1"
+                        className={`${isDarkBackground ? "text-white" : "text-text-dark"} font-normal text-[17px] leading-6 ${isDarkBackground ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex-1`}
                         onClick={(e) => {
                           if (link.hasDropdown) {
                             e.preventDefault();
@@ -390,7 +508,7 @@ const Navbar = () => {
                       {link.hasDropdown && (
                         <button
                           onClick={() => link.setIsOpen?.(!link.isOpen)}
-                          className="p-2 text-gray-500"
+                          className={`p-2 ${isDarkBackground ? "text-white/70" : "text-gray-500"}`}
                         >
                           <motion.svg
                             animate={{ rotate: link.isOpen ? 180 : 0 }}
