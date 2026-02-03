@@ -74,14 +74,34 @@ const Navbar = () => {
 
   // Detect dark/light background behind navbar on scroll
   useEffect(() => {
+    const getClassName = (element: HTMLElement): string => {
+      // Safely convert className to string (handles DOMTokenList, SVGAnimatedString, etc.)
+      if (typeof element.className === 'string') {
+        return element.className;
+      }
+      if (element.className && typeof element.className === 'object') {
+        const classNameObj = element.className as any;
+        // Handle DOMTokenList
+        if ('value' in classNameObj) {
+          return String(classNameObj.value);
+        }
+        // Handle SVGAnimatedString
+        if ('baseVal' in classNameObj) {
+          return String(classNameObj.baseVal);
+        }
+      }
+      // Fallback to getAttribute
+      return element.getAttribute('class') || '';
+    };
+
     const checkBackground = (element: HTMLElement | null): boolean => {
       if (!element || element === document.body) return false;
       
       const bgColor = window.getComputedStyle(element).backgroundColor;
-      const bgClass = element.className || '';
+      const bgClass = getClassName(element);
       
       // Check for dark background classes first
-      const isDarkClass = bgClass.includes('bg-hero') || 
+      const isDarkClass = bgClass.includes('bg-hero') ||
                          bgClass.includes('bg-[#111235]') ||
                          bgClass.includes('bg-card') ||
                          bgClass.includes('bg-gradient-container') ||
