@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import GradientContainer from "./GradientContainer";
-import { Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus, MessageCircle, Phone } from "lucide-react";
+import SectionBadge from "./SectionBadge";
 import TextAnimation from "./TextAnimation";
 
 interface FaqItem {
@@ -23,12 +24,8 @@ interface FaqAccordionProps {
 
 const FaqAccordion = ({
   faqItems,
-  logoImage = "/assets/images/Logo.png",
-  companyName = "VACEI",
   phoneNumber = "+356 77142418",
-  callToActionText = "Get Started Free Call?",
-  backgroundColor = "bg-primary",
-  showRadials = false,
+  callToActionText = "Need more help?",
 }: FaqAccordionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -37,136 +34,114 @@ const FaqAccordion = ({
   };
 
   return (
-    <section className="w-full py-20 overflow-hidden">
-      <div className="mx-auto">
-        <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row lg:items-center max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-          {/* Left: Logo Card */}
-          <div className="relative flex-1 flex items-center justify-center">
-            <div className="relative w-full max-w-[400px] h-[500px] rounded-2xl overflow-hidden bg-primary shadow-xl">
-              {/* Pattern Background - Logo image in grid */}
-              <div className="absolute inset-0 opacity-20">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `url(/assets/images/imgi_1_Logo-2.0 8.png)`,
-                    backgroundSize: "40px 40px",
-                    backgroundRepeat: "repeat",
-                    backgroundPosition: "0 0",
-                  }}
-                ></div>
-              </div>
+    <section className="relative py-20 lg:py-28 overflow-hidden ">
+       {/* Background Decor - Light Gradients (Consistent with Pricing) */}
+       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[80px]" />
+        <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[80px]" />
+      </div>
 
-              {/* Logo and Company Name */}
-              <div className="relative z-10 flex flex-col items-center justify-center h-full pb-40">
-                <div className="mb-6">
-                  <Image
-                    src={logoImage}
-                    alt={companyName}
-                    width={120}
-                    height={120}
-                    className="object-contain"
-                  />
-                </div>
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6 lg:px-8 z-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column: Title & Support Card */}
+          <div className="lg:w-1/3 lg:sticky lg:top-24">
+            <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.6 }}
+            >
+                <SectionBadge text="FAQ" className="bg-white/80 backdrop-blur-md border border-gray-200 text-heading shadow-sm" />
                 <TextAnimation
-                  text={companyName}
+                  text="Frequently Asked Questions"
                   as="h2"
-                  className="text-4xl md:text-5xl font-bold text-white uppercase tracking-wider"
+                  className="mt-4 text-3xl md:text-4xl font-medium text-heading leading-tight"
                 />
-              </div>
+                <p className="mt-4 text-gray text-base leading-relaxed mb-8">
+                  Everything you need to know about our services, pricing, and process.
+                </p>
 
-              {/* Get Started Call Card with Curve */}
-              <div className="absolute bottom-6 left-6 z-10 max-w-[280px]">
-                {/* Curve above the card */}
-                <div className="relative w-full h-6 -mb-1">
-                  <svg
-                    className="w-full h-full text-purple-bg"
-                    viewBox="0 0 280 24"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M0,24 Q140,0 280,24 L280,24 L0,24 Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
-
-                {/* Card */}
-                <div className="bg-purple-bg rounded-t-2xl rounded-b-xl p-6 text-white shadow-lg">
-                  <p className="text-lg font-bold leading-tight mb-4">
-                    {callToActionText}
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white border-2 border-white/30">
-                      <Phone className="h-5 w-5" />
+                {/* Glass Support Card */}
+                <div className="p-6 rounded-3xl bg-white/60 backdrop-blur-xl border border-white/60 shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-500">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary-blue/10 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+                    
+                    <div className="relative z-10">
+                        <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary-blue mb-4">
+                            <MessageCircle className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-lg font-bold text-heading mb-2">{callToActionText}</h3>
+                        <p className="text-sm text-gray mb-6">
+                            Can't find the answer you're looking for? Please chat to our friendly team.
+                        </p>
+                        <div className="flex flex-col gap-3">
+                            <button className="w-full py-3 rounded-xl bg-text-heading text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-md flex items-center justify-center gap-2">
+                                Get in Touch
+                            </button>
+                            <div className="flex items-center justify-center gap-2 text-sm text-heading font-medium">
+                                <Phone className="w-4 h-4 text-primary-blue" />
+                                <span>{phoneNumber}</span>
+                            </div>
+                        </div>
                     </div>
-                    <span className="text-base font-semibold">
-                      {phoneNumber}
-                    </span>
-                  </div>
                 </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right: FAQ accordion list */}
-          <div className="flex-1 lg:pl-6 w-full">
-            <div className="space-y-4 lg:space-y-5">
+          {/* Right Column: Accordion Items */}
+          <div className="lg:w-2/3 w-full">
+            <div className="space-y-4">
               {faqItems.map((item, index) => {
                 const isOpen = openIndex === index;
                 return (
-                  <div
+                  <motion.div
                     key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
                     onClick={() => toggleItem(index)}
-                    className={`overflow-hidden rounded-[18px] shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group ${
+                    className={`group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${
                       isOpen
-                        ? "bg-purple-bg text-white"
-                        : "bg-white text-heading"
+                        ? "bg-white border-primary-blue/30 shadow-lg shadow-blue-100/50"
+                        : "bg-white/40 border-white/60 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-md"
                     }`}
                   >
-                    <div className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6">
-                      <span
-                        className={`text-base lg:text-[18px] font-semibold tracking-tight ${
-                          isOpen ? "text-white" : "text-heading"
+                    <div className="flex items-center justify-between px-6 py-5">
+                      <h3
+                        className={`text-lg font-semibold transition-colors duration-300 ${
+                          isOpen ? "text-primary-blue" : "text-heading group-hover:text-primary-blue"
                         }`}
                       >
                         {item.title}
-                      </span>
-                      <button
-                        type="button"
-                        className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${
+                      </h3>
+                      <div
+                        className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${
                           isOpen
-                            ? "border-white text-white"
-                            : "border-purple-bg text-purple-bg group-hover:bg-purple-bg/10"
+                            ? "bg-primary-blue text-white rotate-180"
+                            : "bg-white text-gray shadow-sm group-hover:text-primary-blue"
                         }`}
                       >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          {isOpen ? (
-                            <path d="M5 12h14" />
-                          ) : (
-                            <path d="M12 5v14M5 12h14" />
-                          )}
-                        </svg>
-                      </button>
-                    </div>
-                    {isOpen && (
-                      <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
-                        {/* Dashed line */}
-                        <div className="mb-5 border-t border-dashed border-white/30" />
-                        <p className="text-sm lg:text-[15px] text-white/90 leading-[1.6] font-medium">
-                          {item.content}
-                        </p>
+                         {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                        >
+                          <div className="px-6 pb-6 pt-0">
+                            <p className="text-gray leading-relaxed">
+                              {item.content}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
                 );
               })}
             </div>

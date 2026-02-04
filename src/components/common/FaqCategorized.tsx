@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus } from "lucide-react";
 import TextAnimation from "./TextAnimation";
 
 interface FaqQuestion {
@@ -38,106 +40,108 @@ const FaqCategorized = ({
   };
 
   return (
-    <section className="w-full py-5 lg:py-24 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+    <section className="w-full py-16 lg:py-24 overflow-hidden bg-[#f8fafc]">
+       {/* Background Decor - consistent light gradients */}
+       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[80px]" />
+          <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-50/50 rounded-full blur-[80px]" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6 lg:px-8 z-10">
         {/* Label */}
         {showLabel && (
-          <div className="text-center mb-8">
-            <span className="inline-block bg-white text-black text-xs font-medium uppercase tracking-wider px-4 py-2 rounded border-4 border-dashed border-black">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-white text-heading text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full border border-gray-200 shadow-sm">
               {labelText}
             </span>
           </div>
         )}
 
         {/* Categories */}
-        <div className="space-y-12 lg:space-y-16">
+        <div className="space-y-16 lg:space-y-24">
           {categories.map((category, categoryIndex) => {
-            const titleParts = category.titleHighlight
-              ? category.title.split(category.titleHighlight)
-              : [category.title];
-
-            // First category (Services & Delivery) gets larger text, others are one size smaller
+            
+            // First category gets larger text
             const isFirstCategory = categoryIndex === 0;
             const titleSize = isFirstCategory
               ? "text-3xl md:text-4xl lg:text-5xl"
               : "text-2xl md:text-3xl lg:text-4xl";
 
             return (
-              <div key={categoryIndex} className="space-y-6">
+              <div key={categoryIndex} className="space-y-8 lg:space-y-10">
                 {/* Category Heading */}
-                <TextAnimation
-                  text={category.title}
-                  as="h2"
-                  className={`${titleSize} font-medium text-heading text-center`}
-                />
+                <div className="relative">
+                     <TextAnimation
+                        text={category.title}
+                        as="h2"
+                        className={`${titleSize} font-medium text-heading text-center`}
+                        />
+                     {/* Decorative subtle underline/glow */}
+                     <div className="absolute left-1/2 -translate-x-1/2 -bottom-4 w-24 h-1 bg-gradient-to-r from-transparent via-primary-blue/30 to-transparent rounded-full" />
+                </div>
 
                 {/* Questions */}
-                <div className="space-y-4 lg:space-y-5">
+                <div className="space-y-4 max-w-4xl mx-auto">
                   {category.questions.map((faq, questionIndex) => {
                     const key = `${categoryIndex}-${questionIndex}`;
                     const isOpen = openItems[key] === questionIndex;
 
                     return (
-                      <div
+                      <motion.div
                         key={questionIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: questionIndex * 0.05 }}
                         onClick={() => toggleItem(categoryIndex, questionIndex)}
-                        className={`overflow-hidden rounded-[18px] shadow-sm transition-all duration-300 hover:shadow-lg cursor-pointer group ${
+                        className={`group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${
                           isOpen
-                            ? "bg-purple-bg text-white"
-                            : "bg-white text-heading"
+                            ? "bg-white border-primary-blue/30 shadow-lg shadow-blue-100/50"
+                            : "bg-white/40 border-white/60 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-md"
                         }`}
                       >
-                        <div className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6">
+                        <div className="flex items-center justify-between px-6 lg:px-8 py-5">
                           <h3
-                            className={`text-base lg:text-[18px] font-semibold tracking-tight pr-4 ${
-                              isOpen ? "text-white" : "text-heading"
+                            className={`text-base lg:text-lg font-semibold tracking-tight pr-8 transition-colors duration-300 ${
+                              isOpen ? "text-primary-blue" : "text-heading group-hover:text-primary-blue"
                             }`}
                           >
                             {faq.question}
                           </h3>
-                          <button
-                            type="button"
-                            className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 flex-shrink-0 ${
+                          <div
+                            className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 flex-shrink-0 ${
                               isOpen
-                                ? "border-white text-white"
-                                : "border-purple-bg text-purple-bg group-hover:bg-purple-bg/10"
+                                ? "bg-primary-blue text-white rotate-180"
+                                : "bg-white text-gray shadow-sm group-hover:text-primary-blue"
                             }`}
                           >
-                            <svg
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              {isOpen ? (
-                                <path d="M5 12h14" />
-                              ) : (
-                                <path d="M12 5v14M5 12h14" />
-                              )}
-                            </svg>
-                          </button>
-                        </div>
-                        {isOpen && (
-                          <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
-                            {/* Dashed line */}
-                            <div className="mb-5 border-t border-dashed border-white/30" />
-                            <p className="text-sm lg:text-[15px] text-white/90 leading-[1.6] font-medium">
-                              {faq.answer}
-                            </p>
+                             {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                           </div>
-                        )}
-                      </div>
+                        </div>
+                        <AnimatePresence>
+                            {isOpen && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                            >
+                                <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
+                                <p className="text-sm lg:text-base text-gray leading-[1.7]">
+                                    {faq.answer}
+                                </p>
+                                </div>
+                            </motion.div>
+                            )}
+                        </AnimatePresence>
+                      </motion.div>
                     );
                   })}
                 </div>
 
-                {/* White border after Services & Delivery section */}
-                {isFirstCategory && (
-                  <div className="border-t-4 border-white mt-12"></div>
+                {/* Divider Line if not last */}
+                {categoryIndex !== categories.length - 1 && (
+                     <div className="max-w-xs mx-auto border-t border-gray-200/60 mt-16 lg:mt-24"></div>
                 )}
               </div>
             );
