@@ -64,9 +64,9 @@ const PortalFeature = () => {
     return (
         <section className="w-full relative">
             <GradientContainer
-                backgroundColor="bg-[#111235]" // Match Dark Premium Theme
+                backgroundColor="bg-primary"
                 showRadials={true}
-                className="py-24 lg:py-32 overflow-hidden"
+                className="py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 lg:space-y-40">
                     {features.map((feature, idx) => {
@@ -84,7 +84,7 @@ const PortalFeature = () => {
                                     className="w-full lg:w-1/2 relative perspective-1000 group"
                                 >
                                     {/* Glass Base - Sleek Dark Card */}
-                                    <div className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] bg-card/90 backdrop-blur-2xl border border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 group-hover:bg-card/95 group-hover:border-white/30 group-hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.4)] overflow-visible">
+                                    <div className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] bg-primary/90 backdrop-blur-2xl border border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 group-hover:bg-primary/95 group-hover:border-white/30 group-hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.4)] overflow-visible">
                                         
                                         {/* Internal Glow - Enhanced */}
                                         <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/20 via-transparent to-purple-500/20 opacity-60 rounded-[2.5rem]" />

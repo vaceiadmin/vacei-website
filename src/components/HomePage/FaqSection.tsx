@@ -53,10 +53,10 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="w-full py-12 sm:py-20 pb-20 sm:pb-32 overflow-hidden">
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
       <div className="mx-auto px-4 md:px-0">
         <GradientContainer
-          className="py-10 sm:py-16 lg:py-20 bg-primary relative"
+          className="py-12 sm:py-16 md:py-20 lg:py-24 bg-primary relative"
           showRadials={false}
         >
           {/* Animated Background Blobs */}

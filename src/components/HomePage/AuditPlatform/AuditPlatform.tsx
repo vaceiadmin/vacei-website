@@ -68,7 +68,7 @@ export default function AuditPlatform() {
   const [isMobile] = useMobile(700);
 
   return (
-    <section className="relative py-16 sm:py-24 overflow-hidden">
+    <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{

@@ -6,7 +6,7 @@ import { FadeInUp } from "../common/Animations"
 
 const ReadyToSimplifySection = () => {
   return (
-    <section className="w-full py-16 lg:py-24 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
       <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
         
         <div className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden">

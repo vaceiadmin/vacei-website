@@ -172,7 +172,7 @@ const ProcessStepsSection = () => {
   }
 
   return (
-    <section className="w-full relative overflow-hidden py-20 lg:py-28" style={{ backgroundColor: '#D8E5E5' }}>
+    <section className="w-full relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28" style={{ backgroundColor: '#D8E5E5' }}>
         
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

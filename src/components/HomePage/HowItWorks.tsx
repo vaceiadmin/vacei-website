@@ -85,9 +85,9 @@ const HowItWorks = () => {
     return (
         <section className="w-full">
             <GradientContainer
-                backgroundColor="bg-[#111235]"
+                backgroundColor="bg-primary"
                 showRadials={true}
-                className="py-20 lg:py-24 overflow-hidden"
+                className="py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
             >
                 <div className="relative z-10 mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
 
@@ -110,7 +110,7 @@ const HowItWorks = () => {
                     </FadeInUp>
 
                     {/* Video Banner with Glassmorphism Play Button */}
-                    <FadeInUp delay={0.2} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-[2.4/1] rounded-3xl overflow-hidden shadow-2xl mb-20 group border border-white/10 bg-[#1e2040]">
+                    <FadeInUp delay={0.2} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-[2.4/1] rounded-3xl overflow-hidden shadow-2xl mb-20 group border border-white/10 bg-primary/80">
                         {!isPlaying ? (
                             <>
                                 <Image
@@ -120,7 +120,7 @@ const HowItWorks = () => {
                                     className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
                                     priority
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#111235]/80 via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
 
                                 {/* Glassy Play Button Overlay */}
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -161,7 +161,7 @@ const HowItWorks = () => {
                             <motion.div 
                                 key={index}
                                 whileHover={{ y: -5 }}
-                                className="relative p-6 rounded-2xl bg-[#1e2040]/50 border border-white/5 backdrop-blur-sm hover:bg-[#1e2040] hover:border-primary-blue/30 transition-all duration-300 group"
+                                className="relative p-6 rounded-2xl bg-primary/50 border border-white/5 backdrop-blur-sm hover:bg-primary/70 hover:border-primary-blue/30 transition-all duration-300 group"
                             >
                                 {/* Icon Box */}
                                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-300 shadow-lg">

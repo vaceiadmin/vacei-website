@@ -13,7 +13,7 @@ const HeroSection = () => {
   return (
     <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center">
       <GradientContainer
-        backgroundColor="bg-hero"
+        backgroundColor="bg-primary"
         showRadials
         leftPositionClass="bottom-0 left-0"
         rightPositionClass="bottom-0 right-0"
@@ -223,7 +223,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Gradient overlay for bottom fade */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-hero to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary to-transparent z-20 pointer-events-none" />
       </GradientContainer>
     </section>
   );

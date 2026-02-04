@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const CompanySetupSection = () => {
   return (
-    <section className="w-full py-20 lg:py-28 relative overflow-hidden bg-[#D8E5E5]"> {/* Light Premium Background */}
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden bg-[#D8E5E5]"> {/* Light Premium Background */}
       
       {/* Wave Background Pattern - Matching AuditPlatform */}
       <div 

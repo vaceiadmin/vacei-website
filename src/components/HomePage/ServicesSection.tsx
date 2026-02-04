@@ -79,17 +79,17 @@ const ServicesSection = () => {
 
   return (
     <section className="w-full">
-        <GradientContainer 
-            backgroundColor="bg-[#111235]" 
+        <GradientContainer
+            backgroundColor="bg-primary" 
             showRadials={true} 
-            className="py-20 lg:py-28 overflow-hidden"
+            className="py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
         >
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 {/* Header Area */}
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
                     <div className="space-y-4">
-                        <motion.div 
+            <motion.div 
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-bold tracking-widest text-[#989fea] uppercase"
@@ -104,17 +104,17 @@ const ServicesSection = () => {
                             Everything You Need <br />
                             <span className="text-white/40">In One Place.</span>
                         </motion.h2>
-                    </div>
+          </div>
 
                     {/* Glass Tabs */}
-                    <motion.div 
+          <motion.div 
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         className="flex p-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full"
                     >
-                        {(["services", "experts", "products"] as const).map((tab) => (
-                            <button
-                                key={tab}
+              {(["services", "experts", "products"] as const).map((tab) => (
+                <button
+                  key={tab}
                                 onClick={() => { setActiveTab(tab); setCurrentIndex(0); }}
                                 className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
                                     activeTab === tab ? "text-white" : "text-white/50 hover:text-white"
@@ -128,17 +128,17 @@ const ServicesSection = () => {
                                     />
                                 )}
                                 <span className="relative z-10 capitalize">{tab}</span>
-                            </button>
-                        ))}
-                    </motion.div>
-                </div>
+                </button>
+              ))}
+                        </motion.div>
+                      </div>
 
                 {/* Carousel Area */}
                 <div className="relative min-h-[500px]">
                     <div className="flex gap-8 justify-center">
                         <AnimatePresence mode="popLayout">
                             {displayItems.map((item, idx) => (
-                                <motion.div
+                  <motion.div 
                                     key={`${item.id}-${activeTab}-${idx}`}
                                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -157,26 +157,26 @@ const ServicesSection = () => {
 
                                             {/* Main Image */}
                                             <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2">
-                                                <Image
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                    fill
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
                                                     className={`object-contain ${activeTab === "products" ? "drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]" : "opacity-90 grayscale-[20%] group-hover:grayscale-0"}`}
-                                                />
+                      />
                                             </div>
-                                        </div>
+                    </div>
 
                                         {/* Content Container (Bottom Half) */}
                                         <div className="h-[45%] p-8 flex flex-col justify-between relative bg-gradient-to-t from-[#111235] via-[#111235]/80 to-transparent">
-                                            <div>
+                      <div>
                                                 {item.badge && (
                                                     <span className="inline-block px-2 py-0.5 mb-2 rounded text-[10px] font-bold uppercase bg-primary-blue/20 border border-primary-blue/30 text-blue-200">
                                                         {item.badge}
                                                     </span>
                                                 )}
                                                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#989fea] transition-colors">
-                                                    {item.title}
-                                                </h3>
+                          {item.title}
+                        </h3>
                                                 <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
                                                     {item.subtitle}
                                                 </p>
@@ -191,11 +191,11 @@ const ServicesSection = () => {
                                                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7m7-7H3" /></svg>
                                                 </div>
                                             </Link>
-                                        </div>
+                      </div>
 
                                         {/* Hover Reveal for Products */}
                                         {activeTab === "products" && item.hoverImage && (
-                                            <div className="absolute inset-0 bg-[#111235] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-col">
+                                            <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-col">
                                                 <div className="relative w-full h-full">
                                                     <Image src={item.hoverImage} alt={item.title} fill className="object-contain opacity-60" />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-[#111235] via-transparent to-transparent" />
@@ -209,12 +209,12 @@ const ServicesSection = () => {
                                                         >
                                                             Launch Portal
                                                         </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
+                      </div>
+                    </div>
+                  </div>
+              )}
                                     </div>
-                                </motion.div>
+            </motion.div>
                             ))}
                         </AnimatePresence>
                     </div>
@@ -224,15 +224,15 @@ const ServicesSection = () => {
                 <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-20">
                     <button onClick={prevSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                    </button>
+                </button>
                 </div>
                 <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-20">
                     <button onClick={nextSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                    </button>
-                </div>
+                </button>
+              </div>
 
-            </div>
+          </div>
         </GradientContainer>
     </section>
   );
