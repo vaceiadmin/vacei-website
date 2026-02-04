@@ -145,7 +145,63 @@ const Navbar = () => {
       }
 
       const navbarRect = navbar.getBoundingClientRect();
-      const checkY = navbarRect.bottom + 20; // Check further below navbar
+      const scrollY = window.scrollY || window.pageYOffset;
+      const isAtTop = scrollY < 10; // Consider "at top" if scrolled less than 10px
+      
+      // At the top of the page, check navbar's own background and body background
+      if (isAtTop) {
+        // Check navbar's own background first
+        const navElement = navbar as HTMLElement;
+        const navBgColor = window.getComputedStyle(navElement).backgroundColor;
+        const navBgClass = getClassName(navElement);
+        
+        // Check if navbar has explicit light background classes
+        const hasLightClass = navBgClass.includes('bg-white') || 
+                             navBgClass.includes('bg-background') ||
+                             navBgClass.includes('bg-white/');
+        
+        if (hasLightClass) {
+          setIsDarkBackground(false);
+          return;
+        }
+        
+        // Check navbar background color luminance
+        const rgbMatch = navBgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (rgbMatch) {
+          const r = parseInt(rgbMatch[1]);
+          const g = parseInt(rgbMatch[2]);
+          const b = parseInt(rgbMatch[3]);
+          const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+          
+          // If navbar background is light, use dark text
+          if (luminance > 0.6) {
+            setIsDarkBackground(false);
+            return;
+          }
+        }
+        
+        // Check body background as fallback
+        const bodyBgColor = window.getComputedStyle(document.body).backgroundColor;
+        const bodyRgbMatch = bodyBgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (bodyRgbMatch) {
+          const r = parseInt(bodyRgbMatch[1]);
+          const g = parseInt(bodyRgbMatch[2]);
+          const b = parseInt(bodyRgbMatch[3]);
+          const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+          
+          if (luminance > 0.6) {
+            setIsDarkBackground(false);
+            return;
+          }
+        }
+        
+        // Default to light background (dark text) at top
+        setIsDarkBackground(false);
+        return;
+      }
+      
+      // When scrolled, check what's below the navbar
+      const checkY = navbarRect.bottom + 20;
       
       // Check multiple points for better accuracy
       const checkPoints = [
@@ -158,19 +214,19 @@ const Navbar = () => {
       let lightCount = 0;
       
       for (const checkX of checkPoints) {
-        const elementBelow = document.elementFromPoint(checkX, checkY);
+        const elementAtPoint = document.elementFromPoint(checkX, checkY);
         
-        if (!elementBelow) {
+        if (!elementAtPoint) {
           lightCount++;
           continue;
         }
         
         // Skip navbar elements
-        if ((elementBelow as HTMLElement).closest('nav')) {
+        if ((elementAtPoint as HTMLElement).closest('nav')) {
           continue;
         }
         
-        const isDark = checkBackground(elementBelow as HTMLElement);
+        const isDark = checkBackground(elementAtPoint as HTMLElement);
         if (isDark) {
           darkCount++;
         } else {
@@ -194,10 +250,11 @@ const Navbar = () => {
       }
     };
 
-    // Initial check with delay to ensure DOM is ready
+    // Initial check - run immediately and also after a short delay to ensure DOM is ready
+    handleScroll(); // Immediate check
     const initialCheck = setTimeout(() => {
       handleScroll();
-    }, 150);
+    }, 100);
     
     window.addEventListener('scroll', throttledHandleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });

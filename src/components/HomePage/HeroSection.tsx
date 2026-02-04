@@ -49,7 +49,7 @@ const HeroSection = () => {
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-14 lg:mt-20 flex flex-col items-center ml-7">
+        <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-14 lg:mt-20 flex flex-col items-center mx-auto">
           <div className="w-full max-w-4xl flex flex-col items-center">
             {/* Text & CTAs Section */}
             <motion.div
