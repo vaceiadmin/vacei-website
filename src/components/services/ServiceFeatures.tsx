@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 import TextAnimation from "../common/TextAnimation";
@@ -24,7 +27,7 @@ const ServiceFeatures = ({
   bulletIconAlt = "Item",
 }: ServiceFeatureProps) => {
   return (
-    <GradientContainer className="py-20 bg-footer-hero overflow-hidden">
+    <GradientContainer className="py-20 lg:py-24 overflow-hidden" backgroundColor="bg-primary">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column: Title and CTA */}
@@ -43,20 +46,28 @@ const ServiceFeatures = ({
           {/* Right Column: Feature Cards */}
           <div className="space-y-4 w-full">
             {features.map((feature, index) => (
-              <FadeInUp
+              <motion.div
                 key={index}
-                delay={index * 0.1}
-                className="bg-hero border border-white/10 p-6 md:p-8 rounded-2xl"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="group bg-hero border border-white/10 p-6 md:p-8 rounded-2xl transition-all duration-300 hover:border-primary-blue/50 hover:shadow-lg hover:shadow-primary-blue/10"
               >
                 <div className="flex flex-col md:flex-row gap-6 md:gap-12">
-                  <h3 className="text-white font-medium text-lg min-w-[140px] pt-1">
+                  <h3 className="text-white font-medium text-lg min-w-[140px] pt-1 group-hover:text-primary-blue transition-colors duration-300">
                     {feature.title}
                   </h3>
                   <ul className="space-y-5 flex-1">
                     {feature.items.map((item, idx) => (
-                      <li
+                      <motion.li
                         key={idx}
-                        className="flex items-start gap-4 text-[15px] text-light-gray leading-relaxed"
+                        initial={{ opacity: 0, x: 10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.2 + (idx * 0.05) }}
+                        className="flex items-start gap-4 text-[15px] text-light-gray leading-relaxed group-hover:text-white transition-colors duration-300"
                       >
                         <div className="mt-1 shrink-0">
                           {bulletIconSrc ? (
@@ -74,24 +85,30 @@ const ServiceFeatures = ({
                               viewBox="0 0 20 20"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
+                              className="group-hover:text-primary-blue transition-colors duration-300"
                             >
                               <circle
                                 opacity="0.2"
                                 cx="10"
                                 cy="10"
                                 r="9"
-                                stroke="white"
+                                stroke="currentColor"
+                                className="stroke-white group-hover:stroke-primary-blue transition-colors duration-300"
                               />
-                              <path d="M10 6L14 10L10 14L6 10Z" fill="white" />
+                              <path 
+                                d="M10 6L14 10L10 14L6 10Z" 
+                                fill="currentColor" 
+                                className="fill-white group-hover:fill-primary-blue transition-colors duration-300"
+                              />
                             </svg>
                           )}
                         </div>
                         {item}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
-              </FadeInUp>
+              </motion.div>
             ))}
           </div>
         </div>

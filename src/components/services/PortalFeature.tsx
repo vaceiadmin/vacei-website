@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import SectionBadge from "@/components/common/SectionBadge";
 import TextAnimation from "@/components/common/TextAnimation";
 import { FadeInUp } from "@/components/common/Animations";
@@ -69,10 +70,16 @@ const PortalFeature = ({
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-4 lg:h-[658px]">
           {/* Left Column: Text / How it works */}
-          <FadeInUp className="w-full lg:w-1/2 h-full">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full lg:w-1/2 h-full"
+          >
             <div className="flex flex-col gap-4 h-full">
               {/* 1. Top Wide Card: How it is used */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm grow flex flex-col justify-center">
+              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm grow flex flex-col justify-center transition-shadow duration-300 hover:shadow-md">
                 <div className="mb-4">
                   <SectionBadge text={sectionLabel} className="text-heading" />
                 </div>
@@ -89,8 +96,12 @@ const PortalFeature = ({
                 </p>
                 <ul className="space-y-2 mb-6">
                   {bulletItems.map((item, index) => (
-                    <li
+                    <motion.li
                       key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.3 + (index * 0.1) }}
                       className="flex items-start gap-2 text-sm text-heading font-medium text-left"
                     >
                       {/* Circle Container with Diamond Bullet (Dark) */}
@@ -116,7 +127,7 @@ const PortalFeature = ({
                         </svg>
                       </div>
                       {item}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
                 <p className="text-gray text-sm mb-4 text-left">
@@ -149,9 +160,9 @@ const PortalFeature = ({
               </div>
 
               {/* 2. Bottom Row: Split 2:3 Ratio */}
-              <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4 h-[35%] min-h-[200px]">
+              <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4 h-auto md:h-[35%] min-h-[200px]">
                 {/* Client Portal Info */}
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-center h-full">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-center h-full transition-transform duration-300 hover:scale-[1.02]">
                   <h3 className="text-lg font-medium text-heading mb-3 text-left">
                     {bottomTitle}
                   </h3>
@@ -161,7 +172,7 @@ const PortalFeature = ({
                 </div>
 
                 {/* Quote Card */}
-                <div className="bg-purple-bg rounded-2xl p-6 shadow-sm flex flex-col justify-center relative overflow-hidden h-full">
+                <div className="bg-purple-bg rounded-2xl p-6 shadow-sm flex flex-col justify-center relative overflow-hidden h-full transition-transform duration-300 hover:scale-[1.02]">
                   {/* Quote Icon Top Left */}
                   <div className="absolute top-4 left-4 opacity-30">
                     <Image
@@ -190,12 +201,18 @@ const PortalFeature = ({
                 </div>
               </div>
             </div>
-          </FadeInUp>
+          </motion.div>
 
           {/* Right Column */}
-          <FadeInUp delay={0.2} className="w-full lg:w-1/2 flex flex-col h-full">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="w-full lg:w-1/2 flex flex-col h-full"
+          >
             {variant === "technology" ? (
-              <div className="w-full h-full rounded-3xl bg-background border border-input shadow-xl px-5 py-6 md:px-7 md:py-7 flex flex-col gap-5">
+              <div className="w-full h-full rounded-3xl bg-background border border-input shadow-xl px-5 py-6 md:px-7 md:py-7 flex flex-col gap-5 hover:shadow-2xl transition-shadow duration-500">
                 {/* Top status row with vector */}
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
@@ -273,7 +290,7 @@ const PortalFeature = ({
                       </p>
                     </div>
                     <div className="flex-1">
-                      <div className="w-full border border-dashed border-input rounded-xl bg-icon px-4 py-4 text-center space-y-2">
+                      <div className="w-full border border-dashed border-input rounded-xl bg-icon px-4 py-4 text-center space-y-2 cursor-pointer hover:bg-gray-50 transition-colors">
                         <p className="text-[11px] text-gray-500">
                           Drop your document here
                         </p>
@@ -331,17 +348,17 @@ const PortalFeature = ({
                 </div>
               </div>
             ) : (
-              <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-gray-100 bg-white min-h-[400px] lg:min-h-0">
+              <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-gray-100 bg-white min-h-[400px] lg:min-h-0 group">
                 <Image
                   src={portalImage}
                   alt="Client Portal Dashboard"
                   fill
-                  className="object-contain"
+                  className="object-contain group-hover:scale-105 transition-transform duration-700"
                   priority
                 />
               </div>
             )}
-          </FadeInUp>
+          </motion.div>
         </div>
       </div>
     </section>

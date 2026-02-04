@@ -1,7 +1,9 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import TextAnimation from "../common/TextAnimation";
-import { FadeInUp } from "../common/Animations";
 
 interface ServiceOverviewProps {
   title: string;
@@ -15,25 +17,37 @@ const ServiceOverview = ({
   image,
 }: ServiceOverviewProps) => {
   return (
-    <section className=" py-16 lg:py-24">
+    <section className="py-20 lg:py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Column: Image */}
-          <FadeInUp className="relative w-full aspect-4/3 rounded-2xl overflow-hidden shadow-sm bg-gray-100">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="relative w-full aspect-4/3 rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/10 bg-gray-100"
+          >
             {/* If image is a placeholder path that might not exist, we should handle it, 
                  but for now assuming the prop is a valid path or we use a fallback */}
             <Image
               src={image}
               alt={`${title} Overview`}
               fill
-              className="object-cover"
+              className="object-cover hover:scale-105 transition-transform duration-700"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
             />
-          </FadeInUp>
+          </motion.div>
 
           {/* Right Column: Content */}
-          <FadeInUp delay={0.2} className="flex flex-col pt-2">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-col pt-2"
+          >
             <TextAnimation
               text={title}
               as="h2"
@@ -42,7 +56,7 @@ const ServiceOverview = ({
             <div className="text-sm md:text-base text-gray leading-[1.8]">
               {description}
             </div>
-          </FadeInUp>
+          </motion.div>
         </div>
       </div>
     </section>

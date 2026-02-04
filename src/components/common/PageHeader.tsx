@@ -22,7 +22,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <GradientContainer className="my-6">
+    <GradientContainer backgroundColor="bg-primary" className="my-6">
       <FadeInUp className="flex flex-col items-center justify-center py-20 md:py-32 lg:py-40 px-4 text-center">
         {/* Title */}
         <TextAnimation
@@ -59,26 +59,35 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
               >
                 {item.label === "Services" ? (
                   <div className="relative">
-                    <button
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
-                      className={`text-white/80 transition-colors text-sm font-normal flex items-center gap-1.5 ${dropdownOpen ? "text-white" : "hover:text-white"}`}
-                    >
-                      {item.label}
-                      <motion.svg
-                        animate={{ rotate: dropdownOpen ? 180 : 0 }}
-                        className="w-3 h-3"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <div className="flex items-center gap-1.5 text-sm font-normal">
+                      <Link
+                        href="/services"
+                        className={`text-white/80 transition-colors ${dropdownOpen ? "text-white" : "hover:text-white"}`}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </motion.svg>
-                    </button>
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                        aria-label="Toggle services menu"
+                        className={`text-white/80 transition-colors ${dropdownOpen ? "text-white" : "hover:text-white"}`}
+                      >
+                        <motion.svg
+                          animate={{ rotate: dropdownOpen ? 180 : 0 }}
+                          className="w-3 h-3"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </motion.svg>
+                      </button>
+                    </div>
 
                     {/* Dropdown Menu */}
                     <AnimatePresence>

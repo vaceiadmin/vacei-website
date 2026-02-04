@@ -50,7 +50,10 @@ const ServicePage = async ({ params }: ServicePageProps) => {
           </div>
         )}
         {service.portalImage && (
-          <PortalFeature portalImage={service.portalImage} />
+          <PortalFeature 
+            portalImage={service.portalImage} 
+            variant={service.portalVariant}
+          />
         )}
       </AnimatedPageSections>
     </main>

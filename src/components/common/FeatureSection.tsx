@@ -111,43 +111,43 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                                     feature.overlayImages.map((overlay, overlayIndex) => {
                                         const totalImages = feature.overlayImages?.length || 0
                                         return (
-                                            <motion.div
-                                                key={overlayIndex}
-                                                variants={{
-                                                    hidden: { opacity: 0, scale: 0.8, y: 20 },
-                                                    visible: { 
-                                                        opacity: 1, 
-                                                        scale: 1, 
-                                                        y: 0,
-                                                        transition: { duration: 0.8, ease: "easeOut" }
-                                                    }
-                                                }}
-                                                animate={{
-                                                    y: [0, -10, 0],
-                                                }}
-                                                transition={{
-                                                    y: {
-                                                        duration: 3 + overlayIndex,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut",
-                                                        delay: 0.8
-                                                    }
-                                                }}
+                                        <motion.div
+                                            key={overlayIndex}
+                                            variants={{
+                                                hidden: { opacity: 0, scale: 0.8, y: 20 },
+                                                visible: { 
+                                                    opacity: 1, 
+                                                    scale: 1, 
+                                                    y: 0,
+                                                    transition: { duration: 0.8, ease: "easeOut" }
+                                                }
+                                            }}
+                                            animate={{
+                                                y: [0, -10, 0],
+                                            }}
+                                            transition={{
+                                                y: {
+                                                    duration: 3 + overlayIndex,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut",
+                                                    delay: 0.8
+                                                }
+                                            }}
                                                 className={`absolute ${getOverlayPosition(overlay.position, overlayIndex)} ${getOverlaySize(
-                                                    overlay.size
+                                                overlay.size
                                                 )} overflow-visible`}
                                                 style={{ zIndex: getZIndex(overlayIndex, totalImages) }}
-                                            >
+                                        >
                                                 {/* Image only - no background, no border */}
                                                 <div className="relative w-full h-full">
-                                                    <Image
-                                                        src={overlay.src}
-                                                        alt={overlay.alt}
-                                                        fill
+                                            <Image
+                                                src={overlay.src}
+                                                alt={overlay.alt}
+                                                fill
                                                         className="object-contain drop-shadow-2xl"
-                                                    />
+                                            />
                                                 </div>
-                                            </motion.div>
+                                        </motion.div>
                                         )
                                     })}
                             </StaggerContainer>
@@ -161,43 +161,43 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                                     feature.overlayImages.map((overlay, overlayIndex) => {
                                         const totalImages = feature.overlayImages?.length || 0
                                         return (
-                                            <motion.div
-                                                key={overlayIndex}
-                                                variants={{
-                                                    hidden: { opacity: 0, scale: 0.8, y: 20 },
-                                                    visible: { 
-                                                        opacity: 1, 
-                                                        scale: 1, 
-                                                        y: 0,
-                                                        transition: { duration: 0.8, ease: "easeOut" }
-                                                    }
-                                                }}
-                                                animate={{
-                                                    y: [0, -15, 0], // Gentle float
-                                                }}
-                                                transition={{
-                                                    y: {
-                                                        duration: 4 + overlayIndex,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut",
-                                                        delay: 0.8
-                                                    }
-                                                }}
+                                        <motion.div
+                                            key={overlayIndex}
+                                            variants={{
+                                                hidden: { opacity: 0, scale: 0.8, y: 20 },
+                                                visible: { 
+                                                    opacity: 1, 
+                                                    scale: 1, 
+                                                    y: 0,
+                                                    transition: { duration: 0.8, ease: "easeOut" }
+                                                }
+                                            }}
+                                            animate={{
+                                                y: [0, -15, 0], // Gentle float
+                                            }}
+                                            transition={{
+                                                y: {
+                                                    duration: 4 + overlayIndex,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut",
+                                                    delay: 0.8
+                                                }
+                                            }}
                                                 className={`absolute ${getOverlayPosition(overlay.position, overlayIndex)} ${getOverlaySize(
-                                                    overlay.size
+                                                overlay.size
                                                 )} overflow-visible`}
                                                 style={{ zIndex: getZIndex(overlayIndex, totalImages) }}
-                                            >
+                                        >
                                                 {/* Image only - no background, no border, no shadow */}
                                                 <div className="relative w-full h-full">
-                                                    <Image
-                                                        src={overlay.src}
-                                                        alt={overlay.alt}
-                                                        fill
+                                            <Image
+                                                src={overlay.src}
+                                                alt={overlay.alt}
+                                                fill
                                                         className="object-contain drop-shadow-2xl"
-                                                    />
+                                            />
                                                 </div>
-                                            </motion.div>
+                                        </motion.div>
                                         )
                                     })}
                             </StaggerContainer>
