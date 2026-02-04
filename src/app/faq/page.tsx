@@ -106,7 +106,7 @@ const FaqPage = () => {
       <FadeInUp>
         <FaqAccordion
           faqItems={faqItems}
-          backgroundColor="bg-text-heading"
+          backgroundColor="bg-primary"
           showRadials={false}
         />
       </FadeInUp>

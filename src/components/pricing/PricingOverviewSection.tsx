@@ -197,7 +197,7 @@ const PricingOverviewSection = () => {
                 <p className="text-sm text-gray mb-6">
                   Get a tailored proposal based on your exact requirements.
                 </p>
-                <button className="px-6 py-3 rounded-xl bg-text-heading text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-lg">
+                <button className="px-6 py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-lg">
                   Get a Quote
                 </button>
               </div>

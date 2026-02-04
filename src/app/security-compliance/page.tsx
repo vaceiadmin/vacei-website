@@ -3,6 +3,7 @@
 import React from "react";
 import PageHeader from "@/components/common/PageHeader";
 import SecurityComplianceCards from "@/components/security-compliance/SecurityComplianceCards";
+import { FadeInUp } from "@/components/common/Animations";
 
 const SecurityCompliancePage = () => {
   return (
@@ -14,7 +15,9 @@ const SecurityCompliancePage = () => {
         />
       </div>
 
-      <SecurityComplianceCards />
+      <FadeInUp>
+        <SecurityComplianceCards />
+      </FadeInUp>
     </main>
   );
 };

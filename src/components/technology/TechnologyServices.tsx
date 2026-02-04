@@ -266,7 +266,7 @@ const TechnologyServices = () => {
                   <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-heading text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
                     Choose File
                   </button>
-                  <button className="flex-1 bg-text-heading hover:bg-dark-hover text-white text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
+                  <button className="flex-1 bg-primary hover:bg-dark-hover text-white text-xs lg:text-sm font-medium py-2 px-3 rounded-lg transition-colors">
                     Analyze Document
                   </button>
                 </div>

@@ -101,7 +101,7 @@ const QuoteProcess = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className="bg-text-heading rounded-2xl shadow-lg overflow-hidden"
+                            className="bg-primary rounded-2xl shadow-lg overflow-hidden"
                         >
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 p-6 md:p-8 lg:p-12">
                                 {/* Left Side: Text Content */}

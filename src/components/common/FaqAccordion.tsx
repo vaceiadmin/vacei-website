@@ -75,7 +75,7 @@ const FaqAccordion = ({
                             Can't find the answer you're looking for? Please chat to our friendly team.
                         </p>
                         <div className="flex flex-col gap-3">
-                            <button className="w-full py-3 rounded-xl bg-text-heading text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-md flex items-center justify-center gap-2">
+                            <button className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-md flex items-center justify-center gap-2">
                                 Get in Touch
                             </button>
                             <div className="flex items-center justify-center gap-2 text-sm text-heading font-medium">

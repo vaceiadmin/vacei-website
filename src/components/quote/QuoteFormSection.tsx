@@ -66,7 +66,7 @@ const QuoteFormSection = () => {
     <section className="py-16 lg:py-24">
       <GradientContainer
         className="w-full"
-        backgroundColor="bg-text-heading"
+        backgroundColor="bg-primary"
         showRadials={true}
       >
         <div className="max-w-6xl mx-auto py-12 lg:py-16">

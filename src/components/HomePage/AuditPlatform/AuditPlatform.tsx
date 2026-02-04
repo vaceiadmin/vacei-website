@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { features } from "./AuditPlatformData";
 import { useMobile } from "@/hooks/use-mobile";
+import AuditPlatformBeam from "./AuditPlatformBeam";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import TextAnimation from "../../common/TextAnimation";
 
@@ -166,16 +167,12 @@ export default function AuditPlatform() {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <motion.div
-                className="relative rounded-[32px] border border-white/15 bg-white/10 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-2xl px-4 py-6 sm:px-8 sm:py-10 overflow-hidden"
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25" />
-                <div className="pointer-events-none absolute -top-20 -right-10 h-56 w-56 rounded-full bg-primary-blue/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-24 -left-10 h-64 w-64 rounded-full bg-[#111827]/40 blur-3xl" />
-                <AnimatedOrbit />
-              </motion.div>
+              <div className="relative rounded-[32px] border border-white/20 bg-gradient-to-br from-white/10 to-white/5 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-3xl overflow-hidden aspect-square flex items-center justify-center">
+                 {/* Glassy Background Elements from previous design if needed, or simplified for Beam */}
+                 <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25 z-20" />
+                 
+                 <AuditPlatformBeam className="w-full h-full" />
+              </div>
             </motion.div>
           )}
         </div>

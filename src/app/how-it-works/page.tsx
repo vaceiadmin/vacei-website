@@ -50,6 +50,10 @@ const steps: HowItWorksStep[] = [
   },
 ];
 
+import { FadeInUp } from "@/components/common/Animations";
+
+// ... existing imports ...
+
 const HowItWorksPage = () => {
   return (
     <main className="min-h-screen bg-background">
@@ -60,8 +64,12 @@ const HowItWorksPage = () => {
         />
       </div>
 
-      <HowItWorksTimeline steps={steps} />
-      <OngoingSupportSection />
+      <FadeInUp>
+        <HowItWorksTimeline steps={steps} />
+      </FadeInUp>
+      <FadeInUp delay={0.2}>
+        <OngoingSupportSection />
+      </FadeInUp>
     </main>
   );
 };

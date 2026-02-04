@@ -269,9 +269,9 @@ const Navbar = () => {
   // Desktop nav links – switch labels/structure in compact mode.
   const navLinks = useCompactNav
     ? [
-        // 100% zoom and above: show About instead of AI Review,
-        // move AI Review + How It Works under Resources.
-        { label: "About Us", href: "/about" },
+        // 100% zoom and above: show Home in the main nav,
+        // move AI Review + How It Works + About under Resources.
+        { label: "Home", href: "/" },
         {
           label: "Services",
           href: "#",
@@ -296,7 +296,8 @@ const Navbar = () => {
         },
       ]
     : [
-        // Default / 90% zoom layout – original structure.
+        // Default / 90% zoom layout – original structure with Home added.
+        { label: "Home", href: "/" },
         { label: "AI Review", href: "/ai-review" },
         {
           label: "Services",

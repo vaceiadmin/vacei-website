@@ -140,7 +140,7 @@ const PortalFeature = ({
                     className="inline-flex items-center gap-2 text-heading font-semibold text-sm hover:text-primary-blue transition-colors group"
                   >
                     {ctaLabel}
-                    <div className="w-5 h-5 rounded-full bg-text-heading group-hover:bg-primary-blue flex items-center justify-center transition-colors">
+                    <div className="w-5 h-5 rounded-full bg-primary group-hover:bg-primary-blue flex items-center justify-center transition-colors">
                       <svg
                         className="w-2.5 h-2.5 text-white"
                         fill="none"
