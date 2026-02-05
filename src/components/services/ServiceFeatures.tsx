@@ -17,6 +17,10 @@ interface ServiceFeatureProps {
   }[];
   bulletIconSrc?: string;
   bulletIconAlt?: string;
+  primaryCtaText?: string;
+  primaryCtaHref?: string;
+  secondaryCtaText?: string;
+  secondaryCtaHref?: string;
 }
 
 const ServiceFeatures = ({
@@ -28,7 +32,15 @@ const ServiceFeatures = ({
   backgroundColor,
   theme = "dark",
   showRadials = true,
-}: ServiceFeatureProps & { backgroundColor?: string; theme?: "light" | "dark"; showRadials?: boolean }) => {
+  primaryCtaText,
+  primaryCtaHref,
+  secondaryCtaText,
+  secondaryCtaHref,
+}: ServiceFeatureProps & {
+  backgroundColor?: string;
+  theme?: "light" | "dark";
+  showRadials?: boolean;
+}) => {
   const isDark = theme === "dark";
   const styles = {
     heading: isDark ? "text-white" : "text-text-heading",
@@ -51,8 +63,33 @@ const ServiceFeatures = ({
               className={`text-3xl md:text-5xl font-medium mb-6 leading-tight max-w-lg ${styles.heading}`}
             />
             <p className={`text-lg mb-10 max-w-md ${styles.subheading}`}>{subtitle}</p>
-            <div>
-              <GetInstantQuoteButton hasShadow={true} />
+            <div className="flex flex-wrap items-center gap-3">
+              {primaryCtaText || secondaryCtaText ? (
+                <>
+                  {primaryCtaText && (
+                    <GetInstantQuoteButton
+                      variant="custom"
+                      text={primaryCtaText}
+                      href={primaryCtaHref || "/quote"}
+                      hasShadow={true}
+                      className={isDark ? "" : "bg-primary-blue text-white"}
+                    />
+                  )}
+                  {secondaryCtaText && (
+                    <GetInstantQuoteButton
+                      variant="custom"
+                      text={secondaryCtaText}
+                      href={secondaryCtaHref || "/quote"}
+                      hasShadow={false}
+                      bgColor={isDark ? "transparent" : "transparent"}
+                      textColor={isDark ? "#ffffff" : "#111827"}
+                      borderColor={isDark ? "rgba(255,255,255,0.4)" : "rgba(37, 99, 235, 0.6)"}
+                    />
+                  )}
+                </>
+              ) : (
+                <GetInstantQuoteButton hasShadow={true} />
+              )}
             </div>
           </FadeInUp>
 

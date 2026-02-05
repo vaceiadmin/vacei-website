@@ -6,6 +6,8 @@ import ServiceOverview from "@/components/services/ServiceOverview";
 import ServiceFeatures from "@/components/services/ServiceFeatures";
 import PortalFeature from "@/components/services/PortalFeature";
 import AnimatedPageSections from "@/components/common/AnimatedPageSections";
+import ServiceVideoSection from "@/components/services/ServiceVideoSection";
+import ServiceCTA from "@/components/services/ServiceCTA";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -34,18 +36,25 @@ const ServicePage = async ({ params }: ServicePageProps) => {
         />
       </div>
 
+      <ServiceVideoSection title={service.title} videoUrl={service.videoUrl} />
+
       <AnimatedPageSections>
         <ServiceOverview
           title={service.title}
           description={service.description}
           image={service.image}
         />
+        <ServiceCTA />
         {service.featuresSection && (
           <div className="mt-16 lg:mt-24">
             <ServiceFeatures
               title={service.featuresSection.title}
               subtitle={service.featuresSection.subtitle}
               features={service.featuresSection.features}
+              primaryCtaText={service.primaryCtaText}
+              primaryCtaHref={service.primaryCtaHref}
+              secondaryCtaText={service.secondaryCtaText}
+              secondaryCtaHref={service.secondaryCtaHref}
             />
           </div>
         )}

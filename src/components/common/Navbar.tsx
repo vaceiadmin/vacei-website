@@ -434,19 +434,21 @@ const Navbar = () => {
                       >
                         <div className="bg-white/95 backdrop-blur-[25px] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/50 p-2 overflow-hidden min-w-[260px]">
                           {link.label === "Services" ? (
-                            <div className="grid grid-cols-1 gap-1 p-1">
-                              {servicesData.map((service) => (
-                                <Link
-                                  key={service.id}
-                                  href={`/services/${service.slug}`}
-                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
-                                  onClick={() => link.setIsOpen?.(false)}
-                                >
-                                  <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
-                                    {service.title}
-                                  </div>
-                                </Link>
-                              ))}
+                            <div className="max-h-[320px] overflow-y-auto pr-1 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue/70 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+                              <div className="grid grid-cols-1 gap-1 p-1">
+                                {servicesData.map((service) => (
+                                  <Link
+                                    key={service.id}
+                                    href={`/services/${service.slug}`}
+                                    className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
+                                    onClick={() => link.setIsOpen?.(false)}
+                                  >
+                                    <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                      {service.title}
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
                             </div>
                           ) : link.label === "Portals" ? (
                             <div className="grid grid-cols-1 gap-1 p-1">

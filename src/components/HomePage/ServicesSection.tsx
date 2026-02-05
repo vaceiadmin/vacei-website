@@ -36,10 +36,12 @@ const ServicesSection = () => {
 
   // --- Data ---
   const services: BaseCard[] = [
-    { id: 1, title: "Corporate & CSP", subtitle: "Structuring & company services.", image: "/assets/images/placeholder.png", link: "/services/corporate-csp-services", category: "Service", badge: "Core" },
-    { id: 2, title: "Accounting & Finance", subtitle: "Financial management experts.", image: "/assets/images/placeholder.png", link: "/services/accounting-finance", category: "Service" },
+    { id: 1, title: "Corporate & CSP Services", subtitle: "Ongoing corporate administration in Malta.", image: "/assets/images/placeholder.png", link: "/services/corporate-csp-services", category: "Service", badge: "Core" },
+    { id: 2, title: "Accounting & Finance", subtitle: "Structured financial management & CFO support.", image: "/assets/images/placeholder.png", link: "/services/accounting-finance", category: "Service" },
     { id: 3, title: "Tax & Compliance", subtitle: "Staying compliant made easy.", image: "/assets/images/placeholder.png", link: "/services/tax-compliance", category: "Service", badge: "Critical" },
-    { id: 4, title: "Audit & Assurance", subtitle: "Rigorous audit services.", image: "/assets/images/placeholder.png", link: "/services/audit-assurance", category: "Service" },
+    { id: 4, title: "Company Structure & Changes", subtitle: "Event-based corporate changes & projects.", image: "/assets/images/placeholder.png", link: "/services/company-structure-corporate-changes", category: "Service" },
+    { id: 5, title: "Liquidation & Wind-Down", subtitle: "Structured support to close or exit entities.", image: "/assets/images/placeholder.png", link: "/services/liquidation-wind-down", category: "Service" },
+    { id: 6, title: "Audit & Assurance", subtitle: "Rigorous audit services.", image: "/assets/images/placeholder.png", link: "/services/audit-assurance", category: "Service" },
   ];
 
   const experts: BaseCard[] = [
