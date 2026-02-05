@@ -83,12 +83,12 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/coming-soon" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/our-team" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Our Team
                 </Link>
               </li>
               <li>
-                <Link href="/coming-soon" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/careers" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Careers
                 </Link>
               </li>
@@ -105,27 +105,27 @@ const Footer = () => {
             <h3 className="text-text-dark font-bold text-base">Partner With VACEI</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/coming-soon" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/partners" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Partner Overview
                 </Link>
               </li>
               <li>
-                <Link href="/coming-soon" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/partners/white-label" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   White-Label Solutions
                 </Link>
               </li>
               <li>
-                <Link href="/technology" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Technology Licensing
+                <Link href="/partners/technology-support" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Technology Integration Support
                 </Link>
               </li>
               <li>
-                <Link href="/coming-soon" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/partners/service-delivery" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Become a Partner Firm
                 </Link>
               </li>
               <li>
-                <Link href="/coming-soon" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/partners/reseller-program" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Reseller Program
                 </Link>
               </li>

@@ -25,9 +25,22 @@ const ServiceFeatures = ({
   features,
   bulletIconSrc,
   bulletIconAlt = "Item",
-}: ServiceFeatureProps) => {
+  backgroundColor,
+  theme = "dark",
+  showRadials = true,
+}: ServiceFeatureProps & { backgroundColor?: string; theme?: "light" | "dark"; showRadials?: boolean }) => {
+  const isDark = theme === "dark";
+  const styles = {
+    heading: isDark ? "text-white" : "text-text-heading",
+    subheading: isDark ? "text-white/70" : "text-text-gray",
+    cardBg: isDark ? "bg-hero border-white/10" : "bg-white border-gray-200 shadow-sm",
+    cardTitle: isDark ? "text-white" : "text-text-heading",
+    cardBody: isDark ? "text-light-gray group-hover:text-white" : "text-text-gray group-hover:text-text-heading",
+    iconStroke: isDark ? "stroke-white" : "stroke-text-heading",
+    iconFill: isDark ? "fill-white" : "fill-text-heading",
+  };
   return (
-    <GradientContainer className="py-20 lg:py-24 overflow-hidden" backgroundColor="bg-primary">
+    <GradientContainer className="py-20 lg:py-24 overflow-hidden" backgroundColor={backgroundColor || "bg-primary"} showRadials={showRadials}>
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column: Title and CTA */}
@@ -35,9 +48,9 @@ const ServiceFeatures = ({
             <TextAnimation
               text={typeof title === "string" ? title : ""}
               as="h2"
-              className="text-3xl md:text-5xl font-medium text-white mb-6 leading-tight max-w-lg"
+              className={`text-3xl md:text-5xl font-medium mb-6 leading-tight max-w-lg ${styles.heading}`}
             />
-            <p className="text-white/70 text-lg mb-10 max-w-md">{subtitle}</p>
+            <p className={`text-lg mb-10 max-w-md ${styles.subheading}`}>{subtitle}</p>
             <div>
               <GetInstantQuoteButton hasShadow={true} />
             </div>
@@ -53,10 +66,10 @@ const ServiceFeatures = ({
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
-                className="group bg-hero border border-white/10 p-6 md:p-8 rounded-2xl transition-all duration-300 hover:border-primary-blue/50 hover:shadow-lg hover:shadow-primary-blue/10"
+                className={`group ${styles.cardBg} p-6 md:p-8 rounded-2xl transition-all duration-300 hover:border-primary-blue/50 hover:shadow-lg hover:shadow-primary-blue/10`}
               >
                 <div className="flex flex-col md:flex-row gap-6 md:gap-12">
-                  <h3 className="text-white font-medium text-lg min-w-[140px] pt-1 group-hover:text-primary-blue transition-colors duration-300">
+                  <h3 className={`${styles.cardTitle} font-medium text-lg min-w-[140px] pt-1 group-hover:text-primary-blue transition-colors duration-300`}>
                     {feature.title}
                   </h3>
                   <ul className="space-y-5 flex-1">
@@ -67,7 +80,7 @@ const ServiceFeatures = ({
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.3, delay: 0.2 + (idx * 0.05) }}
-                        className="flex items-start gap-4 text-[15px] text-light-gray leading-relaxed group-hover:text-white transition-colors duration-300"
+                        className={`flex items-start gap-4 text-[15px] ${styles.cardBody} leading-relaxed transition-colors duration-300`}
                       >
                         <div className="mt-1 shrink-0">
                           {bulletIconSrc ? (
@@ -93,12 +106,12 @@ const ServiceFeatures = ({
                                 cy="10"
                                 r="9"
                                 stroke="currentColor"
-                                className="stroke-white group-hover:stroke-primary-blue transition-colors duration-300"
+                                className={`${styles.iconStroke} group-hover:stroke-primary-blue transition-colors duration-300`}
                               />
                               <path 
                                 d="M10 6L14 10L10 14L6 10Z" 
                                 fill="currentColor" 
-                                className="fill-white group-hover:fill-primary-blue transition-colors duration-300"
+                                className={`${styles.iconFill} group-hover:fill-primary-blue transition-colors duration-300`}
                               />
                             </svg>
                           )}
