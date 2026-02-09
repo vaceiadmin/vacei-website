@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${bodoni.variable} ${montserrat.variable} ${nunito.variable}`}>
-        {/* <IntroAnimation /> */}
+         <IntroAnimation /> 
         <SmoothScroll>
           <Navbar />
           <PageTransition>{children}</PageTransition>
