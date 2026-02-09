@@ -11,6 +11,7 @@ const ContactForm = () => {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -51,12 +52,31 @@ const ContactForm = () => {
     }
 
     setIsSubmitting(true);
-    // Handle form submission here
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert("Message sent successfully!");
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          subject: "Website contact form",
+          context: "Contact page form",
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+
       setFormData({ name: "", email: "", message: "" });
-    }, 1000);
+      alert("Message sent successfully!");
+    } catch (err) {
+      console.error(err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -79,6 +99,9 @@ const ContactForm = () => {
                 Use this form to request a quote, ask a question, or get more
                 information about our services.
               </p>
+              {submitError && (
+                <p className="mb-4 text-sm text-error">{submitError}</p>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name Field */}

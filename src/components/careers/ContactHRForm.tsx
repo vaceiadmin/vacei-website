@@ -12,6 +12,8 @@ const ContactHRForm = () => {
     role: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -20,11 +22,38 @@ const ContactHRForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
-    alert("Thank you! Your message has been sent to our HR team.");
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: `${formData.message}\n\nRole / Area of interest: ${formData.role || "Not specified"}`,
+          subject: "Careers / Talent Network enquiry",
+          context: "Careers contact form",
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+
+      alert("Thank you! Your message has been sent to our HR team.");
+      setFormData({ name: "", email: "", role: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -129,12 +158,16 @@ const ContactHRForm = () => {
                         />
                         </div>
 
-                        <div className="pt-4">
+                        <div className="pt-4 space-y-3">
+                        {submitError && (
+                          <p className="text-sm text-red-500">{submitError}</p>
+                        )}
                         <button
                             type="submit"
-                            className="w-full bg-primary text-white text-lg font-bold py-4 rounded-xl hover:bg-primary-blue transition-all shadow-xl hover:shadow-primary-blue/25 active:scale-[0.98] flex items-center justify-center gap-2 group"
+                            disabled={isSubmitting}
+                            className="w-full bg-primary text-white text-lg font-bold py-4 rounded-xl hover:bg-primary-blue transition-all shadow-xl hover:shadow-primary-blue/25 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
                         >
-                            Send to HR Team
+                            {isSubmitting ? "Sending..." : "Send to HR Team"}
                             <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>

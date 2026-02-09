@@ -14,6 +14,7 @@ const QuoteFormSection = () => {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -54,12 +55,29 @@ const QuoteFormSection = () => {
     }
 
     setIsSubmitting(true);
-    // Handle form submission here
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert("Quote request sent successfully!");
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+
       setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 1000);
+      alert("Quote request sent successfully!");
+    } catch (err) {
+      console.error(err);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -98,9 +116,12 @@ const QuoteFormSection = () => {
               className="flex flex-col"
             >
               <BoxShadow className="h-full flex flex-col justify-center bg-transparent border-white/10 p-6 md:p-8 lg:p-12">
-                <h2 className="text-2xl md:text-3xl font-medium text-white mb-6">
+                <h2 className="text-2xl md:text-3xl font-medium text-white mb-3">
                   Complete the form below to receive your tailored quote
                 </h2>
+                {submitError && (
+                  <p className="mb-3 text-sm text-red-400">{submitError}</p>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Name Field */}

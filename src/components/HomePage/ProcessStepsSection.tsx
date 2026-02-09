@@ -101,6 +101,7 @@ const ProcessStepsSection = () => {
   })
   const [error, setError] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [direction, setDirection] = useState(0) // -1 for back, 1 for next
 
   const step = formSteps[currentStep]
@@ -129,7 +130,7 @@ const ProcessStepsSection = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 0))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (submitted) return
     if (currentStep < formSteps.length - 1) { handleNext(); return }
@@ -138,11 +139,31 @@ const ProcessStepsSection = () => {
     if (msg) { setError(msg); return }
     
     setError("")
-    setSubmitted(true)
-    // Simulate API submission
-    setTimeout(() => {
-        // Success animation logic handled by state
-    }, 1500)
+    setSubmitError(null)
+
+    try {
+      await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: "Homepage quote / project request",
+          message: formData.message,
+          meta: {
+            service: formData.service,
+            companyStage: formData.companyStage,
+            documentStatus: formData.documentStatus,
+            communicationChannel: formData.communicationChannel,
+            updateCadence: formData.updateCadence,
+          },
+        }),
+      })
+      setSubmitted(true)
+    } catch (err) {
+      console.error(err)
+      setSubmitError("Something went wrong. Please try again.")
+    }
   }
 
   const handleChange = (key: keyof FormData, value: any) => {

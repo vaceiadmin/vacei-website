@@ -104,14 +104,14 @@ const PricingOverviewSection = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <FadeInUp>
-            <SectionBadge text="Transparent Pricing" className="bg-white/80 backdrop-blur-md border border-gray-200 text-heading shadow-sm" />
+            <SectionBadge text="Service Pricing Models" className="bg-white/80 backdrop-blur-md border border-gray-200 text-heading shadow-sm" />
             <TextAnimation
-              text="Simple, Transparent Models."
+              text="Explore Our Service Categories"
               as="h2"
               className="mt-6 text-3xl md:text-5xl font-medium text-heading tracking-tight"
             />
             <p className="mt-4 text-gray text-lg max-w-2xl mx-auto">
-              Pricing designed to scale with you. Choose the services that match your current stage.
+              Each service is priced based on your specific requirements. Browse our categories to understand typical pricing models.
             </p>
           </FadeInUp>
         </div>
