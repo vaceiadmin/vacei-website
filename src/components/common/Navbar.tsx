@@ -693,13 +693,13 @@ const Navbar = () => {
           >
             {/* Sidebar Container with gradient background, border radius, and hidden scrollbar */}
             <div
-              className="h-full w-full rounded-l-3xl overflow-y-auto hide-scrollbar"
+              className="h-full w-full rounded-l-3xl overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-white/20"
               style={{
                 background:
                   "linear-gradient(135deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%)",
               }}
             >
-              <div className="p-6 lg:p-8 space-y-8 h-full">
+              <div className="p-6 lg:p-8 space-y-8 h-full relative">
                 {/* Header with Logo and Close Button */}
                 <div className="flex items-center justify-between">
                   <Link
@@ -875,6 +875,20 @@ const Navbar = () => {
                     </a>
                   </div>
                 </div>
+
+                 {/* Download Brochure PDF Icon - Matches provided screenshot */}
+                 <div className="absolute bottom-6 right-6 z-20">
+                    <a
+                      href="#"
+                      className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform group"
+                      aria-label="Download PDF"
+                    >
+                      <svg className="w-6 h-6 text-[#E52828]" viewBox="0 0 24 24" fill="currentColor">
+                         <path d="M11.293 1.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L13 4.414V14a1 1 0 1 1-2 0V4.414L6.707 8.707a1 1 0 0 1-1.414-1.414l6-6zM5 16a1 1 0 0 1 1 1v4h12v-4a1 1 0 1 1 2 0v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4a1 1 0 0 1 1-1z" />
+                      </svg>
+                    </a>
+                 </div>
+
               </div>
             </div>
           </motion.div>

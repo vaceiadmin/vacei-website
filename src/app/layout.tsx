@@ -6,7 +6,7 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import PageTransition from "@/components/common/PageTransition";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
-import IntroAnimation from "@/components/common/IntroAnimation";
+import IntroAnimationGate from "@/components/common/IntroAnimationGate";
 
 const bodoni = Libre_Bodoni({
   subsets: ["latin"],
@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${bodoni.variable} ${montserrat.variable} ${nunito.variable}`}>
-         <IntroAnimation /> 
+         <IntroAnimationGate /> 
         <SmoothScroll>
           <Navbar />
           <PageTransition>{children}</PageTransition>

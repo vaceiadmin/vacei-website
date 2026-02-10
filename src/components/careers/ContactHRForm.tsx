@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FadeInUp } from "../common/Animations";
 import { motion } from "framer-motion";
 import GradientContainer from "../common/GradientContainer";
+import FormStatusModal from "../common/FormStatusModal";
 
 const ContactHRForm = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,9 @@ const ContactHRForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [statusOpen, setStatusOpen] = useState(false);
+  const [statusType, setStatusType] = useState<"success" | "error">("success");
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -46,18 +50,31 @@ const ContactHRForm = () => {
         throw new Error("Request failed");
       }
 
-      alert("Thank you! Your message has been sent to our HR team.");
       setFormData({ name: "", email: "", role: "", message: "" });
+      setStatusType("success");
+      setStatusMessage("Thank you! Your message has been sent to our HR team.");
+      setStatusOpen(true);
     } catch (err) {
       console.error(err);
       setSubmitError("Something went wrong. Please try again.");
+      setStatusType("error");
+      setStatusMessage("We couldn’t send your message. Please try again in a moment.");
+      setStatusOpen(true);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <GradientContainer className="py-20 lg:py-28 overflow-hidden" showRadials={false} backgroundColor="bg-primary">
+    <>
+      <FormStatusModal
+        open={statusOpen}
+        type={statusType}
+        title={statusType === "success" ? "Message sent" : "Something went wrong"}
+        message={statusMessage}
+        onClose={() => setStatusOpen(false)}
+      />
+      <GradientContainer className="py-20 lg:py-28 overflow-hidden" showRadials={false} backgroundColor="bg-primary">
       <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
             <FadeInUp>
@@ -179,6 +196,7 @@ const ContactHRForm = () => {
         </FadeInUp>
       </div>
     </GradientContainer>
+    </>
   );
 };
 

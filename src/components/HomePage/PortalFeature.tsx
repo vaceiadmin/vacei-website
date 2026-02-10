@@ -77,10 +77,10 @@ const PortalFeature = () => {
                                 
                                 {/* Image Column (Glassy Portal) */}
                                 <motion.div 
-                                    initial={{ opacity: 0, x: isReversed ? 50 : -50, rotateY: isReversed ? -10 : 10 }}
+                                    initial={{ opacity: 0, x: isReversed ? 60 : -60, rotateY: isReversed ? -5 : 5 }}
                                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                                     viewport={{ once: true, margin: "-100px" }}
-                                    transition={{ duration: 0.8, ease: "easeOut" }}
+                                    transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full lg:w-1/2 relative perspective-1000 group"
                                 >
                                     {/* Glass Base - Sleek Dark Card */}
@@ -98,23 +98,41 @@ const PortalFeature = () => {
                                                 <motion.div
                                                     key={imgIdx}
                                                     className={`absolute ${img.className} transition-transform duration-700 group-hover:scale-105`}
-                                                    animate={{
-                                                        y: [0, -10, 0],
+                                                    initial={{ 
+                                                        y: 10, 
+                                                        opacity: 0 
                                                     }}
-                                                    transition={{
-                                                        duration: 4 + imgIdx,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut",
-                                                        delay: imgIdx * 1
+                                                    whileInView={{ 
+                                                        y: 0, 
+                                                        opacity: 1 
+                                                    }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ 
+                                                        duration: 0.8, 
+                                                        delay: 0.2 + (imgIdx * 0.2), 
+                                                        ease: [0.16, 1, 0.3, 1] 
                                                     }}
                                                 >
-                                                     <Image 
-                                                        src={img.src} 
-                                                        alt={img.alt} 
-                                                        width={600} 
-                                                        height={400} 
-                                                        className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-                                                     />
+                                                    {/* Floating Animation Wrapper */}
+                                                    <motion.div
+                                                        animate={{
+                                                            y: [0, -12, 0],
+                                                        }}
+                                                        transition={{
+                                                            duration: 4 + imgIdx,
+                                                            repeat: Infinity,
+                                                            ease: "easeInOut",
+                                                            delay: imgIdx * 1.5
+                                                        }}
+                                                    >
+                                                         <Image 
+                                                            src={img.src} 
+                                                            alt={img.alt} 
+                                                            width={600} 
+                                                            height={400} 
+                                                            className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+                                                         />
+                                                    </motion.div>
                                                 </motion.div>
                                             ))}
                                         </div>
@@ -132,13 +150,18 @@ const PortalFeature = () => {
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.8, delay: 0.2 }}
+                                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full lg:w-1/2 space-y-8"
                                 >
                                     <div className="space-y-4">
-                                        <div className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-widest text-[#989fea] uppercase mb-2">
+                                        <motion.div 
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            transition={{ delay: 0.3, duration: 0.5 }}
+                                            className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-widest text-[#989fea] uppercase mb-2"
+                                        >
                                             Feature {idx + 1}
-                                        </div>
+                                        </motion.div>
                                         <TextAnimation 
                                             text={feature.title} 
                                             as="h2" 
@@ -156,7 +179,8 @@ const PortalFeature = () => {
                                                 key={i}
                                                 initial={{ opacity: 0, x: -20 }}
                                                 whileInView={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: 0.3 + (i * 0.1) }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: 0.4 + (i * 0.1), duration: 0.6, ease: "easeOut" }}
                                                 className="flex items-center gap-4 text-white/90 text-lg"
                                             >
                                                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary-blue/20 border border-primary-blue/50 text-primary-blue">
@@ -167,7 +191,13 @@ const PortalFeature = () => {
                                         ))}
                                     </ul>
 
-                                    <div className="pt-6">
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.6, duration: 0.5 }}
+                                        className="pt-6"
+                                    >
                                         <GetInstantQuoteButton
                                             variant="custom"
                                             text={feature.buttonText}
@@ -176,7 +206,7 @@ const PortalFeature = () => {
                                             textColor="white"
                                             className="px-8 py-4 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-blue-900/40 hover:shadow-blue-900/60 hover:scale-105 transition-all text-sm md:text-base border border-white/10"
                                         />
-                                    </div>
+                                    </motion.div>
                                 </motion.div>
 
                             </div>

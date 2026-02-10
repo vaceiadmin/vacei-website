@@ -44,7 +44,7 @@ const PodcastSection = () => {
           <div className="text-center mb-10 lg:mb-12">
             <SectionBadge
               text="Our Podcast"
-              className="border-white text-white/80"
+              className="border-white !text-white/80"
             />
             <h2 className="mt-4 text-3xl md:text-4xl font-semibold text-white leading-tight">
               Podcast

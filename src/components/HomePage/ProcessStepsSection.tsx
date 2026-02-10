@@ -260,7 +260,7 @@ const ProcessStepsSection = () => {
                         </div>
 
                         {/* Fields Container */}
-                        <div className="flex-grow relative">
+                        <div className="grow relative">
                             <AnimatePresence initial={false} custom={direction} mode="wait">
                                 <motion.div
                                     key={currentStep}
@@ -364,22 +364,24 @@ const ProcessStepsSection = () => {
                         {/* Action Buttons */}
                         <div className="mt-8 flex items-center gap-4">
                              {currentStep > 0 && (
-                                <button
+                                <motion.button
+                                    whileHover={{ scale: 1.03, y: -2 }}
+                                    whileTap={{ scale: 0.97, y: 0 }}
                                     type="button"
                                     onClick={handleBack}
-                                    className="px-6 py-4 rounded-xl font-bold text-gray-600 hover:text-[#1a1c35] bg-white/30 hover:bg-white/60 transition-all"
+                                    className="px-6 py-4 rounded-xl font-bold text-gray-600 hover:text-[#1a1c35] bg-white/30 hover:bg-white/60 transition-all shadow-sm hover:shadow-md"
                                 >
                                     Back
-                                </button>
+                                </motion.button>
                              )}
                              <motion.button
                                 whileHover={{ scale: 1.02, boxShadow: "0 10px 30px -10px rgba(59,73,230,0.4)" }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
-                                className="flex-grow py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-[#3b49e6]/20 transition-all relative overflow-hidden group"
+                                className="grow py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-[#3b49e6]/20 transition-all relative overflow-hidden group"
                              >
                                 <span className="relative z-10">{step.primaryLabel || "Next Step"}</span>
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                              </motion.button>
                         </div>
                     </form>
@@ -419,23 +421,24 @@ const ProcessStepsSection = () => {
                </div>
             </motion.div>
 
-            {/* --- Right Column: Interactive Step Progress --- */}
+            {/* --- Right Column: Sleek Timeline --- */}
             <div className="relative lg:pl-10 h-full flex flex-col justify-center">
                 {/* Connecting Line (Track) */}
-                <div className="absolute left-[27px] top-6 bottom-6 w-[2px] bg-gray-300/30 rounded-full lg:block hidden" />
+                <div className="absolute left-[31px] top-5 bottom-8 w-[2px] bg-white/40 backdrop-blur-sm rounded-full lg:block hidden" />
                 
                 {/* Active Progress Line */}
-                <div className="absolute left-[27px] top-6 bottom-6 lg:block hidden">
+                <div className="absolute left-[31px] top-5 bottom-8 lg:block hidden">
                    <motion.div 
-                     className="w-[2px] bg-[#3b49e6] rounded-full origin-top"
-                     initial={{ scaleY: 0 }}
-                     animate={{ scaleY: currentStep / (processSteps.length - 1) }}
-                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                     style={{ height: '100%' }}
+                     className="w-[2px] rounded-full bg-gradient-to-b from-[#3b49e6] via-[#3b49e6] to-transparent shadow-[0_0_18px_rgba(59,73,230,0.45)]"
+                     initial={{ height: 0 }}
+                     animate={{ 
+                       height: `${(currentStep / (processSteps.length - 1)) * 100}%`
+                     }}
+                     transition={{ duration: 0.6, ease: "easeInOut" }}
                    />
                 </div>
 
-                <div className="space-y-10 relative z-10">
+                <div className="space-y-6 md:space-y-8 relative z-10">
                     {processSteps.map((s, idx) => {
                         const isActive = idx === currentStep;
                         const isPast = idx < currentStep;
@@ -452,11 +455,11 @@ const ProcessStepsSection = () => {
                                 {/* Indicator Circle */}
                                 <motion.div 
                                     animate={{ 
-                                        scale: isActive ? 1.15 : 1,
-                                        backgroundColor: isActive || isPast ? "#FFFFFF" : "rgba(255,255,255,0.5)",
-                                        borderColor: isActive || isPast ? "#3b49e6" : "rgba(156, 163, 175, 0.5)"
+                                        scale: isActive ? 1.1 : 1,
+                                        backgroundColor: isActive || isPast ? "#FFFFFF" : "rgba(255,255,255,0.35)",
+                                        borderColor: isActive || isPast ? "#3b49e6" : "rgba(156, 163, 175, 0.45)"
                                     }}
-                                    className={`relative z-10 w-14 h-14 shrink-0 rounded-full border-[3px] flex items-center justify-center text-lg font-bold transition-all shadow-sm ${isActive ? "shadow-[0_0_20px_rgba(59,73,230,0.3)] ring-4 ring-[#3b49e6]/10" : ""}`}
+                                    className={`relative z-10 w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-full border-[3px] flex items-center justify-center text-sm md:text-lg font-semibold transition-all shadow-sm ${isActive ? "shadow-[0_0_24px_rgba(59,73,230,0.35)] ring-4 ring-[#3b49e6]/15" : ""}`}
                                 >
                                     {isPast ? (
                                         <svg className="w-6 h-6 text-[#3b49e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -466,24 +469,26 @@ const ProcessStepsSection = () => {
                                 </motion.div>
 
                                 {/* Text Content */}
-                                <div className="pt-1.5">
-                                    <h4 className={`text-2xl font-extrabold mb-2 transition-colors duration-300 ${isActive ? "text-[#1a1c35]" : "text-gray-500"}`}>
-                                        {s.title}
-                                    </h4>
-                                    <AnimatePresence>
-                                        {(isActive || isPast) && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                className="overflow-hidden"
-                                            >
-                                                <p className="text-gray-600 font-medium leading-relaxed max-w-sm">
-                                                    {s.description}
-                                                </p>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                                <div className="pt-1.5 flex-1">
+                                    <div className={`rounded-2xl px-4 py-3 md:px-5 md:py-4 transition-all duration-300 border ${isActive ? "bg-white/70 border-white/80 shadow-[0_18px_40px_-22px_rgba(15,23,42,0.45)]" : "bg-white/20 border-white/40 hover:bg-white/40 hover:border-white/80"} backdrop-blur-sm`}>
+                                        <h4 className={`text-lg md:text-xl font-extrabold mb-1.5 tracking-tight transition-colors duration-300 ${isActive ? "text-[#111827]" : "text-gray-600"}`}>
+                                            {s.title}
+                                        </h4>
+                                        <AnimatePresence>
+                                            {(isActive || isPast) && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <p className="text-sm md:text-base text-gray-600 font-medium leading-relaxed max-w-sm">
+                                                        {s.description}
+                                                    </p>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
                             </motion.div>
                         )

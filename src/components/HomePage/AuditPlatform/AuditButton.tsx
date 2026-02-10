@@ -20,7 +20,7 @@ export default function AuditButton({
   color = "theme",
   ...props
 }: ButtonProps) {
-  const base = "font-semibold font-sans transition duration-300 flex items-center justify-center";
+  const base = "font-semibold font-sans transition duration-300 flex items-center justify-center transform hover:-translate-y-0.5 hover:shadow-md";
   const rounded = pill ? "rounded-full" : "rounded-lg";
   
   let sizeClass = "";

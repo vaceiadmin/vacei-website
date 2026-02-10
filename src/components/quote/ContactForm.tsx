@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
+import FormStatusModal from "@/components/common/FormStatusModal";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,9 @@ const ContactForm = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [statusOpen, setStatusOpen] = useState(false);
+  const [statusType, setStatusType] = useState<"success" | "error">("success");
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -70,17 +74,30 @@ const ContactForm = () => {
       }
 
       setFormData({ name: "", email: "", message: "" });
-      alert("Message sent successfully!");
+      setStatusType("success");
+      setStatusMessage("Your message has been sent. We’ll reply as soon as we can.");
+      setStatusOpen(true);
     } catch (err) {
       console.error(err);
       setSubmitError("Something went wrong. Please try again.");
+      setStatusType("error");
+      setStatusMessage("We couldn’t send your message. Please try again in a moment.");
+      setStatusOpen(true);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="py-16 lg:py-24 ">
+    <>
+      <FormStatusModal
+        open={statusOpen}
+        type={statusType}
+        title={statusType === "success" ? "Message sent" : "Something went wrong"}
+        message={statusMessage}
+        onClose={() => setStatusOpen(false)}
+      />
+      <section className="py-16 lg:py-24 ">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className=" rounded-2xl  p-6 md:p-8 lg:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -159,13 +176,15 @@ const ContactForm = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.97, y: 0 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-dark-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-primary hover:bg-dark-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
+                </motion.button>
               </form>
             </motion.div>
 
@@ -184,7 +203,7 @@ const ContactForm = () => {
               <div className="space-y-6 mb-8">
                 {/* Email */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -202,7 +221,7 @@ const ContactForm = () => {
 
                 {/* Phone */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -220,7 +239,7 @@ const ContactForm = () => {
 
                 {/* Address */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -239,16 +258,21 @@ const ContactForm = () => {
                 <p className="text-base md:text-lg font-semibold text-heading mb-4">
                   Prefer to talk?
                 </p>
-                <button className="bg-purple-bg hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.97, y: 0 }}
+                  className="bg-purple-bg hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                >
                   <span>Book a free 15-minute call</span>
                   <PhoneCall className="w-5 h-5" />
-                </button>
+                </motion.button>
               </div>
             </motion.div>
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 };
 

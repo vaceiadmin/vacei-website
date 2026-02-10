@@ -1,5 +1,6 @@
 "use client"
 import React from "react"
+import { motion } from "framer-motion"
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
 import TextAnimation from "../common/TextAnimation"
 import { FadeInUp } from "../common/Animations"
@@ -9,12 +10,26 @@ const ReadyToSimplifySection = () => {
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
       <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
         
-        <div className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden">
+        <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
+        >
             
             {/* Decorative soft gradients */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-blue-50 rounded-full blur-[80px] opacity-60" />
-                <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-50 rounded-full blur-[80px] opacity-60" />
+                <motion.div 
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-blue-50 rounded-full blur-[80px]" 
+                />
+                <motion.div 
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
+                    transition={{ duration: 8, delay: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-50 rounded-full blur-[80px]" 
+                />
             </div>
 
             <FadeInUp className="relative z-10 flex flex-col items-center">
@@ -30,7 +45,7 @@ const ReadyToSimplifySection = () => {
                 <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
                 <GetInstantQuoteButton
                     text="Get Instant Quote"
-                    className="px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20"
+                    className="px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20 hover:scale-105 transition-transform"
                     bgColor="#3b49e6"
                     textColor="white"
                     hasShadow={true}
@@ -41,12 +56,12 @@ const ReadyToSimplifySection = () => {
                     href="/services"
                     bgColor="white"
                     textColor="#1a1c35"
-                    className="px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 hover:bg-gray-50 transition-colors"
+                    className="px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all"
                     hasShadow={false}
                 />
                 </div>
             </FadeInUp>
-        </div>
+        </motion.div>
 
       </div>
     </section>

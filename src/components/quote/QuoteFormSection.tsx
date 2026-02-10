@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import GradientContainer from "@/components/common/GradientContainer";
 import BoxShadow from "@/components/common/BoxShadow";
+import FormStatusModal from "@/components/common/FormStatusModal";
 
 const QuoteFormSection = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +16,9 @@ const QuoteFormSection = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [statusOpen, setStatusOpen] = useState(false);
+  const [statusType, setStatusType] = useState<"success" | "error">("success");
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -71,17 +75,30 @@ const QuoteFormSection = () => {
       }
 
       setFormData({ name: "", email: "", subject: "", message: "" });
-      alert("Quote request sent successfully!");
+      setStatusType("success");
+      setStatusMessage("Your quote request has been sent. We’ll get back to you shortly.");
+      setStatusOpen(true);
     } catch (err) {
       console.error(err);
       setSubmitError("Something went wrong. Please try again.");
+      setStatusType("error");
+      setStatusMessage("We couldn’t send your request. Please try again in a moment.");
+      setStatusOpen(true);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="py-16 lg:py-24">
+    <>
+      <FormStatusModal
+        open={statusOpen}
+        type={statusType}
+        title={statusType === "success" ? "Request sent" : "Something went wrong"}
+        message={statusMessage}
+        onClose={() => setStatusOpen(false)}
+      />
+      <section className="py-16 lg:py-24">
       <GradientContainer
         className="w-full"
         backgroundColor="bg-primary"
@@ -216,7 +233,8 @@ const QuoteFormSection = () => {
           </div>
         </div>
       </GradientContainer>
-    </section>
+      </section>
+    </>
   );
 };
 

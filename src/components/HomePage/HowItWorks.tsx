@@ -120,11 +120,13 @@ const HowItWorks = () => {
                                     className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
                                     priority
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent" />
 
                                 {/* Glassy Play Button Overlay */}
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <button
+                                    <motion.button
+                                        whileHover={{ scale: 1.07, y: -2 }}
+                                        whileTap={{ scale: 0.96, y: 0 }}
                                         onClick={() => setIsPlaying(true)}
                                         className="relative w-20 h-20 md:w-24 md:h-24 rounded-full group/btn outline-none"
                                         aria-label="Play Video"
@@ -135,9 +137,9 @@ const HowItWorks = () => {
                                         {/* Glass Button Base */}
                                         <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] flex items-center justify-center transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:bg-white/20 group-hover/btn:border-white/50">
                                             {/* Play Triangle */}
-                                            <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1 drop-shadow-lg"></div>
+                                            <div className="w-0 h-0 border-t-12 border-t-transparent border-l-20 border-l-white border-b-12 border-b-transparent ml-1 drop-shadow-lg"></div>
                                         </div>
-                                    </button>
+                                    </motion.button>
                                 </div>
                             </>
                         ) : (
@@ -164,7 +166,7 @@ const HowItWorks = () => {
                                 className="relative p-6 rounded-2xl bg-primary/50 border border-white/5 backdrop-blur-sm hover:bg-primary/70 hover:border-primary-blue/30 transition-all duration-300 group"
                             >
                                 {/* Icon Box */}
-                                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-300 shadow-lg">
+                                <div className="w-14 h-14 rounded-xl bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-300 shadow-lg">
                                     {step.icon}
                                 </div>
 
@@ -176,7 +178,7 @@ const HowItWorks = () => {
                                 
                                 {/* Connector Line (Desktop Only, except last item) */}
                                 {index < steps.length - 1 && (
-                                    <div className="hidden lg:block absolute top-[2.75rem] -right-[1.75rem] w-8 h-[2px] bg-gradient-to-r from-white/10 to-transparent" />
+                                    <div className="hidden lg:block absolute top-11 -right-7 w-8 h-[2px] bg-linear-to-r from-white/10 to-transparent" />
                                 )}
                             </motion.div>
                         ))}

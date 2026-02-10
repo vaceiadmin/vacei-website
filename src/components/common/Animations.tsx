@@ -13,13 +13,16 @@ interface AnimationProps extends HTMLMotionProps<"div"> {
   as?: keyof typeof motion;
 }
 
+// Premium easing curve for smooth "hero-like" feel
+const PREMIUM_EASE = [0.16, 1, 0.3, 1];
+
 // 1. Fade In Up (Most common)
 export const FadeInUp = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.6,
-  viewportMargin = "-100px",
+  duration = 0.8,
+  viewportMargin = "-50px",
   once = true,
   as = "div",
   ...props
@@ -28,10 +31,10 @@ export const FadeInUp = ({
 
   return (
     <Component
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: viewportMargin }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
     >
@@ -45,8 +48,8 @@ export const FadeInLeft = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.6,
-  viewportMargin = "-100px",
+  duration = 0.8,
+  viewportMargin = "-50px",
   once = true,
   as = "div",
   ...props
@@ -55,10 +58,10 @@ export const FadeInLeft = ({
 
   return (
     <Component
-      initial={{ opacity: 0, x: -60 }}
+      initial={{ opacity: 0, x: -40 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once, margin: viewportMargin }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
     >
@@ -72,8 +75,8 @@ export const FadeInRight = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.6,
-  viewportMargin = "-100px",
+  duration = 0.8,
+  viewportMargin = "-50px",
   once = true,
   as = "div",
   ...props
@@ -82,10 +85,10 @@ export const FadeInRight = ({
 
   return (
     <Component
-      initial={{ opacity: 0, x: 60 }}
+      initial={{ opacity: 0, x: 40 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once, margin: viewportMargin }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
     >
@@ -99,8 +102,8 @@ export const ZoomIn = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.5,
-  viewportMargin = "-100px",
+  duration = 0.6,
+  viewportMargin = "-50px",
   once = true,
   as = "div",
   ...props
@@ -109,10 +112,10 @@ export const ZoomIn = ({
 
   return (
     <Component
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once, margin: viewportMargin }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
     >
@@ -129,8 +132,8 @@ interface StaggerProps extends AnimationProps {
 export const StaggerContainer = ({
   children,
   className = "",
-  staggerDelay = 0.1,
-  viewportMargin = "-100px",
+  staggerDelay = 0.15,
+  viewportMargin = "-50px",
   once = true,
   as = "div",
   ...props
@@ -148,6 +151,7 @@ export const StaggerContainer = ({
           opacity: 1,
           transition: {
             staggerChildren: staggerDelay,
+            delayChildren: 0.1,
           },
         },
       }}
