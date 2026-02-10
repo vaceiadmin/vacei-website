@@ -3,7 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const IntroAnimation = () => {
+type IntroAnimationProps = {
+  onComplete?: () => void;
+};
+
+const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
 
@@ -40,7 +44,7 @@ const IntroAnimation = () => {
   }));
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={onComplete}>
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}

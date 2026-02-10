@@ -1,25 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import IntroAnimation from "./IntroAnimation";
 
-// Wrapper to only show the intro animation once per browser session
+// Shows the intro loader on every page load/refresh (no session persistence).
 const IntroAnimationGate = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const hasSeenIntro = window.sessionStorage.getItem("vacei_intro_seen");
-    if (!hasSeenIntro) {
-      setShow(true);
-      window.sessionStorage.setItem("vacei_intro_seen", "1");
-    }
-  }, []);
+  const handleComplete = () => setShow(false);
 
   if (!show) return null;
 
-  return <IntroAnimation />;
+  return <IntroAnimation onComplete={handleComplete} />;
 };
 
 export default IntroAnimationGate;
