@@ -45,7 +45,7 @@ const PricingCTA = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/contact">
+                    <Link href="/quote#quote-section-2">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -63,7 +63,7 @@ const PricingCTA = () => {
                       </motion.button>
                     </Link>
 
-                    <Link href="/contact">
+                    <Link href="/quote#quote-section-2">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -113,8 +113,9 @@ const PricingCTA = () => {
                 </div>
 
                 {/* Right: Visual Element */}
-                <div className="hidden lg:block relative">
-                  <div className="relative">
+                <div className="hidden lg:flex relative items-center justify-end">
+                  {/* Wrapper with fixed height so the card stack can be vertically centered */}
+                  <div className="relative h-[260px] w-[260px]">
                     {/* Floating Cards */}
                     <motion.div
                       animate={{ y: [0, -30, 0] }}
@@ -141,7 +142,7 @@ const PricingCTA = () => {
                     <motion.div
                       animate={{ y: [0, -35, 0] }}
                       transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute top-32 right-20 w-64 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl"
+                      className="absolute top-20 right-16 w-64 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl"
                     >
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
@@ -163,7 +164,7 @@ const PricingCTA = () => {
                     <motion.div
                       animate={{ y: [0, -40, 0] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                      className="absolute top-64 right-0 w-64 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl"
+                      className="absolute top-40 right-0 w-64 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl"
                     >
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 rounded-lg bg-green-500/30 flex items-center justify-center">

@@ -16,7 +16,6 @@ const Navbar = () => {
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [hamburgerHover, setHamburgerHover] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(false); // Default to light background
 
@@ -345,7 +344,7 @@ const Navbar = () => {
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },
         { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote" },
+        { label: "Get Instant Quote", href: "/quote#quote-section-2" },
         { label: "CPE & Podcast", href: "/cpe" },
       ]
     : [
@@ -354,7 +353,7 @@ const Navbar = () => {
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },
         { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote" },
+        { label: "Get Instant Quote", href: "/quote#quote-section-2" },
         { label: "CPE & Podcast", href: "/cpe" },
       ];
 
@@ -749,35 +748,69 @@ const Navbar = () => {
                   </p>
                 </div>
 
-                {/* Search Section */}
+                {/* Sidebar Quick Links Section (static) */}
                 <div className="space-y-4">
-                  <h3 className="text-white font-bold text-lg">Search Now!</h3>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Search here.."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full px-4 py-3 pr-12 bg-white rounded-lg text-text-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-blue"
-                    />
-                    <button
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-text-dark transition-colors"
-                      aria-label="Search"
+                  <h3 className="text-white font-bold text-lg">Quick actions</h3>
+                  <div className="space-y-3">
+                    <Link
+                      href="/quote#quote-section-2"
+                      onClick={() => setSidebarOpen(false)}
+                      className="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all"
                     >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                      </svg>
-                    </button>
+                      <div>
+                        <p className="text-sm font-semibold text-white">
+                          Request a quote
+                        </p>
+                        <p className="text-xs text-white/70">
+                          Share your requirements in a few steps.
+                        </p>
+                      </div>
+                      <span className="ml-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-blue">
+                        <svg
+                          className="w-4 h-4 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </Link>
+
+                    <Link
+                      href="/services"
+                      onClick={() => setSidebarOpen(false)}
+                      className="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 transition-all"
+                    >
+                      <div>
+                        <p className="text-sm font-semibold text-white">
+                          Explore services
+                        </p>
+                        <p className="text-xs text-white/70">
+                          View accounting, audit and corporate offerings.
+                        </p>
+                      </div>
+                      <span className="ml-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
+                        <svg
+                          className="w-4 h-4 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </Link>
                   </div>
                 </div>
 

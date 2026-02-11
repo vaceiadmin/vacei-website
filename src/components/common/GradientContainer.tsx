@@ -33,7 +33,13 @@ const GradientContainer = ({
     
     
     return (
-        <div className={`relative w-full ${bgColor} ${className}`}>
+        <div
+            className={`
+                relative w-full ${bgColor} ${className}
+                rounded-[32px] md:rounded-[48px] 
+                overflow-hidden
+            `}
+        >
             {/* Background Wrapper with Overflow Hidden */}
             <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
                 {/* Background Radial Image - Top Left */}

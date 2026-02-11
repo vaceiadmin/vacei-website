@@ -17,95 +17,73 @@ const ServiceOverview = ({
   image,
 }: ServiceOverviewProps) => {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-background via-background to-gray-50/30">
-      {/* Ambient Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-primary-blue/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      </div>
+    // Full-width light background strip; content centered within
+    <section className="py-20 ">
+      <div className=" mx-auto px-4 md:px-6 lg:px-8">
+        <div className="relative rounded-[32px] md:rounded-[40px] bg-white shadow-[0_18px_60px_rgba(15,23,42,0.06)] border border-gray-100 px-6 sm:px-10 lg:px-14 py-10 sm:py-12 lg:py-16 overflow-hidden">
+          {/* subtle ambient light blobs */}
+          <div className="pointer-events-none absolute -top-24 -left-16 w-72 h-72 bg-primary-blue/5 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-28 -right-10 w-80 h-80 bg-purple-200/20 blur-3xl" />
 
-      {/* Wave Background Pattern */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center z-0"
-        style={{
-          backgroundImage: "url('/Background pattern.svg')",
-          opacity: 0.04,
-        }}
-      />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center"
+          >
+            {/* Text Content */}
+            <div>
+              <TextAnimation
+                text={title}
+                as="h1"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-heading mb-6 leading-tight tracking-tight"
+              />
 
-      <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
-        {/* Main Glass Card Container */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative"
-        >
-          {/* Glassmorphism Card */}
-          <div className="relative bg-white/40 backdrop-blur-2xl border border-white/60 rounded-3xl overflow-hidden shadow-2xl shadow-gray-900/5">
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-primary-blue/5 pointer-events-none" />
-            
-            {/* Content Container */}
-            <div className="relative z-10">
-              {/* Image Section */}
-              <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/60 z-10" />
+              {/* Decorative Line */}
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: "5rem" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="h-1 bg-gradient-to-r from-primary-blue to-primary rounded-full mb-8"
+              />
+
+              <div className="space-y-5 text-base md:text-lg text-text-gray leading-relaxed">
+                {description}
+              </div>
+            </div>
+
+            {/* Image / Visual */}
+            <div className="relative">
+              <div className="relative w-full h-64 sm:h-72 lg:h-80 rounded-3xl overflow-hidden border border-gray-100 bg-[#f9fbff]">
                 <Image
                   src={image}
                   alt={`${title} Overview`}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
-                
-                {/* Floating Accent Elements */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-8 right-8 w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl border border-white/40 shadow-lg"
-                />
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="absolute bottom-8 left-8 w-16 h-16 bg-primary-blue/20 backdrop-blur-md rounded-full border border-white/40 shadow-lg"
-                />
+
+                {/* Soft gradient overlay for readability */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/40 via-transparent to-transparent" />
               </div>
 
-              {/* Text Content Section */}
-              <div className="px-8 md:px-12 lg:px-16 py-12 md:py-14 lg:py-16">
-                <TextAnimation
-                  text={title}
-                  as="h1"
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-heading mb-6 leading-tight tracking-tight"
-                />
-                
-                {/* Decorative Line */}
-                <motion.div 
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "5rem" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                  className="h-1 bg-gradient-to-r from-primary-blue to-primary rounded-full mb-8"
-                />
-                
-                <div className="prose prose-lg max-w-none">
-                  <div className="space-y-5 text-base md:text-lg text-text-gray/90 leading-relaxed">
-                    {description}
-                  </div>
-                </div>
-              </div>
+              {/* Floating accents */}
+              <motion.div
+                animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 w-16 h-16 rounded-2xl bg-white border border-gray-100 shadow-[0_18px_45px_rgba(15,23,42,0.12)]"
+              />
+              <motion.div
+                animate={{ y: [0, 10, 0], opacity: [0.4, 0.9, 0.4] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                className="absolute -bottom-6 left-6 w-24 h-24 rounded-full bg-primary-blue/10 border border-gray-100 shadow-[0_18px_45px_rgba(15,23,42,0.16)]"
+              />
             </div>
-
-            {/* Bottom Glow Effect */}
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-blue/30 to-transparent" />
-          </div>
-
-          {/* Floating Shadow Elements */}
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3/4 h-6 bg-primary-blue/10 blur-2xl rounded-full -z-10" />
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

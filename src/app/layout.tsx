@@ -7,6 +7,8 @@ import Footer from "@/components/common/Footer";
 import PageTransition from "@/components/common/PageTransition";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
 import IntroAnimationGate from "@/components/common/IntroAnimationGate";
+import ScrollToTopButton from "@/components/common/ScrollToTopButton";
+import SupportChat from "@/components/support-chat/SupportChat";
 
 const bodoni = Libre_Bodoni({
   subsets: ["latin"],
@@ -45,6 +47,8 @@ export default function RootLayout({
           <Navbar />
           <PageTransition>{children}</PageTransition>
           <Footer />
+          <ScrollToTopButton />
+          <SupportChat />
         </SmoothScroll>
       </body>
     </html>

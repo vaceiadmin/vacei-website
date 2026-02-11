@@ -69,7 +69,7 @@ const QuoteProcess = () => {
     ]
 
     return (
-        <section className="py-16 lg:py-24 bg-section-light">
+        <section id="quote-section-2" className="py-16 lg:py-24 bg-section-light">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                 {/* Header Section */}
                 <motion.div

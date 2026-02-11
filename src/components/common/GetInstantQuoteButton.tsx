@@ -25,7 +25,7 @@ const GetInstantQuoteButton = ({
   if (variant === 'custom') {
     return (
       <Link
-        href={href || "/quote"}
+        href={href || "/quote#quote-section-2"}
         className={`
           inline-flex items-center gap-2 px-6 py-3 rounded-full transition-all text-[15px] font-medium 
           ${bgColor ? '' : 'bg-primary-blue hover:bg-primary-blue-hover'}
@@ -67,7 +67,7 @@ const GetInstantQuoteButton = ({
 
   return (
     <Link
-      href={href || "/quote"}
+      href={href || "/quote#quote-section-2"}
       className={`
         inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
         ${hasShadow ? 'shadow-[0_4px_30px_var(--primary-blue-shadow)] hover:shadow-[0_6px_40px_var(--primary-blue-shadow)] transform hover:-translate-y-0.5' : ''}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 type IntroAnimationProps = {
@@ -213,71 +214,46 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 );
               })}
 
-              {/* Center Logo Text */}
+              {/* Center Logo Image */}
               <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: { 
-                      staggerChildren: 0.08,
-                      delayChildren: 0.3
-                    }
-                  }
+                initial={{ opacity: 0, scale: 0.8, y: 40 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                  delay: 0.3,
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
                 className="relative z-10"
               >
-                <div className="relative flex">
-                  {["V", "A", "C", "E", "I"].map((char, index) => (
-                    <motion.span
-                      key={index}
-                      variants={{
-                        hidden: { 
-                          opacity: 0, 
-                          y: 50,
-                          rotateX: -90,
-                          filter: "blur(10px)"
-                        },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          rotateX: 0,
-                          filter: "blur(0px)",
-                          transition: {
-                            duration: 0.8,
-                            ease: [0.22, 1, 0.36, 1],
-                          }
-                        }
-                      }}
-                      className="text-7xl md:text-8xl font-bold tracking-wider text-white font-mona-sans leading-none inline-block"
-                      style={{
-                        textShadow: '0 0 30px rgba(59, 73, 230, 0.5), 0 0 60px rgba(59, 73, 230, 0.3)',
-                        willChange: 'transform, opacity',
-                      }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                  
+                <div className="relative flex items-center justify-center">
+                  <div className="relative w-[220px] h-[80px] md:w-[260px] md:h-[95px]">
+                    <Image
+                      src="/assets/images/Logo.png"
+                      alt="VACEI logo"
+                      fill
+                      priority
+                      sizes="260px"
+                      className="object-contain drop-shadow-[0_0_30px_rgba(59,73,230,0.5)]"
+                    />
+                  </div>
+
                   {/* Shine Effect */}
                   <motion.div
                     initial={{ x: "-100%", opacity: 0 }}
-                    animate={{ 
-                      x: "200%", 
-                      opacity: [0, 1, 0] 
+                    animate={{
+                      x: "200%",
+                      opacity: [0, 1, 0],
                     }}
-                    transition={{ 
-                      delay: 1.5, 
-                      duration: 1.2, 
+                    transition={{
+                      delay: 1.5,
+                      duration: 1.2,
                       ease: "easeInOut",
                       repeat: Infinity,
                       repeatDelay: 2,
                     }}
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 pointer-events-none"
                     style={{
-                      willChange: 'transform, opacity',
+                      willChange: "transform, opacity",
                     }}
                   />
                 </div>
@@ -295,7 +271,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                   }}
                   className="absolute inset-0 bg-primary-blue/20 blur-3xl -z-10 rounded-full"
                   style={{
-                    willChange: 'transform, opacity',
+                    willChange: "transform, opacity",
                   }}
                 />
               </motion.div>

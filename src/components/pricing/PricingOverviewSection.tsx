@@ -197,9 +197,12 @@ const PricingOverviewSection = () => {
                 <p className="text-sm text-gray mb-6">
                   Get a tailored proposal based on your exact requirements.
                 </p>
-                <button className="px-6 py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-lg">
+                <a
+                  href="/quote#quote-section-2"
+                  className="px-6 py-3 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-blue transition-colors shadow-lg inline-flex items-center justify-center"
+                >
                   Get a Quote
-                </button>
+                </a>
               </div>
             </motion.div>
           </AnimatePresence>

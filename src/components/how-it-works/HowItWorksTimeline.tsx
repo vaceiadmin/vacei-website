@@ -40,7 +40,7 @@ const HowItWorksTimeline = ({
               text="How it works"
               className={
                 isDark
-                  ? "border-white/60 text-white/80"
+                  ? "border-white/60 !text-white/80"
                   : "border-purple-bg text-heading"
               }
             />
