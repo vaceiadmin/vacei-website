@@ -67,6 +67,8 @@ export async function POST(req: NextRequest) {
             .join("\n")
         : "No conversation transcript provided.";
 
+    const sessionToken = req.cookies.get("vacei_session")?.value || "N/A";
+
     await transport.sendMail({
       from: `"VACEI Website Support" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
       to: toAddress,
@@ -77,6 +79,7 @@ Support request from the website chat.
 
 Name: ${name.trim()}
 Email: ${email.trim()}
+Session token: ${sessionToken}
 
 Issue / Question:
 ${issue.trim()}

@@ -120,14 +120,7 @@ export default function AuditPlatform() {
               control across every engagement.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4 justify-center md:justify-center lg:justify-start">
-              <span className="rounded-full bg-white shadow-sm border border-gray-100 px-4 py-1.5 text-xs sm:text-sm text-gray-800 font-montserrat">
-                Starting at <span className="font-semibold">€120 / user / mo</span>
-              </span>
-              <span className="text-xs sm:text-sm text-gray-400 font-nunito">
-                No setup fees. Cancel anytime.
-              </span>
-            </motion.div>
+           
 
             {/* Mobile Orbit */}
             {isMobile && (
