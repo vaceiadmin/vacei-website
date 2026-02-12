@@ -10,7 +10,7 @@ import ServiceVideoSection from "@/components/services/ServiceVideoSection";
 import ServiceCTA from "@/components/services/ServiceCTA";
 
 interface ServicePageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 }
 
 const ServicePage = async ({ params }: ServicePageProps) => {
-  const { slug } = params;
+  const { slug } = await params;
   const service = getServiceBySlug(slug);
 
   if (!service) {
