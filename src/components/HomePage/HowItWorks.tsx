@@ -1,7 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
-import Image from "next/image"
+import React, { useRef, useEffect } from "react"
 import { motion } from "framer-motion"
 import { FadeInUp, StaggerContainer } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
@@ -79,8 +78,49 @@ const steps = [
     },
 ]
 
+const HOW_IT_WORKS_VIDEO = "/assets/videos/Vacei Fix (1) X1V1.mp4"
+const HOW_IT_WORKS_POSTER = "/assets/videos/Main%20Render.gif"
+
 const HowItWorks = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const video = videoRef.current
+        const container = containerRef.current
+        if (!video || !container) return
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {})
+                    } else {
+                        video.pause()
+                    }
+                })
+            },
+            { threshold: 0.1, rootMargin: "0px" }
+        )
+
+        observer.observe(container)
+
+        const onCanPlay = () => {
+            if (container && video) {
+                const rect = container.getBoundingClientRect()
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0
+                if (isVisible) video.play().catch(() => {})
+            }
+        }
+        video.addEventListener("canplay", onCanPlay)
+        if (video.readyState >= 3) onCanPlay()
+
+        return () => {
+            observer.disconnect()
+            video.removeEventListener("canplay", onCanPlay)
+            video.pause()
+        }
+    }, [])
 
     return (
         <section className="w-full">
@@ -109,51 +149,21 @@ const HowItWorks = () => {
                         </p>
                     </FadeInUp>
 
-                    {/* Video Banner with Glassmorphism Play Button */}
-                    <FadeInUp delay={0.2} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-[2.4/1] rounded-3xl overflow-hidden shadow-2xl mb-20 group border border-white/10 bg-primary/80">
-                        {!isPlaying ? (
-                            <>
-                                <Image
-                                    src="/assets/images/Rectangle 34624231.png"
-                                    alt="How VACEI Works"
-                                    fill
-                                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-                                    priority
-                                />
-                                <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent" />
-
-                                {/* Glassy Play Button Overlay */}
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <motion.button
-                                        whileHover={{ scale: 1.07, y: -2 }}
-                                        whileTap={{ scale: 0.96, y: 0 }}
-                                        onClick={() => setIsPlaying(true)}
-                                        className="relative w-20 h-20 md:w-24 md:h-24 rounded-full group/btn outline-none"
-                                        aria-label="Play Video"
-                                    >
-                                        {/* Pulse Effect */}
-                                        <span className="absolute inset-0 rounded-full bg-white/20 animate-ping opacity-75 duration-1000"></span>
-                                        
-                                        {/* Glass Button Base */}
-                                        <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] flex items-center justify-center transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:bg-white/20 group-hover/btn:border-white/50">
-                                            {/* Play Triangle */}
-                                            <div className="w-0 h-0 border-t-12 border-t-transparent border-l-20 border-l-white border-b-12 border-b-transparent ml-1 drop-shadow-lg"></div>
-                                        </div>
-                                    </motion.button>
-                                </div>
-                            </>
-                        ) : (
-                            <iframe
-                                width="100%"
-                                height="100%"
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                                title="VACEI Video"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                className="absolute inset-0"
-                            ></iframe>
-                        )}
+                    {/* Video Banner - same as Hero, autoplay on scroll into view */}
+                    <FadeInUp delay={0.2} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10 bg-slate-950">
+                        <div ref={containerRef} className="absolute inset-0">
+                            <video
+                                ref={videoRef}
+                                src={HOW_IT_WORKS_VIDEO}
+                                poster={HOW_IT_WORKS_POSTER}
+                                preload="auto"
+                                // muted
+                                loop
+                                playsInline
+                                className="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
+                        </div>
                     </FadeInUp>
 
                     {/* Steps Grid - Modern Glass Cards */}

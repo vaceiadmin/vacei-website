@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { serviceVideosById } from "./video";
 
 export interface ServiceData {
   id: string; // The specific ID/Key for the service
@@ -587,6 +588,7 @@ export const servicesData: ServiceData[] = [
       { label: "Accounting & Finance" },
     ],
     image: "/assets/images/Frame 1618872606.png",
+    videoUrl: serviceVideosById["accounting-finance"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "technology",
     description: (
@@ -620,6 +622,7 @@ export const servicesData: ServiceData[] = [
       { label: "Tax & Compliance" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
+    videoUrl: serviceVideosById["tax-compliance"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "technology",
     description: (
@@ -653,6 +656,7 @@ export const servicesData: ServiceData[] = [
       { label: "Audit & Assurance" },
     ],
     image: "/assets/images/Frame 1618872609.png",
+    videoUrl: serviceVideosById["audit-assurance"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -689,6 +693,7 @@ export const servicesData: ServiceData[] = [
       { label: "Corporate & CSP Services" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
+    videoUrl: serviceVideosById["corporate-csp-services"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -722,6 +727,7 @@ export const servicesData: ServiceData[] = [
       { label: "Regulated & Licensing" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
+    videoUrl: serviceVideosById["regulated-licensing"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -755,6 +761,7 @@ export const servicesData: ServiceData[] = [
       { label: "Advisory & Growth" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
+    videoUrl: serviceVideosById["advisory-growth"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -788,6 +795,7 @@ export const servicesData: ServiceData[] = [
       { label: "Company Structure & Corporate Changes" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
+    videoUrl: serviceVideosById["company-structure-corporate-changes"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -821,6 +829,7 @@ export const servicesData: ServiceData[] = [
       { label: "Liquidation & Wind-Down" },
     ],
     image: "/assets/images/placeholder.png", // Placeholder
+    videoUrl: serviceVideosById["liquidation-wind-down"],
     portalImage: "/assets/images/Liquidation Dashboard.png",
     portalVariant: "default",
     description: (
@@ -851,6 +860,7 @@ export const servicesData: ServiceData[] = [
       { label: "International Business Structuring & Expansion" },
     ],
     image: "/assets/images/placeholder.png",
+    videoUrl: serviceVideosById["international-business-structuring-expansion"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -888,6 +898,7 @@ export const servicesData: ServiceData[] = [
       { label: "Crypto & Digital Assets" },
     ],
     image: "/assets/images/placeholder.png",
+    videoUrl: serviceVideosById["crypto-digital-assets"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -922,6 +933,7 @@ export const servicesData: ServiceData[] = [
       { label: "Audit Readiness" },
     ],
     image: "/assets/images/placeholder.png",
+    videoUrl: serviceVideosById["audit-readiness"],
     portalImage: "/assets/images/Frame 1618872609.png",
     portalVariant: "default",
     description: (
@@ -956,6 +968,7 @@ export const servicesData: ServiceData[] = [
       { label: "Group & Consolidation" },
     ],
     image: "/assets/images/placeholder.png",
+    videoUrl: serviceVideosById["group-consolidation"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -990,6 +1003,7 @@ export const servicesData: ServiceData[] = [
       { label: "Banking & Payments Support" },
     ],
     image: "/assets/images/placeholder.png",
+    videoUrl: serviceVideosById["banking-payments-support"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (
@@ -1024,6 +1038,7 @@ export const servicesData: ServiceData[] = [
       { label: "Corporate Transactions" },
     ],
     image: "/assets/images/placeholder.png",
+    videoUrl: serviceVideosById["corporate-transactions"],
     portalImage: "/assets/images/Frame 1618872799.png",
     portalVariant: "default",
     description: (

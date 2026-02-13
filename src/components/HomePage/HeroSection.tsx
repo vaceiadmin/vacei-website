@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,7 +8,67 @@ import GlassyEffect from "../common/GlassyEffect";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 
+const HERO_VIDEO_SRC = "/assets/videos/Vacei%20(2)%20X2V2.mp4";
+const HERO_VIDEO_POSTER = "/assets/videos/Main%20Render.gif";
+
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const isInViewRef = useRef(true);
+  const [muted, setMuted] = useState(true);
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    const next = !muted;
+    videoRef.current.muted = next;
+    setMuted(next);
+  };
+
+  const tryPlay = () => {
+    const video = videoRef.current;
+    if (!video || !isInViewRef.current) return;
+    video.play().catch(() => {});
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const container = videoContainerRef.current;
+    if (!video || !container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isInViewRef.current = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px" }
+    );
+
+    observer.observe(container);
+
+    const onCanPlay = () => tryPlay();
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("loadeddata", onCanPlay);
+    if (video.readyState >= 3) tryPlay();
+
+    const retryPlay = () => {
+      if (isInViewRef.current) video.play().catch(() => {});
+    };
+    const retryTimer = setTimeout(retryPlay, 4200);
+
+    return () => {
+      clearTimeout(retryTimer);
+      video.removeEventListener("loadeddata", onCanPlay);
+      observer.disconnect();
+      video.removeEventListener("canplay", onCanPlay);
+      video.pause();
+    };
+  }, []);
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center">
@@ -172,18 +232,37 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="w-full max-w-5xl mx-auto mt-16"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-white/10 backdrop-blur-2xl">
-              <div className="aspect-video relative">
-                <Image
-                  src="/assets/videos/Main Render.gif"
-                  alt="VACEI Portal Experience"
-                  fill
-                  className="object-contain"
-                  priority
-                  unoptimized
+            <div ref={videoContainerRef} className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-slate-950 backdrop-blur-2xl">
+              <div className="aspect-video relative bg-slate-950">
+                <video
+                  ref={videoRef}
+                  src={HERO_VIDEO_SRC}
+                  poster={HERO_VIDEO_POSTER}
+                  preload="auto"
+                  // muted={muted}
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-contain"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-white/20 rounded-3xl pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={toggleMute}
+                  className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white transition hover:bg-white/30"
+                  aria-label={muted ? "Unmute" : "Mute"}
+                >
+                  {muted ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z" />
+                      <path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z" />
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06Z" />
+                    </svg>
+                  )}
+                </button>
               </div>
               
               {/* Glow effect */}
