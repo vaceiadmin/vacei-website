@@ -1,6 +1,7 @@
 "use client"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { getServiceForm, SERVICE_TYPE_OPTIONS, type ServiceField } from "@/data/serviceRequestForms"
 
 // --- Types ---
 type FormData = {
@@ -9,6 +10,8 @@ type FormData = {
   message: string
   service: string
   companyStage: string
+  companyName: string
+  jurisdiction: string
   documentStatus: string
   uploadFiles: FileList | null
   uploadMethod: string
@@ -54,10 +57,18 @@ const formSteps: FormStep[] = [
   {
     id: "onboarding",
     title: "Project Scope",
-    subtitle: "How can we help you?",
+    subtitle: "Choose the type of service you need",
     fields: [
-      { key: "service", label: "Service Type", placeholder: "Select Service", type: "select", options: ["Accounting", "Audit", "Company Setup", "Compliance", "Corporate Services"] },
-      { key: "companyStage", label: "Current Stage", placeholder: "Select Stage", type: "select", options: ["Idea Phase", "Startup", "Scale-up", "Enterprise"] },
+      {
+        key: "service",
+        label: "Service Type",
+        placeholder: "Select service",
+        type: "select",
+        options: SERVICE_TYPE_OPTIONS.map((o) => o.value),
+      },
+      { key: "companyStage", label: "Current Stage", placeholder: "Select stage", type: "select", options: ["Idea Phase", "Startup", "Scale-up", "Enterprise"] },
+      { key: "companyName", label: "Company name (optional)", placeholder: "e.g. Acme Ltd", type: "text" },
+      { key: "jurisdiction", label: "Jurisdiction (optional)", placeholder: "e.g. Malta", type: "text" },
     ],
     primaryLabel: "Next Step",
   },
@@ -88,27 +99,51 @@ const processSteps = [
   { title: "Onboard", description: "We align on goals, timelines, and details." },
   { title: "Upload", description: "Securely submit documents to your portal." },
   { title: "Execute", description: "We do the work while keeping you in the loop." },
-  { title: "Deliver", description: "Access completed records and compliance proofs." },
 ]
 
 // --- Component ---
+// Helper: should we show this service field based on showWhen?
+function shouldShowServiceField(
+  field: ServiceField,
+  serviceDetails: Record<string, string | string[] | number>
+): boolean {
+  if (!field.showWhen) return true
+  const val = serviceDetails[field.showWhen.field]
+  if (Array.isArray(val)) return field.showWhen.oneOf.some((o) => val.includes(o))
+  return field.showWhen.oneOf.includes(String(val ?? ""))
+}
+
 const ProcessStepsSection = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<FormData>({
-    name: "", email: "", message: "", service: "", companyStage: "",
-    documentStatus: "", uploadFiles: null, uploadMethod: "",
-    communicationChannel: "", updateCadence: "", complianceReminders: "", recordAccess: "",
+    name: "",
+    email: "",
+    message: "",
+    service: "",
+    companyStage: "",
+    companyName: "",
+    jurisdiction: "",
+    documentStatus: "",
+    uploadFiles: null,
+    uploadMethod: "",
+    communicationChannel: "",
+    updateCadence: "",
+    complianceReminders: "",
+    recordAccess: "",
   })
+  const [serviceDetails, setServiceDetails] = useState<Record<string, string | string[] | number>>({})
   const [error, setError] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
-  const [direction, setDirection] = useState(0) // -1 for back, 1 for next
+  const [direction, setDirection] = useState(0)
+  const [openSelectKey, setOpenSelectKey] = useState<string | null>(null)
 
   const step = formSteps[currentStep]
+  const serviceFormConfig = formData.service ? getServiceForm(formData.service) : null
 
   const validateStep = () => {
     for (const field of step.fields) {
-      if (field.key === "uploadFiles") continue 
+      if (field.key === "uploadFiles" || field.key === "companyName" || field.key === "jurisdiction") continue
       const val = formData[field.key]
       if (!val || (typeof val === "string" && !val.trim())) return `${field.label} is required.`
       if (field.key === "email" && typeof val === "string" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return "Invalid email address."
@@ -116,9 +151,30 @@ const ProcessStepsSection = () => {
     return ""
   }
 
+  const validateServiceDetails = (): string => {
+    if (!serviceFormConfig) return ""
+    for (const f of serviceFormConfig.fields) {
+      if (!f.required) continue
+      if (!shouldShowServiceField(f, serviceDetails)) continue
+      const val = serviceDetails[f.key]
+      if (val === undefined || val === "" || (Array.isArray(val) && val.length === 0)) return `${f.label} is required.`
+    }
+    return ""
+  }
+
   const handleNext = () => {
     const msg = validateStep()
-    if (msg) { setError(msg); return }
+    if (msg) {
+      setError(msg)
+      return
+    }
+    if (step.id === "onboarding" && formData.service) {
+      const serviceMsg = validateServiceDetails()
+      if (serviceMsg) {
+        setError(serviceMsg)
+        return
+      }
+    }
     setError("")
     setDirection(1)
     setCurrentStep((prev) => Math.min(prev + 1, formSteps.length - 1))
@@ -133,13 +189,34 @@ const ProcessStepsSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (submitted) return
-    if (currentStep < formSteps.length - 1) { handleNext(); return }
-    
+    if (currentStep < formSteps.length - 1) {
+      handleNext()
+      return
+    }
     const msg = validateStep()
-    if (msg) { setError(msg); return }
-    
+    if (msg) {
+      setError(msg)
+      return
+    }
+    if (formData.service) {
+      const serviceMsg = validateServiceDetails()
+      if (serviceMsg) {
+        setError(serviceMsg)
+        return
+      }
+    }
     setError("")
     setSubmitError(null)
+
+    const metaServiceDetails: Record<string, unknown> = {}
+    if (serviceFormConfig) {
+      for (const f of serviceFormConfig.fields) {
+        const v = serviceDetails[f.key]
+        if (v === undefined || v === "") continue
+        if (Array.isArray(v) && v.length === 0) continue
+        metaServiceDetails[f.key] = v
+      }
+    }
 
     try {
       await fetch("/api/quote", {
@@ -153,9 +230,12 @@ const ProcessStepsSection = () => {
           meta: {
             service: formData.service,
             companyStage: formData.companyStage,
+            companyName: formData.companyName || undefined,
+            jurisdiction: formData.jurisdiction || undefined,
             documentStatus: formData.documentStatus,
             communicationChannel: formData.communicationChannel,
             updateCadence: formData.updateCadence,
+            serviceDetails: Object.keys(metaServiceDetails).length ? metaServiceDetails : undefined,
           },
         }),
       })
@@ -166,9 +246,23 @@ const ProcessStepsSection = () => {
     }
   }
 
-  const handleChange = (key: keyof FormData, value: any) => {
-    setFormData(prev => ({ ...prev, [key]: value }))
+  const handleChange = (key: keyof FormData, value: string | FileList | null) => {
+    setFormData((prev) => ({ ...prev, [key]: value }))
     if (error) setError("")
+  }
+
+  const handleServiceDetailChange = (key: string, value: string | string[] | number) => {
+    setServiceDetails((prev) => ({ ...prev, [key]: value }))
+    if (error) setError("")
+  }
+
+  const toggleMulticheck = (key: string, optionValue: string) => {
+    const current = (serviceDetails[key] as string[] | undefined) ?? []
+    const arr = Array.isArray(current) ? [...current] : []
+    const idx = arr.indexOf(optionValue)
+    if (idx >= 0) arr.splice(idx, 1)
+    else arr.push(optionValue)
+    handleServiceDetailChange(key, arr)
   }
 
   // Animation Variants
@@ -225,7 +319,7 @@ const ProcessStepsSection = () => {
                <div className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]">
                   
                   {/* Glossy Reflection */}
-                  <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/40 to-transparent opacity-50 pointer-events-none" />
+                  <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-white/40 to-transparent opacity-50 pointer-events-none" />
 
                   {!submitted ? (
                     <form onSubmit={handleSubmit} className="flex flex-col h-full relative z-10 min-h-[500px]">
@@ -277,21 +371,73 @@ const ProcessStepsSection = () => {
                                             {/* Floating Label Effect Support */}
                                             {field.type === "select" ? (
                                                 <div className="relative">
-                                                     <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 block pl-1">
+                                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 block pl-1">
                                                         {field.label}
                                                     </label>
-                                                    <select
-                                                        value={formData[field.key] as string}
-                                                        onChange={(e) => handleChange(field.key, e.target.value)}
-                                                        className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-4 text-gray-800 appearance-none focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 transition-all font-semibold placeholder:text-gray-400 shadow-sm hover:bg-white/80"
+                                                    <div
+                                                      tabIndex={0}
+                                                      onBlur={() => setOpenSelectKey((prev) => (prev === field.key ? null : prev))}
+                                                      className="relative"
                                                     >
-                                                        <option value="" disabled>{field.placeholder}</option>
-                                                        {field.options?.map(opt => (
-                                                            <option key={opt} value={opt} className="text-gray-900">{opt}</option>
-                                                        ))}
-                                                    </select>
-                                                    <div className="absolute right-4 top-[56%] -translate-y-1/2 pointer-events-none text-gray-500">
-                                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                                      <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                          setOpenSelectKey((prev) => (prev === field.key ? null : field.key))
+                                                        }
+                                                        className="w-full min-h-[54px] rounded-xl border border-white/70 bg-white/70 px-4 pr-11 py-3 text-left text-sm font-semibold text-gray-800 shadow-sm transition-all hover:bg-white focus:outline-none focus-visible:ring-4 focus-visible:ring-[#3b49e6]/15 focus-visible:border-[#3b49e6]/50"
+                                                      >
+                                                        <span
+                                                          className={
+                                                            (formData[field.key] as string)
+                                                              ? "text-gray-900"
+                                                              : "text-gray-400"
+                                                          }
+                                                        >
+                                                          {(formData[field.key] as string) || field.placeholder}
+                                                        </span>
+                                                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                                                          <svg
+                                                            className={`w-5 h-5 transition-transform ${
+                                                              openSelectKey === field.key ? "rotate-180" : ""
+                                                            }`}
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                          >
+                                                            <path
+                                                              strokeLinecap="round"
+                                                              strokeLinejoin="round"
+                                                              strokeWidth={2}
+                                                              d="M19 9l-7 7-7-7"
+                                                            />
+                                                          </svg>
+                                                        </span>
+                                                      </button>
+
+                                                      {openSelectKey === field.key && (
+                                                        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-xl">
+                                                          <div className="max-h-60 overflow-y-auto py-1">
+                                                            {field.options?.map((opt) => (
+                                                              <button
+                                                                key={opt}
+                                                                type="button"
+                                                                onMouseDown={(e) => e.preventDefault()}
+                                                                onClick={() => {
+                                                                  handleChange(field.key, opt)
+                                                                  setOpenSelectKey(null)
+                                                                }}
+                                                                className={`flex w-full items-center px-3 py-2 text-sm text-left ${
+                                                                  (formData[field.key] as string) === opt
+                                                                    ? "bg-[#3b49e6]/10 text-[#111827] font-semibold"
+                                                                    : "text-gray-700 hover:bg-slate-50"
+                                                                }`}
+                                                              >
+                                                                {opt}
+                                                              </button>
+                                                            ))}
+                                                          </div>
+                                                        </div>
+                                                      )}
                                                     </div>
                                                 </div>
                                             ) : field.type === "textarea" ? (
@@ -340,6 +486,108 @@ const ProcessStepsSection = () => {
                                             )}
                                         </div>
                                     ))}
+
+                                    {/* Service-specific request details (all services A–M from config) */}
+                                    {step.id === "onboarding" && serviceFormConfig && (
+                                      <div className="mt-6 space-y-5 pt-4 border-t border-white/60">
+                                        <h4 className="text-sm font-extrabold text-[#1a1c35] tracking-[0.18em] uppercase mb-1">
+                                          {serviceFormConfig.label} — request details
+                                        </h4>
+                                        <p className="text-xs text-gray-600 mb-3">{serviceFormConfig.purpose}</p>
+
+                                        {(formData.companyName || formData.jurisdiction) && (
+                                          <div className="flex flex-wrap gap-4 text-xs text-gray-500 mb-2">
+                                            {formData.companyName && <span><strong>Company:</strong> {formData.companyName}</span>}
+                                            {formData.jurisdiction && <span><strong>Jurisdiction:</strong> {formData.jurisdiction}</span>}
+                                          </div>
+                                        )}
+
+                                        {serviceFormConfig.fields
+                                          .filter((f) => shouldShowServiceField(f, serviceDetails))
+                                          .map((f) => (
+                                            <div key={f.key} className="space-y-2">
+                                              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block pl-1">
+                                                {f.label}
+                                                {f.required && <span className="text-red-500 ml-0.5">*</span>}
+                                              </label>
+                                              {f.type === "radio" && (
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                                  {f.options?.map((opt) => (
+                                                    <button
+                                                      key={opt.value}
+                                                      type="button"
+                                                      onClick={() => handleServiceDetailChange(f.key, opt.value)}
+                                                      className={`text-xs sm:text-sm rounded-xl px-3 py-2.5 text-left border transition-all ${
+                                                        (serviceDetails[f.key] as string) === opt.value
+                                                          ? "bg-[#3b49e6] text-white border-[#3b49e6] shadow-sm"
+                                                          : "bg-white/60 text-gray-700 border-white/70 hover:bg-white"
+                                                      }`}
+                                                    >
+                                                      {opt.label}
+                                                    </button>
+                                                  ))}
+                                                </div>
+                                              )}
+                                              {f.type === "multicheck" && (
+                                                <div className="flex flex-wrap gap-2">
+                                                  {f.options?.map((opt) => {
+                                                    const arr = (serviceDetails[f.key] as string[] | undefined) ?? []
+                                                    const checked = Array.isArray(arr) && arr.includes(opt.value)
+                                                    return (
+                                                      <button
+                                                        key={opt.value}
+                                                        type="button"
+                                                        onClick={() => toggleMulticheck(f.key, opt.value)}
+                                                        className={`text-xs sm:text-sm rounded-xl px-3 py-2.5 text-left border transition-all ${
+                                                          checked ? "bg-[#3b49e6] text-white border-[#3b49e6] shadow-sm" : "bg-white/60 text-gray-700 border-white/70 hover:bg-white"
+                                                        }`}
+                                                      >
+                                                        {opt.label}
+                                                      </button>
+                                                    )
+                                                  })}
+                                                </div>
+                                              )}
+                                              {f.type === "text" && (
+                                                <input
+                                                  type="text"
+                                                  value={(serviceDetails[f.key] as string) ?? ""}
+                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
+                                                  placeholder={f.placeholder}
+                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm"
+                                                />
+                                              )}
+                                              {f.type === "number" && (
+                                                <input
+                                                  type="number"
+                                                  value={serviceDetails[f.key] === undefined || serviceDetails[f.key] === "" ? "" : String(serviceDetails[f.key])}
+                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value === "" ? "" : Number(e.target.value))}
+                                                  placeholder={f.placeholder}
+                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm"
+                                                />
+                                              )}
+                                              {f.type === "date" && (
+                                                <input
+                                                  type="date"
+                                                  value={(serviceDetails[f.key] as string) ?? ""}
+                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
+                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm"
+                                                />
+                                              )}
+                                              {f.type === "textarea" && (
+                                                <textarea
+                                                  rows={3}
+                                                  value={(serviceDetails[f.key] as string) ?? ""}
+                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
+                                                  placeholder={f.placeholder}
+                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm resize-none"
+                                                />
+                                              )}
+                                              {f.helperText && <p className="text-[11px] text-gray-500 mt-1">{f.helperText}</p>}
+                                            </div>
+                                          ))}
+                                      </div>
+                                    )}
                                 </motion.div>
                             </AnimatePresence>
                         </div>
@@ -411,7 +659,7 @@ const ProcessStepsSection = () => {
                         </p>
                         
                         <button
-                            onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({...formData}); setDirection(0); }}
+                            onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: "", companyStage: "", companyName: "", jurisdiction: "", documentStatus: "", uploadFiles: null, uploadMethod: "", communicationChannel: "", updateCadence: "", complianceReminders: "", recordAccess: "" }); setServiceDetails({}); setDirection(0); }}
                             className="px-8 py-3.5 rounded-xl bg-white border-2 border-transparent hover:border-gray-200 text-gray-900 font-bold transition-all shadow-md hover:shadow-lg"
                         >
                             Start New Request
@@ -424,12 +672,12 @@ const ProcessStepsSection = () => {
             {/* --- Right Column: Sleek Timeline --- */}
             <div className="relative lg:pl-10 h-full flex flex-col justify-center">
                 {/* Connecting Line (Track) */}
-                <div className="absolute left-[31px] top-5 bottom-8 w-[2px] bg-white/40 backdrop-blur-sm rounded-full lg:block hidden" />
+                <div className="absolute left-[31px] top-7 bottom-10 w-[2px] bg-white/40 backdrop-blur-sm rounded-full lg:block hidden" />
                 
                 {/* Active Progress Line */}
-                <div className="absolute left-[31px] top-5 bottom-8 lg:block hidden">
+                <div className="absolute left-[31px] top-7 bottom-10 lg:block hidden">
                    <motion.div 
-                     className="w-[2px] rounded-full bg-gradient-to-b from-[#3b49e6] via-[#3b49e6] to-transparent shadow-[0_0_18px_rgba(59,73,230,0.45)]"
+                     className="w-[2px] rounded-full bg-linear-to-b from-[#3b49e6] via-[#6366f1] to-transparent shadow-[0_0_18px_rgba(79,70,229,0.55)]"
                      initial={{ height: 0 }}
                      animate={{ 
                        height: `${(currentStep / (processSteps.length - 1)) * 100}%`
@@ -446,21 +694,33 @@ const ProcessStepsSection = () => {
                         return (
                             <motion.div 
                                 key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className={`relative flex gap-8 group cursor-pointer ${isActive ? "opacity-100" : "opacity-50 hover:opacity-80"} transition-all duration-300`}
+                                initial={{ opacity: 0, x: 24, y: 8 }}
+                                animate={{
+                                  opacity: isActive ? 1 : 0.6,
+                                  x: 0,
+                                  y: isActive ? -4 : 0,
+                                }}
+                                transition={{ duration: 0.35, delay: idx * 0.08, ease: "easeOut" }}
+                                className={`relative flex gap-8 group cursor-pointer transition-all duration-300 ${isActive ? "opacity-100" : "hover:opacity-90"}`}
                                 onClick={() => { if(idx <= currentStep + 1) setCurrentStep(idx) }}
                             >
                                 {/* Indicator Circle */}
                                 <motion.div 
                                     animate={{ 
-                                        scale: isActive ? 1.1 : 1,
+                                        scale: isActive ? 1.08 : 1,
                                         backgroundColor: isActive || isPast ? "#FFFFFF" : "rgba(255,255,255,0.35)",
                                         borderColor: isActive || isPast ? "#3b49e6" : "rgba(156, 163, 175, 0.45)"
                                     }}
-                                    className={`relative z-10 w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-full border-[3px] flex items-center justify-center text-sm md:text-lg font-semibold transition-all shadow-sm ${isActive ? "shadow-[0_0_24px_rgba(59,73,230,0.35)] ring-4 ring-[#3b49e6]/15" : ""}`}
+                                    className={`relative z-10 w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-full border-[3px] flex items-center justify-center text-sm md:text-lg font-semibold transition-all shadow-sm ${isActive ? "shadow-[0_0_24px_rgba(79,70,229,0.45)]" : ""}`}
                                 >
+                                    {isActive && (
+                                      <motion.div
+                                        className="absolute inset-0 rounded-full border border-[#3b49e6]/40"
+                                        initial={{ opacity: 0.6, scale: 1 }}
+                                        animate={{ opacity: [0.6, 0, 0.6], scale: [1, 1.25, 1] }}
+                                        transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+                                      />
+                                    )}
                                     {isPast ? (
                                         <svg className="w-6 h-6 text-[#3b49e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                                     ) : (
@@ -470,24 +730,35 @@ const ProcessStepsSection = () => {
 
                                 {/* Text Content */}
                                 <div className="pt-1.5 flex-1">
-                                    <div className={`rounded-2xl px-4 py-3 md:px-5 md:py-4 transition-all duration-300 border ${isActive ? "bg-white/70 border-white/80 shadow-[0_18px_40px_-22px_rgba(15,23,42,0.45)]" : "bg-white/20 border-white/40 hover:bg-white/40 hover:border-white/80"} backdrop-blur-sm`}>
-                                        <h4 className={`text-lg md:text-xl font-extrabold mb-1.5 tracking-tight transition-colors duration-300 ${isActive ? "text-[#111827]" : "text-gray-600"}`}>
-                                            {s.title}
-                                        </h4>
-                                        <AnimatePresence>
-                                            {(isActive || isPast) && (
-                                                <motion.div
-                                                    initial={{ height: 0, opacity: 0 }}
-                                                    animate={{ height: "auto", opacity: 1 }}
-                                                    exit={{ height: 0, opacity: 0 }}
-                                                    className="overflow-hidden"
-                                                >
-                                                    <p className="text-sm md:text-base text-gray-600 font-medium leading-relaxed max-w-sm">
-                                                        {s.description}
-                                                    </p>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
+                                    <div className={`relative rounded-2xl overflow-hidden transition-all duration-300 border backdrop-blur-sm ${
+                                      isActive
+                                        ? "bg-white/80 border-white/90 shadow-[0_22px_40px_-22px_rgba(15,23,42,0.55)]"
+                                        : "bg-white/25 border-white/40 hover:bg-white/45 hover:border-white/80"
+                                    }`}>
+                                        {isActive && (
+                                          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-linear-to-b from-[#3b49e6] via-[#6366f1] to-[#a855f7]" />
+                                        )}
+                                        <div className="px-4 py-3 md:px-5 md:py-4 pl-5 md:pl-6">
+                                          <h4 className={`text-lg md:text-xl font-extrabold mb-1.5 tracking-tight transition-colors duration-300 ${
+                                            isActive ? "text-[#111827]" : "text-gray-600"
+                                          }`}>
+                                              {s.title}
+                                          </h4>
+                                          <AnimatePresence>
+                                              {(isActive || isPast) && (
+                                                  <motion.div
+                                                      initial={{ height: 0, opacity: 0 }}
+                                                      animate={{ height: "auto", opacity: 1 }}
+                                                      exit={{ height: 0, opacity: 0 }}
+                                                      className="overflow-hidden"
+                                                  >
+                                                      <p className="text-sm md:text-base text-gray-600 font-medium leading-relaxed max-w-sm">
+                                                          {s.description}
+                                                      </p>
+                                                  </motion.div>
+                                              )}
+                                          </AnimatePresence>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
