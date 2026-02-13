@@ -13,16 +13,6 @@ const Logo = "/assets/images/Logo.png";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const hideChromeRoutes = [
-    "/privacy-policy",
-    "/terms-and-conditions",
-    "/cookie-policy",
-  ];
-
-  if (hideChromeRoutes.includes(pathname)) {
-    return null;
-  }
-
   const [servicesOpen, setServicesOpen] = useState(false);
   const [portalsOpen, setPortalsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
@@ -37,6 +27,13 @@ const Navbar = () => {
   // Detect when the browser is at 100% zoom or above on laptop/desktop
   // and switch to a "compact" nav where some items move under Resources.
   const [useCompactNav, setUseCompactNav] = useState(false);
+
+  const hideChromeRoutes = [
+    "/privacy-policy",
+    "/terms-and-conditions",
+    "/cookie-policy",
+  ];
+  const shouldHideChrome = hideChromeRoutes.includes(pathname);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -368,6 +365,10 @@ const Navbar = () => {
         { label: "Get Instant Quote", href: "/quote#quote-section-2" },
         { label: "CPE & Podcast", href: "/cpe" },
       ];
+
+  if (shouldHideChrome) {
+    return null;
+  }
 
   return (
     <>
