@@ -8,7 +8,7 @@ import GlassyEffect from "../common/GlassyEffect";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 
-const HERO_VIDEO_SRC = "/assets/videos/Vacei%20(2)%20X2V2.mp4";
+const HERO_VIDEO_SRC = "/assets/videos/Vacei (2) X2V2.mp4";
 const HERO_VIDEO_POSTER = "/assets/videos/Main%20Render.gif";
 
 const HeroSection = () => {
