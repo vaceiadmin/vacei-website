@@ -105,7 +105,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/quote#quote-section-2" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                <Link href="/quote#contact-form" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Contact
                 </Link>
               </li>

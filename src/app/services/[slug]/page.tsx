@@ -2,6 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/common/PageHeader";
 import { getServiceBySlug, servicesData } from "@/data/servicesData";
+import { getServiceImage } from "@/data/serviceImages";
 import ServiceOverview from "@/components/services/ServiceOverview";
 import ServiceFeatures from "@/components/services/ServiceFeatures";
 import PortalFeature from "@/components/services/PortalFeature";
@@ -27,6 +28,8 @@ const ServicePage = async ({ params }: ServicePageProps) => {
     notFound();
   }
 
+  const overviewImage = getServiceImage(service.id, service.image);
+
   return (
     <main className="min-h-screen bg-background">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
@@ -42,7 +45,7 @@ const ServicePage = async ({ params }: ServicePageProps) => {
         <ServiceOverview
           title={service.title}
           description={service.description}
-          image={service.image}
+          image={overviewImage}
         />
         {/* <ServiceCTA /> */}
         {service.featuresSection && (

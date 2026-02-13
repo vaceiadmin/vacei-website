@@ -45,7 +45,7 @@ const PricingCTA = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/quote#quote-section-2">
+                    <Link href="/quote">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -63,7 +63,7 @@ const PricingCTA = () => {
                       </motion.button>
                     </Link>
 
-                    <Link href="/quote#quote-section-2">
+                    <Link href="/quote">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

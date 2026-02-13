@@ -353,7 +353,7 @@ const Navbar = () => {
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },
         { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote#quote-section-2" },
+        { label: "Get Instant Quote", href: "/quote" },
         { label: "CPE & Podcast", href: "/cpe" },
       ]
     : [
@@ -362,7 +362,7 @@ const Navbar = () => {
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },
         { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote#quote-section-2" },
+        { label: "Get Instant Quote", href: "/quote" },
         { label: "CPE & Podcast", href: "/cpe" },
       ];
 
@@ -372,22 +372,22 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 z-60 py-3 px-4 sm:py-4 sm:px-6 lg:px-8">
-        {/* Navbar Container – full width, rounded corners, responsive horizontal padding */}
+      <nav className="w-full sticky top-0 z-60 py-2 px-3 sm:py-3 sm:px-4 lg:py-4 lg:px-8">
+        {/* Navbar Container – compact on mobile, rounded corners */}
         <motion.div 
           initial={false}
-          className={`w-full rounded-2xl ${isDarkBackground ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-white/70 backdrop-blur-sm"} shadow-sm px-4 sm:px-6 lg:px-8 transition-all duration-300 bg-clip-padding supports-backdrop-filter:${isDarkBackground ? "bg-white/5" : "bg-white/10"}`}
+          className={`w-full rounded-xl lg:rounded-2xl ${isDarkBackground ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-white/70 backdrop-blur-sm"} shadow-sm px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 transition-all duration-300`}
         >
-          <div className="flex items-center justify-between min-h-[72px] py-3 lg:min-h-[80px] lg:py-4">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 shrink-0">
-              <div className=" flex items-center justify-center">
+          <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
+            {/* Logo - smaller on mobile */}
+            <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileMenuOpen(false)}>
+              <div className="flex items-center justify-center">
                 <Image
                   src={Logo}
                   alt="VACEI Logo"
                   width={100}
                   height={70}
-                  className="object-contain"
+                  className="object-contain w-20 h-12 sm:w-24 sm:h-14 lg:w-[100px] lg:h-[70px]"
                 />
               </div>
             </Link>
@@ -508,9 +508,9 @@ const Navbar = () => {
             {/* Right Side Actions - Tight spacing */}
             <div className="flex items-center gap-3 lg:gap-4 shrink-0">
               <div className="hidden lg:flex items-center gap-3">
-                {/* Try The Client Portal Button */}
+                {/* Try The Client Portal Button - scrolls to process steps form on homepage */}
                 <Link
-                  href="/portal/client-portal"
+                  href="/#process-steps"
                   className={`flex items-center justify-center gap-2 rounded-full border ${isDarkBackground ? "border-white/40 text-white hover:bg-white/20" : "border-primary-blue text-text-dark hover:bg-white/40"} font-normal text-[15px] transition-all px-6 h-[44px] backdrop-blur-sm`}
                 >
                   <span>Try The Client Portal</span>
@@ -533,9 +533,9 @@ const Navbar = () => {
                 <GetInstantQuoteButton hasShadow={false} />
               </div>
 
-              {/* Mobile: hamburger opens mobile menu. Desktop: hamburger opens sidebar. Single button. */}
+              {/* Mobile: hamburger opens full-screen menu. Desktop: hamburger opens sidebar. */}
               <button
-                className="w-12 h-12 flex flex-col items-center justify-center gap-1.5 relative lg:w-10 lg:gap-1.5"
+                className="w-11 h-11 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 relative lg:w-10 lg:gap-1.5 rounded-lg active:bg-black/5 lg:active:bg-transparent -m-1 lg:m-0"
                 onClick={() => {
                   if (isMobile) {
                     setMobileMenuOpen(!mobileMenuOpen);
@@ -570,22 +570,59 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu - inline version */}
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div 
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <div className="max-h-[70vh] overflow-y-auto pt-4 pb-12 px-1 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
-                  {navLinks.map((link) => (
-                  <div key={link.label} className="border-b border-white/10 last:border-none">
+        </motion.div>
+      </nav>
+
+      {/* Mobile full-screen overlay menu: slides in from right, over homepage, with close option */}
+      <AnimatePresence>
+        {mobileMenuOpen && isMobile && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[65] bg-black/30 lg:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-hidden
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="fixed inset-0 z-[70] w-full h-full lg:hidden flex flex-col bg-white shadow-2xl"
+            >
+              {/* Header: logo + close */}
+              <div className="flex items-center justify-between shrink-0 px-4 py-4 sm:px-6 border-b border-gray-200/80">
+                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                  <Image
+                    src={Logo}
+                    alt="VACEI Logo"
+                    width={120}
+                    height={56}
+                    className="object-contain h-10 w-auto"
+                  />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-11 h-11 flex items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              {/* Scrollable menu links */}
+              <div className="flex-1 overflow-y-auto py-4 px-4 sm:px-6 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue/60 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+                {navLinks.map((link) => (
+                  <div key={link.label} className="border-b border-gray-100 last:border-none">
                     <div className="flex items-center justify-between py-3">
                       <Link
                         href={link.href}
-                        className={`${isDarkBackground ? "text-white" : "text-text-dark"} font-normal text-[17px] leading-6 ${isDarkBackground ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex-1`}
+                        className="text-text-dark font-medium text-base hover:text-primary-blue transition-colors flex-1"
                         onClick={(e) => {
                           if (link.hasDropdown) {
                             e.preventDefault();
@@ -599,8 +636,10 @@ const Navbar = () => {
                       </Link>
                       {link.hasDropdown && (
                         <button
+                          type="button"
                           onClick={() => link.setIsOpen?.(!link.isOpen)}
-                          className={`p-2 ${isDarkBackground ? "text-white/70" : "text-gray-500"}`}
+                          className="p-2 -mr-2 rounded-lg text-gray-500 hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                          aria-expanded={link.isOpen}
                         >
                           <motion.svg
                             animate={{ rotate: link.isOpen ? 180 : 0 }}
@@ -609,79 +648,68 @@ const Navbar = () => {
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 9l-7 7-7-7"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </motion.svg>
                         </button>
                       )}
                     </div>
-
-                    {/* Mobile Dropdown Content */}
                     <AnimatePresence>
                       {link.hasDropdown && link.isOpen && (
-                        <motion.div 
+                        <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="pl-4 pb-3 space-y-2 overflow-hidden mt-1"
+                          transition={{ duration: 0.2 }}
+                          className="pl-3 pb-3 overflow-hidden"
                         >
-                          <div className="bg-white/40 backdrop-blur-xl rounded-xl p-2 space-y-1 border border-white/40">
-                            {link.label === "Services" ? (
+                          <div className="rounded-xl bg-gray-50 border border-gray-200/80 p-2.5 space-y-0.5">
+                            {link.label === "Services" &&
                               servicesData.map((service) => (
                                 <Link
                                   key={service.id}
                                   href={`/services/${service.slug}`}
-                                  className="block py-2.5 text-[15px] text-text-dark hover:text-primary-blue hover:bg-white/60 rounded-lg pl-3 transition-all font-medium"
+                                  className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {service.title}
                                 </Link>
-                              ))
-                            ) : link.label === "Portals" ? (
+                              ))}
+                            {link.label === "Portals" &&
                               portalLinks.map((item) => (
                                 <Link
                                   key={item.href}
                                   href={item.href}
-                                  className="block py-2.5 text-[15px] text-text-dark hover:text-primary-blue hover:bg-white/60 rounded-lg pl-3 transition-all font-medium"
+                                  className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {item.label}
                                 </Link>
-                              ))
-                            ) : link.label === "Resources" ? (
+                              ))}
+                            {link.label === "Resources" &&
                               resourceLinks.map((item) => (
                                 <Link
                                   key={item.href}
                                   href={item.href}
-                                  className="block py-2.5 text-[15px] text-text-dark hover:text-primary-blue hover:bg-white/60 rounded-lg pl-3 transition-all font-medium"
+                                  className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {item.label}
                                 </Link>
-                              ))
-                            ) : null}
+                              ))}
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
                 ))}
-                <div className="mt-6" onClick={() => setMobileMenuOpen(false)}>
-                  <GetInstantQuoteButton
-                    hasShadow={false}
-                    className="w-full justify-center"
-                  />
+                <div className="mt-6 pt-4 border-t border-gray-200" onClick={() => setMobileMenuOpen(false)}>
+                  <GetInstantQuoteButton hasShadow={false} className="w-full justify-center" />
                 </div>
               </div>
             </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </nav>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Sidebar Overlay & Panel - Only for desktop */}
       {sidebarOpen && !isMobile && (
@@ -766,7 +794,7 @@ const Navbar = () => {
                   <h3 className="text-white font-bold text-lg">Quick actions</h3>
                   <div className="space-y-3">
                     <Link
-                      href="/quote#quote-section-2"
+                      href="/quote"
                       onClick={() => setSidebarOpen(false)}
                       className="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all"
                     >
@@ -796,7 +824,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      href="/services"
+                      href="/#services"
                       onClick={() => setSidebarOpen(false)}
                       className="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 transition-all"
                     >

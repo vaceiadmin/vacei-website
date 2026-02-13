@@ -97,7 +97,7 @@ const ContactForm = () => {
         message={statusMessage}
         onClose={() => setStatusOpen(false)}
       />
-      <section className="py-16 lg:py-24 ">
+      <section id="contact-form" className="py-16 lg:py-24 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className=" rounded-2xl  p-6 md:p-8 lg:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">

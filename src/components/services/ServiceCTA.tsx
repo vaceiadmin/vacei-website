@@ -19,7 +19,7 @@ const ServiceCTA = () => {
           </div>
           <div className="flex-shrink-0">
             <Link
-              href="/quote#quote-section-2"
+              href="/quote"
               className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white text-lg font-medium rounded-full shadow-lg hover:bg-primary-blue hover:shadow-primary-blue/30 transition-all duration-300 transform hover:-translate-y-1"
             >
               Get Started

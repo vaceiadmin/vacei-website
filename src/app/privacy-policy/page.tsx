@@ -2337,11 +2337,10 @@ const PrivacyPolicyPage = () => {
   <span className="block-component" style={{ fontSize: 15 }} />
 </p>
 
-              <p style={{ fontSize: 15, lineHeight: "1.5" }}>
-                <div className="block-component">
-                  <span style={{ fontSize: 15 }} />
-                </div>
-              </p>
+<p style={{ fontSize: 15, lineHeight: "1.5" }}>
+  <span className="block-component" style={{ fontSize: 15 }}></span>
+</p>
+
               <ul>
                 <li data-custom-class="body_text" style={{ lineHeight: "1.5" }}>
                   <span style={{ fontSize: 15 }}>
@@ -2376,11 +2375,13 @@ const PrivacyPolicyPage = () => {
                 </li>
               </ul>
               <p style={{ fontSize: 15, lineHeight: "1.5" }}>
-                <div className="block-component" />
-              </p>
-              <p style={{ fontSize: 15, lineHeight: "1.5" }}>
-                <div className="block-component" />
-              </p>
+  <span className="block-component"></span>
+</p>
+
+<p style={{ fontSize: 15, lineHeight: "1.5" }}>
+  <span className="block-component"></span>
+</p>
+
               <div style={{ lineHeight: "1.5" }}>
                 <div className="block-component">
                   <span style={{ fontSize: 15 }}>
@@ -11814,30 +11815,17 @@ const PrivacyPolicyPage = () => {
                                                                         </span>
                                                                       </span>
                                                                     </span>
-                                                                    <p
-                                                                      style={{
-                                                                        fontSize: 15
-                                                                      }}
-                                                                    >
-                                                                      <span
-                                                                        style={{
-                                                                          fontSize: 15
-                                                                        }}
-                                                                      >
-                                                                        <div className="forloop-component" />
-                                                                        <div className="block-component" />
-                                                                      </span>
-                                                                      <span data-custom-class="body_text">
-                                                                        <span
-                                                                          style={{
-                                                                            color:
-                                                                              "rgb(89, 89, 89)"
-                                                                          }}
-                                                                        >
-                                                                          <div className="forloop-component" />
-                                                                        </span>
-                                                                      </span>
-                                                                    </p>
+                                                                    <div style={{ fontSize: 15 }}>
+  <div className="forloop-component" />
+  <div className="block-component" />
+
+  <span data-custom-class="body_text">
+    <span style={{ color: "rgb(89, 89, 89)" }}>
+      <div className="forloop-component" />
+    </span>
+  </span>
+</div>
+
                                                                     <p
                                                                       style={{
                                                                         fontSize: 15,

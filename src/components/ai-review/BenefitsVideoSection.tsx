@@ -33,11 +33,13 @@ interface BenefitsVideoSectionProps {
 
 const BenefitsVideoSection = ({
     cards = defaultCards,
-    videoSrc = '/assets/videos/ai-review-demo.mp4',
+    videoSrc = '/assets/videos/services/V11-Ai FS Review GIF.gif',
     posterImage = '/assets/images/RectangleV.png',
 }: BenefitsVideoSectionProps) => {
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const [isPlaying, setIsPlaying] = useState(false)
+    
+    const isGif = videoSrc.toLowerCase().endsWith('.gif')
 
     const handleTogglePlay = () => {
         const video = videoRef.current
@@ -63,29 +65,39 @@ const BenefitsVideoSection = ({
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 mt-2">
                 <div className="bg-purple-bg rounded-2xl p-3 md:p-4 shadow-md">
                     <div className="relative w-full rounded-xl overflow-hidden bg-black">
-                        <video
-                            ref={videoRef}
-                            className="w-full h-auto max-h-[420px] object-cover"
-                            src={videoSrc}
-                            poster={posterImage}
-                            controls={false}
-                        />
-
-                        {/* Play overlay button */}
-                        <button
-                            type="button"
-                            onClick={handleTogglePlay}
-                            className="absolute inset-0 flex items-center justify-center focus:outline-none"
-                            aria-label={isPlaying ? 'Pause video' : 'Play video'}
-                        >
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center shadow-xl border border-white/70 hover:bg-white/35 transition-colors">
-                                <Play
-                                    size={30}
-                                    className="text-white"
-                                    fill="currentColor"
+                        {isGif ? (
+                            <img
+                                src={videoSrc}
+                                alt="Benefits Video Review"
+                                className="w-full h-auto"
+                            />
+                        ) : (
+                            <>
+                                <video
+                                    ref={videoRef}
+                                    className="w-full h-auto"
+                                    src={videoSrc}
+                                    poster={posterImage}
+                                    controls={false}
                                 />
-                            </div>
-                        </button>
+
+                                {/* Play overlay button */}
+                                <button
+                                    type="button"
+                                    onClick={handleTogglePlay}
+                                    className="absolute inset-0 flex items-center justify-center focus:outline-none"
+                                    aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                                >
+                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center shadow-xl border border-white/70 hover:bg-white/35 transition-colors">
+                                        <Play
+                                            size={30}
+                                            className="text-white"
+                                            fill="currentColor"
+                                        />
+                                    </div>
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

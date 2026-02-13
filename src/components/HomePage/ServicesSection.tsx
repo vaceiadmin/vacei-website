@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import GradientContainer from "../common/GradientContainer";
+import { servicesData } from "@/data/servicesData";
+import { getServiceImage } from "@/data/serviceImages";
 
 interface BaseCard {
-  id: number;
+  id: string | number;
   title: string;
   subtitle: string;
   image: string;
@@ -22,6 +24,23 @@ const ServicesSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
 
+  const serviceSubtitleMap: Record<string, string> = {
+    "accounting-finance": "Ongoing accounting, reporting and CFO support for your business.",
+    "tax-compliance": "Ongoing support for tax, payroll and statutory filings.",
+    "audit-assurance": "Structured statutory audits and assurance work with clear timelines.",
+    "corporate-csp-services": "Registered office, company secretary and ongoing corporate administration.",
+    "regulated-licensing": "Support for licence applications, renewals and key regulatory submissions.",
+    "advisory-growth": "Advisory projects that help you plan, grow and navigate key decisions.",
+    "company-structure-corporate-changes": "Project-based changes to ownership, management and company structure.",
+    "liquidation-wind-down": "Support to formally close, wind down or strike off entities.",
+    "international-business-structuring-expansion": "Design and coordination of international structures and expansions.",
+    "crypto-digital-assets": "Structuring, banking and compliance support around crypto and digital assets.",
+    "audit-readiness": "Preparation so records and documentation are ready before the audit starts.",
+    "group-consolidation": "Group reporting and consolidation support across multiple entities.",
+    "banking-payments-support": "Support for accessing and maintaining banking and payment solutions.",
+    "corporate-transactions": "Support for defined corporate transactions and one-off corporate projects.",
+  };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) setVisibleItems(1);
@@ -35,14 +54,16 @@ const ServicesSection = () => {
   }, []);
 
   // --- Data ---
-  const services: BaseCard[] = [
-    { id: 1, title: "Corporate & CSP Services", subtitle: "Ongoing corporate administration in Malta.", image: "/assets/images/placeholder.png", link: "/services/corporate-csp-services", category: "Service", badge: "Core" },
-    { id: 2, title: "Accounting & Finance", subtitle: "Structured financial management & CFO support.", image: "/assets/images/placeholder.png", link: "/services/accounting-finance", category: "Service" },
-    { id: 3, title: "Tax & Compliance", subtitle: "Staying compliant made easy.", image: "/assets/images/placeholder.png", link: "/services/tax-compliance", category: "Service", badge: "Critical" },
-    { id: 4, title: "Company Structure & Changes", subtitle: "Event-based corporate changes & projects.", image: "/assets/images/placeholder.png", link: "/services/company-structure-corporate-changes", category: "Service" },
-    { id: 5, title: "Liquidation & Wind-Down", subtitle: "Structured support to close or exit entities.", image: "/assets/images/placeholder.png", link: "/services/liquidation-wind-down", category: "Service" },
-    { id: 6, title: "Audit & Assurance", subtitle: "Rigorous audit services.", image: "/assets/images/placeholder.png", link: "/services/audit-assurance", category: "Service" },
-  ];
+  const services: BaseCard[] = servicesData.map((service) => ({
+    id: service.id,
+    title: service.title,
+    subtitle:
+      serviceSubtitleMap[service.id] ||
+      "Structured support delivered through one digital platform.",
+    image: getServiceImage(service.id, service.image),
+    link: `/services/${service.slug}`,
+    category: "Service",
+  }));
 
   const experts: BaseCard[] = [
     { id: 1, title: "Senior CPAs", subtitle: "Chartered accountants.", image: "/assets/images/pngegg (2) 1.png", link: "/team", category: "Experts", badge: "Elite" },
@@ -70,6 +91,17 @@ const ServicesSection = () => {
   const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % activeData.length);
   const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + activeData.length) % activeData.length);
 
+  // Auto-advance carousel for a smooth, marquee-like effect
+  useEffect(() => {
+    if (activeData.length <= visibleItems) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % activeData.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [activeTab, activeData.length, visibleItems]);
+
   const displayItems = [];
   if (activeData.length <= visibleItems) {
     displayItems.push(...activeData);
@@ -80,7 +112,7 @@ const ServicesSection = () => {
   }
 
   return (
-    <section className="w-full">
+    <section id="services" className="w-full scroll-mt-20">
         <GradientContainer
             backgroundColor="bg-primary" 
             showRadials={true} 
