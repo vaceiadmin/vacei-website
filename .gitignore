@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large video assets (host elsewhere or use compressed version for repo)
+/public/assets/videos/Vacei Fix (1) X1V1.mp4
