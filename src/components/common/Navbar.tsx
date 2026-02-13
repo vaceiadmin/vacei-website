@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import GetInstantQuoteButton from "./GetInstantQuoteButton";
 import { servicesData } from "@/data/servicesData";
@@ -11,6 +12,17 @@ import { servicesData } from "@/data/servicesData";
 const Logo = "/assets/images/Logo.png";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const hideChromeRoutes = [
+    "/privacy-policy",
+    "/terms-and-conditions",
+    "/cookie-policy",
+  ];
+
+  if (hideChromeRoutes.includes(pathname)) {
+    return null;
+  }
+
   const [servicesOpen, setServicesOpen] = useState(false);
   const [portalsOpen, setPortalsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);

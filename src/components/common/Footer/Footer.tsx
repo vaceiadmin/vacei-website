@@ -1,13 +1,25 @@
-'use client'
+"use client"
 
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import GetStartedHero from './GetStartedHero'
 
 const Logo = '/assets/images/Logo.png'
 
 const Footer = () => {
+  const pathname = usePathname()
+  const hideChromeRoutes = [
+    '/privacy-policy',
+    '/terms-and-conditions',
+    '/cookie-policy',
+  ]
+
+  if (hideChromeRoutes.includes(pathname)) {
+    return null
+  }
+
   return (
     <footer className="w-full relative overflow-visible mt-48">
       {/* Split background: top white, bottom light grey */}
@@ -186,15 +198,15 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray">
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/coming-soon" className="hover:text-primary-blue transition-colors">
+              <Link href="/terms-and-conditions" className="hover:text-primary-blue transition-colors">
                 Terms & Conditions
               </Link>
               <span className="text-light-gray">|</span>
-              <Link href="/coming-soon" className="hover:text-primary-blue transition-colors">
+              <Link href="/privacy-policy" className="hover:text-primary-blue transition-colors">
                 Privacy Policy
               </Link>
               <span className="text-light-gray">|</span>
-              <Link href="/coming-soon" className="hover:text-primary-blue transition-colors">
+              <Link href="/cookie-policy" className="hover:text-primary-blue transition-colors">
                 Cookie Policy
               </Link>
             </div>
