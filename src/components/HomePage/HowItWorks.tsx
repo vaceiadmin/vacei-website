@@ -78,7 +78,7 @@ const steps = [
     },
 ]
 
-const HOW_IT_WORKS_VIDEO = "/assets/videos/Vacei%20Fix%20(1)%20X1V1.mp4"
+const HOW_IT_WORKS_VIDEO = "/assets/videos/Vacei Fix (1) X1V1.mp4"
 const HOW_IT_WORKS_POSTER = "/assets/videos/Main%20Render.gif"
 
 const HowItWorks = () => {
