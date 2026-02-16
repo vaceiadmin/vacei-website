@@ -854,10 +854,10 @@ export const servicesData: ServiceData[] = [
   {
     id: "international-business-structuring-expansion",
     slug: "international-business-structuring-expansion",
-    title: "International Business Structuring & Expansion",
+    title: "International Business Structures",
     breadcrumbs: [
       { label: "Services" },
-      { label: "International Business Structuring & Expansion" },
+      { label: "International Business Structures " },
     ],
     image: "/assets/images/placeholder.png",
     videoUrl: serviceVideosById["international-business-structuring-expansion"],
@@ -869,7 +869,7 @@ export const servicesData: ServiceData[] = [
           What It Is
         </h3>
         <p className="mb-4 text-gray leading-[26px]">
-          Support for designing and managing international business structures and expansions.
+          Support for designing and managing international business structures.
         </p>
         <p className="mb-4 text-gray leading-[26px]">
           VACEI helps you set up and coordinate group structures, entities, and banking in a compliant, tax-aware way.
