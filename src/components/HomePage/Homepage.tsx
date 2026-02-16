@@ -7,7 +7,7 @@ import ProcessStepsSection from "./ProcessStepsSection";
 import CompanySetupSection from "./CompanySetupSection";
 import FaqSection from "./FaqSection";
 import HeroSection from "./HeroSection";
-import PortalFeature from "./PortalFeature";
+// import PortalFeature from "./PortalFeature";
 import HowItWorks from "./HowItWorks";
 import AuditPlatform from "./AuditPlatform/AuditPlatform";
 
@@ -29,7 +29,7 @@ const HomePage = () => {
       <AuditPlatform />
       <HowItWorks />
       <ProcessStepsSection />
-      <PortalFeature />
+      {/* <PortalFeature /> */}
       <ReadyToSimplifySection />
       <ServicesSection />
       <CompanySetupSection />

@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Play, Pause } from "lucide-react";
 import TextAnimation from "../common/TextAnimation";
 import GlassyEffect from "../common/GlassyEffect";
 import GradientContainer from "../common/GradientContainer";
@@ -16,12 +17,23 @@ const HeroSection = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const isInViewRef = useRef(true);
   const [muted, setMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const toggleMute = () => {
     if (!videoRef.current) return;
     const next = !muted;
     videoRef.current.muted = next;
     setMuted(next);
+  };
+
+  const togglePlayPause = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
   };
 
   const tryPlay = () => {
@@ -51,6 +63,11 @@ const HeroSection = () => {
 
     observer.observe(container);
 
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPause);
+
     const onCanPlay = () => tryPlay();
     video.addEventListener("canplay", onCanPlay);
     video.addEventListener("loadeddata", onCanPlay);
@@ -63,6 +80,8 @@ const HeroSection = () => {
 
     return () => {
       clearTimeout(retryTimer);
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPause);
       video.removeEventListener("loadeddata", onCanPlay);
       observer.disconnect();
       video.removeEventListener("canplay", onCanPlay);
@@ -246,10 +265,23 @@ const HeroSection = () => {
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-white/20 rounded-3xl pointer-events-none" />
+                {/* Glassmorphism play/pause button */}
+                <button
+                  type="button"
+                  onClick={togglePlayPause}
+                  className="absolute bottom-4 left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all hover:bg-white/20 hover:border-white/30 hover:scale-105 active:scale-95 shadow-lg"
+                  aria-label={isPlaying ? "Pause" : "Play"}
+                >
+                  {isPlaying ? (
+                    <Pause className="w-5 h-5" fill="currentColor" />
+                  ) : (
+                    <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+                  )}
+                </button>
                 <button
                   type="button"
                   onClick={toggleMute}
-                  className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white transition hover:bg-white/30"
+                  className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all hover:bg-white/20 hover:border-white/30 hover:scale-105 active:scale-95 shadow-lg"
                   aria-label={muted ? "Unmute" : "Mute"}
                 >
                   {muted ? (

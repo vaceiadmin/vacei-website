@@ -33,7 +33,7 @@ const ServicesSection = () => {
     "advisory-growth": "Advisory projects that help you plan, grow and navigate key decisions.",
     "company-structure-corporate-changes": "Project-based changes to ownership, management and company structure.",
     "liquidation-wind-down": "Support to formally close, wind down or strike off entities.",
-    "international-business-structuring-expansion": "Design and coordination of international structures and expansions.",
+    "international-business-structuring": "Design and coordination of international structures and expansions.",
     "crypto-digital-assets": "Structuring, banking and compliance support around crypto and digital assets.",
     "audit-readiness": "Preparation so records and documentation are ready before the audit starts.",
     "group-consolidation": "Group reporting and consolidation support across multiple entities.",

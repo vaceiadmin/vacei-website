@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { Play, Pause } from "lucide-react"
 import { FadeInUp, StaggerContainer } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
 
@@ -78,23 +79,44 @@ const steps = [
     },
 ]
 
-const HOW_IT_WORKS_VIDEO = "/assets/videos/Vacei Fix (1) X1V1.mp4"
+// URL-encoded paths so the video loads in production (spaces/parentheses break static serving)
+const HOW_IT_WORKS_VIDEO = "/assets/videos/Vacei%20Fix%20%281%29%20X1V1.mp4"
 const HOW_IT_WORKS_POSTER = "/assets/videos/Main%20Render.gif"
 
 const HowItWorks = () => {
     const videoRef = useRef<HTMLVideoElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
+    const userPausedRef = useRef(false)
+    const [isPlaying, setIsPlaying] = useState(false)
+
+    const togglePlayPause = () => {
+        const video = videoRef.current
+        if (!video) return
+        if (video.paused) {
+            userPausedRef.current = false
+            video.play().catch(() => {})
+        } else {
+            userPausedRef.current = true
+            video.pause()
+        }
+    }
 
     useEffect(() => {
         const video = videoRef.current
         const container = containerRef.current
         if (!video || !container) return
 
+        const onPlay = () => setIsPlaying(true)
+        const onPause = () => setIsPlaying(false)
+
+        video.addEventListener("play", onPlay)
+        video.addEventListener("pause", onPause)
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        video.play().catch(() => {})
+                        if (!userPausedRef.current) video.play().catch(() => {})
                     } else {
                         video.pause()
                     }
@@ -106,7 +128,7 @@ const HowItWorks = () => {
         observer.observe(container)
 
         const onCanPlay = () => {
-            if (container && video) {
+            if (container && video && !userPausedRef.current) {
                 const rect = container.getBoundingClientRect()
                 const isVisible = rect.top < window.innerHeight && rect.bottom > 0
                 if (isVisible) video.play().catch(() => {})
@@ -116,6 +138,8 @@ const HowItWorks = () => {
         if (video.readyState >= 3) onCanPlay()
 
         return () => {
+            video.removeEventListener("play", onPlay)
+            video.removeEventListener("pause", onPause)
             observer.disconnect()
             video.removeEventListener("canplay", onCanPlay)
             video.pause()
@@ -157,12 +181,24 @@ const HowItWorks = () => {
                                 src={HOW_IT_WORKS_VIDEO}
                                 poster={HOW_IT_WORKS_POSTER}
                                 preload="auto"
-                                // muted
                                 loop
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
+                            {/* Glassmorphism play/pause button */}
+                            <button
+                                type="button"
+                                onClick={togglePlayPause}
+                                className="absolute bottom-4 left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all hover:bg-white/20 hover:border-white/30 hover:scale-105 active:scale-95 shadow-lg"
+                                aria-label={isPlaying ? "Pause" : "Play"}
+                            >
+                                {isPlaying ? (
+                                    <Pause className="w-5 h-5" fill="currentColor" />
+                                ) : (
+                                    <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
+                                )}
+                            </button>
                         </div>
                     </FadeInUp>
 
