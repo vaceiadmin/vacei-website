@@ -24,6 +24,8 @@ const CompanySetupSection = () => {
              <motion.span 
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55 }}
                 className="inline-block px-3 py-1 rounded-full bg-white border border-blue-100 text-xs font-bold tracking-widest text-[#3b49e6] uppercase mb-4 shadow-sm"
              >
                 Incorporation Made Simple
@@ -31,7 +33,8 @@ const CompanySetupSection = () => {
              <motion.h2 
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.1 }}
                 className="text-3xl md:text-5xl font-bold text-[#1a1c35] mb-6 leading-tight"
              >
                 Starts with a Company, <br/>
@@ -40,7 +43,8 @@ const CompanySetupSection = () => {
              <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.2 }}
                 className="text-lg text-gray-600 leading-relaxed"
              >
                 We handle specific incorporation and setup, but our real value lies in the ongoing partnership. Manage everything through one unified portal.
@@ -55,6 +59,7 @@ const CompanySetupSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ duration: 0.55 }}
                 className="relative group h-full"
             >
                 <div className="h-full bg-white/70 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2 transition-all duration-500">
@@ -83,7 +88,7 @@ const CompanySetupSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
+                transition={{ duration: 0.55, delay: 0.1 }}
                 className="relative group h-full"
             >
                 <div className="h-full bg-white/70 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2 transition-all duration-500">
@@ -113,7 +118,7 @@ const CompanySetupSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+                transition={{ duration: 0.55, delay: 0.2 }}
                 className="relative group h-full"
             >
                 {/* Dark Blue Gradient Card */}

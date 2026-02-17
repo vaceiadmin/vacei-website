@@ -16,12 +16,12 @@ interface AnimationProps extends HTMLMotionProps<"div"> {
 // Premium easing curve for smooth "hero-like" feel
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 
-// 1. Fade In Up (Most common)
+// 1. Fade In Up (Most common) – duration 0.6 so animation is visible and smooth
 export const FadeInUp = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.8,
+  duration = 0.6,
   viewportMargin = "-50px",
   once = true,
   as = "div",
@@ -31,7 +31,7 @@ export const FadeInUp = ({
 
   return (
     <Component
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: viewportMargin }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}

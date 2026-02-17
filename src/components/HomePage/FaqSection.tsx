@@ -10,13 +10,13 @@ import TextAnimation from "../common/TextAnimation";
 import { FadeInUp, StaggerContainer as StaggerEffect } from "../common/Animations";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  hidden: { opacity: 0, y: 36, scale: 0.96 },
   visible: { 
     opacity: 1, 
     y: 0, 
     scale: 1,
     transition: { 
-      duration: 0.8, 
+      duration: 0.55, 
       ease: [0.16, 1, 0.3, 1] 
     } 
   }
@@ -27,7 +27,8 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     }
   }
 }
@@ -83,7 +84,7 @@ const FaqSection = () => {
           
           <div className="max-w-6xl mx-auto px-4 md:px-0 relative z-10">
             {/* Section Header */}
-            <FadeInUp className="text-center mb-12 lg:mb-20 max-w-3xl mx-auto">
+            <FadeInUp duration={0.6} delay={0} className="text-center mb-12 lg:mb-20 max-w-3xl mx-auto">
               <TextAnimation
                 text="Why Choose VACEI?"
                 as="h2"
@@ -95,7 +96,7 @@ const FaqSection = () => {
               </p>
             </FadeInUp>
 
-            <StaggerEffect className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start" viewportMargin="-100px">
+            <StaggerEffect staggerDelay={0.1} className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start" viewportMargin="-100px">
             {/* Left: Interactive Image Area */}
             <motion.div 
               initial="hidden"

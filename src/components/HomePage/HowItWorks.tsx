@@ -156,7 +156,7 @@ const HowItWorks = () => {
                 <div className="relative z-10 mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
 
                     {/* Header */}
-                    <FadeInUp className="text-center mb-16">
+                    <FadeInUp duration={0.6} delay={0} className="text-center mb-16">
                         <TextAnimation
                             text="How It Works"
                             as="h2"
@@ -165,7 +165,7 @@ const HowItWorks = () => {
                         <TextAnimation
                             text="One portal. One team. Everything handled."
                             as="h3"
-                            delay={0.3}
+                            delay={0.15}
                             className="text-white text-3xl md:text-5xl font-bold mb-6"
                         />
                         <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -174,7 +174,7 @@ const HowItWorks = () => {
                     </FadeInUp>
 
                     {/* Video Banner - same as Hero, autoplay on scroll into view */}
-                    <FadeInUp delay={0.2} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10 bg-slate-950">
+                    <FadeInUp duration={0.6} delay={0.15} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10 bg-slate-950">
                         <div ref={containerRef} className="absolute inset-0">
                             <video
                                 ref={videoRef}
@@ -204,7 +204,7 @@ const HowItWorks = () => {
 
                     {/* Steps Grid - Modern Glass Cards */}
                     <div className="relative">
-                        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                         {steps.map((step, index) => (
                             <motion.div 
                                 key={index}

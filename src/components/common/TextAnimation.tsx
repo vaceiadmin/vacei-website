@@ -30,7 +30,7 @@ export const TextAnimation = ({
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.08, 
+        staggerChildren: 0.055, 
         delayChildren: delay 
       },
     },
@@ -39,15 +39,15 @@ export const TextAnimation = ({
   const wordVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: 25,
-      filter: "blur(4px)"
+      y: 22,
+      filter: "blur(6px)"
     },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: [0.2, 0.65, 0.3, 0.9],
       },
     },

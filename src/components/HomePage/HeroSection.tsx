@@ -135,7 +135,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.8,
+                duration: 0.55,
                 ease: [0.16, 1, 0.3, 1],
               }}
               className="w-full text-center"
@@ -144,7 +144,7 @@ const HeroSection = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-5 py-2 text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase text-white/90 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mx-auto"
               >
                 <motion.span
@@ -175,7 +175,7 @@ const HeroSection = () => {
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
+                  transition={{ duration: 0.55, delay: 0.2 }}
                   className="text-3xl sm:text-4xl md:text-5xl text-white/90 font-bold leading-[1.1]"
                 >
                   Delivered Through One Portal
@@ -186,7 +186,7 @@ const HeroSection = () => {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.55, delay: 0.3 }}
                 className="relative"
               >
                 <div className="absolute inset-0 -z-10" />
@@ -201,7 +201,7 @@ const HeroSection = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
+                transition={{ duration: 0.55, delay: 0.4 }}
                 className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center"
               >
                 <motion.div
@@ -248,7 +248,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="w-full max-w-5xl mx-auto mt-16"
           >
             <div ref={videoContainerRef} className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-slate-950 backdrop-blur-2xl">
@@ -318,7 +318,7 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
+          transition={{ duration: 0.5, delay: 0.65 }}
           className="absolute bottom-12 left-12 flex flex-col items-center gap-4 hidden md:flex z-30"
         >
           <div className="text-white/50 text-xs tracking-widest uppercase -rotate-90 origin-bottom translate-y-8 absolute bottom-12 whitespace-nowrap">

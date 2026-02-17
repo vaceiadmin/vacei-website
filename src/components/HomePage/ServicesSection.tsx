@@ -124,8 +124,9 @@ const ServicesSection = () => {
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
                     <div className="space-y-4">
             <motion.div 
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                             className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-bold tracking-widest text-[#989fea] uppercase"
                         >
                             Our Ecosystem
@@ -133,6 +134,7 @@ const ServicesSection = () => {
                         <motion.h2 
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                             className="text-3xl md:text-5xl font-bold text-white leading-tight"
                         >
                             Everything You Need <br />
@@ -144,6 +146,7 @@ const ServicesSection = () => {
           <motion.div 
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                         className="flex p-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full"
                     >
               {(["services", "experts", "products"] as const).map((tab) => (
@@ -174,10 +177,10 @@ const ServicesSection = () => {
                             {displayItems.map((item, idx) => (
                   <motion.div 
                                     key={`${item.id}-${activeTab}-${idx}`}
-                                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                    transition={{ duration: 0.4 }}
+                                    exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                    transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full max-w-[380px] flex-shrink-0"
                                 >
                                     <div className="group relative h-[480px] w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)] transition-all duration-500">

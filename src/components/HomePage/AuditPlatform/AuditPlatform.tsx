@@ -9,15 +9,22 @@ import AuditPlatformBeam from "./AuditPlatformBeam";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import TextAnimation from "../../common/TextAnimation";
 
-// Animation Variants (kept simple to satisfy motion-dom types)
+// Animation Variants – visible render, smooth and not laggy
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.08 },
+  },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 function AnimatedOrbit() {
@@ -65,7 +72,7 @@ function AnimatedOrbit() {
             className={`absolute flex items-center gap-2 p-2 z-20 rounded-lg  ${className}`}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
+            transition={{ duration: 0.5, delay: index * 0.12 }}
           >
             {src && <img src={src} alt={alt} className={`${imgClass}`} />}
             {Text}
@@ -175,7 +182,7 @@ export default function AuditPlatform() {
               initial={{ opacity: 0, scale: 0.95, y: 40 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="relative rounded-[32px] border border-white/20 bg-linear-to-br from-white/10 to-white/5 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-3xl overflow-hidden aspect-square flex items-center justify-center">
                  {/* Glassy Background Elements from previous design if needed, or simplified for Beam */}

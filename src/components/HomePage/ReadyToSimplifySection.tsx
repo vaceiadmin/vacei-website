@@ -14,7 +14,7 @@ const ReadyToSimplifySection = () => {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
         >
             
@@ -32,7 +32,7 @@ const ReadyToSimplifySection = () => {
                 />
             </div>
 
-            <FadeInUp className="relative z-10 flex flex-col items-center">
+            <FadeInUp duration={0.6} delay={0.1} className="relative z-10 flex flex-col items-center">
                 <TextAnimation
                 text="Ready to simplify your business?"
                 as="h2"
