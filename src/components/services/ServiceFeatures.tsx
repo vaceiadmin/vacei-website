@@ -60,7 +60,7 @@ const ServiceFeatures = ({
             <TextAnimation
               text={typeof title === "string" ? title : ""}
               as="h2"
-              className={`text-3xl md:text-5xl font-medium mb-6 leading-tight max-w-lg ${styles.heading}`}
+              className={`text-3xl md:text-5xl font-medium mb-8 leading-tight max-w-lg ${styles.heading}`}
             />
             <p className={`text-lg mb-10 max-w-md ${styles.subheading}`}>{subtitle}</p>
             <div className="flex flex-wrap items-center gap-3">

@@ -166,7 +166,7 @@ const HowItWorks = () => {
                             text="One portal. One team. Everything handled."
                             as="h3"
                             delay={0.15}
-                            className="text-white text-3xl md:text-5xl font-bold mb-8"
+                            className="text-white text-3xl md:text-5xl font-bold mb-4 leading-tight"
                         />
                         <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
                             See how VACEI simplifies accounting, audit, compliance, and corporate services with a streamlined, tech-enabled approach.
