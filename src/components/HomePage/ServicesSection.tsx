@@ -4,18 +4,21 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Box, LayoutGrid, FileCheck } from "lucide-react";
 import GradientContainer from "../common/GradientContainer";
 import { servicesData } from "@/data/servicesData";
-import { getServiceImage } from "@/data/serviceImages";
 
 interface BaseCard {
   id: string | number;
   title: string;
   subtitle: string;
-  image: string;
   link: string;
   category: string;
   badge?: string;
+  /** Feature titles for animated glassy pills (services only) */
+  featureTitles?: string[];
+  /** Product icon component key (products only) */
+  productIcon?: "box" | "grid" | "file";
   hoverImage?: string;
 }
 
@@ -60,9 +63,12 @@ const ServicesSection = () => {
     subtitle:
       serviceSubtitleMap[service.id] ||
       "Structured support delivered through one digital platform.",
-    image: getServiceImage(service.id, service.image),
     link: `/services/${service.slug}`,
     category: "Service",
+    featureTitles:
+      service.featuresSection?.features
+        .slice(0, 3)
+        .map((f) => f.title) ?? [],
   }));
 
   /* const experts: BaseCard[] = [
@@ -73,9 +79,9 @@ const ServicesSection = () => {
   ]; */
 
   const products: BaseCard[] = [
-    { id: 1, title: "Bookkeeping Portal", subtitle: "Real-time financial dashboard.", image: "/assets/images/Cube 1.png", hoverImage: "/assets/images/Accounting.jpg", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
-    { id: 2, title: "Client Portal", subtitle: "Documents & communication.", image: "/assets/images/Pyramid 2.png", hoverImage: "/assets/images/Frame 1618872451.png", link: "/portal/client-portal", category: "Platform", badge: "Featured" },
-    { id: 3, title: "Audit Portal", subtitle: "Streamlined audit workflows.", image: "/assets/images/Thorus Knot.png", hoverImage: "/assets/images/Audit.jpg", link: "/portal/audit-portal", category: "Platform" },
+    { id: 1, title: "Bookkeeping Portal", subtitle: "Real-time financial dashboard.", productIcon: "box", hoverImage: "/assets/images/Accounting.jpg", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
+    { id: 2, title: "Client Portal", subtitle: "Documents & communication.", productIcon: "grid", hoverImage: "/assets/images/Frame 1618872451.png", link: "/portal/client-portal", category: "Platform", badge: "Featured" },
+    { id: 3, title: "Audit Portal", subtitle: "Streamlined audit workflows.", productIcon: "file", hoverImage: "/assets/images/Audit.jpg", link: "/portal/audit-portal", category: "Platform" },
   ];
 
   const getActiveData = () => {
@@ -181,30 +187,47 @@ const ServicesSection = () => {
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
                                     transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                                    className="w-full max-w-[380px] flex-shrink-0"
+                                    className="w-full max-w-[380px] shrink-0"
                                 >
                                     <div className="group relative h-[480px] w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)] transition-all duration-500">
                                         
-                                        {/* Image Container (Top Half) */}
-                                        <div className="h-[55%] relative w-full p-8 flex items-center justify-center overflow-hidden">
-                                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                            
-                                            {/* Background Glow */}
-                                            <div className="absolute inset-0 bg-primary-blue/20 blur-[60px] rounded-full scale-0 group-hover:scale-100 transition-transform duration-700 opacity-50" />
+                                        {/* Animated Glassy Header (replaces image) - like HowItWorks cards */}
+                                        <div className="h-[55%] relative w-full p-6 flex flex-col items-center justify-center gap-6 overflow-hidden">
+                                            <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                            <div className="absolute inset-0 bg-primary-blue/10 blur-[60px] rounded-full scale-75 group-hover:scale-100 transition-transform duration-700 opacity-40" />
 
-                                            {/* Main Image */}
-                                            <div className="relative w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                                                    className={`object-contain ${activeTab === "products" ? "drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]" : "opacity-90 grayscale-[20%] group-hover:grayscale-0"}`}
-                      />
-                                            </div>
-                    </div>
+                                            {activeTab === "services" && item.featureTitles && item.featureTitles.length > 0 ? (
+                                                /* Services: glassy pills with feature titles */
+                                                <div className="relative z-10 flex flex-wrap items-center justify-center gap-2">
+                                                    {item.featureTitles.map((label, i) => (
+                                                        <motion.div
+                                                            key={label}
+                                                            initial={{ opacity: 0, y: 12 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ delay: idx * 0.1 + i * 0.08, duration: 0.4 }}
+                                                            className="px-4 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-medium group-hover:bg-white/15 group-hover:border-white/20 transition-all duration-300"
+                                                        >
+                                                            {label}
+                                                        </motion.div>
+                                                    ))}
+                                                </div>
+                                            ) : activeTab === "products" && item.productIcon ? (
+                                                /* Products: glassy icon container */
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.9 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    transition={{ delay: idx * 0.1, duration: 0.4 }}
+                                                    className="w-20 h-20 rounded-2xl bg-linear-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-primary-blue/30 group-hover:border-primary-blue/40 transition-all duration-300 shadow-lg"
+                                                >
+                                                    {item.productIcon === "box" && <Box className="w-10 h-10" strokeWidth={1.5} />}
+                                                    {item.productIcon === "grid" && <LayoutGrid className="w-10 h-10" strokeWidth={1.5} />}
+                                                    {item.productIcon === "file" && <FileCheck className="w-10 h-10" strokeWidth={1.5} />}
+                                                </motion.div>
+                                            ) : null}
+                                        </div>
 
                                         {/* Content Container (Bottom Half) */}
-                                        <div className="h-[45%] p-8 flex flex-col justify-between relative bg-gradient-to-t from-[#111235] via-[#111235]/80 to-transparent">
+                                        <div className="h-[45%] p-8 flex flex-col justify-between relative bg-linear-to-t from-[#111235] via-[#111235]/80 to-transparent">
                       <div>
                                                 {item.badge && (
                                                     <span className="inline-block px-2 py-0.5 mb-2 rounded text-[10px] font-bold uppercase bg-primary-blue/20 border border-primary-blue/30 text-blue-200">
@@ -235,7 +258,7 @@ const ServicesSection = () => {
                                             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto flex flex-col">
                                                 <div className="relative w-full h-full">
                                                     <Image src={item.hoverImage} alt={item.title} fill className="object-contain opacity-60" />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#111235] via-transparent to-transparent" />
+                                                    <div className="absolute inset-0 bg-linear-to-t from-[#111235] via-transparent to-transparent" />
                                                     
                                                     <div className="absolute inset-0 p-8 flex flex-col justify-end">
                                                         <h3 className="text-2xl font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">{item.title}</h3>
