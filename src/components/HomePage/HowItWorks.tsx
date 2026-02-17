@@ -6,10 +6,10 @@ import { Play, Pause } from "lucide-react"
 import { FadeInUp, StaggerContainer } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
 
-import Image from "next/image"
+import GradientContainer from "../common/GradientContainer"
 import { HOW_IT_WORKS_VIDEO, HOW_IT_WORKS_POSTER } from "@/data/video"
 
-// Icons matching the reference - work on light theme
+// Icons - dark theme
 const RequestServiceIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="6" cy="18" r="2" />
@@ -144,28 +144,12 @@ const HowItWorks = () => {
     }, [])
 
     return (
-        <section className="w-full relative overflow-hidden">
-            <div className="relative w-full bg-background py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden rounded-[32px] md:rounded-[48px]">
-                {/* Radial gradients - like footer */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[inherit]">
-                    <div className="absolute bottom-0 left-0 w-[350px] h-[330px] z-0 transform -rotate-360">
-                        <Image
-                            src="/assets/images/radial3.png"
-                            alt=""
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-[350px] h-[330px] z-0 transform -rotate-90">
-                        <Image
-                            src="/assets/images/radial3.png"
-                            alt=""
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                </div>
-
+        <section className="w-full">
+            <GradientContainer
+                backgroundColor="bg-primary"
+                showRadials={true}
+                className="py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
+            >
                 <div className="relative z-10 mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
 
                     {/* Header */}
@@ -179,15 +163,15 @@ const HowItWorks = () => {
                             text="One portal. One team. Everything handled."
                             as="h3"
                             delay={0.15}
-                            className="text-text-heading text-3xl md:text-5xl font-bold mb-4 leading-tight"
+                            className="text-white text-3xl md:text-5xl font-bold mb-4 leading-tight"
                         />
-                        <p className="text-gray text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
                             See how VACEI simplifies accounting, audit, compliance, and corporate services with a streamlined, tech-enabled approach.
                         </p>
                     </FadeInUp>
 
                     {/* Video Banner - autoplay on scroll into view */}
-                    <FadeInUp duration={0.6} delay={0.15} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-input bg-slate-950">
+                    <FadeInUp duration={0.6} delay={0.15} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10 bg-slate-950">
                         <div ref={containerRef} className="absolute inset-0">
                             <video
                                 ref={videoRef}
@@ -198,7 +182,7 @@ const HowItWorks = () => {
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
+                            <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
                             {/* Glassmorphism play/pause button */}
                             <button
                                 type="button"
@@ -215,24 +199,24 @@ const HowItWorks = () => {
                         </div>
                     </FadeInUp>
 
-                    {/* Steps Grid - Glassy cards with connectors */}
+                    {/* Steps Grid - Dark glassy cards with connectors */}
                     <div className="relative">
                         <StaggerContainer staggerDelay={0.1} className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-stretch gap-6 lg:gap-2">
                         {steps.map((step, index) => (
                             <React.Fragment key={index}>
                                 <motion.div 
                                     whileHover={{ y: -5 }}
-                                    className="relative p-6 rounded-2xl bg-white/25 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-all duration-300 group hover:bg-white/45 hover:border-white/60 hover:shadow-[0_12px_48px_rgba(59,73,230,0.1)] lg:flex-1 lg:min-w-0"
+                                    className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-300 group hover:bg-white/10 hover:border-primary-blue/30 lg:flex-1 lg:min-w-0"
                                 >
                                     {/* Icon Box */}
-                                    <div className="w-14 h-14 rounded-xl bg-white/40 backdrop-blur-md border border-white/50 flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue group-hover:text-white transition-all duration-300 shadow-[0_4px_16px_rgba(255,255,255,0.3)]">
+                                    <div className="w-14 h-14 rounded-xl bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-300 shadow-lg">
                                         {step.icon}
                                     </div>
 
                                     {/* Text Content */}
                                     <div className="flex flex-col">
-                                        <h4 className="text-lg font-bold text-text-heading mb-2 group-hover:text-primary-blue transition-colors">{step.title}</h4>
-                                        <p className="text-gray text-sm leading-relaxed">{step.description}</p>
+                                        <h4 className="text-lg font-bold text-white mb-2 group-hover:text-primary-blue transition-colors">{step.title}</h4>
+                                        <p className="text-white/60 text-sm leading-relaxed">{step.description}</p>
                                     </div>
                                 </motion.div>
 
@@ -240,8 +224,8 @@ const HowItWorks = () => {
                                 {index < steps.length - 1 && (
                                     <div className="hidden lg:flex items-center justify-center shrink-0 w-6 xl:w-10" aria-hidden>
                                         <div className="flex items-center w-full">
-                                            <div className="flex-1 h-[2px] bg-linear-to-r from-transparent via-primary-blue/30 to-primary-blue/40 rounded-full" />
-                                            <svg className="w-4 h-4 text-primary-blue/50 shrink-0 -ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                            <div className="flex-1 h-[2px] bg-linear-to-r from-white/10 via-white/20 to-white/10 rounded-full" />
+                                            <svg className="w-4 h-4 text-white/40 shrink-0 -ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M9 18l6-6-6-6v12z" />
                                             </svg>
                                         </div>
@@ -253,7 +237,7 @@ const HowItWorks = () => {
                     </div>
 
                 </div>
-            </div>
+            </GradientContainer>
         </section>
     )
 }
