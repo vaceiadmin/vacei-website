@@ -348,6 +348,7 @@ const Navbar = () => {
   const resourceLinks = useCompactNav
     ? [
         // Compact: move AI Review + How It Works under Resources
+        { label: "Insights", href: "/insights" },
         { label: "AI Review", href: "/ai-review" },
         { label: "How It Works", href: "/how-it-works" },
         { label: "About VACEI", href: "/about" },
@@ -358,6 +359,7 @@ const Navbar = () => {
       ]
     : [
         // Original Resources content
+        { label: "Insights", href: "/insights" },
         { label: "How It Works", href: "/how-it-works" },
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },

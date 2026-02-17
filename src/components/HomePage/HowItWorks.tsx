@@ -7,7 +7,7 @@ import { FadeInUp, StaggerContainer } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
 
 import GradientContainer from "../common/GradientContainer"
-import { HOW_IT_WORKS_VIDEO, HOW_IT_WORKS_POSTER } from "@/data/video"
+import { HOW_IT_WORKS_VIDEO } from "@/data/video"
 
 // Icons - dark theme
 const RequestServiceIcon = () => (
@@ -83,7 +83,7 @@ const steps = [
 const HowItWorks = () => {
     const videoRef = useRef<HTMLVideoElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
-    const userPausedRef = useRef(false)
+    const userPausedRef = useRef(true)
     const [isPlaying, setIsPlaying] = useState(false)
 
     const togglePlayPause = () => {
@@ -112,11 +112,7 @@ const HowItWorks = () => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        if (!userPausedRef.current) video.play().catch(() => {})
-                    } else {
-                        video.pause()
-                    }
+                    if (!entry.isIntersecting) video.pause()
                 })
             },
             { threshold: 0.1, rootMargin: "0px" }
@@ -124,21 +120,10 @@ const HowItWorks = () => {
 
         observer.observe(container)
 
-        const onCanPlay = () => {
-            if (container && video && !userPausedRef.current) {
-                const rect = container.getBoundingClientRect()
-                const isVisible = rect.top < window.innerHeight && rect.bottom > 0
-                if (isVisible) video.play().catch(() => {})
-            }
-        }
-        video.addEventListener("canplay", onCanPlay)
-        if (video.readyState >= 3) onCanPlay()
-
         return () => {
             video.removeEventListener("play", onPlay)
             video.removeEventListener("pause", onPause)
             observer.disconnect()
-            video.removeEventListener("canplay", onCanPlay)
             video.pause()
         }
     }, [])
@@ -176,26 +161,36 @@ const HowItWorks = () => {
                             <video
                                 ref={videoRef}
                                 src={encodeURI(HOW_IT_WORKS_VIDEO)}
-                                poster={encodeURI(HOW_IT_WORKS_POSTER)}
                                 preload="metadata"
                                 loop
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
-                            {/* Glassmorphism play/pause button */}
-                            <button
-                                type="button"
-                                onClick={togglePlayPause}
-                                className="absolute bottom-4 left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all hover:bg-white/20 hover:border-white/30 hover:scale-105 active:scale-95 shadow-lg"
-                                aria-label={isPlaying ? "Pause" : "Play"}
-                            >
-                                {isPlaying ? (
-                                    <Pause className="w-5 h-5" fill="currentColor" />
-                                ) : (
-                                    <Play className="w-5 h-5 ml-0.5" fill="currentColor" />
-                                )}
-                            </button>
+                            {/* Centered glassmorphism play/pause button */}
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <motion.button
+                                    type="button"
+                                    onClick={togglePlayPause}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="pointer-events-auto z-10 relative flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl border border-white/25 text-white shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:bg-white/20 hover:border-white/40"
+                                    aria-label={isPlaying ? "Pause" : "Play"}
+                                >
+                                    {!isPlaying && (
+                                        <motion.span
+                                            className="absolute inset-0 rounded-full border-2 border-white/30"
+                                            animate={{ scale: [1, 1.3, 1.3], opacity: [0.5, 0, 0] }}
+                                            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                                        />
+                                    )}
+                                    {isPlaying ? (
+                                        <Pause className="w-8 h-8 md:w-10 md:h-10 relative z-10" fill="currentColor" />
+                                    ) : (
+                                        <Play className="w-8 h-8 md:w-10 md:h-10 ml-1 relative z-10" fill="currentColor" />
+                                    )}
+                                </motion.button>
+                            </div>
                         </div>
                     </FadeInUp>
 
