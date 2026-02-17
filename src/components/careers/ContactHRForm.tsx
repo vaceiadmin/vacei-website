@@ -47,7 +47,8 @@ const ContactHRForm = () => {
       });
 
       if (!res.ok) {
-        throw new Error("Request failed");
+        const data = await res.json().catch(() => ({}));
+        throw new Error((data as { error?: string }).error || "Request failed");
       }
 
       setFormData({ name: "", email: "", role: "", message: "" });
@@ -56,9 +57,10 @@ const ContactHRForm = () => {
       setStatusOpen(true);
     } catch (err) {
       console.error(err);
-      setSubmitError("Something went wrong. Please try again.");
+      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setSubmitError(msg);
       setStatusType("error");
-      setStatusMessage("We couldn’t send your message. Please try again in a moment.");
+      setStatusMessage(msg);
       setStatusOpen(true);
     } finally {
       setIsSubmitting(false);

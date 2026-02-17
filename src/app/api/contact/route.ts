@@ -1,15 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-const transport = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: process.env.SMTP_SECURE === "true",
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+function getTransport() {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!host || !user || !pass) {
+    throw new Error(
+      "SMTP is not configured. Set SMTP_HOST, SMTP_USER, and SMTP_PASS in your deployment environment."
+    );
+  }
+  return nodemailer.createTransport({
+    host,
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: process.env.SMTP_SECURE === "true",
+    auth: { user, pass },
+  });
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -43,7 +50,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await transport.sendMail({
+    await getTransport().sendMail({
       from: `"VACEI Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
       to: toAddress,
       subject: subject || `New contact from ${name || "VACEI website"}`,

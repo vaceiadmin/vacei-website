@@ -264,14 +264,18 @@ const ProcessStepsSection = () => {
 
       setIsSubmitting(true)
 
-      await fetch("/api/quote", {
+      const res = await fetch("/api/quote", {
         method: "POST",
         body: form,
       })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error((data as { error?: string }).error || "Request failed")
+      }
       setSubmitted(true)
     } catch (err) {
       console.error(err)
-      setSubmitError("Something went wrong. Please try again.")
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
     } finally {
       setIsSubmitting(false)
     }

@@ -1,6 +1,10 @@
 export const SERVICE_VIDEOS_BASE_PATH = "/assets/videos";
 const SERVICES_PATH = "/assets/videos/services";
 
+/** How It Works section - exact filenames from public/assets/videos/ */
+export const HOW_IT_WORKS_VIDEO = `${SERVICE_VIDEOS_BASE_PATH}/Vacei Fix (1) X1V1.mp4`;
+export const HOW_IT_WORKS_POSTER = `${SERVICE_VIDEOS_BASE_PATH}/Main Render.gif`;
+
 // Maps each service ID to its GIF in public/assets/videos/services
 export const serviceVideosById: Record<string, string | undefined> = {
   "accounting-finance": `${SERVICES_PATH}/Accounting%20%26%20Bookkeeping_X1V1.gif`,
