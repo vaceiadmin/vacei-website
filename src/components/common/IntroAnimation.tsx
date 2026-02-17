@@ -13,20 +13,22 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Progress animation
+    // Progress animation – faster so intro doesn't feel paused
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 2;
+        // ~1s to reach 100%
+        return prev + 4;
       });
-    }, 50);
+    }, 40);
 
+    // Hide intro sooner so page appears quickly
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 3500);
+    }, 1600);
 
     return () => {
       clearTimeout(timer);
@@ -219,8 +221,8 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 initial={{ opacity: 0, scale: 0.8, y: 40 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{
-                  delay: 0.3,
-                  duration: 0.8,
+                  delay: 0,
+                  duration: 0.6,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="relative z-10"
@@ -281,7 +283,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               className="mt-8 flex flex-col items-center gap-3"
             >
               <p className="text-white/50 text-xs tracking-[0.3em] uppercase font-medium">

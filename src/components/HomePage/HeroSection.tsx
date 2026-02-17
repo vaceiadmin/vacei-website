@@ -109,8 +109,8 @@ const HeroSection = () => {
               alt="Hero glow top left"
               width={320}
               height={320}
+              loading="lazy"
               className="w-full h-auto object-contain"
-              priority
             />
           </div>
 
@@ -121,8 +121,8 @@ const HeroSection = () => {
               alt="Hero glow top right"
               width={320}
               height={320}
+              loading="lazy"
               className="w-full h-auto object-contain"
-              priority
             />
           </div>
         </div>
@@ -257,7 +257,7 @@ const HeroSection = () => {
                   ref={videoRef}
                   src={HERO_VIDEO_SRC}
                   poster={HERO_VIDEO_POSTER}
-                  preload="auto"
+                  preload="metadata"
                   // muted={muted}
                   loop
                   playsInline

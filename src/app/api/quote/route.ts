@@ -13,20 +13,64 @@ const transport = nodemailer.createTransport({
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const {
-      name,
-      email,
-      subject,
-      message,
-      meta,
-    }: {
-      name?: string;
-      email?: string;
-      subject?: string;
-      message?: string;
-      meta?: any;
-    } = body;
+    const contentType = req.headers.get("content-type") || "";
+
+    let name: string | undefined;
+    let email: string | undefined;
+    let subject: string | undefined;
+    let message: string | undefined;
+    let meta: any;
+    let attachments: { filename: string; content: Buffer }[] = [];
+
+    if (contentType.includes("multipart/form-data")) {
+      // Handle multipart requests (homepage ProcessStepsSection with file uploads)
+      const form = await req.formData();
+      name = form.get("name")?.toString();
+      email = form.get("email")?.toString();
+      subject =
+        form.get("subject")?.toString() ||
+        "Homepage quote / project request";
+      message = form.get("message")?.toString() || "";
+
+      const metaJson = form.get("metaJson")?.toString();
+      if (metaJson) {
+        try {
+          meta = JSON.parse(metaJson);
+        } catch {
+          meta = metaJson;
+        }
+      }
+
+      const files = form.getAll("files") as unknown as File[];
+      if (files && files.length > 0) {
+        const buffers = await Promise.all(
+          files.map(async (file) => {
+            const arrayBuffer = await file.arrayBuffer();
+            return {
+              filename: file.name,
+              content: Buffer.from(arrayBuffer),
+            };
+          }),
+        );
+        attachments = buffers;
+      }
+    } else {
+      // Handle existing JSON-based quote forms (e.g. /quote page)
+      const body = await req.json();
+      ({
+        name,
+        email,
+        subject,
+        message,
+        meta,
+      } = body as {
+        name?: string;
+        email?: string;
+        subject?: string;
+        message?: string;
+        meta?: any;
+      });
+    }
 
     if (!email || !name) {
       return NextResponse.json(
@@ -35,7 +79,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const toAddress = process.env.QUOTE_TO_EMAIL || process.env.CONTACT_TO_EMAIL || process.env.SMTP_USER;
+    const toAddress =
+      process.env.QUOTE_TO_EMAIL ||
+      process.env.CONTACT_TO_EMAIL ||
+      process.env.SMTP_USER;
     if (!toAddress) {
       return NextResponse.json(
         { error: "Email destination is not configured." },
@@ -43,20 +90,94 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const metaText = meta ? `\n\nAdditional details:\n${JSON.stringify(meta, null, 2)}` : "";
+    const subjectLine = subject || `New quote request from ${name}`;
+
+    // Build nicer text + HTML body for Gmail readability
+    const lines: string[] = [];
+    lines.push(`Name: ${name}`);
+    lines.push(`Email: ${email}`);
+    lines.push("");
+    lines.push("Message:");
+    lines.push(message || "(no message provided)");
+
+    if (meta) {
+      lines.push("");
+      lines.push("Additional details:");
+      if (meta.service) lines.push(`- Service: ${meta.service}`);
+      if (meta.companyStage)
+        lines.push(`- Company Stage: ${meta.companyStage}`);
+      if (meta.companyName)
+        lines.push(`- Company Name: ${meta.companyName}`);
+      if (meta.jurisdiction)
+        lines.push(`- Jurisdiction: ${meta.jurisdiction}`);
+      if (meta.documentStatus)
+        lines.push(`- Document Status: ${meta.documentStatus}`);
+      if (meta.communicationChannel) {
+        lines.push(
+          `- Communication Channel: ${meta.communicationChannel}`,
+        );
+      }
+      if (meta.phone) {
+        lines.push(`- Phone: ${meta.phone}`);
+      }
+      if (meta.updateCadence) {
+        lines.push(`- Update Cadence: ${meta.updateCadence}`);
+      }
+      if (meta.serviceDetails) {
+        lines.push("- Service Details:");
+        lines.push(JSON.stringify(meta.serviceDetails, null, 2));
+      }
+    }
+
+    const textBody = lines.join("\n");
+
+    const htmlBody = `
+      <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size:14px; color:#111827;">
+        <h2 style="font-size:18px; margin:0 0 12px 0;">${subjectLine}</h2>
+        <p style="margin:0 0 4px 0;"><strong>Name:</strong> ${name}</p>
+        <p style="margin:0 0 12px 0;"><strong>Email:</strong> ${email}</p>
+        <p style="margin:0 0 6px 0;"><strong>Message</strong></p>
+        <p style="white-space:pre-line; margin:0 0 12px 0;">${message || "(no message provided)"}</p>
+        ${
+          meta
+            ? `<div style="margin-top:8px;">
+                 <p style="margin:0 0 6px 0;"><strong>Additional details</strong></p>
+                 <ul style="margin:0 0 0 16px; padding:0;">
+                   ${meta.service ? `<li><strong>Service:</strong> ${meta.service}</li>` : ""}
+                   ${meta.companyStage ? `<li><strong>Company Stage:</strong> ${meta.companyStage}</li>` : ""}
+                   ${meta.companyName ? `<li><strong>Company Name:</strong> ${meta.companyName}</li>` : ""}
+                   ${meta.jurisdiction ? `<li><strong>Jurisdiction:</strong> ${meta.jurisdiction}</li>` : ""}
+                   ${meta.documentStatus ? `<li><strong>Document Status:</strong> ${meta.documentStatus}</li>` : ""}
+                   ${meta.communicationChannel ? `<li><strong>Communication Channel:</strong> ${meta.communicationChannel}</li>` : ""}
+                   ${meta.phone ? `<li><strong>Phone:</strong> ${meta.phone}</li>` : ""}
+                   ${meta.updateCadence ? `<li><strong>Update Cadence:</strong> ${meta.updateCadence}</li>` : ""}
+                 </ul>
+                 ${
+                   meta.serviceDetails
+                     ? `<p style="margin:8px 0 4px 0;"><strong>Service Details (raw JSON)</strong></p>
+                        <pre style="background:#f9fafb; padding:8px 10px; border-radius:6px; font-size:12px; white-space:pre-wrap;">${JSON.stringify(
+                          meta.serviceDetails,
+                          null,
+                          2,
+                        )}</pre>`
+                     : ""
+                 }
+               </div>`
+            : ""
+        }
+      </div>
+    `;
 
     await transport.sendMail({
-      from: `"VACEI Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      from: `"VACEI Website" <${
+        process.env.SMTP_FROM || process.env.SMTP_USER
+      }>`,
       to: toAddress,
-      subject: subject || `New quote request from ${name}`,
+      subject: subjectLine,
       replyTo: email,
-      text: `
-Name: ${name}
-Email: ${email}
-
-Message:
-${message || "(no message provided)"}${metaText}
-      `.trim(),
+      text: textBody,
+      html: htmlBody,
+      attachments,
     });
 
     return NextResponse.json({ ok: true });

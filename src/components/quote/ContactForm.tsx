@@ -97,9 +97,9 @@ const ContactForm = () => {
         message={statusMessage}
         onClose={() => setStatusOpen(false)}
       />
-      <section id="contact-form" className="py-16 lg:py-24 scroll-mt-20">
+      <section id="contact-form" className="py-16 lg:py-24 scroll-mt-20 bg-[#F3F5F7]">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-        <div className=" rounded-2xl  p-6 md:p-8 lg:p-12">
+        <div className="rounded-2xl p-6 md:p-8 lg:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Column: Contact Form */}
             <motion.div
@@ -107,14 +107,17 @@ const ContactForm = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-xl p-6 md:p-8 shadow-md"
+              className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100"
             >
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-medium mb-3">
+                Get in touch
+              </span>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-3">
-                Send Us a Message
+                Send us a message
               </h2>
               <p className="text-sm md:text-base text-gray mb-6 leading-relaxed">
-                Use this form to request a quote, ask a question, or get more
-                information about our services.
+                Share a few details about what you&apos;re looking for and our team will
+                get back to you with next steps.
               </p>
               {submitError && (
                 <p className="mb-4 text-sm text-error">{submitError}</p>
@@ -129,7 +132,7 @@ const ContactForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors hover:border-primary-blue/60 ${
                       errors.name ? "border-error" : "border-input"
                     }`}
                     placeholder="Your name"
@@ -147,7 +150,7 @@ const ContactForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors hover:border-primary-blue/60 ${
                       errors.email ? "border-error" : "border-input"
                     }`}
                     placeholder="your.email@example.com"
@@ -165,7 +168,7 @@ const ContactForm = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors resize-none ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors resize-none hover:border-primary-blue/60 ${
                       errors.message ? "border-error" : "border-input"
                     }`}
                     placeholder="Your message"
@@ -177,11 +180,11 @@ const ContactForm = () => {
 
                 {/* Submit Button */}
                 <motion.button
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.97, y: 0 }}
+                  whileHover={{ scale: 1.01, y: -1 }}
+                  whileTap={{ scale: 0.98, y: 0 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-dark-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+                  className="w-full bg-gradient-to-r from-primary to-primary-blue hover:from-primary-blue hover:to-primary text-white font-semibold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
                 </motion.button>
@@ -196,9 +199,13 @@ const ContactForm = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col justify-start"
             >
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-8">
-                Contact Information
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-3">
+                Contact information
               </h2>
+              <p className="text-sm md:text-base text-gray mb-6 leading-relaxed max-w-md">
+                Prefer email, a quick call or an in-person chat? Choose what works
+                best for you.
+              </p>
 
               <div className="space-y-6 mb-8">
                 {/* Email */}
@@ -258,14 +265,17 @@ const ContactForm = () => {
                 <p className="text-base md:text-lg font-semibold text-heading mb-4">
                   Prefer to talk?
                 </p>
-                <motion.button
+                <motion.a
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.97, y: 0 }}
+                  href="https://calendly.com/vacei-info/new-meeting"
+                  target="_blank"
+                  rel="noreferrer"
                   className="bg-purple-bg hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
                 >
                   <span>Book a free 15-minute call</span>
                   <PhoneCall className="w-5 h-5" />
-                </motion.button>
+                </motion.a>
               </div>
             </motion.div>
           </div>

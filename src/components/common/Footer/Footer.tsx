@@ -27,7 +27,7 @@ const Footer = () => {
       <div className="absolute top-0 left-0 right-0 h-[260px] md:h-[300px] -z-10 bg-background" />
       {/* GetStartedHero - Positioned above footer content with spacing */}
       <div className="relative w-full -mt-48 md:-mt-56 mb-16 flex justify-center">
-        <GetStartedHero />
+        {!pathname.includes('/careers') && <GetStartedHero />}
       </div>
 
       {/* Radial Gradient Pattern Images - Bottom left and right */}
@@ -94,11 +94,11 @@ const Footer = () => {
                   About VACEI
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/our-team" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Our Team
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/careers" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   Careers

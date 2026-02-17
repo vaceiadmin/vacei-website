@@ -180,7 +180,7 @@ const HowItWorks = () => {
                                 ref={videoRef}
                                 src={HOW_IT_WORKS_VIDEO}
                                 poster={HOW_IT_WORKS_POSTER}
-                                preload="auto"
+                                preload="metadata"
                                 loop
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover"

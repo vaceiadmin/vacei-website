@@ -83,6 +83,8 @@ const ContactHRForm = () => {
                 </h2>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
                     Don't see a specific role that fits? We're always looking for exceptional talent. Send us your details and tell us how you can make an impact.
+                    <br /><br />
+                    Or email us a copy of your CV on <a href="mailto:info@vacei.com" className="text-white font-semibold hover:text-primary-blue transition-colors">info@vacei.com</a>
                 </p>
             </FadeInUp>
         </div>

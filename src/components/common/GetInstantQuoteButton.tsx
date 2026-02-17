@@ -51,7 +51,7 @@ const GetInstantQuoteButton = ({
   if (variant === 'book-demo') {
     return (
       <Link
-        href={href || "/demo"}
+        href={href || "https://calendly.com/vacei-info/new-meeting"}
         className={`
           inline-flex items-center gap-2 bg-transparent border-2 border-white hover:bg-white/10 text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium transform hover:-translate-y-0.5
           ${className}

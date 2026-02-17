@@ -32,9 +32,9 @@ const QuotePage = () => {
       <FadeInUp delay={0.2}>
         <QuoteProcess />
       </FadeInUp>
-      <FadeInUp delay={0.4}>
+      {/* <FadeInUp delay={0.4}>
         <QuoteFormSection />
-      </FadeInUp>
+      </FadeInUp> */}
     </main>
   );
 };

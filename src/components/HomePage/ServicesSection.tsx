@@ -20,7 +20,7 @@ interface BaseCard {
 }
 
 const ServicesSection = () => {
-  const [activeTab, setActiveTab] = useState<"services" | "experts" | "products">("services");
+  const [activeTab, setActiveTab] = useState<"services" | /* "experts" | */ "products">("services");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
 
@@ -65,12 +65,12 @@ const ServicesSection = () => {
     category: "Service",
   }));
 
-  const experts: BaseCard[] = [
+  /* const experts: BaseCard[] = [
     { id: 1, title: "Senior CPAs", subtitle: "Chartered accountants.", image: "/assets/images/pngegg (2) 1.png", link: "/team", category: "Experts", badge: "Elite" },
     { id: 2, title: "Bookkeepers", subtitle: "Day-to-day accuracy.", image: "/assets/images/pngegg (3) 1.png", link: "/team", category: "Experts" },
     { id: 3, title: "Tax Advisors", subtitle: "Strategic tax planning.", image: "/assets/images/pngegg (1) 1.png", link: "/team", category: "Experts" },
     { id: 4, title: "Audit Leads", subtitle: "Compliance assurance.", image: "/assets/images/pngegg (4) 1.png", link: "/team", category: "Experts" },
-  ];
+  ]; */
 
   const products: BaseCard[] = [
     { id: 1, title: "Bookkeeping Portal", subtitle: "Real-time financial dashboard.", image: "/assets/images/Cube 1.png", hoverImage: "/assets/images/Accounting.jpg", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
@@ -80,7 +80,7 @@ const ServicesSection = () => {
 
   const getActiveData = () => {
     switch (activeTab) {
-      case "experts": return experts;
+      /* case "experts": return experts; */
       case "products": return products;
       case "services": default: return services;
     }
@@ -149,7 +149,7 @@ const ServicesSection = () => {
                         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                         className="flex p-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full"
                     >
-              {(["services", "experts", "products"] as const).map((tab) => (
+              {(["services", /* "experts", */ "products"] as const).map((tab) => (
                 <button
                   key={tab}
                                 onClick={() => { setActiveTab(tab); setCurrentIndex(0); }}

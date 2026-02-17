@@ -17,6 +17,7 @@ type FormData = {
   uploadMethod: string
   communicationChannel: string
   updateCadence: string
+  phone: string
   complianceReminders: string
   recordAccess: string
 }
@@ -89,6 +90,7 @@ const formSteps: FormStep[] = [
     fields: [
       { key: "communicationChannel", label: "Communication", placeholder: "Preferred Channel", type: "select", options: ["Email", "WhatsApp", "Phone Call", "Portal"] },
       { key: "updateCadence", label: "Updates", placeholder: "Frequency", type: "select", options: ["Weekly", "Bi-weekly", "Monthly", "Urgent Only"] },
+      { key: "phone", label: "Phone Number (required for WhatsApp / Phone Call)", placeholder: "+356 1234 5678", type: "text" },
     ],
     primaryLabel: "Submit Request",
   },
@@ -128,6 +130,7 @@ const ProcessStepsSection = () => {
     uploadMethod: "",
     communicationChannel: "",
     updateCadence: "",
+    phone: "",
     complianceReminders: "",
     recordAccess: "",
   })
@@ -135,6 +138,7 @@ const ProcessStepsSection = () => {
   const [error, setError] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [direction, setDirection] = useState(0)
   const [openSelectKey, setOpenSelectKey] = useState<string | null>(null)
 
@@ -148,6 +152,17 @@ const ProcessStepsSection = () => {
       if (!val || (typeof val === "string" && !val.trim())) return `${field.label} is required.`
       if (field.key === "email" && typeof val === "string" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return "Invalid email address."
     }
+
+    // Additional conditional validation: phone is required when communication is not Email
+    if (
+      step.id === "preferences" &&
+      formData.communicationChannel &&
+      formData.communicationChannel !== "Email" &&
+      !formData.phone.trim()
+    ) {
+      return "Phone number is required for this communication method."
+    }
+
     return ""
   }
 
@@ -188,7 +203,7 @@ const ProcessStepsSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (submitted) return
+    if (submitted || isSubmitting) return
     if (currentStep < formSteps.length - 1) {
       handleNext()
       return
@@ -219,30 +234,46 @@ const ProcessStepsSection = () => {
     }
 
     try {
+      // Use multipart form data so uploads can be sent as attachments
+      const payloadMeta = {
+        service: formData.service,
+        companyStage: formData.companyStage,
+        companyName: formData.companyName || undefined,
+        jurisdiction: formData.jurisdiction || undefined,
+        documentStatus: formData.documentStatus,
+        communicationChannel: formData.communicationChannel,
+        updateCadence: formData.updateCadence,
+        phone: formData.phone || undefined,
+        serviceDetails: Object.keys(metaServiceDetails).length
+          ? metaServiceDetails
+          : undefined,
+      }
+
+      const form = new FormData()
+      form.append("name", formData.name)
+      form.append("email", formData.email)
+      form.append("subject", "Homepage quote / project request")
+      form.append("message", formData.message)
+      form.append("metaJson", JSON.stringify(payloadMeta))
+
+      if (formData.uploadFiles && formData.uploadFiles.length > 0) {
+        Array.from(formData.uploadFiles).forEach((file) => {
+          form.append("files", file)
+        })
+      }
+
+      setIsSubmitting(true)
+
       await fetch("/api/quote", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: "Homepage quote / project request",
-          message: formData.message,
-          meta: {
-            service: formData.service,
-            companyStage: formData.companyStage,
-            companyName: formData.companyName || undefined,
-            jurisdiction: formData.jurisdiction || undefined,
-            documentStatus: formData.documentStatus,
-            communicationChannel: formData.communicationChannel,
-            updateCadence: formData.updateCadence,
-            serviceDetails: Object.keys(metaServiceDetails).length ? metaServiceDetails : undefined,
-          },
-        }),
+        body: form,
       })
       setSubmitted(true)
     } catch (err) {
       console.error(err)
       setSubmitError("Something went wrong. Please try again.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -466,8 +497,36 @@ const ProcessStepsSection = () => {
                                                         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md text-[#3b49e6] mx-auto mb-3">
                                                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
                                                         </div>
-                                                        <p className="text-sm font-bold text-gray-600 mb-1">{field.label}</p>
-                                                        <p className="text-xs text-gray-400">Drag & drop or click to upload</p>
+                                                        {formData.uploadFiles && formData.uploadFiles.length > 0 ? (
+                                                          <div className="space-y-2">
+                                                            <p className="text-sm font-bold text-gray-700">
+                                                              {formData.uploadFiles.length === 1
+                                                                ? "1 file attached"
+                                                                : `${formData.uploadFiles.length} files attached`}
+                                                            </p>
+                                                            <ul className="text-xs text-gray-500 max-h-20 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-300/80 [&::-webkit-scrollbar-thumb]:rounded-full">
+                                                              {Array.from(formData.uploadFiles)
+                                                                .slice(0, 4)
+                                                                .map((file, idx) => (
+                                                                  <li key={idx} className="truncate">
+                                                                    • {file.name}
+                                                                  </li>
+                                                                ))}
+                                                              {formData.uploadFiles.length > 4 && (
+                                                                <li className="italic">+ more…</li>
+                                                              )}
+                                                            </ul>
+                                                          </div>
+                                                        ) : (
+                                                          <>
+                                                            <p className="text-sm font-bold text-gray-600 mb-1">
+                                                              {field.label}
+                                                            </p>
+                                                            <p className="text-xs text-gray-400">
+                                                              Drag & drop or click to upload
+                                                            </p>
+                                                          </>
+                                                        )}
                                                     </div>
                                                 </div>
                                             ) : (
@@ -626,9 +685,21 @@ const ProcessStepsSection = () => {
                                 whileHover={{ scale: 1.02, boxShadow: "0 10px 30px -10px rgba(59,73,230,0.4)" }}
                                 whileTap={{ scale: 0.98 }}
                                 type="submit"
-                                className="grow py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-[#3b49e6]/20 transition-all relative overflow-hidden group"
+                                disabled={isSubmitting}
+                                className={`grow py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-[#3b49e6]/20 transition-all relative overflow-hidden group ${
+                                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                                }`}
                              >
-                                <span className="relative z-10">{step.primaryLabel || "Next Step"}</span>
+                                <span className="relative z-10 flex items-center justify-center gap-2">
+                                  {isSubmitting && (
+                                    <span className="inline-flex h-4 w-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin" />
+                                  )}
+                                  {isSubmitting
+                                    ? currentStep === formSteps.length - 1
+                                      ? "Sending request..."
+                                      : "Processing..."
+                                    : step.primaryLabel || "Next Step"}
+                                </span>
                                 <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                              </motion.button>
                         </div>
@@ -659,7 +730,7 @@ const ProcessStepsSection = () => {
                         </p>
                         
                         <button
-                            onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: "", companyStage: "", companyName: "", jurisdiction: "", documentStatus: "", uploadFiles: null, uploadMethod: "", communicationChannel: "", updateCadence: "", complianceReminders: "", recordAccess: "" }); setServiceDetails({}); setDirection(0); }}
+                            onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: "", companyStage: "", companyName: "", jurisdiction: "", documentStatus: "", uploadFiles: null, uploadMethod: "", communicationChannel: "", updateCadence: "", phone: "", complianceReminders: "", recordAccess: "" }); setServiceDetails({}); setDirection(0); }}
                             className="px-8 py-3.5 rounded-xl bg-white border-2 border-transparent hover:border-gray-200 text-gray-900 font-bold transition-all shadow-md hover:shadow-lg"
                         >
                             Start New Request

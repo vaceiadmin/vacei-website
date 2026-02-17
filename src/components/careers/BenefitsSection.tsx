@@ -33,14 +33,15 @@ const BenefitsSection = () => {
 
   return (
     <div className="">
-        <ServiceFeatures
+      <ServiceFeatures
         title="Why VACEI?"
         subtitle="We build more than just software; we build careers. Join a team where your work matters and your growth is prioritized."
         features={benefitsFeatures}
         theme="light"
         backgroundColor="bg-[#F3F5F7]"
         showRadials={false}
-        />
+        hideCta={true}
+      />
     </div>
   );
 };

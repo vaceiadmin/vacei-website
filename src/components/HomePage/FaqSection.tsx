@@ -114,8 +114,8 @@ const FaqSection = () => {
                     alt="Professional"
                     width={600}
                     height={750}
-                    className="w-[360px] sm:w-[480px] max-w-none object-contain translate-y-4"
-                    priority
+                loading="lazy"
+                className="w-[360px] sm:w-[480px] max-w-none object-contain translate-y-4"
                   />
                 </div>
 
