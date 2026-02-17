@@ -23,7 +23,8 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+    // Keep transition simple to satisfy framer-motion's DOM typings
+    transition: { duration: 0.5 },
   },
 };
 

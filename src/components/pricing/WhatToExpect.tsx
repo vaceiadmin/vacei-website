@@ -59,7 +59,7 @@ const WhatToExpect = () => {
               <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
               <span className="text-sm font-semibold text-white">Our Commitment</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-medium text-white tracking-tight mb-6">
+            <h2 className="text-3xl md:text-5xl font-medium text-white tracking-tight mb-8">
               What to Expect
             </h2>
             <p className="text-white/80 text-lg max-w-3xl mx-auto">

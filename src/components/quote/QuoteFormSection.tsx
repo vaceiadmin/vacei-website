@@ -133,7 +133,7 @@ const QuoteFormSection = () => {
               className="flex flex-col"
             >
               <BoxShadow className="h-full flex flex-col justify-center bg-transparent border-white/10 p-6 md:p-8 lg:p-12">
-                <h2 className="text-2xl md:text-3xl font-medium text-white mb-3">
+                <h2 className="text-2xl md:text-3xl font-medium text-white mb-5">
                   Complete the form below to receive your tailored quote
                 </h2>
                 {submitError && (

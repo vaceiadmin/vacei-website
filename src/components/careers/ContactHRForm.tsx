@@ -78,7 +78,7 @@ const ContactHRForm = () => {
       <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
             <FadeInUp>
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
                     Join Our Talent Network
                 </h2>
                 <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">

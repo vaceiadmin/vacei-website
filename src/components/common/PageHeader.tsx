@@ -28,7 +28,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
         <TextAnimation
           text={title}
           as="h1"
-          className="text-2xl md:text-5xl font-medium text-white mb-6"
+          className="text-2xl md:text-5xl font-medium text-white mb-10"
         />
 
         {/* Breadcrumbs */}
