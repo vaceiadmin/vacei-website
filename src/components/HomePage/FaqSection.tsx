@@ -108,12 +108,12 @@ const FaqSection = () => {
               {/* Main square background container */}
               <div className="relative h-[380px] sm:h-[500px] w-full max-w-[340px] sm:max-w-[460px] rounded-[32px] sm:rounded-[48px] scale-95 sm:scale-100 origin-center overflow-visible">
                 {/* Floating Cards Layer - Behind the man (lower z-index) */}
-                <div className="absolute inset-0 pointer-events-none z-10">
+                <div className="absolute inset-0 pointer-events-none z-10 md:z-40">
                   {/* Financial Overview */}
                   <motion.div 
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute left-0 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10"
+                    className="absolute  md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 !z-10"
                   >
                     <div className="mb-4 text-[12px] font-bold text-primary">
                       Financial Overview
@@ -191,7 +191,7 @@ const FaqSection = () => {
                   <motion.div 
                     animate={{ y: [0, -15, 0] }}
                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-10 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105"
+                    className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-40 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105"
                   >
                     <p className="text-[16px] font-bold leading-tight tracking-wide">
                       Get Started
