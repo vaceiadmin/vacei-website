@@ -174,13 +174,13 @@ const HowItWorks = () => {
                                     onClick={togglePlayPause}
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="pointer-events-auto z-10 relative flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl border border-white/25 text-white shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:bg-white/20 hover:border-white/40"
+                                    className="pointer-events-auto z-10 relative flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-primary-blue border-2 border-white/40 text-white shadow-[0_8px_32px_rgba(59,73,230,0.5)] backdrop-blur-sm transition-all duration-300 hover:bg-primary-blue-hover hover:border-white/60 hover:shadow-[0_8px_40px_rgba(59,73,230,0.6)]"
                                     aria-label={isPlaying ? "Pause" : "Play"}
                                 >
                                     {!isPlaying && (
                                         <motion.span
-                                            className="absolute inset-0 rounded-full border-2 border-white/30"
-                                            animate={{ scale: [1, 1.3, 1.3], opacity: [0.5, 0, 0] }}
+                                            className="absolute inset-0 rounded-full border-2 border-white/50"
+                                            animate={{ scale: [1, 1.3, 1.3], opacity: [0.6, 0, 0] }}
                                             transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
                                         />
                                     )}

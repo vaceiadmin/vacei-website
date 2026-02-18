@@ -15,25 +15,25 @@ const PartnersPage = () => {
       title: "Service Delivery Partnerships",
       description: "Structured collaboration for accounting and audit firms. Operate within our delivery framework while maintaining professional standards.",
       link: "/partners/service-delivery",
-      image: "/assets/images/placeholder.png", // Replaced with actual image if available
+      iconIndex: 0,
     },
     {
       title: "White Label & Technology Access",
       description: "Leverage VACEI's platform under your own brand. Perfect for firms wanting structured workflows and client portals without building internal systems.",
       link: "/partners/white-label",
-      image: "/assets/images/placeholder.png",
+      iconIndex: 1,
     },
     {
       title: "Technology Integration Support",
       description: "Strengthen your existing systems with our process expertise. We help you structure workflows and controls within your current environment.",
       link: "/partners/technology-support",
-      image: "/assets/images/placeholder.png",
+      iconIndex: 2,
     },
     {
       title: "Reseller Program",
       description: "Introduce clients to the VACEI platform and earn ongoing commissions. Ideal for consultants and advisors.",
       link: "/partners/reseller-program",
-      image: "/assets/images/placeholder.png",
+      iconIndex: 3,
     },
   ];
 
@@ -68,8 +68,8 @@ const PartnersPage = () => {
                 key={index}
                 title={model.title}
                 description={model.description}
-                image={model.image}
                 link={model.link}
+                iconIndex={model.iconIndex}
                 delay={index * 0.1}
               />
             ))}

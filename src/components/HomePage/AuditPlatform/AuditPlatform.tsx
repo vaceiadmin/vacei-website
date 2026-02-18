@@ -116,16 +116,13 @@ export default function AuditPlatform() {
 
             <motion.h1 variants={itemVariants} className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold">
               <span className="text-primary inline-block mr-2 sm:mr-3">
-                One Platform
+                One Platform.
               </span>
-              <span className="inline-block">
-                for all your audit needs
-              </span>
+              <span className="inline-block">Structured Delivery.</span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="mt-4 text-sm sm:text-base font-nunito text-gray-500">
-              Designed for modern audit teams who need structure, visibility and
-              control across every engagement.
+            <motion.p variants={itemVariants} className="mt-4 text-sm sm:text-base font-nunito text-gray-500 leading-relaxed">
+              VACEI brings structure to professional services through a unified digital workspace designed for clarity and control. Engagements are organised through defined workflows, tracked documentation, review layers, and secure client interaction. Every task, file, and approval sits within a controlled framework rather than across disconnected tools. The platform supports disciplined delivery across engagements, ensuring visibility, accountability, and consistency without replacing professional judgment.
             </motion.p>
 
            
@@ -140,12 +137,42 @@ export default function AuditPlatform() {
               </motion.div>
             )}
 
-            <motion.h2 variants={itemVariants} className="mt-10 sm:mt-12 text-2xl sm:text-3xl font-montserrat font-bold text-gray-800">
-              An Audit Organizational Management Tool
-            </motion.h2>
-            <motion.p variants={itemVariants} className="mt-4 text-sm sm:text-base font-nunito leading-relaxed text-gray-500 max-w-md mx-auto lg:mx-0">
-              Meticulously researched and thoughtfully designed so every auditor has
-              the right tools, workflows and documentation in a single, unified portal.
+            {/* Principle blocks */}
+            <motion.div variants={containerVariants} className="mt-10 sm:mt-12 space-y-6">
+              {[
+                {
+                  title: "Structured Workflows",
+                  desc: "Clear engagement stages, responsibilities, and progress tracking.",
+                },
+                {
+                  title: "Controlled Documentation",
+                  desc: "Centralised files, version visibility, and organised working papers.",
+                },
+                {
+                  title: "Review and Approval Layers",
+                  desc: "Defined review flows with tracked comments and sign-off history.",
+                },
+                {
+                  title: "Secure Client Interaction",
+                  desc: "Document exchange, queries, and approvals within a controlled environment.",
+                },
+              ].map((block) => (
+                <motion.div key={block.title} variants={itemVariants} className="flex gap-3">
+                  <span className="shrink-0 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-blue" />
+                  <div>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 font-montserrat">
+                      {block.title}
+                    </h3>
+                    <p className="mt-0.5 text-sm font-nunito text-gray-500 leading-relaxed">
+                      {block.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p variants={itemVariants} className="mt-8 text-sm sm:text-base font-nunito font-semibold text-gray-700 italic">
+              Professional services require discipline. The platform ensures it.
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start items-center relative z-20">
