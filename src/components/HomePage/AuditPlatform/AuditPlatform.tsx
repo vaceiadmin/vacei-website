@@ -47,8 +47,7 @@ export default function AuditPlatform() {
           >
             <motion.div variants={itemVariants}>
               <p className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs sm:text-sm font-montserrat uppercase tracking-[0.2em] text-primary">
-                Audit Platform
-                <span className="h-1 w-1 rounded-full bg-primary" />
+              
                 All-in-one workspace
               </p>
             </motion.div>
