@@ -19,7 +19,7 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:top-20 md:left-10 top-12 left-5 max-xs:top-6 max-xs:left-2 shadow-lg bg-white",
+      "md:top-20 md:left-10 top-12 left-5 max-sm:top-6 max-sm:left-2 shadow-lg bg-white",
     imgClass: "scale-x-[-1] md:h-6 h-3",
   },
   {
@@ -31,7 +31,7 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:top-28 md:right-0 top-24 right-5 max-xs:top-20 max-xs:-right-3 py-1 px-2 shadow-lg bg-white",
+      "md:top-28 md:right-0 top-24 right-5 max-sm:top-20 max-sm:right-1 py-1 px-2 shadow-lg bg-white",
     imgClass: "md:h-6 h-3",
   },
   {
@@ -41,7 +41,7 @@ export const features: FeatureItem[] = [
       <p className="md:text-sm text-[8px] text-gray-600 font-medium">Audit</p>
     ),
     className:
-      "md:bottom-3 md:-left-10 bottom-4 -left-6 max-xs:bottom-4 max-xs:-left-8 px-3 shadow-lg bg-white",
+      "md:bottom-3 md:-left-10 bottom-4 -left-6 max-sm:bottom-4 max-sm:left-1 px-3 shadow-lg bg-white",
     imgClass: "md:h-6 h-3",
   },
   {
@@ -53,7 +53,7 @@ export const features: FeatureItem[] = [
       </p>
     ),
     className:
-      "md:bottom-10 md:left-20 bottom-12 left-8 max-xs:bottom-12 max-xs:-left-2 px-2 py-1 shadow-lg bg-white",
+      "md:bottom-10 md:left-20 bottom-12 left-8 max-sm:bottom-12 max-sm:left-2 px-2 py-1 shadow-lg bg-white",
     imgClass: "md:h-6 h-3",
   },
   {
@@ -83,30 +83,30 @@ export const features: FeatureItem[] = [
     alt: "PDF",
     Text: "",
     className:
-      "md:-top-10 md:left-[75%] -top-6 left-[75%] max-xs:-top-6 max-xs:left-[75%]",
-    imgClass: "md:h-12 h-8 max-xs:h-7 shadow-lg",
+      "md:-top-10 md:left-[75%] -top-6 left-[60%] max-sm:-top-6 max-sm:right-2 max-sm:left-auto",
+    imgClass: "md:h-12 h-8 max-sm:h-6 shadow-lg",
   },
   {
     src: "/sec-2/word_4726038.png",
     alt: "Doc",
     Text: "",
     className:
-      "left-0 top-[40%] max-xs:-left-8 max-xs:top-[40%] bg-transparent shadow-none",
-    imgClass: "md:h-12 h-8 max-xs:h-7 shadow-lg",
+      "left-0 top-[40%] max-sm:left-1 max-sm:top-[40%] bg-transparent shadow-none",
+    imgClass: "md:h-12 h-8 max-sm:h-7 shadow-lg",
   },
   {
     src: "/sec-2/xls_4726040.png",
     alt: "XLS",
     Text: "",
-    className: "right-24 top-[65%] max-xs:right-12 bg-transparent shadow-none",
-    imgClass: "md:h-12 h-8 max-xs:h-7 shadow-lg",
+    className: "right-24 top-[65%] max-sm:right-12 bg-transparent shadow-none",
+    imgClass: "md:h-12 h-8 max-sm:h-7 shadow-lg",
   },
   {
     src: "/sec-2/chat_769236.png",
     alt: "Chat",
     Text: "",
     className:
-      "md:-right-10 md:top-[65%] -right-10 top-[55%] max-xs:-right-6 p-1.5 shadow-lg bg-white",
-    imgClass: "md:h-8 h-5 max-xs:h-4",
+      "md:-right-10 md:top-[65%] -right-10 top-[55%] max-sm:right-1 max-sm:top-[55%] p-1.5 shadow-lg bg-white",
+    imgClass: "md:h-8 h-5 max-sm:h-4",
   },
 ];

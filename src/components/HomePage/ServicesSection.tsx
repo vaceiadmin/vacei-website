@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Box, LayoutGrid, FileCheck } from "lucide-react";
 import GradientContainer from "../common/GradientContainer";
 import { servicesData } from "@/data/servicesData";
 
@@ -17,8 +16,10 @@ interface BaseCard {
   badge?: string;
   /** Feature titles for animated glassy pills (services only) */
   featureTitles?: string[];
-  /** Product icon component key (products only) */
+  /** Product icon component key (products only) - deprecated, use image instead */
   productIcon?: "box" | "grid" | "file";
+  /** Product image for portal cards */
+  image?: string;
   hoverImage?: string;
 }
 
@@ -79,9 +80,9 @@ const ServicesSection = () => {
   ]; */
 
   const products: BaseCard[] = [
-    { id: 1, title: "Bookkeeping Portal", subtitle: "Real-time financial dashboard.", productIcon: "box", hoverImage: "/assets/images/Accounting.jpg", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
-    { id: 2, title: "Client Portal", subtitle: "Documents & communication.", productIcon: "grid", hoverImage: "/assets/images/Frame 1618872451.png", link: "/portal/client-portal", category: "Platform", badge: "Featured" },
-    { id: 3, title: "Audit Portal", subtitle: "Streamlined audit workflows.", productIcon: "file", hoverImage: "/assets/images/Audit.jpg", link: "/portal/audit-portal", category: "Platform" },
+    { id: 1, title: "Client Portal", subtitle: "Documents, queries, and secure communication.", image: "/assets/images/Pyramid 2.png", hoverImage: "/assets/images/portal.png", link: "/portal/client-portal", category: "Platform", badge: "Featured" },
+    { id: 2, title: "Audit Portal", subtitle: "Structured workflows and audit delivery.", image: "/assets/images/Thorus Knot.png", hoverImage: "/assets/images/Audit 1.png", link: "/portal/audit-portal", category: "Platform" },
+    { id: 3, title: "Accounting Portal", subtitle: "Real-time financial dashboard and reporting.", image: "/assets/images/Cube 1.png", hoverImage: "/assets/images/Accounting 1.png", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
   ];
 
   const getActiveData = () => {
@@ -122,12 +123,12 @@ const ServicesSection = () => {
         <GradientContainer
             backgroundColor="bg-primary" 
             showRadials={true} 
-            className="py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden"
+            className="py-16 sm:py-20 md:py-24 lg:py-28 overflow-x-clip"
         >
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 {/* Header Area */}
-                <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+                <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-8">
                     <div className="space-y-4">
             <motion.div 
                             initial={{ opacity: 0, scale: 0.95 }}
@@ -176,9 +177,9 @@ const ServicesSection = () => {
                         </motion.div>
                       </div>
 
-                {/* Carousel Area */}
-                <div className="relative min-h-[500px]">
-                    <div className="flex gap-8 justify-center">
+                {/* Carousel Area - padding prevents first/last card cutoff */}
+                <div className="relative min-h-[500px] overflow-visible">
+                    <div className="flex gap-4 sm:gap-8 justify-center px-12 sm:px-14 md:px-16">
                         <AnimatePresence mode="popLayout">
                             {displayItems.map((item, idx) => (
                   <motion.div 
@@ -187,7 +188,7 @@ const ServicesSection = () => {
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
                                     transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                                    className="w-full max-w-[380px] shrink-0"
+                                    className="w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[360px] min-w-0 shrink-0"
                                 >
                                     <div className="group relative h-[480px] w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)] transition-all duration-500">
                                         
@@ -211,23 +212,27 @@ const ServicesSection = () => {
                                                         </motion.div>
                                                     ))}
                                                 </div>
-                                            ) : activeTab === "products" && item.productIcon ? (
-                                                /* Products: glassy icon container */
+                                            ) : activeTab === "products" && item.image ? (
+                                                /* Products: Cube, Pyramid, Thorus Knot images */
                                                 <motion.div
                                                     initial={{ opacity: 0, scale: 0.9 }}
                                                     animate={{ opacity: 1, scale: 1 }}
                                                     transition={{ delay: idx * 0.1, duration: 0.4 }}
-                                                    className="w-20 h-20 rounded-2xl bg-linear-to-br from-white/15 to-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-primary-blue/30 group-hover:border-primary-blue/40 transition-all duration-300 shadow-lg"
+                                                    className="relative w-36 h-36 sm:w-44 sm:h-44 flex items-center justify-center"
                                                 >
-                                                    {item.productIcon === "box" && <Box className="w-10 h-10" strokeWidth={1.5} />}
-                                                    {item.productIcon === "grid" && <LayoutGrid className="w-10 h-10" strokeWidth={1.5} />}
-                                                    {item.productIcon === "file" && <FileCheck className="w-10 h-10" strokeWidth={1.5} />}
+                                                    <Image
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        width={176}
+                                                        height={176}
+                                                        className="w-full h-full object-contain drop-shadow-lg"
+                                                    />
                                                 </motion.div>
                                             ) : null}
                                         </div>
 
                                         {/* Content Container (Bottom Half) */}
-                                        <div className="h-[45%] p-8 flex flex-col justify-between relative bg-linear-to-t from-[#111235] via-[#111235]/80 to-transparent">
+                                        <div className="h-[45%] p-5 sm:p-6 md:p-8 flex flex-col justify-between relative bg-linear-to-t from-[#111235] via-[#111235]/80 to-transparent">
                       <div>
                                                 {item.badge && (
                                                     <span className="inline-block px-2 py-0.5 mb-2 rounded text-[10px] font-bold uppercase bg-primary-blue/20 border border-primary-blue/30 text-blue-200">
@@ -237,7 +242,7 @@ const ServicesSection = () => {
                                                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#989fea] transition-colors">
                           {item.title}
                         </h3>
-                                                <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
+                                                <p className="text-white/60 text-sm leading-relaxed line-clamp-3 break-words">
                                                     {item.subtitle}
                                                 </p>
                                             </div>
@@ -281,14 +286,14 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Navigation Buttons - Floating */}
-                <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-20">
-                    <button onClick={prevSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-8 z-20">
+                    <button onClick={prevSlide} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg" aria-label="Previous">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 </div>
-                <div className="absolute top-1/2 -translate-y-1/2 right-4 md:right-8 z-20">
-                    <button onClick={nextSlide} className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg">
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 z-20">
+                    <button onClick={nextSlide} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg" aria-label="Next">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </button>
               </div>
 

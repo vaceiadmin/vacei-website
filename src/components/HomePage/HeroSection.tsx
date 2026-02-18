@@ -12,7 +12,7 @@ const HERO_YOUTUBE_ID = "ja8vHdyu6Qs";
 const HeroSection = () => {
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center">
+    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center [transform:translateZ(0)] [contain:paint]">
       <GradientContainer
         backgroundColor="bg-primary"
         showRadials
@@ -52,10 +52,11 @@ const HeroSection = () => {
         {/* Main Content */}
         <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-14 lg:mt-20 flex flex-col items-center mx-auto">
           <div className="w-full max-w-4xl flex flex-col items-center">
-            {/* Text & CTAs Section */}
+            {/* Text & CTAs Section - whileInView once to prevent re-animation on scroll back */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{
                 duration: 0.55,
                 ease: [0.16, 1, 0.3, 1],
@@ -65,9 +66,10 @@ const HeroSection = () => {
               {/* Glassy Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-5 py-2 text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase text-white/90 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mx-auto"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-5 py-2 text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase text-white/90 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mx-auto [transform:translateZ(0)]"
               >
                 <motion.span
                   className="h-2 w-2 rounded-full bg-primary-blue"
@@ -96,7 +98,8 @@ const HeroSection = () => {
                 />
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.55, delay: 0.2 }}
                   className="text-3xl sm:text-4xl md:text-5xl text-white/90 font-bold leading-[1.1]"
                 >
@@ -107,7 +110,8 @@ const HeroSection = () => {
               {/* Description with Glassy Background */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.55, delay: 0.3 }}
                 className="relative"
               >
@@ -122,7 +126,8 @@ const HeroSection = () => {
               {/* CTA Buttons with Enhanced Glassy Effects */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.55, delay: 0.4 }}
                 className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center"
               >
@@ -169,11 +174,12 @@ const HeroSection = () => {
           {/* YouTube video - autoplay, loop, muted */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             className="w-full max-w-5xl mx-auto mt-16"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-slate-950 backdrop-blur-2xl">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-slate-950 backdrop-blur-2xl [transform:translateZ(0)]">
               <div className="aspect-video relative">
                 <iframe
                   src={`https://www.youtube.com/embed/${HERO_YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_YOUTUBE_ID}&controls=0&rel=0&modestbranding=1`}
@@ -186,18 +192,10 @@ const HeroSection = () => {
                 <div className="absolute inset-0 ring-1 ring-white/20 rounded-3xl pointer-events-none" />
               </div>
               
-              {/* Glow effect */}
-              <motion.div
-                className="absolute -inset-4 bg-primary-blue/20 blur-3xl -z-10 rounded-full"
-                animate={{
-                  opacity: [0.3, 0.5, 0.3],
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              {/* Glow effect - simplified to reduce scroll jank */}
+              <div
+                className="absolute -inset-4 bg-primary-blue/20 blur-3xl -z-10 rounded-full opacity-40 [transform:translateZ(0)]"
+                aria-hidden
               />
             </div>
           </motion.div>
@@ -206,7 +204,8 @@ const HeroSection = () => {
         {/* Scroll Down Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, delay: 0.65 }}
           className="absolute bottom-12 left-12 flex flex-col items-center gap-4 hidden md:flex z-30"
         >

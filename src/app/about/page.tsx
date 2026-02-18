@@ -14,8 +14,6 @@ const aboutFeatures = [
       "VACEI is a professional accounting, audit and corporate services firm built around a structured digital platform.",
     paragraph:
       "We deliver accounting, compliance, corporate and audit services end to end by combining experienced professionals with disciplined workflows and purpose-built technology.\n\nVACEI is not a software product and not a marketplace. We are a firm that does the work for you, supported by a secure and structured client portal.",
-    useImageBackground: true,
-    backgroundImage: "/assets/images/Frame 1618872596.png",
     reverseLayout: false,
   },
   {
@@ -24,8 +22,6 @@ const aboutFeatures = [
       "Traditional professional services rely heavily on emails, spreadsheets and fragmented tools. This often results in inefficiencies, limited visibility and unnecessary operational risk.",
     paragraph:
       "VACEI was built to modernise how accounting and audit services are delivered, without compromising professional responsibility or quality.\n\nOur approach focuses on structure, visibility and accountability, supported by technology that enables better delivery rather than replacing professional judgement.",
-    useImageBackground: true,
-    backgroundImage: "/assets/images/Frame 1618872603.png",
     reverseLayout: true,
   },
 ];

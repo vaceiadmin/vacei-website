@@ -149,7 +149,7 @@ const CompanySetupSection = () => {
         </div>
 
         {/* CTA */}
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link 
                 href="/company-setup"
                 className="px-8 py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 transition-all"

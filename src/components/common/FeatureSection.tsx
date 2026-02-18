@@ -1,208 +1,208 @@
 'use client'
 
-import React from 'react'
-import Image from 'next/image'
-import GradientContainer from './GradientContainer'
+import React, { useRef } from 'react'
 import GetInstantQuoteButton from './GetInstantQuoteButton'
 import TextAnimation from './TextAnimation'
 import { FadeInUp, StaggerContainer } from './Animations'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 interface FeatureItem {
     title: string
     description: string
-    content?: string[] // For bullet points
-    paragraph?: string // For paragraph text
+    content?: string[]
+    paragraph?: string
     buttonText?: string
     buttonHref?: string
     mainImage?: string
     overlayImages?: {
         src: string
         alt: string
-        position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center-left' | 'center-right'
-        size?: 'small' | 'medium' | 'large'
+        position: string
+        size?: string
     }[]
-    useImageBackground?: boolean // If true, use image instead of GradientContainer
+    useImageBackground?: boolean
     backgroundImage?: string
-    reverseLayout?: boolean // If true, image on left, text on right
+    reverseLayout?: boolean
 }
 
 interface FeatureSectionProps {
     features: FeatureItem[]
     className?: string
-    useGridLayout?: boolean // Force grid layout
+    useGridLayout?: boolean
+}
+
+/** Interactive animated visual - replaces images with floating orbs, gradient mesh, and hover effects */
+function AnimatedFeatureVisual({ index }: { index: number }) {
+    const ref = useRef<HTMLDivElement>(null)
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+    const springConfig = { damping: 25, stiffness: 200 }
+    const xSpring = useSpring(x, springConfig)
+    const ySpring = useSpring(y, springConfig)
+    const rotateX = useTransform(ySpring, [-0.5, 0.5], [8, -8])
+    const rotateY = useTransform(xSpring, [-0.5, 0.5], [-8, 8])
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!ref.current) return
+        const rect = ref.current.getBoundingClientRect()
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
+        x.set((e.clientX - centerX) / rect.width)
+        y.set((e.clientY - centerY) / rect.height)
+    }
+
+    const handleMouseLeave = () => {
+        x.set(0)
+        y.set(0)
+    }
+
+    return (
+        <motion.div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d', perspective: 1000 }}
+            className="relative w-full h-[450px] overflow-hidden rounded-[2.5rem] cursor-default"
+        >
+            {/* Base gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1e2040] via-[#111235] to-[#0f1229] rounded-[2.5rem]" />
+
+            {/* Animated gradient border glow */}
+            <motion.div
+                className="absolute inset-0 rounded-[2.5rem] opacity-60"
+                style={{
+                    background: 'linear-gradient(105deg, transparent 40%, rgba(59,73,230,0.3) 50%, transparent 60%)',
+                    backgroundSize: '200% 200%',
+                }}
+                animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+            />
+
+            {/* Floating animated orbs */}
+            <motion.div
+                className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-primary-blue/30 blur-[50px]"
+                animate={{
+                    x: [0, 20, -10, 0],
+                    y: [0, -15, 20, 0],
+                    scale: [1, 1.2, 1],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <motion.div
+                className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-purple-500/25 blur-[60px]"
+                animate={{
+                    x: [0, -25, 15, 0],
+                    y: [0, 20, -10, 0],
+                    scale: [1, 1.1, 1],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            />
+            <motion.div
+                className="absolute top-1/2 left-1/2 w-24 h-24 sm:w-32 sm:h-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/20 blur-[40px]"
+                animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.5, 0.9, 0.5],
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            />
+
+            {/* Grid pattern overlay */}
+            <div
+                className="absolute inset-0 opacity-[0.08]"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '32px 32px',
+                }}
+            />
+
+            {/* Animated ring/circle elements */}
+            <motion.div
+                className="absolute top-1/2 left-1/2 w-48 h-48 sm:w-64 sm:h-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            />
+            <motion.div
+                className="absolute top-1/2 left-1/2 w-36 h-36 sm:w-48 sm:h-48 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary-blue/20"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+            />
+
+            {/* Central glowing dot */}
+            <motion.div
+                className="absolute top-1/2 left-1/2 w-3 h-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-blue shadow-[0_0_20px_rgba(59,73,230,0.8)]"
+                animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.8, 1, 0.8],
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            {/* Floating particles */}
+            {[...Array(6)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute w-1.5 h-1.5 rounded-full bg-white/30"
+                    style={{
+                        left: `${20 + i * 15}%`,
+                        top: `${25 + (i % 3) * 25}%`,
+                    }}
+                    animate={{
+                        y: [0, -30, 0],
+                        opacity: [0.3, 0.8, 0.3],
+                    }}
+                    transition={{
+                        duration: 3 + i * 0.5,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: i * 0.3,
+                    }}
+                />
+            ))}
+
+            {/* Ambient shimmer */}
+            <motion.div
+                className="absolute inset-0 rounded-[2.5rem] overflow-hidden pointer-events-none"
+                style={{ background: 'linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.04) 50%, transparent 75%)', backgroundSize: '200% 100%' }}
+                animate={{ backgroundPosition: ['0% 0%', '100% 0%'] }}
+                transition={{ duration: 4, repeat: Infinity, repeatDelay: 2, ease: 'easeInOut' }}
+            />
+        </motion.div>
+    )
 }
 
 const FeatureSection = ({ features, className = '', useGridLayout = false }: FeatureSectionProps) => {
-    const getOverlayPosition = (position: string, index: number) => {
-        const positions: Record<string, string> = {
-            // Overlapping card positions with better spacing for natural overlap
-            'top-left': 'top-4 left-2 lg:top-6 lg:left-4',
-            'top-right': 'top-2 right-2 lg:top-4 lg:right-4',
-            'bottom-left': 'bottom-4 left-4 lg:bottom-6 lg:left-6',
-            'bottom-right': 'bottom-2 right-4 lg:bottom-4 lg:right-6',
-            'center-left': 'top-1/2 -translate-y-1/2 left-2 lg:left-4',
-            'center-right': 'top-1/2 -translate-y-1/2 right-2 lg:right-4',
-        }
-        return positions[position] || positions['top-right']
-    }
-
-    const getOverlaySize = (size: string = 'medium') => {
-        const sizes: Record<string, string> = {
-            // Sizes for overlapping cards - larger sizes for better visibility
-            'small': 'w-[40%] h-[32%] lg:w-[42%] lg:h-[34%]',
-            'medium': 'w-[50%] h-[42%] lg:w-[52%] lg:h-[44%]',
-            'large': 'w-[60%] h-[55%] lg:w-[62%] lg:h-[57%]',
-        }
-        return sizes[size] || sizes['medium']
-    }
-
-    const getZIndex = (index: number, total: number) => {
-        // Later images should be on top (higher z-index)
-        return 20 + (total - index)
-    }
-
-    // Auto-detect grid layout for 4 features (2x2 grid)
     const shouldUseGrid = useGridLayout && features.length === 4
 
     const renderCard = (feature: FeatureItem, index: number) => {
-        // Automatically alternate layout based on index (index 0 = left, index 1 = right, etc.)
-        // But respect explicit reverseLayout if provided in the data
         const isReversed = feature.reverseLayout !== undefined ? feature.reverseLayout : index % 2 === 1
 
-        const getImageOrder = () => {
-            if (shouldUseGrid) return ''
-            return isReversed ? 'lg:order-2' : 'lg:order-1'
-        }
-
-        const getContentOrder = () => {
-            if (shouldUseGrid) return ''
-            return isReversed ? 'lg:order-1' : 'lg:order-2'
-        }
+        const getVisualOrder = () => (shouldUseGrid ? '' : isReversed ? 'lg:order-2' : 'lg:order-1')
+        const getContentOrder = () => (shouldUseGrid ? '' : isReversed ? 'lg:order-1' : 'lg:order-2')
 
         return (
             <div 
                 key={index} 
-                className={`group flex flex-col h-full ${shouldUseGrid ? 'lg:flex-row' : 'lg:flex-row'} items-center gap-10 lg:gap-16`}
+                className={`group flex flex-col h-full lg:flex-row items-center gap-10 lg:gap-16`}
             >
                 <motion.div 
-                    initial={{ opacity: 0, x: isReversed ? 40 : -40 }}
+                    initial={{ opacity: 0, x: isReversed ? 60 : -60 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className={`flex-1 w-full min-w-0 overflow-visible ${getImageOrder()}`}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className={`flex-1 w-full min-w-0 overflow-visible ${getVisualOrder()}`}
                 >
-                    {feature.useImageBackground && feature.backgroundImage ? (
-                        // Use image as background - fixed height
-                        <div className="relative w-full h-[450px] overflow-hidden rounded-[2.5rem] bg-card transition-all duration-700 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
-                            <div className="absolute inset-0 w-full h-full [&>img]:object-contain! [&>img]:w-full! [&>img]:h-full! transition-transform duration-1000 group-hover:scale-105">
-                                <Image
-                                    src={feature.backgroundImage}
-                                    alt={feature.title}
-                                    fill
-                                    className="object-contain!"
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    priority={index === 0}
-                                />
-                            </div>
-                            {/* Overlay Images - Image only, no backgrounds */}
-                            <StaggerContainer staggerDelay={0.2}>
-                                {feature.overlayImages &&
-                                    feature.overlayImages.map((overlay, overlayIndex) => {
-                                        const totalImages = feature.overlayImages?.length || 0
-                                        return (
                                         <motion.div
-                                            key={overlayIndex}
-                                            variants={{
-                                                hidden: { opacity: 0, scale: 0.8, y: 20 },
-                                                visible: { 
-                                                    opacity: 1, 
-                                                    scale: 1, 
-                                                    y: 0,
-                                                    transition: { duration: 0.8, ease: "easeOut" }
-                                                }
-                                            }}
-                                            animate={{
-                                                y: [0, -10, 0],
-                                            }}
-                                            transition={{
-                                                y: {
-                                                    duration: 3 + overlayIndex,
-                                                    repeat: Infinity,
-                                                    ease: "easeInOut",
-                                                    delay: 0.8
-                                                }
-                                            }}
-                                                className={`absolute ${getOverlayPosition(overlay.position, overlayIndex)} ${getOverlaySize(
-                                                overlay.size
-                                                )} overflow-visible`}
-                                                style={{ zIndex: getZIndex(overlayIndex, totalImages) }}
-                                        >
-                                                {/* Image only - no background, no border */}
-                                                <div className="relative w-full h-full">
-                                            <Image
-                                                src={overlay.src}
-                                                alt={overlay.alt}
-                                                fill
-                                                        className="object-contain drop-shadow-2xl"
-                                            />
-                                                </div>
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        className="relative"
+                    >
+                        <AnimatedFeatureVisual index={index} />
                                         </motion.div>
-                                        )
-                                    })}
-                            </StaggerContainer>
-                        </div>
-                    ) : (
-                        // Dark blue background card with overlay images only
-                        <div className="relative w-full h-[450px] overflow-visible rounded-[2.5rem] bg-card transition-all duration-700 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
-                            {/* All images as overlays - no main image */}
-                            <StaggerContainer staggerDelay={0.2}>
-                                {feature.overlayImages &&
-                                    feature.overlayImages.map((overlay, overlayIndex) => {
-                                        const totalImages = feature.overlayImages?.length || 0
-                                        return (
-                                        <motion.div
-                                            key={overlayIndex}
-                                            variants={{
-                                                hidden: { opacity: 0, scale: 0.8, y: 20 },
-                                                visible: { 
-                                                    opacity: 1, 
-                                                    scale: 1, 
-                                                    y: 0,
-                                                    transition: { duration: 0.8, ease: "easeOut" }
-                                                }
-                                            }}
-                                            animate={{
-                                                y: [0, -15, 0], // Gentle float
-                                            }}
-                                            transition={{
-                                                y: {
-                                                    duration: 4 + overlayIndex,
-                                                    repeat: Infinity,
-                                                    ease: "easeInOut",
-                                                    delay: 0.8
-                                                }
-                                            }}
-                                                className={`absolute ${getOverlayPosition(overlay.position, overlayIndex)} ${getOverlaySize(
-                                                overlay.size
-                                                )} overflow-visible`}
-                                                style={{ zIndex: getZIndex(overlayIndex, totalImages) }}
-                                        >
-                                                {/* Image only - no background, no border, no shadow */}
-                                                <div className="relative w-full h-full">
-                                            <Image
-                                                src={overlay.src}
-                                                alt={overlay.alt}
-                                                fill
-                                                        className="object-contain drop-shadow-2xl"
-                                            />
-                                                </div>
-                                        </motion.div>
-                                        )
-                                    })}
-                            </StaggerContainer>
-                        </div>
-                    )}
                 </motion.div>
 
                 {/* Text Content */}

@@ -351,7 +351,7 @@ const ProcessStepsSection = () => {
               className="relative group perspective-1000"
             >
                {/* 3D Tilt Wrapper / Card */}
-               <div className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]">
+               <div className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]">
                   
                   {/* Glossy Reflection */}
                   <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-white/40 to-transparent opacity-50 pointer-events-none" />
