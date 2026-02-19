@@ -105,15 +105,91 @@ const FaqSection = () => {
               variants={fadeInUp}
               className="relative flex-1 py-8 lg:py-10 flex justify-center lg:block"
             >
-              {/* Main square background container */}
-              <div className="relative h-[380px] sm:h-[500px] w-full max-w-[340px] sm:max-w-[460px] rounded-[32px] sm:rounded-[48px] scale-95 sm:scale-100 origin-center overflow-visible">
+              {/* Mobile: stacked layout – image on top, cards below (no overlap) */}
+              <div className="lg:hidden w-full max-w-[340px] mx-auto flex flex-col items-center gap-6">
+                <div className="relative flex justify-center">
+                  <Image
+                    src="/assets/images/man 2.png"
+                    alt="Professional"
+                    width={320}
+                    height={400}
+                    loading="lazy"
+                    className="w-[220px] object-contain object-bottom"
+                  />
+                </div>
+                <div className="flex flex-col gap-4 w-full">
+                  {/* Financial Overview - stacked */}
+                  <div className="rounded-[24px] bg-white p-4 shadow-xl w-full">
+                    <div className="mb-4 text-[12px] font-bold text-primary">Financial Overview</div>
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-md">
+                          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[11px] font-bold text-primary">Total Asset</p>
+                          <p className="text-[9px] text-light-gray">Jan 2026 (Balance Sheet)</p>
+                          <p className="mt-0.5 text-[11px] font-extrabold text-primary">€ 23,691.29 <span className="ml-1 text-[9px] font-medium text-green-500">0% vs last month</span></p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-md">
+                          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[11px] font-bold text-primary">Cash at End of Period</p>
+                          <p className="text-[9px] text-light-gray">Jan 2026 (Cash Flow)</p>
+                          <p className="mt-0.5 text-[11px] font-extrabold text-primary">€ 8,232.61 <span className="ml-1 text-[9px] font-medium text-green-500">0% vs last month</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Get Started - stacked */}
+                  <div className="rounded-[24px] bg-purple-bg p-5 text-white shadow-2xl w-full">
+                    <p className="text-[16px] font-bold leading-tight tracking-wide">Get Started<br />Free Call?</p>
+                    <div className="mt-5 flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-lg">
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                      </div>
+                      <span className="text-[14px] font-semibold tracking-wide">+356 77142418</span>
+                    </div>
+                  </div>
+                  {/* Authorized Share - stacked */}
+                  <div className="rounded-[24px] bg-white p-4 shadow-xl w-full">
+                    <p className="mb-4 text-[11px] font-bold text-primary">Authorized Share</p>
+                    <div className="flex flex-col items-center gap-5">
+                      <div className="relative h-16 w-16 shadow-inner rounded-full overflow-hidden">
+                        <div className="h-full w-full rounded-full bg-progress-purple" />
+                        <div className="absolute bottom-0 left-0 h-[50%] w-full rounded-b-full bg-purple-bg" />
+                      </div>
+                      <div className="flex w-full flex-col gap-1.5 px-1">
+                        <div className="h-1.5 w-full rounded-full bg-neutral-200" />
+                        <div className="h-1.5 w-[70%] rounded-full bg-purple-bg" />
+                      </div>
+                      <div className="flex flex-col gap-1 text-center">
+                        <span className="text-[9px] font-bold text-success tracking-wide">Issued Share 50%</span>
+                        <span className="text-[9px] font-bold text-error tracking-wide">Left Share 50%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop: floating cards + man image (overlap layout) */}
+              <div className="hidden lg:block relative h-[380px] sm:h-[500px] w-full max-w-[340px] sm:max-w-[460px] rounded-[32px] sm:rounded-[48px] scale-95 sm:scale-100 origin-center overflow-visible">
                 {/* Floating Cards Layer - Behind the man (lower z-index) */}
                 <div className="absolute inset-0 pointer-events-none z-10 md:z-40">
                   {/* Financial Overview */}
                   <motion.div 
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute  md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 !z-10"
+                    className="absolute md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10"
                   >
                     <div className="mb-4 text-[12px] font-bold text-primary">
                       Financial Overview
