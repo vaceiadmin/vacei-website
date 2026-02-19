@@ -32,7 +32,7 @@ export const FadeInUp = ({
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
-    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
     return <Tag className={className}>{children}</Tag>;
   }
 
@@ -65,7 +65,7 @@ export const FadeInLeft = ({
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
-    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
     return <Tag className={className}>{children}</Tag>;
   }
 
@@ -98,7 +98,7 @@ export const FadeInRight = ({
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
-    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
     return <Tag className={className}>{children}</Tag>;
   }
 
@@ -131,7 +131,7 @@ export const ZoomIn = ({
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
-    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
     return <Tag className={className}>{children}</Tag>;
   }
 
@@ -168,7 +168,7 @@ export const StaggerContainer = ({
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
-    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
     return <Tag className={className}>{children}</Tag>;
   }
 
