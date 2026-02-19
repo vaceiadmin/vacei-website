@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
+import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 
 interface AnimationProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -16,24 +17,30 @@ interface AnimationProps extends HTMLMotionProps<"div"> {
 // Premium easing curve for smooth "hero-like" feel
 const PREMIUM_EASE = [0.16, 1, 0.3, 1];
 
-// 1. Fade In Up (Most common) – duration 0.6 so animation is visible and smooth
+// 1. Fade In Up (Most common). On mobile/reduced-motion: no animation to avoid scroll lag.
 export const FadeInUp = ({
   children,
   className = "",
   delay = 0,
   duration = 0.6,
-  viewportMargin = "-50px",
+  viewportMargin = "100px 0px 100px 0px",
   once = true,
   as = "div",
   ...props
 }: AnimationProps) => {
+  const reduceMotion = useReduceMotion();
   const Component = motion[as as keyof typeof motion] as any;
+
+  if (reduceMotion) {
+    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    return <Tag className={className}>{children}</Tag>;
+  }
 
   return (
     <Component
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: viewportMargin }}
+      viewport={{ once, margin: viewportMargin, amount: 0.05 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -43,7 +50,7 @@ export const FadeInUp = ({
   );
 };
 
-// 2. Fade In Left
+// 2. Fade In Left. On mobile/reduced-motion: no animation.
 export const FadeInLeft = ({
   children,
   className = "",
@@ -54,7 +61,13 @@ export const FadeInLeft = ({
   as = "div",
   ...props
 }: AnimationProps) => {
+  const reduceMotion = useReduceMotion();
   const Component = motion[as as keyof typeof motion] as any;
+
+  if (reduceMotion) {
+    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    return <Tag className={className}>{children}</Tag>;
+  }
 
   return (
     <Component
@@ -70,7 +83,7 @@ export const FadeInLeft = ({
   );
 };
 
-// 3. Fade In Right
+// 3. Fade In Right. On mobile/reduced-motion: no animation.
 export const FadeInRight = ({
   children,
   className = "",
@@ -81,7 +94,13 @@ export const FadeInRight = ({
   as = "div",
   ...props
 }: AnimationProps) => {
+  const reduceMotion = useReduceMotion();
   const Component = motion[as as keyof typeof motion] as any;
+
+  if (reduceMotion) {
+    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    return <Tag className={className}>{children}</Tag>;
+  }
 
   return (
     <Component
@@ -97,7 +116,7 @@ export const FadeInRight = ({
   );
 };
 
-// 4. Zoom In (Scale Up)
+// 4. Zoom In (Scale Up). On mobile/reduced-motion: no animation.
 export const ZoomIn = ({
   children,
   className = "",
@@ -108,7 +127,13 @@ export const ZoomIn = ({
   as = "div",
   ...props
 }: AnimationProps) => {
+  const reduceMotion = useReduceMotion();
   const Component = motion[as as keyof typeof motion] as any;
+
+  if (reduceMotion) {
+    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    return <Tag className={className}>{children}</Tag>;
+  }
 
   return (
     <Component
@@ -129,22 +154,29 @@ interface StaggerProps extends AnimationProps {
   staggerDelay?: number;
 }
 
+// On mobile/reduced-motion: no stagger animation to avoid scroll lag.
 export const StaggerContainer = ({
   children,
   className = "",
   staggerDelay = 0.15,
-  viewportMargin = "-50px",
+  viewportMargin = "100px 0px 100px 0px",
   once = true,
   as = "div",
   ...props
 }: StaggerProps) => {
+  const reduceMotion = useReduceMotion();
   const Component = motion[as as keyof typeof motion] as any;
+
+  if (reduceMotion) {
+    const Tag = (as || "div") as keyof JSX.IntrinsicElements;
+    return <Tag className={className}>{children}</Tag>;
+  }
 
   return (
     <Component
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: viewportMargin }}
+      viewport={{ once, margin: viewportMargin, amount: 0.05 }}
       variants={{
         hidden: { opacity: 0 },
         visible: {

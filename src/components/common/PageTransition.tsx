@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { pageTransition } from "@/lib/motion";
@@ -12,6 +12,12 @@ export default function PageTransition({
 }) {
   const pathname = usePathname();
 
+  // After route change, trigger resize so IntersectionObserver (whileInView) re-evaluates and content isn't stuck hidden
+  useEffect(() => {
+    const t = setTimeout(() => window.dispatchEvent(new Event("resize")), 80);
+    return () => clearTimeout(t);
+  }, [pathname]);
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -20,6 +26,7 @@ export default function PageTransition({
         animate={pageTransition.animate}
         exit={pageTransition.exit}
         transition={pageTransition.transition}
+        style={{ minHeight: "100vh", isolation: "isolate" }}
       >
         {children}
       </motion.div>

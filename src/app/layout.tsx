@@ -10,6 +10,7 @@ import IntroAnimationGate from "@/components/common/IntroAnimationGate";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import SupportChat from "@/components/support-chat/SupportChat";
+import { ReduceMotionProvider } from "@/contexts/ReduceMotionContext";
 
 const bodoni = Libre_Bodoni({
   subsets: ["latin"],
@@ -43,15 +44,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${bodoni.variable} ${montserrat.variable} ${nunito.variable}`}>
-         <IntroAnimationGate /> 
-        <SmoothScroll>
-          <Navbar />
-          <PageTransition>{children}</PageTransition>
-          <Footer />
-          <ScrollToTopButton />
-          <SupportChat />
-          <CookieConsentBanner />
-        </SmoothScroll>
+        <ReduceMotionProvider>
+          <IntroAnimationGate />
+          <SmoothScroll>
+            <Navbar />
+            <PageTransition>{children}</PageTransition>
+            <Footer />
+            <ScrollToTopButton />
+            <SupportChat />
+            <CookieConsentBanner />
+          </SmoothScroll>
+        </ReduceMotionProvider>
       </body>
     </html>
   );
