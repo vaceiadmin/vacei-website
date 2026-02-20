@@ -22,7 +22,7 @@ export const FadeInUp = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.6,
+  duration = 0.4,
   viewportMargin = "100px 0px 100px 0px",
   once = true,
   as = "div",
@@ -40,7 +40,7 @@ export const FadeInUp = ({
     <Component
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: viewportMargin, amount: 0.05 }}
+      viewport={{ once, margin: "0px", amount: 0.05 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -73,7 +73,7 @@ export const FadeInLeft = ({
     <Component
       initial={{ opacity: 0, x: -40 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once, margin: viewportMargin }}
+      viewport={{ once, margin: "0px" }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -106,7 +106,7 @@ export const FadeInRight = ({
     <Component
       initial={{ opacity: 0, x: 40 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once, margin: viewportMargin }}
+      viewport={{ once, margin: "0px" }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -139,7 +139,7 @@ export const ZoomIn = ({
     <Component
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once, margin: viewportMargin }}
+      viewport={{ once, margin: "0px" }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -158,7 +158,7 @@ interface StaggerProps extends AnimationProps {
 export const StaggerContainer = ({
   children,
   className = "",
-  staggerDelay = 0.15,
+  staggerDelay = 0.1,
   viewportMargin = "100px 0px 100px 0px",
   once = true,
   as = "div",
@@ -176,7 +176,7 @@ export const StaggerContainer = ({
     <Component
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: viewportMargin, amount: 0.05 }}
+      viewport={{ once, margin: "0px", amount: 0.05 }}
       variants={{
         hidden: { opacity: 0 },
         visible: {

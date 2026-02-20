@@ -11,6 +11,8 @@ import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import SupportChat from "@/components/support-chat/SupportChat";
 import { ReduceMotionProvider } from "@/contexts/ReduceMotionContext";
+import { TopLoader } from "@/components/common/TopLoader";
+import { Suspense } from "react";
 
 const bodoni = Libre_Bodoni({
   subsets: ["latin"],
@@ -44,6 +46,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${bodoni.variable} ${montserrat.variable} ${nunito.variable}`}>
+        <Suspense fallback={null}>
+          <TopLoader />
+        </Suspense>
         <ReduceMotionProvider>
           <IntroAnimationGate />
           <SmoothScroll>

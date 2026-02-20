@@ -50,7 +50,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
   return preferNativeScroll ? (
     <>{children}</>
   ) : (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis root options={{ lerp: 0.14, duration: 1.0, smoothWheel: true }}>
       <ScrollReset />
       {children}
     </ReactLenis>

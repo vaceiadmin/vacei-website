@@ -58,7 +58,7 @@ export const TextAnimation = ({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-100px" }}
+      viewport={{ once, margin: "0px" }}
       className={className}
     >
       {words.map((word, index) => (

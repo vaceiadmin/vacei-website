@@ -15,10 +15,12 @@ export default function InsightsPage() {
 
   return (
     <main className="bg-background-secondary min-h-screen">
-      <PageHeader
-        title="Insights"
-        breadcrumbs={breadcrumbs}
-      />
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+        <PageHeader
+          title="Insights"
+          breadcrumbs={breadcrumbs}
+        />
+      </div>
       
       {/* Background decoration */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -27,7 +29,7 @@ export default function InsightsPage() {
       </div>
 
       <div className="relative z-10">
-        <div className="container mx-auto px-4 pt-4 max-w-7xl">
+        <div className="container mx-auto px-4 pt-4 max-w-[1400px]">
           <p className="text-center text-text-gray text-lg max-w-2xl mx-auto mb-4">
             Structured thinking on accounting, audit, compliance, business and professional growth.
           </p>
