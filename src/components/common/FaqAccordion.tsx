@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, MessageCircle, Phone } from "lucide-react";
 import SectionBadge from "./SectionBadge";
 import TextAnimation from "./TextAnimation";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 interface FaqItem {
   title: string;
@@ -28,6 +29,7 @@ const FaqAccordion = ({
   callToActionText = "Need more help?",
 }: FaqAccordionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   const toggleItem = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -35,11 +37,13 @@ const FaqAccordion = ({
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden ">
-       {/* Background Decor - Light Gradients (Consistent with Pricing) */}
-       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[80px]" />
-        <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[80px]" />
-      </div>
+       {/* Background Decor - Light Gradients - Hidden on iPhone for performance */}
+       {!isIPhone && !isLowPerformance && (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[80px]" />
+          <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[80px]" />
+        </div>
+       )}
 
       <div className="relative max-w-6xl mx-auto px-4 md:px-6 lg:px-8 z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
@@ -52,7 +56,10 @@ const FaqAccordion = ({
                viewport={{ once: true }}
                transition={{ duration: 0.6 }}
             >
-                <SectionBadge text="FAQ" className="bg-white/80 backdrop-blur-md border border-gray-200 text-heading shadow-sm" />
+                <SectionBadge text="FAQ" className={cn(
+                  "border border-gray-200 text-heading shadow-sm",
+                  isIPhone || isLowPerformance ? "bg-white" : "bg-white/80 backdrop-blur-md"
+                )} />
                 <TextAnimation
                   text="Frequently Asked Questions"
                   as="h2"
@@ -63,8 +70,13 @@ const FaqAccordion = ({
                 </p>
 
                 {/* Glass Support Card */}
-                <div className="p-6 rounded-3xl bg-white/60 backdrop-blur-xl border border-white/60 shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-500">
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary-blue/10 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+                <div className={cn(
+                  "p-6 rounded-3xl border shadow-lg relative overflow-hidden group hover:shadow-xl transition-all duration-500",
+                  isIPhone || isLowPerformance ? "bg-white border-gray-100" : "bg-white/60 backdrop-blur-xl border-white/60"
+                )}>
+                    {!isIPhone && !isLowPerformance && (
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary-blue/10 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+                    )}
                     
                     <div className="relative z-10">
                         <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary-blue mb-4">
@@ -101,26 +113,31 @@ const FaqAccordion = ({
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     onClick={() => toggleItem(index)}
-                    className={`group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${
+                    className={cn(
+                      "group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden",
                       isOpen
                         ? "bg-white border-primary-blue/30 shadow-lg shadow-blue-100/50"
-                        : "bg-white/40 border-white/60 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-md"
-                    }`}
+                        : isIPhone || isLowPerformance 
+                          ? "bg-white border-gray-100 shadow-sm"
+                          : "bg-white/40 border-white/60 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-md"
+                    )}
                   >
                     <div className="flex items-center justify-between px-6 py-5">
                       <h3
-                        className={`text-lg font-semibold transition-colors duration-300 ${
+                        className={cn(
+                          "text-lg font-semibold transition-colors duration-300",
                           isOpen ? "text-primary-blue" : "text-heading group-hover:text-primary-blue"
-                        }`}
+                        )}
                       >
                         {item.title}
                       </h3>
                       <div
-                        className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${
+                        className={cn(
+                          "flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300",
                           isOpen
                             ? "bg-primary-blue text-white rotate-180"
                             : "bg-white text-gray shadow-sm group-hover:text-primary-blue"
-                        }`}
+                        )}
                       >
                          {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                       </div>
@@ -153,3 +170,4 @@ const FaqAccordion = ({
 };
 
 export default FaqAccordion;
+

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import TextAnimation from "./TextAnimation";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 interface FaqQuestion {
   question: string;
@@ -30,6 +32,7 @@ const FaqCategorized = ({
   const [openItems, setOpenItems] = useState<{ [key: string]: number | null }>(
     {},
   );
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   const toggleItem = (categoryIndex: number, questionIndex: number) => {
     const key = `${categoryIndex}-${questionIndex}`;
@@ -41,11 +44,13 @@ const FaqCategorized = ({
 
   return (
     <section className="w-full py-16 lg:py-24 overflow-hidden bg-[#f8fafc]">
-       {/* Background Decor - consistent light gradients */}
-       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[80px]" />
-          <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-50/50 rounded-full blur-[80px]" />
-      </div>
+       {/* Background Decor - consistent light gradients - Hidden on iPhone */}
+       {!isIPhone && !isLowPerformance && (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[80px]" />
+            <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-50/50 rounded-full blur-[80px]" />
+        </div>
+       )}
 
       <div className="relative max-w-6xl mx-auto px-4 md:px-6 lg:px-8 z-10">
         {/* Label */}
@@ -94,26 +99,31 @@ const FaqCategorized = ({
                         viewport={{ once: true }}
                         transition={{ duration: 0.3, delay: questionIndex * 0.05 }}
                         onClick={() => toggleItem(categoryIndex, questionIndex)}
-                        className={`group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden ${
+                        className={cn(
+                          "group rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden",
                           isOpen
                             ? "bg-white border-primary-blue/30 shadow-lg shadow-blue-100/50"
-                            : "bg-white/40 border-white/60 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-md"
-                        }`}
+                            : isIPhone || isLowPerformance
+                              ? "bg-white/80 border-gray-100 shadow-sm"
+                              : "bg-white/40 border-white/60 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-md"
+                        )}
                       >
                         <div className="flex items-center justify-between px-6 lg:px-8 py-5">
                           <h3
-                            className={`text-base lg:text-lg font-semibold tracking-tight pr-8 transition-colors duration-300 ${
+                            className={cn(
+                              "text-base lg:text-lg font-semibold tracking-tight pr-8 transition-colors duration-300",
                               isOpen ? "text-primary-blue" : "text-heading group-hover:text-primary-blue"
-                            }`}
+                            )}
                           >
                             {faq.question}
                           </h3>
                           <div
-                            className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 flex-shrink-0 ${
+                            className={cn(
+                              "flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 flex-shrink-0",
                               isOpen
                                 ? "bg-primary-blue text-white rotate-180"
                                 : "bg-white text-gray shadow-sm group-hover:text-primary-blue"
-                            }`}
+                            )}
                           >
                              {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                           </div>
@@ -153,3 +163,4 @@ const FaqCategorized = ({
 };
 
 export default FaqCategorized;
+

@@ -144,11 +144,13 @@ const PortalFeature = () => {
                                         </div>
                                     </div>
                                     
-                                    {/* Decorative Background Blur - Enhanced */}
-                                    <div className={`absolute -inset-12 bg-primary-blue/30 blur-[100px] -z-10 rounded-full opacity-30 group-hover:opacity-70 transition-opacity duration-700 ${isReversed ? "left-0" : "right-0"}`} />
-                                    
-                                    {/* Additional subtle glow */}
-                                    <div className={`absolute -inset-8 bg-purple-500/20 blur-[60px] -z-10 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${isReversed ? "right-0" : "left-0"}`} />
+                                    {/* Decorative Background Blur - Enhanced - Hidden on iPhone */}
+                                    {!isIPhone && !isLowPerformance && (
+                                        <>
+                                            <div className={`absolute -inset-12 bg-primary-blue/30 blur-[100px] -z-10 rounded-full opacity-30 group-hover:opacity-70 transition-opacity duration-700 ${isReversed ? "left-0" : "right-0"}`} />
+                                            <div className={`absolute -inset-8 bg-purple-500/20 blur-[60px] -z-10 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${isReversed ? "right-0" : "left-0"}`} />
+                                        </>
+                                    )}
                                 </DirectionalDiv>
 
                                 {/* Text Column */}

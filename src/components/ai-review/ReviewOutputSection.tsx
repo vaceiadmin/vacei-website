@@ -1,33 +1,41 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import SectionBadge from "@/components/common/SectionBadge";
 import TextAnimation from "../common/TextAnimation";
 import { FadeInUp, StaggerContainer } from "../common/Animations";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 const ReviewOutputSection = () => {
+  const { isIPhone, isLowPerformance } = usePerformance();
+
   return (
     <section className="bg-section-light py-16 lg:py-24 relative overflow-hidden">
-      {/* Background Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <motion.div 
-          animate={{ 
-            x: [0, -30, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-primary-blue/5 blur-[120px] rounded-full"
-        />
-        <motion.div 
-          animate={{ 
-            x: [0, 40, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-purple-500/5 blur-[120px] rounded-full"
-        />
-      </div>
+      {/* Background Blobs - Hidden on iPhone */}
+      {!isIPhone && !isLowPerformance && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <motion.div 
+            animate={{ 
+              x: [0, -30, 0],
+              y: [0, 50, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-primary-blue/5 blur-[120px] rounded-full"
+          />
+          <motion.div 
+            animate={{ 
+              x: [0, 40, 0],
+              y: [0, -30, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-purple-500/5 blur-[120px] rounded-full"
+          />
+        </div>
+      )}
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.1fr] gap-12 lg:gap-16 items-center">
@@ -130,24 +138,33 @@ const ReviewOutputSection = () => {
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-primary-blue/10 backdrop-blur-[2px]"></div>
+              <div className={cn(
+                "absolute inset-0 bg-primary-blue/10",
+                !isIPhone && !isLowPerformance ? "backdrop-blur-[2px]" : ""
+              )}></div>
             </div>
 
             {/* Overlay audit result card */}
             <div className="absolute inset-0 flex items-center justify-center p-4">
               <motion.div 
-                animate={{ 
+                animate={isIPhone || isLowPerformance ? { y: 0, rotateZ: 0 } : { 
                     y: [0, -15, 0],
                     rotateZ: [-1, 1, -1]
                 }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-full max-w-md bg-white rounded-3xl shadow-premium border border-gray-100 p-6 backdrop-blur-md"
+                transition={isIPhone || isLowPerformance ? {} : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className={cn(
+                  "w-full max-w-md bg-white rounded-3xl shadow-premium border border-gray-100 p-6",
+                  !isIPhone && !isLowPerformance ? "backdrop-blur-md" : ""
+                )}
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-[13px] font-bold text-heading">
                     Audit Result
                   </p>
-                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                  <span className={cn(
+                    "w-2 h-2 rounded-full bg-red-500",
+                    !isIPhone && !isLowPerformance ? "animate-pulse" : ""
+                  )}></span>
                 </div>
                 <p className="text-[11px] font-bold text-red-500 mb-4 bg-red-50 py-1 px-3 rounded-full w-fit">
                   Critical Errors
@@ -190,3 +207,4 @@ const ReviewOutputSection = () => {
 };
 
 export default ReviewOutputSection;
+

@@ -1,37 +1,45 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { FileText, Upload, Check, AlertTriangle } from "lucide-react";
 import GradientContainer from "../common/GradientContainer";
 import TextAnimation from "../common/TextAnimation";
 import { FadeInUp, StaggerContainer } from "../common/Animations";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 const AIReviewFeature = () => {
+  const { isIPhone, isLowPerformance } = usePerformance();
+
   return (
     <section className="w-full py-16 md:py-24 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Interactive UI Demo */}
           <div className="relative">
-            {/* Ambient Background Blobs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-              <motion.div 
-                animate={{ 
-                  x: [0, 30, 0],
-                  y: [0, -20, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-0 left-0 w-[60%] h-[60%] bg-primary-blue/10 blur-[100px] rounded-full"
-              />
-              <motion.div 
-                animate={{ 
-                  x: [0, -20, 0],
-                  y: [0, 30, 0],
-                  scale: [1.1, 1, 1.1]
-                }}
-                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[100px] rounded-full"
-              />
-            </div>
+            {/* Ambient Background Blobs - Hidden on iPhone for performance */}
+            {!isIPhone && !isLowPerformance && (
+              <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+                <motion.div 
+                  animate={{ 
+                    x: [0, 30, 0],
+                    y: [0, -20, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-0 left-0 w-[60%] h-[60%] bg-primary-blue/10 blur-[100px] rounded-full"
+                />
+                <motion.div 
+                  animate={{ 
+                    x: [0, -20, 0],
+                    y: [0, 30, 0],
+                    scale: [1.1, 1, 1.1]
+                  }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[100px] rounded-full"
+                />
+              </div>
+            )}
 
             <GradientContainer
               showRadials={false}
@@ -43,8 +51,8 @@ const AIReviewFeature = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ 
+                  animate={isIPhone || isLowPerformance ? { y: 0 } : { y: [0, -8, 0] }}
+                  transition={isIPhone || isLowPerformance ? { opacity: { duration: 0.5 } } : { 
                     y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
                     opacity: { duration: 0.5 }
                   }}
@@ -66,12 +74,14 @@ const AIReviewFeature = () => {
                         </p>
                         <p className="text-[10px] text-gray-400">0.25 MB</p>
                       </div>
-                      {/* Scan pulse effect on the file */}
-                      <motion.div 
-                        animate={{ x: ["-100%", "200%"] }}
-                        transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 bg-linear-to-r from-transparent via-primary-blue/5 to-transparent skew-x-12"
-                      />
+                      {/* Scan pulse effect on the file - Simplified on iPhone */}
+                      {!isIPhone && !isLowPerformance && (
+                        <motion.div 
+                          animate={{ x: ["-100%", "200%"] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                          className="absolute inset-0 bg-linear-to-r from-transparent via-primary-blue/5 to-transparent skew-x-12"
+                        />
+                      )}
                     </div>
                   </div>
 
@@ -93,7 +103,10 @@ const AIReviewFeature = () => {
                           className="flex items-center gap-2 group cursor-pointer"
                         >
                           <div
-                            className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-colors ${item.checked ? "border-primary bg-primary" : "border-input group-hover:border-input"}`}
+                            className={cn(
+                              "w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-colors",
+                              item.checked ? "border-primary bg-primary" : "border-input group-hover:border-input"
+                            )}
                           >
                             {item.checked && (
                               <Check className="w-2.5 h-2.5 text-white stroke-3" />
@@ -108,10 +121,10 @@ const AIReviewFeature = () => {
                   </div>
 
                   <motion.button 
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={isIPhone ? {} : { scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    animate={{ boxShadow: ["0 0 0 rgba(0,102,255,0)", "0 0 20px rgba(0,102,255,0.2)", "0 0 0 rgba(0,102,255,0)"] }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    animate={isIPhone || isLowPerformance ? { boxShadow: "0 0 10px rgba(0,102,255,0.1)" } : { boxShadow: ["0 0 0 rgba(0,102,255,0)", "0 0 20px rgba(0,102,255,0.2)", "0 0 0 rgba(0,102,255,0)"] }}
+                    transition={isIPhone || isLowPerformance ? {} : { duration: 2, repeat: Infinity }}
                     className="mt-auto w-full py-2.5 bg-primary hover:bg-hero transition-all rounded-lg text-white text-[11px] font-semibold shadow-md shadow-primary-blue"
                   >
                     Generate Analysis Report
@@ -123,19 +136,21 @@ const AIReviewFeature = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ 
+                  animate={isIPhone || isLowPerformance ? { y: 0 } : { y: [0, -12, 0] }}
+                  transition={isIPhone || isLowPerformance ? { opacity: { duration: 0.5, delay: 0.2 } } : { 
                     y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
                     opacity: { duration: 0.5, delay: 0.2 }
                   }}
                   className="bg-white rounded-2xl p-6 shadow-sm flex flex-col items-center text-center h-full border border-gray-100/50 relative overflow-hidden"
                 >
-                  {/* Scanning beam animation */}
-                  <motion.div 
-                    animate={{ y: ["-100%", "400%"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary-blue/30 to-transparent blur-sm z-20"
-                  />
+                  {/* Scanning beam animation - Hidden on iPhone */}
+                  {!isIPhone && !isLowPerformance && (
+                    <motion.div 
+                      animate={{ y: ["-100%", "400%"] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary-blue/30 to-transparent blur-sm z-20"
+                    />
+                  )}
                   
                   <TextAnimation
                     text="Upload Financial Statements"
@@ -165,8 +180,8 @@ const AIReviewFeature = () => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ 
+                  animate={isIPhone || isLowPerformance ? { y: 0 } : { y: [0, -10, 0] }}
+                  transition={isIPhone || isLowPerformance ? { opacity: { duration: 0.5, delay: 0.4 }, scale: { duration: 0.5, delay: 0.4 } } : { 
                     y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 },
                     opacity: { duration: 0.5, delay: 0.4 },
                     scale: { duration: 0.5, delay: 0.4 }
@@ -191,8 +206,8 @@ const AIReviewFeature = () => {
                       >
                         <div className="flex items-center gap-3 min-w-0">
                           <motion.div 
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            animate={isIPhone || isLowPerformance ? { scale: 1 } : { scale: [1, 1.2, 1] }}
+                            transition={isIPhone || isLowPerformance ? {} : { duration: 2, repeat: Infinity }}
                             className="w-5 h-5 rounded-full bg-primary flex items-center justify-center shrink-0"
                           >
                             <Check className="w-2.5 h-2.5 text-white stroke-3" />
@@ -221,11 +236,11 @@ const AIReviewFeature = () => {
                         <div className="flex items-center gap-3 min-w-0">
                           <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0">
                             <motion.div
-                              animate={{ 
+                              animate={isIPhone || isLowPerformance ? { opacity: 1, scale: 1 } : { 
                                 scale: [1, 1.15, 1],
                                 opacity: [1, 0.8, 1]
                               }}
-                              transition={{ duration: 1.5, repeat: Infinity }}
+                              transition={isIPhone || isLowPerformance ? {} : { duration: 1.5, repeat: Infinity }}
                             >
                               <AlertTriangle className="w-5 h-5 text-red-500 fill-red-50" />
                             </motion.div>
@@ -276,3 +291,4 @@ const AIReviewFeature = () => {
 };
 
 export default AIReviewFeature;
+

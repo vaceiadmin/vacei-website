@@ -3,6 +3,8 @@ import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import { Play } from 'lucide-react'
 import BenefitsCardsRow, { BenefitCard } from './BenefitsCardsRow'
+import { usePerformance } from "@/contexts/ReduceMotionContext"
+import { cn } from "@/lib/utils"
 
 const defaultCards: BenefitCard[] = [
     {
@@ -38,6 +40,7 @@ const BenefitsVideoSection = ({
 }: BenefitsVideoSectionProps) => {
     const videoRef = useRef<HTMLVideoElement | null>(null)
     const [isPlaying, setIsPlaying] = useState(false)
+    const { isIPhone, isLowPerformance } = usePerformance();
     
     const isGif = videoSrc.toLowerCase().endsWith('.gif')
 
@@ -88,7 +91,10 @@ const BenefitsVideoSection = ({
                                     className="absolute inset-0 flex items-center justify-center focus:outline-none"
                                     aria-label={isPlaying ? 'Pause video' : 'Play video'}
                                 >
-                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center shadow-xl border border-white/70 hover:bg-white/35 transition-colors">
+                                    <div className={cn(
+                                        "w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-xl border border-white/70 transition-colors",
+                                        isIPhone || isLowPerformance ? "bg-white/40" : "bg-white/25 backdrop-blur-md hover:bg-white/35"
+                                    )}>
                                         <Play
                                             size={30}
                                             className="text-white"
@@ -106,5 +112,6 @@ const BenefitsVideoSection = ({
 }
 
 export default BenefitsVideoSection
+
 
 

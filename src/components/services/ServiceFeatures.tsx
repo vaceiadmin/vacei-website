@@ -7,6 +7,7 @@ import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 import TextAnimation from "../common/TextAnimation";
 import { FadeInUp } from "../common/Animations";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
 
 interface ServiceFeatureProps {
   title: React.ReactNode;
@@ -49,6 +50,7 @@ const ServiceFeatures = ({
   theme?: "light" | "dark";
   showRadials?: boolean;
 }) => {
+  const { isIPhone, isLowPerformance } = usePerformance();
   const isDark = theme === "dark";
   const styles = {
     heading: isDark ? "text-white" : "text-text-heading",
@@ -125,7 +127,7 @@ const ServiceFeatures = ({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.02 }}
                 className={`group ${styles.cardBg} p-6 md:p-8 rounded-2xl transition-all duration-300 hover:border-primary-blue/50 hover:shadow-lg hover:shadow-primary-blue/10 hardware-accelerated`}
               >
 
@@ -192,3 +194,4 @@ const ServiceFeatures = ({
 };
 
 export default ServiceFeatures;
+

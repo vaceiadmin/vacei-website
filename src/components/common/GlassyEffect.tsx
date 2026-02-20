@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useIsSafari } from "@/hooks/use-safari";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
 
 
 interface GlassyEffectProps {
@@ -16,23 +17,25 @@ const GlassyEffect = ({
   animated = false,
 }: GlassyEffectProps) => {
   const isSafari = useIsSafari();
+  const { isIPhone, isLowPerformance } = usePerformance();
+  const performanceMode = isIPhone || isLowPerformance;
 
   const intensityClasses = {
     low: cn(
       "bg-primary/5 border border-primary/10",
-      isSafari ? "bg-primary/15" : "backdrop-blur-sm"
+      isSafari || performanceMode ? "bg-primary/15" : "backdrop-blur-sm"
     ),
     medium: cn(
       "border border-primary/20 shadow-lg shadow-primary/10",
-      isSafari ? "bg-primary/25" : "bg-primary/10 backdrop-blur-md"
+      isSafari || performanceMode ? "bg-primary/25" : "bg-primary/10 backdrop-blur-md"
     ),
     high: cn(
       "border border-primary/30 shadow-xl shadow-primary/20",
-      isSafari ? "bg-primary/30" : "bg-primary/15 backdrop-blur-lg"
+      isSafari || performanceMode ? "bg-primary/30" : "bg-primary/15 backdrop-blur-lg"
     ),
     premium: cn(
       "border border-primary/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]",
-      isSafari ? "bg-primary/25" : "bg-primary/10 backdrop-blur-xl"
+      isSafari || performanceMode ? "bg-primary/25" : "bg-primary/10 backdrop-blur-xl"
     ),
   };
 
@@ -68,3 +71,4 @@ const GlassyEffect = ({
 };
 
 export default GlassyEffect;
+
