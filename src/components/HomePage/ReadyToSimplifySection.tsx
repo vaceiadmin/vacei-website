@@ -30,8 +30,9 @@ const ReadyToSimplifySection = () => {
                     } 
                 }
             }}
-            className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
+            className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden hardware-accelerated"
         >
+
             
             {/* Decorative soft gradients */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

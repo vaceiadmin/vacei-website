@@ -126,8 +126,9 @@ const ServiceFeatures = ({
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
-                className={`group ${styles.cardBg} p-6 md:p-8 rounded-2xl transition-all duration-300 hover:border-primary-blue/50 hover:shadow-lg hover:shadow-primary-blue/10`}
+                className={`group ${styles.cardBg} p-6 md:p-8 rounded-2xl transition-all duration-300 hover:border-primary-blue/50 hover:shadow-lg hover:shadow-primary-blue/10 hardware-accelerated`}
               >
+
                 <div className="flex flex-col md:flex-row gap-6 md:gap-12">
                   <h3 className={`${styles.cardTitle} font-medium text-lg min-w-[140px] pt-1 group-hover:text-primary-blue transition-colors duration-300`}>
                     {feature.title}

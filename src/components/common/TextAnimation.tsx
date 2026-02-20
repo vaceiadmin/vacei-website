@@ -2,6 +2,8 @@ import { motion, Variants } from "framer-motion";
 import { useRef } from "react";
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 import { useIsSafari } from "@/hooks/use-safari";
+import { cn } from "@/lib/utils";
+
 
 
 interface TextAnimationProps {
@@ -68,8 +70,9 @@ export const TextAnimation = ({
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={className}
+      className={cn("hardware-accelerated", className)}
     >
+
       {words.map((word, index) => (
         <span key={index} className="inline-block overflow-hidden whitespace-nowrap">
           <motion.span

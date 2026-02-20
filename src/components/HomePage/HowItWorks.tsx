@@ -234,10 +234,11 @@ const HowItWorks = () => {
                                 <DirectionalDiv
                                     whileHover={isSafari ? {} : { y: -5 }}
                                     className={cn(
-                                        "relative p-6 rounded-2xl border border-white/10 transition-all duration-300 group hover:border-primary-blue/30 lg:flex-1 lg:min-w-0",
+                                        "relative p-6 rounded-2xl border border-white/10 transition-all duration-300 group hover:border-primary-blue/30 lg:flex-1 lg:min-w-0 hardware-accelerated",
                                         isSafari ? "bg-white/10" : "bg-white/5 backdrop-blur-md hover:bg-white/10"
                                     )}
                                 >
+
 
                                     {/* Icon Box */}
                                     <div className="w-14 h-14 rounded-xl bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-300 shadow-lg">

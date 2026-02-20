@@ -151,11 +151,12 @@ export default function AuditPlatform() {
           >
             <div 
               className={cn(
-                "relative rounded-[32px] border border-white/20 shadow-[0_30px_90px_rgba(15,23,42,0.65)] overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4",
+                "relative rounded-[32px] border border-white/20 shadow-[0_30px_90px_rgba(15,23,42,0.65)] overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4 hardware-accelerated",
                 isSafari ? "bg-white/20" : "bg-linear-to-br from-white/10 to-white/5 backdrop-blur-3xl"
               )}
               style={{ WebkitBackdropFilter: isSafari ? 'none' : 'blur(40px)', transform: 'translateZ(0)' }}
             >
+
 
               <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25 z-20" />
               <AuditPlatformBeam className="w-full h-full" />

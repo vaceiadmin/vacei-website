@@ -5,6 +5,8 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 import { useRef } from "react";
+import { cn } from "@/lib/utils";
+
 
 interface AnimationProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -46,8 +48,9 @@ export const FadeInUp = ({
       initial={{ opacity: 0, y: 32 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
-      className={className}
+      className={cn("hardware-accelerated", className)}
       {...props}
+
     >
       {children}
     </Component>
@@ -81,8 +84,9 @@ export const FadeInLeft = ({
       initial={{ opacity: 0, x: -40 }}
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
-      className={className}
+      className={cn("hardware-accelerated", className)}
       {...props}
+
     >
       {children}
     </Component>
@@ -116,8 +120,9 @@ export const FadeInRight = ({
       initial={{ opacity: 0, x: 40 }}
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
-      className={className}
+      className={cn("hardware-accelerated", className)}
       {...props}
+
     >
       {children}
     </Component>
@@ -151,8 +156,9 @@ export const ZoomIn = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
-      className={className}
+      className={cn("hardware-accelerated", className)}
       {...props}
+
     >
       {children}
     </Component>
@@ -199,9 +205,10 @@ export const StaggerContainer = ({
           },
         },
       }}
-      className={className}
+      className={cn("hardware-accelerated", className)}
       {...props}
     >
+
       {children}
     </Component>
   );

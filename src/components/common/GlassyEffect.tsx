@@ -40,11 +40,12 @@ const GlassyEffect = ({
   return (
     <div
       className={cn(
-        "relative rounded-2xl overflow-hidden",
+        "relative rounded-2xl overflow-hidden hardware-accelerated smooth-scrolling",
         intensityClasses[intensity],
         animated &&
           "transition-all duration-300 hover:shadow-primary/40 hover:border-primary/40",
         className
+
       )}
     >
       {/* Gradient tint overlay (primary-based) */}

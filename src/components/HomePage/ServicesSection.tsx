@@ -202,9 +202,10 @@ const ServicesSection = () => {
                                     className="w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[360px] min-w-0 shrink-0"
                                 >
                                     <div className={cn(
-                                        "group relative h-[480px] w-full border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500",
+                                        "group relative h-[480px] w-full border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500 hardware-accelerated",
                                         isSafari ? "bg-white/20 hover:bg-white/25" : "bg-white/5 backdrop-blur-2xl hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)]"
                                     )}>
+
 
                                         
                                         {/* Animated Glassy Header (replaces image) - like HowItWorks cards */}

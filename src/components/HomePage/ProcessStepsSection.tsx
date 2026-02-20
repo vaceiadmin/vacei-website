@@ -364,13 +364,14 @@ const ProcessStepsSection = () => {
               className="relative group h-full"
             >
                {/* 3D Tilt Wrapper / Card */}
-               <div 
-                 className={cn(
-                   "relative border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 h-full",
-                   isSafari ? "bg-white/60" : "bg-white/40 backdrop-blur-xl hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]"
-                 )}
-                 style={{ WebkitBackdropFilter: isSafari ? 'none' : 'blur(24px)', transform: 'translateZ(0)' }}
-               >
+                <div 
+                  className={cn(
+                    "relative border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 h-full hardware-accelerated",
+                    isSafari ? "bg-white/60" : "bg-white/40 backdrop-blur-xl hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]"
+                  )}
+                  style={{ WebkitBackdropFilter: isSafari ? 'none' : 'blur(24px)', transform: 'translateZ(0)' }}
+                >
+
 
                   
                   {/* Glossy Reflection */}

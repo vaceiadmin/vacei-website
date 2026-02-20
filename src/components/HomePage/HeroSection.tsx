@@ -106,7 +106,8 @@ const HeroSection = () => {
 
   if (reduceMotion) {
     return (
-      <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center transform-[translateZ(0)] contain-[paint]">
+      <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center hardware-accelerated contain-paint">
+
         <GradientContainer
           backgroundColor="bg-primary"
           showRadials
@@ -141,7 +142,8 @@ const HeroSection = () => {
   const isInViewGlobal = useDirectionalInView(sectionRef);
 
   return (
-    <section ref={sectionRef} className="relative w-full min-h-screen overflow-hidden flex flex-col items-center transform-[translateZ(0)] contain-[paint]">
+    <section ref={sectionRef} className="relative w-full min-h-screen overflow-hidden flex flex-col items-center hardware-accelerated contain-paint">
+
       <GradientContainer
         backgroundColor="bg-primary"
         showRadials

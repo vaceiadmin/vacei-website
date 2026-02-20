@@ -130,84 +130,111 @@
 .bg-background {
   background-color: var(--background);
 }
+
 .bg-primary {
   background-color: var(--primary);
 }
+
 .bg-primary-blue {
   background-color: var(--primary-blue);
 }
+
 .bg-primary-blue-hover {
   background-color: var(--primary-blue-hover);
 }
+
 .bg-hero {
   background-color: var(--hero-bg);
 }
+
 .bg-hero-dark {
   background-color: var(--hero-bg-dark);
 }
+
 .bg-hero-glow {
   background-color: var(--hero-glow);
 }
+
 .bg-gradient-container {
   background-color: var(--gradient-container);
 }
+
 .bg-button-indigo {
   background-color: var(--button-indigo);
 }
+
 .bg-tab-active {
   background-color: var(--tab-active);
 }
+
 .bg-tab-active-hover {
   background-color: var(--tab-active-hover);
 }
+
 .bg-card-hover-overlay {
   background-color: var(--card-hover-overlay);
 }
+
 .bg-card {
   background-color: var(--card-bg);
 }
+
 .bg-icon {
   background-color: var(--icon-bg);
 }
+
 .bg-dark-hover {
   background-color: var(--dark-hover);
 }
+
 .bg-purple-hover {
   background-color: var(--purple-hover);
 }
+
 .bg-success {
   background-color: var(--success);
 }
+
 .bg-error {
   background-color: var(--error);
 }
+
 .bg-progress-purple {
   background-color: var(--progress-purple);
 }
+
 .bg-purple-bg {
   background-color: var(--purple-bg);
 }
+
 .bg-section-light {
   background-color: var(--section-bg-light);
 }
+
 .bg-text-heading {
   background-color: var(--text-heading);
 }
+
 .bg-text-gray {
   background-color: var(--text-gray);
 }
+
 .bg-footer-hero {
   background-color: var(--footer-hero-bg);
 }
+
 .bg-benefit-icon {
   background-color: var(--benefit-icon-bg);
 }
+
 .border-benefit-icon {
   border-color: var(--benefit-icon-border);
 }
+
 .text-light-gray {
   color: var(--text-light-gray);
 }
+
 .focus-ring-purple {
   --tw-ring-color: var(--purple-bg);
 }
@@ -215,57 +242,68 @@
 .border-input {
   border-color: var(--input-border);
 }
+
 .text-form-label {
   color: var(--form-label);
 }
+
 .bg-neutral-200 {
   background-color: var(--neutral-200);
 }
+
 .shadow-primary-blue {
   box-shadow: 0 0 20px var(--primary-blue-shadow);
 }
 
 /* Quote/process panel gradient (dark blue gradient) */
 .bg-gradient-quote-panel {
-  background: linear-gradient(
-    135deg,
-    var(--sidebar-bg-start) 0%,
-    var(--gradient-container) 50%,
-    var(--hero-bg) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--sidebar-bg-start) 0%,
+      var(--gradient-container) 50%,
+      var(--hero-bg) 100%);
 }
 
 /* Utility Classes for Text Colors */
 .text-primary {
   color: var(--primary);
 }
+
 .text-primary-blue {
   color: var(--primary-blue);
 }
+
 .text-heading {
   color: var(--text-heading);
 }
+
 .text-gray {
   color: var(--text-gray);
 }
+
 .text-text-dark {
   color: var(--text-dark);
 }
+
 .text-tab-active {
   color: var(--tab-active);
 }
+
 .text-tab-active-hover {
   color: var(--tab-active-hover);
 }
+
 .text-purple-bg {
   color: var(--purple-bg);
 }
+
 .text-purple-hover {
   color: var(--purple-hover);
 }
+
 .text-success {
   color: var(--success);
 }
+
 .text-error {
   color: var(--error);
 }
@@ -274,12 +312,15 @@
 .border-primary {
   border-color: var(--primary);
 }
+
 .border-primary-blue {
   border-color: var(--primary-blue);
 }
+
 .border-tab-active {
   border-color: var(--tab-active);
 }
+
 .border-purple-bg {
   border-color: var(--purple-bg);
 }
@@ -288,9 +329,11 @@
 .focus-ring-primary-blue {
   --tw-ring-color: var(--primary-blue);
 }
+
 .focus-ring-primary-blue:focus {
   --tw-ring-color: var(--primary-blue);
 }
+
 .ring-primary-blue {
   --tw-ring-color: var(--primary-blue);
 }
@@ -324,12 +367,17 @@ body {
  * affecting your breakpoints.
  */
 html {
-  font-size: 15px; /* ~94% of the default 16px, so 100% zoom ≈ your old 90% */
+  font-size: 15px;
+  /* ~94% of the default 16px, so 100% zoom ≈ your old 90% */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* Prevent font-size changes on orientation change */
 }
 
 @media (min-width: 1440px) {
   html {
-    font-size: 16px; /* Restore full size on very large desktops */
+    font-size: 16px;
+    /* Restore full size on very large desktops */
   }
 }
 
@@ -338,7 +386,38 @@ html,
 body {
   max-width: 100%;
   overflow-x: hidden;
+  /* Support dynamic viewport height for mobile Safari */
+  min-height: 100dvh;
 }
+
+/* Global Mobile Safari Optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+  /* Remove gray flash on tap */
+}
+
+/* Prevent auto-zoom on iOS inputs while keeping base font at 15px */
+@media screen and (max-width: 768px) {
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* iOS Safari smooth scrolling and interaction */
+.smooth-scrolling {
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Force hardware acceleration for smoother animations on iOS */
+.hardware-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
 
 /* Hide scrollbar for sidebar */
 .hide-scrollbar {

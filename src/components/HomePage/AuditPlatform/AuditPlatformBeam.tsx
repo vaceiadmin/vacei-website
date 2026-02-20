@@ -52,10 +52,11 @@ const Circle = forwardRef<
         }}
 
         className={cn(
-          "z-10 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:shadow-lg hover:shadow-primary-blue/10 hover:border-primary-blue/30",
+          "z-10 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:shadow-lg hover:shadow-primary-blue/10 hover:border-primary-blue/30 hardware-accelerated",
           className
         )}
       >
+
         <div className="scale-75 sm:scale-100">
           {children}
         </div>

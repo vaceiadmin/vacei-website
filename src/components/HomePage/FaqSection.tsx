@@ -78,8 +78,9 @@ const FaqSection = () => {
               } : {}}
               transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
 
-              className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full"
+              className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
             />
+
             <motion.div 
               animate={isInView && !isSafari ? { 
                 x: [0, -30, 0],
@@ -88,8 +89,9 @@ const FaqSection = () => {
               } : {}}
               transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
 
-              className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full"
+              className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
             />
+
           </div>
           
           <div className="max-w-6xl mx-auto px-4 md:px-0 relative z-10">
@@ -198,8 +200,9 @@ const FaqSection = () => {
                   <motion.div 
                     animate={isInView ? { y: [0, -10, 0] } : {}}
                     transition={{ duration: 4, repeat: 0, ease: "easeInOut" }}
-                    className="absolute md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10"
+                    className="absolute md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10 hardware-accelerated"
                   >
+
                     <div className="mb-4 text-[12px] font-bold text-primary">
                       Financial Overview
                     </div>
@@ -276,8 +279,9 @@ const FaqSection = () => {
                   <motion.div 
                     animate={isInView ? { y: [0, -15, 0] } : {}}
                     transition={{ duration: 5, repeat: 0, ease: "easeInOut", delay: 1 }}
-                    className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-40 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105"
+                    className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-40 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105 hardware-accelerated"
                   >
+
                     <p className="text-[16px] font-bold leading-tight tracking-wide">
                       Get Started
                       <br />
@@ -312,8 +316,9 @@ const FaqSection = () => {
                         rotate: [0, 1, 0, -1, 0]
                     } : {}}
                     transition={{ duration: 4.5, repeat: 0, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute bottom-16 -right-10 max-sm:bottom-20 max-sm:right-2 pointer-events-auto z-10 transition-transform hover:scale-105"
+                    className="absolute bottom-16 -right-10 max-sm:bottom-20 max-sm:right-2 pointer-events-auto z-10 transition-transform hover:scale-105 hardware-accelerated"
                   >
+
                     <div className="relative w-[140px] sm:w-[160px] rounded-[24px] bg-white p-4 sm:p-5 shadow-xl">
                       <p className="mb-4 text-[11px] font-bold text-primary">
                         Authorized Share
@@ -389,8 +394,9 @@ const FaqSection = () => {
                     <DirectionalDiv key={index} variants={fadeInUp}>
                     <GlassyEffect
                       intensity="premium"
-                      className={`overflow-hidden rounded-[18px] transition-all duration-300 cursor-pointer group mx-2 sm:mx-5 border-none shadow-none hover:bg-white/10 ${isOpen ? "bg-white/10" : "bg-white/5"}`}
+                      className={`overflow-hidden rounded-[18px] transition-all duration-300 cursor-pointer group mx-2 sm:mx-5 border-none shadow-none hover:bg-white/10 hardware-accelerated ${isOpen ? "bg-white/10" : "bg-white/5"}`}
                     >
+
                       <div 
                         className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6"
                         onClick={() => toggleItem(index)}
