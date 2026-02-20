@@ -27,7 +27,7 @@ const itemVariants = {
 export default function AuditPlatform() {
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden">
+    <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden isolate">
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{
@@ -137,7 +137,10 @@ export default function AuditPlatform() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative rounded-[32px] border border-white/20 bg-linear-to-br from-white/10 to-white/5 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-3xl overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4">
+            <div 
+              className="relative rounded-[32px] border border-white/20 bg-linear-to-br from-white/10 to-white/5 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-3xl overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4"
+              style={{ WebkitBackdropFilter: 'blur(40px)', transform: 'translateZ(0)' }}
+            >
               <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25 z-20" />
               <AuditPlatformBeam className="w-full h-full" />
             </div>

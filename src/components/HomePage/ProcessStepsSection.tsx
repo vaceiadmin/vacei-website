@@ -322,19 +322,21 @@ const ProcessStepsSection = () => {
   }
 
   return (
-    <section id="process-steps" className="w-full relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28 scroll-mt-20" style={{ backgroundColor: '#D8E5E5' }}>
+    <section id="process-steps" className="w-full relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28 scroll-mt-20 isolate" style={{ backgroundColor: '#D8E5E5' }}>
         
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated Background Elements - Safari Friendly */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ transform: 'translateZ(0)' }}>
              <motion.div 
-               animate={{ y: [0, -20, 0], opacity: [0.4, 0.6, 0.4] }}
+               animate={{ y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] }}
                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-               className="absolute -top-[10%] -right-[10%] w-[800px] h-[800px] bg-white/40 blur-[100px] rounded-full mix-blend-overlay"
+               className="absolute top-0 right-0 w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-white/30 blur-[60px] rounded-full"
+               style={{ transform: 'translateZ(0)' }}
              />
              <motion.div 
-               animate={{ y: [0, 30, 0], opacity: [0.3, 0.5, 0.3] }}
+               animate={{ y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-               className="absolute -bottom-[10%] -left-[10%] w-[600px] h-[600px] bg-blue-200/40 blur-[120px] rounded-full" 
+               className="absolute bottom-0 left-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-blue-100/30 blur-[60px] rounded-full" 
+               style={{ transform: 'translateZ(0)' }}
              />
         </div>
 
@@ -348,10 +350,13 @@ const ProcessStepsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative group perspective-1000"
+              className="relative group h-full"
             >
                {/* 3D Tilt Wrapper / Card */}
-               <div className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]">
+               <div 
+                 className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)] h-full"
+                 style={{ WebkitBackdropFilter: 'blur(24px)', transform: 'translateZ(0)' }}
+               >
                   
                   {/* Glossy Reflection */}
                   <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-white/40 to-transparent opacity-50 pointer-events-none" />
@@ -805,11 +810,14 @@ const ProcessStepsSection = () => {
 
                                 {/* Text Content */}
                                 <div className="pt-1.5 flex-1">
-                                    <div className={`relative rounded-2xl overflow-hidden transition-all duration-300 border backdrop-blur-sm ${
-                                      isActive
-                                        ? "bg-white/80 border-white/90 shadow-[0_22px_40px_-22px_rgba(15,23,42,0.55)]"
-                                        : "bg-white/25 border-white/40 hover:bg-white/45 hover:border-white/80"
-                                    }`}>
+                                    <div 
+                                      className={`relative rounded-2xl overflow-hidden transition-all duration-300 border backdrop-blur-sm ${
+                                        isActive
+                                          ? "bg-white/80 border-white/90 shadow-[0_22px_40px_-22px_rgba(15,23,42,0.55)]"
+                                          : "bg-white/25 border-white/40 hover:bg-white/45 hover:border-white/80"
+                                      }`}
+                                      style={{ WebkitBackdropFilter: 'blur(4px)', transform: 'translateZ(0)' }}
+                                    >
                                         {isActive && (
                                           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-linear-to-b from-[#3b49e6] via-[#6366f1] to-[#a855f7]" />
                                         )}
