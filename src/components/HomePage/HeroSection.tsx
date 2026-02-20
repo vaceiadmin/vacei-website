@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import TextAnimation from "../common/TextAnimation";
-import { SkeletonImage } from "../common/Skeleton";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
@@ -107,10 +106,10 @@ const HeroSection = () => {
         >
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="hidden md:block absolute -top-12 left-0 lg:-top-16 lg:left-4 xl:top-0 xl:left-0 w-40 sm:w-48 lg:w-56 -rotate-90">
-              <SkeletonImage src="/assets/images/SHadow.png" alt="" width={320} height={320} loading="lazy" imageClassName="w-full h-auto object-contain" />
+              <Image src="/assets/images/SHadow.png" alt="" width={320} height={320} loading="lazy" className="w-full h-auto object-contain" />
             </div>
             <div className="hidden md:block absolute -top-12 right-0 lg:-top-16 lg:right-4 xl:top-0 xl:right-0 w-40 sm:w-48 lg:w-56 rotate-360">
-              <SkeletonImage src="/assets/images/SHadow.png" alt="" width={320} height={320} loading="lazy" imageClassName="w-full h-auto object-contain" />
+              <Image src="/assets/images/SHadow.png" alt="" width={320} height={320} loading="lazy" className="w-full h-auto object-contain" />
             </div>
           </div>
           <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-10 sm:mt-14 lg:mt-20 flex flex-col items-center mx-auto">
