@@ -75,8 +75,9 @@ const ReadyToSimplifySection = () => {
                 <GetInstantQuoteButton
                     variant="custom"
                     text="View Our Services"
-                    href="/services"
+                    href="#services"
                     bgColor="white"
+
                     textColor="#1a1c35"
                     className="px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all"
                     hasShadow={false}
