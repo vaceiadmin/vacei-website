@@ -7,6 +7,35 @@ import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Filter out Framer Motion specific props that shouldn't be passed to plain DOM elements
+ */
+const filterMotionProps = (props: any) => {
+  const {
+    initial,
+    animate,
+    exit,
+    variants,
+    transition,
+    whileHover,
+    whileTap,
+    whileFocus,
+    whileDrag,
+    whileInView,
+    viewport,
+    layout,
+    layoutId,
+    custom,
+    onAnimationStart,
+    onAnimationComplete,
+    onUpdate,
+    onLayoutAnimationComplete,
+    onViewportEnter,
+    onViewportLeave,
+    ...rest
+  } = props;
+  return rest;
+};
 
 interface AnimationProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -39,7 +68,7 @@ export const FadeInUp = ({
 
   if (reduceMotion) {
     const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
-    return <Tag className={className}>{children}</Tag>;
+    return <Tag className={className} {...filterMotionProps(props)}>{children}</Tag>;
   }
 
   return (
@@ -50,7 +79,6 @@ export const FadeInUp = ({
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={cn("hardware-accelerated", className)}
       {...props}
-
     >
       {children}
     </Component>
@@ -75,7 +103,7 @@ export const FadeInLeft = ({
 
   if (reduceMotion) {
     const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
-    return <Tag className={className}>{children}</Tag>;
+    return <Tag className={className} {...filterMotionProps(props)}>{children}</Tag>;
   }
 
   return (
@@ -86,7 +114,6 @@ export const FadeInLeft = ({
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={cn("hardware-accelerated", className)}
       {...props}
-
     >
       {children}
     </Component>
@@ -111,7 +138,7 @@ export const FadeInRight = ({
 
   if (reduceMotion) {
     const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
-    return <Tag className={className}>{children}</Tag>;
+    return <Tag className={className} {...filterMotionProps(props)}>{children}</Tag>;
   }
 
   return (
@@ -122,7 +149,6 @@ export const FadeInRight = ({
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={cn("hardware-accelerated", className)}
       {...props}
-
     >
       {children}
     </Component>
@@ -147,7 +173,7 @@ export const ZoomIn = ({
 
   if (reduceMotion) {
     const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
-    return <Tag className={className}>{children}</Tag>;
+    return <Tag className={className} {...filterMotionProps(props)}>{children}</Tag>;
   }
 
   return (
@@ -158,7 +184,6 @@ export const ZoomIn = ({
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={cn("hardware-accelerated", className)}
       {...props}
-
     >
       {children}
     </Component>
@@ -187,7 +212,7 @@ export const StaggerContainer = ({
 
   if (reduceMotion) {
     const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
-    return <Tag className={className}>{children}</Tag>;
+    return <Tag className={className} {...filterMotionProps(props)}>{children}</Tag>;
   }
 
   return (
@@ -208,7 +233,6 @@ export const StaggerContainer = ({
       className={cn("hardware-accelerated", className)}
       {...props}
     >
-
       {children}
     </Component>
   );
@@ -247,6 +271,7 @@ export const DirectionalDiv = ({
 
   if (reduceMotion) {
     const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
+    // We already destructured motion props, so props only contains standard HTML attributes
     return <Tag {...(props as any)}>{children}</Tag>;
   }
 
