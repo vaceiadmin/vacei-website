@@ -10,12 +10,15 @@ import HeroSection from "./HeroSection";
 // import PortalFeature from "./PortalFeature";
 import HowItWorks from "./HowItWorks";
 import AuditPlatform from "./AuditPlatform/AuditPlatform";
+import IPhoneFaqSection from "./IPhoneFaqSection";
 
 import { MotionConfig } from "framer-motion";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { isIPhone } from "@/lib/utils";
 
 const HomePage = () => {
   const reduceMotion = useReduceMotion();
+  const iPhone = typeof window !== 'undefined' ? isIPhone() : false;
 
   // Scroll to hash section on load (e.g. /#process-steps or /#services from navbar)
   useEffect(() => {
@@ -39,11 +42,12 @@ const HomePage = () => {
         <ReadyToSimplifySection />
         <ServicesSection />
         <CompanySetupSection />
-        <FaqSection />
+        {iPhone ? <IPhoneFaqSection /> : <FaqSection />}
       </div>
     </MotionConfig>
   );
 };
+
 
 
 export default HomePage;
