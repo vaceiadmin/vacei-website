@@ -101,7 +101,7 @@ const ResellerProgramPage = () => {
       >
         <div className="flex justify-center pt-8">
             <Link 
-                href="/quote" 
+                href="/quote#process-steps" 
                 className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-medium rounded-full shadow-lg hover:bg-primary-blue transition-all"
             >
                 Apply to Become a Reseller

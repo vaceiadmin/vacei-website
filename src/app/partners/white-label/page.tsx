@@ -122,7 +122,7 @@ const WhiteLabelPage = () => {
                 White label and technology access partnerships are designed for firms that value structured delivery, controlled workflows, and operational clarity. If you are interested in using VACEI technology under your own brand, we invite you to discuss your requirements with our team.
             </p>
              <Link 
-                href="/quote" 
+                href="/quote#process-steps" 
                 className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-medium rounded-full shadow-lg hover:bg-primary-blue transition-all"
             >
                 Discuss Partnership

@@ -55,7 +55,7 @@ const PricingCTA = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href="/quote">
+                    <Link href="/quote#process-steps">
                       <motion.button
                         whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.05 }}
                         whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.95 }}

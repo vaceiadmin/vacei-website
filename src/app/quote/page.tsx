@@ -2,16 +2,20 @@
 
 import React, { useEffect } from "react";
 import PageHeader from "@/components/common/PageHeader";
-import ContactForm from "@/components/quote/ContactForm";
+import ProcessStepsSection from "@/components/HomePage/ProcessStepsSection";
 import QuoteProcess from "@/components/quote/QuoteProcess";
-import QuoteFormSection from "@/components/quote/QuoteFormSection";
 import { FadeInUp } from "@/components/common/Animations";
 
 const QuotePage = () => {
   useEffect(() => {
     const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
-    if (hash !== "contact-form") return;
-    const el = document.getElementById(hash);
+    if (hash !== "process-steps" && hash !== "contact-form") return;
+    
+    // We handle both IDs for backward compatibility if needed, 
+    // but the target is now process-steps
+    const targetId = hash === "contact-form" ? "process-steps" : hash;
+    const el = document.getElementById(targetId);
+    
     if (el) {
       const t = setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
       return () => clearTimeout(t);
@@ -26,9 +30,11 @@ const QuotePage = () => {
           breadcrumbs={[{ label: "Get a Quote" }]}
         />
       </div>
-      <FadeInUp>
-        <ContactForm />
-      </FadeInUp>
+      
+      <div id="process-steps">
+        <ProcessStepsSection />
+      </div>
+
       <FadeInUp delay={0.2}>
         <QuoteProcess />
       </FadeInUp>

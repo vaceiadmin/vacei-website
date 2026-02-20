@@ -103,7 +103,7 @@ const ServiceDeliveryPage = () => {
       >
         <div className="flex justify-center pt-8">
             <Link 
-                href="/quote" 
+                href="/quote#process-steps" 
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white text-lg font-medium rounded-full shadow-lg hover:bg-primary-blue hover:shadow-primary-blue/30 transition-all duration-300 transform hover:-translate-y-1"
             >
                 Start a Conversation

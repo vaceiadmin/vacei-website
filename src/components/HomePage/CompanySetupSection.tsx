@@ -182,7 +182,7 @@ const CompanySetupSection = () => {
                 Start Incorporation
             </Link>
             <Link 
-                href="/quote"
+                href="/quote#process-steps"
                 className="px-8 py-4 rounded-xl bg-white border border-gray-200 text-gray-700 font-bold text-base hover:bg-gray-50 transition-all hover:border-gray-300"
             >
                 Book a Consultation

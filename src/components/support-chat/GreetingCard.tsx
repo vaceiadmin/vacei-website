@@ -61,7 +61,7 @@ export default function GreetingCard({ onChatNow, onClose }: GreetingCardProps) 
             Chat now
           </button>
           <Link
-            href="/quote"
+            href="/quote#process-steps"
             onClick={onClose}
             className="w-full py-3 px-4 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-sm transition-colors text-center border border-gray-200/80"
           >

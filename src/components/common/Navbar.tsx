@@ -360,12 +360,13 @@ const Navbar = () => {
     ? [
         // Compact: move AI Review + How It Works under Resources
         { label: "Insights", href: "/insights" },
-        { label: "AI Review", href: "/ai-review" },
-        { label: "How It Works", href: "/how-it-works" },
+        // { label: "AI Review", href: "/ai-review" },
+        // { label: "How It Works", href: "/how-it-works" },
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },
+        { label: "Contact Us", href: "/contact" },
         { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote" },
+        { label: "Get Instant Quote", href: "/quote#process-steps" },
         { label: "CPE & Podcast", href: "/cpe" },
       ]
     : [
@@ -375,6 +376,7 @@ const Navbar = () => {
         { label: "How It Works", href: "/how-it-works" },
         { label: "About VACEI", href: "/about" },
         { label: "FAQs", href: "/faq" },
+        { label: "Contact Us", href: "/contact" },
         { label: "Security & Compliance", href: "/security-compliance" },
         { label: "Get Instant Quote", href: "/quote" },
         { label: "CPE & Podcast", href: "/cpe" },
