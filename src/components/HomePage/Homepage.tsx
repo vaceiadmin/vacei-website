@@ -10,7 +10,6 @@ import HeroSection from "./HeroSection";
 // import PortalFeature from "./PortalFeature";
 import HowItWorks from "./HowItWorks";
 import AuditPlatform from "./AuditPlatform/AuditPlatform";
-import IPhoneFaqSection from "./IPhoneFaqSection";
 
 import { MotionConfig } from "framer-motion";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
@@ -42,7 +41,7 @@ const HomePage = () => {
         <ReadyToSimplifySection />
         <ServicesSection />
         <CompanySetupSection />
-        {iPhone ? <IPhoneFaqSection /> : <FaqSection />}
+        <FaqSection />
       </div>
     </MotionConfig>
   );

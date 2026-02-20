@@ -199,7 +199,7 @@ export default function AuditPlatformBeam({
         duration={3}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.2}
+        pathOpacity={0.1}
         gradientStartColor="#ef4444"
         gradientStopColor="#3b82f6"
       />
@@ -211,7 +211,7 @@ export default function AuditPlatformBeam({
         delay={0.5}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.2}
+        pathOpacity={0.1}
         gradientStartColor="#22c55e"
         gradientStopColor="#3b82f6"
       />
@@ -223,7 +223,7 @@ export default function AuditPlatformBeam({
         delay={1}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.2}
+        pathOpacity={0.1}
         gradientStartColor="#3b82f6"
         gradientStopColor="#3b82f6"
       />
@@ -237,7 +237,7 @@ export default function AuditPlatformBeam({
         duration={4}
         curvature={15}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.2}
+        pathOpacity={0.1}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -249,7 +249,7 @@ export default function AuditPlatformBeam({
         delay={0.7}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.2}
+        pathOpacity={0.1}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -261,7 +261,7 @@ export default function AuditPlatformBeam({
         delay={1.4}
         curvature={-15}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.2}
+        pathOpacity={0.1}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -275,7 +275,7 @@ export default function AuditPlatformBeam({
         duration={3}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isIPhone ? 0 : 0.3}
+        pathOpacity={0.15}
         pathWidth={3}
         gradientStartColor="#6366f1"
         gradientStopColor="#3b82f6"

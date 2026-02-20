@@ -7,11 +7,13 @@ import CategoryFilter from "./CategoryFilter";
 import InsightCard from "./InsightCard";
 import { insightsData, insightCategories } from "@/data/insightsData";
 import { FadeInUp } from "@/components/common/Animations";
-import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 
 const InsightsClient = () => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const reduceMotion = useReduceMotion();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
+
+  const isSimple = isIPhone || isLowPerformance;
 
   const filteredArticles = useMemo(() => {
     if (activeCategory === "All") {
@@ -82,7 +84,7 @@ const InsightsClient = () => {
         {filterSection}
       </FadeInUp>
 
-      {reduceMotion ? articlesGrid : animatedGrid}
+      {reduceMotion || isSimple ? articlesGrid : animatedGrid}
 
       {filteredArticles.length === 0 && noResults}
     </div>

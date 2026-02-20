@@ -71,7 +71,22 @@ function AnimatedFeatureVisual({ index }: { index: number }) {
             className="relative w-full h-[450px] overflow-hidden rounded-[2.5rem] cursor-default"
         >
             {/* Base gradient background */}
-            <div className="absolute inset-0 bg-[#111235] rounded-[2.5rem]" />
+            <div className={cn(
+                "absolute inset-0 rounded-[2.5rem]",
+                isSimple ? "bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#111235]" : "bg-[#111235]"
+            )} />
+
+            {isSimple && (
+                <div className="absolute inset-0 overflow-hidden rounded-[2.5rem]">
+                    <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-primary-blue/10 rounded-full blur-[60px]" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-500/10 rounded-full blur-[50px]" />
+                    {/* Fixed decorative rings */}
+                    <div className="absolute top-1/2 left-1/2 w-48 h-48 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 opacity-40 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]" />
+                    <div className="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary-blue/10 opacity-30 shadow-[0_0_15px_rgba(59,73,230,0.1)]" />
+                    {/* Small static accent dot */}
+                    <div className="absolute top-1/2 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-blue/60" />
+                </div>
+            )}
 
             {!isSimple && (
                 <>

@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -6,7 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { InsightArticle } from "@/data/insightsData";
-import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 interface InsightCardProps {
   article: InsightArticle;
@@ -15,7 +15,7 @@ interface InsightCardProps {
 
 const InsightCard = ({ article, index }: InsightCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const reduceMotion = useReduceMotion();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
 
   const cardClass = "group relative flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-primary-blue/30 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary-blue/5";
 
@@ -61,9 +61,10 @@ const InsightCard = ({ article, index }: InsightCardProps) => {
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={cardClass}
+      className={cn(
+        cardClass,
+        (isIPhone || isLowPerformance) && "hover:translate-y-0 hover:shadow-md"
+      )}
     >
       {cardContent}
     </div>

@@ -67,48 +67,43 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
               >
                 {item.label === "Services" ? (
                   <div className="relative">
-                    <div className="flex items-center gap-1.5 text-sm font-normal">
-                      <Link
-                        href="/services"
-                        className={`text-white/80 transition-colors ${dropdownOpen ? "text-white" : "hover:text-white"}`}
+                    <button
+                      type="button"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      className={cn(
+                        "flex items-center gap-1.5 text-sm font-normal outline-none transition-colors",
+                        dropdownOpen ? "text-white" : "text-white/80 hover:text-white"
+                      )}
+                    >
+                      <span>{item.label}</span>
+                      <motion.svg
+                        animate={{ rotate: dropdownOpen ? 180 : 0 }}
+                        className="w-3.5 h-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        {item.label}
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                        aria-label="Toggle services menu"
-                        className={`text-white/80 transition-colors ${dropdownOpen ? "text-white" : "hover:text-white"}`}
-                      >
-                        <motion.svg
-                          animate={{ rotate: dropdownOpen ? 180 : 0 }}
-                          className="w-3 h-3"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </motion.svg>
-                      </button>
-                    </div>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </motion.svg>
+                    </button>
 
                     {/* Dropdown Menu */}
                     <AnimatePresence>
                       {dropdownOpen && (
                         <motion.div
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          initial={{ opacity: 0, y: 8, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.95 }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
-                          className="absolute top-full left-1/2 -translate-x-1/2 mt-4 pt-2 w-[280px] z-50 origin-top"
+                          className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[280px] z-[110] origin-top"
                         >
                           <div className={cn(
-                            "rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/40 p-2 overflow-hidden",
+                            "rounded-[20px] shadow-[0_25px_60px_rgba(0,0,0,0.2)] border border-white/20 p-2 overflow-hidden",
                             isIPhone || isLowPerformance ? "bg-white" : "bg-white/95 backdrop-blur-2xl"
                           )}>
                             <div className="grid grid-cols-1 gap-1">
@@ -116,7 +111,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
                                 <Link
                                   key={service.id}
                                   href={`/services/${service.slug}`}
-                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-all group/item text-left"
+                                  className="block px-4 py-3 rounded-[14px] hover:bg-primary-blue/10 transition-all group/item text-left"
                                   onClick={() => setDropdownOpen(false)}
                                 >
                                   <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
@@ -126,6 +121,11 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
                               ))}
                             </div>
                           </div>
+                          {/* Triangle indicator */}
+                          <div className={cn(
+                            "absolute top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 z-[-1] hidden md:block border-l border-t border-white/20",
+                            isIPhone || isLowPerformance ? "bg-white" : "bg-white/95 backdrop-blur-2xl"
+                          )} />
                         </motion.div>
                       )}
                     </AnimatePresence>

@@ -70,35 +70,36 @@ const FaqSection = () => {
       <div className="mx-auto px-4 md:px-0">
         <GradientContainer
           className="py-12 sm:py-16 md:py-20 lg:py-24 bg-primary relative"
-          showRadials={false}
+          showRadials={true}
         >
-          {/* Animated Background Blobs */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-            <motion.div 
-              animate={isInView && !isIPhone && !reduceMotion && !isLowPerformance ? { 
-                x: [0, 40, 0],
-                y: [0, 50, 0],
-                scale: [1, 1.1, 1]
-              } : {}}
+          {/* Animated Background Blobs - Hidden on iPhone for performance */}
+          {!isIPhone && !isLowPerformance && (
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+              <motion.div 
+                animate={isInView && !reduceMotion ? { 
+                  x: [0, 40, 0],
+                  y: [0, 50, 0],
+                  scale: [1, 1.1, 1]
+                } : {}}
 
-              transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
+                transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
 
-              className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
-            />
+                className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
+              />
 
-            <motion.div 
-              animate={isInView && !isIPhone && !reduceMotion && !isLowPerformance ? { 
-                x: [0, -30, 0],
-                y: [0, -40, 0],
-                scale: [1, 1.2, 1]
-              } : {}}
+              <motion.div 
+                animate={isInView && !reduceMotion ? { 
+                  x: [0, -30, 0],
+                  y: [0, -40, 0],
+                  scale: [1, 1.2, 1]
+                } : {}}
 
-              transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
+                transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
 
-              className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
-            />
-
-          </div>
+                className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
+              />
+            </div>
+          )}
           
           <div className="max-w-6xl mx-auto px-4 md:px-0 relative z-10">
             {/* Section Header */}

@@ -4,6 +4,8 @@
 import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+
 interface CategoryFilterProps {
   categories: string[];
   activeCategory: string;
@@ -16,6 +18,7 @@ const CategoryFilter = ({
   onSelectCategory,
 }: CategoryFilterProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   // Optional: Scroll active category into view if needed
   useEffect(() => {
@@ -51,7 +54,7 @@ const CategoryFilter = ({
                 `}
               >
                 {category}
-                {isActive && (
+                {isActive && !isIPhone && !isLowPerformance && (
                   <motion.div
                     layoutId="activeCategoryHighlight"
                     className="absolute inset-0 rounded-full bg-primary-blue -z-10"
