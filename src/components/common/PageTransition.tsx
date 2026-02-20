@@ -16,7 +16,7 @@ export default function PageTransition({
 
   // After route change, trigger resize so IntersectionObserver (whileInView) re-evaluates and content isn't stuck hidden
   useEffect(() => {
-    const t = setTimeout(() => window.dispatchEvent(new Event("resize")), 80);
+    const t = setTimeout(() => window.dispatchEvent(new Event("resize")), 40);
     return () => clearTimeout(t);
   }, [pathname]);
 
@@ -30,7 +30,7 @@ export default function PageTransition({
   }
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       <motion.div
         key={pathname}
         initial={pageTransition.initial}

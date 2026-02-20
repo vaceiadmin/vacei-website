@@ -20,15 +20,15 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           clearInterval(progressInterval);
           return 100;
         }
-        // ~1s to reach 100%
-        return prev + 4;
+        // ~0.5s to reach 100%
+        return prev + 8;
       });
     }, 40);
 
     // Hide intro sooner so page appears quickly
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 1600);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
@@ -56,7 +56,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             scale: 1.1,
             transition: { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] } 
           }}
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-gradient-to-br from-[#0a0f1e] via-[#0d1425] to-[#0a0f1e] overflow-hidden"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-linear-to-br from-[#0a0f1e] via-[#0d1425] to-[#0a0f1e] overflow-hidden"
         >
           {/* Animated Background Grid */}
           <div className="absolute inset-0 opacity-20">
@@ -253,7 +253,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                       repeat: Infinity,
                       repeatDelay: 2,
                     }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 pointer-events-none"
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/60 to-transparent skew-x-12 pointer-events-none"
                     style={{
                       willChange: "transform, opacity",
                     }}
@@ -308,7 +308,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 <motion.div
                   initial={{ width: "0%" }}
                   animate={{ width: `${progress}%` }}
-                  className="relative h-full bg-gradient-to-r from-primary-blue via-cyan-400 to-primary-blue rounded-full"
+                  className="relative h-full bg-linear-to-r from-primary-blue via-cyan-400 to-primary-blue rounded-full"
                   style={{
                     boxShadow: '0 0 20px rgba(59, 73, 230, 0.8), 0 0 40px rgba(59, 73, 230, 0.4)',
                   }}
@@ -323,7 +323,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                       repeat: Infinity,
                       ease: "linear",
                     }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent"
                   />
                 </motion.div>
               </div>

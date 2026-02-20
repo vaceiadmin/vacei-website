@@ -50,10 +50,10 @@ const InsightsClient = () => {
           <motion.div
             layout
             key={article.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <InsightCard article={article} index={Number(article.id)} />
           </motion.div>
@@ -77,7 +77,7 @@ const InsightsClient = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-20 max-w-7xl">
+    <div className="container mx-auto px-4 py-12 md:py-20 max-w-[1400px]">
       <FadeInUp className="mb-12 md:mb-16">
         {filterSection}
       </FadeInUp>

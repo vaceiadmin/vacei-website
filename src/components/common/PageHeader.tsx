@@ -23,7 +23,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
 
   return (
     <GradientContainer backgroundColor="bg-primary" className="my-6">
-      <FadeInUp className="flex flex-col items-center justify-center py-20 md:py-32 lg:py-40 px-4 text-center">
+      <div className="flex flex-col items-center justify-center py-20 md:py-32 lg:py-40 px-4 text-center">
         {/* Title */}
         <TextAnimation
           text={title}
@@ -135,7 +135,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
             </React.Fragment>
           ))}
         </div>
-      </FadeInUp>
+      </div>
     </GradientContainer>
   );
 };

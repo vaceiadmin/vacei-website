@@ -5,9 +5,18 @@ import IntroAnimation from "./IntroAnimation";
 
 // Shows the intro loader on every page load/refresh (no session persistence).
 const IntroAnimationGate = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [showSoundPrompt, setShowSoundPrompt] = useState(false);
   const audioRef = React.useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    // Session persistence: only show on first visit in the session
+    const hasSeenIntro = sessionStorage.getItem("vacei-intro-seen");
+    if (!hasSeenIntro) {
+      setShow(true);
+      sessionStorage.setItem("vacei-intro-seen", "true");
+    }
+  }, []);
 
   useEffect(() => {
     // Attempt to play immediately
@@ -67,7 +76,7 @@ const IntroAnimationGate = () => {
       />
       
       {showSoundPrompt && (
-        <div className="fixed top-5 right-5 z-[10000] animate-fade-in">
+        <div className="fixed top-5 right-5 z-10000 animate-fade-in">
           <div className="flex items-center gap-2 bg-black/30 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-xs font-medium text-white/70 tracking-wide shadow-lg">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M11 5L6 9H2v6h4l5 4V5z"></path>

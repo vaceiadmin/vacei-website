@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { SkeletonImage } from "@/components/common/Skeleton";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionBadge from "@/components/common/SectionBadge";
@@ -175,12 +175,12 @@ const PortalFeature = ({
                 <div className="bg-purple-bg rounded-2xl p-6 shadow-sm flex flex-col justify-center relative overflow-hidden h-full transition-transform duration-300 hover:scale-[1.02]">
                   {/* Quote Icon Top Left */}
                   <div className="absolute top-4 left-4 opacity-30">
-                    <Image
+                    <SkeletonImage
                       src="/assets/images/Vector (3).png"
                       alt="Quote icon"
                       width={20}
                       height={20}
-                      className="object-contain"
+                      imageClassName="object-contain"
                     />
                   </div>
 
@@ -190,12 +190,12 @@ const PortalFeature = ({
 
                   {/* Quote Icon Bottom Right */}
                   <div className="absolute bottom-4 right-4 opacity-30 rotate-180">
-                    <Image
+                    <SkeletonImage
                       src="/assets/images/Vector (3).png"
                       alt="Quote icon"
                       width={20}
                       height={20}
-                      className="object-contain"
+                      imageClassName="object-contain"
                     />
                   </div>
                 </div>
@@ -236,12 +236,12 @@ const PortalFeature = ({
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-icon flex items-center justify-center text-tab-active">
-                          <Image
+                          <SkeletonImage
                             src="/assets/images/VectorC.png"
                             alt="Analysis"
                             width={22}
                             height={22}
-                            className="object-contain"
+                            imageClassName="object-contain"
                           />
                         </div>
                         <div className="flex flex-col">
@@ -349,11 +349,11 @@ const PortalFeature = ({
               </div>
             ) : (
               <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-gray-100 bg-white min-h-[400px] lg:min-h-0 group">
-                <Image
+                <SkeletonImage
                   src={portalImage}
                   alt="Client Portal Dashboard"
                   fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-700"
+                  imageClassName="object-contain group-hover:scale-105 transition-transform duration-700"
                   priority
                 />
               </div>
