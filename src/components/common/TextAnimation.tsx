@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { useRef } from "react";
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
+import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 import { useIsSafari } from "@/hooks/use-safari";
 import { cn } from "@/lib/utils";
 
@@ -29,10 +30,16 @@ export const TextAnimation = ({
   const ref = useRef(null);
   const isInView = useDirectionalInView(ref);
   const isSafari = useIsSafari();
+  const reduceMotion = useReduceMotion();
 
   
   // Dynamic component type (h1, h2, etc.)
   const MotionComponent = (motion as any)[as];
+
+  if (reduceMotion) {
+    const Tag = (as || "h2") as any;
+    return <Tag className={className}>{text}</Tag>;
+  }
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -86,5 +93,6 @@ export const TextAnimation = ({
     </MotionComponent>
   );
 };
+
 
 export default TextAnimation;

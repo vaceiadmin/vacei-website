@@ -15,6 +15,7 @@ import {
   User
 } from "lucide-react";
 import { useIsSafari } from "@/hooks/use-safari";
+import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 
 
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
@@ -27,9 +28,35 @@ const Circle = forwardRef<
   const innerRef = useRef<HTMLDivElement>(null);
   const isInView = useDirectionalInView(innerRef);
   const isSafari = useIsSafari();
+  const reduceMotion = useReduceMotion();
   
   // Expose both refs (internal for observation, passed for external linking)
   useImperativeHandle(ref, () => innerRef.current!);
+
+  if (reduceMotion) {
+    return (
+      <div 
+        ref={innerRef}
+        className="flex flex-col items-center gap-1 sm:gap-1.5 min-w-[50px] sm:min-w-[70px]"
+      >
+        <div
+          className={cn(
+            "z-10 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:shadow-lg hover:shadow-primary-blue/10 hover:border-primary-blue/30 hardware-accelerated",
+            className
+          )}
+        >
+          <div className="scale-75 sm:scale-100">
+            {children}
+          </div>
+        </div>
+        {label && (
+          <span className="text-[7px] sm:text-[9px] font-bold text-gray-500 uppercase tracking-tight sm:tracking-wider text-center max-w-[55px] sm:max-w-[80px] leading-tight">
+            {label}
+          </span>
+        )}
+      </div>
+    );
+  }
 
   return (
     <motion.div 

@@ -10,3 +10,9 @@ export const isIOSSafari = () => {
   return /iP(ad|hone|od).+Version\/[\d.]+.*Safari/i.test(navigator.userAgent);
 };
 
+export const isIPhone = () => {
+  if (typeof navigator === "undefined") return false;
+  return /iPhone/i.test(navigator.userAgent);
+};
+
+

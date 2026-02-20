@@ -9,8 +9,10 @@ function isSafariOrIOS(): boolean {
   const ua = window.navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const isSafari = /Safari/.test(ua) && !/Chrome|Chromium|CriOS/.test(ua);
-  return isIOS || isSafari;
+  const isIPhone = /iPhone/i.test(ua);
+  return isIOS || isSafari || isIPhone;
 }
+
 
 export function ReduceMotionProvider({ children }: { children: React.ReactNode }) {
   const [reduce, setReduce] = useState(true);

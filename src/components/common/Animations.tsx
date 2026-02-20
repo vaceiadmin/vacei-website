@@ -229,9 +229,15 @@ export const DirectionalDiv = ({
   as = "div",
   ...props
 }: DirectionalProps) => {
+  const reduceMotion = useReduceMotion();
   const ref = useRef(null);
   const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
   const Component = (motion as any)[as] || motion.div;
+
+  if (reduceMotion) {
+    const Tag = (as || "div") as keyof React.JSX.IntrinsicElements;
+    return <Tag {...(props as any)}>{children}</Tag>;
+  }
 
   // Use whileInView as the target state if provided, otherwise use animate
   const targetState = whileInView || animate;
@@ -247,3 +253,4 @@ export const DirectionalDiv = ({
     </Component>
   );
 };
+

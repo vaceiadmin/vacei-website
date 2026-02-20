@@ -11,7 +11,12 @@ import HeroSection from "./HeroSection";
 import HowItWorks from "./HowItWorks";
 import AuditPlatform from "./AuditPlatform/AuditPlatform";
 
+import { MotionConfig } from "framer-motion";
+import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+
 const HomePage = () => {
+  const reduceMotion = useReduceMotion();
+
   // Scroll to hash section on load (e.g. /#process-steps or /#services from navbar)
   useEffect(() => {
     const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
@@ -24,18 +29,21 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="relative">
-      <HeroSection />
-      <AuditPlatform />
-      <HowItWorks />
-      <ProcessStepsSection />
-      {/* <PortalFeature /> */}
-      <ReadyToSimplifySection />
-      <ServicesSection />
-      <CompanySetupSection />
-      <FaqSection />
-    </div>
+    <MotionConfig transition={reduceMotion ? { duration: 0 } : undefined}>
+      <div className="relative">
+        <HeroSection />
+        <AuditPlatform />
+        <HowItWorks />
+        <ProcessStepsSection />
+        {/* <PortalFeature /> */}
+        <ReadyToSimplifySection />
+        <ServicesSection />
+        <CompanySetupSection />
+        <FaqSection />
+      </div>
+    </MotionConfig>
   );
 };
+
 
 export default HomePage;

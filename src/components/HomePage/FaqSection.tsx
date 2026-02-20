@@ -37,11 +37,16 @@ const staggerContainer = {
   }
 }
 
+import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+
+
 const FaqSection = () => {
   const sectionRef = useRef(null);
   const isInView = useDirectionalInView(sectionRef);
   const isSafari = useIsSafari();
+  const reduceMotion = useReduceMotion();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
 
 
   const items = [
@@ -71,22 +76,24 @@ const FaqSection = () => {
           {/* Animated Background Blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <motion.div 
-              animate={isInView && !isSafari ? { 
+              animate={isInView && !isSafari && !reduceMotion ? { 
                 x: [0, 40, 0],
                 y: [0, 50, 0],
                 scale: [1, 1.1, 1]
               } : {}}
+
               transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
 
               className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
             />
 
             <motion.div 
-              animate={isInView && !isSafari ? { 
+              animate={isInView && !isSafari && !reduceMotion ? { 
                 x: [0, -30, 0],
                 y: [0, -40, 0],
                 scale: [1, 1.2, 1]
               } : {}}
+
               transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
 
               className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
@@ -198,7 +205,8 @@ const FaqSection = () => {
                 <div className="absolute inset-0 pointer-events-none z-10 md:z-40">
                   {/* Financial Overview */}
                   <motion.div 
-                    animate={isInView ? { y: [0, -10, 0] } : {}}
+                    animate={isInView && !reduceMotion ? { y: [0, -10, 0] } : {}}
+
                     transition={{ duration: 4, repeat: 0, ease: "easeInOut" }}
                     className="absolute md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10 hardware-accelerated"
                   >
@@ -277,7 +285,8 @@ const FaqSection = () => {
 
                   {/* Get Started Card */}
                   <motion.div 
-                    animate={isInView ? { y: [0, -15, 0] } : {}}
+                    animate={isInView && !reduceMotion ? { y: [0, -15, 0] } : {}}
+
                     transition={{ duration: 5, repeat: 0, ease: "easeInOut", delay: 1 }}
                     className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-40 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105 hardware-accelerated"
                   >
@@ -311,10 +320,11 @@ const FaqSection = () => {
 
                   {/* Authorized Share Card - In front of man, stay in viewport on mobile */}
                   <motion.div 
-                    animate={isInView ? { 
+                    animate={isInView && !reduceMotion ? { 
                         y: [0, -12, 0],
                         rotate: [0, 1, 0, -1, 0]
                     } : {}}
+
                     transition={{ duration: 4.5, repeat: 0, ease: "easeInOut", delay: 0.5 }}
                     className="absolute bottom-16 -right-10 max-sm:bottom-20 max-sm:right-2 pointer-events-auto z-10 transition-transform hover:scale-105 hardware-accelerated"
                   >
