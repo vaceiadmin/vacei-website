@@ -3,7 +3,8 @@
 import React, { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Play, Pause } from "lucide-react"
-import { FadeInUp, StaggerContainer } from "../common/Animations"
+import { useMobile } from "@/hooks/use-mobile"
+import { FadeInUp, StaggerContainer, DirectionalDiv } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
 
 import GradientContainer from "../common/GradientContainer"
@@ -85,8 +86,11 @@ const HowItWorks = () => {
     const containerRef = useRef<HTMLDivElement>(null)
     const userPausedRef = useRef(true)
     const [isPlaying, setIsPlaying] = useState(false)
-const [isHovered, setIsHovered] = useState(false)
-    const togglePlayPause = () => {
+    const [isHovered, setIsHovered] = useState(false)
+    const [isMobile] = useMobile()
+
+    const togglePlayPause = (e?: React.MouseEvent) => {
+        if (e) e.stopPropagation()
         const video = videoRef.current
         if (!video) return
         if (video.paused) {
@@ -158,11 +162,12 @@ const [isHovered, setIsHovered] = useState(false)
                     {/* Video Banner - autoplay on scroll into view */}
                     <FadeInUp duration={0.6} delay={0.15} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10 bg-slate-950">
                         <div
-  ref={containerRef}
-  className="absolute inset-0"
-  onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}
->
+                            ref={containerRef}
+                            className="absolute inset-0 cursor-pointer"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                            onClick={() => togglePlayPause()}
+                        >
                             <video
                                 ref={videoRef}
                                 src={encodeURI(HOW_IT_WORKS_VIDEO)}
@@ -174,7 +179,7 @@ const [isHovered, setIsHovered] = useState(false)
                             <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
                             {/* Centered glassmorphism play/pause button */}
                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-  {(!isPlaying || isHovered) && (
+  {(!isPlaying || (isHovered && !isMobile)) && (
     <motion.button
       type="button"
       onClick={togglePlayPause}
@@ -187,7 +192,7 @@ const [isHovered, setIsHovered] = useState(false)
         <motion.span
           className="absolute inset-0 rounded-full border-2 border-white/50"
           animate={{ scale: [1, 1.3, 1.3], opacity: [0.6, 0, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+          transition={{ duration: 2, repeat: 0, ease: "easeOut" }}
         />
       )}
 
@@ -207,7 +212,7 @@ const [isHovered, setIsHovered] = useState(false)
                         <StaggerContainer staggerDelay={0.1} className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-stretch gap-6 lg:gap-2">
                         {steps.map((step, index) => (
                             <React.Fragment key={index}>
-                                <motion.div 
+                                <DirectionalDiv
                                     whileHover={{ y: -5 }}
                                     className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-300 group hover:bg-white/10 hover:border-primary-blue/30 lg:flex-1 lg:min-w-0"
                                 >
@@ -221,7 +226,7 @@ const [isHovered, setIsHovered] = useState(false)
                                         <h4 className="text-lg font-bold text-white mb-2 group-hover:text-primary-blue transition-colors">{step.title}</h4>
                                         <p className="text-white/60 text-sm leading-relaxed">{step.description}</p>
                                     </div>
-                                </motion.div>
+                                </DirectionalDiv>
 
                                 {/* Connector: line + chevron (desktop only) */}
                                 {index < steps.length - 1 && (

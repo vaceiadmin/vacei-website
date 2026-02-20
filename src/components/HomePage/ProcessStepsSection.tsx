@@ -2,6 +2,9 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { getServiceForm, SERVICE_TYPE_OPTIONS, type ServiceField } from "@/data/serviceRequestForms"
+import { useDirectionalInView } from "@/hooks/use-directional-in-view"
+import { DirectionalDiv } from "../common/Animations"
+import { useRef } from "react"
 
 // --- Types ---
 type FormData = {
@@ -116,7 +119,10 @@ function shouldShowServiceField(
 }
 
 const ProcessStepsSection = () => {
-  const [currentStep, setCurrentStep] = useState(0)
+    const bgRef = useRef(null);
+    const isInView = useDirectionalInView(bgRef);
+    
+    const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -322,19 +328,19 @@ const ProcessStepsSection = () => {
   }
 
   return (
-    <section id="process-steps" className="w-full relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28 scroll-mt-20 isolate" style={{ backgroundColor: '#D8E5E5' }}>
+    <section id="process-steps" ref={bgRef} className="w-full relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28 scroll-mt-20 isolate" style={{ backgroundColor: '#D8E5E5' }}>
         
         {/* Animated Background Elements - Safari Friendly */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ transform: 'translateZ(0)' }}>
              <motion.div 
-               animate={{ y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] }}
-               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+               animate={isInView ? { y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] } : {}}
+               transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
                className="absolute top-0 right-0 w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-white/30 blur-[60px] rounded-full"
                style={{ transform: 'translateZ(0)' }}
              />
              <motion.div 
-               animate={{ y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] }}
-               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+               animate={isInView ? { y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] } : {}}
+               transition={{ duration: 10, repeat: 0, ease: "easeInOut", delay: 1 }}
                className="absolute bottom-0 left-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-blue-100/30 blur-[60px] rounded-full" 
                style={{ transform: 'translateZ(0)' }}
              />
@@ -345,10 +351,9 @@ const ProcessStepsSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
             {/* --- Left Column: High-End Glass Form --- */}
-            <motion.div 
+            <DirectionalDiv 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="relative group h-full"
             >
@@ -746,8 +751,8 @@ const ProcessStepsSection = () => {
                         </button>
                     </motion.div>
                   )}
-               </div>
-            </motion.div>
+                </div>
+            </DirectionalDiv>
 
             {/* --- Right Column: Sleek Timeline --- */}
             <div className="relative lg:pl-10 h-full flex flex-col justify-center">

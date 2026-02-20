@@ -7,7 +7,9 @@ import GradientContainer from "../common/GradientContainer";
 
 import GlassyEffect from "../common/GlassyEffect";
 import TextAnimation from "../common/TextAnimation";
-import { FadeInUp, StaggerContainer as StaggerEffect } from "../common/Animations";
+import { FadeInUp, StaggerContainer as StaggerEffect, DirectionalDiv } from "../common/Animations";
+import { useRef } from "react";
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 36, scale: 0.96 },
@@ -34,6 +36,8 @@ const staggerContainer = {
 }
 
 const FaqSection = () => {
+  const sectionRef = useRef(null);
+  const isInView = useDirectionalInView(sectionRef);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const items = [
@@ -54,7 +58,7 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 overflow-x-hidden">
+    <section ref={sectionRef} className="w-full py-16 sm:py-20 md:py-24 lg:py-28 overflow-x-hidden">
       <div className="mx-auto px-4 md:px-0">
         <GradientContainer
           className="py-12 sm:py-16 md:py-20 lg:py-24 bg-primary relative"
@@ -63,21 +67,21 @@ const FaqSection = () => {
           {/* Animated Background Blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <motion.div 
-              animate={{ 
+              animate={isInView ? { 
                 x: [0, 40, 0],
                 y: [0, 50, 0],
                 scale: [1, 1.1, 1]
-              }}
-              transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+              } : {}}
+              transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
               className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full"
             />
             <motion.div 
-              animate={{ 
+              animate={isInView ? { 
                 x: [0, -30, 0],
                 y: [0, -40, 0],
                 scale: [1, 1.2, 1]
-              }}
-              transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              } : {}}
+              transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
               className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full"
             />
           </div>
@@ -98,10 +102,9 @@ const FaqSection = () => {
 
             <StaggerEffect staggerDelay={0.1} className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start" viewportMargin="-100px">
             {/* Left: Interactive Image Area */}
-            <motion.div 
+            <DirectionalDiv 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
               className="relative flex-1 py-8 lg:py-10 flex justify-center lg:block"
             >
@@ -187,8 +190,8 @@ const FaqSection = () => {
                 <div className="absolute inset-0 pointer-events-none z-10 md:z-40">
                   {/* Financial Overview */}
                   <motion.div 
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    animate={isInView ? { y: [0, -10, 0] } : {}}
+                    transition={{ duration: 4, repeat: 0, ease: "easeInOut" }}
                     className="absolute md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10"
                   >
                     <div className="mb-4 text-[12px] font-bold text-primary">
@@ -265,8 +268,8 @@ const FaqSection = () => {
 
                   {/* Get Started Card */}
                   <motion.div 
-                    animate={{ y: [0, -15, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    animate={isInView ? { y: [0, -15, 0] } : {}}
+                    transition={{ duration: 5, repeat: 0, ease: "easeInOut", delay: 1 }}
                     className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-40 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105"
                   >
                     <p className="text-[16px] font-bold leading-tight tracking-wide">
@@ -298,11 +301,11 @@ const FaqSection = () => {
 
                   {/* Authorized Share Card - In front of man, stay in viewport on mobile */}
                   <motion.div 
-                    animate={{ 
+                    animate={isInView ? { 
                         y: [0, -12, 0],
                         rotate: [0, 1, 0, -1, 0]
-                    }}
-                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    } : {}}
+                    transition={{ duration: 4.5, repeat: 0, ease: "easeInOut", delay: 0.5 }}
                     className="absolute bottom-16 -right-10 max-sm:bottom-20 max-sm:right-2 pointer-events-auto z-10 transition-transform hover:scale-105"
                   >
                     <div className="relative w-[140px] sm:w-[160px] rounded-[24px] bg-white p-4 sm:p-5 shadow-xl">
@@ -312,8 +315,8 @@ const FaqSection = () => {
                       <div className="flex flex-col items-center gap-5">
                         {/* Pie Chart */}
                         <motion.div 
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            animate={isInView ? { rotate: 360 } : {}}
+                            transition={{ duration: 20, repeat: 0, ease: "linear" }}
                             className="relative h-16 w-16 shadow-inner rounded-full"
                         >
                           <div className="h-full w-full rounded-full bg-progress-purple" />
@@ -334,8 +337,8 @@ const FaqSection = () => {
 
                       {/* Floating Legend / Tooltip - Reposition on mobile to avoid cutoff */}
                       <motion.div 
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        animate={isInView ? { x: [0, 5, 0] } : {}}
+                        transition={{ duration: 3, repeat: 0, ease: "easeInOut" }}
                         className="absolute max-sm:right-0 max-sm:left-auto -right-6 -top-10 bg-white rounded-[14px] px-3 py-2 shadow-lg border border-input min-w-[90px] max-sm:min-w-[80px]"
                       >
                         <div className="flex flex-col gap-1">
@@ -363,14 +366,13 @@ const FaqSection = () => {
                   />
                 </div>
               </div>
-            </motion.div>
+            </DirectionalDiv>
 
             {/* Right: FAQ accordion list */}
             <div className="flex-1 lg:pl-12 w-full lg:mt-8">
-              <motion.div 
+              <DirectionalDiv 
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
                 className="space-y-4 lg:space-y-5"
               >
@@ -378,7 +380,7 @@ const FaqSection = () => {
                   const isOpen = openIndex === index;
 
                   return (
-                    <motion.div key={index} variants={fadeInUp}>
+                    <DirectionalDiv key={index} variants={fadeInUp}>
                     <GlassyEffect
                       intensity="premium"
                       className={`overflow-hidden rounded-[18px] transition-all duration-300 cursor-pointer group mx-2 sm:mx-5 border-none shadow-none hover:bg-white/10 ${isOpen ? "bg-white/10" : "bg-white/5"}`}
@@ -438,10 +440,10 @@ const FaqSection = () => {
                         )}
                       </AnimatePresence>
                     </GlassyEffect>
-                    </motion.div>
+                    </DirectionalDiv>
                   );
                 })}
-              </motion.div>
+              </DirectionalDiv>
             </div>
           </StaggerEffect>
           </div>

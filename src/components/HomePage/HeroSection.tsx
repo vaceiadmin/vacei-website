@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -7,6 +7,7 @@ import TextAnimation from "../common/TextAnimation";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 
 const HeroSection = () => {
   const reduceMotion = useReduceMotion();
@@ -121,8 +122,11 @@ const HeroSection = () => {
     );
   }
 
+  const sectionRef = useRef(null);
+  const isInViewGlobal = useDirectionalInView(sectionRef); // Assuming this hook determines 'isReversed' or similar logic
+
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center transform-[translateZ(0)] contain-[paint]">
+    <section ref={sectionRef} className="relative w-full min-h-screen overflow-hidden flex flex-col items-center transform-[translateZ(0)] contain-[paint]">
       <GradientContainer
         backgroundColor="bg-primary"
         showRadials
@@ -147,8 +151,8 @@ const HeroSection = () => {
               <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl px-5 py-2 text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase text-white/90 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mx-auto transform-[translateZ(0)]">
                 <motion.span
                   className="h-2 w-2 rounded-full bg-primary-blue"
-                  animate={{ boxShadow: ["0_0_12px_rgba(59,130,246,0.8)", "0_0_20px_rgba(59,130,246,1)", "0_0_12px_rgba(59,130,246,0.8)"] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={isInViewGlobal ? { boxShadow: ["0_0_12px_rgba(59,130,246,0.8)", "0_0_20px_rgba(59,130,246,1)", "0_0_12px_rgba(59,130,246,0.8)"] } : {}}
+                  transition={{ duration: 2, ease: "easeInOut", repeat: 0 }}
                 />
                 Accounting • Audit • Corporate
               </div>
@@ -197,7 +201,7 @@ const HeroSection = () => {
 
         <div className="absolute bottom-12 left-12 flex-col items-center gap-4 hidden md:flex z-30">
           <div className="text-white/50 text-xs tracking-widest uppercase -rotate-90 origin-bottom translate-y-8 absolute bottom-12 whitespace-nowrap">Scroll Down</div>
-          <motion.div className="w-5 h-8 border border-white/30 rounded-full flex justify-center pt-2 backdrop-blur-sm bg-white/5" animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
+          <motion.div className="w-5 h-8 border border-white/30 rounded-full flex justify-center pt-2 backdrop-blur-sm bg-white/5" animate={isInViewGlobal ? { y: [0, 8, 0] } : {}} transition={{ duration: 2, ease: "easeInOut", repeat: 0 }}>
             <div className="w-1 h-1 bg-white rounded-full" />
           </motion.div>
         </div>

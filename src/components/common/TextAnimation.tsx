@@ -1,5 +1,6 @@
-"use client";
 import { motion, Variants } from "framer-motion";
+import { useRef } from "react";
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 
 interface TextAnimationProps {
   text: string;
@@ -11,7 +12,7 @@ interface TextAnimationProps {
 
 /**
  * TextAnimation component that reveals text word-by-word when scrolled into view.
- * Uses Framer Motion's whileInView for the trigger.
+ * Only triggers on scroll down and plays once.
  */
 export const TextAnimation = ({ 
   text, 
@@ -21,6 +22,8 @@ export const TextAnimation = ({
   once = true
 }: TextAnimationProps) => {
   const words = text.split(" ");
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref);
   
   // Dynamic component type (h1, h2, etc.)
   const MotionComponent = (motion as any)[as];
@@ -55,10 +58,10 @@ export const TextAnimation = ({
 
   return (
     <MotionComponent
+      ref={ref}
       variants={containerVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "0px" }}
+      animate={isInView ? "visible" : "hidden"}
       className={className}
     >
       {words.map((word, index) => (

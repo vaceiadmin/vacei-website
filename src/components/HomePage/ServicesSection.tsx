@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GradientContainer from "../common/GradientContainer";
 import { servicesData } from "@/data/servicesData";
+import { DirectionalDiv } from "../common/Animations";
 
 interface BaseCard {
   id: string | number;
@@ -130,27 +131,28 @@ const ServicesSection = () => {
                 {/* Header Area */}
                 <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-8">
                     <div className="space-y-4">
-            <motion.div 
+                        <DirectionalDiv 
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                             className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/10 text-xs font-bold tracking-widest text-[#989fea] uppercase"
                         >
                             Our Ecosystem
-                        </motion.div>
-                        <motion.h2 
+                        </DirectionalDiv>
+                        <DirectionalDiv 
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                            as="h2"
                             className="text-3xl md:text-5xl font-bold text-white leading-tight mb-2"
                         >
                             Everything You Need <br />
                             <span className="text-white/40">In One Place.</span>
-                        </motion.h2>
+                        </DirectionalDiv>
           </div>
 
                     {/* Glass Tabs */}
-          <motion.div 
+                    <DirectionalDiv 
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
@@ -174,8 +176,8 @@ const ServicesSection = () => {
                                 <span className="relative z-10 capitalize">{tab}</span>
                 </button>
               ))}
-                        </motion.div>
-                      </div>
+                        </DirectionalDiv>
+                    </div>
 
                 {/* Carousel Area - padding prevents first/last card cutoff */}
                 <div className="relative min-h-[500px] overflow-visible">

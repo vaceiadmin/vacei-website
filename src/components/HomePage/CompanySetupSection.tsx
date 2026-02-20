@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion } from "framer-motion"
 import Link from 'next/link'
+import { DirectionalDiv } from "../common/Animations"
 
 const CompanySetupSection = () => {
   return (
@@ -21,44 +22,42 @@ const CompanySetupSection = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
-             <motion.span 
+             <DirectionalDiv 
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.55 }}
                 className="inline-block px-3 py-1 rounded-full bg-white border border-blue-100 text-xs font-bold tracking-widest text-[#3b49e6] uppercase mb-4 shadow-sm"
              >
                 Incorporation Made Simple
-             </motion.span>
-             <motion.h2 
+             </DirectionalDiv>
+             <DirectionalDiv 
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: 0.1 }}
+                as="h2"
                 className="text-3xl md:text-5xl font-bold text-[#1a1c35] mb-6 leading-tight"
              >
                 Starts with a Company, <br/>
                 <span className="text-[#3b49e6]">Grows with VACEI.</span>
-             </motion.h2>
-             <motion.p
+             </DirectionalDiv>
+             <DirectionalDiv
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: 0.2 }}
+                as="p"
                 className="text-lg text-gray-600 leading-relaxed"
              >
                 We handle specific incorporation and setup, but our real value lies in the ongoing partnership. Manage everything through one unified portal.
-             </motion.p>
+             </DirectionalDiv>
         </div>
 
         {/* 3-Column Glass Grid - Monochromatic Blue Theme */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             
             {/* Card 1: What We Handle */}
-            <motion.div 
+            <DirectionalDiv 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.55 }}
                 className="relative group h-full"
             >
@@ -81,13 +80,12 @@ const CompanySetupSection = () => {
                         ))}
                     </ul>
                 </div>
-            </motion.div>
+            </DirectionalDiv>
 
             {/* Card 2: What You Do */}
-            <motion.div 
+            <DirectionalDiv 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: 0.1 }}
                 className="relative group h-full"
             >
@@ -111,13 +109,12 @@ const CompanySetupSection = () => {
                         ))}
                     </ul>
                 </div>
-            </motion.div>
+            </DirectionalDiv>
 
             {/* Card 3: What You Get */}
-            <motion.div 
+            <DirectionalDiv 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: 0.2 }}
                 className="relative group h-full"
             >
@@ -144,7 +141,7 @@ const CompanySetupSection = () => {
                         ))}
                     </ul>
                 </div>
-            </motion.div>
+            </DirectionalDiv>
 
         </div>
 

@@ -3,17 +3,16 @@ import React from "react"
 import { motion } from "framer-motion"
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
 import TextAnimation from "../common/TextAnimation"
-import { FadeInUp } from "../common/Animations"
+import { DirectionalDiv } from "../common/Animations"
 
 const ReadyToSimplifySection = () => {
   return (
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
       <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
         
-        <motion.div 
+        <DirectionalDiv 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
             variants={{
                 hidden: { opacity: 0, scale: 0.95, y: 20 },
                 visible: { 
@@ -34,17 +33,17 @@ const ReadyToSimplifySection = () => {
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <motion.div 
                     animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
                     className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-blue-50 rounded-full blur-[80px]" 
                 />
                 <motion.div 
                     animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
-                    transition={{ duration: 8, delay: 4, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 8, delay: 4, repeat: 0, ease: "easeInOut" }}
                     className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-50 rounded-full blur-[80px]" 
                 />
             </div>
 
-            <motion.div 
+            <DirectionalDiv 
                 variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -78,8 +77,8 @@ const ReadyToSimplifySection = () => {
                     hasShadow={false}
                 />
                 </div>
-            </motion.div>
-        </motion.div>
+            </DirectionalDiv>
+        </DirectionalDiv>
 
       </div>
     </section>

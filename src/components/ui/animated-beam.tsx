@@ -24,13 +24,15 @@ export interface AnimatedBeamProps {
   endYOffset?: number;
 }
 
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
+
 export const AnimatedBeam = ({
   className,
   containerRef,
   fromRef,
   toRef,
   curvature = 0,
-  reverse = false, // Include the reverse prop
+  reverse = false,
   duration = Math.random() * 3 + 4,
   delay = 0,
   pathColor = "gray",
@@ -46,6 +48,7 @@ export const AnimatedBeam = ({
   const id = useId();
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+  const isInView = useDirectionalInView(containerRef);
 
   // Calculate the gradient coordinates based on the reverse prop
   const gradientCoordinates = reverse
@@ -151,17 +154,22 @@ export const AnimatedBeam = ({
             y1: "0%",
             y2: "0%",
           }}
-          animate={{
+          animate={isInView ? {
             x1: gradientCoordinates.x1,
             x2: gradientCoordinates.x2,
             y1: gradientCoordinates.y1,
             y2: gradientCoordinates.y2,
+          } : {
+            x1: gradientCoordinates.x1[0],
+            x2: gradientCoordinates.x2[0],
+            y1: gradientCoordinates.y1[0],
+            y2: gradientCoordinates.y2[0],
           }}
           transition={{
             delay,
             duration,
             ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
-            repeat: Infinity,
+            repeat: 0, // Only play once as per new rules
             repeatDelay: 0,
           }}
         >

@@ -11,6 +11,7 @@ import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import SupportChat from "@/components/support-chat/SupportChat";
 import { ReduceMotionProvider } from "@/contexts/ReduceMotionContext";
+import { ScrollProvider } from "@/contexts/ScrollContext";
 import { TopLoader } from "@/components/common/TopLoader";
 import { Suspense } from "react";
 
@@ -50,15 +51,17 @@ export default function RootLayout({
           <TopLoader />
         </Suspense>
         <ReduceMotionProvider>
-          <IntroAnimationGate />
-          <SmoothScroll>
-            <Navbar />
-            <PageTransition>{children}</PageTransition>
-            <Footer />
-            <ScrollToTopButton />
-            <SupportChat />
-            <CookieConsentBanner />
-          </SmoothScroll>
+          <ScrollProvider>
+            <IntroAnimationGate />
+            <SmoothScroll>
+              <Navbar />
+              <PageTransition>{children}</PageTransition>
+              <Footer />
+              <ScrollToTopButton />
+              <SupportChat />
+              <CookieConsentBanner />
+            </SmoothScroll>
+          </ScrollProvider>
         </ReduceMotionProvider>
       </body>
     </html>

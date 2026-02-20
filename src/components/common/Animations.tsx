@@ -3,6 +3,8 @@
 import React from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
+import { useRef } from "react";
 
 interface AnimationProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -23,12 +25,14 @@ export const FadeInUp = ({
   className = "",
   delay = 0,
   duration = 0.4,
-  viewportMargin = "100px 0px 100px 0px",
+  viewportMargin = "0px",
   once = true,
   as = "div",
   ...props
 }: AnimationProps) => {
   const reduceMotion = useReduceMotion();
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
@@ -38,9 +42,9 @@ export const FadeInUp = ({
 
   return (
     <Component
+      ref={ref}
       initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "0px", amount: 0.05 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -56,12 +60,14 @@ export const FadeInLeft = ({
   className = "",
   delay = 0,
   duration = 0.8,
-  viewportMargin = "-50px",
+  viewportMargin = "0px",
   once = true,
   as = "div",
   ...props
 }: AnimationProps) => {
   const reduceMotion = useReduceMotion();
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
@@ -71,9 +77,9 @@ export const FadeInLeft = ({
 
   return (
     <Component
+      ref={ref}
       initial={{ opacity: 0, x: -40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once, margin: "0px" }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -89,12 +95,14 @@ export const FadeInRight = ({
   className = "",
   delay = 0,
   duration = 0.8,
-  viewportMargin = "-50px",
+  viewportMargin = "0px",
   once = true,
   as = "div",
   ...props
 }: AnimationProps) => {
   const reduceMotion = useReduceMotion();
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
@@ -104,9 +112,9 @@ export const FadeInRight = ({
 
   return (
     <Component
+      ref={ref}
       initial={{ opacity: 0, x: 40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once, margin: "0px" }}
+      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -122,12 +130,14 @@ export const ZoomIn = ({
   className = "",
   delay = 0,
   duration = 0.6,
-  viewportMargin = "-50px",
+  viewportMargin = "0px",
   once = true,
   as = "div",
   ...props
 }: AnimationProps) => {
   const reduceMotion = useReduceMotion();
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
@@ -137,9 +147,9 @@ export const ZoomIn = ({
 
   return (
     <Component
+      ref={ref}
       initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once, margin: "0px" }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
       transition={{ duration, delay, ease: PREMIUM_EASE }}
       className={className}
       {...props}
@@ -159,12 +169,14 @@ export const StaggerContainer = ({
   children,
   className = "",
   staggerDelay = 0.1,
-  viewportMargin = "100px 0px 100px 0px",
+  viewportMargin = "0px",
   once = true,
   as = "div",
   ...props
 }: StaggerProps) => {
   const reduceMotion = useReduceMotion();
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
   const Component = motion[as as keyof typeof motion] as any;
 
   if (reduceMotion) {
@@ -174,9 +186,9 @@ export const StaggerContainer = ({
 
   return (
     <Component
+      ref={ref}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once, margin: "0px", amount: 0.05 }}
+      animate={isInView ? "visible" : "hidden"}
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -188,6 +200,40 @@ export const StaggerContainer = ({
         },
       }}
       className={className}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+};
+
+// 6. Generic Directional Component
+interface DirectionalProps extends HTMLMotionProps<"div"> {
+  as?: any;
+  viewportMargin?: string;
+}
+
+export const DirectionalDiv = ({
+  children,
+  initial,
+  animate,
+  whileInView,
+  viewportMargin = "0px",
+  as = "div",
+  ...props
+}: DirectionalProps) => {
+  const ref = useRef(null);
+  const isInView = useDirectionalInView(ref, { margin: viewportMargin as any });
+  const Component = (motion as any)[as] || motion.div;
+
+  // Use whileInView as the target state if provided, otherwise use animate
+  const targetState = whileInView || animate;
+
+  return (
+    <Component
+      ref={ref}
+      initial={initial}
+      animate={isInView ? targetState : initial}
       {...props}
     >
       {children}

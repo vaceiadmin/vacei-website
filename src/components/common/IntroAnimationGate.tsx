@@ -10,12 +10,8 @@ const IntroAnimationGate = () => {
   const audioRef = React.useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    // Session persistence: only show on first visit in the session
-    const hasSeenIntro = sessionStorage.getItem("vacei-intro-seen");
-    if (!hasSeenIntro) {
-      setShow(true);
-      sessionStorage.setItem("vacei-intro-seen", "true");
-    }
+    // Shows the intro loader on every page load/refresh
+    setShow(true);
   }, []);
 
   useEffect(() => {

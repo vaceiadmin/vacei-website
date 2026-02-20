@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import AuditPlatformBeam from "./AuditPlatformBeam";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
+import { DirectionalDiv } from "@/components/common/Animations";
+import { useRef } from "react";
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 
 // Animation Variants – visible render, smooth and not laggy
 const containerVariants = {
@@ -25,9 +28,11 @@ const itemVariants = {
 };
 
 export default function AuditPlatform() {
+  const sectionRef = useRef(null);
+  const isInView = useDirectionalInView(sectionRef);
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden isolate">
+    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden isolate">
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{
@@ -38,33 +43,32 @@ export default function AuditPlatform() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left Section */}
-          <motion.div
+          <DirectionalDiv
             className="md:text-center lg:text-left max-w-xl lg:flex-1"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.div variants={itemVariants}>
+            <DirectionalDiv variants={itemVariants}>
               <p className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs sm:text-sm font-montserrat uppercase tracking-[0.2em] text-primary">
               
                 All-in-one workspace
               </p>
-            </motion.div>
+            </DirectionalDiv>
 
-            <motion.h1 variants={itemVariants} className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold">
+            <DirectionalDiv variants={itemVariants} as="h1" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold">
               <span className="text-primary inline-block mr-2 sm:mr-3">
                 One Platform.
               </span>
               <span className="inline-block">Structured Delivery.</span>
-            </motion.h1>
+            </DirectionalDiv>
 
-            <motion.p variants={itemVariants} className="mt-4 text-sm sm:text-base font-nunito text-gray-500 leading-relaxed">
+            <DirectionalDiv variants={itemVariants} as="p" className="mt-4 text-sm sm:text-base font-nunito text-gray-500 leading-relaxed">
               VACEI brings structure to professional services through a unified digital workspace designed for clarity and control. Engagements are organised through defined workflows, tracked documentation, review layers, and secure client interaction. Every task, file, and approval sits within a controlled framework rather than across disconnected tools. The platform supports disciplined delivery across engagements, ensuring visibility, accountability, and consistency without replacing professional judgment.
-            </motion.p>
+            </DirectionalDiv>
 
             {/* Principle blocks */}
-            <motion.div variants={containerVariants} className="mt-10 sm:mt-12 space-y-6">
+            <DirectionalDiv variants={containerVariants} className="mt-10 sm:mt-12 space-y-6">
               {[
                 {
                   title: "Structured Workflows",
@@ -83,7 +87,7 @@ export default function AuditPlatform() {
                   desc: "Document exchange, queries, and approvals within a controlled environment.",
                 },
               ].map((block) => (
-                <motion.div key={block.title} variants={itemVariants} className="flex gap-3">
+                <DirectionalDiv key={block.title} variants={itemVariants} className="flex gap-3">
                   <span className="shrink-0 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-blue" />
                   <div>
                     <h3 className="text-base sm:text-lg font-semibold text-gray-800 font-montserrat">
@@ -93,15 +97,15 @@ export default function AuditPlatform() {
                       {block.desc}
                     </p>
                   </div>
-                </motion.div>
+                </DirectionalDiv>
               ))}
-            </motion.div>
+            </DirectionalDiv>
 
-            <motion.p variants={itemVariants} className="mt-8 text-sm sm:text-base font-nunito font-semibold text-gray-700 italic">
+            <DirectionalDiv variants={itemVariants} as="p" className="mt-8 text-sm sm:text-base font-nunito font-semibold text-gray-700 italic">
               Professional services require discipline. The platform ensures it.
-            </motion.p>
+            </DirectionalDiv>
 
-            <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start items-center relative z-20">
+            <DirectionalDiv variants={itemVariants} className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start items-center relative z-20">
               <GetInstantQuoteButton
                 className="h-[46px]"
               />
@@ -126,15 +130,14 @@ export default function AuditPlatform() {
                 </svg>
                 </Link>
               </motion.div>
-            </motion.div>
-          </motion.div>
+            </DirectionalDiv>
+          </DirectionalDiv>
 
           {/* Right Section - Same on desktop and mobile */}
-          <motion.div
+          <DirectionalDiv
             className="w-full max-w-xl lg:max-w-2xl mx-auto lg:mx-0 lg:flex-1 mt-8 lg:mt-0"
             initial={{ opacity: 0, scale: 0.95, y: 40 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <div 
@@ -144,7 +147,7 @@ export default function AuditPlatform() {
               <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25 z-20" />
               <AuditPlatformBeam className="w-full h-full" />
             </div>
-          </motion.div>
+          </DirectionalDiv>
         </div>
       </div>
     </section>

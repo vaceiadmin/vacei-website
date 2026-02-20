@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useRef, useImperativeHandle } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
@@ -15,27 +15,34 @@ import {
   User
 } from "lucide-react";
 
+import { useDirectionalInView } from "@/hooks/use-directional-in-view";
+
 // Reusable Circle Component with Label and Animation
 const Circle = forwardRef<
   HTMLDivElement,
   { className?: string; children?: React.ReactNode; label?: string; delay?: number }
 >(({ className, children, label, delay = 0 }, ref) => {
+  const innerRef = useRef<HTMLDivElement>(null);
+  const isInView = useDirectionalInView(innerRef);
+  
+  // Expose both refs (internal for observation, passed for external linking)
+  useImperativeHandle(ref, () => innerRef.current!);
+
   return (
     <motion.div 
+      ref={innerRef}
       initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       className="flex flex-col items-center gap-1 sm:gap-1.5 min-w-[50px] sm:min-w-[70px]"
     >
       <motion.div
-        ref={ref}
-        animate={{
+        animate={isInView ? {
           y: [0, -6, 0],
-        }}
+        } : { y: 0 }}
         transition={{
           duration: 4,
-          repeat: Infinity,
+          repeat: 0, 
           ease: "easeInOut",
           delay: delay,
         }}

@@ -5,6 +5,9 @@ import { motion } from "framer-motion"
 import GradientContainer from "../common/GradientContainer"
 import TextAnimation from "../common/TextAnimation"
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
+import { useDirectionalInView } from "@/hooks/use-directional-in-view"
+import { DirectionalDiv } from "../common/Animations"
+import { useRef } from "react"
 
 const features = [
         {
@@ -61,8 +64,11 @@ const features = [
 ]
 
 const PortalFeature = () => {
+    const sectionRef = useRef(null);
+    const isInViewGlobal = useDirectionalInView(sectionRef);
+
     return (
-        <section className="w-full relative">
+        <section ref={sectionRef} className="w-full relative">
             <GradientContainer
                 backgroundColor="bg-primary"
                 showRadials={true}
@@ -76,10 +82,9 @@ const PortalFeature = () => {
                             <div key={idx} className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-24 ${isReversed ? "lg:flex-row-reverse" : ""}`}>
                                 
                                 {/* Image Column (Glassy Portal) */}
-                                <motion.div 
+                                <DirectionalDiv 
                                     initial={{ opacity: 0, x: isReversed ? 60 : -60, rotateY: isReversed ? -5 : 5 }}
                                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
-                                    viewport={{ once: true, margin: "-100px" }}
                                     transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full lg:w-1/2 relative perspective-1000 group"
                                 >
@@ -95,7 +100,7 @@ const PortalFeature = () => {
                                         {/* Floating Images Container */}
                                         <div className="absolute inset-4 md:inset-8 flex items-center justify-center">
                                             {feature.overlayImages.map((img, imgIdx) => (
-                                                <motion.div
+                                                <DirectionalDiv
                                                     key={imgIdx}
                                                     className={`absolute ${img.className} transition-transform duration-700 group-hover:scale-105`}
                                                     initial={{ 
@@ -106,7 +111,6 @@ const PortalFeature = () => {
                                                         y: 0, 
                                                         opacity: 1 
                                                     }}
-                                                    viewport={{ once: true }}
                                                     transition={{ 
                                                         duration: 0.8, 
                                                         delay: 0.2 + (imgIdx * 0.2), 
@@ -115,12 +119,12 @@ const PortalFeature = () => {
                                                 >
                                                     {/* Floating Animation Wrapper */}
                                                     <motion.div
-                                                        animate={{
+                                                        animate={isInViewGlobal ? {
                                                             y: [0, -12, 0],
-                                                        }}
+                                                        } : { y: 0 }}
                                                         transition={{
                                                             duration: 4 + imgIdx,
-                                                            repeat: Infinity,
+                                                            repeat: 0,
                                                             ease: "easeInOut",
                                                             delay: imgIdx * 1.5
                                                         }}
@@ -133,7 +137,7 @@ const PortalFeature = () => {
                                                             className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
                                                          />
                                                     </motion.div>
-                                                </motion.div>
+                                                </DirectionalDiv>
                                             ))}
                                         </div>
                                     </div>
@@ -143,25 +147,24 @@ const PortalFeature = () => {
                                     
                                     {/* Additional subtle glow */}
                                     <div className={`absolute -inset-8 bg-purple-500/20 blur-[60px] -z-10 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${isReversed ? "right-0" : "left-0"}`} />
-                                </motion.div>
+                                </DirectionalDiv>
 
                                 {/* Text Column */}
-                                <motion.div 
+                                <DirectionalDiv 
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
                                     transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full lg:w-1/2 space-y-8"
                                 >
                                     <div className="space-y-4">
-                                        <motion.div 
+                                        <DirectionalDiv 
                                             initial={{ opacity: 0, scale: 0.9 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
                                             transition={{ delay: 0.3, duration: 0.5 }}
                                             className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-widest text-[#989fea] uppercase mb-2"
                                         >
                                             Feature {idx + 1}
-                                        </motion.div>
+                                        </DirectionalDiv>
                                         <TextAnimation 
                                             text={feature.title} 
                                             as="h2" 
@@ -175,11 +178,11 @@ const PortalFeature = () => {
 
                                     <ul className="space-y-4">
                                         {feature.content.map((item, i) => (
-                                            <motion.li 
+                                            <DirectionalDiv 
                                                 key={i}
+                                                as="li"
                                                 initial={{ opacity: 0, x: -20 }}
                                                 whileInView={{ opacity: 1, x: 0 }}
-                                                viewport={{ once: true }}
                                                 transition={{ delay: 0.4 + (i * 0.1), duration: 0.6, ease: "easeOut" }}
                                                 className="flex items-center gap-4 text-white/90 text-lg"
                                             >
@@ -187,14 +190,13 @@ const PortalFeature = () => {
                                                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                                                 </span>
                                                 {item}
-                                            </motion.li>
+                                            </DirectionalDiv>
                                         ))}
                                     </ul>
 
-                                    <motion.div 
+                                    <DirectionalDiv 
                                         initial={{ opacity: 0, y: 10 }}
                                         whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
                                         transition={{ delay: 0.6, duration: 0.5 }}
                                         className="pt-6"
                                     >
@@ -206,8 +208,8 @@ const PortalFeature = () => {
                                             textColor="white"
                                             className="px-8 py-4 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-blue-900/40 hover:shadow-blue-900/60 hover:scale-105 transition-all text-sm md:text-base border border-white/10"
                                         />
-                                    </motion.div>
-                                </motion.div>
+                                    </DirectionalDiv>
+                                </DirectionalDiv>
 
                             </div>
                         );
