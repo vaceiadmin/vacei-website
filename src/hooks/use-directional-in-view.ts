@@ -29,10 +29,13 @@ export function useDirectionalInView(
 
     useEffect(() => {
         // Lock in the triggered state only when scrolling down
-        if (!hasTriggered && isInView && scrollDirection === "down") {
+        // OR if the element is in view and we are essentially at the top of the page
+        const isAtTop = typeof window !== "undefined" && window.scrollY < 20;
+        if (!hasTriggered && isInView && (scrollDirection === "down" || isAtTop)) {
             setHasTriggered(true);
         }
     }, [isInView, scrollDirection, hasTriggered]);
+
 
     return hasTriggered;
 }

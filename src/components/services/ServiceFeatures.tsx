@@ -10,7 +10,8 @@ import { FadeInUp } from "../common/Animations";
 
 interface ServiceFeatureProps {
   title: React.ReactNode;
-  subtitle: React.ReactNode;
+  subtitle?: React.ReactNode;
+
   features: {
     title: React.ReactNode;
     items: string[];
@@ -21,9 +22,11 @@ interface ServiceFeatureProps {
   primaryCtaHref?: string;
   secondaryCtaText?: string;
   secondaryCtaHref?: string;
+  description?: React.ReactNode;
   /** When true, hides the CTA buttons block entirely */
   hideCta?: boolean;
 }
+
 
 const ServiceFeatures = ({
   title,
@@ -38,7 +41,9 @@ const ServiceFeatures = ({
   primaryCtaHref,
   secondaryCtaText,
   secondaryCtaHref,
+  description,
   hideCta = false,
+
 }: ServiceFeatureProps & {
   backgroundColor?: string;
   theme?: "light" | "dark";
@@ -60,12 +65,25 @@ const ServiceFeatures = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Column: Title and CTA */}
           <FadeInUp className="flex flex-col justify-start pt-0">
-            <TextAnimation
-              text={typeof title === "string" ? title : ""}
-              as="h2"
-              className={`text-3xl md:text-5xl font-medium mb-8 leading-tight max-w-lg ${styles.heading}`}
-            />
-            <p className={`text-lg mb-10 max-w-md ${styles.subheading}`}>{subtitle}</p>
+            {typeof title === "string" ? (
+              <TextAnimation
+                text={title}
+                as="h2"
+                className={`text-3xl md:text-5xl font-medium mb-6 leading-tight max-w-lg ${styles.heading}`}
+              />
+            ) : (
+              <h2 className={`text-3xl md:text-5xl font-medium mb-6 leading-tight max-w-lg ${styles.heading}`}>
+                {title}
+              </h2>
+            )}
+            
+            {(subtitle || description) && (
+              <p className={`text-base md:text-lg mb-10 max-w-md ${styles.subheading}`}>
+                {subtitle || description}
+              </p>
+            )}
+
+
             {!hideCta && (
               <div className="flex flex-wrap items-center gap-3">
                 {primaryCtaText || secondaryCtaText ? (

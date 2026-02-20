@@ -43,59 +43,58 @@ const AccountingPortalPage = () => {
               bottomTitle="Accounting Portal"
               bottomDescription="Documents, tasks, deadlines and communication in one place."
               quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
+              workflowDetail={{
+                heading: "Monthly Accounting Workflow",
+                description: "Bookkeeping, reconciliations, VAT, and payroll are managed through controlled processes, ensuring tasks are completed in correct sequence."
+              }}
       />
+
 
       <RiskAuditSection variant="accounting" />
       <ServiceFeatures
               title={
                   <>
-                      How VACEI delivers structured,
+                      Excellence in 
                       <br />
-                      high-quality audits.
+                      Digital Accounting.
                   </>
               }
-              subtitle="Who It’s For"
+              description="A structured approach to monthly bookkeeping, reconciliations, and financial management for growing businesses."
+
               bulletIconSrc="/assets/images/bullet2.png"
               bulletIconAlt="Bullet"
               features={[
+
                   {
-                      title: "Who It’s For",
+                      title: "Document management",
                       items: [
-                          'Operating companies that need ongoing bookkeeping and accounting',
-                          'Growing businesses that require structured financial reporting',
-                          'Management teams that need visibility over performance and cash flow',
-                          'Businesses preparing for audit, investment or expansion',
+                          'All accounting-related information is centralised',
+                          'Documents stored in one place & linked to specific tasks',
+                          'Reduced reliance on emails and scattered files',
+                          'Improves continuity across months and teams',
                       ],
                   },
                   {
-                      title: "Who It’s For",
+                      title: "Reviews & internal controls",
                       items: [
-                          'Operating companies that need ongoing bookkeeping and accounting',
-                          'Growing businesses that require structured financial reporting',
-                          'Management teams that need visibility over performance and cash flow',
-                          'Businesses preparing for audit, investment or expansion',
+                          'Quality control built into the accounting process',
+                          'Internal reviews performed before delivery',
+                          'Clear sign-off stages',
+                          'Documented audit trail for accounting work',
                       ],
                   },
                   {
-                      title: "Who It’s For",
+                      title: "Visibility & reporting",
                       items: [
-                          'Operating companies that need ongoing bookkeeping and accounting',
-                          'Growing businesses that require structured financial reporting',
-                          'Management teams that need visibility over performance and cash flow',
-                          'Businesses preparing for audit, investment or expansion',
-                      ],
-                  },
-                  {
-                      title: "Who It’s For",
-                      items: [
-                          'Operating companies that need ongoing bookkeeping and accounting',
-                          'Growing businesses that require structured financial reporting',
-                          'Management teams that need visibility over performance and cash flow',
-                          'Businesses preparing for audit, investment or expansion',
+                          'Real-time visibility over financial position',
+                          'Up-to-date records throughout the month',
+                          'Clear view of key balances and activity',
+                          'Reduced reliance on end-of-month catch-ups',
                       ],
                   },
               ]}
       />
+
 
       <ClientPortalOverviewSection
               variant="accounting"
@@ -118,15 +117,16 @@ const AccountingPortalPage = () => {
                       intro:
                           'The Accounting Portal is also available to firms that want to operate with the same level of structure, workflow discipline, and internal controls.',
                       bullets: [
-                          'Partner with VACEI for accounting delivery, or',
-                          'Deploy the portal within their own operations to support internal teams.',
+                          'Partner with VACEI for accounting delivery',
+                          'Deploy the portal within their own operations to support internal teams',
                       ],
                       footer:
-                          'This approach allows us to scale delivery while maintaining quality and control.',
+                          'Built for firms who value efficiency and transparency.',
                   },
               ]}
               bulletIconSrc="/assets/images/bullet.png"
       />
+
     </main>
   );
 };

@@ -27,6 +27,11 @@ interface PortalFeatureProps {
   bottomDescription?: string;
   // Quote card
   quoteText?: string;
+  // Optional Workflow Detail
+  workflowDetail?: {
+    heading: string;
+    description: string;
+  };
 }
 
 const PortalFeature = ({
@@ -47,7 +52,9 @@ const PortalFeature = ({
   bottomTitle = "AI Review",
   bottomDescription = "Documents, tasks, deadlines and communication in one place.",
   quoteText = "Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable.",
+  workflowDetail,
 }: PortalFeatureProps) => {
+
   const [analysisProgress, setAnalysisProgress] = useState(0);
 
   useEffect(() => {
@@ -159,7 +166,20 @@ const PortalFeature = ({
                 </div>
               </div>
 
+              {/* Workflow Detail Card (Optional) */}
+              {workflowDetail && (
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                  <h3 className="text-lg font-medium text-heading mb-3 text-left">
+                    {workflowDetail.heading}
+                  </h3>
+                  <p className="text-gray text-sm leading-relaxed text-left">
+                    {workflowDetail.description}
+                  </p>
+                </div>
+              )}
+
               {/* 2. Bottom Row: Split 2:3 Ratio */}
+
               <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4 h-auto md:h-[35%] min-h-[200px]">
                 {/* Client Portal Info */}
                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-center h-full transition-transform duration-300 hover:scale-[1.02]">

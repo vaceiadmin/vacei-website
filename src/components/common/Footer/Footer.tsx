@@ -71,10 +71,11 @@ const Footer = () => {
               A modern accounting, audit and corporate services firm delivering clarity through a structured digital platform.
             </p>
 
-            {/* Social Media - LinkedIn */}
             <div className="flex items-center gap-4 pt-2">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/officialvacei/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center bg-purple-bg rounded-full text-white transition-colors"
                 aria-label="LinkedIn"
               >
@@ -83,6 +84,7 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
+
           </div>
 
           {/* Column 2 - VACEI */}

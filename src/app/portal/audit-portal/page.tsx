@@ -54,51 +54,43 @@ const auditWorkflowSteps: HowItWorksStep[] = [
 const auditServiceFeatures = {
     title: (
         <>
-            How VACEI delivers structured,
+            Advanced Quality & Compliance 
             <br />
-            high-quality audits.
+            Infrastructure.
         </>
     ),
-    subtitle: 'Who It’s For',
+    subtitle: 'Standards',
     features: [
         {
-            title: "Who It’s For",
+            title: "ISQM & quality management",
             items: [
-                'Operating companies that need ongoing bookkeeping and accounting',
-                'Growing businesses that require structured financial reporting',
-                'Management teams that need visibility over performance and cash flow',
-                'Businesses preparing for audit, investment or expansion',
+                'ISQM policies and procedures documented within the portal',
+                'Mapping of quality requirements to audit workflows',
+                'Ongoing visibility over implementation and compliance',
+                'Quality monitored continuously, not only at the final review stage',
             ],
         },
         {
-            title: "Who It’s For",
+            title: "KYC & client onboarding",
             items: [
-                'Operating companies that need ongoing bookkeeping and accounting',
-                'Growing businesses that require structured financial reporting',
-                'Management teams that need visibility over performance and cash flow',
-                'Businesses preparing for audit, investment or expansion',
+                'Configurable KYC templates',
+                'Clients complete required information through the Client Portal',
+                'All compliance documentation stored centrally',
+                'Ensures regulatory requirements are met from the start',
             ],
         },
         {
-            title: "Who It’s For",
+            title: "Integrations",
             items: [
-                'Operating companies that need ongoing bookkeeping and accounting',
-                'Growing businesses that require structured financial reporting',
-                'Management teams that need visibility over performance and cash flow',
-                'Businesses preparing for audit, investment or expansion',
-            ],
-        },
-        {
-            title: "Who It’s For",
-            items: [
-                'Operating companies that need ongoing bookkeeping and accounting',
-                'Growing businesses that require structured financial reporting',
-                'Management teams that need visibility over performance and cash flow',
-                'Businesses preparing for audit, investment or expansion',
+                'Connects with Accounting systems where applicable',
+                'Banking data (read-only access) integration',
+                'Reduces manual work and improves visibility',
+                'Supports more effective audit planning and testing',
             ],
         },
     ],
 }
+
 
 const AuditPortalPage = () => {
   return (
@@ -132,11 +124,17 @@ const AuditPortalPage = () => {
                   'Clear structure from planning through completion',
                   'Defined ownership and responsibilities across the audit team',
               ]}
-              closingText="This ensures audits are client-specific, risk-driven, and aligned with professional standards, rather than relying on generic checklists."
+              closingText="Audit planning is risk-focused and aligned with ISA standards, ensuring that procedures are tailored to the specific client and engagement."
               bottomTitle="Audit Portal"
               bottomDescription="Documents, tasks, deadlines and communication in one place."
               quoteText="Good firms rely on experience. Great firms rely on structure. VACEI exists to make that structure visible, auditable, and scalable"
+              workflowDetail={{
+                heading: "Structured Audit Workflow",
+                description: "Planning, documentation, evidence, and reviews are brought into one structured environment, ensuring audits are delivered efficiently and in line with professional standards."
+              }}
       />
+
+
 
       <RiskAuditSection variant="audit" />
 
@@ -149,11 +147,40 @@ const AuditPortalPage = () => {
 
       <ServiceFeatures
               title={auditServiceFeatures.title}
-              subtitle={auditServiceFeatures.subtitle}
+              description="VACEI provides the infrastructure and controls required to deliver high-quality, professional audit engagements."
               features={auditServiceFeatures.features}
               bulletIconSrc="/assets/images/bullet2.png"
               bulletIconAlt="Bullet"
       />
+
+
+
+      <ClientPortalOverviewSection
+              variant="audit"
+              bulletedSections={[
+                  {
+                      title: 'One environment, end-to-end control',
+                      intro: 'By managing audits within a single, structured environment, VACEI ensures:',
+                      bullets: [
+                          'Consistent audit execution & Documentation',
+                          'Strong quality and compliance',
+                          'Efficient collaboration between teams and clients',
+                      ],
+                      footer: 'This is how VACEI delivers audits that are structured, transparent, and built for scale.',
+                  },
+                  {
+                      title: 'For firms & partners',
+                      intro: 'The Audit Portal is also available to firms that want to operate with the same level of structure, quality control, and workflow discipline.',
+                      bullets: [
+                          'Partner with VACEI for audit delivery',
+                          'Deploy the portal within their own operations to support internal teams',
+                      ],
+                      footer: 'Built for firms who value clarity and excellence.',
+                  },
+              ]}
+              bulletIconSrc="/assets/images/bullet.png"
+      />
+
     </main>
   );
 };
