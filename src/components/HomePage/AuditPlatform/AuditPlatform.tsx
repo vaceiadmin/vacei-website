@@ -35,11 +35,11 @@ export default function AuditPlatform() {
           opacity: 0.07,
         }}
       ></div>
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
           {/* Left Section */}
           <motion.div
-            className="md:text-center lg:text-left max-w-xl"
+            className="md:text-center lg:text-left max-w-xl lg:flex-1"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -131,13 +131,13 @@ export default function AuditPlatform() {
 
           {/* Right Section - Same on desktop and mobile */}
           <motion.div
-            className="w-full max-w-md lg:max-w-lg mx-auto lg:mx-0"
+            className="w-full max-w-xl lg:max-w-2xl mx-auto lg:mx-0 lg:flex-1 mt-8 lg:mt-0"
             initial={{ opacity: 0, scale: 0.95, y: 40 }}
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative rounded-[32px] border border-white/20 bg-linear-to-br from-white/10 to-white/5 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-3xl overflow-hidden aspect-square flex items-center justify-center">
+            <div className="relative rounded-[32px] border border-white/20 bg-linear-to-br from-white/10 to-white/5 shadow-[0_30px_90px_rgba(15,23,42,0.65)] backdrop-blur-3xl overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4">
               <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25 z-20" />
               <AuditPlatformBeam className="w-full h-full" />
             </div>
