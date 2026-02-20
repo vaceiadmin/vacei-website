@@ -225,6 +225,17 @@ export const DirectionalDiv = ({
   initial,
   animate,
   whileInView,
+  whileHover,
+  whileTap,
+  whileFocus,
+  whileDrag,
+  exit,
+  transition,
+  variants,
+  viewport,
+  layout,
+  layoutId,
+  custom,
   viewportMargin = "0px",
   as = "div",
   ...props
@@ -247,6 +258,17 @@ export const DirectionalDiv = ({
       ref={ref}
       initial={initial}
       animate={isInView ? targetState : initial}
+      whileHover={whileHover}
+      whileTap={whileTap}
+      whileFocus={whileFocus}
+      whileDrag={whileDrag}
+      exit={exit}
+      transition={transition}
+      variants={variants}
+      viewport={viewport}
+      layout={layout}
+      layoutId={layoutId}
+      custom={custom}
       {...props}
     >
       {children}

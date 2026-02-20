@@ -6,6 +6,7 @@ import { useDirectionalInView } from "@/hooks/use-directional-in-view"
 import { DirectionalDiv } from "../common/Animations"
 import { useRef } from "react"
 import { useIsSafari } from "@/hooks/use-safari"
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
 import { cn } from "@/lib/utils"
 
 
@@ -151,6 +152,7 @@ const ProcessStepsSection = () => {
   const [direction, setDirection] = useState(0)
   const [openSelectKey, setOpenSelectKey] = useState<string | null>(null)
   const isSafari = useIsSafari()
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance()
 
 
   const step = formSteps[currentStep]
@@ -338,13 +340,13 @@ const ProcessStepsSection = () => {
         {/* Animated Background Elements - Safari Friendly */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ transform: 'translateZ(0)' }}>
              <motion.div 
-               animate={isInView && !isSafari ? { y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] } : {}}
+               animate={isInView && !isIPhone && !isLowPerformance ? { y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] } : {}}
                transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
                className="absolute top-0 right-0 w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-white/30 blur-[60px] rounded-full"
                style={{ transform: 'translateZ(0)' }}
              />
              <motion.div 
-               animate={isInView && !isSafari ? { y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] } : {}}
+               animate={isInView && !isIPhone && !isLowPerformance ? { y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] } : {}}
                transition={{ duration: 10, repeat: 0, ease: "easeInOut", delay: 1 }}
 
                className="absolute bottom-0 left-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-blue-100/30 blur-[60px] rounded-full" 
@@ -367,9 +369,9 @@ const ProcessStepsSection = () => {
                 <div 
                   className={cn(
                     "relative border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 h-full hardware-accelerated",
-                    isSafari ? "bg-white/60" : "bg-white/40 backdrop-blur-xl hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]"
+                    isIPhone || isLowPerformance ? "bg-white/60" : "bg-white/40 backdrop-blur-xl hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]"
                   )}
-                  style={{ WebkitBackdropFilter: isSafari ? 'none' : 'blur(24px)', transform: 'translateZ(0)' }}
+                  style={{ WebkitBackdropFilter: isIPhone || isLowPerformance ? 'none' : 'blur(24px)', transform: 'translateZ(0)' }}
                 >
 
 
@@ -770,7 +772,7 @@ const ProcessStepsSection = () => {
                 {/* Connecting Line (Track) */}
                 <div className={cn(
                   "absolute left-[31px] top-7 bottom-10 w-[2px] rounded-full lg:block hidden",
-                  isSafari ? "bg-white/60" : "bg-white/40 backdrop-blur-sm"
+                  isIPhone || isLowPerformance ? "bg-white/60" : "bg-white/40 backdrop-blur-sm"
                 )} />
 
                 
@@ -831,12 +833,12 @@ const ProcessStepsSection = () => {
                                 {/* Text Content */}
                                 <div className="pt-1.5 flex-1">
                                     <div 
-                                      className={`relative rounded-2xl overflow-hidden transition-all duration-300 border backdrop-blur-sm ${
+                                      className={`relative rounded-2xl overflow-hidden transition-all duration-300 border ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"} ${
                                         isActive
                                           ? "bg-white/80 border-white/90 shadow-[0_22px_40px_-22px_rgba(15,23,42,0.55)]"
                                           : "bg-white/25 border-white/40 hover:bg-white/45 hover:border-white/80"
                                       }`}
-                                      style={{ WebkitBackdropFilter: 'blur(4px)', transform: 'translateZ(0)' }}
+                                      style={{ WebkitBackdropFilter: isIPhone || isLowPerformance ? 'none' : 'blur(4px)', transform: 'translateZ(0)' }}
                                     >
                                         {isActive && (
                                           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-linear-to-b from-[#3b49e6] via-[#6366f1] to-[#a855f7]" />

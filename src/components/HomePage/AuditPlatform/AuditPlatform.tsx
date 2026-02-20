@@ -12,6 +12,9 @@ import { useIsSafari } from "@/hooks/use-safari";
 import { cn } from "@/lib/utils";
 
 
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+
+
 // Animation Variants – visible render, smooth and not laggy
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,6 +37,7 @@ export default function AuditPlatform() {
   const sectionRef = useRef(null);
   const isInView = useDirectionalInView(sectionRef);
   const isSafari = useIsSafari();
+  const { isIPhone, isLowPerformance } = usePerformance();
 
 
   return (
@@ -114,12 +118,12 @@ export default function AuditPlatform() {
               <GetInstantQuoteButton
                 className="h-[46px]"
               />
-              <motion.div whileHover={isSafari ? {} : { scale: 1.03, y: -2 }} whileTap={isSafari ? {} : { scale: 0.97, y: 0 }}>
+              <motion.div whileHover={isIPhone ? {} : { scale: 1.03, y: -2 }} whileTap={isIPhone ? {} : { scale: 0.97, y: 0 }}>
                 <Link
                   href="/portal/client-portal"
                   className={cn(
                     "flex items-center justify-center gap-2 rounded-full border border-primary-blue/80 text-text-dark font-normal text-[15px] transition-all px-6 h-[44px] shadow-sm",
-                    isSafari ? "bg-white/80" : "bg-white/60 backdrop-blur-sm hover:bg-white/40 hover:shadow-md"
+                    isIPhone || isLowPerformance ? "bg-white/80" : "bg-white/60 backdrop-blur-sm hover:bg-white/40 hover:shadow-md"
                   )}
                 >
 
@@ -145,16 +149,16 @@ export default function AuditPlatform() {
           {/* Right Section - Same on desktop and mobile */}
            <DirectionalDiv
             className="w-full max-w-xl lg:max-w-2xl mx-auto lg:mx-0 lg:flex-1 mt-8 lg:mt-0"
-            initial={isSafari ? { opacity: 0, y: 30 } : { opacity: 0, scale: 0.95, y: 40 }}
-            whileInView={isSafari ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
+            initial={isIPhone ? { opacity: 0, y: 30 } : { opacity: 0, scale: 0.95, y: 40 }}
+            whileInView={isIPhone ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <div 
               className={cn(
                 "relative rounded-[32px] border border-white/20 shadow-[0_30px_90px_rgba(15,23,42,0.65)] overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4 hardware-accelerated",
-                isSafari ? "bg-white/20" : "bg-linear-to-br from-white/10 to-white/5 backdrop-blur-3xl"
+                isIPhone || isLowPerformance ? "bg-white/20" : "bg-linear-to-br from-white/10 to-white/5 backdrop-blur-3xl"
               )}
-              style={{ WebkitBackdropFilter: isSafari ? 'none' : 'blur(40px)', transform: 'translateZ(0)' }}
+              style={{ WebkitBackdropFilter: isIPhone || isLowPerformance ? 'none' : 'blur(40px)', transform: 'translateZ(0)' }}
             >
 
 

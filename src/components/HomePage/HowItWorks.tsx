@@ -8,7 +8,7 @@ import { useIsSafari } from "@/hooks/use-safari"
 import { cn } from "@/lib/utils"
 
 import { FadeInUp, StaggerContainer, DirectionalDiv } from "../common/Animations"
-import { useReduceMotion } from "@/contexts/ReduceMotionContext"
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
 import TextAnimation from "../common/TextAnimation"
 
 
@@ -94,8 +94,7 @@ const HowItWorks = () => {
     const [isHovered, setIsHovered] = useState(false)
     const [isMobile] = useMobile()
     const isSafari = useIsSafari()
-    const reduceMotion = useReduceMotion()
-
+    const { reduceMotion, isIPhone, isLowPerformance } = usePerformance()
 
 
     const togglePlayPause = (e?: React.MouseEvent) => {
@@ -174,7 +173,7 @@ const HowItWorks = () => {
                     {/* Video Banner - autoplay on scroll into view */}
                     <FadeInUp duration={0.6} delay={0.15} className={cn(
                         "relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10",
-                        isSafari ? "bg-slate-900" : "bg-slate-950 backdrop-blur-2xl"
+                        isIPhone || isLowPerformance ? "bg-slate-900" : "bg-slate-950 backdrop-blur-2xl"
                     )}>
 
                         <div
@@ -205,12 +204,15 @@ const HowItWorks = () => {
                                     <motion.button
                                         type="button"
                                         onClick={togglePlayPause}
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="pointer-events-auto flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-primary-blue border-2 border-white/40 text-white shadow-[0_8px_32px_rgba(59,73,230,0.5)] backdrop-blur-sm transition-all duration-300 hover:bg-primary-blue-hover hover:border-white/60 hover:shadow-[0_8px_40px_rgba(59,73,230,0.6)]"
+                                        whileHover={isIPhone ? {} : { scale: 1.1 }}
+                                        whileTap={isIPhone ? {} : { scale: 0.95 }}
+                                        className={cn(
+                                            "pointer-events-auto flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-primary-blue border-2 border-white/40 text-white shadow-[0_8px_32px_rgba(59,73,230,0.5)] transition-all duration-300 hover:bg-primary-blue-hover hover:border-white/60 hover:shadow-[0_8px_40px_rgba(59,73,230,0.6)]",
+                                            isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
+                                        )}
                                         aria-label={isPlaying ? "Pause" : "Play"}
                                     >
-                                        {!isPlaying && !isSafari && !reduceMotion && (
+                                        {!isPlaying && !isIPhone && !reduceMotion && (
                                             <motion.span
                                                 className="absolute inset-0 rounded-full border-2 border-white/50"
                                                 animate={{ scale: [1, 1.3, 1.3], opacity: [0.6, 0, 0] }}
@@ -236,10 +238,10 @@ const HowItWorks = () => {
                         {steps.map((step, index) => (
                             <React.Fragment key={index}>
                                 <DirectionalDiv
-                                    whileHover={isSafari ? {} : { y: -5 }}
+                                    whileHover={isIPhone ? {} : { y: -5 }}
                                     className={cn(
                                         "relative p-6 rounded-2xl border border-white/10 transition-all duration-300 group hover:border-primary-blue/30 lg:flex-1 lg:min-w-0 hardware-accelerated",
-                                        isSafari ? "bg-white/10" : "bg-white/5 backdrop-blur-md hover:bg-white/10"
+                                        isIPhone || isLowPerformance ? "bg-white/10" : "bg-white/5 backdrop-blur-md hover:bg-white/10"
                                     )}
                                 >
 

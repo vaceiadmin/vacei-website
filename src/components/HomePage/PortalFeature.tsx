@@ -8,6 +8,7 @@ import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
 import { useDirectionalInView } from "@/hooks/use-directional-in-view"
 import { DirectionalDiv } from "../common/Animations"
 import { useRef } from "react"
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
 
 const features = [
         {
@@ -66,6 +67,7 @@ const features = [
 const PortalFeature = () => {
     const sectionRef = useRef(null);
     const isInViewGlobal = useDirectionalInView(sectionRef);
+    const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
 
     return (
         <section ref={sectionRef} className="w-full relative">
@@ -89,7 +91,7 @@ const PortalFeature = () => {
                                     className="w-full lg:w-1/2 relative perspective-1000 group"
                                 >
                                     {/* Glass Base - Sleek Dark Card */}
-                                    <div className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] bg-primary/90 backdrop-blur-2xl border border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 group-hover:bg-primary/95 group-hover:border-white/30 group-hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.4)] overflow-visible">
+                                    <div className={`relative aspect-square md:aspect-[4/3] rounded-[2.5rem] bg-primary/90 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-2xl"} border border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 group-hover:bg-primary/95 group-hover:border-white/30 group-hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.4)] overflow-visible`}>
                                         
                                         {/* Internal Glow - Enhanced */}
                                         <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/20 via-transparent to-purple-500/20 opacity-60 rounded-[2.5rem]" />
@@ -119,7 +121,7 @@ const PortalFeature = () => {
                                                 >
                                                     {/* Floating Animation Wrapper */}
                                                     <motion.div
-                                                        animate={isInViewGlobal ? {
+                                                        animate={isInViewGlobal && !isIPhone && !isLowPerformance ? {
                                                             y: [0, -12, 0],
                                                         } : { y: 0 }}
                                                         transition={{

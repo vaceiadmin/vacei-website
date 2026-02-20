@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { usePerformance } from '@/contexts/ReduceMotionContext'
 
 interface GradientContainerProps {
     children: React.ReactNode
@@ -26,6 +27,7 @@ const GradientContainer = ({
     leftPositionClass,
     rightPositionClass,
 }: GradientContainerProps) => {
+    const { isIPhone, isLowPerformance } = usePerformance()
     const bgColor = backgroundColor || 'bg-primary'
     const radialSrc = radialImage || '/assets/images/radial2.png'
     const leftPos = leftPositionClass || 'top-0 left-0'
@@ -42,9 +44,9 @@ const GradientContainer = ({
         >
             {/* Background Wrapper with Overflow Hidden */}
             <div className="absolute inset-0 overflow-hidden rounded-[inherit] pointer-events-none">
-                {/* Background Radial Image - Top Left */}
+                {/* Background Radial Image - Top Left - Hide on iPhone if performance is an issue */}
                 {showRadials && (
-                    <div className={`absolute ${leftPos} w-[350px] h-[330px] z-0 transform ${topLeftRotation}`}>
+                    <div className={`absolute ${leftPos} w-[350px] h-[330px] z-0 transform ${topLeftRotation} ${isIPhone ? 'opacity-40' : ''}`}>
                         <Image
                             src={radialSrc}
                             alt="Radial Gradient"
@@ -56,7 +58,7 @@ const GradientContainer = ({
 
                 {/* Background Radial Image - Bottom Right */}
                 {showRadials && (
-                    <div className={`absolute ${rightPos} w-[350px] h-[330px] z-0 transform ${bottomRightRotation}`}>
+                    <div className={`absolute ${rightPos} w-[350px] h-[330px] z-0 transform ${bottomRightRotation} ${isIPhone ? 'opacity-40' : ''}`}>
                         <Image
                             src={radialSrc}
                             alt="Radial Gradient"
@@ -66,8 +68,8 @@ const GradientContainer = ({
                     </div>
                 )}
 
-                {/* Noise Overlay */}
-                <div className="absolute inset-0 z-[1] mix-blend-soft-light opacity-50">
+                {/* Noise Overlay - mix-blend-mode is VERY expensive on iOS Safari/Chrome */}
+                <div className={`absolute inset-0 z-[1] opacity-50 ${isIPhone || isLowPerformance ? 'mix-blend-normal' : 'mix-blend-soft-light'}`}>
                     <Image
                         src="/assets/images/Noise.png"
                         alt="Noise Overlay"

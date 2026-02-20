@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
 
 type IntroAnimationProps = {
   onComplete?: () => void;
@@ -11,6 +12,7 @@ type IntroAnimationProps = {
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
 
   useEffect(() => {
     // Progress animation – faster so intro doesn't feel paused
@@ -70,7 +72,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           </div>
 
           {/* Floating Particles - Optimized */}
-          {particles.map((particle) => (
+          {(isIPhone || isLowPerformance ? particles.slice(0, 4) : particles).map((particle) => (
             <motion.div
               key={particle.id}
               initial={{ opacity: 0, scale: 0 }}
@@ -100,7 +102,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
             <div className="relative w-[500px] h-[500px] flex items-center justify-center">
               
               {/* Expanding Wave Ripples - Reduced for performance */}
-              {[0, 1].map((index) => (
+              {(isIPhone || isLowPerformance ? [0] : [0, 1]).map((index) => (
                 <motion.div
                   key={`wave-${index}`}
                   initial={{ scale: 0, opacity: 0 }}
@@ -124,25 +126,25 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
               {/* Morphing Hexagon to Square */}
               <motion.div
-                animate={{
+                animate={isIPhone || isLowPerformance ? { rotate: 360 } : {
                   rotate: [0, 180, 360],
                   borderRadius: ["30%", "10%", "30%"],
                 }}
                 transition={{
-                  duration: 8,
+                  duration: isIPhone || isLowPerformance ? 12 : 8,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 className="absolute w-[280px] h-[280px] border-2 border-primary-blue/20"
                 style={{
-                  boxShadow: '0 0 30px rgba(59, 73, 230, 0.2)',
+                  boxShadow: isIPhone || isLowPerformance ? 'none' : '0 0 30px rgba(59, 73, 230, 0.2)',
                   willChange: 'transform',
                 }}
               />
 
               {/* Inner Morphing Shape */}
               <motion.div
-                animate={{
+                animate={isIPhone || isLowPerformance ? { rotate: 0 } : {
                   rotate: [360, 180, 0],
                   borderRadius: ["10%", "50%", "10%"],
                   scale: [1, 1.1, 1],
@@ -154,18 +156,21 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 }}
                 className="absolute w-[180px] h-[180px] border-2 border-cyan-400/30"
                 style={{
-                  boxShadow: '0 0 25px rgba(34, 211, 238, 0.3)',
+                  boxShadow: isIPhone || isLowPerformance ? 'none' : '0 0 25px rgba(34, 211, 238, 0.3)',
                   willChange: 'transform',
                 }}
               />
 
               {/* Floating Corner Dots - Optimized */}
-              {[
+              {(isIPhone || isLowPerformance ? [
+                { x: -100, y: -100, delay: 0, color: 'bg-primary-blue' },
+                { x: 100, y: 100, delay: 1, color: 'bg-purple-400' },
+              ] : [
                 { x: -100, y: -100, delay: 0, color: 'bg-primary-blue' },
                 { x: 100, y: -100, delay: 0.5, color: 'bg-cyan-400' },
                 { x: 100, y: 100, delay: 1, color: 'bg-purple-400' },
                 { x: -100, y: 100, delay: 1.5, color: 'bg-primary-blue' },
-              ].map((dot, index) => (
+              ]).map((dot, index) => (
                 <motion.div
                   key={`dot-${index}`}
                   animate={{
@@ -189,7 +194,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               ))}
 
               {/* Particle Trails - Reduced for performance */}
-              {[...Array(6)].map((_, index) => {
+              {[...Array(isIPhone || isLowPerformance ? 2 : 6)].map((_, index) => {
                 const angle = (index * 360) / 6;
                 return (
                   <motion.div
@@ -262,7 +267,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
 
                 {/* Pulsing Glow Effect */}
                 <motion.div
-                  animate={{
+                  animate={isIPhone || isLowPerformance ? { opacity: 0.4 } : {
                     opacity: [0.3, 0.6, 0.3],
                     scale: [0.95, 1.05, 0.95],
                   }}
@@ -290,7 +295,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 Loading Experience
               </p>
               
-              <div className="relative w-64 h-1 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
+              <div className={`relative w-64 h-1 bg-white/5 rounded-full overflow-hidden ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"}`}>
                 {/* Background glow */}
                 <motion.div
                   animate={{

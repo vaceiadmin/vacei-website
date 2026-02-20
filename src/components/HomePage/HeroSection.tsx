@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 import TextAnimation from "../common/TextAnimation";
 import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
-import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 import { useIsSafari } from "@/hooks/use-safari";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
-  const reduceMotion = useReduceMotion();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
   const isSafari = useIsSafari();
 
   const badgeContent = (
@@ -27,7 +27,7 @@ const HeroSection = () => {
       {/* Glassy Badge */}
       <div className={cn(
         "inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2 text-[11px] sm:text-xs font-medium tracking-[0.25em] uppercase text-white/90 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] mx-auto transform-[translateZ(0)]",
-        isSafari ? "bg-white/20" : "bg-white/10 backdrop-blur-xl"
+        isIPhone || isLowPerformance ? "bg-white/20" : "bg-white/10 backdrop-blur-xl"
       )}>
         {badgeContent}
       </div>
@@ -58,7 +58,7 @@ const HeroSection = () => {
           href="/portal/client-portal"
           className={cn(
             "group flex items-center justify-center gap-2 rounded-full border border-white/30 text-white text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
-            isSafari ? "bg-white/20 hover:bg-white/30" : "bg-white/10 backdrop-blur-xl hover:bg-white/15 hover:border-white/40"
+            isIPhone || isLowPerformance ? "bg-white/20 hover:bg-white/30" : "bg-white/10 backdrop-blur-xl hover:bg-white/15 hover:border-white/40"
           )}
         >
           Try the Client Portal
@@ -74,7 +74,7 @@ const HeroSection = () => {
     <div className="w-full max-w-5xl mx-auto mt-16">
       <div className={cn(
         "relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 transform-[translateZ(0)]",
-        isSafari ? "bg-slate-900" : "bg-slate-950 backdrop-blur-2xl"
+        isIPhone || isLowPerformance ? "bg-slate-900" : "bg-slate-950 backdrop-blur-2xl"
       )}>
         <div className="aspect-video relative">
           <img
@@ -85,7 +85,9 @@ const HeroSection = () => {
           <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
           <div className="absolute inset-0 ring-1 ring-white/20 rounded-3xl pointer-events-none" />
         </div>
-        <div className="absolute -inset-4 bg-primary-blue/20 blur-3xl -z-10 rounded-full opacity-40 transform-[translateZ(0)]" aria-hidden />
+        {!isIPhone && (
+            <div className="absolute -inset-4 bg-primary-blue/20 blur-3xl -z-10 rounded-full opacity-40 transform-[translateZ(0)]" aria-hidden />
+        )}
       </div>
     </div>
   );
@@ -97,7 +99,7 @@ const HeroSection = () => {
       </div>
       <div className={cn(
         "w-5 h-8 border border-white/30 rounded-full flex justify-center pt-2",
-        isSafari ? "bg-white/10" : "backdrop-blur-sm bg-white/5"
+        isIPhone || isLowPerformance ? "bg-white/10" : "backdrop-blur-sm bg-white/5"
       )}>
         <div className="w-1 h-1 bg-white rounded-full" />
       </div>

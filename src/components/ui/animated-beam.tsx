@@ -28,6 +28,9 @@ export interface AnimatedBeamProps {
 
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+
+
 export const AnimatedBeam = ({
   className,
   containerRef,
@@ -51,7 +54,7 @@ export const AnimatedBeam = ({
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
   const isInView = useDirectionalInView(containerRef);
-  const isSafari = useIsSafari();
+  const { isIPhone, isLowPerformance } = usePerformance();
 
 
   // Calculate the gradient coordinates based on the reverse prop
@@ -121,6 +124,8 @@ export const AnimatedBeam = ({
     endYOffset,
   ]);
 
+  const showGradient = !isIPhone && !isLowPerformance;
+
   return (
     <svg
       fill="none"
@@ -137,10 +142,10 @@ export const AnimatedBeam = ({
         d={pathD}
         stroke={pathColor}
         strokeWidth={pathWidth}
-        strokeOpacity={isSafari ? pathOpacity * 2 : pathOpacity}
+        strokeOpacity={isIPhone ? pathOpacity * 2 : pathOpacity}
         strokeLinecap="round"
       />
-      {!isSafari && (
+      {showGradient && (
         <path
           d={pathD}
           stroke={`url(#${id})`}
@@ -150,42 +155,44 @@ export const AnimatedBeam = ({
         />
       )}
 
-      <defs>
-        <motion.linearGradient
-          className="transform-gpu"
-          id={id}
-          gradientUnits="userSpaceOnUse"
-          initial={{
-            x1: "0%",
-            x2: "0%",
-            y1: "0%",
-            y2: "0%",
-          }}
-          animate={isInView ? {
-            x1: gradientCoordinates.x1,
-            x2: gradientCoordinates.x2,
-            y1: gradientCoordinates.y1,
-            y2: gradientCoordinates.y2,
-          } : {
-            x1: gradientCoordinates.x1[0],
-            x2: gradientCoordinates.x2[0],
-            y1: gradientCoordinates.y1[0],
-            y2: gradientCoordinates.y2[0],
-          }}
-          transition={{
-            delay,
-            duration,
-            ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
-            repeat: 0, // Only play once as per new rules
-            repeatDelay: 0,
-          }}
-        >
-          <stop stopColor={gradientStartColor} stopOpacity="0" />
-          <stop stopColor={gradientStartColor} />
-          <stop offset="32.5%" stopColor={gradientStopColor} />
-          <stop offset="100%" stopColor={gradientStopColor} stopOpacity="0" />
-        </motion.linearGradient>
-      </defs>
+      {showGradient && (
+        <defs>
+            <motion.linearGradient
+            className="transform-gpu"
+            id={id}
+            gradientUnits="userSpaceOnUse"
+            initial={{
+                x1: "0%",
+                x2: "0%",
+                y1: "0%",
+                y2: "0%",
+            }}
+            animate={isInView ? {
+                x1: gradientCoordinates.x1,
+                x2: gradientCoordinates.x2,
+                y1: gradientCoordinates.y1,
+                y2: gradientCoordinates.y2,
+            } : {
+                x1: gradientCoordinates.x1[0],
+                x2: gradientCoordinates.x2[0],
+                y1: gradientCoordinates.y1[0],
+                y2: gradientCoordinates.y2[0],
+            }}
+            transition={{
+                delay,
+                duration,
+                ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
+                repeat: 0, // Only play once as per new rules
+                repeatDelay: 0,
+            }}
+            >
+            <stop stopColor={gradientStartColor} stopOpacity="0" />
+            <stop stopColor={gradientStartColor} />
+            <stop offset="32.5%" stopColor={gradientStopColor} />
+            <stop offset="100%" stopColor={gradientStopColor} stopOpacity="0" />
+            </motion.linearGradient>
+        </defs>
+      )}
     </svg>
   );
 };

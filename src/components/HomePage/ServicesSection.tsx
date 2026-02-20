@@ -8,6 +8,7 @@ import GradientContainer from "../common/GradientContainer";
 import { servicesData } from "@/data/servicesData";
 import { DirectionalDiv } from "../common/Animations";
 import { useIsSafari } from "@/hooks/use-safari";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
 
 
@@ -32,6 +33,7 @@ const ServicesSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
   const isSafari = useIsSafari();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
 
 
   const serviceSubtitleMap: Record<string, string> = {
@@ -163,7 +165,7 @@ const ServicesSection = () => {
                         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                         className={cn(
                           "flex p-1.5 border border-white/10 rounded-full",
-                          isSafari ? "bg-white/20" : "bg-white/5 backdrop-blur-xl"
+                          isIPhone || isLowPerformance ? "bg-white/20" : "bg-white/5 backdrop-blur-xl"
                         )}
                     >
 
@@ -203,7 +205,7 @@ const ServicesSection = () => {
                                 >
                                     <div className={cn(
                                         "group relative h-[480px] w-full border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500 hardware-accelerated",
-                                        isSafari ? "bg-white/20 hover:bg-white/25" : "bg-white/5 backdrop-blur-2xl hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)]"
+                                        isIPhone || isLowPerformance ? "bg-white/20 hover:bg-white/25" : "bg-white/5 backdrop-blur-2xl hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)]"
                                     )}>
 
 
@@ -224,7 +226,7 @@ const ServicesSection = () => {
                                                             transition={{ delay: idx * 0.1 + i * 0.08, duration: 0.4 }}
                                                             className={cn(
                                                               "px-4 py-2.5 rounded-xl border border-white/10 text-white/90 text-xs font-medium group-hover:border-white/20 transition-all duration-300",
-                                                              isSafari ? "bg-white/20 group-hover:bg-white/30" : "bg-white/10 backdrop-blur-md group-hover:bg-white/15"
+                                                              isIPhone || isLowPerformance ? "bg-white/20 group-hover:bg-white/30" : "bg-white/10 backdrop-blur-md group-hover:bg-white/15"
                                                             )}
 
                                                         >
@@ -309,7 +311,7 @@ const ServicesSection = () => {
                 <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-8 z-20">
                     <button onClick={prevSlide} className={cn(
                       "w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center text-white transition-all shadow-lg",
-                      isSafari ? "bg-white/20" : "bg-white/10 hover:bg-white/20 backdrop-blur-xl hover:scale-110 active:scale-95"
+                      isIPhone || isLowPerformance ? "bg-white/20" : "bg-white/10 hover:bg-white/20 backdrop-blur-xl hover:scale-110 active:scale-95"
                     )} aria-label="Previous">
                         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>
@@ -317,7 +319,7 @@ const ServicesSection = () => {
                 <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 z-20">
                     <button onClick={nextSlide} className={cn(
                        "w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center text-white transition-all shadow-lg",
-                       isSafari ? "bg-white/20" : "bg-white/10 hover:bg-white/20 backdrop-blur-xl hover:scale-110 active:scale-95"
+                       isIPhone || isLowPerformance ? "bg-white/20" : "bg-white/10 hover:bg-white/20 backdrop-blur-xl hover:scale-110 active:scale-95"
                     )} aria-label="Next">
                         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </button>

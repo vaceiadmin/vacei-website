@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import GetInstantQuoteButton from "./GetInstantQuoteButton";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 import { servicesData } from "@/data/servicesData";
 
 // Logo path from assets
@@ -20,6 +21,7 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [hamburgerHover, setHamburgerHover] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(false); // Default to light background
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   // Check if mobile screen
   const [isMobile, setIsMobile] = useState(false);
@@ -378,7 +380,11 @@ const Navbar = () => {
         {/* Navbar Container – compact on mobile, rounded corners */}
         <motion.div 
           initial={false}
-          className={`w-full rounded-xl lg:rounded-2xl ${isDarkBackground ? "bg-white/10 backdrop-blur-md border border-white/20" : "bg-white/70 backdrop-blur-sm"} shadow-sm px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 transition-all duration-300`}
+          className={`w-full rounded-xl lg:rounded-2xl ${
+            isDarkBackground 
+              ? `bg-white/10 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-md"} border border-white/20` 
+              : `bg-white/70 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"}`
+          } shadow-sm px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 transition-all duration-300`}
         >
           <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
             {/* Logo - smaller on mobile */}
@@ -446,7 +452,7 @@ const Navbar = () => {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-max z-50 origin-top"
                       >
-                        <div className="bg-white/95 backdrop-blur-[25px] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/50 p-2 overflow-hidden min-w-[260px]">
+                        <div className={`bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-[25px]"} rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/50 p-2 overflow-hidden min-w-[260px]`}>
                           {link.label === "Services" ? (
                             <div className="max-h-[320px] overflow-y-auto pr-1 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue/70 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
                               <div className="grid grid-cols-1 gap-1 p-1">
@@ -513,7 +519,7 @@ const Navbar = () => {
                 {/* Try The Client Portal Button - scrolls to process steps form on homepage */}
                 <Link
                   href="/#process-steps"
-                  className={`flex items-center justify-center gap-2 rounded-full border ${isDarkBackground ? "border-white/40 text-white hover:bg-white/20" : "border-primary-blue text-text-dark hover:bg-white/40"} font-normal text-[15px] transition-all px-6 h-[44px] backdrop-blur-sm`}
+                  className={`flex items-center justify-center gap-2 rounded-full border ${isDarkBackground ? "border-white/40 text-white hover:bg-white/20" : "border-primary-blue text-text-dark hover:bg-white/40"} font-normal text-[15px] transition-all px-6 h-[44px] ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"}`}
                 >
                   <span>Try The Client Portal</span>
                   <svg
@@ -721,7 +727,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-60 backdrop-blur-md bg-black/20"
+            className={`fixed inset-0 z-60 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-md"} bg-black/20`}
             onClick={() => setSidebarOpen(false)}
           />
 

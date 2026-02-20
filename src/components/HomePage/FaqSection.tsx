@@ -37,16 +37,15 @@ const staggerContainer = {
   }
 }
 
-import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 
 
 const FaqSection = () => {
   const sectionRef = useRef(null);
   const isInView = useDirectionalInView(sectionRef);
   const isSafari = useIsSafari();
-  const reduceMotion = useReduceMotion();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
 
 
   const items = [
@@ -76,7 +75,7 @@ const FaqSection = () => {
           {/* Animated Background Blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <motion.div 
-              animate={isInView && !isSafari && !reduceMotion ? { 
+              animate={isInView && !isIPhone && !reduceMotion && !isLowPerformance ? { 
                 x: [0, 40, 0],
                 y: [0, 50, 0],
                 scale: [1, 1.1, 1]
@@ -88,7 +87,7 @@ const FaqSection = () => {
             />
 
             <motion.div 
-              animate={isInView && !isSafari && !reduceMotion ? { 
+              animate={isInView && !isIPhone && !reduceMotion && !isLowPerformance ? { 
                 x: [0, -30, 0],
                 y: [0, -40, 0],
                 scale: [1, 1.2, 1]

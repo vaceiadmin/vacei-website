@@ -92,11 +92,12 @@ const IPhoneFaqSection = () => {
           <h4 className="text-lg font-bold mb-2">Still have questions?</h4>
           <p className="text-xs text-white/70 mb-5">We are here to help you scaling your business.</p>
           <a 
-            href="/contact" 
-            className="inline-block px-6 py-3 rounded-xl bg-[#3b49e6] text-white font-bold text-sm shadow-lg shadow-blue-500/20"
+            href="/quote" 
+            className="inline-block px-8 py-3.5 rounded-xl bg-[#3b49e6] text-white font-bold text-sm shadow-lg shadow-blue-500/20"
           >
-            Contact Support
+            Get Instant Quote
           </a>
+
         </div>
       </div>
     </section>

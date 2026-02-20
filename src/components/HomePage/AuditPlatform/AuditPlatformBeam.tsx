@@ -15,7 +15,7 @@ import {
   User
 } from "lucide-react";
 import { useIsSafari } from "@/hooks/use-safari";
-import { useReduceMotion } from "@/contexts/ReduceMotionContext";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 
 
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
@@ -28,7 +28,7 @@ const Circle = forwardRef<
   const innerRef = useRef<HTMLDivElement>(null);
   const isInView = useDirectionalInView(innerRef);
   const isSafari = useIsSafari();
-  const reduceMotion = useReduceMotion();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
   
   // Expose both refs (internal for observation, passed for external linking)
   useImperativeHandle(ref, () => innerRef.current!);
@@ -63,12 +63,12 @@ const Circle = forwardRef<
       ref={innerRef}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.5, delay: isSafari ? 0 : delay * 0.1 }}
+      transition={{ duration: 0.5, delay: isIPhone ? 0 : delay * 0.1 }}
       className="flex flex-col items-center gap-1 sm:gap-1.5 min-w-[50px] sm:min-w-[70px]"
     >
 
       <motion.div
-        animate={isInView && !isSafari ? {
+        animate={isInView && !isIPhone && !isLowPerformance ? {
           y: [0, -6, 0],
         } : { y: 0 }}
         transition={{
@@ -105,6 +105,7 @@ export default function AuditPlatformBeam({
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isIPhone, isLowPerformance } = usePerformance();
   const isSafari = useIsSafari();
   
   // Refs for logic flow
@@ -198,7 +199,7 @@ export default function AuditPlatformBeam({
         duration={3}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isSafari ? 0 : 0.2}
+        pathOpacity={isIPhone ? 0 : 0.2}
         gradientStartColor="#ef4444"
         gradientStopColor="#3b82f6"
       />
@@ -210,7 +211,7 @@ export default function AuditPlatformBeam({
         delay={0.5}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={0.2}
+        pathOpacity={isIPhone ? 0 : 0.2}
         gradientStartColor="#22c55e"
         gradientStopColor="#3b82f6"
       />
@@ -222,7 +223,7 @@ export default function AuditPlatformBeam({
         delay={1}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={isSafari ? 0 : 0.2}
+        pathOpacity={isIPhone ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#3b82f6"
       />
@@ -236,7 +237,7 @@ export default function AuditPlatformBeam({
         duration={4}
         curvature={15}
         pathColor="#94a3b8"
-        pathOpacity={isSafari ? 0 : 0.2}
+        pathOpacity={isIPhone ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -248,7 +249,7 @@ export default function AuditPlatformBeam({
         delay={0.7}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={0.2}
+        pathOpacity={isIPhone ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -260,7 +261,7 @@ export default function AuditPlatformBeam({
         delay={1.4}
         curvature={-15}
         pathColor="#94a3b8"
-        pathOpacity={isSafari ? 0 : 0.2}
+        pathOpacity={isIPhone ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -274,7 +275,7 @@ export default function AuditPlatformBeam({
         duration={3}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={0.3}
+        pathOpacity={isIPhone ? 0 : 0.3}
         pathWidth={3}
         gradientStartColor="#6366f1"
         gradientStopColor="#3b82f6"
