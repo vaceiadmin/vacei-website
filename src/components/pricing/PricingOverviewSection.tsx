@@ -89,22 +89,34 @@ const pricingData = {
   ],
 };
 
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
+
 const PricingOverviewSection = () => {
   const [activeTab, setActiveTab] = useState<Category>("Essentials");
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden bg-[#f8fafc]">
       {/* Background Decor - Light Gradients */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[80px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-100/40 rounded-full blur-[80px]" />
-      </div>
+      {!isIPhone && !isLowPerformance && (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[80px]" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-100/40 rounded-full blur-[80px]" />
+        </div>
+      )}
 
       <div className="relative max-w-6xl mx-auto px-4 md:px-6 lg:px-8 z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <FadeInUp>
-            <SectionBadge text="Service Pricing Models" className="bg-white/80 backdrop-blur-md border border-gray-200 text-heading shadow-sm" />
+            <SectionBadge 
+              text="Service Pricing Models" 
+              className={cn(
+                "border border-gray-200 text-heading shadow-sm",
+                isIPhone || isLowPerformance ? "bg-white" : "bg-white/80 backdrop-blur-md"
+              )} 
+            />
             <TextAnimation
               text="Explore Our Service Categories"
               as="h2"
@@ -118,7 +130,10 @@ const PricingOverviewSection = () => {
 
         {/* Custom Glass Tabs */}
         <div className="flex justify-center mb-16">
-          <div className="bg-white/40 p-1.5 rounded-full border border-white/60 shadow-sm backdrop-blur-xl flex gap-1 relative">
+          <div className={cn(
+            "p-1.5 rounded-full border border-white/60 shadow-sm flex gap-1 relative",
+            isIPhone || isLowPerformance ? "bg-white" : "bg-white/40 backdrop-blur-xl"
+          )}>
             {categories.map((tab) => (
               <button
                 key={tab}
@@ -129,7 +144,7 @@ const PricingOverviewSection = () => {
               >
                 {activeTab === tab && (
                   <motion.div
-                    layoutId="glassTab"
+                    layoutId={isIPhone || isLowPerformance ? undefined : "glassTab"}
                     className="absolute inset-0 bg-primary-blue rounded-full shadow-lg shadow-blue-500/30"
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   />
@@ -154,11 +169,13 @@ const PricingOverviewSection = () => {
               {pricingData[activeTab].map((card, index) => (
                 <div
                   key={index}
-                  className={`group relative p-8 rounded-3xl border transition-all duration-500 backdrop-blur-md flex flex-col ${
+                  className={cn(
+                    "group relative p-8 rounded-3xl border transition-all duration-500 flex flex-col",
+                    isIPhone || isLowPerformance ? "" : "backdrop-blur-md",
                     card.highlight
                       ? "bg-white/80 border-white shadow-xl shadow-blue-100/50 hover:shadow-2xl hover:shadow-blue-200/50"
                       : "bg-white/40 border-white/50 hover:bg-white/60 hover:border-white shadow-sm hover:shadow-lg"
-                  }`}
+                  )}
                 >
                   {/* Highlight Glow for showcased cards */}
                   {card.highlight && (
@@ -173,7 +190,10 @@ const PricingOverviewSection = () => {
                   <div className="grow space-y-4 mb-8">
                     {card.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-3 text-sm text-heading opacity-80">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${card.highlight ? "bg-blue-50 text-primary-blue" : "bg-gray-100 text-gray"}`}>
+                        <div className={cn(
+                          "w-5 h-5 rounded-full flex items-center justify-center shrink-0",
+                          card.highlight ? "bg-blue-50 text-primary-blue" : "bg-gray-100 text-gray"
+                        )}>
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                         </div>
                         {feature}
@@ -189,8 +209,14 @@ const PricingOverviewSection = () => {
               ))}
 
               {/* General "Contact Us" Card acting as the 3rd column often */}
-              <div className="group relative p-8 rounded-3xl border border-white/60 bg-gradient-to-br from-white/60 to-white/30 backdrop-blur-md flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className={cn(
+                "group relative p-8 rounded-3xl border border-white/60 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-all",
+                isIPhone || isLowPerformance ? "bg-white" : "bg-gradient-to-br from-white/60 to-white/30 backdrop-blur-md"
+              )}>
+                <div className={cn(
+                  "w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4 transition-transform duration-300",
+                  !isIPhone && !isLowPerformance && "group-hover:scale-110"
+                )}>
                     <svg className="w-6 h-6 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                 </div>
                 <h3 className="text-lg font-bold text-heading mb-2">Need a custom quote?</h3>

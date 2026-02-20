@@ -8,6 +8,10 @@ import { servicesData } from "@/data/servicesData";
 import TextAnimation from "./TextAnimation";
 import { FadeInUp } from "./Animations";
 
+import { cn } from "@/lib/utils";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+
+
 interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -20,6 +24,7 @@ interface PageHeaderProps {
 
 const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
     <GradientContainer backgroundColor="bg-primary" className="my-6">
@@ -32,7 +37,10 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
         />
 
         {/* Breadcrumbs */}
-        <div className="flex items-center gap-4 rounded-full px-6 md:py-2.5 py-1 shadow-xl bg-white/10 backdrop-blur-md border border-white/20 relative z-100">
+        <div className={cn(
+          "flex items-center gap-4 rounded-full px-6 md:py-2.5 py-1 shadow-xl border border-white/20 relative z-100",
+          isIPhone || isLowPerformance ? "bg-white/20" : "bg-white/10 backdrop-blur-md"
+        )}>
           <Link
             href="/"
             className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"
@@ -99,7 +107,10 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
                           transition={{ duration: 0.2, ease: "easeOut" }}
                           className="absolute top-full left-1/2 -translate-x-1/2 mt-4 pt-2 w-[280px] z-50 origin-top"
                         >
-                          <div className="bg-white/95 backdrop-blur-2xl rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/40 p-2 overflow-hidden">
+                          <div className={cn(
+                            "rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/40 p-2 overflow-hidden",
+                            isIPhone || isLowPerformance ? "bg-white" : "bg-white/95 backdrop-blur-2xl"
+                          )}>
                             <div className="grid grid-cols-1 gap-1">
                               {servicesData.map((service) => (
                                 <Link

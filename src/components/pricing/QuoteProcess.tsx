@@ -6,7 +6,11 @@ import TextAnimation from "@/components/common/TextAnimation";
 import { FadeInUp } from "@/components/common/Animations";
 import SectionBadge from "@/components/common/SectionBadge";
 
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
+
 const QuoteProcess = () => {
+  const { isIPhone, isLowPerformance } = usePerformance();
   const steps = [
     {
       number: "01",
@@ -105,9 +109,15 @@ const QuoteProcess = () => {
                 className="relative"
               >
                 {/* Step Card */}
-                <div className="relative bg-white/70 backdrop-blur-md border border-white/60 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <div className={cn(
+                  "relative border border-white/60 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group",
+                  isIPhone || isLowPerformance ? "bg-white" : "bg-white/70 backdrop-blur-md"
+                )}>
                   {/* Number Badge */}
-                  <div className="absolute -top-4 left-6 w-12 h-12 rounded-xl bg-[#3b49e6] flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform duration-300">
+                  <div className={cn(
+                    "absolute -top-4 left-6 w-12 h-12 rounded-xl bg-[#3b49e6] flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30 transition-transform duration-300",
+                    !isIPhone && !isLowPerformance && "group-hover:scale-110"
+                  )}>
                     {step.number}
                   </div>
 
@@ -131,7 +141,10 @@ const QuoteProcess = () => {
 
         {/* Quote Includes Section */}
         <FadeInUp delay={0.3}>
-          <div className="bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-xl border border-white/60 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-100/30">
+          <div className={cn(
+            "border border-white/60 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-100/30",
+            isIPhone || isLowPerformance ? "bg-white" : "bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-xl"
+          )}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left: Content */}
               <div>
@@ -207,8 +220,12 @@ const QuoteProcess = () => {
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-6 -right-6 w-32 h-32 bg-purple-200/30 rounded-full blur-2xl -z-10" />
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200/30 rounded-full blur-2xl -z-10" />
+                {!isIPhone && !isLowPerformance && (
+                  <>
+                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-purple-200/30 rounded-full blur-2xl -z-10" />
+                    <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200/30 rounded-full blur-2xl -z-10" />
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -219,7 +236,10 @@ const QuoteProcess = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-12 bg-blue-50/50 backdrop-blur-sm border border-blue-100 rounded-2xl p-6 flex items-start gap-4"
+          className={cn(
+            "mt-12 border border-blue-100 rounded-2xl p-6 flex items-start gap-4",
+            isIPhone || isLowPerformance ? "bg-blue-50" : "bg-blue-50/50 backdrop-blur-sm"
+          )}
         >
           <div className="w-10 h-10 rounded-lg bg-primary-blue/10 flex items-center justify-center shrink-0">
             <svg className="w-5 h-5 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -5,8 +5,12 @@ import { motion } from "framer-motion";
 import TextAnimation from "@/components/common/TextAnimation";
 import { FadeInUp } from "@/components/common/Animations";
 import SectionBadge from "@/components/common/SectionBadge";
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 const PricingHero = () => {
+  const { isIPhone, isLowPerformance } = usePerformance();
+
   return (
     <section className="relative py-20 lg:py-32 overflow-hidden bg-[#ecf0f0]">
       {/* Wave Background Pattern */}
@@ -23,7 +27,10 @@ const PricingHero = () => {
           
           {/* Left Column: Content */}
           <div className="relative z-10">
-            <div className="bg-white/60 backdrop-blur-xl border border-white/50 rounded-3xl p-8 md:p-12 lg:p-16 shadow-xl shadow-gray-100/50">
+            <div className={cn(
+              "border border-white/50 rounded-3xl p-8 md:p-12 lg:p-16 shadow-xl shadow-gray-100/50",
+              isIPhone || isLowPerformance ? "bg-white/80" : "bg-white/60 backdrop-blur-xl"
+            )}>
               <SectionBadge 
                 text="Transparent Pricing" 
                 className="bg-white border border-blue-100 text-[#3b49e6] mb-6 shadow-sm" 
@@ -94,10 +101,13 @@ const PricingHero = () => {
                 <div className="absolute top-4 right-4 w-[90%] h-[90%] bg-linear-to-br from-blue-50 to-purple-50 rounded-3xl shadow-2xl transform rotate-3 opacity-80" />
                 
                 {/* Front Card - Main Content */}
-                <div className="absolute top-0 left-0 w-full h-full bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl shadow-2xl p-8 flex flex-col justify-between">
+                <div className={cn(
+                  "absolute top-0 left-0 w-full h-full border border-white/60 rounded-3xl shadow-2xl p-8 flex flex-col justify-between",
+                  isIPhone || isLowPerformance ? "bg-white" : "bg-white/80 backdrop-blur-xl"
+                )}>
                   <div>
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-100 rounded-full mb-6">
-                      <div className="w-2 h-2 bg-[#3b49e6] rounded-full animate-pulse" />
+                      <div className={cn("w-2 h-2 bg-[#3b49e6] rounded-full", !isIPhone && !isLowPerformance && "animate-pulse")} />
                       <span className="text-sm font-semibold text-[#3b49e6]">Tailored Quote</span>
                     </div>
                     
@@ -137,8 +147,12 @@ const PricingHero = () => {
               </div>
               
               {/* Decorative Elements */}
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-blue-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-purple-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
+              {!isIPhone && !isLowPerformance && (
+                <>
+                  <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-blue-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
+                  <div className="absolute -top-12 -left-12 w-48 h-48 bg-purple-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
+                </>
+              )}
             </div>
           </div>
         </div>

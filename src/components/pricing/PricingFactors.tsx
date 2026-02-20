@@ -111,9 +111,14 @@ const pricingFactors = [
   }
 ];
 
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
+
+
 const PricingFactors = () => {
   const [selectedFactor, setSelectedFactor] = useState(pricingFactors[0]);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden bg-white">
@@ -156,18 +161,22 @@ const PricingFactors = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               onClick={() => setSelectedFactor(factor)}
-              onMouseEnter={() => setHoveredId(factor.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              className={`group relative p-6 rounded-2xl text-left transition-all duration-500 ${
+              onMouseEnter={() => !isIPhone && !isLowPerformance && setHoveredId(factor.id)}
+              onMouseLeave={() => !isIPhone && !isLowPerformance && setHoveredId(null)}
+              className={cn(
+                "group relative p-6 rounded-2xl text-left transition-all duration-500",
                 selectedFactor.id === factor.id
                   ? 'bg-primary-blue text-white shadow-2xl shadow-primary-blue/30 scale-105'
-                  : 'bg-white/70 backdrop-blur-md border border-gray-100 hover:shadow-xl hover:border-primary-blue/30'
-              }`}
+                  : cn(
+                      "bg-white border border-gray-100",
+                      isIPhone || isLowPerformance ? "" : "backdrop-blur-md hover:shadow-xl hover:border-primary-blue/30"
+                    )
+              )}
             >
               {/* Animated Background Glow */}
               {selectedFactor.id === factor.id && (
                 <motion.div
-                  layoutId="selectedGlow"
+                  layoutId={isIPhone || isLowPerformance ? undefined : "selectedGlow"}
                   className="absolute inset-0 bg-primary-blue rounded-2xl -z-10"
                   initial={false}
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
@@ -176,42 +185,46 @@ const PricingFactors = () => {
 
               {/* Icon */}
               <motion.div 
-                className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 ${
+                className={cn(
+                  "w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-300",
                   selectedFactor.id === factor.id
                     ? 'bg-white/20'
                     : 'bg-primary-blue text-white'
-                }`}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.95 }}
+                )}
+                whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.1, rotate: 5 }}
+                whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.95 }}
               >
                 {factor.icon}
               </motion.div>
 
               {/* Title */}
-              <h3 className={`text-lg font-bold mb-2 transition-colors ${
+              <h3 className={cn(
+                "text-lg font-bold mb-2 transition-colors",
                 selectedFactor.id === factor.id ? 'text-white' : 'text-[#1a1c35]'
-              }`}>
+              )}>
                 {factor.title}
               </h3>
 
               {/* Short Description */}
-              <p className={`text-sm leading-relaxed ${
+              <p className={cn(
+                "text-sm leading-relaxed",
                 selectedFactor.id === factor.id ? 'text-white/90' : 'text-gray-600'
-              }`}>
+              )}>
                 {factor.shortDesc}
               </p>
 
               {/* Number Badge */}
-              <div className={`absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+              <div className={cn(
+                "absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300",
                 selectedFactor.id === factor.id
                   ? 'bg-white/20 text-white'
                   : 'bg-primary-blue/10 text-primary-blue'
-              }`}>
+              )}>
                 {factor.id}
               </div>
 
               {/* Hover Border Animation */}
-              {hoveredId === factor.id && selectedFactor.id !== factor.id && (
+              {hoveredId === factor.id && selectedFactor.id !== factor.id && !isIPhone && !isLowPerformance && (
                 <motion.div
                   layoutId="hoverBorder"
                   className="absolute inset-0 border-2 border-primary-blue/50 rounded-2xl"
@@ -232,7 +245,10 @@ const PricingFactors = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="bg-gradient-to-br from-white to-gray-50/50 backdrop-blur-xl border border-gray-100 rounded-3xl p-8 md:p-12 shadow-2xl"
+            className={cn(
+              "bg-gradient-to-br from-white to-gray-50/50 border border-gray-100 rounded-3xl p-8 md:p-12 shadow-2xl",
+              isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"
+            )}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               {/* Left: Details */}
@@ -263,7 +279,10 @@ const PricingFactors = () => {
                       transition={{ delay: idx * 0.1 }}
                       className="flex items-start gap-3 group"
                     >
-                      <div className="w-6 h-6 rounded-full bg-primary-blue flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                      <div className={cn(
+                        "w-6 h-6 rounded-full bg-primary-blue flex items-center justify-center shrink-0 mt-0.5 transition-transform",
+                        !isIPhone && !isLowPerformance && "group-hover:scale-110"
+                      )}>
                         <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>

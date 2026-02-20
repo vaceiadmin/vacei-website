@@ -44,19 +44,27 @@ const expectations = [
   }
 ];
 
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
+
 const WhatToExpect = () => {
+  const { isIPhone, isLowPerformance } = usePerformance();
+
   return (
     <GradientContainer
       backgroundColor="bg-primary"
-      showRadials={true}
+      showRadials={!isIPhone && !isLowPerformance}
       className="py-20 lg:py-28 overflow-hidden"
     >
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8 z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <FadeInUp>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-6">
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            <div className={cn(
+              "inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6",
+              isIPhone || isLowPerformance ? "" : "backdrop-blur-md"
+            )}>
+              <div className={cn("w-2 h-2 bg-white rounded-full", !isIPhone && !isLowPerformance && "animate-pulse")} />
               <span className="text-sm font-semibold text-white">Our Commitment</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-medium text-white tracking-tight mb-8">
@@ -78,10 +86,16 @@ const WhatToExpect = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="group relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300"
+              className={cn(
+                "group relative border border-white/20 rounded-2xl p-8 transition-all duration-300",
+                isIPhone || isLowPerformance ? "bg-white/10" : "bg-white/10 backdrop-blur-md hover:bg-white/15"
+              )}
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-300">
+              <div className={cn(
+                "w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center text-white mb-6 transition-all duration-300",
+                isIPhone || isLowPerformance ? "" : "backdrop-blur-sm group-hover:scale-110 group-hover:bg-white/20"
+              )}>
                 {item.icon}
               </div>
 
@@ -101,12 +115,18 @@ const WhatToExpect = () => {
 
         {/* Bottom CTA Card */}
         <FadeInUp delay={0.4}>
-          <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 overflow-hidden">
+          <div className={cn(
+            "relative border border-white/20 rounded-3xl p-8 md:p-12 overflow-hidden",
+            isIPhone || isLowPerformance ? "bg-white/10" : "bg-white/10 backdrop-blur-xl"
+          )}>
             {/* Decorative Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
             
             <div className="relative z-10 text-center max-w-3xl mx-auto">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-white mx-auto mb-6">
+              <div className={cn(
+                "w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white mx-auto mb-6",
+                isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
+              )}>
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -122,21 +142,30 @@ const WhatToExpect = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center">
-                <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                <div className={cn(
+                  "flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20",
+                  isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
+                )}>
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span className="text-sm font-medium text-white">Fair Pricing</span>
                 </div>
                 
-                <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                <div className={cn(
+                  "flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20",
+                  isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
+                )}>
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span className="text-sm font-medium text-white">Full Transparency</span>
                 </div>
                 
-                <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                <div className={cn(
+                  "flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20",
+                  isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
+                )}>
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>

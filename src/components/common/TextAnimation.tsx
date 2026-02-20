@@ -15,6 +15,9 @@ interface TextAnimationProps {
   once?: boolean;
 }
 
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+
+
 /**
  * TextAnimation component that reveals text word-by-word when scrolled into view.
  * Only triggers on scroll down and plays once.
@@ -30,7 +33,7 @@ export const TextAnimation = ({
   const ref = useRef(null);
   const isInView = useDirectionalInView(ref);
   const isSafari = useIsSafari();
-  const reduceMotion = useReduceMotion();
+  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
 
   
   // Dynamic component type (h1, h2, etc.)
@@ -41,12 +44,14 @@ export const TextAnimation = ({
     return <Tag className={className}>{text}</Tag>;
   }
 
+  const isSimple = isIPhone || isLowPerformance;
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: isSafari ? 0.03 : 0.055, 
+        staggerChildren: isSimple ? 0.02 : (isSafari ? 0.03 : 0.055), 
         delayChildren: delay 
       },
 
@@ -56,15 +61,15 @@ export const TextAnimation = ({
   const wordVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: isSafari ? 10 : 22,
-      filter: isSafari ? "none" : "blur(6px)"
+      y: isSimple ? 5 : (isSafari ? 10 : 22),
+      filter: isSimple || isSafari ? "none" : "blur(6px)"
     },
     visible: {
       opacity: 1,
       y: 0,
       filter: "none",
       transition: {
-        duration: isSafari ? 0.3 : 0.5,
+        duration: isSimple ? 0.25 : (isSafari ? 0.3 : 0.5),
         ease: [0.2, 0.65, 0.3, 0.9],
       },
     },
