@@ -4,6 +4,14 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ReduceMotionContext = createContext(false);
 
+function isSafariOrIOS(): boolean {
+  if (typeof window === "undefined") return true;
+  const ua = window.navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isSafari = /Safari/.test(ua) && !/Chrome|Chromium|CriOS/.test(ua);
+  return isIOS || isSafari;
+}
+
 export function ReduceMotionProvider({ children }: { children: React.ReactNode }) {
   const [reduce, setReduce] = useState(true);
 
@@ -12,10 +20,15 @@ export function ReduceMotionProvider({ children }: { children: React.ReactNode }
     const prefersReduced =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setReduce(isMobile || prefersReduced);
+    const safariOrIOS = isSafariOrIOS();
+    setReduce(isMobile || prefersReduced || safariOrIOS);
 
     const onResize = () => {
-      setReduce(window.innerWidth < 768 || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      setReduce(
+        window.innerWidth < 768 ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          isSafariOrIOS()
+      );
     };
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
     mql.addEventListener("change", onResize);

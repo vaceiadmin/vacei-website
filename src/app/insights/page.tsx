@@ -27,6 +27,11 @@ export default function InsightsPage() {
       </div>
 
       <div className="relative z-10">
+        <div className="container mx-auto px-4 pt-4 max-w-7xl">
+          <p className="text-center text-text-gray text-lg max-w-2xl mx-auto mb-4">
+            Structured thinking on accounting, audit, compliance, business and professional growth.
+          </p>
+        </div>
         <InsightsClient />
       </div>
     </main>

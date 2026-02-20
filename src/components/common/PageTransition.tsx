@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { pageTransition } from "@/lib/motion";
+import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 
 export default function PageTransition({
   children,
@@ -11,12 +12,22 @@ export default function PageTransition({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const reduceMotion = useReduceMotion();
 
   // After route change, trigger resize so IntersectionObserver (whileInView) re-evaluates and content isn't stuck hidden
   useEffect(() => {
     const t = setTimeout(() => window.dispatchEvent(new Event("resize")), 80);
     return () => clearTimeout(t);
   }, [pathname]);
+
+  // No enter/exit animation when reducing motion: instant swap avoids Safari/nav bugs (empty page until refresh)
+  if (reduceMotion) {
+    return (
+      <div key={pathname} style={{ minHeight: "100vh", isolation: "isolate" }}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <AnimatePresence mode="wait">

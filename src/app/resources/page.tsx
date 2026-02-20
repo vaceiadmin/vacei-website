@@ -7,6 +7,7 @@ import PageHeader from "@/components/common/PageHeader";
 import { FadeInUp, StaggerContainer } from "@/components/common/Animations";
 
 const resourceLinks = [
+  { label: "Insights", href: "/insights", description: "Articles on accounting, audit, compliance and growth." },
   { label: "How It Works", href: "/how-it-works", description: "One portal. One team. Everything handled." },
   { label: "About VACEI", href: "/about", description: "Our story and approach." },
   { label: "FAQs", href: "/faq", description: "Frequently asked questions." },

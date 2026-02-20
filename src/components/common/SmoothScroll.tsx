@@ -3,7 +3,6 @@
 import { ReactLenis, useLenis } from "lenis/react";
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ReduceMotionProvider } from "@/contexts/ReduceMotionContext";
 
 interface SmoothScrollProps {
   children: ReactNode;
@@ -48,16 +47,12 @@ function ScrollReset() {
 export function SmoothScroll({ children }: SmoothScrollProps) {
   const preferNativeScroll = usePreferNativeScroll();
 
-  return (
-    <ReduceMotionProvider>
-      {preferNativeScroll ? (
-        <>{children}</>
-      ) : (
-        <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
-          <ScrollReset />
-          {children}
-        </ReactLenis>
-      )}
-    </ReduceMotionProvider>
+  return preferNativeScroll ? (
+    <>{children}</>
+  ) : (
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+      <ScrollReset />
+      {children}
+    </ReactLenis>
   );
 }
