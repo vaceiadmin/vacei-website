@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
+import { useScrollDirection } from "@/contexts/ScrollContext";
 
 interface Options {
     margin?: string;
@@ -23,14 +24,15 @@ export function useDirectionalInView(
         amount: options.amount as any,
     });
 
+    const scrollDirection = useScrollDirection();
     const [hasTriggered, setHasTriggered] = useState(false);
 
     useEffect(() => {
-        // Trigger once when it enters view from any direction for consistent behavior
-        if (!hasTriggered && isInView) {
+        // Lock in the triggered state only when scrolling down
+        if (!hasTriggered && isInView && scrollDirection === "down") {
             setHasTriggered(true);
         }
-    }, [isInView, hasTriggered]);
+    }, [isInView, scrollDirection, hasTriggered]);
 
     return hasTriggered;
 }

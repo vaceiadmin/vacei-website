@@ -90,12 +90,15 @@ const HowItWorks = () => {
     const [isMobile] = useMobile()
 
     const togglePlayPause = (e?: React.MouseEvent) => {
-        if (e) e.stopPropagation()
+        if (e) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
         const video = videoRef.current
         if (!video) return
         if (video.paused) {
             userPausedRef.current = false
-            video.play().catch(() => {})
+            video.play().catch((err) => console.error("Video play failed:", err))
         } else {
             userPausedRef.current = true
             video.pause()
@@ -166,44 +169,50 @@ const HowItWorks = () => {
                             className="absolute inset-0 cursor-pointer"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
-                            onClick={() => togglePlayPause()}
                         >
                             <video
                                 ref={videoRef}
-                                src={encodeURI(HOW_IT_WORKS_VIDEO)}
-                                preload="metadata"
+                                src={HOW_IT_WORKS_VIDEO}
+                                preload="auto"
                                 loop
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
-                            {/* Centered glassmorphism play/pause button */}
-                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-  {(!isPlaying || (isHovered && !isMobile)) && (
-    <motion.button
-      type="button"
-      onClick={togglePlayPause}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-      className="pointer-events-auto z-10 relative flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-primary-blue border-2 border-white/40 text-white shadow-[0_8px_32px_rgba(59,73,230,0.5)] backdrop-blur-sm transition-all duration-300 hover:bg-primary-blue-hover hover:border-white/60 hover:shadow-[0_8px_40px_rgba(59,73,230,0.6)]"
-      aria-label={isPlaying ? "Pause" : "Play"}
-    >
-      {!isPlaying && (
-        <motion.span
-          className="absolute inset-0 rounded-full border-2 border-white/50"
-          animate={{ scale: [1, 1.3, 1.3], opacity: [0.6, 0, 0] }}
-          transition={{ duration: 2, repeat: 0, ease: "easeOut" }}
-        />
-      )}
+                            {/* Full-area invisible tap layer for pause/play */}
+                            <div 
+                                className="absolute inset-0 z-10 cursor-pointer"
+                                onClick={() => togglePlayPause()}
+                            />
 
-      {isPlaying ? (
-        <Pause className="w-8 h-8 md:w-10 md:h-10 relative z-10" fill="currentColor" />
-      ) : (
-        <Play className="w-8 h-8 md:w-10 md:h-10 ml-1 relative z-10" fill="currentColor" />
-      )}
-    </motion.button>
-  )}
-</div>
+                            <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
+                            
+                            {/* Centered glassmorphism play/pause button - controlled visibility */}
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                                {(!isPlaying || (isHovered && !isMobile)) && (
+                                    <motion.button
+                                        type="button"
+                                        onClick={togglePlayPause}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="pointer-events-auto flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-primary-blue border-2 border-white/40 text-white shadow-[0_8px_32px_rgba(59,73,230,0.5)] backdrop-blur-sm transition-all duration-300 hover:bg-primary-blue-hover hover:border-white/60 hover:shadow-[0_8px_40px_rgba(59,73,230,0.6)]"
+                                        aria-label={isPlaying ? "Pause" : "Play"}
+                                    >
+                                        {!isPlaying && (
+                                            <motion.span
+                                                className="absolute inset-0 rounded-full border-2 border-white/50"
+                                                animate={{ scale: [1, 1.3, 1.3], opacity: [0.6, 0, 0] }}
+                                                transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                                            />
+                                        )}
+
+                                        {isPlaying ? (
+                                            <Pause className="w-8 h-8 md:w-10 md:h-10 relative z-10" fill="currentColor" />
+                                        ) : (
+                                            <Play className="w-8 h-8 md:w-10 md:h-10 ml-1 relative z-10" fill="currentColor" />
+                                        )}
+                                    </motion.button>
+                                )}
+                            </div>
                         </div>
                     </FadeInUp>
 
