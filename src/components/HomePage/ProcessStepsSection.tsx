@@ -316,9 +316,9 @@ const ProcessStepsSection = () => {
   // Animation Variants
   const slideVariants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 30 : -30,
+      x: isIPhone || isLowPerformance ? (dir > 0 ? 10 : -10) : (dir > 0 ? 30 : -30),
       opacity: 0,
-      scale: 0.98,
+      scale: isIPhone || isLowPerformance ? 1 : 0.98,
     }),
     center: {
       zIndex: 1,
@@ -328,9 +328,9 @@ const ProcessStepsSection = () => {
     },
     exit: (dir: number) => ({
       zIndex: 0,
-      x: dir < 0 ? 30 : -30,
+      x: isIPhone || isLowPerformance ? (dir < 0 ? 10 : -10) : (dir < 0 ? 30 : -30),
       opacity: 0,
-      scale: 0.98,
+      scale: isIPhone || isLowPerformance ? 1 : 0.98,
     })
   }
 
@@ -699,8 +699,8 @@ const ProcessStepsSection = () => {
                         <div className="mt-8 flex items-center gap-4">
                              {currentStep > 0 && (
                                 <motion.button
-                                    whileHover={{ scale: 1.03, y: -2 }}
-                                    whileTap={{ scale: 0.97, y: 0 }}
+                                    whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.03, y: -2 }}
+                                    whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.97, y: 0 }}
                                     type="button"
                                     onClick={handleBack}
                                     className="px-6 py-4 rounded-xl font-bold text-gray-600 hover:text-[#1a1c35] bg-white/30 hover:bg-white/60 transition-all shadow-sm hover:shadow-md"
@@ -709,8 +709,8 @@ const ProcessStepsSection = () => {
                                 </motion.button>
                              )}
                              <motion.button
-                                whileHover={{ scale: 1.02, boxShadow: "0 10px 30px -10px rgba(59,73,230,0.4)" }}
-                                whileTap={{ scale: 0.98 }}
+                                whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.02, boxShadow: "0 10px 30px -10px rgba(59,73,230,0.4)" }}
+                                whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.98 }}
                                 type="submit"
                                 disabled={isSubmitting}
                                 className={`grow py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-[#3b49e6]/20 transition-all relative overflow-hidden group ${

@@ -193,14 +193,14 @@ const ServicesSection = () => {
                 {/* Carousel Area - padding prevents first/last card cutoff */}
                 <div className="relative min-h-[500px] overflow-visible">
                     <div className="flex gap-4 sm:gap-8 justify-center px-12 sm:px-14 md:px-16">
-                        <AnimatePresence mode="popLayout">
+                        <AnimatePresence mode={isIPhone || isLowPerformance ? undefined : "popLayout"}>
                             {displayItems.map((item, idx) => (
                   <motion.div 
                                     key={`${item.id}-${activeTab}-${idx}`}
-                                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                    initial={isIPhone || isLowPerformance ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                    transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                                    exit={isIPhone || isLowPerformance ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 20 }}
+                                    transition={{ duration: isIPhone || isLowPerformance ? 0.3 : 0.55, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[360px] min-w-0 shrink-0"
                                 >
                                     <div className={cn(
@@ -213,7 +213,9 @@ const ServicesSection = () => {
                                         {/* Animated Glassy Header (replaces image) - like HowItWorks cards */}
                                         <div className="h-[55%] relative w-full p-6 flex flex-col items-center justify-center gap-6 overflow-hidden">
                                             <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                            <div className="absolute inset-0 bg-primary-blue/10 blur-[60px] rounded-full scale-75 group-hover:scale-100 transition-transform duration-700 opacity-40" />
+                                            {!isIPhone && !isLowPerformance && (
+                                              <div className="absolute inset-0 bg-primary-blue/10 blur-[60px] rounded-full scale-75 group-hover:scale-100 transition-transform duration-700 opacity-40" />
+                                            )}
 
                                             {activeTab === "services" && item.featureTitles && item.featureTitles.length > 0 ? (
                                                 /* Services: glassy pills with feature titles */

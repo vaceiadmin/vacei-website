@@ -154,6 +154,16 @@ const Navbar = () => {
         return;
       }
 
+      // PERFORMANCE: Skip expensive background detection on iPhone/low-performance devices
+      if (isIPhone || isLowPerformance) {
+        const scrollY = window.scrollY || window.pageYOffset;
+        // On iPhone, we simplify: if scrolled more than a bit, we usually want a solid look or specific theme
+        // For VACEI, most pages start with a dark hero, so we can often default to darkBackground=true if at top
+        // or just use a fixed threshold. Let's use 50px as a threshold for "scrolled" state.
+        setIsDarkBackground(scrollY < 50); 
+        return;
+      }
+
       const navbarRect = navbar.getBoundingClientRect();
       const scrollY = window.scrollY || window.pageYOffset;
       const isAtTop = scrollY < 10; // Consider "at top" if scrolled less than 10px

@@ -5,11 +5,13 @@ import { motion } from "framer-motion"
 import Link from 'next/link'
 import { DirectionalDiv } from "../common/Animations"
 import { useIsSafari } from "@/hooks/use-safari"
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
 import { cn } from "@/lib/utils"
 
 
 const CompanySetupSection = () => {
   const isSafari = useIsSafari();
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden bg-[#D8E5E5]"> {/* Light Premium Background */}
@@ -68,7 +70,8 @@ const CompanySetupSection = () => {
             >
                 <div className={cn(
                   "h-full border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 hardware-accelerated",
-                  isSafari ? "bg-white/90" : "bg-white/70 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2"
+                  isSafari || isIPhone || isLowPerformance ? "bg-white/90" : "bg-white/70 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)]",
+                  !isIPhone && !isLowPerformance && "hover:-translate-y-2"
                 )}>
 
 
@@ -101,7 +104,8 @@ const CompanySetupSection = () => {
             >
                 <div className={cn(
                   "h-full border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] transition-all duration-500 hardware-accelerated",
-                  isSafari ? "bg-white/90" : "bg-white/70 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2"
+                  isSafari || isIPhone || isLowPerformance ? "bg-white/90" : "bg-white/70 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)]",
+                  !isIPhone && !isLowPerformance && "hover:-translate-y-2"
                 )}>
 
 
@@ -134,10 +138,15 @@ const CompanySetupSection = () => {
                 className="relative group h-full"
             >
                 {/* Dark Blue Gradient Card */}
-                <div className="h-full bg-gradient-to-br from-[#111235] to-[#1e2040] text-white p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(17,18,53,0.3)] hover:-translate-y-2 transition-all duration-500 relative overflow-hidden hardware-accelerated">
+                <div className={cn(
+                    "h-full bg-gradient-to-br from-[#111235] to-[#1e2040] text-white p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(17,18,53,0.3)] transition-all duration-500 relative overflow-hidden hardware-accelerated",
+                    !isIPhone && !isLowPerformance && "hover:-translate-y-2"
+                )}>
 
                     {/* Glow Effect */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#3b49e6]/30 blur-[50px] rounded-full" />
+                    {!isIPhone && !isLowPerformance && (
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-[#3b49e6]/30 blur-[50px] rounded-full" />
+                    )}
                     
                     <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-white/10">
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -165,7 +174,10 @@ const CompanySetupSection = () => {
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Link 
                 href="/company-setup"
-                className="px-8 py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 transition-all"
+                className={cn(
+                    "px-8 py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-blue-500/30 transition-all",
+                    !isIPhone && !isLowPerformance && "hover:shadow-blue-500/50 hover:scale-105"
+                )}
             >
                 Start Incorporation
             </Link>

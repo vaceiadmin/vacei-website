@@ -5,10 +5,13 @@ import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
 import TextAnimation from "../common/TextAnimation"
 import { DirectionalDiv } from "../common/Animations"
 import { useIsSafari } from "@/hooks/use-safari"
+import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
+import { cn } from "@/lib/utils"
 
 
 const ReadyToSimplifySection = () => {
   const isSafari = useIsSafari();
+  const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
@@ -37,12 +40,12 @@ const ReadyToSimplifySection = () => {
             {/* Decorative soft gradients */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <motion.div 
-                    animate={isSafari ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
+                    animate={isSafari || isIPhone || isLowPerformance ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
                     transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
                     className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-blue-50 rounded-full blur-[80px]" 
                 />
                 <motion.div 
-                    animate={isSafari ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
+                    animate={isSafari || isIPhone || isLowPerformance ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
                     transition={{ duration: 8, delay: 4, repeat: 0, ease: "easeInOut" }}
                     className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-50 rounded-full blur-[80px]" 
                 />
@@ -68,7 +71,10 @@ const ReadyToSimplifySection = () => {
                 <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
                 <GetInstantQuoteButton
                     text="Get Instant Quote"
-                    className="px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20 hover:scale-105 transition-transform"
+                    className={cn(
+                        "px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-transform",
+                        !isIPhone && !isLowPerformance && "hover:scale-105"
+                    )}
                     bgColor="#3b49e6"
                     textColor="white"
                     hasShadow={true}
@@ -80,7 +86,10 @@ const ReadyToSimplifySection = () => {
                     bgColor="white"
 
                     textColor="#1a1c35"
-                    className="px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all"
+                    className={cn(
+                        "px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 transition-all",
+                        !isIPhone && !isLowPerformance ? "hover:bg-gray-50 hover:scale-105" : ""
+                    )}
                     hasShadow={false}
                 />
                 </div>
