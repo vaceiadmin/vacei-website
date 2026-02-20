@@ -11,10 +11,22 @@ const ReadyToSimplifySection = () => {
       <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
         
         <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+                hidden: { opacity: 0, scale: 0.95, y: 20 },
+                visible: { 
+                    opacity: 1, 
+                    scale: 1, 
+                    y: 0,
+                    transition: { 
+                        duration: 0.6, 
+                        ease: [0.16, 1, 0.3, 1],
+                        staggerChildren: 0.1
+                    } 
+                }
+            }}
             className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
         >
             
@@ -32,7 +44,13 @@ const ReadyToSimplifySection = () => {
                 />
             </div>
 
-            <FadeInUp duration={0.6} delay={0.1} className="relative z-10 flex flex-col items-center">
+            <motion.div 
+                variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                className="relative z-10 flex flex-col items-center"
+            >
                 <TextAnimation
                 text="Ready to simplify your business?"
                 as="h2"
@@ -60,7 +78,7 @@ const ReadyToSimplifySection = () => {
                     hasShadow={false}
                 />
                 </div>
-            </FadeInUp>
+            </motion.div>
         </motion.div>
 
       </div>

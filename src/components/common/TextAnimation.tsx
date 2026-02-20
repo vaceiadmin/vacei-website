@@ -65,7 +65,7 @@ export const TextAnimation = ({
         <span key={index} className="inline-block overflow-hidden whitespace-nowrap">
           <motion.span
             variants={wordVariants}
-            className="inline-block mr-[0.25em]"
+            className="inline-block mr-[0.25em] leading-tight"
           >
             {word}
           </motion.span>
