@@ -1,6 +1,8 @@
 import { motion, Variants } from "framer-motion";
 import { useRef } from "react";
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
+import { useIsSafari } from "@/hooks/use-safari";
+
 
 interface TextAnimationProps {
   text: string;
@@ -24,6 +26,8 @@ export const TextAnimation = ({
   const words = text.split(" ");
   const ref = useRef(null);
   const isInView = useDirectionalInView(ref);
+  const isSafari = useIsSafari();
+
   
   // Dynamic component type (h1, h2, etc.)
   const MotionComponent = (motion as any)[as];
@@ -33,28 +37,30 @@ export const TextAnimation = ({
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.055, 
+        staggerChildren: isSafari ? 0.03 : 0.055, 
         delayChildren: delay 
       },
+
     },
   };
 
   const wordVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: 22,
-      filter: "blur(6px)"
+      y: isSafari ? 10 : 22,
+      filter: isSafari ? "none" : "blur(6px)"
     },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
+      filter: "none",
       transition: {
-        duration: 0.5,
+        duration: isSafari ? 0.3 : 0.5,
         ease: [0.2, 0.65, 0.3, 0.9],
       },
     },
   };
+
 
   return (
     <MotionComponent

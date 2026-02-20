@@ -5,6 +5,9 @@ import { getServiceForm, SERVICE_TYPE_OPTIONS, type ServiceField } from "@/data/
 import { useDirectionalInView } from "@/hooks/use-directional-in-view"
 import { DirectionalDiv } from "../common/Animations"
 import { useRef } from "react"
+import { useIsSafari } from "@/hooks/use-safari"
+import { cn } from "@/lib/utils"
+
 
 // --- Types ---
 type FormData = {
@@ -147,6 +150,8 @@ const ProcessStepsSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [direction, setDirection] = useState(0)
   const [openSelectKey, setOpenSelectKey] = useState<string | null>(null)
+  const isSafari = useIsSafari()
+
 
   const step = formSteps[currentStep]
   const serviceFormConfig = formData.service ? getServiceForm(formData.service) : null
@@ -333,14 +338,15 @@ const ProcessStepsSection = () => {
         {/* Animated Background Elements - Safari Friendly */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ transform: 'translateZ(0)' }}>
              <motion.div 
-               animate={isInView ? { y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] } : {}}
+               animate={isInView && !isSafari ? { y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] } : {}}
                transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
                className="absolute top-0 right-0 w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-white/30 blur-[60px] rounded-full"
                style={{ transform: 'translateZ(0)' }}
              />
              <motion.div 
-               animate={isInView ? { y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] } : {}}
+               animate={isInView && !isSafari ? { y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] } : {}}
                transition={{ duration: 10, repeat: 0, ease: "easeInOut", delay: 1 }}
+
                className="absolute bottom-0 left-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-blue-100/30 blur-[60px] rounded-full" 
                style={{ transform: 'translateZ(0)' }}
              />
@@ -359,9 +365,13 @@ const ProcessStepsSection = () => {
             >
                {/* 3D Tilt Wrapper / Card */}
                <div 
-                 className="relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)] h-full"
-                 style={{ WebkitBackdropFilter: 'blur(24px)', transform: 'translateZ(0)' }}
+                 className={cn(
+                   "relative border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 h-full",
+                   isSafari ? "bg-white/60" : "bg-white/40 backdrop-blur-xl hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]"
+                 )}
+                 style={{ WebkitBackdropFilter: isSafari ? 'none' : 'blur(24px)', transform: 'translateZ(0)' }}
                >
+
                   
                   {/* Glossy Reflection */}
                   <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-white/40 to-transparent opacity-50 pointer-events-none" />
@@ -757,7 +767,11 @@ const ProcessStepsSection = () => {
             {/* --- Right Column: Sleek Timeline --- */}
             <div className="relative lg:pl-10 h-full flex flex-col justify-center">
                 {/* Connecting Line (Track) */}
-                <div className="absolute left-[31px] top-7 bottom-10 w-[2px] bg-white/40 backdrop-blur-sm rounded-full lg:block hidden" />
+                <div className={cn(
+                  "absolute left-[31px] top-7 bottom-10 w-[2px] rounded-full lg:block hidden",
+                  isSafari ? "bg-white/60" : "bg-white/40 backdrop-blur-sm"
+                )} />
+
                 
                 {/* Active Progress Line */}
                 <div className="absolute left-[31px] top-7 bottom-10 lg:block hidden">

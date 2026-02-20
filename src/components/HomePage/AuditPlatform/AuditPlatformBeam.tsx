@@ -14,6 +14,8 @@ import {
   ShieldCheck, 
   User
 } from "lucide-react";
+import { useIsSafari } from "@/hooks/use-safari";
+
 
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 
@@ -24,6 +26,7 @@ const Circle = forwardRef<
 >(({ className, children, label, delay = 0 }, ref) => {
   const innerRef = useRef<HTMLDivElement>(null);
   const isInView = useDirectionalInView(innerRef);
+  const isSafari = useIsSafari();
   
   // Expose both refs (internal for observation, passed for external linking)
   useImperativeHandle(ref, () => innerRef.current!);
@@ -33,11 +36,12 @@ const Circle = forwardRef<
       ref={innerRef}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.5, delay: delay * 0.1 }}
+      transition={{ duration: 0.5, delay: isSafari ? 0 : delay * 0.1 }}
       className="flex flex-col items-center gap-1 sm:gap-1.5 min-w-[50px] sm:min-w-[70px]"
     >
+
       <motion.div
-        animate={isInView ? {
+        animate={isInView && !isSafari ? {
           y: [0, -6, 0],
         } : { y: 0 }}
         transition={{
@@ -46,6 +50,7 @@ const Circle = forwardRef<
           ease: "easeInOut",
           delay: delay,
         }}
+
         className={cn(
           "z-10 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:shadow-lg hover:shadow-primary-blue/10 hover:border-primary-blue/30",
           className
@@ -72,8 +77,10 @@ export default function AuditPlatformBeam({
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isSafari = useIsSafari();
   
   // Refs for logic flow
+
   // Column 1: Docs
   const doc1Ref = useRef<HTMLDivElement>(null);
   const doc2Ref = useRef<HTMLDivElement>(null);
@@ -163,7 +170,7 @@ export default function AuditPlatformBeam({
         duration={3}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={0.2}
+        pathOpacity={isSafari ? 0 : 0.2}
         gradientStartColor="#ef4444"
         gradientStopColor="#3b82f6"
       />
@@ -187,10 +194,11 @@ export default function AuditPlatformBeam({
         delay={1}
         curvature={0}
         pathColor="#94a3b8"
-        pathOpacity={0.2}
+        pathOpacity={isSafari ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#3b82f6"
       />
+
 
       {/* Beams: Services -> Portal */}
       <AnimatedBeam
@@ -200,7 +208,7 @@ export default function AuditPlatformBeam({
         duration={4}
         curvature={15}
         pathColor="#94a3b8"
-        pathOpacity={0.2}
+        pathOpacity={isSafari ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
@@ -224,10 +232,11 @@ export default function AuditPlatformBeam({
         delay={1.4}
         curvature={-15}
         pathColor="#94a3b8"
-        pathOpacity={0.2}
+        pathOpacity={isSafari ? 0 : 0.2}
         gradientStartColor="#3b82f6"
         gradientStopColor="#6366f1"
       />
+
 
       {/* Beam: Portal -> Client */}
       <AnimatedBeam

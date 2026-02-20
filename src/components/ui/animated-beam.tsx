@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import { RefObject, useEffect, useId, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, isIOSSafari } from "@/lib/utils";
+import { useIsSafari } from "@/hooks/use-safari";
+
 
 export interface AnimatedBeamProps {
   className?: string;
@@ -49,6 +51,8 @@ export const AnimatedBeam = ({
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
   const isInView = useDirectionalInView(containerRef);
+  const isSafari = useIsSafari();
+
 
   // Calculate the gradient coordinates based on the reverse prop
   const gradientCoordinates = reverse
@@ -133,16 +137,19 @@ export const AnimatedBeam = ({
         d={pathD}
         stroke={pathColor}
         strokeWidth={pathWidth}
-        strokeOpacity={pathOpacity}
+        strokeOpacity={isSafari ? pathOpacity * 2 : pathOpacity}
         strokeLinecap="round"
       />
-      <path
-        d={pathD}
-        stroke={`url(#${id})`}
-        strokeWidth={pathWidth}
-        strokeOpacity="1"
-        strokeLinecap="round"
-      />
+      {!isSafari && (
+        <path
+          d={pathD}
+          stroke={`url(#${id})`}
+          strokeWidth={pathWidth}
+          strokeOpacity="1"
+          strokeLinecap="round"
+        />
+      )}
+
       <defs>
         <motion.linearGradient
           className="transform-gpu"

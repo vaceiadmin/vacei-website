@@ -1,5 +1,6 @@
-import React from "react";
 import { cn } from "@/lib/utils";
+import { useIsSafari } from "@/hooks/use-safari";
+
 
 interface GlassyEffectProps {
   children: React.ReactNode;
@@ -14,31 +15,27 @@ const GlassyEffect = ({
   intensity = "premium",
   animated = false,
 }: GlassyEffectProps) => {
+  const isSafari = useIsSafari();
+
   const intensityClasses = {
-    low: `
-      bg-primary/5
-      backdrop-blur-sm
-      border border-primary/10
-    `,
-    medium: `
-      bg-primary/10
-      backdrop-blur-md
-      border border-primary/20
-      shadow-lg shadow-primary/10
-    `,
-    high: `
-      bg-primary/15
-      backdrop-blur-lg
-      border border-primary/30
-      shadow-xl shadow-primary/20
-    `,
-    premium: `
-      bg-primary/10
-      backdrop-blur-xl
-      border border-primary/20
-      shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]
-    `,
+    low: cn(
+      "bg-primary/5 border border-primary/10",
+      isSafari ? "bg-primary/15" : "backdrop-blur-sm"
+    ),
+    medium: cn(
+      "border border-primary/20 shadow-lg shadow-primary/10",
+      isSafari ? "bg-primary/25" : "bg-primary/10 backdrop-blur-md"
+    ),
+    high: cn(
+      "border border-primary/30 shadow-xl shadow-primary/20",
+      isSafari ? "bg-primary/30" : "bg-primary/15 backdrop-blur-lg"
+    ),
+    premium: cn(
+      "border border-primary/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]",
+      isSafari ? "bg-primary/25" : "bg-primary/10 backdrop-blur-xl"
+    ),
   };
+
 
   return (
     <div

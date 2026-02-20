@@ -7,6 +7,9 @@ import Link from "next/link";
 import GradientContainer from "../common/GradientContainer";
 import { servicesData } from "@/data/servicesData";
 import { DirectionalDiv } from "../common/Animations";
+import { useIsSafari } from "@/hooks/use-safari";
+import { cn } from "@/lib/utils";
+
 
 interface BaseCard {
   id: string | number;
@@ -28,6 +31,8 @@ const ServicesSection = () => {
   const [activeTab, setActiveTab] = useState<"services" | /* "experts" | */ "products">("services");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
+  const isSafari = useIsSafari();
+
 
   const serviceSubtitleMap: Record<string, string> = {
     "accounting-finance": "Ongoing accounting, reporting and CFO support for your business.",
@@ -156,8 +161,12 @@ const ServicesSection = () => {
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex p-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full"
+                        className={cn(
+                          "flex p-1.5 border border-white/10 rounded-full",
+                          isSafari ? "bg-white/20" : "bg-white/5 backdrop-blur-xl"
+                        )}
                     >
+
               {(["services", /* "experts", */ "products"] as const).map((tab) => (
                 <button
                   key={tab}
@@ -192,7 +201,11 @@ const ServicesSection = () => {
                                     transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                                     className="w-full max-w-[320px] sm:max-w-[340px] lg:max-w-[360px] min-w-0 shrink-0"
                                 >
-                                    <div className="group relative h-[480px] w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)] transition-all duration-500">
+                                    <div className={cn(
+                                        "group relative h-[480px] w-full border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500",
+                                        isSafari ? "bg-white/20 hover:bg-white/25" : "bg-white/5 backdrop-blur-2xl hover:bg-white/10 hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.3)]"
+                                    )}>
+
                                         
                                         {/* Animated Glassy Header (replaces image) - like HowItWorks cards */}
                                         <div className="h-[55%] relative w-full p-6 flex flex-col items-center justify-center gap-6 overflow-hidden">
@@ -208,7 +221,11 @@ const ServicesSection = () => {
                                                             initial={{ opacity: 0, y: 12 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             transition={{ delay: idx * 0.1 + i * 0.08, duration: 0.4 }}
-                                                            className="px-4 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 text-white/90 text-xs font-medium group-hover:bg-white/15 group-hover:border-white/20 transition-all duration-300"
+                                                            className={cn(
+                                                              "px-4 py-2.5 rounded-xl border border-white/10 text-white/90 text-xs font-medium group-hover:border-white/20 transition-all duration-300",
+                                                              isSafari ? "bg-white/20 group-hover:bg-white/30" : "bg-white/10 backdrop-blur-md group-hover:bg-white/15"
+                                                            )}
+
                                                         >
                                                             {label}
                                                         </motion.div>
@@ -289,15 +306,22 @@ const ServicesSection = () => {
 
                 {/* Navigation Buttons - Floating */}
                 <div className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 md:left-8 z-20">
-                    <button onClick={prevSlide} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg" aria-label="Previous">
+                    <button onClick={prevSlide} className={cn(
+                      "w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center text-white transition-all shadow-lg",
+                      isSafari ? "bg-white/20" : "bg-white/10 hover:bg-white/20 backdrop-blur-xl hover:scale-110 active:scale-95"
+                    )} aria-label="Previous">
                         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 </div>
                 <div className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 md:right-8 z-20">
-                    <button onClick={nextSlide} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 shadow-lg" aria-label="Next">
+                    <button onClick={nextSlide} className={cn(
+                       "w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 flex items-center justify-center text-white transition-all shadow-lg",
+                       isSafari ? "bg-white/20" : "bg-white/10 hover:bg-white/20 backdrop-blur-xl hover:scale-110 active:scale-95"
+                    )} aria-label="Next">
                         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </button>
               </div>
+
 
           </div>
         </GradientContainer>

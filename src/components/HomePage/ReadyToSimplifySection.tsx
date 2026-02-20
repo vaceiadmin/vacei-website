@@ -4,8 +4,12 @@ import { motion } from "framer-motion"
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
 import TextAnimation from "../common/TextAnimation"
 import { DirectionalDiv } from "../common/Animations"
+import { useIsSafari } from "@/hooks/use-safari"
+
 
 const ReadyToSimplifySection = () => {
+  const isSafari = useIsSafari();
+
   return (
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
       <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
@@ -32,16 +36,17 @@ const ReadyToSimplifySection = () => {
             {/* Decorative soft gradients */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <motion.div 
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
+                    animate={isSafari ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
                     transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
                     className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-blue-50 rounded-full blur-[80px]" 
                 />
                 <motion.div 
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
+                    animate={isSafari ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
                     transition={{ duration: 8, delay: 4, repeat: 0, ease: "easeInOut" }}
                     className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-50 rounded-full blur-[80px]" 
                 />
             </div>
+
 
             <DirectionalDiv 
                 variants={{

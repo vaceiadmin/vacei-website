@@ -4,6 +4,9 @@ import React, { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Play, Pause } from "lucide-react"
 import { useMobile } from "@/hooks/use-mobile"
+import { useIsSafari } from "@/hooks/use-safari"
+import { cn } from "@/lib/utils"
+
 import { FadeInUp, StaggerContainer, DirectionalDiv } from "../common/Animations"
 import TextAnimation from "../common/TextAnimation"
 
@@ -88,6 +91,8 @@ const HowItWorks = () => {
     const [isPlaying, setIsPlaying] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
     const [isMobile] = useMobile()
+    const isSafari = useIsSafari()
+
 
     const togglePlayPause = (e?: React.MouseEvent) => {
         if (e) {
@@ -163,7 +168,11 @@ const HowItWorks = () => {
                     </FadeInUp>
 
                     {/* Video Banner - autoplay on scroll into view */}
-                    <FadeInUp duration={0.6} delay={0.15} className="relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10 bg-slate-950">
+                    <FadeInUp duration={0.6} delay={0.15} className={cn(
+                        "relative w-full max-w-5xl mx-auto aspect-video md:aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 border border-white/10",
+                        isSafari ? "bg-slate-900" : "bg-slate-950 backdrop-blur-2xl"
+                    )}>
+
                         <div
                             ref={containerRef}
                             className="absolute inset-0 cursor-pointer"
@@ -197,13 +206,14 @@ const HowItWorks = () => {
                                         className="pointer-events-auto flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-primary-blue border-2 border-white/40 text-white shadow-[0_8px_32px_rgba(59,73,230,0.5)] backdrop-blur-sm transition-all duration-300 hover:bg-primary-blue-hover hover:border-white/60 hover:shadow-[0_8px_40px_rgba(59,73,230,0.6)]"
                                         aria-label={isPlaying ? "Pause" : "Play"}
                                     >
-                                        {!isPlaying && (
+                                        {!isPlaying && !isSafari && (
                                             <motion.span
                                                 className="absolute inset-0 rounded-full border-2 border-white/50"
                                                 animate={{ scale: [1, 1.3, 1.3], opacity: [0.6, 0, 0] }}
                                                 transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
                                             />
                                         )}
+
 
                                         {isPlaying ? (
                                             <Pause className="w-8 h-8 md:w-10 md:h-10 relative z-10" fill="currentColor" />
@@ -222,9 +232,13 @@ const HowItWorks = () => {
                         {steps.map((step, index) => (
                             <React.Fragment key={index}>
                                 <DirectionalDiv
-                                    whileHover={{ y: -5 }}
-                                    className="relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-300 group hover:bg-white/10 hover:border-primary-blue/30 lg:flex-1 lg:min-w-0"
+                                    whileHover={isSafari ? {} : { y: -5 }}
+                                    className={cn(
+                                        "relative p-6 rounded-2xl border border-white/10 transition-all duration-300 group hover:border-primary-blue/30 lg:flex-1 lg:min-w-0",
+                                        isSafari ? "bg-white/10" : "bg-white/5 backdrop-blur-md hover:bg-white/10"
+                                    )}
                                 >
+
                                     {/* Icon Box */}
                                     <div className="w-14 h-14 rounded-xl bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-300 shadow-lg">
                                         {step.icon}

@@ -4,8 +4,13 @@ import React from 'react'
 import { motion } from "framer-motion"
 import Link from 'next/link'
 import { DirectionalDiv } from "../common/Animations"
+import { useIsSafari } from "@/hooks/use-safari"
+import { cn } from "@/lib/utils"
+
 
 const CompanySetupSection = () => {
+  const isSafari = useIsSafari();
+
   return (
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden bg-[#D8E5E5]"> {/* Light Premium Background */}
       
@@ -61,7 +66,11 @@ const CompanySetupSection = () => {
                 transition={{ duration: 0.55 }}
                 className="relative group h-full"
             >
-                <div className="h-full bg-white/70 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2 transition-all duration-500">
+                <div className={cn(
+                  "h-full border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] transition-all duration-500",
+                  isSafari ? "bg-white/90" : "bg-white/70 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2"
+                )}>
+
                     <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-[#3b49e6] mb-6 group-hover:scale-110 transition-transform duration-500 border border-blue-100">
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                     </div>
@@ -89,7 +98,11 @@ const CompanySetupSection = () => {
                 transition={{ duration: 0.55, delay: 0.1 }}
                 className="relative group h-full"
             >
-                <div className="h-full bg-white/70 backdrop-blur-xl border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2 transition-all duration-500">
+                <div className={cn(
+                  "h-full border border-white/60 p-8 rounded-[2rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] transition-all duration-500",
+                  isSafari ? "bg-white/90" : "bg-white/70 backdrop-blur-xl hover:shadow-[0_30px_60px_-15px_rgba(59,73,230,0.15)] hover:-translate-y-2"
+                )}>
+
                     <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-[#3b49e6] mb-6 group-hover:scale-110 transition-transform duration-500 border border-blue-100">
                         {/* Switched to User Icon for 'You Do' */}
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>

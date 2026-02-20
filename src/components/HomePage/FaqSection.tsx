@@ -10,6 +10,8 @@ import TextAnimation from "../common/TextAnimation";
 import { FadeInUp, StaggerContainer as StaggerEffect, DirectionalDiv } from "../common/Animations";
 import { useRef } from "react";
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
+import { useIsSafari } from "@/hooks/use-safari";
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 36, scale: 0.96 },
@@ -38,7 +40,9 @@ const staggerContainer = {
 const FaqSection = () => {
   const sectionRef = useRef(null);
   const isInView = useDirectionalInView(sectionRef);
+  const isSafari = useIsSafari();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+
 
   const items = [
     {
@@ -67,21 +71,23 @@ const FaqSection = () => {
           {/* Animated Background Blobs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <motion.div 
-              animate={isInView ? { 
+              animate={isInView && !isSafari ? { 
                 x: [0, 40, 0],
                 y: [0, 50, 0],
                 scale: [1, 1.1, 1]
               } : {}}
               transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
+
               className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full"
             />
             <motion.div 
-              animate={isInView ? { 
+              animate={isInView && !isSafari ? { 
                 x: [0, -30, 0],
                 y: [0, -40, 0],
                 scale: [1, 1.2, 1]
               } : {}}
               transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
+
               className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full"
             />
           </div>
