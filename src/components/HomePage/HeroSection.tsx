@@ -8,8 +8,6 @@ import GradientContainer from "../common/GradientContainer";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 
-const HERO_YOUTUBE_ID = "ja8vHdyu6Qs";
-
 const HeroSection = () => {
   const reduceMotion = useReduceMotion();
 
@@ -66,11 +64,9 @@ const HeroSection = () => {
     <div className="w-full max-w-5xl mx-auto mt-16">
       <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-slate-950 backdrop-blur-2xl [transform:translateZ(0)]">
         <div className="aspect-video relative">
-          <iframe
-            src={`https://www.youtube.com/embed/${HERO_YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_YOUTUBE_ID}&controls=0&rel=0&modestbranding=1`}
-            title="VACEI platform overview"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+          <img
+            src="/assets/videos/Main Render.gif"
+            alt="VACEI platform overview"
             className="absolute inset-0 w-full h-full object-cover rounded-3xl"
           />
           <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
@@ -202,7 +198,7 @@ const HeroSection = () => {
           <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6, delay: 0.5 }} className="w-full max-w-5xl mx-auto mt-16">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-slate-950 backdrop-blur-2xl [transform:translateZ(0)]">
               <div className="aspect-video relative">
-                <iframe src={`https://www.youtube.com/embed/${HERO_YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_YOUTUBE_ID}&controls=0&rel=0&modestbranding=1`} title="VACEI platform overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="absolute inset-0 w-full h-full object-cover rounded-3xl" />
+                <img src="/assets/videos/Main Render.gif" alt="VACEI platform overview" className="absolute inset-0 w-full h-full object-cover rounded-3xl" />
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-white/20 rounded-3xl pointer-events-none" />
               </div>
