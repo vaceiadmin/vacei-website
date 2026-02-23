@@ -35,7 +35,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
   const breadcrumbs = [{ label: "Insights" }];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background hardware-accelerated">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 mt-12">
         <PageHeader
           title="Insights"

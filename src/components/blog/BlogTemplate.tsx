@@ -37,7 +37,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white hardware-accelerated">
       <div className="bg-background pt-12">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
           <PageHeader
@@ -197,34 +197,35 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
                   <article
                     key={relatedBlog.slug}
                     className={cn(
-                      "group relative flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-primary-blue/30 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary-blue/5",
+                      "group relative flex flex-col h-full bg-white hover:bg-primary-blue rounded-3xl border border-gray-100 hover:border-primary-blue transition-all duration-500 hover:shadow-2xl hover:shadow-primary-blue/20",
                       (isIPhone || isLowPerformance) && "hover:translate-y-0"
                     )}
                   >
                     <Link href={`/insights/${relatedBlog.slug}`} className="flex flex-col h-full p-6 md:p-8">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-primary-blue/5 text-primary-blue group-hover:bg-primary-blue group-hover:text-white transition-colors duration-300">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-primary-blue/5 text-primary-blue group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">
                           {relatedBlog.tags ? relatedBlog.tags[0] : 'Insight'}
                         </span>
-                        <div className="flex items-center text-xs text-text-gray/70 font-sans">
+                        <div className="flex items-center text-xs text-text-gray/70 group-hover:text-white/70 font-sans transition-colors duration-300">
+                          <Calendar className="w-3.5 h-3.5 mr-1" />
                           {format(new Date(relatedBlog.date), 'MMM dd, yyyy')}
                         </div>
                       </div>
                       
-                      <h3 className="text-lg font-bold text-text-heading mb-3 group-hover:text-primary-blue transition-colors duration-300 line-clamp-2 font-sans">
+                      <h3 className="text-lg font-bold text-text-heading mb-3 group-hover:text-white transition-colors duration-300 line-clamp-2 font-sans">
                         {relatedBlog.title}
                       </h3>
                       
-                      <p className="text-text-gray text-sm leading-relaxed mb-6 line-clamp-2 font-sans">
+                      <p className="text-text-gray text-sm leading-relaxed mb-6 line-clamp-2 group-hover:text-white/80 transition-colors duration-300 font-sans">
                         {relatedBlog.excerpt}
                       </p>
                       
-                      <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-50">
+                      <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-50 group-hover:border-white/10 transition-colors duration-300">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-text-heading font-sans">{relatedBlog.author}</span>
+                          <span className="text-sm font-bold text-text-heading group-hover:text-white transition-colors duration-300 font-sans">{relatedBlog.author}</span>
                         </div>
-                        <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-primary-blue transition-colors duration-300">
-                          <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors duration-300" />
+                        <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
+                          <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-primary-blue transition-colors duration-300" />
                         </div>
                       </div>
                     </Link>
