@@ -48,7 +48,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-16 mb-16 relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Featured Image */}
           {blog.featuredImage && (
             <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl mb-12 border-4 border-white">
@@ -62,67 +62,112 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
             </div>
           )}
 
-          {/* Article Info Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-6 py-8 border-b border-gray-100 mb-12">
-            <div className="flex flex-wrap items-center gap-6 text-sm text-text-gray font-sans">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-primary-blue/10 flex items-center justify-center">
-                  <User className="w-5 h-5 text-primary-blue" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-text-gray/50">Author</span>
-                  <span className="font-bold text-text-dark">{blog.author}</span>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Main Content (Left) */}
+            <div className="lg:col-span-8">
+              {/* Mobile Info (only visible on mobile) */}
+              <div className="lg:hidden flex flex-wrap items-center gap-4 py-6 border-b border-gray-100 mb-8 font-sans text-sm text-text-gray">
+                <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-primary-blue" /> {format(new Date(blog.date), 'MMM dd, yyyy')}</span>
+                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-primary-blue" /> {blog.readingTime}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-primary-blue/10 flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-primary-blue" />
+
+              <article className="max-w-none prose prose-lg prose-blue">
+                <MarkdownRenderer content={blog.content} />
+              </article>
+
+              {/* Bottom Tags (Mobile only) */}
+              {blog.tags && blog.tags.length > 0 && (
+                <div className="lg:hidden mt-8 flex flex-wrap gap-2">
+                  {blog.tags.map((tag, index) => (
+                    <span key={index} className="px-3 py-1 bg-primary-blue/5 text-primary-blue text-xs font-bold rounded-full border border-primary-blue/10">
+                      #{tag}
+                    </span>
+                  ))}
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-text-gray/50">Published</span>
-                  <span className="font-bold text-text-dark">{format(new Date(blog.date), 'MMMM dd, yyyy')}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-primary-blue/10 flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-primary-blue" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] uppercase tracking-wider font-bold text-text-gray/50">Reading Time</span>
-                  <span className="font-bold text-text-dark">{blog.readingTime}</span>
-                </div>
-              </div>
+              )}
             </div>
 
-            <button
-              onClick={handleShare}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-background border border-gray-200 text-text-dark rounded-full hover:bg-white hover:border-primary-blue hover:text-primary-blue transition-all font-medium font-sans shadow-sm"
-            >
-              <Share2 className="w-4 h-4" />
-              Share
-            </button>
+            {/* Sticky Sidebar (Right) */}
+            <aside className="hidden lg:block lg:col-span-4">
+              <div className="sticky top-32 space-y-8">
+                {/* Author Card */}
+                <div className="bg-background rounded-2xl p-6 border border-gray-100">
+                  <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans">WRITTEN BY</h4>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-primary-blue/10 flex items-center justify-center">
+                      <User className="w-6 h-6 text-primary-blue" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-text-heading leading-tight">{blog.author}</p>
+                      <p className="text-xs text-text-gray mt-0.5">VACEI Insights Team</p>
+                    </div>
+                  </div>
+                  <div className="space-y-3 pt-4 border-t border-gray-200/50">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-text-gray font-sans">Published</span>
+                      <span className="font-bold text-text-heading font-sans">{format(new Date(blog.date), 'MMM dd, yyyy')}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-text-gray font-sans">Reading Time</span>
+                      <span className="font-bold text-text-heading font-sans">{blog.readingTime}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Share Sidebar Action */}
+                <div className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm">
+                  <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans">SHARE INSIGHT</h4>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handleShare}
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-blue text-white rounded-xl hover:bg-primary-blue-hover transition-all font-bold font-sans text-sm shadow-lg shadow-primary-blue/20"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Copy Link
+                    </button>
+                  </div>
+                </div>
+
+                {/* Tags Sidebar */}
+                {blog.tags && blog.tags.length > 0 && (
+                  <div className="p-1">
+                    <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans px-2">TAGS</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {blog.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="px-4 py-1.5 bg-white text-text-gray text-xs font-bold rounded-full border border-gray-100 hover:border-primary-blue hover:text-primary-blue transition-all cursor-default font-sans"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Platform CTA */}
+                <div className="relative group overflow-hidden rounded-2xl bg-primary-blue p-6 text-white">
+                  <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
+                    <ArrowUpRight className="w-24 h-24" />
+                  </div>
+                  <div className="relative z-10">
+                    <h4 className="font-bold text-lg mb-2">Need an Audit?</h4>
+                    <p className="text-sm text-blue-100 mb-6">Connect with licensed auditors and streamline your compliance today.</p>
+                    <Link 
+                      href="/portals" 
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-primary-blue rounded-xl font-bold text-sm hover:gap-3 transition-all"
+                    >
+                      Get Started
+                      <ArrowUpRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
-
-          {/* Tags */}
-          {blog.tags && blog.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-12">
-              {blog.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-4 py-1.5 bg-primary-blue/5 text-primary-blue text-xs font-bold rounded-full border border-primary-blue/10 font-sans tracking-wide uppercase"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
-          
-          {/* Main Content */}
-          <article className="max-w-none prose prose-lg prose-blue">
-            <MarkdownRenderer content={blog.content} />
-          </article>
         </div>
       </div>
+
 
       {/* Suggested Blogs */}
       {relatedBlogs.length > 0 && (
