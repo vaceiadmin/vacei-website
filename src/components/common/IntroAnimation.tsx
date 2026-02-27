@@ -30,7 +30,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     // Hide intro sooner so page appears quickly
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 1000);
+    }, 800);
 
     return () => {
       clearTimeout(timer);
@@ -131,7 +131,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                   borderRadius: ["30%", "10%", "30%"],
                 }}
                 transition={{
-                  duration: isIPhone || isLowPerformance ? 12 : 8,
+                  duration: isIPhone || isLowPerformance ? 6 : 4,
                   repeat: Infinity,
                   ease: "linear",
                 }}
@@ -150,7 +150,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                   scale: [1, 1.1, 1],
                 }}
                 transition={{
-                  duration: 6,
+                  duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}

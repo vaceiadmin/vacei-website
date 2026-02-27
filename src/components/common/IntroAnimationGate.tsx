@@ -5,14 +5,10 @@ import IntroAnimation from "./IntroAnimation";
 
 // Shows the intro loader on every page load/refresh (no session persistence).
 const IntroAnimationGate = () => {
-  const [show, setShow] = useState(false);
+  // Initialize to true so it shows immediately on high-z-index, covering the page
+  const [show, setShow] = useState(true);
   const [showSoundPrompt, setShowSoundPrompt] = useState(false);
   const audioRef = React.useRef<HTMLAudioElement>(null);
-
-  useEffect(() => {
-    // Shows the intro loader on every page load/refresh
-    setShow(true);
-  }, []);
 
   useEffect(() => {
     // Attempt to play immediately
@@ -42,20 +38,18 @@ const IntroAnimationGate = () => {
       }
     };
 
-    const cleanupListeners = () => {
-      document.removeEventListener("click", handleInteraction);
-      document.removeEventListener("keydown", handleInteraction);
-      document.removeEventListener("touchstart", handleInteraction);
-    };
+    const handleKeyInteraction = () => handleInteraction();
 
     document.addEventListener("click", handleInteraction);
-    document.addEventListener("keydown", handleInteraction);
+    document.addEventListener("keydown", handleKeyInteraction);
     document.addEventListener("touchstart", handleInteraction);
 
     return () => {
-      cleanupListeners();
+      document.removeEventListener("click", handleInteraction);
+      document.removeEventListener("keydown", handleKeyInteraction);
+      document.removeEventListener("touchstart", handleInteraction);
     };
-  }, []);
+  }, []); // Combined into a single effect with constant dependency size
 
   const handleComplete = () => setShow(false);
 
@@ -67,7 +61,6 @@ const IntroAnimationGate = () => {
         ref={audioRef}
         src="/sounds/lucadialessandro-effect-for-logo-intro-186595.mp3"
         preload="auto"
-        // Use visibility hidden instead of display: none
         style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}
       />
       
@@ -89,4 +82,3 @@ const IntroAnimationGate = () => {
 };
 
 export default IntroAnimationGate;
-
