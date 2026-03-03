@@ -2,81 +2,100 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-const ReduceMotionContext = createContext({
-  reduceMotion: false,
+const ReduceMotionContext = createContext(false);
+
+type PerformanceState = {
+  isIPhone: boolean;
+  isLowPerformance: boolean;
+};
+
+const PerformanceContext = createContext<PerformanceState>({
   isIPhone: false,
   isLowPerformance: false,
 });
 
-function detectIPhone(): boolean {
-  if (typeof window === "undefined") return false;
-  const ua = window.navigator.userAgent;
-  return /iPhone/i.test(ua);
-}
-
-function detectLowPerformance(): boolean {
+function isSafariOrIOS(): boolean {
   if (typeof window === "undefined") return true;
   const ua = window.navigator.userAgent;
-  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isIOS =
+    /iPad|iPhone|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const isSafari = /Safari/.test(ua) && !/Chrome|Chromium|CriOS/.test(ua);
-  const isMobile = window.innerWidth < 768;
-  return isIOS || isSafari || isMobile;
+  return isIOS || isSafari;
 }
 
+function detectPerformance(): PerformanceState {
+  if (typeof window === "undefined") {
+    return { isIPhone: false, isLowPerformance: true };
+  }
 
-export function ReduceMotionProvider({ children }: { children: React.ReactNode }) {
-  const [state, setState] = useState({
-    reduceMotion: true, // conservative default
-    isIPhone: false,
-    isLowPerformance: true,
-  });
+  const ua = window.navigator.userAgent || "";
+  const isIPhone =
+    /iPhone|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  const smallScreen = window.innerWidth < 768;
+  const maybeLowMemory =
+    // Not supported in all browsers; fall back gracefully
+    // @ts-ignore
+    typeof navigator.deviceMemory === "number" &&
+    // @ts-ignore
+    navigator.deviceMemory <= 4;
+
+  const isLowPerformance = isIPhone || smallScreen || !!maybeLowMemory;
+
+  return { isIPhone, isLowPerformance };
+}
+
+export function ReduceMotionProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [reduce, setReduce] = useState(true);
+  const [performance, setPerformance] = useState<PerformanceState>(() =>
+    detectPerformance()
+  );
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    
-    const iPhone = detectIPhone();
-    const lowPerf = detectLowPerformance();
-    
-    setState({
-      reduceMotion: isMobile || prefersReduced || lowPerf,
-      isIPhone: iPhone,
-      isLowPerformance: lowPerf,
-    });
+    const updateFromEnvironment = () => {
+      const isMobile = window.innerWidth < 768;
+      const prefersReduced =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const safariOrIOS = isSafariOrIOS();
 
-    const onResize = () => {
-      const mobile = window.innerWidth < 768;
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const low = detectLowPerformance();
-      setState({
-        reduceMotion: mobile || reduced || low,
-        isIPhone: detectIPhone(),
-        isLowPerformance: low,
-      });
+      setReduce(isMobile || prefersReduced || safariOrIOS);
+      setPerformance(detectPerformance());
     };
-    
+
+    updateFromEnvironment();
+
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    mql.addEventListener("change", onResize);
-    window.addEventListener("resize", onResize);
+    const onChange = () => updateFromEnvironment();
+
+    mql.addEventListener("change", onChange);
+    window.addEventListener("resize", onChange);
+
     return () => {
-      mql.removeEventListener("change", onResize);
-      window.removeEventListener("resize", onResize);
+      mql.removeEventListener("change", onChange);
+      window.removeEventListener("resize", onChange);
     };
   }, []);
 
   return (
-    <ReduceMotionContext.Provider value={state}>
-      {children}
+    <ReduceMotionContext.Provider value={reduce}>
+      <PerformanceContext.Provider value={performance}>
+        {children}
+      </PerformanceContext.Provider>
     </ReduceMotionContext.Provider>
   );
 }
 
 export function useReduceMotion() {
-  return useContext(ReduceMotionContext).reduceMotion;
+  return useContext(ReduceMotionContext);
 }
 
 export function usePerformance() {
-  return useContext(ReduceMotionContext);
+  return useContext(PerformanceContext);
 }
