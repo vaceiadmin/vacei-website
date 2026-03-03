@@ -7,11 +7,13 @@ const ReduceMotionContext = createContext(false);
 type PerformanceState = {
   isIPhone: boolean;
   isLowPerformance: boolean;
+  reduceMotion: boolean;
 };
 
 const PerformanceContext = createContext<PerformanceState>({
   isIPhone: false,
   isLowPerformance: false,
+  reduceMotion: false,
 });
 
 function isSafariOrIOS(): boolean {
@@ -24,9 +26,9 @@ function isSafariOrIOS(): boolean {
   return isIOS || isSafari;
 }
 
-function detectPerformance(): PerformanceState {
+function detectPerformance(currentReduceMotion: boolean): PerformanceState {
   if (typeof window === "undefined") {
-    return { isIPhone: false, isLowPerformance: true };
+    return { isIPhone: false, isLowPerformance: true, reduceMotion: currentReduceMotion };
   }
 
   const ua = window.navigator.userAgent || "";
@@ -44,7 +46,7 @@ function detectPerformance(): PerformanceState {
 
   const isLowPerformance = isIPhone || smallScreen || !!maybeLowMemory;
 
-  return { isIPhone, isLowPerformance };
+  return { isIPhone, isLowPerformance, reduceMotion: currentReduceMotion };
 }
 
 export function ReduceMotionProvider({
@@ -54,7 +56,7 @@ export function ReduceMotionProvider({
 }) {
   const [reduce, setReduce] = useState(true);
   const [performance, setPerformance] = useState<PerformanceState>(() =>
-    detectPerformance()
+    detectPerformance(true)
   );
 
   useEffect(() => {
@@ -65,8 +67,9 @@ export function ReduceMotionProvider({
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const safariOrIOS = isSafariOrIOS();
 
-      setReduce(isMobile || prefersReduced || safariOrIOS);
-      setPerformance(detectPerformance());
+      const nextReduce = isMobile || prefersReduced || safariOrIOS;
+      setReduce(nextReduce);
+      setPerformance(detectPerformance(nextReduce));
     };
 
     updateFromEnvironment();
