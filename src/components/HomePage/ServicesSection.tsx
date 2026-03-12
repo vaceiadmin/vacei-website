@@ -36,13 +36,21 @@ const ServicesSection = () => {
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
 
 
+  const serviceTitleMap: Record<string, string> = {
+    "accounting-finance": "Accounting & Tax",
+    "audit-assurance": "Audit & Assurance",
+    "corporate-csp-services": "Corporate Services",
+    "advisory-growth": "Legal & Advisory",
+    "tax-compliance": "Payroll & Compliance",
+  };
+
   const serviceSubtitleMap: Record<string, string> = {
-    "accounting-finance": "Ongoing accounting, reporting and CFO support for your business.",
-    "tax-compliance": "Ongoing support for tax, payroll and statutory filings.",
-    "audit-assurance": "Structured statutory audits and assurance work with clear timelines.",
-    "corporate-csp-services": "Registered office, company secretary and ongoing corporate administration.",
+    "accounting-finance": "Bookkeeping, financial reporting, and tax compliance.",
+    "tax-compliance": "Employee payroll management and compliance filings.",
+    "audit-assurance": "Statutory audits and assurance engagements with clear milestones.",
+    "corporate-csp-services": "Company secretarial services, governance, and statutory maintenance.",
     "regulated-licensing": "Support for licence applications, renewals and key regulatory submissions.",
-    "advisory-growth": "Advisory projects that help you plan, grow and navigate key decisions.",
+    "advisory-growth": "Legal services and specialist advisory from partner firms.",
     "company-structure-corporate-changes": "Project-based changes to ownership, management and company structure.",
     "liquidation-wind-down": "Support to formally close, wind down or strike off entities.",
     "international-business-structuring": "Design and coordination of international structures and expansions.",
@@ -68,7 +76,7 @@ const ServicesSection = () => {
   // --- Data ---
   const services: BaseCard[] = servicesData.map((service) => ({
     id: service.id,
-    title: service.title,
+    title: serviceTitleMap[service.id] || service.title,
     subtitle:
       serviceSubtitleMap[service.id] ||
       "Structured support delivered through one digital platform.",
@@ -147,14 +155,22 @@ const ServicesSection = () => {
                             Our Ecosystem
                         </DirectionalDiv>
                         <DirectionalDiv 
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                            as="h2"
-                            className="text-3xl md:text-5xl font-bold text-white leading-tight mb-2"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                          as="h2"
+                          className="text-3xl md:text-5xl font-bold text-white leading-tight mb-2"
                         >
-                            Everything You Need <br />
-                            <span className="text-white/40">In One Place.</span>
+                          Everything Your Business Needs
+                        </DirectionalDiv>
+                        <DirectionalDiv
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ duration: 0.55, delay: 0.1 }}
+                          as="p"
+                          className="text-white/70 text-base md:text-lg max-w-xl leading-relaxed"
+                        >
+                          VACEI connects businesses with professional services through one structured workspace.
                         </DirectionalDiv>
           </div>
 

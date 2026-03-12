@@ -286,26 +286,25 @@ const Navbar = () => {
     };
   }, []);
 
-  // Desktop nav links – switch labels/structure in compact mode.
+  // Desktop nav links – updated labels aligned across modes.
   const navLinks = useCompactNav
     ? [
-        // 100% zoom and above: show Home in the main nav,
-        // move AI Review + How It Works + About under Resources.
         { label: "Home", href: "/" },
         {
-          label: "Services",
-          href: "#",
-          hasDropdown: true,
-          isOpen: servicesOpen,
-          setIsOpen: setServicesOpen,
-        },
-        {
-          label: "Portals",
-          href: "/portal/client-portal",
+          label: "Platform",
+          href: "/#platform",
           hasDropdown: true,
           isOpen: portalsOpen,
           setIsOpen: setPortalsOpen,
         },
+        {
+          label: "Services",
+          href: "/#services",
+          hasDropdown: true,
+          isOpen: servicesOpen,
+          setIsOpen: setServicesOpen,
+        },
+        { label: "Partners", href: "/partners" },
         { label: "Pricing", href: "/pricing" },
         {
           label: "Resources",
@@ -316,23 +315,22 @@ const Navbar = () => {
         },
       ]
     : [
-        // Default / 90% zoom layout – original structure with Home added.
         { label: "Home", href: "/" },
         {
-          label: "Services",
-          href: "#",
-          hasDropdown: true,
-          isOpen: servicesOpen,
-          setIsOpen: setServicesOpen,
-        },
-        { label: "How It Works", href: "/how-it-works" },
-        {
-          label: "Portals",
-          href: "/portal/client-portal",
+          label: "Platform",
+          href: "/#platform",
           hasDropdown: true,
           isOpen: portalsOpen,
           setIsOpen: setPortalsOpen,
         },
+        {
+          label: "Services",
+          href: "/#services",
+          hasDropdown: true,
+          isOpen: servicesOpen,
+          setIsOpen: setServicesOpen,
+        },
+        { label: "Partners", href: "/partners" },
         { label: "Pricing", href: "/pricing" },
         {
           label: "Resources",
@@ -482,7 +480,7 @@ const Navbar = () => {
                                 ))}
                               </div>
                             </div>
-                          ) : link.label === "Portals" ? (
+                          ) : link.label === "Platform" ? (
                             <div className="grid grid-cols-1 gap-1 p-1">
                               {portalLinks.map((item) => (
                                 <Link
@@ -528,12 +526,18 @@ const Navbar = () => {
             {/* Right Side Actions - Tight spacing */}
             <div className="flex items-center gap-3 lg:gap-4 shrink-0">
               <div className="hidden lg:flex items-center gap-3">
-                {/* Try The Client Portal Button - scrolls to process steps form on homepage */}
+                {/* Try Client Portal */}
                 <Link
-                  href="/#process-steps"
-                  className={`flex items-center justify-center gap-2 rounded-full border ${isDarkBackground ? "border-white/40 text-white hover:bg-white/20" : "border-primary-blue text-text-dark hover:bg-white/40"} font-normal text-[15px] transition-all px-6 h-[44px] ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"}`}
+                  href="/portal/client-portal"
+                  className={`flex items-center justify-center gap-2 rounded-full border ${
+                    isDarkBackground
+                      ? "border-white/40 text-white hover:bg-white/20"
+                      : "border-primary-blue text-text-dark hover:bg-white/40"
+                  } font-normal text-[15px] transition-all px-6 h-[44px] ${
+                    isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
+                  }`}
                 >
-                  <span>Try The Client Portal</span>
+                  <span>Try Client Portal</span>
                   <svg
                     className="w-4 h-4 ml-1"
                     fill="none"
@@ -694,7 +698,7 @@ const Navbar = () => {
                                   {service.title}
                                 </Link>
                               ))}
-                            {link.label === "Portals" &&
+                            {link.label === "Platform" &&
                               portalLinks.map((item) => (
                                 <Link
                                   key={item.href}

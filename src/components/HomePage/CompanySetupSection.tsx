@@ -29,33 +29,33 @@ const CompanySetupSection = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
-             <DirectionalDiv 
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
-                className="inline-block px-3 py-1 rounded-full bg-white border border-blue-100 text-xs font-bold tracking-widest text-[#3b49e6] uppercase mb-4 shadow-sm"
-             >
-                Incorporation Made Simple
-             </DirectionalDiv>
-             <DirectionalDiv 
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.1 }}
-                as="h2"
-                className="text-3xl md:text-5xl font-bold text-[#1a1c35] mb-6 leading-tight"
-             >
-                Starts with a Company, <br/>
-                <span className="text-[#3b49e6]">Grows with VACEI.</span>
-             </DirectionalDiv>
-             <DirectionalDiv
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.55, delay: 0.2 }}
-                as="p"
-                className="text-lg text-gray-600 leading-relaxed"
-             >
-                We handle specific incorporation and setup, but our real value lies in the ongoing partnership. Manage everything through one unified portal.
-             </DirectionalDiv>
+          <DirectionalDiv
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="inline-block px-3 py-1 rounded-full bg-white border border-blue-100 text-xs font-bold tracking-widest text-[#3b49e6] uppercase mb-4 shadow-sm"
+          >
+            Incorporation Made Simple
+          </DirectionalDiv>
+          <DirectionalDiv
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            as="h2"
+            className="text-3xl md:text-5xl font-bold text-[#1a1c35] mb-6 leading-tight"
+          >
+            Start your company and manage everything through VACEI.
+          </DirectionalDiv>
+          <DirectionalDiv
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+            as="p"
+            className="text-lg text-gray-600 leading-relaxed"
+          >
+            From incorporation and statutory setup to ongoing filings and support, VACEI keeps every step
+            structured inside one workspace.
+          </DirectionalDiv>
         </div>
 
         {/* 3-Column Glass Grid - Monochromatic Blue Theme */}

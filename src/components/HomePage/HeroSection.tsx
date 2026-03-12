@@ -34,39 +34,55 @@ const HeroSection = () => {
 
       <div className="space-y-3 mb-6">
         <TextAnimation
-          text="Accounting, Audit & Corporate Services"
+          text="One Workspace for Your Business"
           as="h1"
           className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] tracking-tight"
         />
         <h2 className="text-3xl sm:text-4xl md:text-5xl text-white/90 font-bold leading-[1.1]">
-          Delivered Through One Portal
+          And All Your Advisors
         </h2>
       </div>
 
-      <div className="relative">
+      <div className="relative space-y-4">
         <div className="absolute inset-0 -z-10" />
         <p className="text-gray-200 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-          VACEI is a professional firm that does the work for you. You get a
-          dedicated team, full visibility, and one place for documents,
-          deadlines, and communication.
+          Manage accounting, audit, legal, and corporate services through one secure platform.
+          Invite your existing advisors or connect with trusted VACEI partner firms.
+        </p>
+        <p className="text-gray-200/80 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          VACEI gives your business full visibility over documents, deadlines, filings, and engagements.
+          Everything happens in one structured workspace—no scattered emails, no lost documents, no uncertainty.
         </p>
       </div>
 
       <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center">
-        <GetInstantQuoteButton className="px-8 py-3.5 text-base font-medium shadow-[0_8px_32px_rgba(59,130,246,0.4)]" />
         <Link
-          href="/portal/client-portal"
+          href="#existing-company"
           className={cn(
-            "group flex items-center justify-center gap-2 rounded-full border border-white/30 text-white text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
-            isIPhone || isLowPerformance ? "bg-white/20 hover:bg-white/30" : "bg-white/10 backdrop-blur-xl hover:bg-white/15 hover:border-white/40"
+            "group flex items-center justify-center gap-2 rounded-full bg-white text-primary-blue text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(255,255,255,0.35)]",
+            !isIPhone && !isLowPerformance && "hover:shadow-[0_14px_40px_rgba(15,23,42,0.45)] hover:-translate-y-0.5"
           )}
         >
-          Try the Client Portal
+          I Have a Company
+        </Link>
+        <Link
+          href="#start-company"
+          className={cn(
+            "group flex items-center justify-center gap-2 rounded-full border border-white/40 text-white text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.25)]",
+            isIPhone || isLowPerformance ? "bg-white/10 hover:bg-white/20" : "bg-white/5 backdrop-blur-xl hover:bg-white/15 hover:border-white/60"
+          )}
+        >
+          Start a New Company
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
         </Link>
       </div>
+
+      <p className="mt-4 text-xs sm:text-sm text-gray-200/80 max-w-xl mx-auto">
+        Already working with an accountant, auditor or lawyer?{" "}
+        <span className="font-semibold">Invite them to your workspace.</span>
+      </p>
     </div>
   );
 
@@ -182,43 +198,68 @@ const HeroSection = () => {
               </div>
 
               <div className="space-y-3 mb-6">
-                <TextAnimation text="Accounting, Audit & Corporate Services" as="h1" className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] tracking-tight" />
+                <TextAnimation
+                  text="One Workspace for Your Business"
+                  as="h1"
+                  className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] tracking-tight"
+                />
                 <h2 className="text-3xl sm:text-4xl md:text-5xl text-white/90 font-bold leading-[1.1]">
-                  Delivered Through One Portal
+                  And All Your Advisors
                 </h2>
               </div>
 
-              <div className="relative">
+              <div className="relative space-y-4">
                 <div className="absolute inset-0 -z-10" />
                 <p className="text-gray-200 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-                  VACEI is a professional firm that does the work for you. You get a dedicated team, full visibility, and one place for documents, deadlines, and communication.
+                  Manage accounting, audit, legal, and corporate services through one secure platform.
+                  Invite your existing advisors or connect with trusted VACEI partner firms.
+                </p>
+                <p className="text-gray-200/80 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                  VACEI gives your business full visibility over documents, deadlines, filings, and engagements.
+                  Everything happens in one structured workspace—no scattered emails, no lost documents, no uncertainty.
                 </p>
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5 items-center justify-center">
                 <motion.div 
-                    whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.05 }} 
-                    whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.98 }} 
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.05 }} 
+                  whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.98 }} 
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <GetInstantQuoteButton className="px-8 py-3.5 text-base font-medium shadow-[0_8px_32px_rgba(59,130,246,0.4)]" />
+                  <Link
+                    href="#existing-company"
+                    className={cn(
+                      "group flex items-center justify-center gap-2 rounded-full bg-white text-primary-blue text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(255,255,255,0.35)]",
+                      !isIPhone && !isLowPerformance && "hover:shadow-[0_14px_40px_rgba(15,23,42,0.45)] hover:-translate-y-0.5"
+                    )}
+                  >
+                    I Have a Company
+                  </Link>
                 </motion.div>
                 <motion.div 
-                    whileHover={isSafari || isIPhone || isLowPerformance ? {} : { scale: 1.05 }} 
-                    whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.98 }} 
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  whileHover={isSafari || isIPhone || isLowPerformance ? {} : { scale: 1.05 }} 
+                  whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.98 }} 
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <Link href="/portal/client-portal" className={cn(
-                    "group flex items-center justify-center gap-2 rounded-full border border-white/30 text-white text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
-                    isSafari || isIPhone || isLowPerformance ? "bg-white/20 hover:bg-white/30" : "bg-white/10 backdrop-blur-xl hover:bg-white/15 hover:border-white/40"
-                  )}>
-                    Try the Client Portal
+                  <Link
+                    href="#start-company"
+                    className={cn(
+                      "group flex items-center justify-center gap-2 rounded-full border border-white/30 text-white text-base px-8 py-3.5 font-medium transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.2)]",
+                      isSafari || isIPhone || isLowPerformance ? "bg-white/20 hover:bg-white/30" : "bg-white/10 backdrop-blur-xl hover:bg-white/15 hover:border-white/40"
+                    )}
+                  >
+                    Start a New Company
                     <motion.svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" initial={{ x: 0 }} whileHover={isIPhone || isLowPerformance ? {} : { x: 4 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </motion.svg>
                   </Link>
                 </motion.div>
               </div>
+
+              <p className="mt-4 text-xs sm:text-sm text-gray-200/80 max-w-xl mx-auto">
+                Already working with an accountant, auditor or lawyer?{" "}
+                <span className="font-semibold">Invite them to your workspace.</span>
+              </p>
             </div>
           </div>
 

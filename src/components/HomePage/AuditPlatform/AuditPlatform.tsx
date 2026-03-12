@@ -41,7 +41,11 @@ export default function AuditPlatform() {
 
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden isolate">
+    <section
+      ref={sectionRef}
+      id="platform"
+      className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden isolate"
+    >
       <div
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{
@@ -65,15 +69,26 @@ export default function AuditPlatform() {
               </p>
             </DirectionalDiv>
 
-            <DirectionalDiv variants={itemVariants} as="h1" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold">
+            <DirectionalDiv
+              variants={itemVariants}
+              as="h1"
+              className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold"
+            >
               <span className="text-primary inline-block mr-2 sm:mr-3">
                 One Platform.
               </span>
-              <span className="inline-block">Structured Delivery.</span>
+              <span className="inline-block">Full Visibility.</span>
             </DirectionalDiv>
 
-            <DirectionalDiv variants={itemVariants} as="p" className="mt-4 text-sm sm:text-base font-nunito text-gray-500 leading-relaxed">
-              VACEI brings structure to professional services through a unified digital workspace designed for clarity and control. Engagements are organised through defined workflows, tracked documentation, review layers, and secure client interaction. Every task, file, and approval sits within a controlled framework rather than across disconnected tools. The platform supports disciplined delivery across engagements, ensuring visibility, accountability, and consistency without replacing professional judgment.
+            <DirectionalDiv
+              variants={itemVariants}
+              as="p"
+              className="mt-4 text-sm sm:text-base font-nunito text-gray-500 leading-relaxed"
+            >
+              Running a business requires constant coordination between advisors—accountants, auditors, lawyers,
+              and corporate service providers. Yet the work is often fragmented across emails, folders, and
+              separate systems. VACEI brings everything together in one structured workspace so you can see
+              exactly what is happening, who is responsible, and what comes next.
             </DirectionalDiv>
 
             {/* Principle blocks */}

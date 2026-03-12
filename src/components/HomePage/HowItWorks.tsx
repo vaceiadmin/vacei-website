@@ -60,28 +60,28 @@ const TrackIcon = () => (
 
 const steps = [
     {
-        title: "Request a service",
-        description: "Get a quote or start a company.",
+        title: "Create your workspace",
+        description: "Set up a secure digital workspace for your company.",
         icon: <RequestServiceIcon />,
     },
     {
-        title: "We set everything up",
-        description: "Portal, systems, and your team.",
+        title: "Invite your advisors",
+        description: "Invite your accountant, auditor, lawyer, or corporate service provider.",
         icon: <SetupIcon />,
     },
     {
         title: "Upload documents",
-        description: "Or confirm no changes.",
+        description: "Respond to document requests or upload files securely.",
         icon: <UploadIcon />,
     },
     {
-        title: "We do the work",
-        description: "Accounting, audit, payroll, compliance.",
+        title: "Advisors deliver the work",
+        description: "Your advisors manage engagements through structured workflows.",
         icon: <WorkIcon />,
     },
     {
         title: "Track everything",
-        description: "Deadlines, status, documents.",
+        description: "Monitor deadlines, filings, milestones, and documents in one place.",
         icon: <TrackIcon />,
     },
 ]
@@ -160,13 +160,13 @@ const HowItWorks = () => {
                             className="text-primary-blue text-sm font-bold uppercase tracking-widest mb-4"
                         />
                         <TextAnimation
-                            text="One portal. One team. Everything handled."
+                            text="How VACEI Works"
                             as="h3"
                             delay={0.15}
                             className="text-white text-3xl md:text-5xl font-bold mb-4 leading-tight"
                         />
                         <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-                            See how VACEI simplifies accounting, audit, compliance, and corporate services with a streamlined, tech-enabled approach.
+                            Create a workspace, invite your advisors, and manage every engagement, document and deadline in one structured platform.
                         </p>
                     </FadeInUp>
 

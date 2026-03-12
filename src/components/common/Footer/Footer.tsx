@@ -68,7 +68,7 @@ const Footer = () => {
             </Link>
 
             <p className="text-sm text-gray leading-relaxed">
-              A modern accounting, audit and corporate services firm delivering clarity through a structured digital platform.
+              VACEI is the digital workspace for businesses and professional advisors, bringing services and documentation into one structured platform.
             </p>
 
             <div className="flex items-center gap-4 pt-2">

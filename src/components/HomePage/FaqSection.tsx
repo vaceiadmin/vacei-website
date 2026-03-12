@@ -51,14 +51,20 @@ const FaqSection = () => {
   const items = [
     {
       title: "Clarity",
-      desc: "Clear pricing, structured workflows and full visibility",
+      desc: "Complete visibility over engagements, documents, and deadlines.",
     },
-    { title: "Speed", desc: "Fast turnaround times and quick communication." },
     {
-      title: "Accountability",
-      desc: "We take ownership of our work and results.",
+      title: "Structure",
+      desc: "Defined workflows ensure professional services are delivered consistently.",
     },
-    { title: "Structure", desc: "Organized processes for maximum efficiency." },
+    {
+      title: "Collaboration",
+      desc: "Work with multiple advisors through one platform.",
+    },
+    {
+      title: "Control",
+      desc: "Track compliance, filings, and business operations from one dashboard.",
+    },
   ];
 
   const toggleItem = (index: number) => {
@@ -105,13 +111,13 @@ const FaqSection = () => {
             {/* Section Header */}
             <FadeInUp duration={0.6} delay={0} className="text-center mb-12 lg:mb-20 max-w-3xl mx-auto">
               <TextAnimation
-                text="Why Choose VACEI?"
+                text="Why Businesses Use VACEI"
                 as="h2"
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
               />
               <p className="text-base md:text-lg text-white/70 leading-relaxed font-medium">
-                We combine industry-leading expertise with a cutting-edge digital platform 
-                to simplify your corporate and financial operations in Malta.
+                VACEI combines a structured digital workspace with professional expertise so businesses and
+                advisors can collaborate with clarity, consistency, and control.
               </p>
             </FadeInUp>
 

@@ -10,6 +10,9 @@ import HeroSection from "./HeroSection";
 // import PortalFeature from "./PortalFeature";
 import HowItWorks from "./HowItWorks";
 import AuditPlatform from "./AuditPlatform/AuditPlatform";
+import WorkspaceEntrySection from "./WorkspaceEntrySection";
+import ComplianceDashboardSection from "./ComplianceDashboardSection";
+import ActiveEUSection from "./ActiveEUSection";
 
 import { MotionConfig } from "framer-motion";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
@@ -35,12 +38,15 @@ const HomePage = () => {
       <div className="relative">
         <HeroSection />
         <AuditPlatform />
+        <WorkspaceEntrySection />
         <HowItWorks />
         <ProcessStepsSection />
         {/* <PortalFeature /> */}
         <ReadyToSimplifySection />
         <ServicesSection />
         <CompanySetupSection />
+        <ComplianceDashboardSection />
+        <ActiveEUSection />
         <FaqSection />
       </div>
     </MotionConfig>

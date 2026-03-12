@@ -53,46 +53,50 @@ const ReadyToSimplifySection = () => {
 
 
             <DirectionalDiv 
-                variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-                }}
-                className="relative z-10 flex flex-col items-center"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+              }}
+              className="relative z-10 flex flex-col items-center"
             >
-                <TextAnimation
-                text="Ready to simplify your business?"
+              <TextAnimation
+                text="Ready to Simplify Your Business?"
                 as="h2"
                 className="max-w-2xl text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl text-[#1a1c35] mb-6"
-                />
-                <p className="max-w-xl text-base md:text-lg text-gray-500 mb-8 leading-relaxed">
-                    Join hundreds of companies that trust VACEI for their accounting, audit, and corporate needs.
-                </p>
+              />
+              <p className="max-w-xl text-base md:text-lg text-gray-500 mb-6 leading-relaxed">
+                Create your workspace and start managing your professional services through one platform.
+              </p>
 
-                <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+              <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
                 <GetInstantQuoteButton
-                    text="Get Instant Quote"
-                    className={cn(
-                        "px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-transform",
-                        !isIPhone && !isLowPerformance && "hover:scale-105"
-                    )}
-                    bgColor="#3b49e6"
-                    textColor="white"
-                    hasShadow={true}
+                  text="Create Workspace"
+                  href="/quote#process-steps"
+                  className={cn(
+                    "px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-transform",
+                    !isIPhone && !isLowPerformance && "hover:scale-105"
+                  )}
+                  bgColor="#3b49e6"
+                  textColor="white"
+                  hasShadow={true}
                 />
                 <GetInstantQuoteButton
-                    variant="custom"
-                    text="View Our Services"
-                    href="#services"
-                    bgColor="white"
+                  variant="custom"
+                  text="Get Instant Quote"
+                  href="/quote"
+                  bgColor="white"
+                  textColor="#1a1c35"
+                  className={cn(
+                    "px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 transition-all",
+                    !isIPhone && !isLowPerformance ? "hover:bg-gray-50 hover:scale-105" : ""
+                  )}
+                  hasShadow={false}
+                />
+              </div>
 
-                    textColor="#1a1c35"
-                    className={cn(
-                        "px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 transition-all",
-                        !isIPhone && !isLowPerformance ? "hover:bg-gray-50 hover:scale-105" : ""
-                    )}
-                    hasShadow={false}
-                />
-                </div>
+              <p className="mt-5 max-w-xl text-xs sm:text-sm text-gray-500 leading-relaxed">
+                Get a quote in minutes or invite your advisors to collaborate in your workspace.
+              </p>
             </DirectionalDiv>
         </DirectionalDiv>
 
