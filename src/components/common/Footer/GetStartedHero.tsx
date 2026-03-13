@@ -13,101 +13,56 @@ const ComplianceSnapshotImage = "/assets/images/compliance-snapshot.png";
 
 const GetStartedHero = () => {
   return (
-    <section className="relative z-50 w-full overflow-hidden py-6 sm:py-8 lg:py-12">
-      <div className="relative z-10 w-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-6xl">
-          <GradientContainer
-            className="min-h-80 sm:min-h-[24rem] lg:h-[22.5rem] lg:max-h-[22.5rem] rounded-lg shadow-2xl bg-[#020410]"
-            showRadials={false}
-          >
-            <div className="relative z-10 w-full h-full flex items-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-0">
-              <div className="grid lg:grid-cols-2 gap-20 sm:gap-8 lg:gap-12 items-center w-full">
-                {/* Left Content */}
-                <div className="text-white space-y-4 sm:space-y-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-                  <TextAnimation
-                    text="Get Started"
-                    as="h1"
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-2"
-                  />
+    <section className="relative z-50 w-full overflow-hidden py-12 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="relative overflow-hidden rounded-3xl bg-[#030712] border border-white/5 shadow-2xl">
+          {/* Dynamic Background Elements */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 blur-[100px] -z-10" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-600/10 blur-[100px] -z-10" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
 
-                  <FadeInUp delay={0.2}>
-                    <p className="text-sm sm:text-base lg:text-lg leading-relaxed opacity-90 max-w-xl">
-                      Modernise how your business handles accounting, audit and
-                      compliance. One firm. One platform. Full visibility.
-                    </p>
-                  </FadeInUp>
-
-                  {/* Action Buttons */}
-                  <FadeInUp delay={0.4} className="w-full">
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 w-full justify-center lg:justify-start">
-                      <GetInstantQuoteButton
-                        variant="default"
-                        className="text-sm sm:text-[15px] px-5 sm:px-6 py-2.5 sm:py-3"
-                      />
-                      <GetInstantQuoteButton
-                        variant="book-demo"
-                        className="text-sm sm:text-[15px] px-5 sm:px-6 py-2.5 sm:py-3"
-                      />
-                    </div>
-                  </FadeInUp>
-                </div>
-
-                {/* Right Content - Cards Overlay */}
-                <div className="relative min-h-[16rem] sm:min-h-[18rem] lg:min-h-[20rem] h-full hidden md:block">
-                  {/* Financial Overview Card - Top Right */}
-                  <FadeInUp
-                    delay={0.6}
-                    className="absolute -top-4 sm:-top-6 right-0 lg:right-6 w-48 sm:w-56 lg:w-64 h-28 sm:h-32 lg:h-36 z-20"
-                  >
-                    <div className="relative w-full h-auto">
-                      <Image
-                        src={FinancialOverviewImage}
-                        alt="Financial Overview"
-                        width={320}
-                        height={200}
-                        className="w-full h-auto object-contain"
-                        priority
-                      />
-                    </div>
-                  </FadeInUp>
-
-                  {/* Cashflow Summary Card - Middle Left */}
-                  <FadeInUp
-                    delay={0.8}
-                    className="absolute top-4 sm:top-2 -left-4 sm:-left-6 w-64 sm:w-80 lg:w-[22rem] xl:w-[26rem] h-48 sm:h-56 lg:h-60 z-10 mt-4 sm:mt-6"
-                  >
-                    <div className="relative w-full h-auto">
-                      <Image
-                        src={CashflowImage}
-                        alt="Cashflow Summary"
-                        width={400}
-                        height={250}
-                        className="w-full h-auto object-contain"
-                        priority
-                      />
-                    </div>
-                  </FadeInUp>
-
-                  {/* Compliance Snapshot Card - Bottom Left */}
-                  <FadeInUp
-                    delay={1.0}
-                    className="absolute top-[10rem] sm:top-[12rem] lg:top-[14rem] -left-8 sm:-left-12 lg:-left-16 w-48 sm:w-56 lg:w-64 h-36 sm:h-40 lg:h-48 z-30 transform -rotate-1"
-                  >
-                    <div className="relative w-full h-auto">
-                      <Image
-                        src={ComplianceSnapshotImage}
-                        alt="Compliance Snapshot"
-                        width={300}
-                        height={180}
-                        className="w-full h-auto object-contain"
-                        priority
-                      />
-                    </div>
-                  </FadeInUp>
-                </div>
-              </div>
+          <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20 lg:py-24 max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest mb-8">
+              Join the Future
             </div>
-          </GradientContainer>
+
+            <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] mb-8">
+              Ready to transform your <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-indigo-400 to-blue-500">
+                business operations?
+              </span>
+            </h2>
+
+            <p className="text-lg sm:text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl">
+              Modernise how your business handles accounting, audit and compliance.
+              Join hundreds of forward-thinking companies already on VACEI.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <GetInstantQuoteButton
+                variant="default"
+                className="w-full sm:w-auto h-14 px-8 text-base font-bold shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transition-all"
+              />
+              <button className="w-full sm:w-auto h-14 px-8 text-base font-bold text-white bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
+                Book a Demo
+              </button>
+            </div>
+
+            {/* Social Proof / Stats */}
+            {/* <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-white/5 w-full">
+                            {[
+                                { label: "EU Countries", value: "27+" },
+                                { label: "Advisors", value: "500+" },
+                                { label: "Compliance Rate", value: "99.9%" },
+                                { label: "Support", value: "24/7" }
+                            ].map((stat) => (
+                                <div key={stat.label} className="flex flex-col gap-1">
+                                    <span className="text-2xl font-black text-white">{stat.value}</span>
+                                    <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold">{stat.label}</span>
+                                </div>
+                            ))}
+                        </div> */}
+          </div>
         </div>
       </div>
     </section>
