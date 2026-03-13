@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { DirectionalDiv } from "../common/Animations";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
 
@@ -12,11 +11,7 @@ const ComplianceDashboardSection = () => {
     <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <DirectionalDiv
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#111827] mb-4">
               Compliance Dashboard
             </h2>
@@ -24,12 +19,9 @@ const ComplianceDashboardSection = () => {
               Every company workspace includes a clear compliance overview so you always know where you stand.
               See upcoming filings, status, and confidence in a single view.
             </p>
-          </DirectionalDiv>
+          </div>
 
-          <DirectionalDiv
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          <div
             className={cn(
               "relative rounded-3xl border border-gray-200/80 bg-[#f9fafb] p-6 sm:p-8 shadow-[0_20px_40px_-24px_rgba(15,23,42,0.25)]",
               !isIPhone && !isLowPerformance && "hover:-translate-y-1 transition-all duration-300"
@@ -84,7 +76,7 @@ const ComplianceDashboardSection = () => {
                 Everything visible in one place—no spreadsheets, no manual trackers, no guessing.
               </p>
             </div>
-          </DirectionalDiv>
+          </div>
         </div>
       </div>
     </section>

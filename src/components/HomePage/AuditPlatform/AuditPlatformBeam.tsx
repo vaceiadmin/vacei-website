@@ -196,7 +196,8 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={doc1Ref}
         toRef={service1Ref}
-        duration={3}
+        duration={1.8}
+        repeat={Infinity}
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.1}
@@ -207,8 +208,9 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={doc2Ref}
         toRef={service2Ref}
-        duration={3}
+        duration={1.8}
         delay={0.5}
+        repeat={Infinity}
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.1}
@@ -219,8 +221,9 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={doc3Ref}
         toRef={service3Ref}
-        duration={3}
+        duration={1.8}
         delay={1}
+        repeat={Infinity}
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.1}
@@ -234,7 +237,8 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={service1Ref}
         toRef={portalRef}
-        duration={4}
+        duration={2}
+        repeat={Infinity}
         curvature={15}
         pathColor="#94a3b8"
         pathOpacity={0.1}
@@ -245,8 +249,9 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={service2Ref}
         toRef={portalRef}
-        duration={4}
+        duration={2}
         delay={0.7}
+        repeat={Infinity}
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.1}
@@ -257,8 +262,9 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={service3Ref}
         toRef={portalRef}
-        duration={4}
+        duration={2}
         delay={1.4}
+        repeat={Infinity}
         curvature={-15}
         pathColor="#94a3b8"
         pathOpacity={0.1}
@@ -272,7 +278,8 @@ export default function AuditPlatformBeam({
         containerRef={containerRef}
         fromRef={portalRef}
         toRef={clientRef}
-        duration={3}
+        duration={1.8}
+        repeat={Infinity}
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.15}

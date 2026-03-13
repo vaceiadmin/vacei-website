@@ -55,9 +55,11 @@ export function ReduceMotionProvider({
   children: React.ReactNode;
 }) {
   const [reduce, setReduce] = useState(true);
-  const [performance, setPerformance] = useState<PerformanceState>(() =>
-    detectPerformance(true)
-  );
+  const [performance, setPerformance] = useState<PerformanceState>({
+    isIPhone: false,
+    isLowPerformance: true,
+    reduceMotion: true,
+  });
 
   useEffect(() => {
     const updateFromEnvironment = () => {

@@ -1,481 +1,195 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
 import Image from "next/image";
-import GradientContainer from "../common/GradientContainer";
+import { cn } from "@/lib/utils";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
 
-import GlassyEffect from "../common/GlassyEffect";
-import TextAnimation from "../common/TextAnimation";
-import { FadeInUp, StaggerContainer as StaggerEffect, DirectionalDiv } from "../common/Animations";
-import { useRef } from "react";
-import { useDirectionalInView } from "@/hooks/use-directional-in-view";
-import { useIsSafari } from "@/hooks/use-safari";
-
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 36, scale: 0.96 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: { 
-      duration: 0.55, 
-      ease: [0.16, 1, 0.3, 1] 
-    } 
-  }
-} as any;
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
-    }
-  }
-}
-
-import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
-
+const FAQ_ITEMS = [
+  {
+    title: "Clarity",
+    desc: "Complete visibility over engagements, documents, and deadlines in a single hub.",
+  },
+  {
+    title: "Structure",
+    desc: "Defined workflows ensure professional services are delivered consistently.",
+  },
+  {
+    title: "Collaboration",
+    desc: "Work with multiple advisors seamlessly through one secure platform.",
+  },
+  {
+    title: "Control",
+    desc: "Track compliance, filings, and operations from a central dashboard.",
+  },
+];
 
 const FaqSection = () => {
-  const sectionRef = useRef(null);
-  const isInView = useDirectionalInView(sectionRef);
-  const isSafari = useIsSafari();
-  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-
-  const items = [
-    {
-      title: "Clarity",
-      desc: "Complete visibility over engagements, documents, and deadlines.",
-    },
-    {
-      title: "Structure",
-      desc: "Defined workflows ensure professional services are delivered consistently.",
-    },
-    {
-      title: "Collaboration",
-      desc: "Work with multiple advisors through one platform.",
-    },
-    {
-      title: "Control",
-      desc: "Track compliance, filings, and business operations from one dashboard.",
-    },
-  ];
-
-  const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const { reduceMotion } = usePerformance();
 
   return (
-    <section ref={sectionRef} className="w-full py-16 sm:py-20 md:py-24 lg:py-28 overflow-x-hidden">
-      <div className="mx-auto px-4 md:px-0">
-        <GradientContainer
-          className="py-12 sm:py-16 md:py-20 lg:py-24 bg-primary relative"
-          showRadials={true}
-        >
-          {/* Animated Background Blobs - Hidden on iPhone for performance */}
-          {!isIPhone && !isLowPerformance && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-              <motion.div 
-                animate={isInView && !reduceMotion ? { 
-                  x: [0, 40, 0],
-                  y: [0, 50, 0],
-                  scale: [1, 1.1, 1]
-                } : {}}
-
-                transition={{ duration: 20, repeat: 0, ease: "easeInOut" }}
-
-                className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/15 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
-              />
-
-              <motion.div 
-                animate={isInView && !reduceMotion ? { 
-                  x: [0, -30, 0],
-                  y: [0, -40, 0],
-                  scale: [1, 1.2, 1]
-                } : {}}
-
-                transition={{ duration: 25, repeat: 0, ease: "easeInOut", delay: 2 }}
-
-                className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-500/10 blur-[100px] lg:blur-[150px] rounded-full hardware-accelerated"
-              />
+    <section id="faq" className="relative w-full py-12 lg:py-16 bg-[#020410] overflow-hidden flex items-center min-h-[90vh] lg:min-h-[100vh]">
+      {/* Cinematic Background Elements (matching HowItWorks) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-600/5 rounded-full blur-[160px]" />
+        <div className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-900/5 rounded-full blur-[160px]" />
+        <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay">
+          <Image src="/assets/images/Noise.png" alt="Noise" fill className="object-cover" />
+        </div>
             </div>
-          )}
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           
-          <div className="max-w-6xl mx-auto px-4 md:px-0 relative z-10">
-            {/* Section Header */}
-            <FadeInUp duration={0.6} delay={0} className="text-center mb-12 lg:mb-20 max-w-3xl mx-auto">
-              <TextAnimation
-                text="Why Businesses Use VACEI"
-                as="h2"
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
-              />
-              <p className="text-base md:text-lg text-white/70 leading-relaxed font-medium">
-                VACEI combines a structured digital workspace with professional expertise so businesses and
-                advisors can collaborate with clarity, consistency, and control.
+          {/* Left: Compact Content & Minimal Accordion */}
+          <div className="lg:col-span-5 order-2 lg:order-1">
+            <div>
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest mb-6">
+                Why VACEI
+              </span>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] mb-6">
+                Structured <br />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-400">
+                    Collaboration
+                </span>
+              </h2>
+              <p className="text-base text-slate-400 font-medium mb-10 max-w-sm leading-relaxed">
+                Unlock clarity and control with a unified digital workspace tailored for professional services.
               </p>
-            </FadeInUp>
-
-            <StaggerEffect staggerDelay={0.1} className="flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start" viewportMargin="-100px">
-            {/* Left: Interactive Image Area */}
-            <DirectionalDiv 
-              initial="hidden"
-              whileInView="visible"
-              variants={fadeInUp}
-              className="relative flex-1 py-8 lg:py-10 flex justify-center lg:block"
-            >
-              {/* Mobile: stacked layout – image on top, cards below (no overlap) */}
-              <div className="lg:hidden w-full max-w-[340px] mx-auto flex flex-col items-center gap-6">
-                <div className="relative flex justify-center">
-                  <Image
-                    src="/assets/images/man 2.png"
-                    alt="Professional"
-                    width={320}
-                    height={400}
-                    loading="lazy"
-                    className="w-[220px] object-contain object-bottom"
-                  />
-                </div>
-                <div className="flex flex-col gap-4 w-full">
-                  {/* Financial Overview - stacked */}
-                  <div className="rounded-[24px] bg-white p-4 shadow-xl w-full">
-                    <div className="mb-4 text-[12px] font-bold text-primary">Financial Overview</div>
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-md">
-                          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                          </svg>
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-[11px] font-bold text-primary">Total Asset</p>
-                          <p className="text-[9px] text-light-gray">Jan 2026 (Balance Sheet)</p>
-                          <p className="mt-0.5 text-[11px] font-extrabold text-primary">€ 23,691.29 <span className="ml-1 text-[9px] font-medium text-green-500">0% vs last month</span></p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-md">
-                          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                          </svg>
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-[11px] font-bold text-primary">Cash at End of Period</p>
-                          <p className="text-[9px] text-light-gray">Jan 2026 (Cash Flow)</p>
-                          <p className="mt-0.5 text-[11px] font-extrabold text-primary">€ 8,232.61 <span className="ml-1 text-[9px] font-medium text-green-500">0% vs last month</span></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Get Started - stacked */}
-                  <div className="rounded-[24px] bg-purple-bg p-5 text-white shadow-2xl w-full">
-                    <p className="text-[16px] font-bold leading-tight tracking-wide">Get Started<br />Free Call?</p>
-                    <div className="mt-5 flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-lg">
-                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                      </div>
-                      <span className="text-[14px] font-semibold tracking-wide">+356 77142418</span>
-                    </div>
-                  </div>
-                  {/* Authorized Share - stacked */}
-                  <div className="rounded-[24px] bg-white p-4 shadow-xl w-full">
-                    <p className="mb-4 text-[11px] font-bold text-primary">Authorized Share</p>
-                    <div className="flex flex-col items-center gap-5">
-                      <div className="relative h-16 w-16 shadow-inner rounded-full overflow-hidden">
-                        <div className="h-full w-full rounded-full bg-progress-purple" />
-                        <div className="absolute bottom-0 left-0 h-[50%] w-full rounded-b-full bg-purple-bg" />
-                      </div>
-                      <div className="flex w-full flex-col gap-1.5 px-1">
-                        <div className="h-1.5 w-full rounded-full bg-neutral-200" />
-                        <div className="h-1.5 w-[70%] rounded-full bg-purple-bg" />
-                      </div>
-                      <div className="flex flex-col gap-1 text-center">
-                        <span className="text-[9px] font-bold text-success tracking-wide">Issued Share 50%</span>
-                        <span className="text-[9px] font-bold text-error tracking-wide">Left Share 50%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Desktop: floating cards + man image (overlap layout) */}
-              <div className="hidden lg:block relative h-[380px] sm:h-[500px] w-full max-w-[340px] sm:max-w-[460px] rounded-[32px] sm:rounded-[48px] scale-95 sm:scale-100 origin-center overflow-visible">
-                {/* Floating Cards Layer - Behind the man (lower z-index) */}
-                <div className="absolute inset-0 pointer-events-none z-10 md:z-40">
-                  {/* Financial Overview */}
-                  <motion.div 
-                    animate={isInView && !reduceMotion ? { y: [0, -10, 0] } : {}}
-
-                    transition={{ duration: 4, repeat: 0, ease: "easeInOut" }}
-                    className="absolute md:-left-10 top-10 w-[200px] sm:w-[240px] max-sm:left-2 rounded-[24px] bg-white p-4 sm:p-5 shadow-xl pointer-events-auto transition-transform hover:scale-105 z-10 hardware-accelerated"
-                  >
-
-                    <div className="mb-4 text-[12px] font-bold text-primary">
-                      Financial Overview
-                    </div>
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white shadow-md">
-                          <svg
-                            width="14"
-                            height="14"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2.5"
-                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                            />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-[11px] font-bold text-primary">
-                            Total Asset
-                          </p>
-                          <p className="text-[9px] text-light-gray">
-                            Jan 2026 (Balance Sheet)
-                          </p>
-                          <p className="mt-0.5 text-[11px] font-extrabold text-primary">
-                            € 23,691.29{" "}
-                            <span className="ml-1 text-[9px] font-medium text-green-500">
-                              0% vs last month
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white shadow-md">
-                          <svg
-                            width="14"
-                            height="14"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2.5"
-                              d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                            />
-                          </svg>
-                        </div>
-                        <div>
-                          <p className="text-[11px] font-bold text-primary">
-                            Cash at End of Perio..
-                          </p>
-                          <p className="text-[9px] text-light-gray">
-                            Jan 2026 (Cash Flow)
-                          </p>
-                          <p className="mt-0.5 text-[11px] font-extrabold text-primary">
-                            € 8,232.61{" "}
-                            <span className="ml-1 text-[9px] font-medium text-green-500">
-                              0% vs last month
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Get Started Card */}
-                  <motion.div 
-                    animate={isInView && !reduceMotion ? { y: [0, -15, 0] } : {}}
-
-                    transition={{ duration: 5, repeat: 0, ease: "easeInOut", delay: 1 }}
-                    className="absolute -bottom-8 -left-8 max-sm:bottom-4 max-sm:left-2 w-[180px] sm:w-[200px] z-40 rounded-[24px] bg-purple-bg p-5 sm:p-6 text-white shadow-2xl pointer-events-auto transition-transform hover:scale-105 hardware-accelerated"
-                  >
-
-                    <p className="text-[16px] font-bold leading-tight tracking-wide">
-                      Get Started
-                      <br />
-                      Free Call?
-                    </p>
-                    <div className="mt-5 flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white shadow-lg">
-                        <svg
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2.5"
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-[14px] font-semibold tracking-wide">
-                        +356 77142418
-                      </span>
-                    </div>
-                  </motion.div>
-
-                  {/* Authorized Share Card - In front of man, stay in viewport on mobile */}
-                  <motion.div 
-                    animate={isInView && !reduceMotion ? { 
-                        y: [0, -12, 0],
-                        rotate: [0, 1, 0, -1, 0]
-                    } : {}}
-
-                    transition={{ duration: 4.5, repeat: 0, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute bottom-16 -right-10 max-sm:bottom-20 max-sm:right-2 pointer-events-auto z-10 transition-transform hover:scale-105 hardware-accelerated"
-                  >
-
-                    <div className="relative w-[140px] sm:w-[160px] rounded-[24px] bg-white p-4 sm:p-5 shadow-xl">
-                      <p className="mb-4 text-[11px] font-bold text-primary">
-                        Authorized Share
-                      </p>
-                      <div className="flex flex-col items-center gap-5">
-                        {/* Pie Chart */}
-                        <motion.div 
-                            animate={isInView ? { rotate: 360 } : {}}
-                            transition={{ duration: 20, repeat: 0, ease: "linear" }}
-                            className="relative h-16 w-16 shadow-inner rounded-full"
-                        >
-                          <div className="h-full w-full rounded-full bg-progress-purple" />
-                          <div className="absolute bottom-0 left-0 h-[50%] w-full rounded-b-full bg-purple-bg" />
-                        </motion.div>
-
-                        {/* Lines */}
-                        <div className="flex w-full flex-col gap-1.5 px-1">
-                          <div className="h-1.5 w-full rounded-full bg-neutral-200"></div>
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            whileInView={{ width: "70%" }}
-                            transition={{ duration: 1.5, ease: "easeOut", delay: 1 }}
-                            className="h-1.5 rounded-full bg-purple-bg"
-                          ></motion.div>
-                        </div>
-                      </div>
-
-                      {/* Floating Legend / Tooltip - Reposition on mobile to avoid cutoff */}
-                      <motion.div 
-                        animate={isInView ? { x: [0, 5, 0] } : {}}
-                        transition={{ duration: 3, repeat: 0, ease: "easeInOut" }}
-                        className="absolute max-sm:right-0 max-sm:left-auto -right-6 -top-10 bg-white rounded-[14px] px-3 py-2 shadow-lg border border-input min-w-[90px] max-sm:min-w-[80px]"
-                      >
-                        <div className="flex flex-col gap-1">
-                          <span className="text-[9px] font-bold text-success tracking-wide">
-                            Issued Share 50%
-                          </span>
-                          <span className="text-[9px] font-bold text-error tracking-wide">
-                            Left Share 50%
-                          </span>
-                        </div>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Man Image - In front of cards (higher z-index) so the person is visible */}
-                <div className="absolute bottom-0 left-1/2 flex w-[140%] max-w-[320px] sm:max-w-none -translate-x-1/2 justify-center items-end z-30 pointer-events-none">
-                  <Image
-                    src="/assets/images/man 2.png"
-                    alt="Professional"
-                    width={600}
-                    height={750}
-                    loading="lazy"
-                    className="w-[320px] sm:w-[480px] max-w-none object-contain translate-y-4"
-                  />
-                </div>
-              </div>
-            </DirectionalDiv>
-
-            {/* Right: FAQ accordion list */}
-            <div className="flex-1 lg:pl-12 w-full lg:mt-8">
-              <DirectionalDiv 
-                initial="hidden"
-                whileInView="visible"
-                variants={staggerContainer}
-                className="space-y-4 lg:space-y-5"
-              >
-                {items.map((item, index) => {
-                  const isOpen = openIndex === index;
-
-                  return (
-                    <DirectionalDiv key={index} variants={fadeInUp}>
-                    <GlassyEffect
-                      intensity="premium"
-                      className={`overflow-hidden rounded-[18px] transition-all duration-300 cursor-pointer group mx-2 sm:mx-5 border-none shadow-none hover:bg-white/10 hardware-accelerated ${isOpen ? "bg-white/10" : "bg-white/5"}`}
-                    >
-
-                      <div 
-                        className="flex items-center justify-between px-6 lg:px-8 py-5 lg:py-6"
-                        onClick={() => toggleItem(index)}
-                      >
-                        <span className="text-base lg:text-[18px] font-semibold tracking-tight text-white/90">
-                          {item.title}
-                        </span>
-                        <motion.button
-                          type="button"
-                          animate={{ rotate: isOpen ? 180 : 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className={`flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-full border transition-colors duration-300 ${
-                            isOpen 
-                              ? "border-white/40 text-white bg-white/20" 
-                              : "border-white/20 text-white/60 group-hover:bg-white/10 group-hover:text-white"
-                          }`}
-                        >
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            {isOpen ? (
-                              <path d="M5 12h14" />
-                            ) : (
-                              <path d="M12 5v14M5 12h14" />
-                            )}
-                          </svg>
-                        </motion.button>
-                      </div>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div 
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0">
-                                {/* Dashed line */}
-                                <div className="mb-5 border-t border-dashed border-white/20" />
-                                <p className="text-sm lg:text-[15px] text-white/80 leading-[1.6] font-medium">
-                                    {item.desc}
-                                </p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </GlassyEffect>
-                    </DirectionalDiv>
-                  );
-                })}
-              </DirectionalDiv>
             </div>
-          </StaggerEffect>
+
+            <div className="space-y-3">
+              {FAQ_ITEMS.map((item, index) => {
+                const isOpen = openIndex === index;
+                return (
+                  <div
+                    key={index}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className={cn(
+                      "group cursor-pointer rounded-2xl p-5 lg:p-6 transition-all duration-300 border relative overflow-hidden",
+                      isOpen 
+                        ? "bg-white/[0.06] border-white/20 shadow-2xl" 
+                        : "bg-transparent border-white/5 hover:border-white/10 hover:bg-white/[0.02]"
+                    )}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className={cn(
+                        "text-[17px] font-bold transition-colors duration-300",
+                        isOpen ? "text-white" : "text-slate-400 group-hover:text-slate-200"
+                      )}>
+                        {item.title}
+                      </span>
+                      <div
+                        className={cn(
+                            "transition-all duration-300",
+                            isOpen ? "text-blue-400 rotate-180" : "text-slate-500"
+                        )}
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                      {isOpen && (
+                        <p className="text-slate-400 text-sm leading-relaxed font-medium mt-2">
+                          {item.desc}
+                        </p>
+                      )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </GradientContainer>
+
+          {/* Right: Man and Integrated Cards (Compact & Static) */}
+          <div className="lg:col-span-7 relative h-[500px] lg:h-[700px] flex items-center justify-center order-1 lg:order-2">
+            <div className="relative w-full max-w-[600px] h-full flex items-center justify-center">
+              
+              {/* The Man Image - Lowered and Static */}
+              <div className="absolute bottom-0 left-1/4 lg:left-1/2 -translate-x-1/2 z-10 w-[280px] lg:w-[420px] pointer-events-none">
+                  <Image
+                    src="/assets/images/man 2.png"
+                    alt="Professional"
+                  width={600}
+                  height={750}
+                  className="w-full h-auto object-contain opacity-95"
+                  />
+                </div>
+
+              {/* Financial Card - Enhanced Sleeekness */}
+              <div className="absolute top-10 -right-4 lg:right-0 w-[220px] lg:w-[280px] rounded-3xl bg-[#161C2C]/60 backdrop-blur-3xl border border-white/10 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] z-20">
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9px] font-black tracking-widest text-blue-400 uppercase">Financial Health</span>
+                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                  </div>
+                  <div className="text-2xl lg:text-3xl font-black text-white tracking-tight">€ 23,691.29</div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] text-green-400 font-bold bg-green-400/10 px-1.5 py-0.5 rounded-md">▲ +12.4%</span>
+                    <span className="text-[10px] text-slate-500 font-bold">Growth</span>
+                  </div>
+                  <div className="h-12 flex items-end gap-1.5 mt-2">
+                    {[35, 65, 50, 85, 60, 95, 75].map((h, i) => (
+                      <div 
+                        key={i} 
+                        style={{ height: `${h}%` }}
+                        className="flex-1 bg-blue-500/40 rounded-full" 
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Equity Card - Enhanced Sleekness */}
+              <div className="absolute bottom-16 -left-4 lg:left-0 w-[190px] lg:w-[240px] rounded-3xl bg-[#1A1F2E]/60 backdrop-blur-3xl border border-white/10 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] z-20">
+                    <div className="flex flex-col gap-4">
+                  <span className="text-[9px] font-black tracking-widest text-purple-400 uppercase">Cap Table State</span>
+                  <div className="flex items-center gap-4">
+                    <div className="relative h-14 w-14 flex items-center justify-center">
+                       <svg className="h-full w-full rotate-[-90deg]">
+                          <circle cx="28" cy="28" r="24" fill="transparent" stroke="currentColor" strokeWidth="5" className="text-white/[0.03]" />
+                          <circle 
+                            cx="28" cy="28" r="24" 
+                            fill="transparent" 
+                            stroke="#A855F7" 
+                            strokeWidth="5" 
+                            strokeDasharray={151} 
+                            strokeDashoffset={75}
+                               strokeLinecap="round"
+                            />
+                          </svg>
+                       <span className="absolute text-xs font-black text-white">50%</span>
+                        </div>
+                        <div>
+                      <div className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Issued Cap</div>
+                      <div className="text-lg font-black text-white">€ 150.0k</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              {/* Contact Pill - Re-positioned and Refined */}
+              <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 lg:ml-28">
+                <div className="bg-[#0B0F19]/80 backdrop-blur-3xl border border-white/15 rounded-full py-3.5 px-6 flex items-center gap-4 shadow-[0_20px_50px_rgba(59,130,246,0.15)] ring-1 ring-white/5">
+                   <div className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                      </div>
+                   <div className="flex flex-col">
+                      <span className="text-[8px] font-black text-blue-400 tracking-[0.2em] uppercase mb-0.5">Direct Support</span>
+                      <span className="text-sm font-black text-white tracking-wide">+356 77142418</span>
+                </div>
+                            </div>
+                          </div>
+
+              {/* Decorative Circle Accents */}
+              <div className="absolute inset-0 border border-white/[0.03] rounded-full scale-[0.85] pointer-events-none" />
+              <div className="absolute inset-0 border border-white/[0.02] rounded-full scale-[1.1] pointer-events-none" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

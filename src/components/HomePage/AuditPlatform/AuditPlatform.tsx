@@ -1,188 +1,214 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import AuditPlatformBeam from "./AuditPlatformBeam";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
-import { DirectionalDiv } from "@/components/common/Animations";
-import { useRef } from "react";
-import { useDirectionalInView } from "@/hooks/use-directional-in-view";
-import { useIsSafari } from "@/hooks/use-safari";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import {
+  CheckCircle2,
+  Workflow,
+  FileCheck,
+  Layers,
+  ShieldAlert,
+  ArrowUpRight
+} from "lucide-react";
 
-
-import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
-
-
-// Animation Variants – visible render, smooth and not laggy
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.08 },
+const principles = [
+  {
+    title: "Structured Workflows",
+    desc: "Clear engagement stages, responsibilities, and progress tracking.",
+    icon: <Workflow className="w-5 h-5" />,
+    color: "bg-blue-500/10 text-blue-600"
   },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
+  {
+    title: "Controlled Documentation",
+    desc: "Centralised files, version visibility, and organised working papers.",
+    icon: <FileCheck className="w-5 h-5" />,
+    color: "bg-indigo-500/10 text-indigo-600"
   },
-};
+  {
+    title: "Review and Approval Layers",
+    desc: "Defined review flows with tracked comments and sign-off history.",
+    icon: <Layers className="w-5 h-5" />,
+    color: "bg-cyan-500/10 text-cyan-600"
+  },
+  {
+    title: "Secure Client Interaction",
+    desc: "Document exchange, queries, and approvals within a controlled environment.",
+    icon: <ShieldAlert className="w-5 h-5" />,
+    color: "bg-sky-500/10 text-sky-600"
+  }
+];
 
 export default function AuditPlatform() {
-  const sectionRef = useRef(null);
-  const isInView = useDirectionalInView(sectionRef);
-  const isSafari = useIsSafari();
-  const { isIPhone, isLowPerformance } = usePerformance();
-
+  const { reduceMotion, isIPhone } = usePerformance();
+  const containerRef = useRef(null);
 
   return (
     <section
-      ref={sectionRef}
-      id="platform"
-      className="relative py-16 sm:py-20 md:py-24 lg:py-28 overflow-hidden isolate"
+      ref={containerRef}
+      className="relative py-16 sm:py-24 overflow-hidden bg-[#FAFBFF]"
     >
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/Background pattern.svg')",
-          opacity: 0.07,
-        }}
-      ></div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          {/* Left Section */}
-          <DirectionalDiv
-            className="md:text-center lg:text-left max-w-xl lg:flex-1"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-          >
-            <DirectionalDiv variants={itemVariants}>
-              <p className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs sm:text-sm font-montserrat uppercase tracking-[0.2em] text-primary">
-              
-                All-in-one workspace
-              </p>
-            </DirectionalDiv>
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30" />
+        <div className="absolute -top-[10%] -left-[5%] w-[40%] h-[40%] bg-blue-50 rounded-full blur-[100px] opacity-60" />
+        <div className="absolute bottom-[10%] -right-[5%] w-[35%] h-[40%] bg-indigo-50 rounded-full blur-[100px] opacity-60" />
 
-            <DirectionalDiv
-              variants={itemVariants}
-              as="h1"
-              className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-semibold"
+        {/* Subtle Grid */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `radial-gradient(#3b82f6 0.5px, transparent 0.5px)`,
+          backgroundSize: '24px 24px'
+        }} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+
+          {/* Left Content Side */}
+          <div className="w-full lg:w-1/2 flex flex-col items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6"
             >
-              <span className="text-primary inline-block mr-2 sm:mr-3">
-                One Platform.
-              </span>
-              <span className="inline-block">Full Visibility.</span>
-            </DirectionalDiv>
+              <CheckCircle2 className="w-4 h-4 text-blue-600" />
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-700">All-in-one workspace</span>
+            </motion.div>
 
-            <DirectionalDiv
-              variants={itemVariants}
-              as="p"
-              className="mt-4 text-sm sm:text-base font-nunito text-gray-500 leading-relaxed"
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-8"
             >
-              Running a business requires constant coordination between advisors—accountants, auditors, lawyers,
-              and corporate service providers. Yet the work is often fragmented across emails, folders, and
-              separate systems. VACEI brings everything together in one structured workspace so you can see
-              exactly what is happening, who is responsible, and what comes next.
-            </DirectionalDiv>
+              One Platform. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Full Visibility.</span>
+            </motion.h2>
 
-            {/* Principle blocks */}
-            <DirectionalDiv variants={containerVariants} className="mt-10 sm:mt-12 space-y-6">
-              {[
-                {
-                  title: "Structured Workflows",
-                  desc: "Clear engagement stages, responsibilities, and progress tracking.",
-                },
-                {
-                  title: "Controlled Documentation",
-                  desc: "Centralised files, version visibility, and organised working papers.",
-                },
-                {
-                  title: "Review and Approval Layers",
-                  desc: "Defined review flows with tracked comments and sign-off history.",
-                },
-                {
-                  title: "Secure Client Interaction",
-                  desc: "Document exchange, queries, and approvals within a controlled environment.",
-                },
-              ].map((block) => (
-                <DirectionalDiv key={block.title} variants={itemVariants} className="flex gap-3">
-                  <span className="shrink-0 mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-blue" />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg text-slate-600 leading-relaxed max-w-xl mb-12"
+            >
+              Running a business requires constant coordination between advisors—accountants, auditors, lawyers, and corporate service providers. Yet the work is often fragmented across emails, folders, and separate systems. VACEI brings everything together in one structured workspace.
+            </motion.p>
+
+            {/* Principles Staggered Reveal */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 w-full">
+              {principles.map((principle, index) => (
+                <motion.div
+                  key={principle.title}
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: 0.1 * index + 0.2,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  whileHover={!reduceMotion ? { 
+                    y: -8,
+                    scale: 1.02,
+                    borderColor: "rgba(59, 130, 246, 0.4)",
+                    boxShadow: "0 20px 40px -15px rgba(59, 130, 246, 0.15)"
+                  } : {}}
+                  className="group flex flex-col gap-4 p-6 rounded-3xl bg-white border border-slate-100 shadow-sm transition-all duration-500 will-change-transform"
+                >
+                  <motion.div 
+                    className={cn("w-12 h-12 rounded-2xl flex items-center justify-center mb-1 transition-colors duration-500", principle.color)}
+                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {principle.icon}
+                  </motion.div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 font-montserrat">
-                      {block.title}
+                    <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                      {principle.title}
                     </h3>
-                    <p className="mt-0.5 text-sm font-nunito text-gray-500 leading-relaxed break-words">
-                      {block.desc}
+                    <p className="text-sm text-slate-500 leading-relaxed font-normal">
+                      {principle.desc}
                     </p>
                   </div>
-                </DirectionalDiv>
+                </motion.div>
               ))}
-            </DirectionalDiv>
-
-            <DirectionalDiv variants={itemVariants} as="p" className="mt-8 text-sm sm:text-base font-nunito font-semibold text-gray-700 italic">
-              Professional services require discipline. The platform ensures it.
-            </DirectionalDiv>
-
-            <DirectionalDiv variants={itemVariants} className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start items-center relative z-20">
-              <GetInstantQuoteButton
-                className="h-[46px]"
-              />
-              <motion.div whileHover={isIPhone ? {} : { scale: 1.03, y: -2 }} whileTap={isIPhone ? {} : { scale: 0.97, y: 0 }}>
-                <Link
-                  href="/portal/client-portal"
-                  className={cn(
-                    "flex items-center justify-center gap-2 rounded-full border border-primary-blue/80 text-text-dark font-normal text-[15px] transition-all px-6 h-[44px] shadow-sm",
-                    isIPhone || isLowPerformance ? "bg-white/80" : "bg-white/60 backdrop-blur-sm hover:bg-white/40 hover:shadow-md"
-                  )}
-                >
-
-                <span>Try The Client Portal</span>
-                <svg
-                  className="w-4 h-4 ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-                </Link>
-              </motion.div>
-            </DirectionalDiv>
-          </DirectionalDiv>
-
-          {/* Right Section - Same on desktop and mobile */}
-           <DirectionalDiv
-            className="w-full max-w-xl lg:max-w-2xl mx-auto lg:mx-0 lg:flex-1 mt-8 lg:mt-0"
-            initial={isIPhone ? { opacity: 0, y: 30 } : { opacity: 0, scale: 0.95, y: 40 }}
-            whileInView={isIPhone ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div 
-              className={cn(
-                "relative rounded-[32px] border border-white/20 shadow-[0_30px_90px_rgba(15,23,42,0.65)] overflow-hidden aspect-[4/3] sm:aspect-[16/10] flex items-center justify-center p-4 hardware-accelerated",
-                isIPhone || isLowPerformance ? "bg-white/20" : "bg-linear-to-br from-white/10 to-white/5 backdrop-blur-3xl"
-              )}
-              style={{ WebkitBackdropFilter: isIPhone || isLowPerformance ? 'none' : 'blur(40px)', transform: 'translateZ(0)' }}
-            >
-
-
-              <div className="pointer-events-none absolute inset-0 rounded-[32px] ring-1 ring-white/25 z-20" />
-              <AuditPlatformBeam className="w-full h-full" />
             </div>
-          </DirectionalDiv>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="mb-10 pl-4 border-l-2 border-primary-blue/30"
+            >
+              <p className="text-base text-slate-500 italic font-medium leading-relaxed">
+                Professional services require discipline. <br className="hidden sm:block" />
+                The platform ensures it.
+              </p>
+            </motion.div>
+
+            {/* CTA's */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap gap-5 w-full sm:w-auto"
+            >
+              <GetInstantQuoteButton className="h-[56px] px-8 text-base shadow-xl shadow-blue-600/10 hover:shadow-blue-600/25 transition-shadow duration-500" />
+
+              <Link
+                href="/portal/client-portal"
+                className="group flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-8 py-3 text-base font-bold text-slate-900 shadow-sm transition-all duration-500 hover:border-blue-400 hover:text-blue-600 hover:shadow-md h-[56px]"
+              >
+                <span>Try The Client Portal</span>
+                <ArrowUpRight className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right Visual Side - Beam Component */}
+          <div className="w-full lg:w-1/2 relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-square lg:aspect-[4/4] rounded-[40px] bg-white border border-slate-100 shadow-[0_40px_100px_-20px_rgba(59,130,246,0.15)] flex items-center justify-center overflow-hidden"
+            >
+              {/* Internal Beams Container */}
+              <div className="absolute inset-0 z-0 opacity-[0.4] bg-gradient-to-br from-blue-50/20 via-transparent to-indigo-50/20" />
+              <AuditPlatformBeam className="w-full h-full relative z-10" />
+
+              {/* Ambient decoration */}
+              <div className="absolute bottom-10 right-10 p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-blue-100 shadow-lg flex items-center gap-3 animate-bounce-subtle pointer-events-none">
+                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-xs font-bold text-slate-800">Compliance Verified</span>
+              </div>
+            </motion.div>
+
+            {/* Floating geometric detail */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute -top-10 -right-10 w-24 h-24 border border-blue-200/50 rounded-full border-dashed"
+            />
+          </div>
         </div>
       </div>
+
+      {/* Bottom Transition */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
     </section>
   );
 }

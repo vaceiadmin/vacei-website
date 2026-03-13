@@ -124,6 +124,17 @@
 
   /* Custom breakpoint at 1200px */
   --breakpoint-1200: 1200px;
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    }
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg - 360deg));
+    }
+  }
+
+  --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
 }
 
 /* Utility Classes for Background Colors */
@@ -718,6 +729,7 @@ body {
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

@@ -27,7 +27,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
   const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
-    <GradientContainer backgroundColor="bg-primary" className="my-6">
+    <GradientContainer backgroundColor="bg-[#020410]" className="my-6">
       <div className="flex flex-col items-center justify-center py-20 md:py-32 lg:py-40 px-4 text-center">
         {/* Title */}
         <TextAnimation

@@ -1,12 +1,9 @@
 "use client"
-import React, { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+
+import React, { useState, useRef } from "react"
 import { getServiceForm, SERVICE_TYPE_OPTIONS, type ServiceField } from "@/data/serviceRequestForms"
-import { useDirectionalInView } from "@/hooks/use-directional-in-view"
-import { DirectionalDiv } from "../common/Animations"
-import { useRef } from "react"
 import { useIsSafari } from "@/hooks/use-safari"
-import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
+import { usePerformance } from "@/contexts/ReduceMotionContext"
 import { cn } from "@/lib/utils"
 
 
@@ -123,10 +120,9 @@ function shouldShowServiceField(
 }
 
 const ProcessStepsSection = () => {
-    const bgRef = useRef(null);
-    const isInView = useDirectionalInView(bgRef);
-    
-    const [currentStep, setCurrentStep] = useState(0)
+  const bgRef = useRef(null)
+
+  const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -147,9 +143,9 @@ const ProcessStepsSection = () => {
   const [serviceDetails, setServiceDetails] = useState<Record<string, string | string[] | number>>({})
   const [error, setError] = useState("")
   const [submitted, setSubmitted] = useState(false)
-  const [submitError, setSubmitError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [direction, setDirection] = useState(0)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [openSelectKey, setOpenSelectKey] = useState<string | null>(null)
   const isSafari = useIsSafari()
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance()
@@ -313,567 +309,361 @@ const ProcessStepsSection = () => {
     handleServiceDetailChange(key, arr)
   }
 
-  // Animation Variants
-  const slideVariants = {
-    enter: (dir: number) => ({
-      x: isIPhone || isLowPerformance ? (dir > 0 ? 10 : -10) : (dir > 0 ? 30 : -30),
-      opacity: 0,
-      scale: isIPhone || isLowPerformance ? 1 : 0.98,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
-    exit: (dir: number) => ({
-      zIndex: 0,
-      x: isIPhone || isLowPerformance ? (dir < 0 ? 10 : -10) : (dir < 0 ? 30 : -30),
-      opacity: 0,
-      scale: isIPhone || isLowPerformance ? 1 : 0.98,
-    })
-  }
-
   return (
-    <section id="process-steps" ref={bgRef} className="w-full relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28 scroll-mt-20 isolate" style={{ backgroundColor: '#D8E5E5' }}>
-        
-        {/* Animated Background Elements - Safari Friendly */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ transform: 'translateZ(0)' }}>
-             <motion.div 
-               animate={isInView && !isIPhone && !isLowPerformance ? { y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] } : {}}
-               transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
-               className="absolute top-0 right-0 w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] bg-white/30 blur-[60px] rounded-full"
-               style={{ transform: 'translateZ(0)' }}
-             />
-             <motion.div 
-               animate={isInView && !isIPhone && !isLowPerformance ? { y: [0, 30, 0], opacity: [0.2, 0.4, 0.2] } : {}}
-               transition={{ duration: 10, repeat: 0, ease: "easeInOut", delay: 1 }}
+    <section
+      id="process-steps"
+      ref={bgRef}
+      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#FAFBFF]"
+    >
+      {/* Subtle Decorative Background - No Parallax */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[120px] -mr-48 -mt-48" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-50/40 rounded-full blur-[100px] -ml-32 -mb-32" />
 
-               className="absolute bottom-0 left-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-blue-100/30 blur-[60px] rounded-full" 
-               style={{ transform: 'translateZ(0)' }}
-             />
-        </div>
+        {/* Suble geometric grid */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `radial-gradient(#3b82f6 0.5px, transparent 0.5px)`,
+          backgroundSize: '32px 32px'
+        }} />
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            
-            {/* --- Left Column: High-End Glass Form --- */}
-            <DirectionalDiv 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative group h-full"
-            >
-               {/* 3D Tilt Wrapper / Card */}
-                <div 
-                  className={cn(
-                    "relative border border-white/60 rounded-[2.5rem] p-6 sm:p-8 md:p-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.5)] overflow-hidden transition-all duration-500 h-full hardware-accelerated",
-                    isIPhone || isLowPerformance ? "bg-white/60" : "bg-white/40 backdrop-blur-xl hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.15)]"
-                  )}
-                  style={{ WebkitBackdropFilter: isIPhone || isLowPerformance ? 'none' : 'blur(24px)', transform: 'translateZ(0)' }}
-                >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-                  
-                  {/* Glossy Reflection */}
-                  <div className="absolute top-0 left-0 w-full h-1/2 bg-linear-to-b from-white/40 to-transparent opacity-50 pointer-events-none" />
-
+          {/* --- Left Column: Premium Sleek Form --- */}
+          <div className="relative z-10 w-full lg:order-1">
+            <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_30px_70px_-20px_rgba(30,58,138,0.08)] overflow-hidden">
+              <div className="p-1 sm:p-2">
+                <div className="bg-slate-50/50 rounded-[2.2rem] p-6 sm:p-8 md:p-10">
                   {!submitted ? (
-                    <form onSubmit={handleSubmit} className="flex flex-col h-full relative z-10 min-h-[500px]">
-                        {/* Progress Bar (Top of Card) */}
-                        <div className="flex gap-2 mb-8">
-                            {formSteps.map((_, idx) => (
-                                <motion.div 
-                                    key={idx}
-                                    className={`h-1.5 rounded-full flex-1 transition-colors duration-500 ${idx <= currentStep ? "bg-[#3b49e6]" : "bg-white/50"}`}
+                    <form onSubmit={handleSubmit} className="flex flex-col h-full min-h-[520px]">
+                      {/* Visual Progress Steps */}
+                      <div className="flex items-center justify-between mb-10 px-2">
+                        {formSteps.map((_, idx) => (
+                          <React.Fragment key={idx}>
+                            <div className="flex flex-col items-center gap-2">
+                              <div className={cn(
+                                "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500",
+                                idx <= currentStep
+                                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                                  : "bg-white border border-slate-200 text-slate-400"
+                              )}>
+                                {idx + 1}
+                              </div>
+                            </div>
+                            {idx < formSteps.length - 1 && (
+                              <div className={cn(
+                                "h-px grow mx-4 transition-colors duration-700",
+                                idx < currentStep ? "bg-blue-600" : "bg-slate-200"
+                              )} />
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+
+                      <div className="mb-8">
+                        <div>
+                          <h3 className="text-3xl font-black text-slate-900 tracking-tight mb-2">
+                            {step.title}
+                          </h3>
+                          <p className="text-slate-500 font-medium">
+                            {step.subtitle}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grow relative">
+                        <div className="space-y-6">
+                          {step.fields.map((field) => (
+                            <div key={field.key} className="space-y-2">
+                              <label className="text-sm font-bold text-slate-700 block ml-1">
+                                {field.label}
+                              </label>
+                              {field.type === "select" ? (
+                                <div className="relative">
+                                  <button
+                                    type="button"
+                                    onClick={() => setOpenSelectKey((prev) => (prev === field.key ? null : field.key))}
+                                    className="w-full h-14 rounded-2xl border border-slate-200 bg-white px-5 text-left text-sm font-semibold text-slate-900 shadow-sm transition-all hover:border-blue-300 focus:outline-none focus:ring-4 focus:ring-blue-600/5"
+                                  >
+                                    <span className={formData[field.key] ? "text-slate-900" : "text-slate-400"}>
+                                      {(formData[field.key] as string) || field.placeholder}
+                                    </span>
+                                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400">
+                                      <svg className={cn("w-5 h-5 transition-transform", openSelectKey === field.key && "rotate-180")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    </span>
+                                  </button>
+
+                                  {openSelectKey === field.key && (
+                                    <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-2xl py-2">
+                                      {field.options?.map((opt) => (
+                                        <button
+                                          key={opt}
+                                          type="button"
+                                          onClick={() => { handleChange(field.key, opt); setOpenSelectKey(null); }}
+                                          className={cn(
+                                            "flex w-full px-5 py-3 text-sm font-medium transition-colors",
+                                            (formData[field.key] as string) === opt ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50"
+                                          )}
+                                        >
+                                          {opt}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              ) : field.type === "textarea" ? (
+                                <textarea
+                                  value={formData[field.key] as string}
+                                  onChange={(e) => handleChange(field.key, e.target.value)}
+                                  placeholder={field.placeholder}
+                                  rows={field.rows}
+                                  className="w-full bg-white border border-slate-200 rounded-2xl px-5 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-400 transition-all font-medium min-h-[100px] resize-none"
                                 />
-                            ))}
-                        </div>
+                              ) : field.type === "file" ? (
+                                <div className="relative overflow-hidden bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-8 text-center hover:bg-white hover:border-blue-400 transition-all group/file cursor-pointer">
+                                  <input
+                                    type="file"
+                                    multiple={field.multiple}
+                                    accept={field.accept}
+                                    onChange={(e) => handleChange(field.key, e.target.files)}
+                                    className="absolute inset-0 opacity-0 cursor-pointer z-20"
+                                  />
+                                  <div className="relative z-10">
+                                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-blue-600 mx-auto mb-3 border border-slate-100 group-hover/file:scale-110 transition-transform">
+                                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                                    </div>
+                                    <p className="text-sm font-bold text-slate-700">
+                                      {formData.uploadFiles?.length ? `${formData.uploadFiles.length} files selected` : field.label}
+                                    </p>
+                                    <p className="text-xs text-slate-400 mt-1">PDF, JPG, PNG, DOC (Max 25MB)</p>
+                                  </div>
+                                </div>
+                              ) : (
+                                <input
+                                  type={field.type}
+                                  value={formData[field.key] as string}
+                                  onChange={(e) => handleChange(field.key, e.target.value)}
+                                  placeholder={field.placeholder}
+                                  className="w-full h-14 bg-white border border-slate-200 rounded-2xl px-5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-400 transition-all font-medium"
+                                />
+                              )}
+                            </div>
+                          ))}
 
-                        {/* Helper / Header */}
-                        <div className="mb-6">
-                            <motion.h3 
-                                key={step.title}
-                                initial={{ opacity: 0, y: 5 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="text-3xl md:text-4xl font-extrabold text-[#1a1c35] tracking-tight mb-2"
-                            >
-                                {step.title}
-                            </motion.h3>
-                            <motion.p
-                                key={step.subtitle}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                className="text-gray-600 font-medium"
-                            >
-                                {step.subtitle}
-                            </motion.p>
-                        </div>
+                          {step.id === "onboarding" && serviceFormConfig && (
+                            <div className="mt-8 pt-8 border-t border-slate-100 space-y-6">
+                              <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100/50">
+                                <h4 className="text-sm font-black text-blue-900 uppercase tracking-widest mb-1">
+                                  {serviceFormConfig.label}
+                                </h4>
+                                <p className="text-xs text-blue-700 font-medium opacity-80">{serviceFormConfig.purpose}</p>
+                              </div>
 
-                        {/* Fields Container */}
-                        <div className="grow relative">
-                            <AnimatePresence initial={false} custom={direction} mode="wait">
-                                <motion.div
-                                    key={currentStep}
-                                    custom={direction}
-                                    variants={slideVariants}
-                                    initial="enter"
-                                    animate="center"
-                                    exit="exit"
-                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                    className="space-y-5"
-                                >
-                                    {step.fields.map((field) => (
-                                        <div key={field.key} className="relative group">
-                                            {/* Floating Label Effect Support */}
-                                            {field.type === "select" ? (
-                                                <div className="relative">
-                                                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 block pl-1">
-                                                        {field.label}
-                                                    </label>
-                                                    <div
-                                                      tabIndex={0}
-                                                      onBlur={() => setOpenSelectKey((prev) => (prev === field.key ? null : prev))}
-                                                      className="relative"
-                                                    >
-                                                      <button
-                                                        type="button"
-                                                        onClick={() =>
-                                                          setOpenSelectKey((prev) => (prev === field.key ? null : field.key))
-                                                        }
-                                                        className="w-full min-h-[54px] rounded-xl border border-white/70 bg-white/70 px-4 pr-11 py-3 text-left text-sm font-semibold text-gray-800 shadow-sm transition-all hover:bg-white focus:outline-none focus-visible:ring-4 focus-visible:ring-[#3b49e6]/15 focus-visible:border-[#3b49e6]/50"
-                                                      >
-                                                        <span
-                                                          className={
-                                                            (formData[field.key] as string)
-                                                              ? "text-gray-900"
-                                                              : "text-gray-400"
-                                                          }
-                                                        >
-                                                          {(formData[field.key] as string) || field.placeholder}
-                                                        </span>
-                                                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
-                                                          <svg
-                                                            className={`w-5 h-5 transition-transform ${
-                                                              openSelectKey === field.key ? "rotate-180" : ""
-                                                            }`}
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                          >
-                                                            <path
-                                                              strokeLinecap="round"
-                                                              strokeLinejoin="round"
-                                                              strokeWidth={2}
-                                                              d="M19 9l-7 7-7-7"
-                                                            />
-                                                          </svg>
-                                                        </span>
-                                                      </button>
-
-                                                      {openSelectKey === field.key && (
-                                                        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-xl">
-                                                          <div className="max-h-60 overflow-y-auto py-1">
-                                                            {field.options?.map((opt) => (
-                                                              <button
-                                                                key={opt}
-                                                                type="button"
-                                                                onMouseDown={(e) => e.preventDefault()}
-                                                                onClick={() => {
-                                                                  handleChange(field.key, opt)
-                                                                  setOpenSelectKey(null)
-                                                                }}
-                                                                className={`flex w-full items-center px-3 py-2 text-sm text-left ${
-                                                                  (formData[field.key] as string) === opt
-                                                                    ? "bg-[#3b49e6]/10 text-[#111827] font-semibold"
-                                                                    : "text-gray-700 hover:bg-slate-50"
-                                                                }`}
-                                                              >
-                                                                {opt}
-                                                              </button>
-                                                            ))}
-                                                          </div>
-                                                        </div>
-                                                      )}
-                                                    </div>
-                                                </div>
-                                            ) : field.type === "textarea" ? (
-                                                <>
-                                                 <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 block pl-1">
-                                                        {field.label}
-                                                    </label>
-                                                    <textarea 
-                                                        value={formData[field.key] as string}
-                                                        onChange={(e) => handleChange(field.key, e.target.value)}
-                                                        placeholder={field.placeholder}
-                                                        rows={field.rows}
-                                                        className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-4 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 transition-all font-semibold placeholder:text-gray-400 shadow-sm hover:bg-white/80 resize-none"
-                                                    />
-                                                </>
-                                            ) : field.type === "file" ? (
-                                                <div className="relative overflow-hidden bg-white/50 border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:bg-white/80 hover:border-[#3b49e6]/50 transition-all group/file cursor-pointer">
-                                                    <input 
-                                                        type="file" 
-                                                        multiple={field.multiple}
-                                                        accept={field.accept}
-                                                        onChange={(e) => handleChange(field.key, e.target.files)}
-                                                        className="absolute inset-0 opacity-0 cursor-pointer z-20"
-                                                    />
-                                                    <div className="relative z-10 transition-transform duration-300 group-hover/file:scale-105">
-                                                        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md text-[#3b49e6] mx-auto mb-3">
-                                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                                                        </div>
-                                                        {formData.uploadFiles && formData.uploadFiles.length > 0 ? (
-                                                          <div className="space-y-2">
-                                                            <p className="text-sm font-bold text-gray-700">
-                                                              {formData.uploadFiles.length === 1
-                                                                ? "1 file attached"
-                                                                : `${formData.uploadFiles.length} files attached`}
-                                                            </p>
-                                                            <ul className="text-xs text-gray-500 max-h-20 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-300/80 [&::-webkit-scrollbar-thumb]:rounded-full">
-                                                              {Array.from(formData.uploadFiles)
-                                                                .slice(0, 4)
-                                                                .map((file, idx) => (
-                                                                  <li key={idx} className="truncate">
-                                                                    • {file.name}
-                                                                  </li>
-                                                                ))}
-                                                              {formData.uploadFiles.length > 4 && (
-                                                                <li className="italic">+ more…</li>
-                                                              )}
-                                                            </ul>
-                                                          </div>
-                                                        ) : (
-                                                          <>
-                                                            <p className="text-sm font-bold text-gray-600 mb-1">
-                                                              {field.label}
-                                                            </p>
-                                                            <p className="text-xs text-gray-400">
-                                                              Drag & drop or click to upload
-                                                            </p>
-                                                          </>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="relative">
-                                                     <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 block pl-1">
-                                                        {field.label}
-                                                    </label>
-                                                    <input 
-                                                        type={field.type}
-                                                        value={formData[field.key] as string}
-                                                        onChange={(e) => handleChange(field.key, e.target.value)}
-                                                        placeholder={field.placeholder}
-                                                        className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-4 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 transition-all font-semibold placeholder:text-gray-400 shadow-sm hover:bg-white/80"
-                                                    />
-                                                </div>
+                              {serviceFormConfig.fields
+                                .filter((f) => shouldShowServiceField(f, serviceDetails))
+                                .map((f) => (
+                                  <div key={f.key} className="space-y-2">
+                                    <label className="text-sm font-bold text-slate-700 block ml-1">
+                                      {f.label} {f.required && <span className="text-red-500">*</span>}
+                                    </label>
+                                    {f.type === "radio" && (
+                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        {f.options?.map((opt) => (
+                                          <button
+                                            key={opt.value}
+                                            type="button"
+                                            onClick={() => handleServiceDetailChange(f.key, opt.value)}
+                                            className={cn(
+                                              "text-sm rounded-xl px-4 py-3 text-left border font-semibold transition-all",
+                                              (serviceDetails[f.key] as string) === opt.value
+                                                ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20"
+                                                : "bg-white text-slate-600 border-slate-200 hover:border-blue-300"
                                             )}
-                                        </div>
-                                    ))}
-
-                                    {/* Service-specific request details (all services A–M from config) */}
-                                    {step.id === "onboarding" && serviceFormConfig && (
-                                      <div className="mt-6 space-y-5 pt-4 border-t border-white/60">
-                                        <h4 className="text-sm font-extrabold text-[#1a1c35] tracking-[0.18em] uppercase mb-1">
-                                          {serviceFormConfig.label} — request details
-                                        </h4>
-                                        <p className="text-xs text-gray-600 mb-3">{serviceFormConfig.purpose}</p>
-
-                                        {(formData.companyName || formData.jurisdiction) && (
-                                          <div className="flex flex-wrap gap-4 text-xs text-gray-500 mb-2">
-                                            {formData.companyName && <span><strong>Company:</strong> {formData.companyName}</span>}
-                                            {formData.jurisdiction && <span><strong>Jurisdiction:</strong> {formData.jurisdiction}</span>}
-                                          </div>
-                                        )}
-
-                                        {serviceFormConfig.fields
-                                          .filter((f) => shouldShowServiceField(f, serviceDetails))
-                                          .map((f) => (
-                                            <div key={f.key} className="space-y-2">
-                                              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider block pl-1">
-                                                {f.label}
-                                                {f.required && <span className="text-red-500 ml-0.5">*</span>}
-                                              </label>
-                                              {f.type === "radio" && (
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                                  {f.options?.map((opt) => (
-                                                    <button
-                                                      key={opt.value}
-                                                      type="button"
-                                                      onClick={() => handleServiceDetailChange(f.key, opt.value)}
-                                                      className={`text-xs sm:text-sm rounded-xl px-3 py-2.5 text-left border transition-all ${
-                                                        (serviceDetails[f.key] as string) === opt.value
-                                                          ? "bg-[#3b49e6] text-white border-[#3b49e6] shadow-sm"
-                                                          : "bg-white/60 text-gray-700 border-white/70 hover:bg-white"
-                                                      }`}
-                                                    >
-                                                      {opt.label}
-                                                    </button>
-                                                  ))}
-                                                </div>
-                                              )}
-                                              {f.type === "multicheck" && (
-                                                <div className="flex flex-wrap gap-2">
-                                                  {f.options?.map((opt) => {
-                                                    const arr = (serviceDetails[f.key] as string[] | undefined) ?? []
-                                                    const checked = Array.isArray(arr) && arr.includes(opt.value)
-                                                    return (
-                                                      <button
-                                                        key={opt.value}
-                                                        type="button"
-                                                        onClick={() => toggleMulticheck(f.key, opt.value)}
-                                                        className={`text-xs sm:text-sm rounded-xl px-3 py-2.5 text-left border transition-all ${
-                                                          checked ? "bg-[#3b49e6] text-white border-[#3b49e6] shadow-sm" : "bg-white/60 text-gray-700 border-white/70 hover:bg-white"
-                                                        }`}
-                                                      >
-                                                        {opt.label}
-                                                      </button>
-                                                    )
-                                                  })}
-                                                </div>
-                                              )}
-                                              {f.type === "text" && (
-                                                <input
-                                                  type="text"
-                                                  value={(serviceDetails[f.key] as string) ?? ""}
-                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
-                                                  placeholder={f.placeholder}
-                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm"
-                                                />
-                                              )}
-                                              {f.type === "number" && (
-                                                <input
-                                                  type="number"
-                                                  value={serviceDetails[f.key] === undefined || serviceDetails[f.key] === "" ? "" : String(serviceDetails[f.key])}
-                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value === "" ? "" : Number(e.target.value))}
-                                                  placeholder={f.placeholder}
-                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm"
-                                                />
-                                              )}
-                                              {f.type === "date" && (
-                                                <input
-                                                  type="date"
-                                                  value={(serviceDetails[f.key] as string) ?? ""}
-                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
-                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm"
-                                                />
-                                              )}
-                                              {f.type === "textarea" && (
-                                                <textarea
-                                                  rows={3}
-                                                  value={(serviceDetails[f.key] as string) ?? ""}
-                                                  onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
-                                                  placeholder={f.placeholder}
-                                                  className="w-full bg-white/60 border border-white/60 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:bg-white focus:ring-4 focus:ring-[#3b49e6]/10 focus:border-[#3b49e6]/40 text-sm resize-none"
-                                                />
-                                              )}
-                                              {f.helperText && <p className="text-[11px] text-gray-500 mt-1">{f.helperText}</p>}
-                                            </div>
-                                          ))}
+                                          >
+                                            {opt.label}
+                                          </button>
+                                        ))}
                                       </div>
                                     )}
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
-
-                        {/* Error Warning */}
-                        <AnimatePresence>
-                            {error && (
-                                <motion.div 
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: "auto" }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    className="overflow-hidden mb-2"
-                                >
-                                    <p className="text-red-500/90 text-sm font-bold bg-red-50/50 px-3 py-2 rounded-lg border border-red-100 flex items-center gap-2">
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                        {error}
-                                    </p>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* Action Buttons */}
-                        <div className="mt-8 flex items-center gap-4">
-                             {currentStep > 0 && (
-                                <motion.button
-                                    whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.03, y: -2 }}
-                                    whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.97, y: 0 }}
-                                    type="button"
-                                    onClick={handleBack}
-                                    className="px-6 py-4 rounded-xl font-bold text-gray-600 hover:text-[#1a1c35] bg-white/30 hover:bg-white/60 transition-all shadow-sm hover:shadow-md"
-                                >
-                                    Back
-                                </motion.button>
-                             )}
-                             <motion.button
-                                whileHover={isIPhone || isLowPerformance ? {} : { scale: 1.02, boxShadow: "0 10px 30px -10px rgba(59,73,230,0.4)" }}
-                                whileTap={isIPhone || isLowPerformance ? {} : { scale: 0.98 }}
-                                type="submit"
-                                disabled={isSubmitting}
-                                className={`grow py-4 rounded-xl bg-[#3b49e6] text-white font-bold text-base shadow-lg shadow-[#3b49e6]/20 transition-all relative overflow-hidden group ${
-                                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-                                }`}
-                             >
-                                <span className="relative z-10 flex items-center justify-center gap-2">
-                                  {isSubmitting && (
-                                    <span className="inline-flex h-4 w-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin" />
-                                  )}
-                                  {isSubmitting
-                                    ? currentStep === formSteps.length - 1
-                                      ? "Sending request..."
-                                      : "Processing..."
-                                    : step.primaryLabel || "Next Step"}
-                                </span>
-                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                             </motion.button>
-                        </div>
-                    </form>
-                  ) : (
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="flex flex-col items-center justify-center h-full text-center py-10 min-h-[500px]"
-                    >
-                        <motion.div 
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
-                            className="w-28 h-28 bg-[#3b49e6]/5 rounded-full flex items-center justify-center mb-6 relative"
-                        >
-                            <motion.div 
-                                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                                transition={{ repeat: Infinity, duration: 2 }}
-                                className="absolute inset-0 bg-[#3b49e6]/5 rounded-full"
-                            />
-                            <svg className="w-12 h-12 text-[#3b49e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                        </motion.div>
-                        
-                        <h3 className="text-3xl font-extrabold text-[#1a1c35] mb-2 tracking-tight">Request Received</h3>
-                        <p className="text-gray-500 font-medium max-w-sm mb-10 leading-relaxed">
-                            Thank you, {formData.name || "Guest"}. We've initiated your profile setup. <br/>Check your email for next steps.
-                        </p>
-                        
-                        <button
-                            onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: "", companyStage: "", companyName: "", jurisdiction: "", documentStatus: "", uploadFiles: null, uploadMethod: "", communicationChannel: "", updateCadence: "", phone: "", complianceReminders: "", recordAccess: "" }); setServiceDetails({}); setDirection(0); }}
-                            className="px-8 py-3.5 rounded-xl bg-white border-2 border-transparent hover:border-gray-200 text-gray-900 font-bold transition-all shadow-md hover:shadow-lg"
-                        >
-                            Start New Request
-                        </button>
-                    </motion.div>
-                  )}
-                </div>
-            </DirectionalDiv>
-
-            {/* --- Right Column: Sleek Timeline --- */}
-            <div className="relative lg:pl-10 h-full flex flex-col justify-center">
-                {/* Connecting Line (Track) */}
-                <div className={cn(
-                  "absolute left-[31px] top-7 bottom-10 w-[2px] rounded-full lg:block hidden",
-                  isIPhone || isLowPerformance ? "bg-white/60" : "bg-white/40 backdrop-blur-sm"
-                )} />
-
-                
-                {/* Active Progress Line */}
-                <div className="absolute left-[31px] top-7 bottom-10 lg:block hidden">
-                   <motion.div 
-                     className="w-[2px] rounded-full bg-linear-to-b from-[#3b49e6] via-[#6366f1] to-transparent shadow-[0_0_18px_rgba(79,70,229,0.55)]"
-                     initial={{ height: 0 }}
-                     animate={{ 
-                       height: `${(currentStep / (processSteps.length - 1)) * 100}%`
-                     }}
-                     transition={{ duration: 0.6, ease: "easeInOut" }}
-                   />
-                </div>
-
-                <div className="space-y-6 md:space-y-8 relative z-10">
-                    {processSteps.map((s, idx) => {
-                        const isActive = idx === currentStep;
-                        const isPast = idx < currentStep;
-
-                        return (
-                            <motion.div 
-                                key={idx}
-                                initial={{ opacity: 0, x: 24, y: 8 }}
-                                animate={{
-                                  opacity: isActive ? 1 : 0.6,
-                                  x: 0,
-                                  y: isActive ? -4 : 0,
-                                }}
-                                transition={{ duration: 0.35, delay: idx * 0.08, ease: "easeOut" }}
-                                className={`relative flex gap-8 group cursor-pointer transition-all duration-300 ${isActive ? "opacity-100" : "hover:opacity-90"}`}
-                                onClick={() => { if(idx <= currentStep + 1) setCurrentStep(idx) }}
-                            >
-                                {/* Indicator Circle */}
-                                <motion.div 
-                                    animate={{ 
-                                        scale: isActive ? 1.08 : 1,
-                                        backgroundColor: isActive || isPast ? "#FFFFFF" : "rgba(255,255,255,0.35)",
-                                        borderColor: isActive || isPast ? "#3b49e6" : "rgba(156, 163, 175, 0.45)"
-                                    }}
-                                    className={`relative z-10 w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-full border-[3px] flex items-center justify-center text-sm md:text-lg font-semibold transition-all shadow-sm ${isActive ? "shadow-[0_0_24px_rgba(79,70,229,0.45)]" : ""}`}
-                                >
-                                    {isActive && (
-                                      <motion.div
-                                        className="absolute inset-0 rounded-full border border-[#3b49e6]/40"
-                                        initial={{ opacity: 0.6, scale: 1 }}
-                                        animate={{ opacity: [0.6, 0, 0.6], scale: [1, 1.25, 1] }}
-                                        transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+                                    {f.type === "multicheck" && (
+                                      <div className="flex flex-wrap gap-2">
+                                        {f.options?.map((opt) => {
+                                          const checked = (serviceDetails[f.key] as string[] ?? []).includes(opt.value);
+                                          return (
+                                            <button
+                                              key={opt.value}
+                                              type="button"
+                                              onClick={() => toggleMulticheck(f.key, opt.value)}
+                                              className={cn(
+                                                "text-xs font-bold rounded-full px-4 py-2 border transition-all",
+                                                checked ? "bg-blue-600 text-white border-blue-600" : "bg-white text-slate-500 border-slate-200 hover:border-blue-300"
+                                              )}
+                                            >
+                                              {opt.label}
+                                            </button>
+                                          )
+                                        })}
+                                      </div>
+                                    )}
+                                    {(["text", "number", "date"].includes(f.type)) && (
+                                      <input
+                                        type={f.type}
+                                        value={(serviceDetails[f.key] as any) ?? ""}
+                                        onChange={(e) => handleServiceDetailChange(f.key, f.type === 'number' ? Number(e.target.value) : e.target.value)}
+                                        placeholder={f.placeholder}
+                                        className="w-full h-12 bg-white border border-slate-200 rounded-xl px-4 text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-400 transition-all text-sm font-medium"
                                       />
                                     )}
-                                    {isPast ? (
-                                        <svg className="w-6 h-6 text-[#3b49e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
-                                    ) : (
-                                        <span className={isActive ? "text-[#3b49e6]" : "text-gray-500"}>{idx + 1}</span>
+                                    {f.type === "textarea" && (
+                                      <textarea
+                                        rows={3}
+                                        value={(serviceDetails[f.key] as string) ?? ""}
+                                        onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
+                                        placeholder={f.placeholder}
+                                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-600/5 focus:border-blue-400 transition-all text-sm font-medium resize-none"
+                                      />
                                     )}
-                                </motion.div>
+                                  </div>
+                                ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
 
-                                {/* Text Content */}
-                                <div className="pt-1.5 flex-1">
-                                    <div 
-                                      className={`relative rounded-2xl overflow-hidden transition-all duration-300 border ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"} ${
-                                        isActive
-                                          ? "bg-white/80 border-white/90 shadow-[0_22px_40px_-22px_rgba(15,23,42,0.55)]"
-                                          : "bg-white/25 border-white/40 hover:bg-white/45 hover:border-white/80"
-                                      }`}
-                                      style={{ WebkitBackdropFilter: isIPhone || isLowPerformance ? 'none' : 'blur(4px)', transform: 'translateZ(0)' }}
-                                    >
-                                        {isActive && (
-                                          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-linear-to-b from-[#3b49e6] via-[#6366f1] to-[#a855f7]" />
-                                        )}
-                                        <div className="px-4 py-3 md:px-5 md:py-4 pl-5 md:pl-6">
-                                          <h4 className={`text-lg md:text-xl font-extrabold mb-1.5 tracking-tight transition-colors duration-300 ${
-                                            isActive ? "text-[#111827]" : "text-gray-600"
-                                          }`}>
-                                              {s.title}
-                                          </h4>
-                                          <AnimatePresence>
-                                              {(isActive || isPast) && (
-                                                  <motion.div
-                                                      initial={{ height: 0, opacity: 0 }}
-                                                      animate={{ height: "auto", opacity: 1 }}
-                                                      exit={{ height: 0, opacity: 0 }}
-                                                      className="overflow-hidden"
-                                                  >
-                                                      <p className="text-sm md:text-base text-gray-600 font-medium leading-relaxed max-w-sm">
-                                                          {s.description}
-                                                      </p>
-                                                  </motion.div>
-                                              )}
-                                          </AnimatePresence>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )
-                    })}
+                      {/* Sticky Error Footer */}
+                      {error && (
+                        <div className="mt-6 p-4 rounded-xl bg-red-50 border border-red-100 flex items-center gap-3">
+                          <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0 uppercase font-black text-[10px]">!</div>
+                          <p className="text-sm font-bold text-red-700">{error}</p>
+                        </div>
+                      )}
+
+                      {/* Form Actions */}
+                      <div className="mt-10 flex items-center gap-4">
+                        {currentStep > 0 && (
+                          <button
+                            type="button"
+                            onClick={handleBack}
+                            className="h-14 px-8 rounded-2xl font-black text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all tracking-widest uppercase text-xs"
+                          >
+                            Back
+                          </button>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="grow h-14 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-xs shadow-xl shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-blue-600/40 active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
+                        >
+                          {isSubmitting && <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />}
+                          {isSubmitting ? "Processing..." : (step.primaryLabel || "Next Step")}
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center min-h-[520px] text-center p-6">
+                      <div className="w-24 h-24 bg-green-50 rounded-[2rem] flex items-center justify-center text-green-500 mb-8 shadow-inner">
+                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                      </div>
+                      <h3 className="text-4xl font-black text-slate-900 mb-4 tracking-tight">Request Received</h3>
+                      <p className="text-slate-500 font-medium max-w-sm mb-12">
+                        We've received your request. Our team will review the details and get back to you within 24 hours.
+                      </p>
+                      <button
+                        onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: "", companyStage: "", companyName: "", jurisdiction: "", documentStatus: "", uploadFiles: null, uploadMethod: "", communicationChannel: "", updateCadence: "", phone: "", complianceReminders: "", recordAccess: "" }); setServiceDetails({}); }}
+                        className="h-14 px-10 rounded-2xl bg-slate-900 text-white font-black uppercase tracking-widest text-xs transition-all hover:bg-slate-800"
+                      >
+                        Start New Request
+                      </button>
+                    </div>
+                  )}
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* --- Right Column: Modern Process Status --- */}
+          <div className="relative lg:pl-10 h-full flex flex-col justify-center lg:order-2">
+            <div className="mb-10">
+              <h2 className="text-sm font-black text-blue-600 uppercase tracking-[0.2em] mb-4">Workflow Progress</h2>
+              <h3 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
+                Real-time <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">Onboarding State</span>
+              </h3>
             </div>
 
+            <div className="space-y-4 relative">
+              {processSteps.map((s, idx) => {
+                const isActive = idx === currentStep;
+                const isPast = idx < currentStep;
+
+                return (
+                  <div
+                    key={idx}
+                    className={cn(
+                      "group relative rounded-3xl p-5 sm:p-6 transition-all duration-500 border",
+                      isActive
+                        ? "bg-white border-blue-100 shadow-[0_20px_40px_-15px_rgba(37,99,235,0.12)] scale-[1.02] z-20"
+                        : "bg-slate-50/50 border-transparent opacity-60 hover:opacity-80"
+                    )}
+                  >
+                    <div className="flex items-start gap-5">
+                      <div className={cn(
+                        "w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500",
+                        isActive ? "bg-blue-600 text-white rotate-3 shadow-lg shadow-blue-500/40" :
+                          isPast ? "bg-green-100 text-green-600" : "bg-white text-slate-400"
+                      )}>
+                        {isPast ? (
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                        ) : (
+                          <span className="text-lg font-black">{idx + 1}</span>
+                        )}
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className={cn(
+                            "text-lg font-black transition-colors",
+                            isActive ? "text-slate-900" : "text-slate-500"
+                          )}>
+                            {s.title}
+                          </h4>
+                          {isActive && (
+                            <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+                          )}
+                        </div>
+                        {(isActive || isPast) && (
+                          <p className="text-sm font-medium text-slate-500 leading-relaxed overflow-hidden">
+                            {s.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {isActive && (
+                      <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-12 bg-blue-600 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.8)] lg:block hidden" />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Promotional Banner Area */}
+            <div className="mt-12 p-8 rounded-[2rem] bg-linear-to-br from-slate-900 to-slate-800 text-white relative overflow-hidden">
+              <div className="relative z-10">
+                <p className="text-blue-400 text-xs font-black uppercase tracking-widest mb-2">Platform Power</p>
+                <p className="text-lg font-bold leading-snug">
+                  Experience the future of <br />corporate management.
+                </p>
+              </div>
+              {/* Abstract circles */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-2xl" />
+            </div>
           </div>
+
         </div>
+      </div>
     </section>
   )
 }

@@ -106,31 +106,31 @@ const Navbar = () => {
 
     const checkBackground = (element: HTMLElement | null): boolean => {
       if (!element || element === document.body) return false;
-      
+
       const bgColor = window.getComputedStyle(element).backgroundColor;
       const bgClass = getClassName(element);
-      
+
       // Check for dark background classes first
       const isDarkClass = bgClass.includes('bg-hero') ||
-                         bgClass.includes('bg-[#111235]') ||
-                         bgClass.includes('bg-card') ||
-                         bgClass.includes('bg-gradient-container') ||
-                         bgClass.includes('bg-hero-dark') ||
-                         bgClass.includes('bg-[#1e2040]') ||
-                         bgClass.includes('bg-[#2a2d55]') ||
-                         bgClass.includes('bg-[#1e1e2f]');
-      
+        bgClass.includes('bg-[#111235]') ||
+        bgClass.includes('bg-card') ||
+        bgClass.includes('bg-gradient-container') ||
+        bgClass.includes('bg-hero-dark') ||
+        bgClass.includes('bg-[#1e2040]') ||
+        bgClass.includes('bg-[#2a2d55]') ||
+        bgClass.includes('bg-[#1e1e2f]');
+
       if (isDarkClass) return true;
-      
+
       // Check for light background classes
       const isLightClass = bgClass.includes('bg-background') ||
-                          bgClass.includes('bg-white') ||
-                          bgClass.includes('bg-section-light') ||
-                          bgClass.includes('bg-[#ecf0f0]') ||
-                          bgClass.includes('bg-[#d8e5e5]');
-      
+        bgClass.includes('bg-white') ||
+        bgClass.includes('bg-section-light') ||
+        bgClass.includes('bg-[#ecf0f0]') ||
+        bgClass.includes('bg-[#d8e5e5]');
+
       if (isLightClass) return false;
-      
+
       // Check background color luminance
       const rgbMatch = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
       if (rgbMatch && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
@@ -138,11 +138,11 @@ const Navbar = () => {
         const g = parseInt(rgbMatch[2]);
         const b = parseInt(rgbMatch[3]);
         const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-        
+
         if (luminance < 0.5) return true; // Dark
         if (luminance > 0.7) return false; // Light
       }
-      
+
       // Recursively check parent
       return checkBackground(element.parentElement);
     };
@@ -160,31 +160,31 @@ const Navbar = () => {
         // On iPhone, we simplify: if scrolled more than a bit, we usually want a solid look or specific theme
         // For VACEI, most pages start with a dark hero, so we can often default to darkBackground=true if at top
         // or just use a fixed threshold. Let's use 50px as a threshold for "scrolled" state.
-        setIsDarkBackground(scrollY < 50); 
+        setIsDarkBackground(scrollY < 50);
         return;
       }
 
       const navbarRect = navbar.getBoundingClientRect();
       const scrollY = window.scrollY || window.pageYOffset;
       const isAtTop = scrollY < 10; // Consider "at top" if scrolled less than 10px
-      
+
       // At the top of the page, check navbar's own background and body background
       if (isAtTop) {
         // Check navbar's own background first
         const navElement = navbar as HTMLElement;
         const navBgColor = window.getComputedStyle(navElement).backgroundColor;
         const navBgClass = getClassName(navElement);
-        
+
         // Check if navbar has explicit light background classes
-        const hasLightClass = navBgClass.includes('bg-white') || 
-                             navBgClass.includes('bg-background') ||
-                             navBgClass.includes('bg-white/');
-        
+        const hasLightClass = navBgClass.includes('bg-white') ||
+          navBgClass.includes('bg-background') ||
+          navBgClass.includes('bg-white/');
+
         if (hasLightClass) {
           setIsDarkBackground(false);
           return;
         }
-        
+
         // Check navbar background color luminance
         const rgbMatch = navBgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
         if (rgbMatch) {
@@ -192,14 +192,14 @@ const Navbar = () => {
           const g = parseInt(rgbMatch[2]);
           const b = parseInt(rgbMatch[3]);
           const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-          
+
           // If navbar background is light, use dark text
           if (luminance > 0.6) {
             setIsDarkBackground(false);
             return;
           }
         }
-        
+
         // Check body background as fallback
         const bodyBgColor = window.getComputedStyle(document.body).backgroundColor;
         const bodyRgbMatch = bodyBgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
@@ -208,44 +208,44 @@ const Navbar = () => {
           const g = parseInt(bodyRgbMatch[2]);
           const b = parseInt(bodyRgbMatch[3]);
           const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-          
+
           if (luminance > 0.6) {
             setIsDarkBackground(false);
             return;
           }
         }
-        
+
         // Default to light background (dark text) at top
         setIsDarkBackground(false);
         return;
       }
-      
+
       // When scrolled, check what's below the navbar
       const checkY = navbarRect.bottom + 20;
-      
+
       // Check multiple points for better accuracy
       const checkPoints = [
         window.innerWidth / 2, // Center
         window.innerWidth * 0.25, // Left quarter
         window.innerWidth * 0.75, // Right quarter
       ];
-      
+
       let darkCount = 0;
       let lightCount = 0;
-      
+
       for (const checkX of checkPoints) {
         const elementAtPoint = document.elementFromPoint(checkX, checkY);
-        
+
         if (!elementAtPoint) {
           lightCount++;
           continue;
         }
-        
+
         // Skip navbar elements
         if ((elementAtPoint as HTMLElement).closest('nav')) {
           continue;
         }
-        
+
         const isDark = checkBackground(elementAtPoint as HTMLElement);
         if (isDark) {
           darkCount++;
@@ -253,7 +253,7 @@ const Navbar = () => {
           lightCount++;
         }
       }
-      
+
       // Use majority vote, default to light if uncertain
       setIsDarkBackground(darkCount > lightCount);
     };
@@ -275,7 +275,7 @@ const Navbar = () => {
     const initialCheck = setTimeout(() => {
       handleScroll();
     }, 100);
-    
+
     window.addEventListener('scroll', throttledHandleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
 
@@ -289,57 +289,57 @@ const Navbar = () => {
   // Desktop nav links – updated labels aligned across modes.
   const navLinks = useCompactNav
     ? [
-        { label: "Home", href: "/" },
-        {
-          label: "Platform",
-          href: "/#platform",
-          hasDropdown: true,
-          isOpen: portalsOpen,
-          setIsOpen: setPortalsOpen,
-        },
-        {
-          label: "Services",
-          href: "/#services",
-          hasDropdown: true,
-          isOpen: servicesOpen,
-          setIsOpen: setServicesOpen,
-        },
-        { label: "Partners", href: "/partners" },
-        { label: "Pricing", href: "/pricing" },
-        {
-          label: "Resources",
-          href: "/resources",
-          hasDropdown: true,
-          isOpen: resourcesOpen,
-          setIsOpen: setResourcesOpen,
-        },
-      ]
+      { label: "Home", href: "/" },
+      {
+        label: "Platform",
+        href: "/#platform",
+        hasDropdown: true,
+        isOpen: portalsOpen,
+        setIsOpen: setPortalsOpen,
+      },
+      {
+        label: "Services",
+        href: "/#services",
+        hasDropdown: true,
+        isOpen: servicesOpen,
+        setIsOpen: setServicesOpen,
+      },
+      { label: "Partners", href: "/partners" },
+      { label: "Pricing", href: "/pricing" },
+      {
+        label: "Resources",
+        href: "/resources",
+        hasDropdown: true,
+        isOpen: resourcesOpen,
+        setIsOpen: setResourcesOpen,
+      },
+    ]
     : [
-        { label: "Home", href: "/" },
-        {
-          label: "Platform",
-          href: "/#platform",
-          hasDropdown: true,
-          isOpen: portalsOpen,
-          setIsOpen: setPortalsOpen,
-        },
-        {
-          label: "Services",
-          href: "/#services",
-          hasDropdown: true,
-          isOpen: servicesOpen,
-          setIsOpen: setServicesOpen,
-        },
-        { label: "Partners", href: "/partners" },
-        { label: "Pricing", href: "/pricing" },
-        {
-          label: "Resources",
-          href: "/resources",
-          hasDropdown: true,
-          isOpen: resourcesOpen,
-          setIsOpen: setResourcesOpen,
-        },
-      ];
+      { label: "Home", href: "/" },
+      {
+        label: "Platform",
+        href: "/#platform",
+        hasDropdown: true,
+        isOpen: portalsOpen,
+        setIsOpen: setPortalsOpen,
+      },
+      {
+        label: "Services",
+        href: "/#services",
+        hasDropdown: true,
+        isOpen: servicesOpen,
+        setIsOpen: setServicesOpen,
+      },
+      { label: "Partners", href: "/partners" },
+      { label: "Pricing", href: "/pricing" },
+      {
+        label: "Resources",
+        href: "/resources",
+        hasDropdown: true,
+        isOpen: resourcesOpen,
+        setIsOpen: setResourcesOpen,
+      },
+    ];
 
   const productLinks = [
     { label: "AI Review", href: "/ai-review" },
@@ -356,29 +356,29 @@ const Navbar = () => {
 
   const resourceLinks = useCompactNav
     ? [
-        // Compact: move AI Review + How It Works under Resources
-        { label: "Insights", href: "/insights" },
-        // { label: "AI Review", href: "/ai-review" },
-        // { label: "How It Works", href: "/how-it-works" },
-        { label: "About VACEI", href: "/about" },
-        { label: "FAQs", href: "/faq" },
-        { label: "Contact Us", href: "/contact" },
-        { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote#process-steps" },
-        { label: "CPE & Podcast", href: "/cpe" },
-      ]
+      // Compact: move AI Review + How It Works under Resources
+      { label: "Insights", href: "/insights" },
+      // { label: "AI Review", href: "/ai-review" },
+      // { label: "How It Works", href: "/how-it-works" },
+      { label: "About VACEI", href: "/about" },
+      { label: "FAQs", href: "/faq" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Security & Compliance", href: "/security-compliance" },
+      { label: "Get Instant Quote", href: "/quote#process-steps" },
+      { label: "CPE & Podcast", href: "/cpe" },
+    ]
     : [
-        // Original Resources content
-        { label: "Insights", href: "/insights" },
-        { label: "AI Review", href: "/ai-review" },
-        { label: "How It Works", href: "/how-it-works" },
-        { label: "About VACEI", href: "/about" },
-        { label: "FAQs", href: "/faq" },
-        { label: "Contact Us", href: "/contact" },
-        { label: "Security & Compliance", href: "/security-compliance" },
-        { label: "Get Instant Quote", href: "/quote" },
-        { label: "CPE & Podcast", href: "/cpe" },
-      ];
+      // Original Resources content
+      { label: "Insights", href: "/insights" },
+      { label: "AI Review", href: "/ai-review" },
+      { label: "How It Works", href: "/how-it-works" },
+      { label: "About VACEI", href: "/about" },
+      { label: "FAQs", href: "/faq" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Security & Compliance", href: "/security-compliance" },
+      { label: "Get Instant Quote", href: "/quote" },
+      { label: "CPE & Podcast", href: "/cpe" },
+    ];
 
   if (shouldHideChrome) {
     return null;
@@ -386,216 +386,222 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full sticky top-0 z-60 py-2 px-3 sm:py-3 sm:px-4 lg:py-4 lg:px-8">
-        {/* Navbar Container – compact on mobile, rounded corners */}
-        <motion.div 
-          initial={false}
-          className={`w-full rounded-xl lg:rounded-2xl ${
-            isDarkBackground 
-              ? `bg-white/10 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-md"} border border-white/20` 
-              : `bg-white/70 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"}`
-          } shadow-sm px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 transition-all duration-300`}
-        >
-          <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
-            {/* Logo - smaller on mobile */}
-            <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileMenuOpen(false)}>
-              <div className="flex items-center justify-center">
-                <Image
-                  src={Logo}
-                  alt="VACEI Logo"
-                  width={100}
-                  height={70}
-                  className="object-contain w-20 h-12 sm:w-24 sm:h-14 lg:w-[100px] lg:h-[70px]"
-                />
-              </div>
-            </Link>
+      <div className="flex justify-center w-full relative z-[60]">
+        <nav className="fixed top-2 sm:top-4 w-full max-w-7xl px-3 sm:px-4 lg:px-8 pointer-events-none">
+          {/* Navbar Container – sleek floating pill layout */}
+          <motion.div
+            initial={false}
+            className={`relative pointer-events-auto w-full mx-auto rounded-full ${isDarkBackground
+                ? `bg-white/10 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-white/20 text-white`
+                : `bg-white/80 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-gray-200/60 text-text-dark`
+              } shadow-lg shadow-black/5 px-4  sm:px-6 lg:px-8 transition-all duration-300`}
+          >
+            <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
+              {/* Logo - smaller on mobile */}
+              <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileMenuOpen(false)}>
+                <div className="flex items-center justify-center">
+                  <Image
+                    src={Logo}
+                    alt="VACEI Logo"
+                    width={100}
+                    height={70}
+                    className="object-contain w-20 h-12 sm:w-24 sm:h-14 lg:w-[100px] lg:h-[70px]"
+                  />
+                </div>
+              </Link>
 
-            {/* Desktop Navigation Links - Tight spacing with responsive font */}
-            <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-center px-4">
-              {navLinks.map((link) => (
-                <div
-                  key={link.label}
-                  className="relative group h-full flex items-center"
-                  onMouseEnter={() =>
-                    link.hasDropdown && link.setIsOpen?.(true)
-                  }
-                  onMouseLeave={() =>
-                    link.hasDropdown && link.setIsOpen?.(false)
-                  }
-                >
-                  <Link
-                    href={link.href}
-                    className={`${isDarkBackground ? "text-white" : "text-text-dark"} font-normal text-[15px] ${isDarkBackground ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (isDarkBackground ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
-                    onClick={(e) => {
-                      if (link.hasDropdown) {
-                        e.preventDefault();
-                        link.setIsOpen?.(!link.isOpen);
-                      }
-                    }}
+              {/* Desktop Navigation Links - Tight spacing with responsive font */}
+              <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-center px-4">
+                {navLinks.map((link) => (
+                  <div
+                    key={link.label}
+                    className="group h-full flex items-center static"
+                    onMouseEnter={() =>
+                      link.hasDropdown && link.setIsOpen?.(true)
+                    }
+                    onMouseLeave={() =>
+                      link.hasDropdown && link.setIsOpen?.(false)
+                    }
                   >
-                    {link.label}
-                    {link.hasDropdown && (
-                      <motion.svg
-                        animate={{ rotate: link.isOpen ? 180 : 0 }}
-                        className="w-3.5 h-3.5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </motion.svg>
-                    )}
+                    <Link
+                      href={link.href}
+                      className={`${isDarkBackground ? "text-white" : "text-text-dark"} font-normal text-[15px] ${isDarkBackground ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (isDarkBackground ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
+                      onClick={(e) => {
+                        if (link.hasDropdown) {
+                          e.preventDefault();
+                          link.setIsOpen?.(!link.isOpen);
+                        }
+                      }}
+                    >
+                      {link.label}
+                      {link.hasDropdown && (
+                        <motion.svg
+                          animate={{ rotate: link.isOpen ? 180 : 0 }}
+                          className="w-3.5 h-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </motion.svg>
+                      )}
+                    </Link>
+
+                    {/* Mega Menu Dropdown */}
+                    <AnimatePresence>
+                      {link.hasDropdown && link.isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 15, scale: 0.98 }}
+                          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                          className="absolute top-full left-1/2 -translate-x-1/2 pt-6 z-50 origin-top pointer-events-auto"
+                        >
+                          <div className={`bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-white/60 p-6 overflow-hidden min-w-[650px] w-max max-w-[90vw] flex gap-8`}>
+                            {link.label === "Services" ? (
+                              <>
+                                <div className="flex-1 min-w-[280px]">
+                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">Our Services</h3>
+                                  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                                    {servicesData.map((service) => (
+                                      <Link
+                                        key={service.id}
+                                        href={`/services/${service.slug}`}
+                                        className="block px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/item"
+                                        onClick={() => link.setIsOpen?.(false)}
+                                      >
+                                        <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                          {service.title}
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div className="w-[240px] shrink-0 rounded-2xl overflow-hidden relative">
+                                  <Image src="/assets/images/Accounting.jpg" alt="Services" layout="fill" objectFit="cover" className="hover:scale-105 transition-transform duration-700" />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-5">
+                                    <span className="text-white font-medium">Explore all our expert services</span>
+                                  </div>
+                                </div>
+                              </>
+                            ) : link.label === "Platform" ? (
+                              <>
+                                <div className="flex-1 min-w-[240px]">
+                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">Portals</h3>
+                                  <div className="grid grid-cols-1 gap-1">
+                                    {portalLinks.map((item) => (
+                                      <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
+                                        onClick={() => link.setIsOpen?.(false)}
+                                      >
+                                        <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                          {item.label}
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div className="w-[240px] shrink-0 rounded-2xl overflow-hidden relative">
+                                  <Image src="/assets/images/portal.png" alt="Portal" layout="fill" objectFit="cover" className="hover:scale-105 transition-transform duration-700" />
+                                </div>
+                              </>
+                            ) : link.label === "Resources" ? (
+                              <>
+                                <div className="flex-1 min-w-[280px]">
+                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">Resources & Company</h3>
+                                  <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                                    {resourceLinks.map((item) => (
+                                      <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="block px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/item"
+                                        onClick={() => link.setIsOpen?.(false)}
+                                      >
+                                        <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                          {item.label}
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div className="w-[240px] shrink-0 rounded-2xl overflow-hidden relative">
+                                  <Image src="/assets/images/Audit.jpg" alt="Resources" layout="fill" objectFit="cover" className="hover:scale-105 transition-transform duration-700" />
+                                </div>
+                              </>
+                            ) : null}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </div>
+
+              {/* Right Side Actions - Tight spacing */}
+              <div className="flex items-center gap-3 lg:gap-4 shrink-0">
+                <div className="hidden lg:flex items-center gap-3">
+                  {/* Login Button */}
+                  <Link
+                    href="/portal/client-portal"
+                    className={`flex items-center justify-center ${isDarkBackground
+                        ? "text-white/90 hover:text-white"
+                        : "text-text-dark/80 hover:text-primary-blue"
+                      } font-medium text-[15px] transition-colors px-2`}
+                  >
+                    <span>Login</span>
                   </Link>
 
-                  {/* Dropdown Menu */}
-                  <AnimatePresence>
-                    {link.hasDropdown && link.isOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 pt-6 w-max z-50 origin-top"
-                      >
-                        <div className={`bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-[25px]"} rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-white/50 p-2 overflow-hidden min-w-[260px]`}>
-                          {link.label === "Services" ? (
-                            <div className="max-h-[320px] overflow-y-auto pr-1 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue/70 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
-                              <div className="grid grid-cols-1 gap-1 p-1">
-                                {servicesData.map((service) => (
-                                  <Link
-                                    key={service.id}
-                                    href={`/services/${service.slug}`}
-                                    className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
-                                    onClick={() => link.setIsOpen?.(false)}
-                                  >
-                                    <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
-                                      {service.title}
-                                    </div>
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          ) : link.label === "Platform" ? (
-                            <div className="grid grid-cols-1 gap-1 p-1">
-                              {portalLinks.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
-                                  onClick={() => link.setIsOpen?.(false)}
-                                >
-                                  <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
-                                    {item.label}
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                          ) : link.label === "Resources" ? (
-                            <div className="grid grid-cols-1 gap-1 p-1">
-                              {resourceLinks.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  className="block px-4 py-3 rounded-xl hover:bg-primary-blue/5 transition-colors group/item"
-                                  onClick={() => link.setIsOpen?.(false)}
-                                >
-                                  <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
-                                    {item.label}
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="p-4 text-sm text-gray-500 text-center">
-                              Coming Soon
-                            </div>
-                          )}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Get Instant Quote Button */}
+                  <GetInstantQuoteButton hasShadow={false} />
                 </div>
-              ))}
-            </div>
 
-            {/* Right Side Actions - Tight spacing */}
-            <div className="flex items-center gap-3 lg:gap-4 shrink-0">
-              <div className="hidden lg:flex items-center gap-3">
-                {/* Try Client Portal */}
-                <Link
-                  href="/portal/client-portal"
-                  className={`flex items-center justify-center gap-2 rounded-full border ${
-                    isDarkBackground
-                      ? "border-white/40 text-white hover:bg-white/20"
-                      : "border-primary-blue text-text-dark hover:bg-white/40"
-                  } font-normal text-[15px] transition-all px-6 h-[44px] ${
-                    isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"
-                  }`}
+                {/* Mobile: hamburger opens full-screen menu. Desktop: hamburger opens sidebar. */}
+                <button
+                  className="w-11 h-11 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 relative lg:w-10 lg:gap-1.5 rounded-lg active:bg-black/5 lg:active:bg-transparent -m-1 lg:m-0"
+                  onClick={() => {
+                    if (isMobile) {
+                      setMobileMenuOpen(!mobileMenuOpen);
+                      setSidebarOpen(false);
+                    } else {
+                      setSidebarOpen(!sidebarOpen);
+                      setMobileMenuOpen(false);
+                    }
+                  }}
+                  onMouseEnter={() => !isMobile && setHamburgerHover(true)}
+                  onMouseLeave={() => !isMobile && setHamburgerHover(false)}
+                  aria-label="Menu"
                 >
-                  <span>Try Client Portal</span>
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                    />
-                  </svg>
-                </Link>
-
-                {/* Get Instant Quote Button */}
-                <GetInstantQuoteButton hasShadow={false} />
-              </div>
-
-              {/* Mobile: hamburger opens full-screen menu. Desktop: hamburger opens sidebar. */}
-              <button
-                className="w-11 h-11 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 relative lg:w-10 lg:gap-1.5 rounded-lg active:bg-black/5 lg:active:bg-transparent -m-1 lg:m-0"
-                onClick={() => {
-                  if (isMobile) {
-                    setMobileMenuOpen(!mobileMenuOpen);
-                    setSidebarOpen(false);
-                  } else {
-                    setSidebarOpen(!sidebarOpen);
-                    setMobileMenuOpen(false);
-                  }
-                }}
-                onMouseEnter={() => !isMobile && setHamburgerHover(true)}
-                onMouseLeave={() => !isMobile && setHamburgerHover(false)}
-                aria-label="Menu"
-              >
-                <motion.div 
-                  animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
-                  className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`} 
-                />
-                <motion.div 
-                  animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
-                  className="relative w-6 h-0.5"
-                >
-                  <div
-                    className={`absolute left-0 h-full ${isDarkBackground ? "bg-white" : "bg-text-dark"} transition-all duration-300 ease-out`}
-                    style={{ width: !isMobile && hamburgerHover ? 24 : 16.8 }}
+                  <motion.div
+                    animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
+                    className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`}
                   />
-                </motion.div>
-                <motion.div 
-                  animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
-                  className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`} 
-                />
-              </button>
+                  <motion.div
+                    animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
+                    className="relative w-6 h-0.5"
+                  >
+                    <div
+                      className={`absolute left-0 h-full ${isDarkBackground ? "bg-white" : "bg-text-dark"} transition-all duration-300 ease-out`}
+                      style={{ width: !isMobile && hamburgerHover ? 24 : 16.8 }}
+                    />
+                  </motion.div>
+                  <motion.div
+                    animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
+                    className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`}
+                  />
+                </button>
+              </div>
             </div>
-          </div>
 
-        </motion.div>
-      </nav>
+          </motion.div>
+        </nav>
+      </div>
 
       {/* Mobile full-screen overlay menu: slides in from right, over homepage, with close option */}
       <AnimatePresence>
@@ -974,18 +980,18 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                 {/* Download Brochure PDF Icon - Matches provided screenshot */}
-                 <div className="absolute bottom-6 right-6 z-20">
-                    <a
-                      href="#"
-                      className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform group"
-                      aria-label="Download PDF"
-                    >
-                      <svg className="w-6 h-6 text-[#E52828]" viewBox="0 0 24 24" fill="currentColor">
-                         <path d="M11.293 1.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L13 4.414V14a1 1 0 1 1-2 0V4.414L6.707 8.707a1 1 0 0 1-1.414-1.414l6-6zM5 16a1 1 0 0 1 1 1v4h12v-4a1 1 0 1 1 2 0v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4a1 1 0 0 1 1-1z" />
-                      </svg>
-                    </a>
-                 </div>
+                {/* Download Brochure PDF Icon - Matches provided screenshot */}
+                <div className="absolute bottom-6 right-6 z-20">
+                  <a
+                    href="#"
+                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform group"
+                    aria-label="Download PDF"
+                  >
+                    <svg className="w-6 h-6 text-[#E52828]" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M11.293 1.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1-1.414 1.414L13 4.414V14a1 1 0 1 1-2 0V4.414L6.707 8.707a1 1 0 0 1-1.414-1.414l6-6zM5 16a1 1 0 0 1 1 1v4h12v-4a1 1 0 1 1 2 0v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4a1 1 0 0 1 1-1z" />
+                    </svg>
+                  </a>
+                </div>
 
               </div>
             </div>

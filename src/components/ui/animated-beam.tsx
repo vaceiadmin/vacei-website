@@ -24,6 +24,7 @@ export interface AnimatedBeamProps {
   startYOffset?: number;
   endXOffset?: number;
   endYOffset?: number;
+  repeat?: number;
 }
 
 import { useDirectionalInView } from "@/hooks/use-directional-in-view";
@@ -49,6 +50,7 @@ export const AnimatedBeam = ({
   startYOffset = 0,
   endXOffset = 0,
   endYOffset = 0,
+  repeat = 0,
 }: AnimatedBeamProps) => {
   const id = useId();
   const [pathD, setPathD] = useState("");
@@ -157,7 +159,7 @@ export const AnimatedBeam = ({
 
       {showGradient && (
         <defs>
-            <motion.linearGradient
+          <motion.linearGradient
             className="transform-gpu"
             id={id}
             gradientUnits="userSpaceOnUse"
@@ -167,30 +169,32 @@ export const AnimatedBeam = ({
                 y1: "0%",
                 y2: "0%",
             }}
-            animate={isInView ? {
-                x1: gradientCoordinates.x1,
-                x2: gradientCoordinates.x2,
-                y1: gradientCoordinates.y1,
-                y2: gradientCoordinates.y2,
-            } : {
-                x1: gradientCoordinates.x1[0],
-                x2: gradientCoordinates.x2[0],
-                y1: gradientCoordinates.y1[0],
-                y2: gradientCoordinates.y2[0],
-            }}
+            animate={isInView
+              ? {
+                  x1: gradientCoordinates.x1,
+                  x2: gradientCoordinates.x2,
+                  y1: gradientCoordinates.y1,
+                  y2: gradientCoordinates.y2,
+                }
+              : {
+                  x1: gradientCoordinates.x1[0],
+                  x2: gradientCoordinates.x2[0],
+                  y1: gradientCoordinates.y1[0],
+                  y2: gradientCoordinates.y2[0],
+                }}
             transition={{
-                delay,
-                duration,
-                ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
-                repeat: 0, // Only play once as per new rules
-                repeatDelay: 0,
+              delay,
+              duration,
+              ease: [0.16, 1, 0.3, 1],
+              repeat,
+              repeatDelay: 0,
             }}
             >
             <stop stopColor={gradientStartColor} stopOpacity="0" />
             <stop stopColor={gradientStartColor} />
             <stop offset="32.5%" stopColor={gradientStopColor} />
             <stop offset="100%" stopColor={gradientStopColor} stopOpacity="0" />
-            </motion.linearGradient>
+          </motion.linearGradient>
         </defs>
       )}
     </svg>

@@ -14,7 +14,6 @@ import WorkspaceEntrySection from "./WorkspaceEntrySection";
 import ComplianceDashboardSection from "./ComplianceDashboardSection";
 import ActiveEUSection from "./ActiveEUSection";
 
-import { MotionConfig } from "framer-motion";
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 import { isIPhone } from "@/lib/utils";
 
@@ -34,7 +33,6 @@ const HomePage = () => {
   }, []);
 
   return (
-    <MotionConfig transition={reduceMotion ? { duration: 0 } : undefined}>
       <div className="relative">
         <HeroSection />
         <AuditPlatform />
@@ -49,7 +47,6 @@ const HomePage = () => {
         <ActiveEUSection />
         <FaqSection />
       </div>
-    </MotionConfig>
   );
 };
 

@@ -1,108 +1,86 @@
-"use client"
 import React from "react"
-import { motion } from "framer-motion"
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton"
-import TextAnimation from "../common/TextAnimation"
-import { DirectionalDiv } from "../common/Animations"
 import { useIsSafari } from "@/hooks/use-safari"
-import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext"
+import { usePerformance } from "@/contexts/ReduceMotionContext"
 import { cn } from "@/lib/utils"
 
-
 const ReadyToSimplifySection = () => {
-  const isSafari = useIsSafari();
-  const { isIPhone, isLowPerformance } = usePerformance();
+    const isSafari = useIsSafari();
+    const { isIPhone, isLowPerformance } = usePerformance();
 
-  return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#ecf0f0]"> {/* Light Theme Background matching root */}
-      <div className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
-        
-        <DirectionalDiv 
-            initial="hidden"
-            whileInView="visible"
-            variants={{
-                hidden: { opacity: 0, scale: 0.95, y: 20 },
-                visible: { 
-                    opacity: 1, 
-                    scale: 1, 
-                    y: 0,
-                    transition: { 
-                        duration: 0.6, 
-                        ease: [0.16, 1, 0.3, 1],
-                        staggerChildren: 0.1
-                    } 
-                }
-            }}
-            className="relative rounded-[2.5rem] bg-white p-8 md:p-12 lg:p-16 text-center shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] overflow-hidden hardware-accelerated"
-        >
-
-            
-            {/* Decorative soft gradients */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <motion.div 
-                    animate={isSafari || isIPhone || isLowPerformance ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
-                    transition={{ duration: 8, repeat: 0, ease: "easeInOut" }}
-                    className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-blue-50 rounded-full blur-[80px]" 
-                />
-                <motion.div 
-                    animate={isSafari || isIPhone || isLowPerformance ? {} : { scale: [1, 1.2, 1], opacity: [0.6, 0.4, 0.6] }}
-                    transition={{ duration: 8, delay: 4, repeat: 0, ease: "easeInOut" }}
-                    className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-purple-50 rounded-full blur-[80px]" 
-                />
+    return (
+        <section className="w-full py-14 bg-slate-50 relative overflow-hidden">
+            {/* Subtle Background Elements */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-blue-100/40 rounded-full blur-[100px]" />
+                <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-indigo-100/30 rounded-full blur-[100px]" />
             </div>
 
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+                <div
+                    className="relative rounded-[3rem] bg-white border border-slate-100 p-8 sm:p-12 md:p-16 lg:p-24 text-center shadow-[0_40px_80px_-20px_rgba(0,0,0,0.06)] overflow-hidden"
+                >
+                    {/* Inner Glow Line */}
+                    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/20 to-transparent" />
 
-            <DirectionalDiv 
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-              }}
-              className="relative z-10 flex flex-col items-center"
-            >
-              <TextAnimation
-                text="Ready to Simplify Your Business?"
-                as="h2"
-                className="max-w-2xl text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl text-[#1a1c35] mb-6"
-              />
-              <p className="max-w-xl text-base md:text-lg text-gray-500 mb-6 leading-relaxed">
-                Create your workspace and start managing your professional services through one platform.
-              </p>
+                    <div className="max-w-4xl mx-auto flex flex-col items-center">
+                        <div
+                            className="mb-8"
+                        >
+                            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-black uppercase tracking-widest border border-blue-100/50">
+                                Next Generation Platform
+                            </span>
+                        </div>
 
-              <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-                <GetInstantQuoteButton
-                  text="Create Workspace"
-                  href="/quote#process-steps"
-                  className={cn(
-                    "px-8 py-3.5 text-base rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-transform",
-                    !isIPhone && !isLowPerformance && "hover:scale-105"
-                  )}
-                  bgColor="#3b49e6"
-                  textColor="white"
-                  hasShadow={true}
-                />
-                <GetInstantQuoteButton
-                  variant="custom"
-                  text="Get Instant Quote"
-                  href="/quote"
-                  bgColor="white"
-                  textColor="#1a1c35"
-                  className={cn(
-                    "px-8 py-3.5 text-base rounded-xl font-medium border border-gray-200 transition-all",
-                    !isIPhone && !isLowPerformance ? "hover:bg-gray-50 hover:scale-105" : ""
-                  )}
-                  hasShadow={false}
-                />
-              </div>
+                        <h2
+                            className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-8"
+                        >
+                            Ready to Simplify <br className="hidden sm:block" />
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">Your Business?</span>
+                        </h2>
 
-              <p className="mt-5 max-w-xl text-xs sm:text-sm text-gray-500 leading-relaxed">
-                Get a quote in minutes or invite your advisors to collaborate in your workspace.
-              </p>
-            </DirectionalDiv>
-        </DirectionalDiv>
+                        <p
+                            className="text-lg md:text-xl text-slate-500 font-medium max-w-2xl mb-12 leading-relaxed"
+                        >
+                            Create your workspace and start managing your professional services through one platform.
+                        </p>
 
-      </div>
-    </section>
-  )
+                        <div
+                            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md sm:max-w-none"
+                        >
+                            <GetInstantQuoteButton
+                                text="Create Workspace"
+                                href="/quote#process-steps"
+                                className="w-full sm:w-auto px-10 py-5 text-sm font-black uppercase tracking-widest transition-transform hover:scale-105"
+                            />
+                            <GetInstantQuoteButton
+                                variant="custom"
+                                text="Get Instant Quote"
+                                href="/quote"
+                                bgColor="white"
+                                textColor="#0f172a"
+                                borderColor="#e2e8f0"
+                                className="w-full sm:w-auto px-10 py-5 text-sm font-black uppercase tracking-widest hover:border-blue-400 hover:text-blue-600 transition-all shadow-sm hover:scale-105"
+                                hasShadow={false}
+                            />
+                        </div>
+
+                        <div
+                            className="mt-10"
+                        >
+                            <p className="text-sm font-bold text-slate-400 max-w-sm">
+                                Get a quote in minutes or invite your advisors <br className="hidden sm:block" /> to collaborate in your workspace.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Subtle decorative shapes */}
+                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-slate-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70" />
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70" />
+                </div>
+            </div>
+        </section>
+    )
 }
 
 export default ReadyToSimplifySection

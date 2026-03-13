@@ -52,7 +52,7 @@ const WhatToExpect = () => {
 
   return (
     <GradientContainer
-      backgroundColor="bg-primary"
+      backgroundColor="bg-[#020410]"
       showRadials={!isIPhone && !isLowPerformance}
       className="py-20 lg:py-28 overflow-hidden"
     >

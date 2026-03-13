@@ -76,7 +76,7 @@ const ContactHRForm = () => {
         message={statusMessage}
         onClose={() => setStatusOpen(false)}
       />
-      <GradientContainer className="py-20 lg:py-28 overflow-hidden" showRadials={false} backgroundColor="bg-primary">
+      <GradientContainer className="py-20 lg:py-28 overflow-hidden" showRadials={false} backgroundColor="bg-[#020410]">
       <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
             <FadeInUp>
