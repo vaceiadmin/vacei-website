@@ -53,12 +53,12 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ 
+          exit={{
             opacity: 0,
             scale: 1.1,
-            transition: { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] } 
+            transition: { duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }
           }}
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-linear-to-br from-[#0a0f1e] via-[#0d1425] to-[#0a0f1e] overflow-hidden"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-[#020410] overflow-hidden"
         >
           {/* Animated Background Grid */}
           <div className="absolute inset-0 opacity-20">
@@ -100,7 +100,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
           <div className="relative flex flex-col items-center">
             {/* Geometric Shapes Container */}
             <div className="relative w-[500px] h-[500px] flex items-center justify-center">
-              
+
               {/* Expanding Wave Ripples - Reduced for performance */}
               {(isIPhone || isLowPerformance ? [0] : [0, 1]).map((index) => (
                 <motion.div
@@ -294,7 +294,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               <p className="text-white/50 text-xs tracking-[0.3em] uppercase font-medium">
                 Loading Experience
               </p>
-              
+
               <div className={`relative w-64 h-1 bg-white/5 rounded-full overflow-hidden ${isIPhone || isLowPerformance ? "" : "backdrop-blur-sm"}`}>
                 {/* Background glow */}
                 <motion.div
@@ -308,7 +308,7 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                   }}
                   className="absolute inset-0 bg-primary-blue/20 blur-md"
                 />
-                
+
                 {/* Progress fill */}
                 <motion.div
                   initial={{ width: "0%" }}

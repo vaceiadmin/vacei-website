@@ -6,7 +6,7 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import PageTransition from "@/components/common/PageTransition";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
-// import IntroAnimationGate from "@/components/common/IntroAnimationGate";
+import IntroAnimationGate from "@/components/common/IntroAnimationGate";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import SupportChat from "@/components/support-chat/SupportChat";
@@ -55,7 +55,7 @@ export default function RootLayout({
         </Suspense>
         <ReduceMotionProvider>
           <ScrollProvider>
-            {/* <IntroAnimationGate /> */}
+            <IntroAnimationGate />
             <SmoothScroll>
               <Navbar />
               <PageTransition>{children}</PageTransition>
