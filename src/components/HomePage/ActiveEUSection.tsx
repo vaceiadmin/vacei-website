@@ -8,10 +8,14 @@ import { cn } from "@/lib/utils";
 // Helper component for premium country markers
 const CountryMarker = ({ code, className }: { code: string; className?: string }) => (
   <div className={cn(
-    "flex items-center justify-center w-full h-full rounded-xl bg-white shadow-[0_8px_16px_rgba(0,0,0,0.06)] border border-slate-100 text-[10px] font-black text-blue-600 transition-transform duration-300 hover:scale-125",
+    "relative flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white shadow-md border border-slate-100 overflow-hidden transition-all duration-300 hover:scale-125 group/flag shrink-0",
     className
   )}>
-    {code}
+    <img 
+      src={`https://flagcdn.com/w40/${code.toLowerCase()}.png`}
+      alt={code}
+      className="w-full h-full object-cover"
+    />
   </div>
 );
 
@@ -61,25 +65,24 @@ const ActiveEUSection = () => {
           </div>
 
           {/* Right Side: Orbiting Circles Visualization (Exact Magic UI Style) */}
-          <div className="relative flex h-[500px] lg:h-[600px] w-full flex-col items-center justify-center overflow-hidden">
+          <div className="relative flex h-[600px] w-full flex-col items-center justify-center overflow-hidden">
             
             {/* Central Business Hub Icon */}
-            <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-50 p-6 group transition-all duration-500 hover:rotate-12 translate-z-0">
-               <svg viewBox="0 0 24 24" className="w-full h-full text-blue-600" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <div className="relative z-20 flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-lg border border-slate-50 p-2 group transition-all duration-500 hover:rotate-12 translate-z-0">
+               <svg viewBox="0 0 24 24" className="w-full h-full text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.5">
                  <path d="M3 21h18" />
                  <path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4" />
                  <path d="M5 21V10.85" />
                  <path d="M19 21V10.85" />
                  <path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4" />
                </svg>
-               <div className="absolute -inset-4 bg-blue-500/5 rounded-full blur-2xl -z-10 group-hover:bg-blue-500/10 transition-colors" />
             </div>
 
             {/* Orbiting Circles Layer 1 - Major Economies */}
             <OrbitingCircles
-              radius={90}
+              radius={80}
               duration={20}
-              iconSize={45}
+              iconSize={24}
               className="border-none bg-transparent"
             >
               <CountryMarker code="DE" />
@@ -90,10 +93,10 @@ const ActiveEUSection = () => {
 
             {/* Orbiting Circles Layer 2 - Growth Markets (Reverse) */}
             <OrbitingCircles
-              radius={180}
+              radius={140}
               duration={35}
               reverse
-              iconSize={38}
+              iconSize={24}
               className="border-none bg-transparent"
             >
               <CountryMarker code="NL" />
@@ -106,9 +109,9 @@ const ActiveEUSection = () => {
 
             {/* Orbiting Circles Layer 3 - Emerging Hubs */}
             <OrbitingCircles
-              radius={260}
+              radius={200}
               duration={50}
-              iconSize={32}
+              iconSize={20}
               className="border-none bg-transparent"
             >
               <CountryMarker code="DK" />
