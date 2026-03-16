@@ -123,7 +123,7 @@ const WorkspaceEntrySection = () => {
                 <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
                   <GetInstantQuoteButton 
                     text="Start Incorporation"
-                    href="/company-setup"
+                    href="/quote#process-steps"
                     className="h-[52px] px-8 text-sm bg-white text-slate-900 border-none hover:bg-slate-50 shadow-white/5"
                     hasShadow={false}
                   />

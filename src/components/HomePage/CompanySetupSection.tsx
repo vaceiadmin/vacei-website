@@ -119,7 +119,7 @@ const CompanySetupSection = () => {
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
             <GetInstantQuoteButton 
               text="Start Incorporation"
-              href="/company-setup"
+              href="/quote#process-steps"
               className="px-8 py-4 sm:px-10 sm:py-5 !text-xs !font-black uppercase tracking-widest"
             />
             <Link 
