@@ -137,4 +137,73 @@ export const insightsData: InsightArticle[] = [
       <p>Prepare a clear ownership chart, a plain explanation of the business model, a realistic description of expected activity, and a clean source-of-funds narrative with documentary evidence.</p>
     `,
   },
+  {
+    id: "6",
+    slug: "compliance-is-becoming-a-systems-problem-not-a-paperwork-problem",
+    title: "Compliance Is Becoming a Systems Problem, Not a Paperwork Problem",
+    subtitle: "Regulatory compliance now depends on digital infrastructure.",
+    description:
+      "As regulators move toward real-time, digital reporting, compliance is shifting away from static documents and toward the systems that generate structured financial data.",
+    category: "Tax & Compliance",
+    publishDate: "March 13, 2026",
+    readTime: "7 min read",
+    author: "Cleven",
+    image: "/assets/images/compliance.png",
+    content: `
+      <h2>From Paperwork to Systems</h2>
+      <p>Compliance used to revolve around forms, files, and periodic submissions. Today, the ability to comply depends increasingly on how financial information is generated, stored, and maintained inside core systems.</p>
+
+      <h2>Digital Reporting Expectations</h2>
+      <p>Authorities across the world are moving toward structured electronic reporting and, in some cases, near real-time access to transaction data. That shift makes internal financial infrastructure central to compliance.</p>
+
+      <h2>Why Infrastructure Matters</h2>
+      <p>Where financial data is fragmented across spreadsheets and manual workflows, producing reliable reports becomes difficult and error-prone. Structured systems reduce inconsistencies and support continuous compliance.</p>
+    `,
+  },
+  {
+    id: "7",
+    slug: "the-end-of-spreadsheet-accounting-how-automation-is-reshaping-financial-operations",
+    title: "The End of Spreadsheet Accounting: How Automation Is Reshaping Financial Operations",
+    subtitle: "Accounting is moving from files to infrastructure.",
+    description:
+      "Manual spreadsheet workflows struggle to keep pace with growing data volumes and regulatory expectations. Automated, integrated systems are becoming the new foundation of financial operations.",
+    category: "Accounting & Finance",
+    publishDate: "March 13, 2026",
+    readTime: "8 min read",
+    author: "Cleven",
+    image: "/assets/images/ChatGPT_Image_Mar_13_2026_01_45_09_PM.png",
+    content: `
+      <h2>Limits of Spreadsheet Workflows</h2>
+      <p>Spreadsheets are powerful modelling tools but weak financial systems. Version control issues, hidden errors, and manual data transfers create operational and governance risk as organisations scale.</p>
+
+      <h2>Automation and Continuous Records</h2>
+      <p>Modern accounting platforms automate transaction capture, reconciliation, and reporting. Financial data can now update continuously instead of being assembled manually at month-end.</p>
+
+      <h2>From Files to Financial Infrastructure</h2>
+      <p>As automation and integrations mature, accounting becomes part of a broader operational stack. Structured systems provide the audit trail, consistency, and connectivity that stakeholders and regulators expect.</p>
+    `,
+  },
+  {
+    id: "8",
+    slug: "the-rise-of-platform-based-professional-services",
+    title: "The Rise of Platform-Based Professional Services",
+    subtitle: "Advisors are becoming infrastructure providers.",
+    description:
+      "Instead of fragmented advisors working in separate tools, integrated platforms now connect accounting, corporate services, tax, and audit into a single digital environment.",
+    category: "Business & Growth",
+    publishDate: "March 12, 2026",
+    readTime: "7 min read",
+    author: "Cleven",
+    image: "/assets/images/ChatGPT_Image_Mar_13_2026_01_54_03_PM.png",
+    content: `
+      <h2>From Fragmentation to Platforms</h2>
+      <p>Traditional professional services often rely on scattered email threads and document exchanges. Platform-based delivery replaces this with a shared workspace that structures information and tasks.</p>
+
+      <h2>Integrated Financial and Compliance Functions</h2>
+      <p>Platforms allow accounting, corporate secretarial work, tax, and audit to share a common data layer. This reduces duplication, speeds up coordination, and provides clearer oversight for clients.</p>
+
+      <h2>Professional Services as Infrastructure</h2>
+      <p>By operating digital platforms, firms move beyond one-off advice toward maintaining ongoing operational infrastructure for their clients, supporting governance and growth over time.</p>
+    `,
+  },
 ];
