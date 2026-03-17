@@ -24,7 +24,7 @@ const WLPricing: React.FC<WLPricingProps> = ({
   onCtaClick,
 }) => {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-transparent relative overflow-hidden">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-primary-blue/5 rounded-full blur-[140px] opacity-40 animate-pulse" />

@@ -8,6 +8,7 @@ import WLInteractiveCards from "@/components/white-label/WLInteractiveCards";
 import WLUseCaseDisplay from "@/components/white-label/WLUseCaseDisplay";
 import WLPricing from "@/components/white-label/WLPricing";
 import WLCTASection from "@/components/white-label/WLCTASection";
+import FallBeamBackground from "@/components/common/FallBeam";
 import { 
   Layout, 
   Users, 
@@ -61,48 +62,55 @@ const WhiteLabelPage = () => {
         onCtaClick={() => window.location.href = "/contact"}
       />
 
-      {/* What You Get Section - Bento Grid */}
-      <WLBentoGrid
-        sectionSubtitle="Everything you need"
-        sectionTitle="What You Get"
-        items={whatYouGet}
-      />
+      {/* Main Content Sections with Falling Beams Background */}
+      <div className="relative">
+        <FallBeamBackground beamColorClass="primary-blue" lineCount={25} className="z-0" />
+        
+        <div className="relative z-10">
+          {/* What You Get Section - Bento Grid */}
+          <WLBentoGrid
+            sectionSubtitle="Everything you need"
+            sectionTitle="What You Get"
+            items={whatYouGet}
+          />
 
-      {/* How It Works Section - Vertical Timeline */}
-      <WLProcess
-        sectionTitle="How It Works"
-        steps={howItWorks}
-      />
+          {/* How It Works Section - Vertical Timeline */}
+          <WLProcess
+            sectionTitle="How It Works"
+            steps={howItWorks}
+          />
 
-      {/* Why Choose White-Label Section - Interactive Cards */}
-      <WLInteractiveCards
-        sectionSubtitle="The VACEI Advantage"
-        sectionTitle="Why Firms Choose White-Label"
-        items={whyChoose}
-      />
+          {/* Why Choose White-Label Section - Interactive Cards */}
+          <WLInteractiveCards
+            sectionSubtitle="The VACEI Advantage"
+            sectionTitle="Why Firms Choose White-Label"
+            items={whyChoose}
+          />
 
-      {/* Use Cases Section - Use Case Display */}
-      <WLUseCaseDisplay
-        sectionSubtitle="Versatile and Scalable"
-        sectionTitle="Use Cases"
-        items={useCases}
-      />
+          {/* Use Cases Section - Use Case Display */}
+          <WLUseCaseDisplay
+            sectionSubtitle="Versatile and Scalable"
+            sectionTitle="Use Cases"
+            items={useCases}
+          />
 
-      {/* Pricing Section */}
-      <WLPricing
-        title="Pricing Model"
-        price="Custom"
-        period="/ solution"
-        description="Flexible pricing based on scale and usage. Designed for firms looking to grow and operate under their own brand."
-        features={[
-          "Unlimited Client Portals",
-          "Custom Domain Support",
-          "Brand Customization",
-          "Ongoing Technical Support"
-        ]}
-        ctaText="Request Quote"
-        onCtaClick={() => window.location.href = "/contact"}
-      />
+          {/* Pricing Section */}
+          <WLPricing
+            title="Pricing Model"
+            price="Custom"
+            period="/ solution"
+            description="Flexible pricing based on scale and usage. Designed for firms looking to grow and operate under their own brand."
+            features={[
+              "Unlimited Client Portals",
+              "Custom Domain Support",
+              "Brand Customization",
+              "Ongoing Technical Support"
+            ]}
+            ctaText="Request Quote"
+            onCtaClick={() => window.location.href = "/contact"}
+          />
+        </div>
+      </div>
 
       {/* Final CTA Section */}
       <WLCTASection

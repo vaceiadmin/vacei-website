@@ -16,7 +16,7 @@ interface WLProcessProps {
 
 const WLProcess: React.FC<WLProcessProps> = ({ sectionTitle, steps }) => {
   return (
-    <section className="py-20 bg-[#fafbfc] relative overflow-hidden">
+    <section className="py-20 bg-transparent relative overflow-hidden">
       {/* Abstract Background Decoration */}
       <div className="absolute top-0 right-0 w-[800px] h-full opacity-[0.03] pointer-events-none -z-10 bg-[url('/assets/images/grid-pattern.png')] bg-repeat" />
 

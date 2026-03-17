@@ -23,7 +23,7 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
 }) => {
   // Balanced layout for 5 items: 2 wide on top, 3 smaller on bottom
   return (
-    <section className="py-16 bg-white relative overflow-hidden">
+    <section className="py-16 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 space-y-4">
           {sectionSubtitle && (
