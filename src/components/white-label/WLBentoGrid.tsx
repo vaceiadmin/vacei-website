@@ -49,13 +49,14 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-8">
           {items.map((item, index) => {
             const Icon = item.icon;
-            // Map items to specific spans for a balanced 5-item layout
+            // Map items to specific spans for a balanced 6-item layout
             const spans = [
               "md:col-span-3 lg:col-span-6", // Item 1 (Wide)
               "md:col-span-3 lg:col-span-6", // Item 2 (Wide)
               "md:col-span-2 lg:col-span-4", // Item 3
               "md:col-span-2 lg:col-span-4", // Item 4
               "md:col-span-2 lg:col-span-4", // Item 5
+              "md:col-span-6 lg:col-span-12", // Item 6 (Full Width)
             ];
 
             return (
@@ -68,10 +69,10 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
                 whileHover={{ y: -5 }}
                 className={`${spans[index % spans.length]} relative group`}
               >
-                <div className="relative h-full p-10 bg-gray-50/50 border border-gray-100 shadow-lg rounded-[2.5rem] overflow-hidden hover:bg-white hover:shadow-2xl hover:shadow-primary-blue/5 hover:border-primary-blue/20 transition-all duration-500 flex flex-col min-h-[260px]">
+                <div className="relative h-full p-10 bg-gray-50/50 border border-gray-100 shadow-lg rounded-[2.5rem] overflow-hidden group-hover:!bg-primary-blue hover:shadow-2xl hover:shadow-primary-blue/30 hover:border-primary-blue/20 transition-all duration-500 flex flex-col min-h-[260px]">
                   <div className="flex flex-col items-start gap-6 mb-8">
                     {Icon && (
-                      <div className="w-16 h-16 shrink-0 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary-blue group-hover:bg-primary-blue group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                      <div className="w-16 h-16 shrink-0 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary-blue group-hover:!bg-white/20 group-hover:!text-white group-hover:!border-white/30 group-hover:scale-110 transition-all duration-500">
                         {(() => {
                           if (typeof Icon === 'function' || (typeof Icon === 'object' && Icon !== null)) {
                             const TypedIcon = Icon as any;
@@ -81,20 +82,20 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
                         })()}
                       </div>
                     )}
-                    <h3 className="text-2xl font-black text-text-dark tracking-tight group-hover:text-primary-blue transition-colors leading-tight">
+                    <h3 className="text-2xl font-black text-text-dark tracking-tight group-hover:!text-white transition-colors leading-tight">
                       {item.title}
                     </h3>
                   </div>
 
                   {item.description && (
-                    <p className="text-gray/70 leading-relaxed font-medium text-lg">
+                    <p className="text-gray/70 group-hover:!text-white/90 leading-relaxed font-medium text-lg transition-colors">
                       {item.description}
                     </p>
                   )}
 
                   {/* Subtle light leak for larger items */}
                   {index < 2 && (
-                    <div className="absolute top-0 right-0 w-48 h-48 bg-primary-blue/5 rounded-full -mr-24 -mt-24 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -mr-24 -mt-24 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   )}
                 </div>
               </motion.div>

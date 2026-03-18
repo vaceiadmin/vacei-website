@@ -75,16 +75,16 @@ const WLFeatureGrid: React.FC<WLFeatureGridProps> = ({
                 {/* Decorative background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/5 to-purple-bg/5 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl" />
                 
-                <div className="relative h-full p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:shadow-primary-blue/10 hover:border-primary-blue/20 transition-all duration-500 flex flex-col items-start overflow-hidden">
+                <div className="relative h-full p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm group-hover:!bg-primary-blue hover:shadow-2xl hover:shadow-primary-blue/30 hover:border-primary-blue/30 transition-all duration-500 flex flex-col items-start overflow-hidden">
                   {/* Subtle Gradient Accent */}
-                  <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-primary-blue/40 to-transparent group-hover:from-primary-blue transition-all" />
+                  <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-primary-blue/40 to-transparent group-hover:from-white/40 transition-all" />
                   
                   {Icon && (
                     <div className="relative mb-8">
                        {/* Floating circle decoration */}
                        <div className="absolute -inset-4 bg-primary-blue/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500" />
                        
-                       <div className="relative w-16 h-16 flex items-center justify-center bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 text-primary-blue group-hover:scale-110 group-hover:bg-primary-blue group-hover:text-white transition-all duration-500">
+                       <div className="relative w-16 h-16 flex items-center justify-center bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 text-primary-blue group-hover:scale-110 group-hover:!bg-white/20 group-hover:!text-white group-hover:!border-white/30 transition-all duration-500">
                           {(() => {
                             if (typeof Icon === 'function' || (typeof Icon === 'object' && Icon !== null)) {
                               const TypedIcon = Icon as any;
@@ -96,18 +96,18 @@ const WLFeatureGrid: React.FC<WLFeatureGridProps> = ({
                     </div>
                   )}
                   
-                  <h3 className="text-2xl font-black text-text-dark mb-5 tracking-tight group-hover:text-primary-blue transition-colors">
+                  <h3 className="text-2xl font-black text-text-dark mb-5 tracking-tight group-hover:!text-white transition-colors">
                     {feature.title}
                   </h3>
                   
                   {feature.description && (
-                    <p className="text-gray/80 leading-relaxed font-medium text-base">
+                    <p className="text-gray/80 group-hover:!text-white/90 leading-relaxed font-medium text-base transition-colors">
                       {feature.description}
                     </p>
                   )}
                   
                   {/* Bottom pattern */}
-                  <div className="absolute bottom-[-20%] right-[-10%] w-32 h-32 bg-primary-blue/5 rounded-full blur-2xl group-hover:bg-primary-blue/10 transition-colors" />
+                  <div className="absolute bottom-[-20%] right-[-10%] w-32 h-32 bg-primary-blue/5 rounded-full blur-2xl group-hover:!bg-white/10 transition-colors" />
                 </div>
               </motion.div>
             );

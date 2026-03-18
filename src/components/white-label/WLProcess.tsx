@@ -12,9 +12,18 @@ interface ProcessStep {
 interface WLProcessProps {
   sectionTitle: string;
   steps: ProcessStep[];
+  tagline?: string;
+  description?: string;
+  highlightWord?: string;
 }
 
-const WLProcess: React.FC<WLProcessProps> = ({ sectionTitle, steps }) => {
+const WLProcess: React.FC<WLProcessProps> = ({ 
+  sectionTitle, 
+  steps,
+  tagline = "Step by Step",
+  description = "We've streamlined the entire white-label onboarding process into four simple phases.",
+  highlightWord = "Works"
+}) => {
   return (
     <section className="py-20 bg-transparent relative overflow-hidden">
       {/* Abstract Background Decoration */}
@@ -31,17 +40,17 @@ const WLProcess: React.FC<WLProcessProps> = ({ sectionTitle, steps }) => {
               className="space-y-6"
             >
               <span className="inline-block px-4 py-1.5 rounded-full bg-primary-blue/5 text-primary-blue font-black tracking-widest uppercase text-[10px] border border-primary-blue/10">
-                Step by Step
+                {tagline}
               </span>
               <h2 className="text-4xl sm:text-5xl font-black text-text-dark tracking-tight leading-tight">
                 {sectionTitle.split(' ').map((word, i) => (
                   <span key={i} className="block">
-                    {word === "Works" ? <span className="text-primary-blue">{word}</span> : word}
+                    {word === highlightWord ? <span className="text-primary-blue">{word}</span> : word}
                   </span>
                 ))}
               </h2>
               <p className="text-lg text-gray/80 font-medium leading-relaxed max-w-sm">
-                We've streamlined the entire white-label onboarding process into four simple phases.
+                {description}
               </p>
               <div className="w-16 h-1 w-full bg-gradient-to-r from-primary-blue to-transparent rounded-full opacity-30" />
             </motion.div>
@@ -64,7 +73,7 @@ const WLProcess: React.FC<WLProcessProps> = ({ sectionTitle, steps }) => {
                 >
                   {/* Glowing Node */}
                   <div className="relative z-10 shrink-0 hidden sm:block">
-                    <div className="w-20 h-20 rounded-3xl bg-white border border-gray-100 flex items-center justify-center text-2xl font-black text-primary-blue shadow-2xl group-hover:scale-110 group-hover:bg-primary-blue group-hover:text-white group-hover:shadow-[0_15px_30px_rgba(59,73,230,0.2)] transition-all duration-500">
+                    <div className="w-20 h-20 rounded-3xl bg-white border border-gray-100 flex items-center justify-center text-2xl font-black text-primary-blue shadow-2xl group-hover:scale-110 group-hover:!bg-primary-blue group-hover:!text-white group-hover:shadow-[0_15px_30px_rgba(59,73,230,0.2)] transition-all duration-500">
                       0{index + 1}
                     </div>
                     <div className="absolute -inset-2 bg-primary-blue opacity-0 group-hover:opacity-10 blur-xl rounded-full scale-0 group-hover:scale-100 transition-all duration-500" />

@@ -59,10 +59,10 @@ const WLInteractiveCards: React.FC<WLInteractiveCardsProps> = ({
                 className="relative group h-full"
               >
                 {/* 3D-like elevated card structure */}
-                <div className="relative h-full p-10 bg-white rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.02)] border border-gray-100 group-hover:bg-white group-hover:shadow-[0_40px_80px_rgba(59,73,230,0.1)] group-hover:border-primary-blue/30 transition-all duration-500 overflow-hidden flex flex-col items-center text-center">
+                <div className="relative h-full p-10 bg-white rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.02)] border border-gray-100 group-hover:!bg-primary-blue group-hover:shadow-[0_40px_80px_rgba(59,73,230,0.1)] group-hover:border-primary-blue/30 transition-all duration-500 overflow-hidden flex flex-col items-center text-center">
                   
                   {/* Glowing Border Trace Effect */}
-                  <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-primary-blue/40 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+                  <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-transparent via-white/40 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
                   
                   {Icon && (
                     <div className="relative mb-10">
@@ -70,7 +70,7 @@ const WLInteractiveCards: React.FC<WLInteractiveCardsProps> = ({
                        <div className="absolute -inset-6 bg-primary-blue/5 rounded-full scale-0 group-hover:scale-125 transition-transform duration-700" />
                        <div className="absolute -inset-2 bg-primary-blue/10 rounded-full scale-0 group-hover:scale-110 transition-transform duration-500 delay-100" />
                        
-                       <div className="relative w-20 h-20 flex items-center justify-center bg-gray-50 rounded-full text-primary-blue group-hover:bg-primary-blue group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                       <div className="relative w-20 h-20 flex items-center justify-center bg-gray-50 rounded-full text-primary-blue group-hover:!bg-white/20 group-hover:!text-white group-hover:scale-110 transition-all duration-500">
                           {(() => {
                            if (typeof Icon === 'function' || (typeof Icon === 'object' && Icon !== null)) {
                              const TypedIcon = Icon as any;
@@ -82,18 +82,18 @@ const WLInteractiveCards: React.FC<WLInteractiveCardsProps> = ({
                     </div>
                   )}
                   
-                  <h3 className="text-2xl font-black text-text-dark mb-6 tracking-tight group-hover:text-primary-blue transition-colors">
+                  <h3 className="text-2xl font-black text-text-dark mb-6 tracking-tight group-hover:!text-white transition-colors">
                     {item.title}
                   </h3>
                   
                   {item.description && (
-                    <p className="text-lg text-gray/80 leading-relaxed font-medium">
+                    <p className="text-lg text-gray/80 group-hover:!text-white/90 leading-relaxed font-medium transition-colors">
                       {item.description}
                     </p>
                   )}
                   
                   {/* Subtle Accent Line */}
-                  <div className="w-12 h-1 bg-gray-100 group-hover:bg-primary-blue group-hover:w-24 transition-all duration-500 mt-auto pt-8 mb-0" />
+                  <div className="w-12 h-1 bg-gray-100 group-hover:!bg-white group-hover:w-24 transition-all duration-500 mt-auto pt-8 mb-0" />
                 </div>
               </motion.div>
             );

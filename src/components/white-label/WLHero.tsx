@@ -13,6 +13,7 @@ interface WLHeroProps {
   ctaText: string;
   onCtaClick?: () => void;
   imagePlaceholder?: string;
+  highlightWords?: string[];
 }
 
 const WLHero: React.FC<WLHeroProps> = ({
@@ -22,6 +23,7 @@ const WLHero: React.FC<WLHeroProps> = ({
   ctaText,
   onCtaClick,
   imagePlaceholder = "/assets/images/portal.png",
+  highlightWords = ["Your", "Own", "Branded"],
 }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
@@ -61,7 +63,7 @@ const WLHero: React.FC<WLHeroProps> = ({
               <h1 className="text-5xl sm:text-7xl font-black text-white leading-[1] mb-10 tracking-tight">
                 {subtitle.split(' ').map((word, i) => (
                   <span key={i} className="inline-block mr-[0.25em]">
-                    {word === "Your" || word === "Own" || word === "Branded" ? (
+                    {highlightWords.includes(word) ? (
                       <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
                         {word}
                       </span>

@@ -34,7 +34,8 @@ const Navbar = () => {
     "/privacy-policy",
     "/terms-and-conditions",
     "/cookie-policy",
-    "/white-label",
+    "/white-label-platform",
+    "/partners-platform",
   ];
   const shouldHideChrome = hideChromeRoutes.includes(pathname);
 

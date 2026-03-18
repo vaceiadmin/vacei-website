@@ -14,7 +14,8 @@ const Footer = () => {
     '/privacy-policy',
     '/terms-and-conditions',
     '/cookie-policy',
-    '/white-label',
+    '/white-label-platform',
+    '/partners-platform',
   ]
 
   if (hideChromeRoutes.includes(pathname)) {

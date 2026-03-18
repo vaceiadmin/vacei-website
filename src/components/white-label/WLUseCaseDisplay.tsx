@@ -57,10 +57,10 @@ const WLUseCaseDisplay: React.FC<WLUseCaseDisplayProps> = ({
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="relative h-full p-10 bg-gray-50/50 rounded-[2.5rem] border border-gray-100 group-hover:bg-primary-blue group-hover:border-primary-blue transition-all duration-500 flex flex-col items-start min-h-[340px]">
+                <div className="relative h-full p-10 bg-gray-50/50 rounded-[2.5rem] border border-gray-100 group-hover:!bg-primary-blue group-hover:!border-primary-blue transition-all duration-500 flex flex-col items-start min-h-[340px]">
                   
                   {Icon && (
-                    <div className="w-16 h-16 mb-10 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary-blue group-hover:bg-white/20 group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                    <div className="w-16 h-16 mb-10 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary-blue group-hover:!bg-white/20 group-hover:!text-white group-hover:!border-white/30 group-hover:scale-110 transition-all duration-500">
                       {(() => {
                         if (typeof Icon === 'function' || (typeof Icon === 'object' && Icon !== null)) {
                           const TypedIcon = Icon as any;
@@ -71,18 +71,18 @@ const WLUseCaseDisplay: React.FC<WLUseCaseDisplayProps> = ({
                     </div>
                   )}
                   
-                  <h3 className="text-2xl font-black text-text-dark mb-5 tracking-tight group-hover:text-white transition-colors">
+                  <h3 className="text-2xl font-black text-text-dark mb-5 tracking-tight group-hover:!text-white transition-colors">
                     {item.title}
                   </h3>
                   
                   {item.description && (
-                    <p className="text-lg text-gray/70 leading-relaxed font-medium group-hover:text-white/80 transition-colors">
+                    <p className="text-lg text-gray/70 leading-relaxed font-medium group-hover:!text-white/80 transition-colors">
                       {item.description}
                     </p>
                   )}
                   
                   {/* Bottom pattern indicator - Number turns white on hover */}
-                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-300 group-hover:border-white/30 group-hover:text-white text-[12px] font-black uppercase transition-all duration-500">
+                  <div className="absolute top-6 right-6 w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 group-hover:!border-white/40 group-hover:!text-white text-[12px] font-black uppercase transition-all duration-500">
                      0{index + 1}
                   </div>
                 </div>
