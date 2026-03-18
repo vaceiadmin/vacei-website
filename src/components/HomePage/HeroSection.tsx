@@ -8,6 +8,7 @@ import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 import { useIsSafari } from "@/hooks/use-safari";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Sparkles, MoveRight } from "lucide-react";
+import LiquidSurface from "../common/background";
 
 const HeroSection = () => {
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
@@ -29,14 +30,19 @@ const HeroSection = () => {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full overflow-hidden bg-[#050510] min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32"
+      className="relative w-full overflow-hidden bg-[#050510] min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-38"
     >
       <div className="absolute inset-0 z-0">
-        <GradientContainer
-          backgroundColor="bg-[#050510]"
-          showRadials={true}
-          className="w-full h-full"
+        <LiquidSurface
+          scheme={5}
+          speed={1.0}
+          intensity={1.2}
+          colors={["#050510", "#3b49e6", "#0a0f25", "#050510", "#1e3a8a", "#050510"]}
+          darkNavyColor="#050510"
+          showCursor={false}
         />
+        {/* Subtle Overlay to blend the top and bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/40 via-transparent to-[#050510]/80 pointer-events-none" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
@@ -80,7 +86,7 @@ const HeroSection = () => {
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
- 
+
             <Link
               href="/quote"
               className="group flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-8 py-4 text-base font-semibold transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:-translate-y-1 active:scale-95 backdrop-blur-sm shadow-lg hover:shadow-primary-blue/10"
@@ -162,8 +168,16 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Subtle Bottom Fade */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#050510] to-transparent z-10" />
+      {/* V-Shape Bottom Divider */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10 pointer-events-none">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="relative block w-full h-[60px] sm:h-[100px] lg:h-[140px]"
+        >
+          <path d="M0 0 L50 100 L100 0 V100 H0 Z" fill="#ffffff" />
+        </svg>
+      </div>
     </section>
   );
 };
