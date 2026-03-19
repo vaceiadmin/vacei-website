@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { ArrowRight, ShieldCheck, BookOpen, Layers } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import GetInstantQuoteButton from "./GetInstantQuoteButton";
 import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
@@ -484,11 +485,20 @@ const Navbar = () => {
                                     ))}
                                   </div>
                                 </div>
-                                <div className="w-[240px] shrink-0 rounded-2xl overflow-hidden relative">
-                                  <Image src="/assets/images/Accounting.jpg" alt="Services" layout="fill" objectFit="cover" className="hover:scale-105 transition-transform duration-700" />
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-5">
-                                    <span className="text-white font-medium">Explore all our expert services</span>
+                                <div className="hidden sm:flex w-[240px] lg:w-[280px] shrink-0 rounded-2xl p-6 bg-linear-to-br from-blue-50 to-indigo-50 border border-blue-100 flex-col justify-between relative overflow-hidden group">
+                                  <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500 pointer-events-none" />
+                                  <div className="relative z-10">
+                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm mb-4">
+                                      <Layers className="w-5 h-5" />
+                                    </div>
+                                    <h4 className="text-[15px] font-bold text-slate-900 mb-2">Unified Services</h4>
+                                    <p className="text-xs text-slate-500 leading-relaxed mb-4">
+                                      From company formation to audit readiness, streamline your operations with expert-led workflows.
+                                    </p>
                                   </div>
+                                  <Link href="/services/advisory-growth" className="relative z-10 flex items-center gap-2 text-xs font-bold text-blue-600 group-hover:gap-3 transition-all" onClick={() => link.setIsOpen?.(false)}>
+                                    Explore methodology <ArrowRight className="w-4 h-4" />
+                                  </Link>
                                 </div>
                               </>
                             ) : link.label === "Platform" ? (
@@ -510,8 +520,26 @@ const Navbar = () => {
                                     ))}
                                   </div>
                                 </div>
-                                <div className="w-[240px] shrink-0 rounded-2xl overflow-hidden relative">
-                                  <Image src="/assets/images/portal.png" alt="Portal" layout="fill" objectFit="cover" className="hover:scale-105 transition-transform duration-700" />
+                                <div className="hidden sm:flex w-[240px] lg:w-[280px] shrink-0 rounded-2xl p-6 bg-[#020410] border border-blue-900/30 flex-col justify-between relative overflow-hidden group">
+                                  <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-blue-600/20 to-transparent blur-xl group-hover:opacity-100 opacity-50 transition-opacity duration-500 pointer-events-none" />
+                                  <div className="relative z-10">
+                                    <div className="flex items-center justify-between mb-5">
+                                      <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+                                        <ShieldCheck className="w-5 h-5" />
+                                      </div>
+                                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                        <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">System OK</span>
+                                      </div>
+                                    </div>
+                                    <h4 className="text-[15px] font-bold text-white mb-2">Secure Platform</h4>
+                                    <p className="text-xs text-slate-400 leading-relaxed mb-6">
+                                      Access your client portal, run AI audits, and manage entity data securely.
+                                    </p>
+                                  </div>
+                                  <Link href="/portal/client-portal" className="relative z-10 flex items-center justify-center w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-500 transition-colors shadow-sm" onClick={() => link.setIsOpen?.(false)}>
+                                    Go to Dashboard
+                                  </Link>
                                 </div>
                               </>
                             ) : link.label === "Resources" ? (
@@ -533,8 +561,22 @@ const Navbar = () => {
                                     ))}
                                   </div>
                                 </div>
-                                <div className="w-[240px] shrink-0 rounded-2xl overflow-hidden relative">
-                                  <Image src="/assets/images/Audit.jpg" alt="Resources" layout="fill" objectFit="cover" className="hover:scale-105 transition-transform duration-700" />
+                                <div className="hidden sm:flex w-[240px] lg:w-[280px] shrink-0 rounded-2xl p-6 bg-slate-50 border border-slate-200 flex-col justify-between group">
+                                  <div>
+                                    <div className="flex items-center gap-3 mb-4">
+                                      <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                                        <BookOpen className="w-5 h-5" />
+                                      </div>
+                                      <span className="text-[9px] font-bold text-orange-600 uppercase tracking-widest bg-orange-50 px-2 py-1 rounded-full border border-orange-100/50 hidden lg:block">New Guide</span>
+                                    </div>
+                                    <h4 className="text-[15px] font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Audit Readiness</h4>
+                                    <p className="text-xs text-slate-500 leading-relaxed mb-6">
+                                      Discover the actionable steps to prepare your financial records for strict compliance.
+                                    </p>
+                                  </div>
+                                  <Link href="/insights" className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-white border border-slate-200 px-4 py-2.5 rounded-xl w-max hover:bg-slate-50 hover:text-blue-600 transition-all shadow-sm" onClick={() => link.setIsOpen?.(false)}>
+                                    Read Now
+                                  </Link>
                                 </div>
                               </>
                             ) : null}
