@@ -104,66 +104,25 @@ const HeroSection = () => {
         </div>
 
         {/* Right Visual Area */}
-        <div
-          className="w-full lg:w-[48%] relative flex justify-center items-center mt-12 lg:mt-0"
-          style={{ perspective: "1400px" }}
-        >
+        <div className="w-full lg:w-[48%] relative flex justify-center items-center mt-12 lg:mt-0">
           {/* Backdrop Glows */}
           <div className="absolute -inset-10 bg-primary-blue/10 blur-[100px] rounded-full opacity-40 animate-pulse pointer-events-none" />
 
-          {/* 3D Wrapper: The rotation happens here so the reflection obeys it! */}
+          {/* New Pre-slanted Image Container with Reflection */}
           <div 
-            className="relative w-full transition-transform duration-[1.5s] group hover:scale-105"
+            className="relative w-full max-w-[650px] mx-auto transition-transform duration-[1.5s] hover:scale-105"
             style={{ 
-              transform: "rotateY(-24deg) rotateX(8deg) scale(1.1)",
-              transformStyle: "preserve-3d",
+              WebkitBoxReflect: "below -10px linear-gradient(transparent, transparent 50%, rgba(255,255,255,0.3))"
             }}
           >
-            {/* Real Card */}
-            <div
-              className="relative w-full aspect-[16/11.5] rounded-3xl overflow-hidden shadow-[-40px_40px_100px_-10px_rgba(0,0,0,0.9)] border-y border-r border-white/10 border-l-[3px] border-l-white/20 bg-[#0a0a1a]"
-              style={{
-                WebkitBoxReflect: "below 0px linear-gradient(transparent, transparent 40%, rgba(255,255,255,0.25))"
-              }}
-            >
-              <div className="relative h-full w-full">
-                {/* Browser Bar Mockup */}
-                <div className="h-8 w-full bg-[#15162d] border-b border-white/5 flex items-center px-4 gap-2 absolute top-0 left-0 z-20">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
-                  </div>
-                  <div className="mx-auto bg-white/5 h-4 w-1/3 rounded-full hidden sm:flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-blue/40 mr-2" />
-                    <span className="text-[7px] text-white/30 uppercase tracking-[0.2em] font-mono">vacei.com</span>
-                  </div>
-                </div>
-
-                {/* Main Visual Asset */}
-                <div className="absolute inset-0 pt-8 mt-[-1px]">
-                  <Image
-                    src="/assets/images/WhatsApp Image 2026-03-19 at 8.42.56 PM.jpeg"
-                    alt="VACEI platform interface"
-                    layout="fill"
-                    objectFit="contain"
-                    className="transition-transform duration-[2s] group-hover:scale-105"
-                    unoptimized
-                  />
-                  {/* Glass overlay and lighting */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a]/90 via-transparent to-transparent opacity-60" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/10 via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                </div>
-              </div>
-            </div>
-            
-            {/* Decorative Floating Elements inside the 3D context */}
-            <div
-              className="absolute -top-6 -right-6 w-16 h-16 rounded-2xl bg-[#15162d]/80 border border-white/10 backdrop-blur-xl flex items-center justify-center shadow-2xl z-30 hidden lg:flex"
-              style={{ transform: "translateZ(30px)" }}
-            >
-              <div className="w-8 h-8 rounded-full border-2 border-primary-blue border-t-transparent animate-spin" />
-            </div>
+             <Image
+                src="/assets/images/ChatGPT Image Mar 19, 2026, 11_43_32 PM.png"
+                alt="VACEI platform interface"
+                width={800}
+                height={600}
+                className="w-full h-auto object-contain drop-shadow-2xl"
+                unoptimized
+              />
           </div>
         </div>
       </div>
