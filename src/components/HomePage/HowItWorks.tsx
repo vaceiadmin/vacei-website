@@ -5,7 +5,7 @@ import { HOW_IT_WORKS_VIDEO } from "@/data/video";
 import { cn } from "@/lib/utils";
 
 const steps = [
-    {
+  {
     title: "Create your workspace",
     description: "Set up a secure digital workspace for your company in minutes.",
     icon: Building2,
@@ -16,9 +16,9 @@ const steps = [
     description: "Seamlessly onboarding your accountant, auditor, lawyer, or corporate service provider.",
     icon: UserPlus,
     color: "from-indigo-500 to-purple-600",
-    },
-    {
-        title: "Upload documents",
+  },
+  {
+    title: "Upload documents",
     description: "Respond to document requests or upload files securely with bank-grade encryption.",
     icon: FileUp,
     color: "from-purple-500 to-pink-600",
@@ -28,13 +28,13 @@ const steps = [
     description: "Your advisors manage engagements through structured and transparent workflows.",
     icon: Workflow,
     color: "from-pink-500 to-orange-500",
-    },
-    {
-        title: "Track everything",
+  },
+  {
+    title: "Track everything",
     description: "Monitor deadlines, filings, milestones, and documents from one central hub.",
     icon: LayoutDashboard,
     color: "from-orange-500 to-amber-500",
-    },
+  },
 ];
 
 const HowItWorks = () => {
@@ -84,7 +84,7 @@ const HowItWorks = () => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -99,37 +99,37 @@ const HowItWorks = () => {
     video.addEventListener('pause', handlePause);
     video.addEventListener('timeupdate', handleTimeUpdate);
 
-        return () => {
+    return () => {
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('timeupdate', handleTimeUpdate);
     };
   }, []);
 
-    return (
+  return (
     <section
       ref={sectionRef}
       className="relative w-full py-16 lg:py-24 bg-[#020410] overflow-hidden"
     >
       {/* Cinematic Background */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[160px]" 
+        <div
+          className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[160px]"
         />
-        <div 
-          className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-900/10 rounded-full blur-[160px]" 
+        <div
+          className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-900/10 rounded-full blur-[160px]"
         />
 
         {/* Abstract Data Lines */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.05]" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path 
-            d="M0 20 Q 25 10, 50 20 T 100 20" stroke="white" strokeWidth="0.05" fill="none" 
+          <path
+            d="M0 20 Q 25 10, 50 20 T 100 20" stroke="white" strokeWidth="0.05" fill="none"
           />
-          <path 
-            d="M0 50 Q 25 40, 50 50 T 100 50" stroke="white" strokeWidth="0.05" fill="none" 
+          <path
+            d="M0 50 Q 25 40, 50 50 T 100 50" stroke="white" strokeWidth="0.05" fill="none"
           />
-          <path 
-            d="M0 80 Q 25 70, 50 80 T 100 80" stroke="white" strokeWidth="0.05" fill="none" 
+          <path
+            d="M0 80 Q 25 70, 50 80 T 100 80" stroke="white" strokeWidth="0.05" fill="none"
           />
         </svg>
       </div>
@@ -182,11 +182,11 @@ const HowItWorks = () => {
 
                   {/* Active/Past Highlight Effect */}
                   {(isActive || isPast) && (
-                    <div 
+                    <div
                       className={cn(
                         "absolute inset-0 pointer-events-none",
                         isActive ? "bg-gradient-to-r from-blue-600/10 to-transparent" : "bg-white/[0.01]"
-                      )} 
+                      )}
                     />
                   )}
 
@@ -199,7 +199,7 @@ const HowItWorks = () => {
                     )}>
                       <Icon className="w-6 h-6" />
                       {isPast && (
-                        <div 
+                        <div
                           className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-[#020410]"
                         >
                           <CheckCircle2 className="w-3 h-3 text-white" />
@@ -216,22 +216,22 @@ const HowItWorks = () => {
                           {step.title}
                         </h4>
                         {isActive && (
-                            <div className="text-blue-400">
-                              <Sparkles className="w-5 h-5 animate-pulse" />
-                            </div>
-                          )}
-                      </div>
-                      
-                      {(isActive || isPast) && (
-                          <p
-                            className={cn(
-                              "text-sm leading-relaxed mt-2 transition-colors duration-500",
-                              isActive ? "text-slate-200" : "text-slate-400"
-                            )}
-                          >
-                            {step.description}
-                          </p>
+                          <div className="text-blue-400">
+                            <Sparkles className="w-5 h-5 animate-pulse" />
+                          </div>
                         )}
+                      </div>
+
+                      {(isActive || isPast) && (
+                        <p
+                          className={cn(
+                            "text-sm leading-relaxed mt-2 transition-colors duration-500",
+                            isActive ? "text-slate-200" : "text-slate-400"
+                          )}
+                        >
+                          {step.description}
+                        </p>
+                      )}
                       {isFuture && (
                         <p className="text-sm text-slate-600 line-clamp-1 group-hover:text-slate-400 transition-colors">
                           {step.description}
@@ -253,28 +253,28 @@ const HowItWorks = () => {
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] -ml-32 -mb-32 pointer-events-none" />
 
               <div className="relative aspect-video rounded-[32px] overflow-hidden bg-slate-900">
-                            <video
-                                ref={videoRef}
-                                src={HOW_IT_WORKS_VIDEO}
+                <video
+                  ref={videoRef}
+                  src={HOW_IT_WORKS_VIDEO}
                   className="w-full h-full object-cover"
-                                loop
+                  loop
                   muted={isMuted}
-                                playsInline
+                  playsInline
                 />
 
                 {/* Play Overlay */}
                 {!isPlaying && (
-                    <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
-                                    <button
-                        onClick={togglePlay}
-                        className="w-24 h-24 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-2xl group/play"
-                      >
-                        <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#020410] shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500 group-hover/play:scale-105 group-hover/play:shadow-[0_0_50px_rgba(255,255,255,0.6)]">
-                          <Play className="w-8 h-8 fill-current ml-1" />
-                        </div>
-                      </button>
-                    </div>
-                  )}
+                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
+                    <button
+                      onClick={togglePlay}
+                      className="w-24 h-24 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-2xl group/play"
+                    >
+                      <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#020410] shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500 group-hover/play:scale-105 group-hover/play:shadow-[0_0_50px_rgba(255,255,255,0.6)]">
+                        <Play className="w-8 h-8 fill-current ml-1" />
+                      </div>
+                    </button>
+                  </div>
+                )}
 
                 {/* Dynamic UI Overlay - Ambient Gradient */}
                 <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-60" />
@@ -290,7 +290,7 @@ const HowItWorks = () => {
                       className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-indigo-400"
                       style={{ width: `${progress}%` }}
                     />
-                                    </div>
+                  </div>
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -306,12 +306,12 @@ const HowItWorks = () => {
                       >
                         {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                       </button>
-                                    </div>
+                    </div>
 
                     <div className="hidden sm:flex items-center gap-4">
-                      <div className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30">
+                      {/* <div className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30">
                         <span className="text-[10px] font-bold text-blue-400 tracking-widest uppercase">Chapter 01: Core Platform</span>
-                                    </div>
+                                    </div> */}
                     </div>
                   </div>
                 </div>
@@ -328,7 +328,7 @@ const HowItWorks = () => {
       {/* Finishing Details */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#020410] to-transparent z-10" />
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#020410] to-transparent z-10" />
-        </section>
+    </section>
   );
 };
 

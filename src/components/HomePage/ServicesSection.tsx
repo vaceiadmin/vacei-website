@@ -206,7 +206,9 @@ const ServicesSection = () => {
                                         {/* Hover Product Preview */}
                                         {activeTab === "products" && item.hoverImage && (
                                             <div className="absolute inset-0 bg-slate-950 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none group-hover:pointer-events-auto">
-                                                <Image src={item.hoverImage} alt={item.title} fill className="object-cover opacity-40" />
+                                                <div className="absolute inset-x-0 top-8 bottom-[35%] opacity-60">
+                                                    <Image src={item.hoverImage} alt={item.title} fill className="object-contain object-top px-6" />
+                                                </div>
                                                 <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/40 to-transparent" />
                                                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                                                     <h3 className="text-3xl font-black text-white mb-2">{item.title}</h3>

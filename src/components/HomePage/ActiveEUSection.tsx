@@ -68,14 +68,12 @@ const ActiveEUSection = () => {
                     <div className="lg:col-span-3 relative flex h-[700px] w-full flex-col items-center justify-center overflow-hidden">
 
                         {/* Central Business Hub Icon */}
-                        <div className="relative z-20 flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-lg border border-slate-50 p-2 group transition-all duration-500 hover:rotate-12 translate-z-0">
-                            <svg viewBox="0 0 24 24" className="w-full h-full text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="M3 21h18" />
-                                <path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4" />
-                                <path d="M5 21V10.85" />
-                                <path d="M19 21V10.85" />
-                                <path d="M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4" />
-                            </svg>
+                        <div className="relative z-20 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-lg border border-slate-50 p-1 group transition-all duration-500 hover:rotate-12 translate-z-0">
+                            <img 
+                                src="/assets/images/imgi_1_Logo-2.0 8.png" 
+                                alt="VACEI Hub" 
+                                className="w-full h-full object-contain" 
+                            />
                         </div>
 
                         {/* Orbiting Circles Layer 1 - Major Economies */}

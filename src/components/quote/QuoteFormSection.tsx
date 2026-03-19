@@ -77,7 +77,7 @@ const QuoteFormSection = () => {
 
       setFormData({ name: "", email: "", subject: "", message: "" });
       setStatusType("success");
-      setStatusMessage("Your quote request has been sent. We’ll get back to you shortly.");
+      setStatusMessage("Your quote request has been sent. Our team will review your details and get back to you within 24 hours.");
       setStatusOpen(true);
     } catch (err) {
       console.error(err);

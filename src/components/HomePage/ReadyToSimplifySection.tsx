@@ -69,7 +69,7 @@ const ReadyToSimplifySection = () => {
                             className="mt-10"
                         >
                             <p className="text-sm font-bold text-slate-400 max-w-sm">
-                                Get a quote in minutes or invite your advisors <br className="hidden sm:block" /> to collaborate in your workspace.
+                                Get a quote or invite your advisors <br className="hidden sm:block" /> to collaborate in your workspace.
                             </p>
                         </div>
                     </div>

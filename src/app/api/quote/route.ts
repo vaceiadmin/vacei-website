@@ -175,16 +175,38 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    await getTransport().sendMail({
-      from: `"VACEI Website" <${
-        process.env.SMTP_FROM || process.env.SMTP_USER
-      }>`,
+    const transport = getTransport();
+    const fromAddress = `"VACEI" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`;
+
+    // Send the notification email to the internal VACEI team
+    await transport.sendMail({
+      from: fromAddress,
       to: toAddress,
       subject: subjectLine,
       replyTo: email,
       text: textBody,
       html: htmlBody,
       attachments,
+    });
+
+    // Send the auto-responder confirmation email to the user
+    const autoReplySubject = "Quote Request Received - VACEI";
+    const autoReplyText = `Hi ${name},\n\nThank you for reaching out to us.\n\nWe have received your quote request and our team will review the details. We will get back to you within 24 hours.\n\nBest regards,\nThe VACEI Team`;
+    const autoReplyHtml = `
+      <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size:14px; color:#111827;">
+        <p>Hi ${name},</p>
+        <p>Thank you for reaching out to us.</p>
+        <p>We have received your quote request and our team will review the details. We will get back to you within 24 hours.</p>
+        <p>Best regards,<br/>The VACEI Team</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress,
+      to: email,
+      subject: autoReplySubject,
+      text: autoReplyText,
+      html: autoReplyHtml,
     });
 
     return NextResponse.json({ ok: true });

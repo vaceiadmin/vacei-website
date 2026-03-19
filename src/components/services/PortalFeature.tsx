@@ -7,8 +7,9 @@ import { motion } from "framer-motion";
 import SectionBadge from "@/components/common/SectionBadge";
 import TextAnimation from "@/components/common/TextAnimation";
 import { FadeInUp } from "@/components/common/Animations";
+import { Search, Settings, Bell, Home, FileText, Share2, Building2, MessageSquare, LogOut, FolderUp } from "lucide-react";
 
-type PortalFeatureVariant = "default" | "technology";
+type PortalFeatureVariant = "default" | "technology" | "upload-dashboard";
 
 interface PortalFeatureProps {
   portalImage: string;
@@ -77,7 +78,7 @@ const PortalFeature = ({
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-4 lg:h-[658px]">
           {/* Left Column: Text / How it works */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -224,7 +225,7 @@ const PortalFeature = ({
           </motion.div>
 
           {/* Right Column */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -266,11 +267,10 @@ const PortalFeature = ({
                         </div>
                         <div className="flex flex-col">
                           <span
-                            className={`text-[13px] font-semibold text-heading ${
-                              analysisProgress === 100
+                            className={`text-[13px] font-semibold text-heading ${analysisProgress === 100
                                 ? "line-through opacity-60"
                                 : ""
-                            }`}
+                              }`}
                           >
                             Analyzing Financial Statement
                           </span>
@@ -364,6 +364,109 @@ const PortalFeature = ({
                       <li>BI02 - CONTACT_PERSON — GENERAL</li>
                       <li>BI06 - PRIMARY_BUSINESS — GENERAL</li>
                     </ul>
+                  </div>
+                </div>
+              </div>
+            ) : variant === "upload-dashboard" ? (
+              <div className="w-full h-full rounded-2xl bg-[#F8FAFC] border border-gray-200 shadow-xl flex overflow-hidden lg:min-h-0 min-h-[500px] group cursor-default">
+                {/* Left Sidebar */}
+                <div className="hidden sm:flex w-[70px] bg-[#0e1222] flex-col items-center py-6 gap-6 z-10 shrink-0">
+                  <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl mb-4 shadow-lg shadow-blue-500/20">V</div>
+                  <div className="flex flex-col gap-6 text-slate-500 w-full items-center">
+                    <div className="p-2.5 bg-white/10 rounded-xl text-white"><Home className="w-5 h-5" /></div>
+                    <FileText className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
+                    <FolderUp className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
+                    <Share2 className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
+                    <Building2 className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
+                    <MessageSquare className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
+                  </div>
+                  <div className="mt-auto">
+                    <img src="https://i.pravatar.cc/100?img=11" alt="User" className="w-9 h-9 rounded-full border-2 border-slate-700" />
+                  </div>
+                </div>
+
+                {/* Main Content Area */}
+                <div className="flex-1 flex flex-col bg-white overflow-hidden">
+                  {/* Top Navbar */}
+                  <div className="h-16 border-b border-gray-100 flex items-center justify-between px-4 sm:px-6 bg-white shrink-0">
+                    <div className="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 w-32 sm:w-56">
+                      <span className="text-slate-400 text-[11px] font-medium grow">Search...</span>
+                      <Search className="w-3.5 h-3.5 text-slate-800 bg-slate-200 rounded p-0.5" />
+                    </div>
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="hidden sm:flex items-center gap-2 border border-slate-200 px-3 py-1.5 rounded-lg bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
+                        <svg className="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" /></svg>
+                        <span className="text-[11px] font-semibold text-slate-700">Quick action</span>
+                      </div>
+                      <Settings className="w-4 h-4 text-slate-500 cursor-pointer hover:text-slate-800 transition-colors" />
+                      <Bell className="w-4 h-4 text-slate-500 cursor-pointer hover:text-slate-800 transition-colors" />
+                      <div className="flex items-center gap-2 border-l border-slate-100 pl-3 sm:pl-4">
+                        <img src="https://i.pravatar.cc/100?img=11" alt="User" className="w-7 h-7 rounded-md" />
+                        <div className="flex-col hidden lg:flex">
+                          <span className="text-[11px] font-bold text-slate-800 leading-tight">Cleven</span>
+                          <span className="text-[9px] text-slate-400">Client</span>
+                        </div>
+                        <LogOut className="w-4 h-4 text-red-400 ml-1 hidden sm:block cursor-pointer hover:text-red-500 transition-colors" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="flex-1 p-5 sm:p-6 flex flex-col overflow-y-auto">
+                    {/* Welcome & Warning */}
+                    <div className="mb-4 sm:mb-6">
+                      <h2 className="text-lg font-bold text-slate-900 mb-3">Welcome Back, Cleven</h2>
+                      <div className="bg-white border border-slate-200 rounded-lg p-3 w-full shadow-sm text-sm">
+                        <span className="font-semibold text-slate-800">Warning:</span> <span className="text-slate-500 ml-1">No documents uploaded this month</span>
+                      </div>
+                    </div>
+
+                    {/* Central Image Upload Box */}
+                    <div className="w-full flex justify-center items-center py-4 sm:py-6 mb-4 mt-2">
+                      <div className="relative w-full max-w-[280px] h-[160px] sm:max-w-[340px] sm:h-[190px]">
+                        <Image
+                          src={portalImage}
+                          alt="Upload Box"
+                          fill
+                          className="object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
+                          priority
+                        />
+                      </div>
+                    </div>
+
+                    {/* Bottom UI Related to Uploading Document */}
+                    <div className="mt-auto border border-slate-100 rounded-xl p-4 bg-slate-50/50">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+                        <h3 className="text-xs font-bold text-slate-700">Pending Requests</h3>
+                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full">2 Action Required</span>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 overflow-hidden pr-2">
+                            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center shrink-0">
+                              <FileText className="w-4 h-4 text-red-500" />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-[11px] font-semibold text-slate-800 truncate">Q1 VAT Return Invoices</span>
+                              <span className="text-[10px] text-red-500 font-medium whitespace-nowrap">Overdue by 3 days</span>
+                            </div>
+                          </div>
+                          <button className="text-[10px] font-bold text-slate-600 border border-slate-200 bg-white px-3 py-1.5 rounded-md hover:bg-slate-50 shadow-sm shrink-0 transition-colors">Upload</button>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 overflow-hidden pr-2">
+                            <div className="w-8 h-8 rounded-full bg-yellow-50 flex items-center justify-center shrink-0">
+                              <FileText className="w-4 h-4 text-yellow-600" />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-[11px] font-semibold text-slate-800 truncate">Copy of Director's ID Proof</span>
+                              <span className="text-[10px] text-yellow-600 font-medium whitespace-nowrap">Due in 5 days</span>
+                            </div>
+                          </div>
+                          <button className="text-[10px] font-bold text-slate-600 border border-slate-200 bg-white px-3 py-1.5 rounded-md hover:bg-slate-50 shadow-sm shrink-0 transition-colors">Upload</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -3,12 +3,13 @@
 import React, { useEffect } from "react";
 import ReadyToSimplifySection from "./ReadyToSimplifySection";
 import ServicesSection from "./ServicesSection";
-import ProcessStepsSection from "./ProcessStepsSection";
+import ProcessStepsSectionDark from "./ProcessStepsSectionDark";
 import CompanySetupSection from "./CompanySetupSection";
 import FaqSection from "./FaqSection";
 import HeroSection from "./HeroSection";
 // import PortalFeature from "./PortalFeature";
 import HowItWorks from "./HowItWorks";
+import BeforeAndAfterSection from "./BeforeAndAfterSection";
 import AuditPlatform from "./AuditPlatform/AuditPlatform";
 import WorkspaceEntrySection from "./WorkspaceEntrySection";
 import ComplianceDashboardSection from "./ComplianceDashboardSection";
@@ -38,7 +39,8 @@ const HomePage = () => {
         <AuditPlatform />
         <WorkspaceEntrySection />
         <HowItWorks />
-        <ProcessStepsSection />
+        <BeforeAndAfterSection />
+        <ProcessStepsSectionDark />
         {/* <PortalFeature /> */}
         <ReadyToSimplifySection />
         <ServicesSection />

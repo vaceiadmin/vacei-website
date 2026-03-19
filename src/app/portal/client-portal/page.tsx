@@ -22,7 +22,8 @@ const ClientPortalPage = () => {
       </FadeInUp>
       <FadeInUp delay={0.2}>
         <PortalFeature
-          portalImage="/assets/images/portal.png"
+          variant="upload-dashboard"
+          portalImage="/assets/images/image copy.png"
           sectionLabel="Our services"
           heading="Task and Documents Upload"
           description="The portal allows you to upload documents securely and respond to requests easily."

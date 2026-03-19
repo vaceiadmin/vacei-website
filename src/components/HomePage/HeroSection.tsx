@@ -8,7 +8,6 @@ import { useDirectionalInView } from "@/hooks/use-directional-in-view";
 import { useIsSafari } from "@/hooks/use-safari";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Sparkles, MoveRight } from "lucide-react";
-import LiquidSurface from "../common/background";
 
 const HeroSection = () => {
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
@@ -33,16 +32,15 @@ const HeroSection = () => {
       className="relative w-full overflow-hidden bg-[#050510] min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-38"
     >
       <div className="absolute inset-0 z-0">
-        <LiquidSurface
-          scheme={5}
-          speed={1.0}
-          intensity={1.2}
-          colors={["#050510", "#3b49e6", "#0a0f25", "#050510", "#1e3a8a", "#050510"]}
-          darkNavyColor="#050510"
-          showCursor={false}
+        <Image
+          src="/assets/images/IMG_3843.PNG"
+          alt="Hero Background"
+          layout="fill"
+          objectFit="cover"
+
         />
         {/* Subtle Overlay to blend the top and bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/40 via-transparent to-[#050510]/80 pointer-events-none" />
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/40 via-transparent to-[#050510]/80 pointer-events-none" /> */}
       </div>
 
       <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
@@ -132,10 +130,10 @@ const HeroSection = () => {
               {/* Main Visual Asset */}
               <div className="absolute inset-0 pt-8 mt-[-1px]">
                 <Image
-                  src="/assets/videos/Main Render.gif"
+                  src="/assets/images/WhatsApp Image 2026-03-19 at 8.42.56 PM.jpeg"
                   alt="VACEI platform interface"
                   layout="fill"
-                  objectFit="cover"
+                  objectFit="contain"
                   className="transition-transform duration-[2s] group-hover:scale-105"
                   unoptimized
                 />
@@ -145,7 +143,7 @@ const HeroSection = () => {
               </div>
 
               {/* Interactive Decoration */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-between transform translate-y-0 opacity-100 transition-all duration-700 pointer-events-none">
+              {/* <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-between transform translate-y-0 opacity-100 transition-all duration-700 pointer-events-none">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-primary-blue/20 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-primary-blue" />
@@ -155,7 +153,7 @@ const HeroSection = () => {
                 <div className="h-1 w-24 bg-white/10 rounded-full overflow-hidden">
                   <div className="h-full w-full bg-primary-blue" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -166,17 +164,6 @@ const HeroSection = () => {
             <div className="w-8 h-8 rounded-full border-2 border-primary-blue border-t-transparent animate-spin" />
           </div>
         </div>
-      </div>
-
-      {/* V-Shape Bottom Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10 pointer-events-none">
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className="relative block w-full h-[60px] sm:h-[100px] lg:h-[140px]"
-        >
-          <path d="M0 0 L50 100 L100 0 V100 H0 Z" fill="#ffffff" />
-        </svg>
       </div>
     </section>
   );
