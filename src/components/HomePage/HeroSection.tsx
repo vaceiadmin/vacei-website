@@ -105,13 +105,17 @@ const HeroSection = () => {
 
         {/* Right Visual Area */}
         <div
-          className="w-full lg:w-[42%] relative flex justify-center items-center"
+          className="w-full lg:w-[48%] relative flex justify-center items-center mt-12 lg:mt-0"
         >
           {/* Backdrop Glows */}
           <div className="absolute -inset-10 bg-primary-blue/10 blur-[100px] rounded-full opacity-40 animate-pulse pointer-events-none" />
 
           <div
-            className="relative w-full aspect-[16/11.5] rounded-3xl overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.8)] border border-white/10 group bg-[#0a0a1a]"
+            className="relative w-full aspect-[16/11.5] rounded-3xl overflow-hidden shadow-[-40px_40px_100px_-10px_rgba(0,0,0,0.9)] border-y border-r border-white/10 border-l-[3px] border-l-white/20 group bg-[#0a0a1a] transition-all duration-[1.5s] hover:scale-105"
+            style={{ 
+              transform: "perspective(1400px) rotateY(-24deg) rotateX(8deg) scale(1.1)",
+              transformStyle: "preserve-3d",
+            }}
           >
             <div className="relative h-full w-full">
               {/* Browser Bar Mockup */}
