@@ -1,41 +1,28 @@
 "use client"
 
 import React, { useState, useRef } from "react"
-import { getServiceForm, SERVICE_TYPE_OPTIONS, type ServiceField } from "@/data/serviceRequestForms"
-import { useIsSafari } from "@/hooks/use-safari"
-import { usePerformance } from "@/contexts/ReduceMotionContext"
+import { SERVICE_TYPE_OPTIONS } from "@/data/serviceRequestForms"
 import { cn } from "@/lib/utils"
 
-
-// --- Types ---
 type FormData = {
   name: string
   email: string
   message: string
-  service: string
-  companyStage: string
-  companyName: string
-  jurisdiction: string
-  documentStatus: string
-  uploadFiles: FileList | null
-  uploadMethod: string
+  service: string[]
+  additionalDetails: string
   communicationChannel: string
   updateCadence: string
   phone: string
-  complianceReminders: string
-  recordAccess: string
 }
 
 type FormField = {
   key: keyof FormData
   label: string
   placeholder?: string
-  type: "text" | "email" | "textarea" | "select" | "file"
+  type: "text" | "email" | "textarea" | "select" | "multiselect"
   autoComplete?: string
   options?: string[]
   rows?: number
-  accept?: string
-  multiple?: boolean
 }
 
 type FormStep = {
@@ -46,7 +33,6 @@ type FormStep = {
   subtitle?: string
 }
 
-// --- Data ---
 const formSteps: FormStep[] = [
   {
     id: "request",
@@ -62,28 +48,22 @@ const formSteps: FormStep[] = [
   {
     id: "onboarding",
     title: "Project Scope",
-    subtitle: "Choose the type of service you need",
+    subtitle: "Choose the services you need",
     fields: [
       {
         key: "service",
-        label: "Service Type",
-        placeholder: "Select service",
-        type: "select",
+        label: "Service Types",
+        placeholder: "Select services",
+        type: "multiselect",
         options: SERVICE_TYPE_OPTIONS.map((o) => o.value),
       },
-      { key: "companyStage", label: "Current Stage", placeholder: "Select stage", type: "select", options: ["Idea Phase", "Startup", "Scale-up", "Enterprise"] },
-      { key: "companyName", label: "Company name (optional)", placeholder: "e.g. Acme Ltd", type: "text" },
-      { key: "jurisdiction", label: "Jurisdiction (optional)", placeholder: "e.g. Malta", type: "text" },
-    ],
-    primaryLabel: "Next Step",
-  },
-  {
-    id: "documents",
-    title: "Documentation",
-    subtitle: "Do you have files ready?",
-    fields: [
-      { key: "documentStatus", label: "Readiness", placeholder: "Select Status", type: "select", options: ["Ready to Upload", "Need Guidance", "Not Yet"] },
-      { key: "uploadFiles", label: "Attach Files", type: "file", accept: ".pdf,.jpg,.png,.doc,.docx", multiple: true },
+      {
+        key: "additionalDetails",
+        label: "Additional details (optional)",
+        placeholder: "Any specific requirements...",
+        type: "textarea",
+        rows: 4
+      }
     ],
     primaryLabel: "Next Step",
   },
@@ -103,21 +83,8 @@ const formSteps: FormStep[] = [
 const processSteps = [
   { title: "Define", description: "Request a quote and define your scope." },
   { title: "Onboard", description: "We align on goals, timelines, and details." },
-  { title: "Upload", description: "Securely submit documents to your portal." },
   { title: "Execute", description: "We do the work while keeping you in the loop." },
 ]
-
-// --- Component ---
-// Helper: should we show this service field based on showWhen?
-function shouldShowServiceField(
-  field: ServiceField,
-  serviceDetails: Record<string, string | string[] | number>
-): boolean {
-  if (!field.showWhen) return true
-  const val = serviceDetails[field.showWhen.field]
-  if (Array.isArray(val)) return field.showWhen.oneOf.some((o) => val.includes(o))
-  return field.showWhen.oneOf.includes(String(val ?? ""))
-}
 
 const ProcessStepsSectionDark = () => {
   const bgRef = useRef(null)
@@ -127,42 +94,36 @@ const ProcessStepsSectionDark = () => {
     name: "",
     email: "",
     message: "",
-    service: "",
-    companyStage: "",
-    companyName: "",
-    jurisdiction: "",
-    documentStatus: "",
-    uploadFiles: null,
-    uploadMethod: "",
+    service: [],
+    additionalDetails: "",
     communicationChannel: "",
     updateCadence: "",
     phone: "",
-    complianceReminders: "",
-    recordAccess: "",
   })
-  const [serviceDetails, setServiceDetails] = useState<Record<string, string | string[] | number>>({})
+  
   const [error, setError] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [direction, setDirection] = useState(0)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [openSelectKey, setOpenSelectKey] = useState<string | null>(null)
-  const isSafari = useIsSafari()
-  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance()
-
 
   const step = formSteps[currentStep]
-  const serviceFormConfig = formData.service ? getServiceForm(formData.service) : null
 
   const validateStep = () => {
     for (const field of step.fields) {
-      if (field.key === "uploadFiles" || field.key === "companyName" || field.key === "jurisdiction") continue
-      const val = formData[field.key]
-      if (!val || (typeof val === "string" && !val.trim())) return `${field.label} is required.`
-      if (field.key === "email" && typeof val === "string" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return "Invalid email address."
+      if (field.key === "additionalDetails") continue 
+
+      if (field.type === "multiselect") {
+        const val = formData[field.key] as string[]
+        if (!val || val.length === 0) return `${field.label} is required.`
+      } else {
+        const val = formData[field.key]
+        if (!val || (typeof val === "string" && !val.trim())) return `${field.label} is required.`
+        if (field.key === "email" && typeof val === "string" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return "Invalid email address."
+      }
     }
 
-    // Additional conditional validation: phone is required when communication is not Email
     if (
       step.id === "preferences" &&
       formData.communicationChannel &&
@@ -175,29 +136,11 @@ const ProcessStepsSectionDark = () => {
     return ""
   }
 
-  const validateServiceDetails = (): string => {
-    if (!serviceFormConfig) return ""
-    for (const f of serviceFormConfig.fields) {
-      if (!f.required) continue
-      if (!shouldShowServiceField(f, serviceDetails)) continue
-      const val = serviceDetails[f.key]
-      if (val === undefined || val === "" || (Array.isArray(val) && val.length === 0)) return `${f.label} is required.`
-    }
-    return ""
-  }
-
   const handleNext = () => {
     const msg = validateStep()
     if (msg) {
       setError(msg)
       return
-    }
-    if (step.id === "onboarding" && formData.service) {
-      const serviceMsg = validateServiceDetails()
-      if (serviceMsg) {
-        setError(serviceMsg)
-        return
-      }
     }
     setError("")
     setDirection(1)
@@ -222,40 +165,17 @@ const ProcessStepsSectionDark = () => {
       setError(msg)
       return
     }
-    if (formData.service) {
-      const serviceMsg = validateServiceDetails()
-      if (serviceMsg) {
-        setError(serviceMsg)
-        return
-      }
-    }
+    
     setError("")
     setSubmitError(null)
 
-    const metaServiceDetails: Record<string, unknown> = {}
-    if (serviceFormConfig) {
-      for (const f of serviceFormConfig.fields) {
-        const v = serviceDetails[f.key]
-        if (v === undefined || v === "") continue
-        if (Array.isArray(v) && v.length === 0) continue
-        metaServiceDetails[f.key] = v
-      }
-    }
-
     try {
-      // Use multipart form data so uploads can be sent as attachments
       const payloadMeta = {
-        service: formData.service,
-        companyStage: formData.companyStage,
-        companyName: formData.companyName || undefined,
-        jurisdiction: formData.jurisdiction || undefined,
-        documentStatus: formData.documentStatus,
+        services: formData.service,
+        additionalDetails: formData.additionalDetails || undefined,
         communicationChannel: formData.communicationChannel,
         updateCadence: formData.updateCadence,
         phone: formData.phone || undefined,
-        serviceDetails: Object.keys(metaServiceDetails).length
-          ? metaServiceDetails
-          : undefined,
       }
 
       const form = new FormData()
@@ -264,12 +184,6 @@ const ProcessStepsSectionDark = () => {
       form.append("subject", "Homepage quote / project request")
       form.append("message", formData.message)
       form.append("metaJson", JSON.stringify(payloadMeta))
-
-      if (formData.uploadFiles && formData.uploadFiles.length > 0) {
-        Array.from(formData.uploadFiles).forEach((file) => {
-          form.append("files", file)
-        })
-      }
 
       setIsSubmitting(true)
 
@@ -290,23 +204,9 @@ const ProcessStepsSectionDark = () => {
     }
   }
 
-  const handleChange = (key: keyof FormData, value: string | FileList | null) => {
+  const handleChange = (key: keyof FormData, value: string | string[]) => {
     setFormData((prev) => ({ ...prev, [key]: value }))
     if (error) setError("")
-  }
-
-  const handleServiceDetailChange = (key: string, value: string | string[] | number) => {
-    setServiceDetails((prev) => ({ ...prev, [key]: value }))
-    if (error) setError("")
-  }
-
-  const toggleMulticheck = (key: string, optionValue: string) => {
-    const current = (serviceDetails[key] as string[] | undefined) ?? []
-    const arr = Array.isArray(current) ? [...current] : []
-    const idx = arr.indexOf(optionValue)
-    if (idx >= 0) arr.splice(idx, 1)
-    else arr.push(optionValue)
-    handleServiceDetailChange(key, arr)
   }
 
   return (
@@ -371,8 +271,9 @@ const ProcessStepsSectionDark = () => {
                           {step.fields.map((field) => (
                             <div key={field.key} className="space-y-2">
                               <label className="text-sm font-bold text-slate-300 block ml-1">
-                                {field.label}
+                                {field.label} {field.key === "additionalDetails" ? "" : <span className="text-red-400">*</span>}
                               </label>
+                              
                               {field.type === "select" ? (
                                 <div className="relative">
                                   <button
@@ -389,21 +290,86 @@ const ProcessStepsSectionDark = () => {
                                   </button>
 
                                   {openSelectKey === field.key && (
-                                    <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#15162d] shadow-2xl py-2">
-                                      {field.options?.map((opt) => (
-                                        <button
-                                          key={opt}
-                                          type="button"
-                                          onClick={() => { handleChange(field.key, opt); setOpenSelectKey(null); }}
-                                          className={cn(
-                                            "flex w-full px-5 py-3 text-sm font-medium transition-colors",
-                                            (formData[field.key] as string) === opt ? "bg-primary-blue/20 text-white" : "text-slate-300 hover:bg-white/5"
-                                          )}
-                                        >
-                                          {opt}
-                                        </button>
-                                      ))}
-                                    </div>
+                                    <>
+                                      <div className="fixed inset-0 z-20" onClick={() => setOpenSelectKey(null)} />
+                                      <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#15162d] shadow-2xl py-2">
+                                        {field.options?.map((opt) => (
+                                          <button
+                                            key={opt}
+                                            type="button"
+                                            onClick={() => { handleChange(field.key, opt); setOpenSelectKey(null); }}
+                                            className={cn(
+                                              "flex w-full px-5 py-3 text-sm font-medium transition-colors",
+                                              (formData[field.key] as string) === opt ? "bg-primary-blue/20 text-white" : "text-slate-300 hover:bg-white/5"
+                                            )}
+                                          >
+                                            {opt}
+                                          </button>
+                                        ))}
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                              ) : field.type === "multiselect" ? (
+                                <div className="relative z-10">
+                                  <button
+                                    type="button"
+                                    onClick={() => setOpenSelectKey((prev) => (prev === field.key ? null : field.key))}
+                                    className="w-full min-h-[56px] py-3 rounded-2xl border border-white/10 bg-white/5 px-5 text-left text-sm font-semibold text-white shadow-sm transition-all hover:border-white/30 focus:outline-none focus:ring-4 focus:ring-primary-blue/20 pr-12 flex flex-wrap gap-2 items-center"
+                                  >
+                                    {(formData[field.key] as string[]).length > 0 ? (
+                                      (formData[field.key] as string[]).map((selected) => (
+                                        <div key={selected} className="bg-primary-blue/20 text-blue-300 px-3 py-1 rounded-full text-xs font-bold border border-primary-blue/30 flex items-center gap-1 z-20">
+                                          {selected}
+                                          <div 
+                                            className="w-4 h-4 rounded-full hover:bg-primary-blue/40 inline-flex items-center justify-center cursor-pointer transition-colors"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              const arr = formData[field.key] as string[];
+                                              handleChange(field.key, arr.filter(x => x !== selected));
+                                            }}
+                                          >
+                                            <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                                          </div>
+                                        </div>
+                                      ))
+                                    ) : (
+                                      <span className="text-slate-500">{field.placeholder}</span>
+                                    )}
+                                    <span className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500">
+                                      <svg className={cn("w-5 h-5 transition-transform", openSelectKey === field.key && "rotate-180")} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                                    </span>
+                                  </button>
+
+                                  {openSelectKey === field.key && (
+                                    <>
+                                      <div className="fixed inset-0 z-[19]" onClick={() => setOpenSelectKey(null)} />
+                                      <div className="absolute z-[30] mt-2 w-full max-h-[300px] overflow-y-auto rounded-2xl border border-white/10 bg-[#15162d] shadow-2xl py-2">
+                                        {field.options?.map((opt) => {
+                                          const isSelected = (formData[field.key] as string[]).includes(opt);
+                                          return (
+                                            <button
+                                              key={opt}
+                                              type="button"
+                                              onClick={(e) => {
+                                                e.preventDefault();
+                                                const arr = formData[field.key] as string[];
+                                                handleChange(field.key, isSelected ? arr.filter(x => x !== opt) : [...arr, opt]);
+                                              }}
+                                              className={cn(
+                                                "flex w-full items-center justify-between px-5 py-3 text-sm font-medium transition-colors",
+                                                isSelected ? "bg-primary-blue/20 text-white" : "text-slate-300 hover:bg-white/5"
+                                              )}
+                                            >
+                                              <span>{opt}</span>
+                                              {isSelected && (
+                                                <svg className="w-4 h-4 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                                              )}
+                                            </button>
+                                          )
+                                        })}
+                                      </div>
+                                    </>
                                   )}
                                 </div>
                               ) : field.type === "textarea" ? (
@@ -414,25 +380,6 @@ const ProcessStepsSectionDark = () => {
                                   rows={field.rows}
                                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-500 focus:outline-none focus:ring-4 focus:ring-primary-blue/20 focus:border-primary-blue/50 transition-all font-medium min-h-[100px] resize-none"
                                 />
-                              ) : field.type === "file" ? (
-                                <div className="relative overflow-hidden bg-white/5 border-2 border-dashed border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-primary-blue/50 transition-all group/file cursor-pointer">
-                                  <input
-                                    type="file"
-                                    multiple={field.multiple}
-                                    accept={field.accept}
-                                    onChange={(e) => handleChange(field.key, e.target.files)}
-                                    className="absolute inset-0 opacity-0 cursor-pointer z-20"
-                                  />
-                                  <div className="relative z-10">
-                                    <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center shadow-sm text-primary-blue mx-auto mb-3 border border-white/10 group-hover/file:scale-110 transition-transform">
-                                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                                    </div>
-                                    <p className="text-sm font-bold text-slate-200">
-                                      {formData.uploadFiles?.length ? `${formData.uploadFiles.length} files selected` : field.label}
-                                    </p>
-                                    <p className="text-xs text-slate-500 mt-1">PDF, JPG, PNG, DOC (Max 25MB)</p>
-                                  </div>
-                                </div>
                               ) : (
                                 <input
                                   type={field.type}
@@ -445,83 +392,6 @@ const ProcessStepsSectionDark = () => {
                             </div>
                           ))}
 
-                          {step.id === "onboarding" && serviceFormConfig && (
-                            <div className="mt-8 pt-8 border-t border-white/10 space-y-6">
-                              <div className="bg-primary-blue/10 p-4 rounded-xl border border-primary-blue/20">
-                                <h4 className="text-sm font-black text-blue-300 uppercase tracking-widest mb-1">
-                                  {serviceFormConfig.label}
-                                </h4>
-                                <p className="text-xs text-blue-200 font-medium opacity-80">{serviceFormConfig.purpose}</p>
-                              </div>
-
-                              {serviceFormConfig.fields
-                                .filter((f) => shouldShowServiceField(f, serviceDetails))
-                                .map((f) => (
-                                  <div key={f.key} className="space-y-2">
-                                    <label className="text-sm font-bold text-slate-300 block ml-1">
-                                      {f.label} {f.required && <span className="text-red-400">*</span>}
-                                    </label>
-                                    {f.type === "radio" && (
-                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        {f.options?.map((opt) => (
-                                          <button
-                                            key={opt.value}
-                                            type="button"
-                                            onClick={() => handleServiceDetailChange(f.key, opt.value)}
-                                            className={cn(
-                                              "text-sm rounded-xl px-4 py-3 text-left border font-semibold transition-all",
-                                              (serviceDetails[f.key] as string) === opt.value
-                                                ? "bg-primary-blue text-white border-primary-blue shadow-lg shadow-primary-blue/20"
-                                                : "bg-white/5 text-slate-300 border-white/10 hover:border-white/30"
-                                            )}
-                                          >
-                                            {opt.label}
-                                          </button>
-                                        ))}
-                                      </div>
-                                    )}
-                                    {f.type === "multicheck" && (
-                                      <div className="flex flex-wrap gap-2">
-                                        {f.options?.map((opt) => {
-                                          const checked = (serviceDetails[f.key] as string[] ?? []).includes(opt.value);
-                                          return (
-                                            <button
-                                              key={opt.value}
-                                              type="button"
-                                              onClick={() => toggleMulticheck(f.key, opt.value)}
-                                              className={cn(
-                                                "text-xs font-bold rounded-full px-4 py-2 border transition-all",
-                                                checked ? "bg-primary-blue text-white border-primary-blue" : "bg-white/5 text-slate-400 border-white/10 hover:border-white/30"
-                                              )}
-                                            >
-                                              {opt.label}
-                                            </button>
-                                          )
-                                        })}
-                                      </div>
-                                    )}
-                                    {(["text", "number", "date"].includes(f.type)) && (
-                                      <input
-                                        type={f.type}
-                                        value={(serviceDetails[f.key] as any) ?? ""}
-                                        onChange={(e) => handleServiceDetailChange(f.key, f.type === 'number' ? Number(e.target.value) : e.target.value)}
-                                        placeholder={f.placeholder}
-                                        className="w-full h-12 bg-white/5 border border-white/10 rounded-xl px-4 text-white focus:outline-none focus:ring-4 focus:ring-primary-blue/20 focus:border-primary-blue/50 transition-all text-sm font-medium"
-                                      />
-                                    )}
-                                    {f.type === "textarea" && (
-                                      <textarea
-                                        rows={3}
-                                        value={(serviceDetails[f.key] as string) ?? ""}
-                                        onChange={(e) => handleServiceDetailChange(f.key, e.target.value)}
-                                        placeholder={f.placeholder}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-4 focus:ring-primary-blue/20 focus:border-primary-blue/50 transition-all text-sm font-medium resize-none"
-                                      />
-                                    )}
-                                  </div>
-                                ))}
-                            </div>
-                          )}
                         </div>
                       </div>
 
@@ -531,42 +401,62 @@ const ProcessStepsSectionDark = () => {
                           <p className="text-sm font-bold text-red-400">{error}</p>
                         </div>
                       )}
+                      
+                      {submitError && (
+                        <div className="mt-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3">
+                          <div className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center text-red-500 shrink-0 uppercase font-black text-[10px]">!</div>
+                          <p className="text-sm font-bold text-red-400">{submitError}</p>
+                        </div>
+                      )}
 
-                      <div className="mt-10 flex items-center gap-4">
-                        {currentStep > 0 && (
+                      <div className="mt-10 flex flex-col gap-4">
+                        <div className="flex items-center gap-4 w-full">
+                          {currentStep > 0 && (
+                            <button
+                              type="button"
+                              onClick={handleBack}
+                              className="h-14 px-8 rounded-2xl font-black text-slate-500 hover:text-white hover:bg-white/10 transition-all tracking-widest uppercase text-xs"
+                            >
+                              Back
+                            </button>
+                          )}
                           <button
-                            type="button"
-                            onClick={handleBack}
-                            className="h-14 px-8 rounded-2xl font-black text-slate-500 hover:text-white hover:bg-white/10 transition-all tracking-widest uppercase text-xs"
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="grow h-14 rounded-2xl bg-white text-[#050510] font-black uppercase tracking-widest text-xs shadow-xl shadow-white/10 transition-all hover:bg-slate-200 active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
                           >
-                            Back
+                            {isSubmitting && <div className="w-4 h-4 border-2 border-[#050510]/20 border-t-[#050510] rounded-full animate-spin" />}
+                            {isSubmitting ? "Processing..." : (step.primaryLabel || "Next Step")}
                           </button>
-                        )}
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="grow h-14 rounded-2xl bg-white text-[#050510] font-black uppercase tracking-widest text-xs shadow-xl shadow-white/10 transition-all hover:bg-slate-200 active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
-                        >
-                          {isSubmitting && <div className="w-4 h-4 border-2 border-[#050510]/20 border-t-[#050510] rounded-full animate-spin" />}
-                          {isSubmitting ? "Processing..." : (step.primaryLabel || "Next Step")}
-                        </button>
+                        </div>
+                        
+
                       </div>
                     </form>
                   ) : (
-                    <div className="flex flex-col items-center justify-center min-h-[520px] text-center p-6">
+                    <div className="flex flex-col items-center justify-center min-h-[520px] text-center p-6 lg:p-10">
                       <div className="w-24 h-24 bg-green-500/10 rounded-[2rem] flex items-center justify-center text-green-400 mb-8 shadow-inner border border-green-500/20">
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                       </div>
                       <h3 className="text-4xl font-black text-white mb-4 tracking-tight">Request Received</h3>
-                      <p className="text-slate-400 font-medium max-w-sm mb-12">
+                      <p className="text-slate-400 font-medium max-w-sm mx-auto mb-10">
                         We've received your request. Our team will review the details and get back to you within 24 hours.
                       </p>
-                      <button
-                        onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: "", companyStage: "", companyName: "", jurisdiction: "", documentStatus: "", uploadFiles: null, uploadMethod: "", communicationChannel: "", updateCadence: "", phone: "", complianceReminders: "", recordAccess: "" }); setServiceDetails({}); }}
-                        className="h-14 px-10 rounded-2xl bg-white text-[#050510] font-black uppercase tracking-widest text-xs transition-all hover:bg-slate-200"
-                      >
-                        Start New Request
-                      </button>
+                      
+                      <div className="flex flex-col sm:flex-row gap-4 w-full">
+                        <button
+                          onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: [], additionalDetails: "", communicationChannel: "", updateCadence: "", phone: "" }); }}
+                          className="flex-1 h-14 rounded-2xl bg-white/5 text-white border border-white/10 font-bold tracking-wide text-sm transition-all hover:bg-white/10"
+                        >
+                          New Request
+                        </button>
+                        <a 
+                          href="https://devclient.vacei.com/onboarding" 
+                          className="flex-1 flex items-center justify-center h-14 rounded-2xl bg-white text-[#050510] font-bold tracking-wide text-sm shadow-xl shadow-white/10 transition-all hover:bg-slate-200"
+                        >
+                          Register Now
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -647,6 +537,19 @@ const ProcessStepsSectionDark = () => {
                 </p>
               </div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary-blue/20 rounded-full -mr-16 -mt-16 blur-2xl" />
+            </div>
+
+            <div className="mt-6">
+              <a 
+                href="https://devclient.vacei.com/onboarding" 
+                className="group relative flex w-full items-center justify-center h-16 rounded-[1.5rem] bg-[#15162d] border border-white/10 text-white font-black tracking-wide text-sm transition-all hover:bg-white/5 hover:border-primary-blue/50 overflow-hidden shadow-lg"
+              >
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-blue/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative z-10 uppercase flex items-center gap-3">
+                  Register Directly
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </span>
+              </a>
             </div>
           </div>
         </div>

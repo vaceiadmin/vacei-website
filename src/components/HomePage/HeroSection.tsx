@@ -1,128 +1,135 @@
-import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useRef } from "react";
 import Link from "next/link";
-import TextAnimation from "../common/TextAnimation";
-import GradientContainer from "../common/GradientContainer";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
-import { useDirectionalInView } from "@/hooks/use-directional-in-view";
-import { useIsSafari } from "@/hooks/use-safari";
-import { cn } from "@/lib/utils";
-import { ArrowRight, Sparkles, MoveRight } from "lucide-react";
 
 const HeroSection = () => {
-  const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
-  const isSafari = useIsSafari();
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useDirectionalInView(sectionRef);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    // No-op for static rendering
-  };
-
-  const handleMouseLeave = () => {
-    // No-op for static rendering
-  };
-
+  const { reduceMotion } = usePerformance();
 
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative w-full overflow-hidden bg-[#050510] min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-38"
-    >
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/images/IMG_3843.PNG"
-          alt="Hero Background"
-          layout="fill"
-          objectFit="cover"
+    <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-24 overflow-hidden bg-[#0A0A0F]">
 
+      {/* Background patterns */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex justify-between">
+        {/* Left dot pattern */}
+        <div
+          className="absolute left-0 top-0 bottom-0 w-[400px] opacity-[0.15]"
+          style={{
+            backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+            maskImage: 'linear-gradient(to right, black, transparent)'
+          }}
         />
-        {/* Subtle Overlay to blend the top and bottom */}
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/40 via-transparent to-[#050510]/80 pointer-events-none" /> */}
+        {/* Right dot pattern */}
+        <div
+          className="absolute right-0 top-0 bottom-0 w-[400px] opacity-[0.15]"
+          style={{
+            backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+            maskImage: 'linear-gradient(to left, black, transparent)'
+          }}
+        />
+        {/* Ambient Left Glow */}
+        <div className="absolute top-1/4 -left-[10%] w-[600px] h-[600px] bg-primary-blue/20 rounded-full blur-[140px]" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
 
         {/* Left Content Area */}
-        <div className="w-full lg:w-[52%] flex flex-col items-start text-left relative z-20">
-          {/* Tagline/Metadata */}
-
-
-          {/* Headline */}
+        <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
           <div className="relative mb-6">
-            <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold text-white leading-[1.1] tracking-tight">
-              One Workspace for Your Business and
+            <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.05] tracking-tight">
+              Receive Proposals. <br />
+              Choose Your Advisors. <br />
+              <span className="text-primary-blue">Manage Everything.</span>
             </h1>
-            <span className="block text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-primary-blue via-blue-400 to-indigo-400 bg-clip-text text-transparent leading-[1.2]">
-              All Your Advisors
-            </span>
           </div>
 
-          {/* Subheadline & Description */}
-          <div className="space-y-6 max-w-xl">
-            <p className="text-slate-400 text-base sm:text-lg leading-relaxed text-balance">
-              Manage accounting, audit, legal, and corporate services on one secure platform. Invite your advisors or connect with trusted VACEI partner firms. Get full visibility of documents, deadlines, filings, and engagements.
+          <div className="space-y-6 max-w-xl mt-4">
+            <p className="text-gray-400 text-base sm:text-lg leading-relaxed text-balance font-medium">
+              Submit one request — receive proposals from verified firms, and manage compliance, documents, and workflows in one platform.
             </p>
           </div>
 
-          {/* Supporting Text */}
-          <div className="mt-8 border-l-2 border-primary-blue/30 pl-5 py-1">
-            <p className="text-sm sm:text-base text-slate-300/80 italic leading-relaxed">
-              Everything happens in one structured workspace — no scattered emails, no lost documents, no uncertainty.
+          <div className="mt-8 border-l-2 border-primary-blue/40 pl-5 py-2">
+            <p className="text-sm sm:text-[15px] text-gray-500 italic leading-relaxed font-medium">
+              From onboarding to compliance — everything in one workspace
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto mt-12 mb-8">
-            <Link
-              href="/portal/client-portal"
-              className="group relative flex items-center justify-center gap-2 rounded-full bg-white text-slate-900 px-8 py-4 text-base font-bold shadow-xl transition-all duration-300 hover:shadow-primary-blue/40 hover:-translate-y-1 active:scale-95 overflow-hidden"
-            >
-              <span className="relative z-10 font-bold">I Have a Company</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Link>
-
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-12 mb-8">
             <Link
               href="/quote"
-              className="group flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-8 py-4 text-base font-semibold transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:-translate-y-1 active:scale-95 backdrop-blur-sm shadow-lg hover:shadow-primary-blue/10"
+              className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-gray-200 text-slate-900 px-8 py-3.5 text-[15px] font-bold shadow-[0_4px_14px_rgba(255,255,255,0.1)] transition-all hover:scale-105"
             >
-              <span>Start a New Company</span>
-              <MoveRight className="w-4 h-4 text-primary-blue transition-transform group-hover:translate-x-1" />
+              <span>Get Proposals Now</span>
+              <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
             </Link>
-          </div>
 
-          {/* Bottom mini-line */}
-          <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-500">
-            <p>Already working with an accountant, auditor or lawyer?</p>
-            <Link href="/contact" className="text-primary-blue font-medium hover:text-white transition-colors border-b border-primary-blue/30 hover:border-white">
-              Invite them to your workspace.
+            <Link
+              href="/contact"
+              className="group flex items-center justify-center gap-2 rounded-full border border-gray-700 bg-[#0A0A0F]/50 text-white px-8 py-3.5 text-[15px] font-medium transition-all hover:bg-white/5 hover:border-gray-500 hover:scale-105"
+            >
+              <span>Book a Demo</span>
+              <ArrowRight className="w-4 h-4 ml-1 text-primary-blue transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
 
         {/* Right Visual Area */}
-        <div className="w-full lg:w-[48%] relative flex justify-center items-center mt-12 lg:mt-0">
-          {/* Backdrop Glows */}
-          <div className="absolute -inset-10 bg-primary-blue/10 blur-[100px] rounded-full opacity-40 animate-pulse pointer-events-none" />
+        <div className="w-full lg:w-[50%] relative flex justify-center items-center mt-12 lg:mt-0">
+          <div className="relative w-full max-w-[650px] mx-auto">
 
-          {/* New Pre-slanted Image Container with Reflection */}
-          <div 
-            className="relative w-full max-w-[650px] mx-auto transition-transform duration-[1.5s] hover:scale-105"
-            style={{ 
-              WebkitBoxReflect: "below -10px linear-gradient(transparent, transparent 50%, rgba(255,255,255,0.3))"
-            }}
-          >
-             <Image
-                src="/assets/images/ChatGPT Image Mar 19, 2026, 11_43_32 PM.png"
-                alt="VACEI platform interface"
-                width={800}
-                height={600}
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                unoptimized
-              />
+            {/* Main Browser Window Wrapper */}
+            <div className="relative rounded-2xl overflow-hidden bg-[#1D1E30] border border-white/10 shadow-2xl z-10 transition-transform duration-700 hover:scale-[1.02]">
+
+              {/* Browser Header */}
+              <div className="h-10 w-full bg-[#181926] border-b border-white/5 flex items-center px-4 justify-between relative">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                </div>
+                <div className="absolute left-1/2 -translate-x-1/2 bg-black/20 px-6 py-1 rounded-md flex items-center justify-center">
+                  <span className="text-[10px] text-white/40 tracking-widest font-mono">vacei.com</span>
+                </div>
+              </div>
+
+              {/* Video Player */}
+              <div className="relative w-full aspect-video bg-[#0A0A0F]">
+                <video
+                  src="/assets/videos/Hero_Banner_v1 (1) (1).mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Interactive Platform Overview Badge */}
+                {/* <div className="absolute bottom-4 left-4 sm:w-[280px] p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-between shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary-blue/30 flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-white text-[11px] font-semibold tracking-wide">Interactive Platform Overview</span>
+                  </div>
+                  <div className="h-1 w-12 bg-white/10 rounded-full overflow-hidden ml-4">
+                    <div className="h-full w-2/3 bg-primary-blue" />
+                  </div>
+                </div> */}
+              </div>
+
+            </div>
+
+            {/* Glowing circle floating element top-right outside */}
+            <div className="absolute -top-4 -right-4 w-14 h-14 bg-[#181926] rounded-2xl border border-white/10 flex items-center justify-center shadow-2xl z-20 hidden sm:flex">
+              <div className="w-6 h-6 rounded-full border-2 border-primary-blue border-r-transparent animate-spin" />
+            </div>
+
+            {/* Abstract glow behind the window */}
+            <div className="absolute inset-0 bg-primary-blue/20 blur-[80px] -z-10 rounded-full scale-100" />
+
           </div>
         </div>
       </div>
