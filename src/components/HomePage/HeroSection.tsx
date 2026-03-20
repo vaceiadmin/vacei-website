@@ -81,7 +81,7 @@ const HeroSection = () => {
               {/* Video Player */}
               <div className="relative w-full aspect-video bg-[#0A0A0F]">
                 <video
-                  src="/assets/videos/Hero_Banner_v1 (1) (1).mp4"
+                  src="/assets/videos/hero-banner-v1.mp4"
                   autoPlay
                   loop
                   muted
