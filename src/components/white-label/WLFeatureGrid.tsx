@@ -31,7 +31,7 @@ const WLFeatureGrid: React.FC<WLFeatureGridProps> = ({
   };
 
   return (
-    <section className="py-16 bg-white/50 relative overflow-hidden">
+    <section className="py-16 bg-[#FAFBFF] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {(sectionTitle || sectionSubtitle) && (
           <div className="text-center mb-20 space-y-4">
@@ -75,7 +75,7 @@ const WLFeatureGrid: React.FC<WLFeatureGridProps> = ({
                 {/* Decorative background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/5 to-purple-bg/5 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl" />
                 
-                <div className="relative h-full p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm group-hover:!bg-primary-blue hover:shadow-2xl hover:shadow-primary-blue/30 hover:border-primary-blue/30 transition-all duration-500 flex flex-col items-start overflow-hidden">
+                <div className="relative h-full p-10 bg-white border border-gray-200/80 rounded-[2.5rem] shadow-xl shadow-gray-200/40 group-hover:!bg-primary-blue hover:shadow-2xl hover:shadow-primary-blue/30 hover:border-primary-blue/30 transition-all duration-500 flex flex-col items-start overflow-hidden">
                   {/* Subtle Gradient Accent */}
                   <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-primary-blue/40 to-transparent group-hover:from-white/40 transition-all" />
                   

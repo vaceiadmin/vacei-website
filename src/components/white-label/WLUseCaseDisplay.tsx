@@ -22,7 +22,7 @@ const WLUseCaseDisplay: React.FC<WLUseCaseDisplayProps> = ({
   items,
 }) => {
   return (
-    <section className="py-16 bg-transparent relative overflow-hidden">
+    <section className="py-16 bg-[#FAFBFF] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 space-y-4">
            {sectionSubtitle && (
@@ -57,7 +57,7 @@ const WLUseCaseDisplay: React.FC<WLUseCaseDisplayProps> = ({
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group relative"
               >
-                <div className="relative h-full p-10 bg-gray-50/50 rounded-[2.5rem] border border-gray-100 group-hover:!bg-primary-blue group-hover:!border-primary-blue transition-all duration-500 flex flex-col items-start min-h-[340px]">
+                <div className="relative h-full p-10 bg-white rounded-[2.5rem] border border-gray-200 shadow-lg shadow-gray-200/40 group-hover:!bg-primary-blue group-hover:!border-primary-blue transition-all duration-500 flex flex-col items-start min-h-[340px]">
                   
                   {Icon && (
                     <div className="w-16 h-16 mb-10 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary-blue group-hover:!bg-white/20 group-hover:!text-white group-hover:!border-white/30 group-hover:scale-110 transition-all duration-500">

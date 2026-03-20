@@ -25,7 +25,7 @@ const WLProcess: React.FC<WLProcessProps> = ({
   highlightWord = "Works"
 }) => {
   return (
-    <section className="py-20 bg-transparent relative overflow-hidden">
+    <section className="py-20 bg-[#F8F9FC] relative overflow-hidden">
       {/* Abstract Background Decoration */}
       <div className="absolute top-0 right-0 w-[800px] h-full opacity-[0.03] pointer-events-none -z-10 bg-[url('/assets/images/grid-pattern.png')] bg-repeat" />
 
@@ -73,7 +73,7 @@ const WLProcess: React.FC<WLProcessProps> = ({
                 >
                   {/* Glowing Node */}
                   <div className="relative z-10 shrink-0 hidden sm:block">
-                    <div className="w-20 h-20 rounded-3xl bg-white border border-gray-100 flex items-center justify-center text-2xl font-black text-primary-blue shadow-2xl group-hover:scale-110 group-hover:!bg-primary-blue group-hover:!text-white group-hover:shadow-[0_15px_30px_rgba(59,73,230,0.2)] transition-all duration-500">
+                    <div className="w-20 h-20 rounded-3xl bg-white border border-gray-200 flex items-center justify-center text-2xl font-black text-primary-blue shadow-xl shadow-gray-200/50 group-hover:scale-110 group-hover:!bg-primary-blue group-hover:!text-white group-hover:shadow-[0_15px_30px_rgba(59,73,230,0.2)] transition-all duration-500">
                       0{index + 1}
                     </div>
                     <div className="absolute -inset-2 bg-primary-blue opacity-0 group-hover:opacity-10 blur-xl rounded-full scale-0 group-hover:scale-100 transition-all duration-500" />
@@ -84,7 +84,7 @@ const WLProcess: React.FC<WLProcessProps> = ({
                       {step.title}
                     </h3>
                     {step.description && (
-                      <p className="text-lg text-gray/70 leading-relaxed font-medium bg-white/40 p-4 rounded-xl backdrop-blur-sm border border-transparent group-hover:bg-white group-hover:border-gray-100 group-hover:shadow-lg group-hover:shadow-black/[0.02] transition-all duration-500">
+                      <p className="text-lg text-gray/70 leading-relaxed font-medium bg-white p-5 rounded-xl backdrop-blur-sm border border-gray-200 shadow-lg shadow-gray-200/40 group-hover:border-primary-blue/20 transition-all duration-500">
                         {step.description}
                       </p>
                     )}

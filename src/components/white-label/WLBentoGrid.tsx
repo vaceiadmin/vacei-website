@@ -23,7 +23,7 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
 }) => {
   // Balanced layout for 5 items: 2 wide on top, 3 smaller on bottom
   return (
-    <section className="py-16 bg-transparent relative overflow-hidden">
+    <section className="py-16 bg-[#F8F9FC] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 space-y-4">
           {sectionSubtitle && (
@@ -69,7 +69,7 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
                 whileHover={{ y: -5 }}
                 className={`${spans[index % spans.length]} relative group`}
               >
-                <div className="relative h-full p-10 bg-gray-50/50 border border-gray-100 shadow-lg rounded-[2.5rem] overflow-hidden group-hover:!bg-primary-blue hover:shadow-2xl hover:shadow-primary-blue/30 hover:border-primary-blue/20 transition-all duration-500 flex flex-col min-h-[260px]">
+                <div className="relative h-full p-10 bg-white border border-gray-200 shadow-xl shadow-gray-200/50 rounded-[2.5rem] overflow-hidden group-hover:!bg-primary-blue hover:shadow-2xl hover:shadow-primary-blue/30 hover:border-primary-blue/20 transition-all duration-500 flex flex-col min-h-[260px]">
                   <div className="flex flex-col items-start gap-6 mb-8">
                     {Icon && (
                       <div className="w-16 h-16 shrink-0 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center text-primary-blue group-hover:!bg-white/20 group-hover:!text-white group-hover:!border-white/30 group-hover:scale-110 transition-all duration-500">
