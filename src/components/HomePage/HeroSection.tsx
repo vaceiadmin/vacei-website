@@ -2,38 +2,21 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
+import GradientContainer from "@/components/common/GradientContainer";
 
 const HeroSection = () => {
   const { reduceMotion } = usePerformance();
 
   return (
-    <section className="relative w-full min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-24 overflow-hidden bg-[#0A0A0F]">
-
-      {/* Background patterns */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex justify-between">
-        {/* Left dot pattern */}
-        <div
-          className="absolute left-0 top-0 bottom-0 w-[400px] opacity-[0.15]"
-          style={{
-            backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            maskImage: 'linear-gradient(to right, black, transparent)'
-          }}
-        />
-        {/* Right dot pattern */}
-        <div
-          className="absolute right-0 top-0 bottom-0 w-[400px] opacity-[0.15]"
-          style={{
-            backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            maskImage: 'linear-gradient(to left, black, transparent)'
-          }}
-        />
-        {/* Ambient Left Glow */}
-        <div className="absolute top-1/4 -left-[10%] w-[600px] h-[600px] bg-primary-blue/20 rounded-full blur-[140px]" />
-      </div>
-
-      <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+    <section className="w-full relative">
+      <GradientContainer 
+        backgroundColor="bg-black" 
+        className="relative min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-24 !rounded-none"
+        radialOpacity={0.6}
+        leftPositionClass="-top-[5%] -left-[5%]"
+        rightPositionClass="-bottom-[5%] -right-[5%]"
+      >
+        <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
 
         {/* Left Content Area */}
         <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
@@ -127,12 +110,11 @@ const HeroSection = () => {
               <div className="w-6 h-6 rounded-full border-2 border-primary-blue border-r-transparent animate-spin" />
             </div>
 
-            {/* Abstract glow behind the window */}
-            <div className="absolute inset-0 bg-primary-blue/20 blur-[80px] -z-10 rounded-full scale-100" />
 
           </div>
         </div>
       </div>
+      </GradientContainer>
     </section>
   );
 };
