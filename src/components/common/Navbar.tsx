@@ -387,6 +387,9 @@ const Navbar = () => {
     return null;
   }
 
+  // Keep dynamic dark/light navbar on desktop, force solid white navbar on mobile.
+  const useDarkNavbarTheme = !isMobile && isDarkBackground;
+
   return (
     <>
       <div className="flex justify-center w-full relative z-[60]">
@@ -394,10 +397,13 @@ const Navbar = () => {
           {/* Navbar Container – sleek floating pill layout */}
           <motion.div
             initial={false}
-            className={`relative pointer-events-auto w-full mx-auto rounded-full ${isDarkBackground
-                ? `bg-white/10 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-white/20 text-white`
-                : `bg-white/80 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-gray-200/60 text-text-dark`
-              } shadow-lg shadow-black/5 px-4  sm:px-6 lg:px-8 transition-all duration-300`}
+            className={`relative pointer-events-auto w-full mx-auto rounded-full ${
+              isMobile
+                ? "bg-white border border-gray-200/80 text-text-dark"
+                : useDarkNavbarTheme
+                  ? `bg-white/10 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-white/20 text-white`
+                  : `bg-white/80 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-gray-200/60 text-text-dark`
+            } shadow-lg shadow-black/5 px-4  sm:px-6 lg:px-8 transition-all duration-300`}
           >
             <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
               {/* Logo - smaller on mobile */}
@@ -428,7 +434,7 @@ const Navbar = () => {
                   >
                     <Link
                       href={link.href}
-                      className={`${isDarkBackground ? "text-white" : "text-text-dark"} font-normal text-[15px] ${isDarkBackground ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (isDarkBackground ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
+                      className={`${useDarkNavbarTheme ? "text-white" : "text-text-dark"} font-normal text-[15px] ${useDarkNavbarTheme ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (useDarkNavbarTheme ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
                       onClick={(e) => {
                         if (link.hasDropdown) {
                           e.preventDefault();
@@ -594,7 +600,7 @@ const Navbar = () => {
                   {/* Login Button */}
                   <Link
                     href="/portal/client-portal"
-                    className={`flex items-center justify-center ${isDarkBackground
+                    className={`flex items-center justify-center ${useDarkNavbarTheme
                         ? "text-white/90 hover:text-white"
                         : "text-text-dark/80 hover:text-primary-blue"
                       } font-medium text-[15px] transition-colors px-2`}
@@ -624,20 +630,20 @@ const Navbar = () => {
                 >
                   <motion.div
                     animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
-                    className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`}
+                    className={`h-0.5 ${useDarkNavbarTheme ? "bg-white" : "bg-text-dark"} w-6`}
                   />
                   <motion.div
                     animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
                     className="relative w-6 h-0.5"
                   >
                     <div
-                      className={`absolute left-0 h-full ${isDarkBackground ? "bg-white" : "bg-text-dark"} transition-all duration-300 ease-out`}
+                      className={`absolute left-0 h-full ${useDarkNavbarTheme ? "bg-white" : "bg-text-dark"} transition-all duration-300 ease-out`}
                       style={{ width: !isMobile && hamburgerHover ? 24 : 16.8 }}
                     />
                   </motion.div>
                   <motion.div
                     animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
-                    className={`h-0.5 ${isDarkBackground ? "bg-white" : "bg-text-dark"} w-6`}
+                    className={`h-0.5 ${useDarkNavbarTheme ? "bg-white" : "bg-text-dark"} w-6`}
                   />
                 </button>
               </div>

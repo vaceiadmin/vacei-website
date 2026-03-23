@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 
 const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tryPlay = async () => {
+      try {
+        await video.play();
+      } catch {
+        // Some browsers block initial autoplay; fallback visual remains visible.
+      }
+    };
+
+    tryPlay();
+  }, []);
+
   return (
     <section className="w-full relative">
       <GradientContainer 
@@ -76,14 +95,29 @@ const HeroSection = () => {
               </div>
 
             {/* Video */}
-            <div className="relative w-full aspect-video bg-black">
+            <div className="relative w-full aspect-video bg-black overflow-hidden">
+              <img
+                src="/assets/videos/Main%20Render.gif"
+                alt="VACEI platform preview fallback"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                  isVideoReady && !hasVideoError ? "opacity-0" : "opacity-100"
+                }`}
+              />
               <video
+                ref={videoRef}
                 className="w-full h-full object-cover"
                 autoPlay
                 loop
                 muted
                 playsInline
                 preload="metadata"
+                onLoadedData={() => setIsVideoReady(true)}
+                onCanPlay={() => {
+                  const video = videoRef.current;
+                  if (!video) return;
+                  video.play().catch(() => {});
+                }}
+                onError={() => setHasVideoError(true)}
                 aria-label="VACEI platform preview video"
               >
                 <source src="/assets/videos/hero-banner-v1.mp4" type="video/mp4" />
