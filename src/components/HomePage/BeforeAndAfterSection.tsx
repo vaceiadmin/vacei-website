@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, alt: string, className?: string, isDark?: boolean }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [firstFrameUrl, setFirstFrameUrl] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Dynamically draw the first frame of the GIF to a canvas to use as a static placeholder
@@ -27,11 +28,19 @@ const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, al
     };
   }, [src]);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <div
       className={cn("relative w-full h-full cursor-pointer overflow-hidden group", className)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onClick={() => isMobile && setIsHovered((prev) => !prev)}
     >
       <div className={cn("absolute inset-0 z-0", isDark ? "bg-[#0a0d1d]" : "bg-white")} />
 
@@ -58,12 +67,14 @@ const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, al
         )}
 
         {/* Play Overlay Indicator */}
-        <div className={cn("absolute inset-0 flex items-center justify-center backdrop-blur-[2px] transition-all duration-500 group-hover:opacity-0", isDark ? "bg-black/40" : "bg-white/40")}>
+        <div className={cn("absolute inset-0 flex items-center justify-center backdrop-blur-[2px] transition-all duration-500", !isMobile && "group-hover:opacity-0", isDark ? "bg-black/40" : "bg-white/40")}>
           <div className="flex flex-col items-center justify-center gap-4">
             <div className={cn("w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transform transition-transform duration-500 group-hover:scale-125", isDark ? "bg-blue-600 text-white shadow-blue-500/30" : "bg-white text-blue-600 shadow-[0_10px_30px_rgba(0,0,0,0.1)]")}>
               <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
             </div>
-            <span className={cn("text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg", isDark ? "bg-[#0e1222]/80 border border-white/10 text-white" : "bg-white/80 border border-slate-200 text-slate-800")}>Hover to Play</span>
+            <span className={cn("text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg", isDark ? "bg-[#0e1222]/80 border border-white/10 text-white" : "bg-white/80 border border-slate-200 text-slate-800")}>
+              {isMobile ? "Tap to Play" : "Hover to Play"}
+            </span>
           </div>
         </div>
       </div>
@@ -96,7 +107,7 @@ const BeforeAndAfterSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 w-full h-[600px] sm:h-[650px] items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 w-full h-auto lg:h-[600px] xl:h-[650px] items-stretch">
           
           {/* Card 1: Before */}
           <div className="relative z-10 flex flex-col group/card h-full w-full">
