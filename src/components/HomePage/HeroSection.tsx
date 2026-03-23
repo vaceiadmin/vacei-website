@@ -1,27 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 
 const HeroSection = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasVideoError, setHasVideoError] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const tryPlay = async () => {
-      try {
-        await video.play();
-      } catch {
-        // Some browsers block initial autoplay; fallback visual remains visible.
-      }
-    };
-
-    tryPlay();
-  }, []);
 
   return (
     <section className="w-full relative">
@@ -104,23 +88,18 @@ const HeroSection = () => {
                 }`}
               />
               <video
-                ref={videoRef}
                 className="w-full h-full object-cover"
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="metadata"
-                onLoadedData={() => setIsVideoReady(true)}
-                onCanPlay={() => {
-                  const video = videoRef.current;
-                  if (!video) return;
-                  video.play().catch(() => {});
-                }}
+                preload="none"
+                poster="/assets/videos/Main%20Render.gif"
+                onPlaying={() => setIsVideoReady(true)}
                 onError={() => setHasVideoError(true)}
                 aria-label="VACEI platform preview video"
               >
-                <source src="/assets/videos/hero-banner-v1.mp4" type="video/mp4" />
+                <source src="/assets/videos/hero-banner-v1.mp4?v=20260323" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
