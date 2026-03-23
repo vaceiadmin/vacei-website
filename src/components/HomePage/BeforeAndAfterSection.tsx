@@ -73,10 +73,10 @@ const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, al
 
 const BeforeAndAfterSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-[#FAFBFF] relative overflow-hidden">
+    <section className="pt-32 pb-24 sm:pt-24 lg:py-32 bg-[#FAFBFF] relative overflow-hidden isolate z-0">
       {/* Background Decor */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.02] z-0" style={{
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute inset-0 opacity-[0.02] -z-10" style={{
         backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`,
         backgroundSize: '24px 24px'
       }} />
@@ -99,8 +99,8 @@ const BeforeAndAfterSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 w-full h-[600px] sm:h-[650px] items-stretch">
           
           {/* Card 1: Before */}
-          <div className="relative flex flex-col group/card h-full w-full">
-            <div className="absolute -inset-1 bg-gradient-to-tr from-slate-200 to-slate-100 rounded-[2.5rem] blur-xl opacity-50 group-hover/card:opacity-70 transition duration-500 isolate" />
+          <div className="relative z-10 flex flex-col group/card h-full w-full">
+            <div className="absolute -inset-1 bg-gradient-to-tr from-slate-200 to-slate-100 rounded-[2.5rem] blur-xl opacity-50 group-hover/card:opacity-70 transition duration-500 pointer-events-none" />
             
             <div className="relative w-full h-full flex flex-col bg-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-xl transition-all duration-500 group-hover/card:-translate-y-2">
               <div className="p-8 border-b border-slate-100 flex items-start justify-between bg-slate-50 shrink-0">
@@ -133,8 +133,8 @@ const BeforeAndAfterSection = () => {
           </div>
 
           {/* Card 2: After */}
-          <div className="relative flex flex-col group/card h-full w-full">
-            <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-[2.5rem] blur-xl opacity-40 group-hover/card:opacity-60 transition duration-500 animate-pulse-slow isolate" />
+          <div className="relative z-10 flex flex-col group/card h-full w-full">
+            <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-[2.5rem] blur-xl opacity-40 group-hover/card:opacity-60 transition duration-500 animate-pulse-slow pointer-events-none" />
             
             <div className="relative w-full h-full flex flex-col bg-[#020410] rounded-[2rem] border border-blue-500/30 overflow-hidden shadow-2xl transition-all duration-500 group-hover/card:-translate-y-2">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />

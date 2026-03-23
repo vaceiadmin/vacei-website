@@ -1,12 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 
 const HeroSection = () => {
-  const { reduceMotion } = usePerformance();
-
   return (
     <section className="w-full relative">
       <GradientContainer 
@@ -78,30 +75,21 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Video Player */}
-              <div className="relative w-full aspect-video bg-[#0A0A0F]">
-                <video
-                  src="/assets/videos/hero-banner-v1.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-
-                {/* Interactive Platform Overview Badge */}
-                {/* <div className="absolute bottom-4 left-4 sm:w-[280px] p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-between shadow-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary-blue/30 flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="text-white text-[11px] font-semibold tracking-wide">Interactive Platform Overview</span>
-                  </div>
-                  <div className="h-1 w-12 bg-white/10 rounded-full overflow-hidden ml-4">
-                    <div className="h-full w-2/3 bg-primary-blue" />
-                  </div>
-                </div> */}
-              </div>
+            {/* Video */}
+            <div className="relative w-full aspect-video bg-black">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="VACEI platform preview video"
+              >
+                <source src="/assets/videos/hero-banner-v1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
 
             </div>
 
