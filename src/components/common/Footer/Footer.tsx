@@ -70,7 +70,7 @@ const Footer = () => {
             </Link>
 
             <p className="text-sm text-gray leading-relaxed">
-              VACEI is the digital workspace for businesses and professional advisors, bringing services and documentation into one structured platform.
+              VACEI is the structured digital workspace where businesses and founders manage professional services, compliance, and workflows in one secure environment.
             </p>
 
             <div className="flex items-center gap-4 pt-2">
@@ -89,72 +89,79 @@ const Footer = () => {
 
           </div>
 
-          {/* Column 2 - VACEI */}
           <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">VACEI</h3>
+            <h3 className="text-text-dark font-bold text-base">Platform</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Overview
+                </Link>
+              </li>
+              <li>
+                <Link href="/how-it-works" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  How It Works
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link href="/security-compliance" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Security & Compliance
+                </Link>
+              </li>
+              <li>
+                <Link href="/#why-vacei" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Why VACEI
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-text-dark font-bold text-base">Services</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/services/corporate" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Corporate Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/audit" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Audit & Assurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/accounting" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Accounting & Bookkeeping
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/tax" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Tax & Compliance
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/legal" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Legal Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/vat-payroll" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  VAT & Payroll
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-text-dark font-bold text-base">Company</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="text-sm text-gray hover:text-primary-blue transition-colors">
                   About VACEI
-                </Link>
-              </li>
-              {/* <li>
-                <Link href="/our-team" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Our Team
-                </Link>
-              </li> */}
-              <li>
-                <Link href="/careers" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3 - Partner With VACEI */}
-          <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">Partner With VACEI</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/partners" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Partner Overview
-                </Link>
-              </li>
-              <li>
-                <Link href="/partners/white-label" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  White-Label Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/partners/technology-support" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Technology Integration Support
-                </Link>
-              </li>
-              <li>
-                <Link href="/partners/service-delivery" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Become a Partner Firm
-                </Link>
-              </li>
-              <li>
-                <Link href="/partners/reseller-program" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Reseller Program
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4 - Resources */}
-          <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/insights" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Insights
                 </Link>
               </li>
               <li>
@@ -163,14 +170,21 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/security-compliance" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Security & Compliance
+                <Link href="/insights" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Insights
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/cpe-podcast" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  CPE & Podcast
                 </Link>
               </li>
             </ul>
-            <div className="pt-2">
-              <h3 className="text-text-dark font-bold text-base">Our Technology</h3>
-            </div>
           </div>
 
           {/* Column 5 - Contact Us */}
@@ -199,6 +213,12 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+        </div>
+        <div className="mt-12 pt-8 border-t border-gray-100">
+          <p className="text-xs text-gray-400 font-medium leading-relaxed max-w-4xl">
+            Professional services through VACEI are delivered by a network of verified professional firms. 
+            VACEI provide the digital environment to manage these engagements efficiently and securely.
+          </p>
         </div>
       </div>
 

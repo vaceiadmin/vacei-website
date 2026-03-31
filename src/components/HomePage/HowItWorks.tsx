@@ -1,39 +1,33 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Play, Pause, CheckCircle2, Building2, UserPlus, FileUp, Workflow, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, CheckCircle2, Building2, UserPlus, FileUp, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { HOW_IT_WORKS_VIDEO } from "@/data/video";
 import { cn } from "@/lib/utils";
 
 const steps = [
   {
-    title: "Create your workspace",
-    description: "Set up a secure digital workspace for your company in minutes.",
+    title: "Define Your Scope",
+    description: "Register and answer a few simple questions to define the professional services your business needs.",
     icon: Building2,
     color: "from-blue-500 to-indigo-600",
   },
   {
-    title: "Invite your advisors",
-    description: "Seamlessly onboarding your accountant, auditor, lawyer, or corporate service provider.",
-    icon: UserPlus,
+    title: "Receive Proposals",
+    description: "Compare bids from verified firms, ensuring the best fit for your requirements and budget.",
+    icon: Sparkles,
     color: "from-indigo-500 to-purple-600",
   },
   {
-    title: "Upload documents",
-    description: "Respond to document requests or upload files securely with bank-grade encryption.",
-    icon: FileUp,
+    title: "Appoint Your Advisors",
+    description: "Select with confidence and engage through our structured digital environment.",
+    icon: UserPlus,
     color: "from-purple-500 to-pink-600",
   },
   {
-    title: "Advisors deliver the work",
-    description: "Your advisors manage engagements through structured and transparent workflows.",
-    icon: Workflow,
-    color: "from-pink-500 to-orange-500",
-  },
-  {
-    title: "Track everything",
-    description: "Monitor deadlines, filings, milestones, and documents from one central hub.",
+    title: "Centralize Workflows",
+    description: "Track progress, manage documents, and coordinate everything through your secure workspace.",
     icon: LayoutDashboard,
-    color: "from-orange-500 to-amber-500",
+    color: "from-pink-500 to-orange-500",
   },
 ];
 
@@ -109,43 +103,43 @@ const HowItWorks = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 lg:py-24 bg-[#020410] overflow-hidden"
+      className="relative w-full py-16 lg:py-24 bg-white overflow-hidden rounded-[48px]"
     >
-      {/* Cinematic Background */}
+      {/* Premium Background elements */}
       <div className="absolute inset-0 z-0">
         <div
-          className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[160px]"
+          className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-50 rounded-full blur-[160px]"
         />
         <div
-          className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-900/10 rounded-full blur-[160px]"
+          className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-50 rounded-full blur-[160px]"
         />
 
         {/* Abstract Data Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.05]" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path
-            d="M0 20 Q 25 10, 50 20 T 100 20" stroke="white" strokeWidth="0.05" fill="none"
+            d="M0 20 Q 25 10, 50 20 T 100 20" stroke="#3b82f6" strokeWidth="0.05" fill="none"
           />
           <path
-            d="M0 50 Q 25 40, 50 50 T 100 50" stroke="white" strokeWidth="0.05" fill="none"
+            d="M0 50 Q 25 40, 50 50 T 100 50" stroke="#3b82f6" strokeWidth="0.05" fill="none"
           />
           <path
-            d="M0 80 Q 25 70, 50 80 T 100 80" stroke="white" strokeWidth="0.05" fill="none"
+            d="M0 80 Q 25 70, 50 80 T 100 80" stroke="#3b82f6" strokeWidth="0.05" fill="none"
           />
         </svg>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6">
             <Sparkles className="w-3.5 h-3.5" />
             <span>How It Works</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-            How <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">VACEI</span> Works
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+            Precision at <span className="text-primary-blue">every stage.</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
             Create a workspace, invite your advisors, and manage every engagement, document and deadline in one structured platform.
           </p>
         </div>
@@ -169,38 +163,28 @@ const HowItWorks = () => {
                   className={cn(
                     "w-full text-left group relative p-5 rounded-[2rem] transition-all duration-700 border overflow-hidden",
                     isActive
-                      ? "bg-white/[0.05] border-white/20 shadow-[0_20px_50px_-20px_rgba(59,130,246,0.3)] backdrop-blur-md"
+                      ? "bg-white border-blue-100 shadow-[0_20px_50px_-20px_rgba(59,130,246,0.15)]"
                       : isPast
-                        ? "bg-white/[0.02] border-white/10 opacity-80"
-                        : "border-transparent bg-transparent hover:bg-white/[0.02] opacity-40"
+                        ? "bg-slate-50 opacity-80 border-slate-100"
+                        : "border-transparent bg-transparent hover:bg-slate-50 opacity-60"
                   )}
                 >
                   {/* Step Connector Line */}
                   {index < steps.length - 1 && (
-                    <div className="absolute left-[2.85rem] top-20 w-0.5 h-12 bg-white/5 z-0" />
-                  )}
-
-                  {/* Active/Past Highlight Effect */}
-                  {(isActive || isPast) && (
-                    <div
-                      className={cn(
-                        "absolute inset-0 pointer-events-none",
-                        isActive ? "bg-gradient-to-r from-blue-600/10 to-transparent" : "bg-white/[0.01]"
-                      )}
-                    />
+                    <div className="absolute left-[2.85rem] top-20 w-0.5 h-12 bg-slate-100 z-0" />
                   )}
 
                   <div className="flex items-center gap-5 relative z-10">
                     <div className={cn(
                       "w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-700 relative",
                       isActive || isPast
-                        ? `bg-gradient-to-br ${step.color} text-white shadow-[0_0_20px_rgba(59,130,246,0.5)]`
-                        : "bg-white/5 text-slate-500 group-hover:text-slate-300"
+                        ? `bg-gradient-to-br ${step.color} text-white shadow-[0_5px_15px_rgba(59,130,246,0.2)]`
+                        : "bg-slate-100 text-slate-400 group-hover:text-slate-600"
                     )}>
                       <Icon className="w-6 h-6" />
                       {isPast && (
                         <div
-                          className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-[#020410]"
+                          className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center border-2 border-white"
                         >
                           <CheckCircle2 className="w-3 h-3 text-white" />
                         </div>
@@ -211,12 +195,12 @@ const HowItWorks = () => {
                       <div className="flex items-center justify-between">
                         <h4 className={cn(
                           "font-bold text-lg transition-all duration-500",
-                          isActive || isPast ? "text-white" : "text-slate-400 group-hover:text-slate-200"
+                          isActive || isPast ? "text-slate-900" : "text-slate-400 group-hover:text-slate-600"
                         )}>
                           {step.title}
                         </h4>
                         {isActive && (
-                          <div className="text-blue-400">
+                          <div className="text-blue-500">
                             <Sparkles className="w-5 h-5 animate-pulse" />
                           </div>
                         )}
@@ -226,14 +210,14 @@ const HowItWorks = () => {
                         <p
                           className={cn(
                             "text-sm leading-relaxed mt-2 transition-colors duration-500",
-                            isActive ? "text-slate-200" : "text-slate-400"
+                            isActive ? "text-slate-600" : "text-slate-400"
                           )}
                         >
                           {step.description}
                         </p>
                       )}
                       {isFuture && (
-                        <p className="text-sm text-slate-600 line-clamp-1 group-hover:text-slate-400 transition-colors">
+                        <p className="text-sm text-slate-400 line-clamp-1 group-hover:text-slate-500 transition-colors">
                           {step.description}
                         </p>
                       )}
@@ -244,14 +228,9 @@ const HowItWorks = () => {
             })}
           </div>
 
-          {/* Cinematic Video Player Container */}
+          {/* Video Player Container */}
           <div className="lg:col-span-7 relative group">
-            {/* Outer Glass Frame */}
-            <div className="relative p-2 rounded-[40px] bg-white/[0.02] border border-white/10 backdrop-blur-3xl shadow-2xl overflow-hidden">
-              {/* Internal Decorative Glows */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] -mr-32 -mt-32 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] -ml-32 -mb-32 pointer-events-none" />
-
+            <div className="relative p-2 rounded-[40px] bg-white border border-slate-100 shadow-2xl overflow-hidden">
               <div className="relative aspect-video rounded-[32px] overflow-hidden bg-slate-900">
                 <video
                   ref={videoRef}
@@ -262,32 +241,23 @@ const HowItWorks = () => {
                   playsInline
                 />
 
-                {/* Play Overlay */}
                 {!isPlaying && (
-                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
+                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/30 backdrop-blur-[1px]">
                     <button
                       onClick={togglePlay}
                       className="w-24 h-24 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl flex items-center justify-center text-white shadow-2xl group/play"
                     >
-                      <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#020410] shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500 group-hover/play:scale-105 group-hover/play:shadow-[0_0_50px_rgba(255,255,255,0.6)]">
+                      <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500 group-hover/play:scale-105 group-hover/play:shadow-[0_0_50px_rgba(255,255,255,0.6)]">
                         <Play className="w-8 h-8 fill-current ml-1" />
                       </div>
                     </button>
                   </div>
                 )}
 
-                {/* Dynamic UI Overlay - Ambient Gradient */}
-                <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black/80 via-transparent to-black/30 opacity-60" />
-
-                {/* Premium Controls */}
-                <div className={cn(
-                  "absolute inset-x-0 bottom-0 z-30 p-6 flex flex-col gap-4 transition-all duration-500",
-                  isPlaying ? "translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100" : "translate-y-0 opacity-100"
-                )}>
-                  {/* Progress Bar */}
-                  <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden relative">
+                <div className="absolute inset-x-0 bottom-0 z-30 p-6 flex flex-col gap-4 transition-all duration-500 group-hover:translate-y-0 translate-y-2 opacity-0 group-hover:opacity-100">
+                  <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden relative">
                     <div
-                      className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-indigo-400"
+                      className="absolute inset-y-0 left-0 bg-blue-500"
                       style={{ width: `${progress}%` }}
                     />
                   </div>
@@ -296,38 +266,24 @@ const HowItWorks = () => {
                     <div className="flex items-center gap-4">
                       <button
                         onClick={togglePlay}
-                        className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-90"
+                        className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-white/30 transition-all active:scale-90"
                       >
                         {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
                       </button>
                       <button
                         onClick={toggleMute}
-                        className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all active:scale-90"
+                        className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-white/30 transition-all active:scale-90"
                       >
                         {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                       </button>
-                    </div>
-
-                    <div className="hidden sm:flex items-center gap-4">
-                      {/* <div className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30">
-                        <span className="text-[10px] font-bold text-blue-400 tracking-widest uppercase">Chapter 01: Core Platform</span>
-                                    </div> */}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Decorative Pulsing indicator */}
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
           </div>
         </div>
       </div>
-
-      {/* Finishing Details */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#020410] to-transparent z-10" />
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#020410] to-transparent z-10" />
     </section>
   );
 };

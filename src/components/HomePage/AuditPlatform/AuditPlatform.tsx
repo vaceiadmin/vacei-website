@@ -19,25 +19,25 @@ import {
 const principles = [
   {
     title: "Structured Workflows",
-    desc: "Clear engagement stages, responsibilities, and progress tracking.",
+    desc: "Clear engagement stages, defined responsibilities, and progress tracking across every service.",
     icon: <Workflow className="w-5 h-5" />,
     color: "bg-blue-500/10 text-blue-600"
   },
   {
     title: "Controlled Documentation",
-    desc: "Centralised files, version visibility, and organised working papers.",
+    desc: "Centralised files, organised records, version visibility, and secure document exchange.",
     icon: <FileCheck className="w-5 h-5" />,
     color: "bg-indigo-500/10 text-indigo-600"
   },
   {
     title: "Review and Approval Layers",
-    desc: "Defined review flows with tracked comments and sign-off history.",
+    desc: "Defined review flows, tracked comments, and sign-off history across services.",
     icon: <Layers className="w-5 h-5" />,
     color: "bg-cyan-500/10 text-cyan-600"
   },
   {
     title: "Secure Client Interaction",
-    desc: "Document exchange, queries, and approvals within a controlled environment.",
+    desc: "Requests, uploads, approvals, and communication handled inside a controlled environment.",
     icon: <ShieldAlert className="w-5 h-5" />,
     color: "bg-sky-500/10 text-sky-600"
   }
@@ -50,7 +50,7 @@ export default function AuditPlatform() {
   return (
     <section
       ref={containerRef}
-      className="relative py-16 sm:py-24 overflow-hidden bg-[#FAFBFF]"
+      className="relative py-16 sm:py-24 overflow-hidden bg-[#FAFBFF] rounded-[48px] overflow-hidden"
     >
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -99,7 +99,7 @@ export default function AuditPlatform() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-slate-600 leading-relaxed max-w-xl mb-12"
             >
-              Running a business requires constant coordination between advisors—accountants, auditors, lawyers, and corporate service providers. Yet the work is often fragmented across emails, folders, and separate systems. VACEI brings everything together in one structured workspace.
+              Running a business means coordinating with accountants, auditors, lawyers, tax advisors, and corporate service providers. Too often, that work is scattered across emails, folders, spreadsheets, and disconnected systems. VACEI brings everything together into one structured workspace so businesses and advisors can work with more visibility, accountability, and control.
             </motion.p>
 
             {/* Principles Staggered Reveal */}
@@ -150,8 +150,8 @@ export default function AuditPlatform() {
               className="mb-10 pl-4 border-l-2 border-primary-blue/30"
             >
               <p className="text-base text-slate-500 italic font-medium leading-relaxed">
-                Professional services require discipline. <br className="hidden sm:block" />
-                The platform ensures it.
+                Professional services require structure. <br className="hidden sm:block" />
+                VACEI gives you that structure.
               </p>
             </motion.div>
 

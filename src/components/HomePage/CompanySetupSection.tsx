@@ -11,7 +11,7 @@ const CompanySetupSection = () => {
   const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
-    <section className="w-full py-16 sm:py-20 relative overflow-hidden bg-[#fafaf9]">
+    <section className="w-full py-16 sm:py-20 relative overflow-hidden bg-[#fafaf9] rounded-[48px]">
       
       {/* Subtle Background Decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -30,12 +30,11 @@ const CompanySetupSection = () => {
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight leading-[1.1]">
-                Start your company and <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">manage everything.</span>
+                Incorporation <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">made effortless.</span>
             </h2>
-
             <p className="text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
-                From incorporation and statutory setup to ongoing filings and support, VACEI keeps every step structured inside one workspace.
+                Whether you're setting up in the UAE or globally, VACEI provides the structure you need to launch and grow.
             </p>
         </div>
 
@@ -48,13 +47,13 @@ const CompanySetupSection = () => {
                     <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 group-hover:rotate-6 transition-transform duration-500">
                         <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                     </div>
-                    <h3 className="text-xl font-black text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">What We Handle</h3>
+                    <h3 className="text-xl font-black text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">Expert Guidance</h3>
                     <ul className="space-y-3">
                         {[
-                            "Company incorporation & registration",
-                            "Statutory setup & compliance",
-                            "Bank account assistance",
-                            "Corporate services & filings"
+                            "New Company Incorporations",
+                            "Registered Office & Address",
+                            "Company Secretarial",
+                            "Entity setup & Statutory maintenance"
                         ].map((item, i) => (
                             <li key={i} className="flex gap-3 text-slate-600 text-sm font-bold">
                                 <span className="w-5 h-5 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-[10px] shadow-sm">✓</span>
@@ -69,15 +68,15 @@ const CompanySetupSection = () => {
             <div className="group relative">
                 <div className="h-full bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-[0_15px_40px_-15px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.06)] group-hover:-translate-y-1.5">
                     <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-900 mb-6 group-hover:-rotate-6 transition-transform duration-500">
-                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-5.618 1.04" /></svg>
                     </div>
-                    <h3 className="text-xl font-black text-slate-900 mb-4 group-hover:text-slate-600 transition-colors">What You Do</h3>
+                    <h3 className="text-xl font-black text-slate-900 mb-4 group-hover:text-slate-600 transition-colors">Document Automation</h3>
                     <ul className="space-y-3">
                          {[
-                            "Complete KYC (Guided Steps)",
-                            "Upload required documents",
-                            "Approve key details",
-                            "Sign digitally"
+                            "Real-time visibility into filings",
+                            "Deadline tracking",
+                            "Compliance calendar setup",
+                            "Statutory register management"
                         ].map((item, i) => (
                             <li key={i} className="flex gap-3 text-slate-600 text-sm font-bold">
                                 <span className="w-5 h-5 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 text-[10px] shadow-sm">➜</span>
@@ -95,15 +94,15 @@ const CompanySetupSection = () => {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-[60px] rounded-full" />
                     
                     <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/10 relative z-10">
-                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                     </div>
-                    <h3 className="text-xl font-black text-white mb-4 relative z-10">What You Get</h3>
+                    <h3 className="text-xl font-black text-white mb-4 relative z-10">Global Reach</h3>
                     <ul className="space-y-3 relative z-10">
                         {[
-                            "Fully registered company",
-                            "Compliance calendar setup",
-                            "Unified portal access",
-                            "24/7 Support team"
+                            "Manage share transfers",
+                            "Director changes",
+                            "Structure updates",
+                            "Cross-border expansion support"
                         ].map((item, i) => (
                             <li key={i} className="flex gap-3 text-slate-300 text-sm font-bold">
                                 <span className="w-5 h-5 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 text-[10px] shadow-[0_0_15px_rgba(37,99,235,0.4)]">★</span>

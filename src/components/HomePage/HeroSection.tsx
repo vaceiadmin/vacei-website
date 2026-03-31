@@ -11,7 +11,7 @@ const HeroSection = () => {
     <section className="w-full relative">
       <GradientContainer 
         backgroundColor="bg-black" 
-        className="relative min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-24 !rounded-none"
+        className="relative min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-24 rounded-b-[48px] overflow-hidden"
         radialOpacity={0.6}
         leftPositionClass="-top-[5%] -left-[5%]"
         rightPositionClass="-bottom-[5%] -right-[5%]"
@@ -22,21 +22,23 @@ const HeroSection = () => {
         <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
           <div className="relative mb-6">
             <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.05] tracking-tight">
-              Receive Proposals. <br />
-              Choose Your Advisors. <br />
-              <span className="text-primary-blue">Manage Everything.</span>
+              Receive proposals. <br />
+              Choose your advisors. <br />
+              <span className="text-primary-blue">Manage everything.</span>
             </h1>
           </div>
 
           <div className="space-y-6 max-w-xl mt-4">
             <p className="text-gray-400 text-base sm:text-lg leading-relaxed text-balance font-medium">
-              Submit one request — receive proposals from verified firms, and manage compliance, documents, and workflows in one platform.
+              VACEI is the structured digital workspace where businesses can request professional services, receive proposals from verified firms, and manage documents, compliance, and workflows in one place.
+              <br /><br />
+              Register once to receive your quote, invite your advisors, and manage everything through one secure platform.
             </p>
           </div>
 
           <div className="mt-8 border-l-2 border-primary-blue/40 pl-5 py-2">
             <p className="text-sm sm:text-[15px] text-gray-500 italic leading-relaxed font-medium">
-              From onboarding to compliance — everything in one workspace
+              From onboarding to ongoing compliance, everything runs through one workspace.
             </p>
           </div>
 
@@ -45,7 +47,7 @@ const HeroSection = () => {
               href="/quote"
               className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-gray-200 text-slate-900 px-8 py-3.5 text-[15px] font-bold shadow-[0_4px_14px_rgba(255,255,255,0.1)] transition-all hover:scale-105"
             >
-              <span>Get Proposals Now</span>
+              <span>Register to Get Instant Quote</span>
               <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
             </Link>
 

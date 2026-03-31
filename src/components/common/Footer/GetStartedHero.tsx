@@ -27,15 +27,14 @@ const GetStartedHero = () => {
             </div>
 
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] mb-8">
-              Ready to transform your <br />
+              Ready to simplify your <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-indigo-400 to-blue-500">
-                business operations?
+                business services?
               </span>
             </h2>
 
             <p className="text-lg sm:text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl">
-              Modernise how your business handles accounting, audit and compliance.
-              Join hundreds of forward-thinking companies already on VACEI.
+              Join the businesses and founders managing their European operations through VACEI's structured digital workspace.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">

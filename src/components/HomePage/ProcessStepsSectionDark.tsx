@@ -81,9 +81,9 @@ const formSteps: FormStep[] = [
 ]
 
 const processSteps = [
-  { title: "Define", description: "Request a quote and define your scope." },
-  { title: "Onboard", description: "We align on goals, timelines, and details." },
-  { title: "Execute", description: "We do the work while keeping you in the loop." },
+  { title: "Define", description: "Register and tell us what your business needs." },
+  { title: "Match", description: "Relevant providers review your request and prepare proposals." },
+  { title: "Execute", description: "Once you choose your provider, the work continues inside your VACEI workspace." },
 ]
 
 const ProcessStepsSectionDark = () => {
@@ -213,7 +213,7 @@ const ProcessStepsSectionDark = () => {
     <section
       id="process-steps"
       ref={bgRef}
-      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#050510]"
+      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#050510] rounded-[48px]"
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-blue/10 rounded-full blur-[120px] -mr-48 -mt-48" />
@@ -466,11 +466,14 @@ const ProcessStepsSectionDark = () => {
 
           <div className="relative lg:pl-10 h-full flex flex-col justify-center lg:order-2">
             <div className="mb-10">
-              <h2 className="text-sm font-black text-primary-blue uppercase tracking-[0.2em] mb-4">Workflow Progress</h2>
-              <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-[1.1]">
-                Real-time <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Onboarding State</span>
+              <h2 className="text-sm font-black text-primary-blue uppercase tracking-[0.2em] mb-4">Register to receive your quote</h2>
+              <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-[1.1] mb-6">
+                Start with a <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Structured Workspace</span>
               </h3>
+              <p className="text-slate-400 font-medium leading-relaxed">
+                To receive an instant quote or proposals through VACEI, you first create your workspace. This allows your requests, documents, and advisor communication to stay structured from the beginning.
+              </p>
             </div>
 
             <div className="space-y-4 relative">

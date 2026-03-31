@@ -84,7 +84,7 @@ const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, al
 
 const BeforeAndAfterSection = () => {
   return (
-    <section className="pt-32 pb-24 sm:pt-24 lg:py-32 bg-[#FAFBFF] relative overflow-hidden isolate z-0">
+    <section className="pt-32 pb-24 sm:pt-24 lg:py-32 bg-[#FAFBFF] relative overflow-hidden isolate z-0 rounded-[48px]">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none -z-10" />
       <div className="absolute inset-0 opacity-[0.02] -z-10" style={{
@@ -99,11 +99,11 @@ const BeforeAndAfterSection = () => {
             <span className="text-[11px] font-black text-blue-600 uppercase tracking-widest">The Next Evolution</span>
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-            From Chaos to <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">Pure Clarity.</span>
+            From chaos to <br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">clarity.</span>
           </h2>
           <p className="mt-4 text-lg font-medium text-slate-500 max-w-2xl mx-auto">
-            See how upgrading to VACEI transforms your corporate management experience, eliminating friction and ensuring complete visibility.
+            VACEI replaces fragmented coordination with one intelligent, structured ecosystem for business services.
           </p>
         </div>
 
@@ -116,11 +116,24 @@ const BeforeAndAfterSection = () => {
             <div className="relative w-full h-full flex flex-col bg-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-xl transition-all duration-500 group-hover/card:-translate-y-2">
               <div className="p-8 border-b border-slate-100 flex items-start justify-between bg-slate-50 shrink-0">
                 <div>
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-4">
                     <span className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500 font-bold">&times;</span>
                     <h4 className="text-2xl font-black text-slate-900">Before VACEI</h4>
                   </div>
-                  <p className="text-slate-500 font-medium text-sm">Disjointed tools, lost files, and poor visibility.</p>
+                  <ul className="space-y-2">
+                    {[
+                      "Scattered emails",
+                      "Repeated document requests",
+                      "Manual follow-ups",
+                      "Poor deadline visibility",
+                      "Separate systems for each advisor"
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-sm font-medium text-slate-500">
+                        <div className="w-1 h-1 rounded-full bg-slate-300" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
@@ -152,11 +165,24 @@ const BeforeAndAfterSection = () => {
 
               <div className="p-8 border-b border-white/10 flex items-start justify-between relative z-10 bg-white/5 backdrop-blur-sm shrink-0">
                 <div>
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-4">
                     <span className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30">&#10003;</span>
                     <h4 className="text-2xl font-black text-white">With VACEI</h4>
                   </div>
-                  <p className="text-blue-300 font-medium text-sm">One intelligent, structured ecosystem.</p>
+                  <ul className="space-y-2">
+                    {[
+                      "One workspace",
+                      "One document environment",
+                      "One place to track requests and deadlines",
+                      "One connected experience across providers",
+                      "Better visibility and control across the business"
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-sm font-medium text-blue-300/80">
+                        <div className="w-1 h-1 rounded-full bg-blue-500" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
@@ -181,6 +207,11 @@ const BeforeAndAfterSection = () => {
             </div>
           </div>
 
+        </div>
+        <div className="mt-16 text-center">
+            <p className="text-lg font-bold text-slate-700">
+              No more guessing. No more missing files. No more disconnected workflows.
+            </p>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import ReadyToSimplifySection from "./ReadyToSimplifySection";
+// import ReadyToSimplifySection from "./ReadyToSimplifySection";
 import ServicesSection from "./ServicesSection";
 import ProcessStepsSectionDark from "./ProcessStepsSectionDark";
 import CompanySetupSection from "./CompanySetupSection";
@@ -14,6 +14,11 @@ import AuditPlatform from "./AuditPlatform/AuditPlatform";
 import WorkspaceEntrySection from "./WorkspaceEntrySection";
 import ComplianceDashboardSection from "./ComplianceDashboardSection";
 import ActiveEUSection from "./ActiveEUSection";
+import PlatformPowerSection from "./PlatformPowerSection";
+import MarketplaceSection from "./MarketplaceSection";
+import MultiCompanySection from "./MultiCompanySection";
+import WhyVaceiSection from "./WhyVaceiSection";
+import TrustSection from "./TrustSection";
 
 import { useReduceMotion } from "@/contexts/ReduceMotionContext";
 import { isIPhone } from "@/lib/utils";
@@ -34,21 +39,25 @@ const HomePage = () => {
   }, []);
 
   return (
-      <div className="relative">
-        <HeroSection />
-        <AuditPlatform />
-        <WorkspaceEntrySection />
-        <HowItWorks />
-        <BeforeAndAfterSection />
-        <ProcessStepsSectionDark />
-        {/* <PortalFeature /> */}
-        <ReadyToSimplifySection />
-        <ServicesSection />
-        <CompanySetupSection />
-        <ComplianceDashboardSection />
-        <ActiveEUSection />
-        <FaqSection />
-      </div>
+    <div className="relative bg-[#020410]">
+      <HeroSection />
+      <AuditPlatform />
+      <WorkspaceEntrySection />
+      <HowItWorks />
+      <ProcessStepsSectionDark />
+      <BeforeAndAfterSection />
+      <PlatformPowerSection />
+      <ServicesSection />
+      <MarketplaceSection />
+      <CompanySetupSection />
+      <ComplianceDashboardSection />
+      <MultiCompanySection />
+      <ActiveEUSection />
+      <WhyVaceiSection />
+      <TrustSection />
+      {/* <ReadyToSimplifySection /> */}
+      <FaqSection />
+    </div>
   );
 };
 

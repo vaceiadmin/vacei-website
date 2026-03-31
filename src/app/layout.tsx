@@ -13,6 +13,7 @@ import SupportChat from "@/components/support-chat/SupportChat";
 import { ReduceMotionProvider } from "@/contexts/ReduceMotionContext";
 import { ScrollProvider } from "@/contexts/ScrollContext";
 import { TopLoader } from "@/components/common/TopLoader";
+import CustomCursor from "@/components/common/CustomCursor";
 import { Suspense } from "react";
 
 const bodoni = Libre_Bodoni({
@@ -62,6 +63,7 @@ export default function RootLayout({
               <Footer />
               <ScrollToTopButton />
               <SupportChat />
+              <CustomCursor />
               <CookieConsentBanner />
             </SmoothScroll>
           </ScrollProvider>
