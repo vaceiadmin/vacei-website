@@ -6,7 +6,7 @@ const ComplianceDashboardSection = () => {
   const { isIPhone, isLowPerformance } = usePerformance();
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-[#020410] rounded-[48px]">
+    <section className="w-full py-16 sm:py-20 md:py-24 lg:py-28 bg-black rounded-[48px]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
@@ -23,10 +23,12 @@ const ComplianceDashboardSection = () => {
 
           <div
             className={cn(
-              "relative rounded-[2.5rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6 sm:p-10 shadow-2xl",
-              !isIPhone && !isLowPerformance && "hover:-translate-y-1 transition-all duration-300"
+              "relative rounded-[2.5rem] border border-white/20 bg-[#0F111A] backdrop-blur-xl p-6 sm:p-10 shadow-2xl overflow-hidden",
+              !isIPhone && !isLowPerformance && "hover:-translate-y-2 hover:border-blue-500/30 transition-all duration-500"
             )}
           >
+            {/* Interior Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.05] to-transparent pointer-events-none" />
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
               <div>
                 <p className="text-[10px] font-black tracking-[0.2em] uppercase text-slate-500 mb-2">

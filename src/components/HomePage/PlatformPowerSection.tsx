@@ -11,7 +11,7 @@ const PlatformPowerSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#0B0E29] relative overflow-hidden rounded-[48px]">
+    <section className="py-24 bg-black relative overflow-hidden rounded-[48px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           
@@ -59,8 +59,10 @@ const PlatformPowerSection = () => {
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-600/10 rounded-full blur-[100px] opacity-40" />
             
-            {/* Main Mockup Card (Darker glassmorphism) */}
-            <div className="relative w-full max-w-[460px] aspect-[4/5] bg-slate-900/50 backdrop-blur-2xl rounded-[2.5rem] border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.4)] overflow-hidden">
+            {/* Main Mockup Card (Premium Dark Glassmorphism) */}
+            <div className="relative w-full max-w-[460px] aspect-[4/5] bg-[#0F111A] backdrop-blur-2xl rounded-[2.5rem] border border-white/20 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
+               {/* Subtle Interior Glow */}
+               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.05] to-transparent pointer-events-none" />
                {/* Mockup Header */}
                <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/5">
                   <div className="flex items-center gap-3">
@@ -128,7 +130,7 @@ const PlatformPowerSection = () => {
             </div>
 
             {/* Floating Accessory 1: Status Badge */}
-            <div className="absolute top-1/4 -right-4 lg:-right-8 p-4 rounded-2xl bg-slate-800 shadow-2xl border border-white/5 z-20 animate-bounce-slow">
+            <div className="absolute top-1/4 -right-4 lg:-right-8 p-4 rounded-2xl bg-[#1A1D2B] shadow-2xl border border-white/10 z-20 animate-bounce-slow">
                <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
                     <CheckCircle2 className="w-5 h-5" />

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 // Helper component for premium country markers
 const CountryMarker = ({ code, className }: { code: string; className?: string }) => (
     <div className={cn(
-        "relative flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-900 shadow-xl border border-white/10 overflow-hidden transition-all duration-300 hover:scale-125 group/flag shrink-0",
+        "relative flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#1A1D2B] shadow-2xl border border-white/20 overflow-hidden transition-all duration-300 hover:scale-125 group/flag shrink-0",
         className
     )}>
         <img
@@ -21,7 +21,7 @@ const ActiveEUSection = () => {
     const { isIPhone, isLowPerformance } = usePerformance();
 
     return (
-        <section className="relative w-full py-24 bg-[#080B24] overflow-hidden rounded-[48px]">
+        <section className="relative w-full py-24 bg-black overflow-hidden rounded-[48px]">
             {/* Background Decorative Element */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/10 blur-[120px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-1/2 h-full bg-indigo-600/10 blur-[120px] pointer-events-none" />
@@ -66,7 +66,7 @@ const ActiveEUSection = () => {
                     <div className="lg:col-span-3 relative flex h-[700px] w-full flex-col items-center justify-center overflow-hidden">
 
                         {/* Central Business Hub Icon */}
-                        <div className="relative z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-2xl border border-white/10 p-2 group transition-all duration-500 hover:rotate-12 translate-z-0">
+                        <div className="relative z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-[0_20px_50px_rgba(37,99,235,0.3)] border border-white/10 p-2 group transition-all duration-500 hover:rotate-12 translate-z-0">
                             <img 
                                 src="/assets/images/imgi_1_Logo-2.0 8.png" 
                                 alt="VACEI Hub" 
@@ -145,7 +145,7 @@ const ActiveEUSection = () => {
             </div>
             
             {/* Dark Transition Detail */}
-            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#080B24] to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-10" />
         </section>
     );
 };

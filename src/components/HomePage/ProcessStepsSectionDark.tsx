@@ -213,7 +213,7 @@ const ProcessStepsSectionDark = () => {
     <section
       id="process-steps"
       ref={bgRef}
-      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#050510] rounded-[48px]"
+      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-black rounded-[48px]"
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-blue/10 rounded-full blur-[120px] -mr-48 -mt-48" />
@@ -227,9 +227,11 @@ const ProcessStepsSectionDark = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="relative z-10 w-full lg:order-1">
-            <div className="bg-[#0a0a1a] rounded-[2.5rem] border border-white/10 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.5)] overflow-hidden">
+            <div className="bg-[#0F111A] rounded-[2.5rem] border border-white/20 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
               <div className="p-1 sm:p-2">
-                <div className="bg-[#15162d]/50 rounded-[2.2rem] p-6 sm:p-8 md:p-10">
+                <div className="bg-[#1A1C33]/50 rounded-[2.2rem] p-6 sm:p-8 md:p-10 relative overflow-hidden">
+                  {/* Interior Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.03] to-transparent pointer-events-none" />
                   {!submitted ? (
                     <form onSubmit={handleSubmit} className="flex flex-col h-full min-h-[520px]">
                       <div className="flex items-center justify-between mb-10 px-2">
@@ -487,8 +489,8 @@ const ProcessStepsSectionDark = () => {
                     className={cn(
                       "group relative rounded-3xl p-5 sm:p-6 transition-all duration-500 border",
                       isActive
-                        ? "bg-[#15162d] border-white/10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] scale-[1.02] z-20"
-                        : "bg-white/5 border-transparent opacity-60 hover:opacity-80"
+                        ? "bg-[#1A1D2B] border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] scale-[1.02] z-20"
+                        : "bg-white/[0.03] border-transparent opacity-60 hover:opacity-100 hover:bg-white/[0.05]"
                     )}
                   >
                     <div className="flex items-start gap-5">

@@ -13,7 +13,7 @@ const WorkspaceEntrySection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 lg:py-24 overflow-hidden bg-[#020410] rounded-[48px]"
+      className="relative w-full py-16 lg:py-24 overflow-hidden bg-black rounded-[48px]"
     >
       {/* Premium Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden text-blue-500/20">
@@ -35,20 +35,23 @@ const WorkspaceEntrySection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
           
           {/* Card 1: Existing Company (Dark Glassmorphic) */}
-          <div className="group relative">
+          <div className="group relative h-full">
             <div className={cn(
-              "relative h-full overflow-hidden rounded-[40px] border border-white/10 bg-white/[0.03] backdrop-blur-xl p-8 sm:p-10 lg:p-12 transition-all duration-500",
-              !reduceMotion && "hover:shadow-[0_48px_100px_-24px_rgba(59,130,246,0.2)] hover:-translate-y-2 hover:bg-white/[0.05]"
+              "relative h-full overflow-hidden rounded-[40px] border border-white/10 bg-[#0F111A] backdrop-blur-2xl p-8 sm:p-10 lg:p-12 transition-all duration-700",
+              !reduceMotion && "hover:shadow-[0_48px_100px_-24px_rgba(59,130,246,0.15)] hover:-translate-y-2 hover:bg-[#151825] hover:border-blue-500/30"
             )}>
-              <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-600/20" />
+              {/* Subtle Interior Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.03] to-transparent pointer-events-none" />
+              <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-600/20 group-hover:bg-blue-600/60 transition-colors duration-700" />
 
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3">
-                    <Building2 className="w-6 h-6" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 transition-all duration-700 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-blue-500/40">
+                    <Building2 className="w-7 h-7 relative z-10" />
+                    <div className="absolute inset-0 bg-blue-400 blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Active Entities</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-400/80 group-hover:text-blue-400 transition-colors duration-500">Active Entities</span>
                   </div>
                 </div>
 
@@ -74,8 +77,8 @@ const WorkspaceEntrySection = () => {
                     "Keep all advisors in one place",
                     "Monitor progress across engagements"
                   ].map((text, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5 text-sm font-medium text-slate-300">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    <div key={idx} className="flex items-center gap-3 text-sm font-bold text-slate-400 group-hover:text-slate-300 transition-colors duration-500">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-400 transition-all duration-500 shadow-[0_0_8px_rgba(59,130,246,0)] group-hover:shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
                       {text}
                     </div>
                   ))}
@@ -100,19 +103,22 @@ const WorkspaceEntrySection = () => {
           {/* Card 2: New Company (Deep Dark) */}
           <div className="group relative">
             <div className={cn(
-              "relative h-full overflow-hidden rounded-[40px] bg-slate-950 border border-white/5 p-8 sm:p-10 lg:p-12 transition-all duration-500",
-              !reduceMotion && "hover:shadow-[0_48px_120px_-24px_rgba(59,73,230,0.4)] hover:-translate-y-2"
+              "relative h-full overflow-hidden rounded-[40px] bg-[#121421] border border-white/10 p-8 sm:p-10 lg:p-12 transition-all duration-700",
+              !reduceMotion && "hover:shadow-[0_48px_120px_-24px_rgba(59,73,230,0.4)] hover:-translate-y-2 hover:border-blue-500/40 hover:bg-[#181B2D]"
             )}>
               <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-              <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse-subtle" />
+              {/* Subtle Interior Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/[0.03] to-transparent pointer-events-none" />
+              <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen animate-pulse-subtle" />
 
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-blue-400 shadow-inner transition-all duration-500 group-hover:shadow-blue-400/20 group-hover:scale-110">
-                    <Rocket className="w-6 h-6" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-blue-400 shadow-inner transition-all duration-700 group-hover:shadow-blue-400/20 group-hover:scale-110 group-hover:-rotate-3 group-hover:border-blue-400/30">
+                    <Rocket className="w-7 h-7 relative z-10" />
+                    <div className="absolute inset-0 bg-blue-600/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-blue-100/50">New Founders</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-100/50 group-hover:text-blue-400 transition-colors duration-500">New Founders</span>
                   </div>
                 </div>
 
@@ -144,7 +150,7 @@ const WorkspaceEntrySection = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#020410] to-transparent opacity-80 z-20" />
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent opacity-80 z-20" />
     </section>
   );
 };

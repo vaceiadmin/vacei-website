@@ -27,7 +27,7 @@ const FaqSection = () => {
   const { reduceMotion } = usePerformance();
 
   return (
-    <section id="faq" className="relative w-full py-12 lg:py-16 bg-white overflow-hidden flex items-center min-h-[90vh] lg:min-h-[100vh] rounded-[48px]">
+    <section id="faq" className="relative w-full py-24 lg:py-32 bg-background overflow-hidden flex items-center min-h-[90vh] lg:min-h-[100vh] rounded-t-[48px] z-20">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-50 rounded-full blur-[160px]" />
@@ -67,8 +67,8 @@ const FaqSection = () => {
                     className={cn(
                       "group cursor-pointer rounded-2xl p-5 lg:p-6 transition-all duration-300 border relative overflow-hidden",
                       isOpen 
-                        ? "bg-white border-blue-100 shadow-2xl" 
-                        : "bg-slate-50/50 border-slate-100 hover:border-blue-100 hover:bg-white"
+                        ? "bg-white border-blue-200 shadow-2xl" 
+                        : "bg-white/50 border-slate-200/50 hover:border-blue-200 hover:bg-white"
                     )}
                   >
                     <div className="flex items-center justify-between">
@@ -140,7 +140,7 @@ const FaqSection = () => {
               </div>
 
               {/* Equity Card */}
-              <div className="absolute bottom-16 -left-4 lg:left-0 w-[190px] lg:w-[240px] rounded-3xl bg-white border border-slate-100 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] z-20">
+              <div className="absolute bottom-16 -left-4 lg:left-0 w-[190px] lg:w-[240px] rounded-3xl bg-white border border-slate-200 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] z-20">
                     <div className="flex flex-col gap-4">
                   <span className="text-[9px] font-black tracking-widest text-purple-600 uppercase">Cap Table State</span>
                   <div className="flex items-center gap-4">
@@ -169,7 +169,7 @@ const FaqSection = () => {
 
               {/* Contact Pill */}
               <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 lg:ml-28">
-                <div className="bg-white/90 backdrop-blur-xl border border-slate-100 rounded-full py-3.5 px-6 flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+                <div className="bg-white/95 backdrop-blur-xl border border-slate-200 rounded-full py-3.5 px-6 flex items-center gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
                    <div className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

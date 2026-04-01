@@ -39,7 +39,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="relative bg-[#020410]">
+    <div className="relative bg-black">
       <HeroSection />
       <AuditPlatform />
       <WorkspaceEntrySection />

@@ -38,7 +38,7 @@ const MarketplaceSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#080B24] relative overflow-hidden rounded-[48px]">
+    <section className="py-24 bg-black relative overflow-hidden rounded-[48px]">
       {/* Abstract Background Decoration */}
       <div className="absolute inset-0 z-0 opacity-30">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0,transparent_70%)]" />
@@ -67,7 +67,9 @@ const MarketplaceSection = () => {
 
           {/* Timeline Steps */}
           <div className="w-full lg:w-2/3">
-             <div className="bg-white/[0.03] backdrop-blur-xl p-8 md:p-16 rounded-[3rem] border border-white/10 shadow-2xl">
+             <div className="bg-[#0D0F18] backdrop-blur-xl p-8 md:p-16 rounded-[3rem] border border-white/15 shadow-2xl relative overflow-hidden">
+                {/* Interior Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/[0.03] to-transparent pointer-events-none" />
                 <div className="space-y-4">
                    {steps.map((step, i) => (
                      <Step 
