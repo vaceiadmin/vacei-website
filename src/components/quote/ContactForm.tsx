@@ -264,7 +264,7 @@ const ContactForm = () => {
                       Address
                     </p>
                     <p className="text-sm md:text-base text-gray">
-                      Triq San Giljan, San Gwann SGN 2801, Malta
+                      A4, Triq San Giljan, San Gwann, Malta.
                     </p>
                   </div>
                 </div>
