@@ -811,13 +811,15 @@ const Navbar = () => {
           >
             {/* Sidebar Container with gradient background, border radius, and hidden scrollbar */}
             <div
-              className="h-full w-full rounded-l-3xl overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent hover:[&::-webkit-scrollbar-thumb]:bg-white/20"
+              className="h-full w-full rounded-l-3xl overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-thumb]:bg-transparent [&::-webkit-scrollbar-track]:bg-transparent"
               style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
                 background:
                   "linear-gradient(135deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%)",
               }}
             >
-              <div className="p-6 lg:p-8 space-y-8 h-full relative">
+              <div className="p-6 lg:p-8 space-y-8 min-h-full pb-24 relative">
                 {/* Header with Logo and Close Button */}
                 <div className="flex items-center justify-between">
                   <Link
@@ -946,6 +948,12 @@ const Navbar = () => {
                         className="text-white text-base hover:text-primary-blue transition-colors"
                       >
                         +356 77142418
+                      </a>
+                      <a
+                        href="tel:+4407400487907"
+                        className="mt-1 block text-white text-base hover:text-primary-blue transition-colors"
+                      >
+                        +44 07400 487907
                       </a>
                     </div>
                     <div>

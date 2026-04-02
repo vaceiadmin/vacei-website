@@ -178,6 +178,7 @@ const FaqSection = () => {
                    <div className="flex flex-col">
                       <span className="text-[8px] font-black text-blue-600 tracking-[0.2em] uppercase mb-0.5">Direct Support</span>
                       <span className="text-sm font-black text-slate-900 tracking-wide">+356 77142418</span>
+                      <span className="text-sm font-black text-slate-900 tracking-wide">+44 07400 487907</span>
                 </div>
                             </div>
                            </div>

@@ -237,12 +237,20 @@ const ContactForm = () => {
                     <p className="text-sm font-semibold text-heading mb-1">
                       Phone
                     </p>
-                    <a
-                      href="tel:+35677142418"
-                      className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
-                    >
-                      +356 77142418
-                    </a>
+                    <div className="flex flex-col leading-tight">
+                      <a
+                        href="tel:+35677142418"
+                        className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
+                      >
+                        +356 77142418
+                      </a>
+                      <a
+                        href="tel:+4407400487907"
+                        className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
+                      >
+                        +44 07400 487907
+                      </a>
+                    </div>
                   </div>
                 </div>
 

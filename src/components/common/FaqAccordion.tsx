@@ -25,7 +25,7 @@ interface FaqAccordionProps {
 
 const FaqAccordion = ({
   faqItems,
-  phoneNumber = "+356 77142418",
+  phoneNumber = "+356 77142418 • +44 07400 487907",
   callToActionText = "Need more help?",
 }: FaqAccordionProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
