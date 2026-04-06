@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState, useRef } from "react"
+import React, { useMemo, useState, useRef } from "react"
+import { useTranslation } from "react-i18next"
 import { SERVICE_TYPE_OPTIONS } from "@/data/serviceRequestForms"
 import { cn } from "@/lib/utils"
 
@@ -33,61 +34,68 @@ type FormStep = {
   subtitle?: string
 }
 
-const formSteps: FormStep[] = [
-  {
-    id: "request",
-    title: "Let's Start",
-    subtitle: "Tell us a bit about yourself",
-    fields: [
-      { key: "name", label: "Full Name", placeholder: "e.g. John Doe", type: "text", autoComplete: "name" },
-      { key: "email", label: "Email Address", placeholder: "john@company.com", type: "email", autoComplete: "email" },
-      { key: "message", label: "Project Brief", placeholder: "Describe your needs...", type: "textarea", rows: 2 },
-    ],
-    primaryLabel: "Continue",
-  },
-  {
-    id: "onboarding",
-    title: "Project Scope",
-    subtitle: "Choose the services you need",
-    fields: [
+const ProcessStepsSectionDark = () => {
+  const { t } = useTranslation("home")
+  const bgRef = useRef(null)
+
+  const formSteps = useMemo((): FormStep[] => {
+    const comm = t("processSteps.communicationOptions", { returnObjects: true }) as string[]
+    const upd = t("processSteps.updateOptions", { returnObjects: true }) as string[]
+    const fq = (base: string, key: string) => t(`${base}.${key}.label`)
+    const fp = (base: string, key: string) => t(`${base}.${key}.placeholder`)
+    return [
       {
-        key: "service",
-        label: "Service Types",
-        placeholder: "Select services",
-        type: "multiselect",
-        options: SERVICE_TYPE_OPTIONS.map((o) => o.value),
+        id: "request",
+        title: t("processSteps.form.request.title"),
+        subtitle: t("processSteps.form.request.subtitle"),
+        fields: [
+          { key: "name", label: fq("processSteps.form.request.fields", "name"), placeholder: fp("processSteps.form.request.fields", "name"), type: "text", autoComplete: "name" },
+          { key: "email", label: fq("processSteps.form.request.fields", "email"), placeholder: fp("processSteps.form.request.fields", "email"), type: "email", autoComplete: "email" },
+          { key: "message", label: fq("processSteps.form.request.fields", "message"), placeholder: fp("processSteps.form.request.fields", "message"), type: "textarea", rows: 2 },
+        ],
+        primaryLabel: t("processSteps.form.request.primaryLabel"),
       },
       {
-        key: "additionalDetails",
-        label: "Additional details (optional)",
-        placeholder: "Any specific requirements...",
-        type: "textarea",
-        rows: 4
-      }
-    ],
-    primaryLabel: "Next Step",
-  },
-  {
-    id: "preferences",
-    title: "Final Touches",
-    subtitle: "How should we contact you?",
-    fields: [
-      { key: "communicationChannel", label: "Communication", placeholder: "Preferred Channel", type: "select", options: ["Email", "WhatsApp", "Phone Call", "Portal"] },
-      { key: "updateCadence", label: "Updates", placeholder: "Frequency", type: "select", options: ["Weekly", "Bi-weekly", "Monthly", "Urgent Only"] },
-      { key: "phone", label: "Phone Number (required for WhatsApp / Phone Call)", placeholder: "+356 1234 5678", type: "text" },
-    ],
-    primaryLabel: "Submit Request",
-  },
-]
+        id: "onboarding",
+        title: t("processSteps.form.onboarding.title"),
+        subtitle: t("processSteps.form.onboarding.subtitle"),
+        fields: [
+          {
+            key: "service",
+            label: fq("processSteps.form.onboarding.fields", "service"),
+            placeholder: fp("processSteps.form.onboarding.fields", "service"),
+            type: "multiselect",
+            options: SERVICE_TYPE_OPTIONS.map((o) => o.value),
+          },
+          {
+            key: "additionalDetails",
+            label: fq("processSteps.form.onboarding.fields", "additionalDetails"),
+            placeholder: fp("processSteps.form.onboarding.fields", "additionalDetails"),
+            type: "textarea",
+            rows: 4,
+          },
+        ],
+        primaryLabel: t("processSteps.form.onboarding.primaryLabel"),
+      },
+      {
+        id: "preferences",
+        title: t("processSteps.form.preferences.title"),
+        subtitle: t("processSteps.form.preferences.subtitle"),
+        fields: [
+          { key: "communicationChannel", label: fq("processSteps.form.preferences.fields", "communicationChannel"), placeholder: fp("processSteps.form.preferences.fields", "communicationChannel"), type: "select", options: Array.isArray(comm) ? comm : [] },
+          { key: "updateCadence", label: fq("processSteps.form.preferences.fields", "updateCadence"), placeholder: fp("processSteps.form.preferences.fields", "updateCadence"), type: "select", options: Array.isArray(upd) ? upd : [] },
+          { key: "phone", label: fq("processSteps.form.preferences.fields", "phone"), placeholder: fp("processSteps.form.preferences.fields", "phone"), type: "text" },
+        ],
+        primaryLabel: t("processSteps.form.preferences.primaryLabel"),
+      },
+    ]
+  }, [t])
 
-const processSteps = [
-  { title: "Define", description: "Register and tell us what your business needs." },
-  { title: "Match", description: "Relevant providers review your request and prepare proposals." },
-  { title: "Execute", description: "Once you choose your provider, the work continues inside your VACEI workspace." },
-]
-
-const ProcessStepsSectionDark = () => {
-  const bgRef = useRef(null)
+  const processSteps = useMemo(
+    () =>
+      (t("processSteps.sidebarSteps", { returnObjects: true }) as { title: string; description: string }[]) ?? [],
+    [t]
+  )
 
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<FormData>({
@@ -116,11 +124,11 @@ const ProcessStepsSectionDark = () => {
 
       if (field.type === "multiselect") {
         const val = formData[field.key] as string[]
-        if (!val || val.length === 0) return `${field.label} is required.`
+        if (!val || val.length === 0) return t("processSteps.errors.fieldRequired", { field: field.label })
       } else {
         const val = formData[field.key]
-        if (!val || (typeof val === "string" && !val.trim())) return `${field.label} is required.`
-        if (field.key === "email" && typeof val === "string" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return "Invalid email address."
+        if (!val || (typeof val === "string" && !val.trim())) return t("processSteps.errors.fieldRequired", { field: field.label })
+        if (field.key === "email" && typeof val === "string" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return t("processSteps.errors.invalidEmail")
       }
     }
 
@@ -130,7 +138,7 @@ const ProcessStepsSectionDark = () => {
       formData.communicationChannel !== "Email" &&
       !formData.phone.trim()
     ) {
-      return "Phone number is required for this communication method."
+      return t("processSteps.errors.phoneRequired")
     }
 
     return ""
@@ -181,7 +189,7 @@ const ProcessStepsSectionDark = () => {
       const form = new FormData()
       form.append("name", formData.name)
       form.append("email", formData.email)
-      form.append("subject", "Homepage quote / project request")
+      form.append("subject", t("processSteps.subjectLine"))
       form.append("message", formData.message)
       form.append("metaJson", JSON.stringify(payloadMeta))
 
@@ -198,7 +206,7 @@ const ProcessStepsSectionDark = () => {
       setSubmitted(true)
     } catch (err) {
       console.error(err)
-      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.")
+      setSubmitError(err instanceof Error ? err.message : t("processSteps.errors.generic"))
     } finally {
       setIsSubmitting(false)
     }
@@ -213,15 +221,11 @@ const ProcessStepsSectionDark = () => {
     <section
       id="process-steps"
       ref={bgRef}
-      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-black rounded-[48px]"
+      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#FAFBFF] rounded-[48px]"
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-blue/10 rounded-full blur-[120px] -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] -ml-32 -mb-32" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `radial-gradient(#ffffff 0.5px, transparent 0.5px)`,
-          backgroundSize: '32px 32px'
-        }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -417,9 +421,9 @@ const ProcessStepsSectionDark = () => {
                             <button
                               type="button"
                               onClick={handleBack}
-                              className="h-14 px-8 rounded-2xl font-black text-slate-500 hover:text-white hover:bg-white/10 transition-all tracking-widest uppercase text-xs"
+                              className="h-14 px-8 rounded-2xl font-black text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all tracking-widest uppercase text-xs"
                             >
-                              Back
+                              {t("processSteps.back")}
                             </button>
                           )}
                           <button
@@ -428,7 +432,7 @@ const ProcessStepsSectionDark = () => {
                             className="grow h-14 rounded-2xl bg-white text-[#050510] font-black uppercase tracking-widest text-xs shadow-xl shadow-white/10 transition-all hover:bg-slate-200 active:scale-[0.98] disabled:opacity-70 flex items-center justify-center gap-3"
                           >
                             {isSubmitting && <div className="w-4 h-4 border-2 border-[#050510]/20 border-t-[#050510] rounded-full animate-spin" />}
-                            {isSubmitting ? "Processing..." : (step.primaryLabel || "Next Step")}
+                            {isSubmitting ? t("processSteps.submitting") : (step.primaryLabel || t("processSteps.nextStepFallback"))}
                           </button>
                         </div>
                         
@@ -440,9 +444,9 @@ const ProcessStepsSectionDark = () => {
                       <div className="w-24 h-24 bg-green-500/10 rounded-[2rem] flex items-center justify-center text-green-400 mb-8 shadow-inner border border-green-500/20">
                         <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
                       </div>
-                      <h3 className="text-4xl font-black text-white mb-4 tracking-tight">Request Received</h3>
+                      <h3 className="text-4xl font-black text-white mb-4 tracking-tight">{t("processSteps.success.title")}</h3>
                       <p className="text-slate-400 font-medium max-w-sm mx-auto mb-10">
-                        We've received your request. Our team will review the details and get back to you within 24 hours.
+                        {t("processSteps.success.body")}
                       </p>
                       
                       <div className="flex flex-col sm:flex-row gap-4 w-full">
@@ -450,13 +454,13 @@ const ProcessStepsSectionDark = () => {
                           onClick={() => { setSubmitted(false); setCurrentStep(0); setFormData({ name: "", email: "", message: "", service: [], additionalDetails: "", communicationChannel: "", updateCadence: "", phone: "" }); }}
                           className="flex-1 h-14 rounded-2xl bg-white/5 text-white border border-white/10 font-bold tracking-wide text-sm transition-all hover:bg-white/10"
                         >
-                          New Request
+                          {t("processSteps.success.newRequest")}
                         </button>
                         <a 
                           href="https://devclient.vacei.com/onboarding" 
                           className="flex-1 flex items-center justify-center h-14 rounded-2xl bg-white text-[#050510] font-bold tracking-wide text-sm shadow-xl shadow-white/10 transition-all hover:bg-slate-200"
                         >
-                          Register Now
+                          {t("processSteps.success.registerNow")}
                         </a>
                       </div>
                     </div>
@@ -468,13 +472,13 @@ const ProcessStepsSectionDark = () => {
 
           <div className="relative lg:pl-10 h-full flex flex-col justify-center lg:order-2">
             <div className="mb-10">
-              <h2 className="text-sm font-black text-primary-blue uppercase tracking-[0.2em] mb-4">Register to receive your quote</h2>
-              <h3 className="text-4xl sm:text-5xl font-black text-white tracking-tight leading-[1.1] mb-6">
-                Start with a <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Structured Workspace</span>
+              <h2 className="text-sm font-black text-primary-blue uppercase tracking-[0.2em] mb-4">{t("processSteps.columnTitle")}</h2>
+              <h3 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
+                {t("processSteps.columnHeadingLine1")}<br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">{t("processSteps.columnHeadingAccent")}</span>
               </h3>
-              <p className="text-slate-400 font-medium leading-relaxed">
-                To receive an instant quote or proposals through VACEI, you first create your workspace. This allows your requests, documents, and advisor communication to stay structured from the beginning.
+              <p className="text-slate-600 font-medium leading-relaxed">
+                {t("processSteps.columnBody")}
               </p>
             </div>
 
@@ -489,15 +493,15 @@ const ProcessStepsSectionDark = () => {
                     className={cn(
                       "group relative rounded-3xl p-5 sm:p-6 transition-all duration-500 border",
                       isActive
-                        ? "bg-[#1A1D2B] border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] scale-[1.02] z-20"
-                        : "bg-white/[0.03] border-transparent opacity-60 hover:opacity-100 hover:bg-white/[0.05]"
+                        ? "bg-white border-slate-200 shadow-xl shadow-slate-200/50 scale-[1.02] z-20"
+                        : "bg-slate-100/80 border-slate-200/80 opacity-90 hover:opacity-100 hover:bg-slate-50"
                     )}
                   >
                     <div className="flex items-start gap-5">
                       <div className={cn(
                         "w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500",
                         isActive ? "bg-primary-blue text-white rotate-3 shadow-lg shadow-primary-blue/40" :
-                          isPast ? "bg-green-500/20 text-green-400" : "bg-white/5 text-slate-500"
+                          isPast ? "bg-emerald-100 text-emerald-600" : "bg-slate-200 text-slate-500"
                       )}>
                         {isPast ? (
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
@@ -510,7 +514,7 @@ const ProcessStepsSectionDark = () => {
                         <div className="flex items-center justify-between mb-1">
                           <h4 className={cn(
                             "text-lg font-black transition-colors",
-                            isActive ? "text-white" : "text-slate-400"
+                            isActive ? "text-slate-900" : "text-slate-500"
                           )}>
                             {s.title}
                           </h4>
@@ -519,7 +523,7 @@ const ProcessStepsSectionDark = () => {
                           )}
                         </div>
                         {(isActive || isPast) && (
-                          <p className="text-sm font-medium text-slate-400 leading-relaxed overflow-hidden">
+                          <p className="text-sm font-medium text-slate-600 leading-relaxed overflow-hidden">
                             {s.description}
                           </p>
                         )}
@@ -534,24 +538,25 @@ const ProcessStepsSectionDark = () => {
               })}
             </div>
 
-            <div className="mt-12 p-8 rounded-[2rem] bg-gradient-to-br from-white/10 to-transparent border border-white/5 text-white relative overflow-hidden backdrop-blur-sm">
+            <div className="mt-12 p-8 rounded-[2rem] bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-100 text-slate-900 relative overflow-hidden">
               <div className="relative z-10">
-                <p className="text-blue-300 text-xs font-black uppercase tracking-widest mb-2">Platform Power</p>
-                <p className="text-lg font-bold leading-snug">
-                  Experience the future of <br />corporate management.
+                <p className="text-blue-600 text-xs font-black uppercase tracking-widest mb-2">{t("processSteps.platformPowerLabel")}</p>
+                <p className="text-lg font-bold leading-snug text-slate-800">
+                  {t("processSteps.platformPowerLine1")} <br />
+                  {t("processSteps.platformPowerLine2")}
                 </p>
               </div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-blue/20 rounded-full -mr-16 -mt-16 blur-2xl" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-blue/15 rounded-full -mr-16 -mt-16 blur-2xl" />
             </div>
 
             <div className="mt-6">
               <a 
                 href="https://devclient.vacei.com/onboarding" 
-                className="group relative flex w-full items-center justify-center h-16 rounded-[1.5rem] bg-[#15162d] border border-white/10 text-white font-black tracking-wide text-sm transition-all hover:bg-white/5 hover:border-primary-blue/50 overflow-hidden shadow-lg"
+                className="group relative flex w-full items-center justify-center h-16 rounded-[1.5rem] bg-slate-900 border border-slate-800 text-white font-black tracking-wide text-sm transition-all hover:bg-slate-800 hover:border-primary-blue/50 overflow-hidden shadow-lg"
               >
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-blue/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 uppercase flex items-center gap-3">
-                  Register Directly
+                  {t("processSteps.registerDirectly")}
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                 </span>
               </a>

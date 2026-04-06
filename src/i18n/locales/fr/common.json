@@ -1,0 +1,112 @@
+{
+  "brand": "VACEI",
+  "glossary": {
+    "getInstantQuote": "Get Instant Quote",
+    "bookDemo": "Book a Demo",
+    "partnerPortal": "Partner Portal",
+    "requestsProposals": "Requests & Proposals"
+  },
+  "language": {
+    "label": "Langue",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch",
+    "es": "Español",
+    "it": "Italiano",
+    "nl": "Nederlands"
+  },
+  "nav": {
+    "home": "Accueil",
+    "platform": "Plateforme",
+    "services": "Services",
+    "partners": "Partenaires",
+    "pricing": "Tarifs",
+    "resources": "Ressources",
+    "login": "Connexion",
+    "getQuote": "Devis instantané",
+    "registerQuote": "S’inscrire pour un devis instantané",
+    "ourServices": "Nos services",
+    "portals": "Portails",
+    "resourcesCompany": "Ressources et entreprise",
+    "unifiedServices": "Services unifiés",
+    "unifiedServicesBody": "De la création d’entreprise à la préparation audit, simplifiez vos opérations avec des flux pilotés par des experts.",
+    "exploreMethodology": "Découvrir la méthode",
+    "securePlatform": "Plateforme sécurisée",
+    "securePlatformBody": "Accédez à votre portail client, lancez des audits IA et gérez les données d’entité en toute sécurité.",
+    "systemOk": "Système OK",
+    "goToDashboard": "Aller au tableau de bord",
+    "auditReadiness": "Préparation à l’audit",
+    "auditReadinessBody": "Les étapes concrètes pour préparer vos dossiers au regard des exigences de conformité.",
+    "readNow": "Lire",
+    "newGuide": "Nouveau guide",
+    "product": {
+      "aiReview": "AI Review",
+      "ourTechnology": "Notre technologie",
+      "cpePodcast": "CPE et podcast"
+    },
+    "portal": {
+      "client": "Portail client",
+      "accounting": "Portail comptable",
+      "audit": "Portail audit"
+    },
+    "resource": {
+      "insights": "Insights",
+      "howItWorks": "Fonctionnement",
+      "about": "À propos de VACEI",
+      "faqs": "FAQ",
+      "contact": "Contact",
+      "security": "Sécurité et conformité"
+    },
+    "sidebar": {
+      "description": "VACEI est un cabinet moderne de comptabilité, d’audit et de services aux sociétés, structuré autour d’une plateforme numérique unique. Nous couvrons comptabilité, conformité, droit des sociétés et audit de bout en bout, avec notre propre technologie pour plus de clarté, de rapidité et de visibilité.",
+      "quickActions": "Actions rapides",
+      "requestQuoteTitle": "Demander un devis",
+      "requestQuoteSubtitle": "Décrivez vos besoins en quelques étapes.",
+      "exploreServicesTitle": "Explorer les services",
+      "exploreServicesSubtitle": "Comptabilité, audit et services sociétés.",
+      "contactInfo": "Coordonnées",
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "followUs": "Suivez-nous"
+    }
+  },
+  "footer": {
+    "tagline": "VACEI est l’espace de travail numérique structuré où entreprises et fondateurs gèrent services professionnels, conformité et flux dans un environnement sécurisé.",
+    "platform": "Plateforme",
+    "overview": "Vue d’ensemble",
+    "howItWorks": "Fonctionnement",
+    "pricing": "Tarifs",
+    "security": "Sécurité et conformité",
+    "whyVacei": "Pourquoi VACEI",
+    "services": "Services",
+    "corporate": "Services sociétés",
+    "audit": "Audit et assurance",
+    "accounting": "Comptabilité",
+    "tax": "Fiscalité et conformité",
+    "legal": "Services juridiques",
+    "vatPayroll": "TVA et paie",
+    "company": "Entreprise",
+    "about": "À propos de VACEI",
+    "faqs": "FAQ",
+    "insights": "Insights",
+    "whiteLabelLanding": "Plateforme marque blanche",
+    "partnerPlatformLanding": "Plateforme Partenaires",
+    "contact": "Contact",
+    "cpePodcast": "CPE et podcast",
+    "contactUs": "Contact",
+    "disclaimer": "Les prestations professionnelles via VACEI sont fournies par un réseau de cabinets vérifiés. VACEI fournit l’environnement numérique pour gérer ces missions efficacement et en toute sécurité.",
+    "terms": "Conditions générales",
+    "privacy": "Politique de confidentialité",
+    "cookies": "Politique cookies",
+    "copyright": "© 2026 What VACEI Is All right reserved"
+  },
+  "pageHeader": {
+    "home": "Accueil"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "body": "We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our use of cookies.",
+    "accept": "Accept",
+    "dismiss": "Dismiss"
+  }
+}

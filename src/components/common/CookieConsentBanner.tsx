@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const COOKIE_NAME = "vacei_cookie_consent";
 
@@ -11,6 +12,7 @@ function hasConsent() {
 }
 
 export default function CookieConsentBanner() {
+  const { t } = useTranslation("common");
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -42,11 +44,8 @@ export default function CookieConsentBanner() {
         >
           <div className="max-w-4xl w-full rounded-2xl bg-[#1e2040] text-white shadow-[0_18px_50px_rgba(0,0,0,0.5)] border border-white/10 px-4 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <div className="flex-1 text-sm sm:text-[13px] leading-relaxed">
-              <p className="font-semibold mb-1">We use cookies</p>
-              <p className="text-white/80">
-                We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our
-                use of cookies.
-              </p>
+              <p className="font-semibold mb-1">{t("cookieConsent.title")}</p>
+              <p className="text-white/80">{t("cookieConsent.body")}</p>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 self-stretch sm:self-auto">
               <button
@@ -54,7 +53,7 @@ export default function CookieConsentBanner() {
                 onClick={accept}
                 className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-white text-[#1e2040] text-sm font-semibold hover:bg-gray-100 transition-colors"
               >
-                Accept
+                {t("cookieConsent.accept")}
               </button>
               {/* Optional secondary link; currently just closes banner visually */}
               <button
@@ -62,7 +61,7 @@ export default function CookieConsentBanner() {
                 onClick={() => setVisible(false)}
                 className="hidden sm:inline-flex px-3 py-2 text-xs font-medium text-white/70 hover:text-white"
               >
-                Dismiss
+                {t("cookieConsent.dismiss")}
               </button>
             </div>
           </div>

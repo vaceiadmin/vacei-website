@@ -65,6 +65,15 @@
   --sidebar-bg-start: #26294a;
   --sidebar-bg-end: #1a1d35;
   --overlay-bg: rgba(0, 0, 0, 0.3);
+  /* Scrollbar accents (sidebar + drawers) */
+  --scrollbar-sidebar-thumb: linear-gradient(
+    180deg,
+    #5b67ff 0%,
+    var(--primary-blue) 45%,
+    #7c3aed 100%
+  );
+  --scrollbar-sidebar-glow: rgba(91, 103, 255, 0.45);
+  --scrollbar-sidebar-track: rgba(255, 255, 255, 0.06);
 
   /* Form / input (no hardcoded hex in components) */
   --input-border: #e1e5ee;
@@ -135,6 +144,73 @@
   }
 
   --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
+}
+
+/* Nav — custom scrollbars (desktop sidebar gradient panel + mobile drawer) */
+.nav-sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 var(--scrollbar-sidebar-track);
+}
+
+.nav-sidebar-scrollbar::-webkit-scrollbar {
+  width: 9px;
+}
+
+.nav-sidebar-scrollbar::-webkit-scrollbar-track {
+  margin: 10px 0 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    var(--scrollbar-sidebar-track) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav-sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-sidebar-thumb);
+  border-radius: 100px;
+  border: 2px solid rgba(26, 29, 53, 0.85);
+  box-shadow:
+    0 0 14px var(--scrollbar-sidebar-glow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.nav-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #7c83ff 0%,
+    #4f5dff 50%,
+    #8b5cf6 100%
+  );
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.55);
+}
+
+.nav-drawer-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 73, 230, 0.8) rgba(241, 245, 249, 0.95);
+}
+
+.nav-drawer-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nav-drawer-scrollbar::-webkit-scrollbar-track {
+  margin: 6px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+  border-radius: 100px;
+}
+
+.nav-drawer-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #93a0ff 0%, var(--primary-blue) 55%, #4f46e5 100%);
+  border-radius: 100px;
+  border: 2px solid #f1f5f9;
+  box-shadow: 0 1px 6px rgba(59, 73, 230, 0.2);
+}
+
+.nav-drawer-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #a5b0ff 0%, #525ceb 100%);
 }
 
 /* Utility Classes for Background Colors */

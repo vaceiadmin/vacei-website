@@ -20,6 +20,9 @@
 # production
 /build
 
+# i18n manual translation packets (remove this line to commit WIP)
+/manual-translation/
+
 # misc
 .DS_Store
 *.pem

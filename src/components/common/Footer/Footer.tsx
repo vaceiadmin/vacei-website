@@ -1,24 +1,26 @@
 "use client"
 
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
+import LocalizedLink from '@/components/common/LocalizedLink'
+import { stripLocaleFromPathname } from '@/lib/localized-path'
 import GetStartedHero from './GetStartedHero'
 
 const Logo = '/assets/images/Logo.png'
 
 const Footer = () => {
   const pathname = usePathname()
+  const { t } = useTranslation('common')
+  const barePath = stripLocaleFromPathname(pathname)
   const hideChromeRoutes = [
     '/privacy-policy',
     '/terms-and-conditions',
     '/cookie-policy',
-    '/white-label-platform',
-    '/partners-platform',
   ]
 
-  if (hideChromeRoutes.includes(pathname)) {
+  if (hideChromeRoutes.includes(barePath)) {
     return null
   }
 
@@ -57,7 +59,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
           {/* Column 1 - Logo and Description */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-3">
+            <LocalizedLink href="/" className="flex items-center gap-3">
               <div className="flex items-center justify-center">
                 <Image
                   src={Logo}
@@ -67,10 +69,10 @@ const Footer = () => {
                   className="object-contain"
                 />
               </div>
-            </Link>
+            </LocalizedLink>
 
             <p className="text-sm text-gray leading-relaxed">
-              VACEI is the structured digital workspace where businesses and founders manage professional services, compliance, and workflows in one secure environment.
+              {t('footer.tagline')}
             </p>
 
             <div className="flex items-center gap-4 pt-2">
@@ -90,106 +92,116 @@ const Footer = () => {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">Platform</h3>
+            <h3 className="text-text-dark font-bold text-base">{t('footer.platform')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Overview
-                </Link>
+                <LocalizedLink href="/" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.overview')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/how-it-works" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  How It Works
-                </Link>
+                <LocalizedLink href="/how-it-works" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.howItWorks')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/pricing" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Pricing
-                </Link>
+                <LocalizedLink href="/pricing" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.pricing')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/security-compliance" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Security & Compliance
-                </Link>
+                <LocalizedLink href="/security-compliance" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.security')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/#why-vacei" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Why VACEI
-                </Link>
+                <LocalizedLink href="/#why-vacei" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.whyVacei')}
+                </LocalizedLink>
               </li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">Services</h3>
+            <h3 className="text-text-dark font-bold text-base">{t('footer.services')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/services/corporate" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Corporate Services
-                </Link>
+                <LocalizedLink href="/services/corporate" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.corporate')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/services/audit" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Audit & Assurance
-                </Link>
+                <LocalizedLink href="/services/audit" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.audit')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/services/accounting" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Accounting & Bookkeeping
-                </Link>
+                <LocalizedLink href="/services/accounting" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.accounting')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/services/tax" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Tax & Compliance
-                </Link>
+                <LocalizedLink href="/services/tax" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.tax')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/services/legal" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Legal Services
-                </Link>
+                <LocalizedLink href="/services/legal" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.legal')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/services/vat-payroll" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  VAT & Payroll
-                </Link>
+                <LocalizedLink href="/services/vat-payroll" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.vatPayroll')}
+                </LocalizedLink>
               </li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">Company</h3>
+            <h3 className="text-text-dark font-bold text-base">{t('footer.company')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  About VACEI
-                </Link>
+                <LocalizedLink href="/about" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.about')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/faq" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  FAQs
-                </Link>
+                <LocalizedLink href="/faq" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.faqs')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/insights" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Insights
-                </Link>
+                <LocalizedLink href="/insights" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.insights')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  Contact Us
-                </Link>
+                <LocalizedLink href="/white-label-platform" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.whiteLabelLanding')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link href="/cpe-podcast" className="text-sm text-gray hover:text-primary-blue transition-colors">
-                  CPE & Podcast
-                </Link>
+                <LocalizedLink href="/partners-platform" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.partnerPlatformLanding')}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink href="/contact" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.contact')}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink href="/cpe" className="text-sm text-gray hover:text-primary-blue transition-colors">
+                  {t('footer.cpePodcast')}
+                </LocalizedLink>
               </li>
             </ul>
           </div>
 
           {/* Column 5 - Contact Us */}
           <div className="space-y-4">
-            <h3 className="text-text-dark font-bold text-base">Contact Us</h3>
+            <h3 className="text-text-dark font-bold text-base">{t('footer.contactUs')}</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-2">
                 <span className="w-10 h-10 rounded-full bg-purple-bg text-white flex items-center justify-center flex-shrink-0">
@@ -232,8 +244,7 @@ const Footer = () => {
         </div>
         <div className="mt-12 pt-8 border-t border-gray-100">
           <p className="text-xs text-gray-400 font-medium leading-relaxed max-w-4xl">
-            Professional services through VACEI are delivered by a network of verified professional firms. 
-            VACEI provide the digital environment to manage these engagements efficiently and securely.
+            {t('footer.disclaimer')}
           </p>
         </div>
       </div>
@@ -243,20 +254,20 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray">
             <div className="flex flex-wrap items-center gap-4">
-              <Link href="/terms-and-conditions" className="hover:text-primary-blue transition-colors">
-                Terms & Conditions
-              </Link>
+              <LocalizedLink href="/terms-and-conditions" className="hover:text-primary-blue transition-colors">
+                {t('footer.terms')}
+              </LocalizedLink>
               <span className="text-light-gray">|</span>
-              <Link href="/privacy-policy" className="hover:text-primary-blue transition-colors">
-                Privacy Policy
-              </Link>
+              <LocalizedLink href="/privacy-policy" className="hover:text-primary-blue transition-colors">
+                {t('footer.privacy')}
+              </LocalizedLink>
               <span className="text-light-gray">|</span>
-              <Link href="/cookie-policy" className="hover:text-primary-blue transition-colors">
-                Cookie Policy
-              </Link>
+              <LocalizedLink href="/cookie-policy" className="hover:text-primary-blue transition-colors">
+                {t('footer.cookies')}
+              </LocalizedLink>
             </div>
             <div className="text-light-gray">
-              © 2026 What VACEI Is All right reserved
+              {t('footer.copyright')}
             </div>
           </div>
         </div>

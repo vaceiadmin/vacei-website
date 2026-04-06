@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import Link from "next/link";
+import React, { useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/common/LocalizedLink";
 import { ArrowRight, Building2, Rocket, Sparkles } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
@@ -7,8 +8,14 @@ import { cn } from "@/lib/utils";
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 
 const WorkspaceEntrySection = () => {
+  const { t } = useTranslation("home");
   const { reduceMotion } = usePerformance();
   const sectionRef = useRef(null);
+
+  const card1Bullets = useMemo(
+    () => (t("workspaceEntry.card1Bullets", { returnObjects: true }) as string[]) ?? [],
+    [t]
+  );
 
   return (
     <section
@@ -51,13 +58,13 @@ const WorkspaceEntrySection = () => {
                     <div className="absolute inset-0 bg-blue-400 blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-700" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-400/80 group-hover:text-blue-400 transition-colors duration-500">Active Entities</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-400/80 group-hover:text-blue-400 transition-colors duration-500">{t("workspaceEntry.activeEntities")}</span>
                   </div>
                 </div>
 
                 <h3 className="text-2xl sm:text-4xl font-extrabold text-white leading-[1.2] mb-6">
-                  Create a workspace for your <span className="relative inline-block text-blue-400">
-                    business.
+                  {t("workspaceEntry.card1TitleBefore")}<span className="relative inline-block text-blue-400">
+                    {t("workspaceEntry.card1TitleAccent")}
                     <svg className="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 200 8" fill="none">
                       <path d="M1 7C50 2 150 2 199 7" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" />
                     </svg>
@@ -65,18 +72,12 @@ const WorkspaceEntrySection = () => {
                 </h3>
 
                 <p className="text-[15px] text-slate-400 leading-relaxed mb-6 max-w-md font-medium">
-                  Manage all your advisors in one place. Upload documents, track deadlines, respond to requests, and coordinate professional services from one dashboard.
+                  {t("workspaceEntry.card1Body")}
                 </p>
 
                 <div className="space-y-3 mb-auto">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">What you can do</h4>
-                  {[
-                    "Manage multiple companies",
-                    "Centralise documents",
-                    "Track compliance and filings",
-                    "Keep all advisors in one place",
-                    "Monitor progress across engagements"
-                  ].map((text, idx) => (
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">{t("workspaceEntry.whatYouCanDo")}</h4>
+                  {card1Bullets.map((text, idx) => (
                     <div key={idx} className="flex items-center gap-3 text-sm font-bold text-slate-400 group-hover:text-slate-300 transition-colors duration-500">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-400 transition-all duration-500 shadow-[0_0_8px_rgba(59,130,246,0)] group-hover:shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
                       {text}
@@ -86,14 +87,14 @@ const WorkspaceEntrySection = () => {
 
                 <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
                   <GetInstantQuoteButton
-                    text="Create Workspace"
-                    href="/quote#process-steps"
+                    text={t("workspaceEntry.createWorkspaceCta")}
+                    href="https://client.vacei.com/onboarding"
                     className="h-[52px] px-8 text-sm"
                   />
 
                   <div className="flex items-center gap-2.5 py-1.5 px-4 rounded-full bg-blue-900/40 border border-blue-500/30">
                     <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
-                    <span className="text-[11px] font-bold text-blue-300">One-click Sync</span>
+                    <span className="text-[11px] font-bold text-blue-300">{t("workspaceEntry.oneClickSync")}</span>
                   </div>
                 </div>
               </div>
@@ -118,31 +119,31 @@ const WorkspaceEntrySection = () => {
                     <div className="absolute inset-0 bg-blue-600/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-100/50 group-hover:text-blue-400 transition-colors duration-500">New Founders</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-100/50 group-hover:text-blue-400 transition-colors duration-500">{t("workspaceEntry.newFounders")}</span>
                   </div>
                 </div>
 
                 <h3 className="text-2xl sm:text-4xl font-extrabold text-white leading-[1.2] mb-6">
-                  Start your company and <span className="text-blue-400">scale from day one.</span>
+                  {t("workspaceEntry.card2Title")}<span className="text-blue-400">{t("workspaceEntry.card2TitleAccent")}</span>
                 </h3>
 
                 <p className="text-base text-blue-100/40 leading-relaxed mb-auto max-w-md font-medium">
-                  Set up your company and centralise incorporation, approvals, compliance, and ongoing support in the same workspace you will use to run the business.
+                  {t("workspaceEntry.card2Body")}
                 </p>
 
                 <div className="mt-10 flex flex-wrap items-center gap-4">
                   <GetInstantQuoteButton
-                    text="Start Incorporation"
-                    href="/quote#process-steps"
+                    text={t("workspaceEntry.startIncorporationCta")}
+                    href="https://client.vacei.com/onboarding"
                     className="h-[52px] px-8 text-sm bg-white text-slate-900 border-none hover:bg-slate-50 shadow-white/5"
                     hasShadow={false}
                   />
-                  <Link
+                  <LocalizedLink
                     href="/contact"
                     className="h-[52px] px-8 text-sm flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all backdrop-blur-sm"
                   >
-                    Book a Consultation
-                  </Link>
+                    {t("workspaceEntry.bookConsultationCta")}
+                  </LocalizedLink>
                 </div>
               </div>
             </div>

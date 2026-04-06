@@ -1,67 +1,60 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import TextAnimation from "@/components/common/TextAnimation";
 import { FadeInUp } from "@/components/common/Animations";
 import SectionBadge from "@/components/common/SectionBadge";
-
-import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import { usePagesTranslation } from "@/hooks/usePagesTranslation";
+
+const STEP_ICONS = [
+  <svg key="s0" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+    />
+  </svg>,
+  <svg key="s1" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+    />
+  </svg>,
+  <svg key="s2" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+    />
+  </svg>,
+  <svg key="s3" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>,
+];
 
 const QuoteProcess = () => {
+  const { t } = usePagesTranslation("pricing");
   const { isIPhone, isLowPerformance } = usePerformance();
-  const steps = [
-    {
-      number: "01",
-      title: "Initial Discussion",
-      description: "Share your requirements and business context with our team.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      )
-    },
-    {
-      number: "02",
-      title: "Scope Assessment",
-      description: "We review your needs and assess the scope, complexity, and requirements.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      )
-    },
-    {
-      number: "03",
-      title: "Clear Quote Provided",
-      description: "Receive a detailed quote outlining services, scope, pricing structure, and assumptions.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      )
-    },
-    {
-      number: "04",
-      title: "Review & Confirm",
-      description: "Review the proposal at your own pace. No pressure, no obligation to proceed.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      )
-    }
-  ];
 
-  const quoteIncludes = [
-    "Services included",
-    "Agreed scope",
-    "Pricing structure",
-    "Assumptions or dependencies",
-    "Timeline and deliverables",
-    "Terms and conditions"
-  ];
+  const steps = useMemo(
+    () =>
+      [0, 1, 2, 3].map((i) => ({
+        number: t(`quoteProcess.steps.${i}.number`),
+        title: t(`quoteProcess.steps.${i}.title`),
+        description: t(`quoteProcess.steps.${i}.description`),
+        icon: STEP_ICONS[i],
+      })),
+    [t]
+  );
+
+  const quoteIncludes = [0, 1, 2, 3, 4, 5].map((i) => t(`quoteProcess.quoteIncludes.${i}`));
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden bg-[#D8E5E5]">
@@ -78,18 +71,16 @@ const QuoteProcess = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <FadeInUp>
-            <SectionBadge 
-              text="Quote Process" 
-              className="bg-white border border-blue-100 text-[#3b49e6] shadow-sm" 
+            <SectionBadge
+              text={t("quoteProcess.badge")}
+              className="bg-white border border-blue-100 text-[#3b49e6] shadow-sm"
             />
             <TextAnimation
-              text="How Quotes Work"
+              text={t("quoteProcess.title")}
               as="h2"
               className="mt-6 text-3xl md:text-5xl font-medium text-[#1a1c35] tracking-tight"
             />
-            <p className="mt-4 text-gray-600 text-lg max-w-3xl mx-auto">
-              A simple, transparent process from initial discussion to confirmed pricing.
-            </p>
+            <p className="mt-4 text-gray-600 text-lg max-w-3xl mx-auto">{t("quoteProcess.subtitle")}</p>
           </FadeInUp>
         </div>
 
@@ -152,16 +143,11 @@ const QuoteProcess = () => {
                   <svg className="w-4 h-4 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="text-sm font-semibold text-[#3b49e6]">What's Included</span>
+                  <span className="text-sm font-semibold text-[#3b49e6]">{t("quoteProcess.includesBadge")}</span>
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1c35] mb-4">
-                  Every Quote Outlines
-                </h3>
-                <p className="text-gray-600 mb-8 leading-relaxed">
-                  Once initial information is reviewed, VACEI provides a clear quote that ensures 
-                  complete transparency and understanding before any work begins.
-                </p>
+                <h3 className="text-2xl md:text-3xl font-bold text-[#1a1c35] mb-4">{t("quoteProcess.everyTitle")}</h3>
+                <p className="text-gray-600 mb-8 leading-relaxed">{t("quoteProcess.everyBody")}</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {quoteIncludes.map((item, idx) => (
@@ -196,8 +182,8 @@ const QuoteProcess = () => {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="font-bold text-heading text-sm">Service Quote</h4>
-                        <p className="text-xs text-gray">Tailored Proposal</p>
+                        <h4 className="font-bold text-heading text-sm">{t("quoteProcess.mockTitle")}</h4>
+                        <p className="text-xs text-gray">{t("quoteProcess.mockSubtitle")}</p>
                       </div>
                     </div>
 
@@ -209,7 +195,7 @@ const QuoteProcess = () => {
                     ))}
 
                     <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
-                      <span className="text-xs text-gray">Pricing confirmed before work starts</span>
+                      <span className="text-xs text-gray">{t("quoteProcess.mockFooter")}</span>
                       <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                         <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -247,11 +233,8 @@ const QuoteProcess = () => {
             </svg>
           </div>
           <div>
-            <h4 className="font-bold text-heading mb-2">Scope Changes</h4>
-            <p className="text-sm text-gray leading-relaxed">
-              If scope changes during an engagement, pricing is discussed and agreed before any 
-              additional work is carried out. We believe in complete transparency at every stage.
-            </p>
+            <h4 className="font-bold text-heading mb-2">{t("quoteProcess.scopeTitle")}</h4>
+            <p className="text-sm text-gray leading-relaxed">{t("quoteProcess.scopeBody")}</p>
           </div>
         </motion.div>
       </div>

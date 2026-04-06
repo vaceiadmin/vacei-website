@@ -1,9 +1,13 @@
+"use client";
+
 import React, { useState } from "react";
-import Link from "next/link";
+import LocalizedLink from "@/components/common/LocalizedLink";
 import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
+  const { t } = useTranslation("home");
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasVideoError, setHasVideoError] = useState(false);
 
@@ -22,42 +26,53 @@ const HeroSection = () => {
         <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
           <div className="relative mb-6">
             <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.05] tracking-tight">
-              Receive proposals. <br />
-              Choose your advisors. <br />
-              <span className="text-primary-blue">Manage everything.</span>
+              {t("hero.titleLine1")} <br />
+              {t("hero.titleLine2")} <br />
+              <span className="text-primary-blue">{t("hero.titleHighlight")}</span>
             </h1>
           </div>
 
           <div className="space-y-6 max-w-xl mt-4">
             <p className="text-gray-400 text-base sm:text-lg leading-relaxed text-balance font-medium">
-              VACEI is the structured digital workspace where businesses can request professional services, receive proposals from verified firms, and manage documents, compliance, and workflows in one place.
+              {t("hero.body")}
               <br /><br />
-              Register once to receive your quote, invite your advisors, and manage everything through one secure platform.
+              {t("hero.body2")}
             </p>
           </div>
 
-          <div className="mt-8 border-l-2 border-primary-blue/40 pl-5 py-2">
-            <p className="text-sm sm:text-[15px] text-gray-500 italic leading-relaxed font-medium">
-              From onboarding to ongoing compliance, everything runs through one workspace.
-            </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-12 mb-8">
-            <Link
+
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-12 mb-6">
+            <LocalizedLink
               href="/quote"
               className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-gray-200 text-slate-900 px-8 py-3.5 text-[15px] font-bold shadow-[0_4px_14px_rgba(255,255,255,0.1)] transition-all hover:scale-105"
             >
-              <span>Register to Get Instant Quote</span>
+              <span>{t("hero.quoteCta")}</span>
               <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </LocalizedLink>
 
-            <Link
+            <LocalizedLink
               href="/contact"
               className="group flex items-center justify-center gap-2 rounded-full border border-gray-700 bg-[#0A0A0F]/50 text-white px-8 py-3.5 text-[15px] font-medium transition-all hover:bg-white/5 hover:border-gray-500 hover:scale-105"
             >
-              <span>Book a Demo</span>
+              <span>{t("hero.demoCta")}</span>
               <ArrowRight className="w-4 h-4 ml-1 text-primary-blue transition-transform group-hover:translate-x-1" />
-            </Link>
+            </LocalizedLink>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8 lg:mb-0">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary-blue"></div>
+              <span className="text-gray-400 text-sm font-medium">{t("hero.badge1")}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary-blue"></div>
+              <span className="text-gray-400 text-sm font-medium">{t("hero.badge2")}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary-blue"></div>
+              <span className="text-gray-400 text-sm font-medium">{t("hero.badge3")}</span>
+            </div>
           </div>
         </div>
 
@@ -118,6 +133,43 @@ const HeroSection = () => {
         </div>
       </div>
       </GradientContainer>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+      `}} />
+
+      {/* Bottom Services Strip (Marquee) */}
+      <div className="w-full bg-white relative py-6 sm:py-8 border-b border-gray-100 overflow-hidden">
+        {/* Subtle fade effect on the edges */}
+        <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+        
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex gap-x-4 sm:gap-x-6 px-2 sm:px-3">
+              {[
+                "Accounting & Bookkeeping",
+                "Audit & Assurance",
+                "Tax & Compliance",
+                "Legal Services",
+                "VAT & Payroll",
+                "Corporate Services",
+              ].map((service, index) => (
+                <div key={index} className="flex items-center gap-2.5 sm:gap-3 px-5 sm:px-7 py-2.5 sm:py-3 bg-slate-50 border border-slate-200/60 rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-blue/5 hover:border-primary-blue/30 hover:bg-white cursor-default group">
+                  <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-primary-blue shadow-[0_0_8px_rgba(37,99,235,0.7)] shrink-0 transition-transform group-hover:scale-125"></div>
+                  <span className="text-slate-700 font-bold text-[13px] sm:text-[14px] uppercase tracking-wider whitespace-nowrap">{service}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

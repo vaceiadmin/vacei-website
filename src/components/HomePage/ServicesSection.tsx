@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/common/LocalizedLink";
 import { servicesData } from "@/data/servicesData";
 import { useIsSafari } from "@/hooks/use-safari";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
@@ -19,30 +22,22 @@ interface BaseCard {
 }
 
 const ServicesSection = () => {
+    const { t } = useTranslation("home");
     const [activeTab, setActiveTab] = useState<"services" | "products">("services");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [visibleItems, setVisibleItems] = useState(3);
     const isSafari = useIsSafari();
     const { isIPhone, isLowPerformance } = usePerformance();
 
-    const serviceTitleMap: Record<string, string> = {
-        "accounting-finance": "Accounting & Bookkeeping",
-        "audit-assurance": "Audit & Assurance",
-        "corporate-csp-services": "Corporate Services",
-        "advisory-growth": "Legal Services",
-        "tax-compliance": "Tax Advisory & Compliance",
-    };
+    const serviceTitleMap = useMemo(() => {
+        const raw = t("servicesSection.serviceTitles", { returnObjects: true }) as Record<string, string>;
+        return raw && typeof raw === "object" ? raw : {};
+    }, [t]);
 
-    const serviceSubtitleMap: Record<string, string> = {
-        "accounting-finance": "Accounting support, bookkeeping workflows, document handling, and structured financial coordination.",
-        "tax-compliance": "Tax filings, advisory work, deadlines, supporting records, and ongoing tax support.",
-        "audit-assurance": "Statutory audits, assurance engagements, working paper coordination, and milestone-driven delivery.",
-        "corporate-csp-services": "Company secretarial services, governance support, statutory maintenance, and corporate administration.",
-        "regulated-licensing": "Support for licence applications, renewals and key regulatory submissions.",
-        "advisory-growth": "Corporate legal support, contracts, transactions, advisory, and cross-border structuring support.",
-        "vat-services": "VAT registrations, VAT returns, compliance support, and indirect tax assistance.",
-        "payroll-employment": "Payroll administration, employment support, and compliance filings.",
-    };
+    const serviceSubtitleMap = useMemo(() => {
+        const raw = t("servicesSection.serviceSubtitles", { returnObjects: true }) as Record<string, string>;
+        return raw && typeof raw === "object" ? raw : {};
+    }, [t]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -58,17 +53,33 @@ const ServicesSection = () => {
     const services: BaseCard[] = servicesData.map((service) => ({
         id: service.id,
         title: serviceTitleMap[service.id] || service.title,
-        subtitle: serviceSubtitleMap[service.id] || "Structured support delivered through one digital platform.",
+        subtitle: serviceSubtitleMap[service.id] || t("servicesSection.defaultSubtitle"),
         link: `/services/${service.slug}`,
-        category: "Service",
+        category: t("servicesSection.categoryService"),
         featureTitles: service.featuresSection?.features.slice(0, 3).map((f) => f.title) ?? [],
     }));
 
-    const products: BaseCard[] = [
-        { id: 1, title: "Client Portal", subtitle: "Documents, queries, and secure communication.", image: "/assets/images/Pyramid 2.png", hoverImage: "/assets/images/portal.png", link: "/portal/client-portal", category: "Platform", badge: "Featured" },
-        { id: 2, title: "Audit Portal", subtitle: "Structured workflows and audit delivery.", image: "/assets/images/Thorus Knot.png", hoverImage: "/assets/images/Audit 1.png", link: "/portal/audit-portal", category: "Platform" },
-        { id: 3, title: "Accounting Portal", subtitle: "Real-time financial dashboard and reporting.", image: "/assets/images/Cube 1.png", hoverImage: "/assets/images/Accounting 1.png", link: "/portal/accounting-portal", category: "Platform", badge: "New" },
-    ];
+    const products: BaseCard[] = useMemo(() => {
+        const copy = t("servicesSection.products", { returnObjects: true }) as
+            | { title: string; subtitle: string; badge?: string }[]
+            | string;
+        const rows = Array.isArray(copy) ? copy : [];
+        const meta = [
+            { id: 1, image: "/assets/images/Pyramid 2.png", hoverImage: "/assets/images/portal.png", link: "/portal/client-portal" },
+            { id: 2, image: "/assets/images/Thorus Knot.png", hoverImage: "/assets/images/Audit 1.png", link: "/portal/audit-portal" },
+            { id: 3, image: "/assets/images/Cube 1.png", hoverImage: "/assets/images/Accounting 1.png", link: "/portal/accounting-portal" },
+        ];
+        return meta.map((m, i) => ({
+            id: m.id,
+            title: rows[i]?.title ?? "",
+            subtitle: rows[i]?.subtitle ?? "",
+            image: m.image,
+            hoverImage: m.hoverImage,
+            link: m.link,
+            category: t("servicesSection.categoryPlatform"),
+            badge: rows[i]?.badge,
+        }));
+    }, [t]);
 
     const activeData = activeTab === "products" ? products : services;
 
@@ -111,14 +122,14 @@ const ServicesSection = () => {
                 <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-20 gap-10">
                     <div className="max-w-2xl">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-black tracking-widest text-blue-600 uppercase mb-6">
-                            Professional Ecosystem
+                            {t("servicesSection.badge")}
                         </div>
                         <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-6">
-                            Professional services through <br />
-                            <span className="text-blue-600">one connected platform</span>
+                            {t("servicesSection.titleLine1")} <br />
+                            <em className="italic text-[#1a5cd7] font-bodoni font-medium">{t("servicesSection.titleHighlight")}</em>
                         </h2>
                         <p className="text-lg text-slate-500 font-medium leading-relaxed">
-                            VACEI helps your business access and manage professional services through one structured workspace.
+                            {t("servicesSection.subtitle")}
                         </p>
                     </div>
 
@@ -133,7 +144,7 @@ const ServicesSection = () => {
                                     activeTab === tab ? "text-white bg-blue-600 shadow-[0_5px_15px_rgba(37,99,235,0.2)]" : "text-slate-400 hover:text-slate-600"
                                 )}
                             >
-                                <span className="relative z-10 uppercase">{tab}</span>
+                                <span className="relative z-10 uppercase">{tab === "services" ? t("servicesSection.tabServices") : t("servicesSection.tabProducts")}</span>
                             </button>
                         ))}
                     </div>
@@ -184,15 +195,15 @@ const ServicesSection = () => {
                                             </p>
 
 
-                                            <Link
+                                            <LocalizedLink
                                                 href={item.link}
                                                 className="group/btn inline-flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-blue-600 transition-all duration-500"
                                             >
-                                                Explore Phase
+                                                {t("servicesSection.explorePhase")}
                                                 <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center group-hover:bg-blue-600 group-hover:border-blue-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 shadow-sm transition-all duration-500">
                                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7-7 7m7-7H3" /></svg>
                                                 </div>
-                                            </Link>
+                                            </LocalizedLink>
                                         </div>
 
                                         {/* Hover Product Preview */}
@@ -205,12 +216,12 @@ const ServicesSection = () => {
                                                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                                                     <h3 className="text-3xl font-black text-slate-900 mb-2">{item.title}</h3>
                                                     <p className="text-slate-600 font-medium mb-8">{item.subtitle}</p>
-                                                    <Link
+                                                    <LocalizedLink
                                                         href={item.link}
                                                         className="w-full py-5 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-xs text-center hover:bg-blue-500 transition-all shadow-[0_10px_30px_rgba(37,99,235,0.3)]"
                                                     >
-                                                        Launch Dashboard
-                                                    </Link>
+                                                        {t("servicesSection.launchDashboard")}
+                                                    </LocalizedLink>
                                                 </div>
                                             </div>
                                         )}

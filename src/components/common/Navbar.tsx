@@ -1,7 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/common/LocalizedLink";
+
+import { stripLocaleFromPathname } from "@/lib/localized-path";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ShieldCheck, BookOpen, Layers } from "lucide-react";
@@ -13,8 +16,12 @@ import { servicesData } from "@/data/servicesData";
 // Logo path from assets
 const Logo = "/assets/images/Logo.png";
 
+type NavDropdownId = "platform" | "services" | "resources";
+
 const Navbar = () => {
   const pathname = usePathname();
+  const { t } = useTranslation("common");
+  const barePath = stripLocaleFromPathname(pathname);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [portalsOpen, setPortalsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
@@ -35,10 +42,8 @@ const Navbar = () => {
     "/privacy-policy",
     "/terms-and-conditions",
     "/cookie-policy",
-    "/white-label-platform",
-    "/partners-platform",
   ];
-  const shouldHideChrome = hideChromeRoutes.includes(pathname);
+  const shouldHideChrome = hideChromeRoutes.includes(barePath);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -289,97 +294,110 @@ const Navbar = () => {
     };
   }, []);
 
-  // Desktop nav links – updated labels aligned across modes.
-  const navLinks = useCompactNav
-    ? [
-      { label: "Home", href: "/" },
-      {
-        label: "Platform",
-        href: "/#platform",
-        hasDropdown: true,
-        isOpen: portalsOpen,
-        setIsOpen: setPortalsOpen,
-      },
-      {
-        label: "Services",
-        href: "/#services",
-        hasDropdown: true,
-        isOpen: servicesOpen,
-        setIsOpen: setServicesOpen,
-      },
-      { label: "Partners", href: "/partners" },
-      { label: "Pricing", href: "/pricing" },
-      {
-        label: "Resources",
-        href: "/resources",
-        hasDropdown: true,
-        isOpen: resourcesOpen,
-        setIsOpen: setResourcesOpen,
-      },
-    ]
-    : [
-      { label: "Home", href: "/" },
-      {
-        label: "Platform",
-        href: "/#platform",
-        hasDropdown: true,
-        isOpen: portalsOpen,
-        setIsOpen: setPortalsOpen,
-      },
-      {
-        label: "Services",
-        href: "/#services",
-        hasDropdown: true,
-        isOpen: servicesOpen,
-        setIsOpen: setServicesOpen,
-      },
-      { label: "Partners", href: "/partners" },
-      { label: "Pricing", href: "/pricing" },
-      {
-        label: "Resources",
-        href: "/resources",
-        hasDropdown: true,
-        isOpen: resourcesOpen,
-        setIsOpen: setResourcesOpen,
-      },
-    ];
+  const navLinks = useMemo(
+    () => [
+          {
+            id: "home",
+            dropdownId: undefined,
+            label: t("nav.home"),
+            href: "/",
+            hasDropdown: false,
+            isOpen: undefined,
+            setIsOpen: undefined,
+          },
+          {
+            id: "platform",
+            dropdownId: "platform" as NavDropdownId,
+            label: t("nav.platform"),
+            href: "/#platform",
+            hasDropdown: true,
+            isOpen: portalsOpen,
+            setIsOpen: setPortalsOpen,
+          },
+          {
+            id: "services",
+            dropdownId: "services" as NavDropdownId,
+            label: t("nav.services"),
+            href: "/#services",
+            hasDropdown: true,
+            isOpen: servicesOpen,
+            setIsOpen: setServicesOpen,
+          },
+          {
+            id: "partners",
+            dropdownId: undefined,
+            label: t("nav.partners"),
+            href: "/partners",
+            hasDropdown: false,
+            isOpen: undefined,
+            setIsOpen: undefined,
+          },
+          {
+            id: "pricing",
+            dropdownId: undefined,
+            label: t("nav.pricing"),
+            href: "/pricing",
+            hasDropdown: false,
+            isOpen: undefined,
+            setIsOpen: undefined,
+          },
+          {
+            id: "resources",
+            dropdownId: "resources" as NavDropdownId,
+            label: t("nav.resources"),
+            href: "/resources",
+            hasDropdown: true,
+            isOpen: resourcesOpen,
+            setIsOpen: setResourcesOpen,
+          },
+        ],
+    [t, portalsOpen, servicesOpen, resourcesOpen]
+  );
 
-  const productLinks = [
-    { label: "AI Review", href: "/ai-review" },
-    { label: "Our Technology", href: "/technology" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "CPE & Podcast", href: "/cpe" },
-  ];
+  const productLinks = useMemo(
+    () => [
+      { label: t("nav.product.aiReview"), href: "/ai-review" },
+      { label: t("nav.product.ourTechnology"), href: "/technology" },
+      { label: t("nav.pricing"), href: "/pricing" },
+      { label: t("nav.product.cpePodcast"), href: "/cpe" },
+    ],
+    [t]
+  );
 
-  const portalLinks = [
-    { label: "Client Portal", href: "/portal/client-portal" },
-    { label: "Accounting Portal", href: "/portal/accounting-portal" },
-    { label: "Audit Portal", href: "/portal/audit-portal" },
-  ];
+  const portalLinks = useMemo(
+    () => [
+      { label: t("nav.portal.client"), href: "/portal/client-portal" },
+      { label: t("nav.portal.accounting"), href: "/portal/accounting-portal" },
+      { label: t("nav.portal.audit"), href: "/portal/audit-portal" },
+    ],
+    [t]
+  );
 
-  const resourceLinks = useCompactNav
-    ? [
-      // Compact: move AI Review + How It Works under Resources
-      { label: "Insights", href: "/insights" },
-      { label: "AI Review", href: "/ai-review" },
-      { label: "How It Works", href: "/how-it-works" },
-      { label: "About VACEI", href: "/about" },
-      { label: "FAQs", href: "/faq" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Security & Compliance", href: "/security-compliance" },
-      { label: "CPE & Podcast", href: "/cpe" },
-    ]
-    : [
-      // Original Resources content
-      { label: "Insights", href: "/insights" },
-      { label: "AI Review", href: "/ai-review" },
-      { label: "How It Works", href: "/how-it-works" },
-      { label: "About VACEI", href: "/about" },
-      { label: "FAQs", href: "/faq" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Security & Compliance", href: "/security-compliance" },
-      { label: "CPE & Podcast", href: "/cpe" },
-    ];
+  const resourceLinks = useMemo(
+    () =>
+      useCompactNav
+        ? [
+            { label: t("nav.resource.insights"), href: "/insights" },
+            { label: t("nav.product.aiReview"), href: "/ai-review" },
+            { label: t("nav.resource.howItWorks"), href: "/how-it-works" },
+            { label: t("nav.resource.about"), href: "/about" },
+            { label: t("nav.resource.faqs"), href: "/faq" },
+            { label: t("nav.resource.contact"), href: "/contact" },
+            { label: t("nav.resource.security"), href: "/security-compliance" },
+            { label: t("nav.product.cpePodcast"), href: "/cpe" },
+          ]
+        : [
+            { label: t("nav.resource.insights"), href: "/insights" },
+            { label: t("nav.product.aiReview"), href: "/ai-review" },
+            { label: t("nav.resource.howItWorks"), href: "/how-it-works" },
+            { label: t("nav.resource.about"), href: "/about" },
+            { label: t("nav.resource.faqs"), href: "/faq" },
+            { label: t("nav.resource.contact"), href: "/contact" },
+            { label: t("nav.resource.security"), href: "/security-compliance" },
+            { label: t("nav.product.cpePodcast"), href: "/cpe" },
+          ],
+    [t, useCompactNav]
+  );
 
   if (shouldHideChrome) {
     return null;
@@ -405,7 +423,7 @@ const Navbar = () => {
           >
             <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
               {/* Logo - smaller on mobile */}
-              <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileMenuOpen(false)}>
+              <LocalizedLink href="/" className="flex items-center gap-2 shrink-0" onClick={() => setMobileMenuOpen(false)}>
                 <div className="flex items-center justify-center">
                   <Image
                     src={Logo}
@@ -415,13 +433,13 @@ const Navbar = () => {
                     className="object-contain w-20 h-12 sm:w-24 sm:h-14 lg:w-[100px] lg:h-[70px]"
                   />
                 </div>
-              </Link>
+              </LocalizedLink>
 
               {/* Desktop Navigation Links - Tight spacing with responsive font */}
               <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-center px-4">
                 {navLinks.map((link) => (
                   <div
-                    key={link.label}
+                    key={link.id}
                     className="group h-full flex items-center static"
                     onMouseEnter={() =>
                       link.hasDropdown && link.setIsOpen?.(true)
@@ -430,7 +448,7 @@ const Navbar = () => {
                       link.hasDropdown && link.setIsOpen?.(false)
                     }
                   >
-                    <Link
+                    <LocalizedLink
                       href={link.href}
                       className={`${useDarkNavbarTheme ? "text-white" : "text-text-dark"} font-normal text-[15px] ${useDarkNavbarTheme ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (useDarkNavbarTheme ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
                       onClick={(e) => {
@@ -457,7 +475,7 @@ const Navbar = () => {
                           />
                         </motion.svg>
                       )}
-                    </Link>
+                    </LocalizedLink>
 
                     {/* Mega Menu Dropdown */}
                     <AnimatePresence>
@@ -470,13 +488,13 @@ const Navbar = () => {
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-6 z-50 origin-top pointer-events-auto"
                         >
                           <div className={`bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-white/60 p-6 overflow-hidden min-w-[650px] w-max max-w-[90vw] flex gap-8`}>
-                            {link.label === "Services" ? (
+                            {link.dropdownId === "services" ? (
                               <>
                                 <div className="flex-1 min-w-[280px]">
-                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">Our Services</h3>
+                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">{t("nav.ourServices")}</h3>
                                   <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                                     {servicesData.map((service) => (
-                                      <Link
+                                      <LocalizedLink
                                         key={service.id}
                                         href={`/services/${service.slug}`}
                                         className="block px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/item"
@@ -485,7 +503,7 @@ const Navbar = () => {
                                         <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
                                           {service.title}
                                         </div>
-                                      </Link>
+                                      </LocalizedLink>
                                     ))}
                                   </div>
                                 </div>
@@ -495,23 +513,23 @@ const Navbar = () => {
                                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-blue-600 shadow-sm mb-4">
                                       <Layers className="w-5 h-5" />
                                     </div>
-                                    <h4 className="text-[15px] font-bold text-slate-900 mb-2">Unified Services</h4>
+                                    <h4 className="text-[15px] font-bold text-slate-900 mb-2">{t("nav.unifiedServices")}</h4>
                                     <p className="text-xs text-slate-500 leading-relaxed mb-4">
-                                      From company formation to audit readiness, streamline your operations with expert-led workflows.
+                                      {t("nav.unifiedServicesBody")}
                                     </p>
                                   </div>
-                                  <Link href="/services/advisory-growth" className="relative z-10 flex items-center gap-2 text-xs font-bold text-blue-600 group-hover:gap-3 transition-all" onClick={() => link.setIsOpen?.(false)}>
-                                    Explore methodology <ArrowRight className="w-4 h-4" />
-                                  </Link>
+                                  <LocalizedLink href="/services/advisory-growth" className="relative z-10 flex items-center gap-2 text-xs font-bold text-blue-600 group-hover:gap-3 transition-all" onClick={() => link.setIsOpen?.(false)}>
+                                    {t("nav.exploreMethodology")} <ArrowRight className="w-4 h-4" />
+                                  </LocalizedLink>
                                 </div>
                               </>
-                            ) : link.label === "Platform" ? (
+                            ) : link.dropdownId === "platform" ? (
                               <>
                                 <div className="flex-1 min-w-[240px]">
-                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">Portals</h3>
+                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">{t("nav.portals")}</h3>
                                   <div className="grid grid-cols-1 gap-1">
                                     {portalLinks.map((item) => (
-                                      <Link
+                                      <LocalizedLink
                                         key={item.href}
                                         href={item.href}
                                         className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
@@ -520,7 +538,7 @@ const Navbar = () => {
                                         <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
                                           {item.label}
                                         </div>
-                                      </Link>
+                                      </LocalizedLink>
                                     ))}
                                   </div>
                                 </div>
@@ -533,26 +551,26 @@ const Navbar = () => {
                                       </div>
                                       <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                        <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">System OK</span>
+                                        <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">{t("nav.systemOk")}</span>
                                       </div>
                                     </div>
-                                    <h4 className="text-[15px] font-bold text-white mb-2">Secure Platform</h4>
+                                    <h4 className="text-[15px] font-bold text-white mb-2">{t("nav.securePlatform")}</h4>
                                     <p className="text-xs text-slate-400 leading-relaxed mb-6">
-                                      Access your client portal, run AI audits, and manage entity data securely.
+                                      {t("nav.securePlatformBody")}
                                     </p>
                                   </div>
-                                  <Link href="/portal/client-portal" className="relative z-10 flex items-center justify-center w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-500 transition-colors shadow-sm" onClick={() => link.setIsOpen?.(false)}>
-                                    Go to Dashboard
-                                  </Link>
+                                  <LocalizedLink href="/portal/client-portal" className="relative z-10 flex items-center justify-center w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-500 transition-colors shadow-sm" onClick={() => link.setIsOpen?.(false)}>
+                                    {t("nav.goToDashboard")}
+                                  </LocalizedLink>
                                 </div>
                               </>
-                            ) : link.label === "Resources" ? (
+                            ) : link.dropdownId === "resources" ? (
                               <>
                                 <div className="flex-1 min-w-[280px]">
-                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">Resources & Company</h3>
+                                  <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-3">{t("nav.resourcesCompany")}</h3>
                                   <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                                     {resourceLinks.map((item) => (
-                                      <Link
+                                      <LocalizedLink
                                         key={item.href}
                                         href={item.href}
                                         className="block px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/item"
@@ -561,7 +579,7 @@ const Navbar = () => {
                                         <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
                                           {item.label}
                                         </div>
-                                      </Link>
+                                      </LocalizedLink>
                                     ))}
                                   </div>
                                 </div>
@@ -571,16 +589,16 @@ const Navbar = () => {
                                       <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
                                         <BookOpen className="w-5 h-5" />
                                       </div>
-                                      <span className="text-[9px] font-bold text-orange-600 uppercase tracking-widest bg-orange-50 px-2 py-1 rounded-full border border-orange-100/50 hidden lg:block">New Guide</span>
+                                      <span className="text-[9px] font-bold text-orange-600 uppercase tracking-widest bg-orange-50 px-2 py-1 rounded-full border border-orange-100/50 hidden lg:block">{t("nav.newGuide")}</span>
                                     </div>
-                                    <h4 className="text-[15px] font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Audit Readiness</h4>
+                                    <h4 className="text-[15px] font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{t("nav.auditReadiness")}</h4>
                                     <p className="text-xs text-slate-500 leading-relaxed mb-6">
-                                      Discover the actionable steps to prepare your financial records for strict compliance.
+                                      {t("nav.auditReadinessBody")}
                                     </p>
                                   </div>
-                                  <Link href="/insights" className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-white border border-slate-200 px-4 py-2.5 rounded-xl w-max hover:bg-slate-50 hover:text-blue-600 transition-all shadow-sm" onClick={() => link.setIsOpen?.(false)}>
-                                    Read Now
-                                  </Link>
+                                  <LocalizedLink href="/insights" className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-white border border-slate-200 px-4 py-2.5 rounded-xl w-max hover:bg-slate-50 hover:text-blue-600 transition-all shadow-sm" onClick={() => link.setIsOpen?.(false)}>
+                                    {t("nav.readNow")}
+                                  </LocalizedLink>
                                 </div>
                               </>
                             ) : null}
@@ -594,20 +612,23 @@ const Navbar = () => {
 
               {/* Right Side Actions - Tight spacing */}
               <div className="flex items-center gap-3 lg:gap-4 shrink-0">
-                <div className="hidden lg:flex items-center gap-3">
-                  {/* Login Button */}
-                  <Link
-                    href="/portal/client-portal"
+                <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+
+                  <LocalizedLink
+                    href="https://client.vacei.com/onboarding"
                     className={`flex items-center justify-center ${useDarkNavbarTheme
                         ? "text-white/90 hover:text-white"
                         : "text-text-dark/80 hover:text-primary-blue"
                       } font-medium text-[15px] transition-colors px-2`}
                   >
-                    <span>Login</span>
-                  </Link>
+                    <span>{t("nav.login")}</span>
+                  </LocalizedLink>
 
-                  {/* Get Instant Quote Button */}
-                  <GetInstantQuoteButton hasShadow={false} />
+                  <GetInstantQuoteButton
+                    hasShadow={false}
+                    href="https://client.vacei.com/onboarding"
+                    text={t("nav.registerQuote")}
+                  />
                 </div>
 
                 {/* Mobile: hamburger opens full-screen menu. Desktop: hamburger opens sidebar. */}
@@ -673,7 +694,7 @@ const Navbar = () => {
             >
               {/* Header: logo + close */}
               <div className="flex items-center justify-between shrink-0 px-4 py-4 sm:px-6 border-b border-gray-200/80">
-                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+                <LocalizedLink href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                   <Image
                     src={Logo}
                     alt="VACEI Logo"
@@ -681,7 +702,7 @@ const Navbar = () => {
                     height={56}
                     className="object-contain h-10 w-auto"
                   />
-                </Link>
+                </LocalizedLink>
                 <button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
@@ -694,11 +715,11 @@ const Navbar = () => {
                 </button>
               </div>
               {/* Scrollable menu links */}
-              <div className="flex-1 overflow-y-auto py-4 px-4 sm:px-6 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-primary-blue/60 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
+              <div className="nav-drawer-scrollbar flex-1 overflow-y-auto py-4 px-4 sm:px-6">
                 {navLinks.map((link) => (
-                  <div key={link.label} className="border-b border-gray-100 last:border-none">
+                  <div key={link.id} className="border-b border-gray-100 last:border-none">
                     <div className="flex items-center justify-between py-3">
-                      <Link
+                      <LocalizedLink
                         href={link.href}
                         className="text-text-dark font-medium text-base hover:text-primary-blue transition-colors flex-1"
                         onClick={(e) => {
@@ -711,7 +732,7 @@ const Navbar = () => {
                         }}
                       >
                         {link.label}
-                      </Link>
+                      </LocalizedLink>
                       {link.hasDropdown && (
                         <button
                           type="button"
@@ -741,38 +762,38 @@ const Navbar = () => {
                           className="pl-3 pb-3 overflow-hidden"
                         >
                           <div className="rounded-xl bg-gray-50 border border-gray-200/80 p-2.5 space-y-0.5">
-                            {link.label === "Services" &&
+                            {link.dropdownId === "services" &&
                               servicesData.map((service) => (
-                                <Link
+                                <LocalizedLink
                                   key={service.id}
                                   href={`/services/${service.slug}`}
                                   className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {service.title}
-                                </Link>
+                                </LocalizedLink>
                               ))}
-                            {link.label === "Platform" &&
+                            {link.dropdownId === "platform" &&
                               portalLinks.map((item) => (
-                                <Link
+                                <LocalizedLink
                                   key={item.href}
                                   href={item.href}
                                   className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {item.label}
-                                </Link>
+                                </LocalizedLink>
                               ))}
-                            {link.label === "Resources" &&
+                            {link.dropdownId === "resources" &&
                               resourceLinks.map((item) => (
-                                <Link
+                                <LocalizedLink
                                   key={item.href}
                                   href={item.href}
                                   className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {item.label}
-                                </Link>
+                                </LocalizedLink>
                               ))}
                           </div>
                         </motion.div>
@@ -780,8 +801,22 @@ const Navbar = () => {
                     </AnimatePresence>
                   </div>
                 ))}
-                <div className="mt-6 pt-4 border-t border-gray-200" onClick={() => setMobileMenuOpen(false)}>
-                  <GetInstantQuoteButton hasShadow={false} className="w-full justify-center" />
+                <div className="mt-6 pt-4 border-t border-gray-200 space-y-3">
+                  <LocalizedLink
+                    href="https://client.vacei.com/onboarding"
+                    className="flex w-full items-center justify-center rounded-xl border border-gray-200 bg-white py-3 text-[15px] font-medium text-text-dark transition-colors hover:border-primary-blue/40 hover:text-primary-blue"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {t("nav.login")}
+                  </LocalizedLink>
+                  <div onClick={() => setMobileMenuOpen(false)}>
+                    <GetInstantQuoteButton
+                      hasShadow={false}
+                      className="w-full justify-center"
+                      href="https://client.vacei.com/onboarding"
+                      text={t("nav.registerQuote")}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -811,10 +846,8 @@ const Navbar = () => {
           >
             {/* Sidebar Container with gradient background, border radius, and hidden scrollbar */}
             <div
-              className="h-full w-full rounded-l-3xl overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar-thumb]:bg-transparent [&::-webkit-scrollbar-track]:bg-transparent"
+              className="nav-sidebar-scrollbar h-full w-full rounded-l-3xl overflow-y-auto pr-1.5 sm:pr-2"
               style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
                 background:
                   "linear-gradient(135deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%)",
               }}
@@ -822,7 +855,7 @@ const Navbar = () => {
               <div className="p-6 lg:p-8 space-y-8 min-h-full pb-24 relative">
                 {/* Header with Logo and Close Button */}
                 <div className="flex items-center justify-between">
-                  <Link
+                  <LocalizedLink
                     href="/"
                     className="flex items-center gap-3"
                     onClick={() => setSidebarOpen(false)}
@@ -836,7 +869,7 @@ const Navbar = () => {
                         className="object-contain"
                       />
                     </div>
-                  </Link>
+                  </LocalizedLink>
                   <button
                     onClick={() => setSidebarOpen(false)}
                     className="w-8 h-8 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-colors"
@@ -860,30 +893,24 @@ const Navbar = () => {
 
                 {/* Description Text */}
                 <div className="text-white text-sm leading-relaxed opacity-90">
-                  <p>
-                    VACEI is a modern accounting, audit and corporate services
-                    firm built around one structured digital platform. We handle
-                    accounting, compliance, corporate and audit work end to end,
-                    using our own technology to deliver clarity, speed and
-                    visibility.
-                  </p>
+                  <p>{t("nav.sidebar.description")}</p>
                 </div>
 
                 {/* Sidebar Quick Links Section (static) */}
                 <div className="space-y-4">
-                  <h3 className="text-white font-bold text-lg">Quick actions</h3>
+                  <h3 className="text-white font-bold text-lg">{t("nav.sidebar.quickActions")}</h3>
                   <div className="space-y-3">
-                    <Link
-                      href="/quote"
+                    <LocalizedLink
+                      href="https://client.vacei.com/onboarding"
                       onClick={() => setSidebarOpen(false)}
                       className="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 transition-all"
                     >
                       <div>
                         <p className="text-sm font-semibold text-white">
-                          Request a quote
+                          {t("nav.sidebar.requestQuoteTitle")}
                         </p>
                         <p className="text-xs text-white/70">
-                          Share your requirements in a few steps.
+                          {t("nav.sidebar.requestQuoteSubtitle")}
                         </p>
                       </div>
                       <span className="ml-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-blue">
@@ -901,19 +928,19 @@ const Navbar = () => {
                           />
                         </svg>
                       </span>
-                    </Link>
+                    </LocalizedLink>
 
-                    <Link
+                    <LocalizedLink
                       href="/#services"
                       onClick={() => setSidebarOpen(false)}
                       className="flex items-center justify-between px-4 py-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 transition-all"
                     >
                       <div>
                         <p className="text-sm font-semibold text-white">
-                          Explore services
+                          {t("nav.sidebar.exploreServicesTitle")}
                         </p>
                         <p className="text-xs text-white/70">
-                          View accounting, audit and corporate offerings.
+                          {t("nav.sidebar.exploreServicesSubtitle")}
                         </p>
                       </div>
                       <span className="ml-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10">
@@ -931,17 +958,17 @@ const Navbar = () => {
                           />
                         </svg>
                       </span>
-                    </Link>
+                    </LocalizedLink>
                   </div>
                 </div>
 
                 {/* Contact Info Section */}
                 <div className="space-y-4">
-                  <h3 className="text-white font-bold text-lg">Contact Info</h3>
+                  <h3 className="text-white font-bold text-lg">{t("nav.sidebar.contactInfo")}</h3>
                   <div className="space-y-3">
                     <div>
                       <p className="text-white text-sm mb-1 opacity-80">
-                        Phone
+                        {t("nav.sidebar.phone")}
                       </p>
                       <a
                         href="tel:+35677142418"
@@ -958,7 +985,7 @@ const Navbar = () => {
                     </div>
                     <div>
                       <p className="text-white text-sm mb-1 opacity-80">
-                        Email
+                        {t("nav.sidebar.email")}
                       </p>
                       <a
                         href="mailto:info@vacei.com"
@@ -972,7 +999,7 @@ const Navbar = () => {
 
                 {/* Follow Us Section */}
                 <div className="space-y-4 pb-8">
-                  <h3 className="text-white font-bold text-lg">Follow Us</h3>
+                  <h3 className="text-white font-bold text-lg">{t("nav.sidebar.followUs")}</h3>
                   <div className="flex items-center gap-4">
                     {/* Facebook */}
                     <a

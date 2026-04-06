@@ -1,0 +1,112 @@
+{
+  "brand": "VACEI",
+  "glossary": {
+    "getInstantQuote": "Get Instant Quote",
+    "bookDemo": "Book a Demo",
+    "partnerPortal": "Partner Portal",
+    "requestsProposals": "Requests & Proposals"
+  },
+  "language": {
+    "label": "Taal",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch",
+    "es": "Español",
+    "it": "Italiano",
+    "nl": "Nederlands"
+  },
+  "nav": {
+    "home": "Home",
+    "platform": "Platform",
+    "services": "Diensten",
+    "partners": "Partners",
+    "pricing": "Prijzen",
+    "resources": "Bronnen",
+    "login": "Inloggen",
+    "getQuote": "Directe offerte",
+    "registerQuote": "Registreren voor directe offerte",
+    "ourServices": "Onze diensten",
+    "portals": "Portalen",
+    "resourcesCompany": "Bronnen & bedrijf",
+    "unifiedServices": "Geïntegreerde diensten",
+    "unifiedServicesBody": "Van oprichting tot audit-readiness: stroomlijn uw processen met workflows onder leiding van experts.",
+    "exploreMethodology": "Methodologie bekijken",
+    "securePlatform": "Veilig platform",
+    "securePlatformBody": "Toegang tot uw klantenportaal, AI-audits en veilig beheer van entiteitsgegevens.",
+    "systemOk": "Systeem OK",
+    "goToDashboard": "Naar dashboard",
+    "auditReadiness": "Audit readiness",
+    "auditReadinessBody": "Concrete stappen om uw administratie voor te bereiden op strenge compliance-eisen.",
+    "readNow": "Nu lezen",
+    "newGuide": "Nieuwe gids",
+    "product": {
+      "aiReview": "AI Review",
+      "ourTechnology": "Onze technologie",
+      "cpePodcast": "CPE & podcast"
+    },
+    "portal": {
+      "client": "Klantenportaal",
+      "accounting": "Accountantsportaal",
+      "audit": "Auditportaal"
+    },
+    "resource": {
+      "insights": "Insights",
+      "howItWorks": "Hoe het werkt",
+      "about": "Over VACEI",
+      "faqs": "FAQ’s",
+      "contact": "Contact",
+      "security": "Beveiliging & compliance"
+    },
+    "sidebar": {
+      "description": "VACEI is een modern accountants-, audit- en corporate serviceskantoor rond één gestructureerd digitaal platform. Wij verzorgen accounting, compliance, vennootschapsrecht en audit end-to-end met eigen technologie voor helderheid, snelheid en inzicht.",
+      "quickActions": "Snelle acties",
+      "requestQuoteTitle": "Offerte aanvragen",
+      "requestQuoteSubtitle": "Deel uw wensen in een paar stappen.",
+      "exploreServicesTitle": "Diensten verkennen",
+      "exploreServicesSubtitle": "Accounting, audit en corporate services.",
+      "contactInfo": "Contact",
+      "phone": "Telefoon",
+      "email": "E-mail",
+      "followUs": "Volg ons"
+    }
+  },
+  "footer": {
+    "tagline": "VACEI is de gestructureerde digitale werkplek waar bedrijven en oprichters professionele diensten, compliance en workflows in één veilige omgeving beheren.",
+    "platform": "Platform",
+    "overview": "Overzicht",
+    "howItWorks": "Hoe het werkt",
+    "pricing": "Prijzen",
+    "security": "Beveiliging & compliance",
+    "whyVacei": "Waarom VACEI",
+    "services": "Diensten",
+    "corporate": "Corporate services",
+    "audit": "Audit & assurance",
+    "accounting": "Accounting",
+    "tax": "Belasting & compliance",
+    "legal": "Juridische diensten",
+    "vatPayroll": "BTW & payroll",
+    "company": "Bedrijf",
+    "about": "Over VACEI",
+    "faqs": "FAQ’s",
+    "insights": "Insights",
+    "whiteLabelLanding": "White-labelplatform",
+    "partnerPlatformLanding": "Partnerplatform",
+    "contact": "Contact",
+    "cpePodcast": "CPE & podcast",
+    "contactUs": "Contact",
+    "disclaimer": "Professionele diensten via VACEI worden geleverd door een netwerk van geverifieerde kantoren. VACEI levert de digitale omgeving om deze trajecten efficiënt en veilig te beheren.",
+    "terms": "Algemene voorwaarden",
+    "privacy": "Privacybeleid",
+    "cookies": "Cookiebeleid",
+    "copyright": "© 2026 What VACEI Is All right reserved"
+  },
+  "pageHeader": {
+    "home": "Home"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "body": "We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our use of cookies.",
+    "accept": "Accept",
+    "dismiss": "Dismiss"
+  }
+}

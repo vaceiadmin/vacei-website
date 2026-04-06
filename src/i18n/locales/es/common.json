@@ -1,0 +1,112 @@
+{
+  "brand": "VACEI",
+  "glossary": {
+    "getInstantQuote": "Get Instant Quote",
+    "bookDemo": "Book a Demo",
+    "partnerPortal": "Partner Portal",
+    "requestsProposals": "Requests & Proposals"
+  },
+  "language": {
+    "label": "Idioma",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch",
+    "es": "Español",
+    "it": "Italiano",
+    "nl": "Nederlands"
+  },
+  "nav": {
+    "home": "Inicio",
+    "platform": "Plataforma",
+    "services": "Servicios",
+    "partners": "Socios",
+    "pricing": "Precios",
+    "resources": "Recursos",
+    "login": "Iniciar sesión",
+    "getQuote": "Presupuesto instantáneo",
+    "registerQuote": "Registrarse para presupuesto instantáneo",
+    "ourServices": "Nuestros servicios",
+    "portals": "Portales",
+    "resourcesCompany": "Recursos y empresa",
+    "unifiedServices": "Servicios unificados",
+    "unifiedServicesBody": "Desde la constitución hasta la preparación de auditoría, agilice sus operaciones con flujos guiados por expertos.",
+    "exploreMethodology": "Explorar metodología",
+    "securePlatform": "Plataforma segura",
+    "securePlatformBody": "Acceda a su portal de cliente, ejecute auditorías con IA y gestione datos de forma segura.",
+    "systemOk": "Sistema OK",
+    "goToDashboard": "Ir al panel",
+    "auditReadiness": "Preparación para auditoría",
+    "auditReadinessBody": "Pasos prácticos para preparar su documentación ante requisitos estrictos de cumplimiento.",
+    "readNow": "Leer ahora",
+    "newGuide": "Nueva guía",
+    "product": {
+      "aiReview": "AI Review",
+      "ourTechnology": "Nuestra tecnología",
+      "cpePodcast": "CPE y podcast"
+    },
+    "portal": {
+      "client": "Portal de cliente",
+      "accounting": "Portal de contabilidad",
+      "audit": "Portal de auditoría"
+    },
+    "resource": {
+      "insights": "Insights",
+      "howItWorks": "Cómo funciona",
+      "about": "Sobre VACEI",
+      "faqs": "Preguntas frecuentes",
+      "contact": "Contacto",
+      "security": "Seguridad y cumplimiento"
+    },
+    "sidebar": {
+      "description": "VACEI es una firma moderna de contabilidad, auditoría y servicios corporativos basada en una plataforma digital estructurada. Gestionamos contabilidad, cumplimiento, mercantil y auditoría de extremo a extremo con tecnología propia para claridad, velocidad y visibilidad.",
+      "quickActions": "Acciones rápidas",
+      "requestQuoteTitle": "Solicitar presupuesto",
+      "requestQuoteSubtitle": "Indique sus necesidades en unos pasos.",
+      "exploreServicesTitle": "Explorar servicios",
+      "exploreServicesSubtitle": "Contabilidad, auditoría y servicios corporativos.",
+      "contactInfo": "Contacto",
+      "phone": "Teléfono",
+      "email": "Correo",
+      "followUs": "Síganos"
+    }
+  },
+  "footer": {
+    "tagline": "VACEI es el espacio de trabajo digital estructurado donde empresas y fundadores gestionan servicios profesionales, cumplimiento y flujos en un entorno seguro.",
+    "platform": "Plataforma",
+    "overview": "Resumen",
+    "howItWorks": "Cómo funciona",
+    "pricing": "Precios",
+    "security": "Seguridad y cumplimiento",
+    "whyVacei": "Por qué VACEI",
+    "services": "Servicios",
+    "corporate": "Servicios corporativos",
+    "audit": "Auditoría y assurance",
+    "accounting": "Contabilidad",
+    "tax": "Fiscalidad y cumplimiento",
+    "legal": "Servicios legales",
+    "vatPayroll": "IVA y nóminas",
+    "company": "Empresa",
+    "about": "Sobre VACEI",
+    "faqs": "Preguntas frecuentes",
+    "insights": "Insights",
+    "whiteLabelLanding": "Plataforma white-label",
+    "partnerPlatformLanding": "Plataforma para partners",
+    "contact": "Contacto",
+    "cpePodcast": "CPE y podcast",
+    "contactUs": "Contacto",
+    "disclaimer": "Los servicios profesionales a través de VACEI los presta una red de firmas verificadas. VACEI proporciona el entorno digital para gestionar estos encargos de forma eficiente y segura.",
+    "terms": "Términos y condiciones",
+    "privacy": "Política de privacidad",
+    "cookies": "Política de cookies",
+    "copyright": "© 2026 What VACEI Is All right reserved"
+  },
+  "pageHeader": {
+    "home": "Inicio"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "body": "We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our use of cookies.",
+    "accept": "Accept",
+    "dismiss": "Dismiss"
+  }
+}

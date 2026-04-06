@@ -1,0 +1,112 @@
+{
+  "brand": "VACEI",
+  "glossary": {
+    "getInstantQuote": "Get Instant Quote",
+    "bookDemo": "Book a Demo",
+    "partnerPortal": "Partner Portal",
+    "requestsProposals": "Requests & Proposals"
+  },
+  "language": {
+    "label": "Lingua",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch",
+    "es": "Español",
+    "it": "Italiano",
+    "nl": "Nederlands"
+  },
+  "nav": {
+    "home": "Home",
+    "platform": "Piattaforma",
+    "services": "Servizi",
+    "partners": "Partner",
+    "pricing": "Prezzi",
+    "resources": "Risorse",
+    "login": "Accedi",
+    "getQuote": "Preventivo immediato",
+    "registerQuote": "Registrati per un preventivo immediato",
+    "ourServices": "I nostri servizi",
+    "portals": "Portali",
+    "resourcesCompany": "Risorse e azienda",
+    "unifiedServices": "Servizi integrati",
+    "unifiedServicesBody": "Dalla costituzione alla readiness di audit, semplificate le operazioni con workflow guidati da esperti.",
+    "exploreMethodology": "Esplora la metodologia",
+    "securePlatform": "Piattaforma sicura",
+    "securePlatformBody": "Accedi al portale clienti, esegui audit IA e gestisci i dati in sicurezza.",
+    "systemOk": "Sistema OK",
+    "goToDashboard": "Vai alla dashboard",
+    "auditReadiness": "Audit readiness",
+    "auditReadinessBody": "Passi concreti per preparare la documentazione ai requisiti di compliance.",
+    "readNow": "Leggi ora",
+    "newGuide": "Nuova guida",
+    "product": {
+      "aiReview": "AI Review",
+      "ourTechnology": "La nostra tecnologia",
+      "cpePodcast": "CPE e podcast"
+    },
+    "portal": {
+      "client": "Portale clienti",
+      "accounting": "Portale contabilità",
+      "audit": "Portale audit"
+    },
+    "resource": {
+      "insights": "Insights",
+      "howItWorks": "Come funziona",
+      "about": "Chi è VACEI",
+      "faqs": "FAQ",
+      "contact": "Contatti",
+      "security": "Sicurezza e compliance"
+    },
+    "sidebar": {
+      "description": "VACEI è uno studio moderno di contabilità, audit e servizi societari costruito su una piattaforma digitale strutturata. Gestiamo contabilità, compliance, diritto societario e audit end-to-end con tecnologia proprietaria per chiarezza, velocità e visibilità.",
+      "quickActions": "Azioni rapide",
+      "requestQuoteTitle": "Richiedi un preventivo",
+      "requestQuoteSubtitle": "Condividi le esigenze in pochi passaggi.",
+      "exploreServicesTitle": "Esplora i servizi",
+      "exploreServicesSubtitle": "Contabilità, audit e servizi societari.",
+      "contactInfo": "Contatti",
+      "phone": "Telefono",
+      "email": "E-mail",
+      "followUs": "Seguici"
+    }
+  },
+  "footer": {
+    "tagline": "VACEI è lo spazio di lavoro digitale strutturato dove aziende e fondatori gestiscono servizi professionali, compliance e workflow in un ambiente sicuro.",
+    "platform": "Piattaforma",
+    "overview": "Panoramica",
+    "howItWorks": "Come funziona",
+    "pricing": "Prezzi",
+    "security": "Sicurezza e compliance",
+    "whyVacei": "Perché VACEI",
+    "services": "Servizi",
+    "corporate": "Servizi societari",
+    "audit": "Audit e assurance",
+    "accounting": "Contabilità",
+    "tax": "Fiscalità e compliance",
+    "legal": "Servizi legali",
+    "vatPayroll": "IVA e payroll",
+    "company": "Azienda",
+    "about": "Chi è VACEI",
+    "faqs": "FAQ",
+    "insights": "Insights",
+    "whiteLabelLanding": "Piattaforma white-label",
+    "partnerPlatformLanding": "Piattaforma Partner",
+    "contact": "Contatti",
+    "cpePodcast": "CPE e podcast",
+    "contactUs": "Contatti",
+    "disclaimer": "I servizi professionali tramite VACEI sono erogati da una rete di studi verificati. VACEI fornisce l’ambiente digitale per gestire questi incarichi in modo efficiente e sicuro.",
+    "terms": "Termini e condizioni",
+    "privacy": "Privacy",
+    "cookies": "Cookie",
+    "copyright": "© 2026 What VACEI Is All right reserved"
+  },
+  "pageHeader": {
+    "home": "Home"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "body": "We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our use of cookies.",
+    "accept": "Accept",
+    "dismiss": "Dismiss"
+  }
+}

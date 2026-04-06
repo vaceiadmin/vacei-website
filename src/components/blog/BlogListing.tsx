@@ -3,12 +3,12 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar, Clock, Search, Filter, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
+import LocalizedLink from '@/components/common/LocalizedLink';
 import { BlogPost } from '@/utils/blog';
 import PageHeader from '@/components/common/PageHeader';
 import { cn } from '@/lib/utils';
 import { usePerformance } from '@/contexts/ReduceMotionContext';
+import { usePagesTranslation } from '@/hooks/usePagesTranslation';
 
 interface BlogListingProps {
   blogs: BlogPost[];
@@ -18,6 +18,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
   const { isIPhone, isLowPerformance } = usePerformance();
+  const { t } = usePagesTranslation('insights');
 
   // Get all unique tags
   const allTags = Array.from(
@@ -32,21 +33,16 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
     return matchesSearch && matchesTag;
   });
 
-  const breadcrumbs = [{ label: "Insights" }];
+  const breadcrumbs = [{ label: t('pageHeader.breadcrumbs.0.label') }];
 
   return (
     <div className="min-h-screen bg-background hardware-accelerated">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8 mt-12">
-        <PageHeader
-          title="Insights"
-          breadcrumbs={breadcrumbs}
-        />
+        <PageHeader title={t('pageHeader.title')} breadcrumbs={breadcrumbs} />
       </div>
 
       <div className="container mx-auto px-4 max-w-[1400px] mt-12 mb-12 relative z-10">
-        <p className="text-center text-text-gray text-lg max-w-2xl mx-auto mb-10">
-          Structured thinking on accounting, audit, compliance, business and professional growth.
-        </p>
+        <p className="text-center text-text-gray text-lg max-w-2xl mx-auto mb-10">{t('subtitle')}</p>
 
         {/* Search and Filter */}
         <div className="max-w-4xl mx-auto bg-white/70 backdrop-blur-md rounded-2xl p-4 md:p-6 shadow-xl shadow-primary-blue/5 border border-white mb-16">
@@ -56,7 +52,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-gray/40 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Search articles..."
+                placeholder={t('searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 bg-background-secondary border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-blue/20 focus:border-primary-blue outline-none transition-all text-text-dark font-sans"
@@ -71,7 +67,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
                 onChange={(e) => setSelectedTag(e.target.value)}
                 className="w-full pl-12 pr-10 py-3 bg-background-secondary border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary-blue/20 focus:border-primary-blue outline-none appearance-none transition-all text-text-dark font-sans"
               >
-                <option value="">All Topics</option>
+                <option value="">{t('allTopics')}</option>
                 {allTags.map(tag => (
                   <option key={tag} value={tag}>{tag}</option>
                 ))}
@@ -87,7 +83,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
           {/* Active Filters */}
           {(searchTerm || selectedTag) && (
             <div className="flex flex-wrap items-center gap-2 mt-4">
-              <span className="text-xs text-text-gray font-sans">Filtered by:</span>
+              <span className="text-xs text-text-gray font-sans">{t('filteredBy')}</span>
               {searchTerm && (
                 <span className="px-3 py-1 bg-primary-blue/10 text-primary-blue text-xs rounded-full font-medium font-sans">
                   &ldquo;{searchTerm}&rdquo;
@@ -105,7 +101,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
                 }}
                 className="text-xs text-text-gray hover:text-primary-blue transition-colors font-sans"
               >
-                Clear all
+                {t('clearAll')}
               </button>
             </div>
           )}
@@ -115,12 +111,8 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
         <div className="max-w-6xl mx-auto pb-24">
           {filteredBlogs.length === 0 ? (
             <div className="text-center py-20 bg-background-secondary rounded-3xl border border-gray-100">
-              <h3 className="text-xl font-bold text-text-heading mb-3 font-sans">
-                No articles found
-              </h3>
-              <p className="text-text-gray mb-8 font-sans">
-                Try adjusting your search terms or filters.
-              </p>
+              <h3 className="text-xl font-bold text-text-heading mb-3 font-sans">{t('noArticlesTitle')}</h3>
+              <p className="text-text-gray mb-8 font-sans">{t('noArticlesHint')}</p>
               <button
                 onClick={() => {
                   setSearchTerm('');
@@ -128,7 +120,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
                 }}
                 className="px-8 py-3 bg-primary-blue text-white rounded-full hover:bg-primary-blue-hover transition-all font-medium font-sans shadow-lg shadow-primary-blue/20"
               >
-                Clear Filters
+                {t('clearFilters')}
               </button>
             </div>
           ) : (
@@ -141,7 +133,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
                     (isIPhone || isLowPerformance) && "hover:translate-y-0"
                   )}
                 >
-                  <Link href={`/insights/${blog.slug}`} className="flex flex-col h-full p-6 md:p-8">
+                  <LocalizedLink href={`/insights/${blog.slug}`} className="flex flex-col h-full p-6 md:p-8">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex flex-wrap gap-2">
                         {blog.tags && blog.tags.length > 0 && (
@@ -176,7 +168,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
                         <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-primary-blue transition-colors duration-300" />
                       </div>
                     </div>
-                  </Link>
+                  </LocalizedLink>
                 </article>
               ))}
             </div>
@@ -185,7 +177,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
           {filteredBlogs.length > 0 && (
             <div className="text-center mt-16">
               <p className="text-sm text-text-gray font-sans">
-                Showing {filteredBlogs.length} of {blogs.length} articles
+                {t('showingArticles', { current: filteredBlogs.length, total: blogs.length })}
               </p>
             </div>
           )}

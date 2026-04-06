@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/common/LocalizedLink";
 import { AnimatePresence, motion } from "framer-motion";
 import GradientContainer from "./GradientContainer";
 import { servicesData } from "@/data/servicesData";
@@ -23,6 +24,7 @@ interface PageHeaderProps {
 }
 
 const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
+  const { t } = useTranslation("common");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { isIPhone, isLowPerformance } = usePerformance();
 
@@ -41,7 +43,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
           "flex items-center gap-4 rounded-full px-6 md:py-2.5 py-1 shadow-xl border border-white/20 relative z-100",
           isIPhone || isLowPerformance ? "bg-white/20" : "bg-white/10 backdrop-blur-md"
         )}>
-          <Link
+          <LocalizedLink
             href="/"
             className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group"
           >
@@ -52,8 +54,8 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
             >
               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
             </svg>
-            <span className="text-sm font-normal">Home</span>
-          </Link>
+            <span className="text-sm font-normal">{t("pageHeader.home")}</span>
+          </LocalizedLink>
 
           {breadcrumbs.map((item, index) => (
             <React.Fragment key={index}>
@@ -108,7 +110,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
                           )}>
                             <div className="grid grid-cols-1 gap-1">
                               {servicesData.map((service) => (
-                                <Link
+                                <LocalizedLink
                                   key={service.id}
                                   href={`/services/${service.slug}`}
                                   className="block px-4 py-3 rounded-[14px] hover:bg-primary-blue/10 transition-all group/item text-left"
@@ -117,7 +119,7 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
                                   <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
                                     {service.title}
                                   </div>
-                                </Link>
+                                </LocalizedLink>
                               ))}
                             </div>
                           </div>
@@ -131,12 +133,12 @@ const PageHeader = ({ title, breadcrumbs }: PageHeaderProps) => {
                     </AnimatePresence>
                   </div>
                 ) : item.href ? (
-                  <Link
+                  <LocalizedLink
                     href={item.href}
                     className="text-white/80 hover:text-white transition-colors text-sm font-normal"
                   >
                     {item.label}
-                  </Link>
+                  </LocalizedLink>
                 ) : (
                   <span className="text-white text-sm font-normal">
                     {item.label}

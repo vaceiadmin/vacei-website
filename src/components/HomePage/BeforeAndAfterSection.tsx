@@ -1,8 +1,11 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
-const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, alt: string, className?: string, isDark?: boolean }) => {
+const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMobile }: { src: string, alt: string, className?: string, isDark?: boolean, playDesktop: string, playMobile: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [firstFrameUrl, setFirstFrameUrl] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -73,7 +76,7 @@ const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, al
               <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
             </div>
             <span className={cn("text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg", isDark ? "bg-[#0e1222]/80 border border-white/10 text-white" : "bg-white/80 border border-slate-200 text-slate-800")}>
-              {isMobile ? "Tap to Play" : "Hover to Play"}
+              {isMobile ? playMobile : playDesktop}
             </span>
           </div>
         </div>
@@ -83,27 +86,24 @@ const HoverPlayGif = ({ src, alt, className, isDark = false }: { src: string, al
 };
 
 const BeforeAndAfterSection = () => {
+  const { t } = useTranslation('home');
   return (
-    <section className="pt-32 pb-24 sm:pt-24 lg:py-32 bg-[#FAFBFF] relative overflow-hidden isolate z-0 rounded-[48px]">
+    <section className="pt-32 pb-24 sm:pt-24 lg:py-32 bg-black relative overflow-hidden isolate z-0 rounded-[48px]">
       {/* Background Decor */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute inset-0 opacity-[0.02] -z-10" style={{
-        backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`,
-        backgroundSize: '24px 24px'
-      }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full max-w-7xl">
         <div className="text-center mb-20 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-50 shadow-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            <span className="text-[11px] font-black text-blue-600 uppercase tracking-widest">The Next Evolution</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-sm mb-6">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+            <span className="text-[11px] font-black text-blue-400 uppercase tracking-widest">{t('beforeAfter.badge')}</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-            From chaos to <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">clarity.</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.1] mb-6">
+            {t('beforeAfter.titleLine1')}<br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-400">{t('beforeAfter.titleHighlight')}</span>
           </h2>
-          <p className="mt-4 text-lg font-medium text-slate-500 max-w-2xl mx-auto">
-            VACEI replaces fragmented coordination with one intelligent, structured ecosystem for business services.
+          <p className="mt-4 text-lg font-medium text-slate-400 max-w-2xl mx-auto">
+            {t('beforeAfter.subtitle')}
           </p>
         </div>
 
@@ -118,16 +118,10 @@ const BeforeAndAfterSection = () => {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500 font-bold">&times;</span>
-                    <h4 className="text-2xl font-black text-slate-900">Before VACEI</h4>
+                    <h4 className="text-2xl font-black text-slate-900">{t('beforeAfter.beforeTitle')}</h4>
                   </div>
                   <ul className="space-y-2">
-                    {[
-                      "Scattered emails",
-                      "Repeated document requests",
-                      "Manual follow-ups",
-                      "Poor deadline visibility",
-                      "Separate systems for each advisor"
-                    ].map((item, idx) => (
+                    {(t('beforeAfter.beforeItems', { returnObjects: true }) as string[]).map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm font-medium text-slate-500">
                         <div className="w-1 h-1 rounded-full bg-slate-300" />
                         {item}
@@ -148,7 +142,9 @@ const BeforeAndAfterSection = () => {
                   <div className="relative w-full aspect-video bg-white overflow-hidden p-[2px]">
                     <HoverPlayGif
                       src="/assets/videos/Before.gif"
-                      alt="Before VACEI"
+                      alt={t('beforeAfter.beforeGifAlt')}
+                      playDesktop={t('beforeAfter.hoverPlayDesktop')}
+                      playMobile={t('beforeAfter.hoverPlayMobile')}
                     />
                   </div>
                 </div>
@@ -167,16 +163,10 @@ const BeforeAndAfterSection = () => {
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30">&#10003;</span>
-                    <h4 className="text-2xl font-black text-white">With VACEI</h4>
+                    <h4 className="text-2xl font-black text-white">{t('beforeAfter.afterTitle')}</h4>
                   </div>
                   <ul className="space-y-2">
-                    {[
-                      "One workspace",
-                      "One document environment",
-                      "One place to track requests and deadlines",
-                      "One connected experience across providers",
-                      "Better visibility and control across the business"
-                    ].map((item, idx) => (
+                    {(t('beforeAfter.afterItems', { returnObjects: true }) as string[]).map((item, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-sm font-medium text-blue-300/80">
                         <div className="w-1 h-1 rounded-full bg-blue-500" />
                         {item}
@@ -198,8 +188,10 @@ const BeforeAndAfterSection = () => {
                   <div className="relative w-full aspect-video bg-[#0a0d1d] overflow-hidden p-[2px]">
                     <HoverPlayGif
                       src="/assets/videos/After.gif"
-                      alt="With VACEI"
+                      alt={t('beforeAfter.afterGifAlt')}
                       isDark={true}
+                      playDesktop={t('beforeAfter.hoverPlayDesktop')}
+                      playMobile={t('beforeAfter.hoverPlayMobile')}
                     />
                   </div>
                 </div>
@@ -209,8 +201,8 @@ const BeforeAndAfterSection = () => {
 
         </div>
         <div className="mt-16 text-center">
-            <p className="text-lg font-bold text-slate-700">
-              No more guessing. No more missing files. No more disconnected workflows.
+            <p className="text-lg font-bold text-slate-300">
+              {t('beforeAfter.footerLine')}
             </p>
         </div>
       </div>

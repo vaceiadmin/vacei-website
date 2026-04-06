@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { ClipboardList, Network, FileSpreadsheet, UserCheck } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface StepProps {
     number: string;
@@ -30,12 +32,20 @@ const Step = ({ number, title, desc, icon, isLast }: StepProps) => (
 );
 
 const MarketplaceSection = () => {
-  const steps = [
-    { number: "01", title: "Request Service", desc: "Select the service your business needs and provide preliminary details through your secure workspace.", icon: <ClipboardList className="w-6 h-6" /> },
-    { number: "02", title: "VACEI Coordination", desc: "We notify verified partner firms and coordinate the proposal process to ensure quality and speed.", icon: <Network className="w-6 h-6" /> },
-    { number: "03", title: "Structured Proposals", desc: "Receive standardized proposals through your workspace, making them easy to compare and evaluate.", icon: <FileSpreadsheet className="w-6 h-6" /> },
-    { number: "04", title: "Choose & Engage", desc: "Compare options, choose the advisor that best fits your needs, and start the engagement immediately.", icon: <UserCheck className="w-6 h-6" /> },
-  ];
+  const { t } = useTranslation("home");
+  const steps = useMemo(() => {
+    const raw = t("marketplace.steps", { returnObjects: true }) as
+      | { number: string; title: string; desc: string }[]
+      | string;
+    const list = Array.isArray(raw) ? raw : [];
+    const icons = [
+      <ClipboardList key="a" className="w-6 h-6" />,
+      <Network key="b" className="w-6 h-6" />,
+      <FileSpreadsheet key="c" className="w-6 h-6" />,
+      <UserCheck key="d" className="w-6 h-6" />,
+    ];
+    return list.map((s, i) => ({ ...s, icon: icons[i] }));
+  }, [t]);
 
   return (
     <section className="py-24 bg-black relative overflow-hidden rounded-[48px]">
@@ -51,18 +61,38 @@ const MarketplaceSection = () => {
           {/* Header & Intro */}
           <div className="w-full lg:w-1/3">
              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-8">
-                Proposal Marketplace
+                {t("marketplace.badge")}
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tight">
-              A marketplace <span className="text-blue-400">built on trust.</span>
+              {t("marketplace.titleLine1")}<span className="text-blue-400">{t("marketplace.titleHighlight")}</span>
             </h2>
             <p className="text-lg text-slate-400 mb-10 font-medium leading-relaxed">
-              Send out a Request for Proposal (RFP) to top-tier firms. Choose between local, regional, and global providers. The VACEI Marketplace gives you direct access to a network of verified professional firms.
+              {t("marketplace.body")}
             </p>
              <GetInstantQuoteButton
-              text="Register to Get Proposals"
+              text={t("marketplace.registerCta")}
               className="h-[56px] px-10 shadow-xl shadow-blue-600/20"
             />
+
+            {/* Request Service GIF Presentation */}
+            <div className="mt-12 relative rounded-2xl overflow-hidden bg-[#1D1E30] border border-white/10 shadow-2xl transition-transform duration-700 hover:scale-[1.02] w-full max-w-[420px]">
+              {/* Browser Header */}
+              <div className="h-8 w-full bg-[#181926] border-b border-white/5 flex items-center px-4 justify-between relative">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                </div>
+              </div>
+              
+              <div className="relative w-full bg-[#050505] overflow-hidden">
+                <img 
+                  src="/assets/videos/Request%20Service_V1.2.gif" 
+                  alt={t("marketplace.gifAlt")} 
+                  className="w-full h-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500" 
+                />
+              </div>
+            </div>
           </div>
 
           {/* Timeline Steps */}

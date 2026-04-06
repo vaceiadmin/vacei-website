@@ -1,0 +1,446 @@
+{
+  "hero": {
+    "titleLine1": "Erhalten Sie Angebote.",
+    "titleLine2": "Wählen Sie Ihre Berater.",
+    "titleHighlight": "Verwalten Sie alles.",
+    "body": "VACEI ist der strukturierte digitale Arbeitsbereich, in dem Unternehmen professionelle Dienstleistungen anfragen, Angebote von verifizierten Firmen erhalten und Dokumente, Compliance sowie Arbeitsabläufe an einem Ort verwalten können.",
+    "body2": "Registrieren Sie sich einmal, um Ihr Angebot zu erhalten, laden Sie Ihre Berater ein und verwalten Sie alles über eine sichere Plattform.",
+    "footnote": "Vom Onboarding bis zur laufenden Compliance läuft alles über einen Arbeitsbereich.",
+    "quoteCta": "Registrieren für ein sofortiges Angebot",
+    "demoCta": "Demo buchen",
+    "badge1": "27 EU-Länder",
+    "badge2": "Nur verifizierte Kanzleien",
+    "badge3": "ISO 27001 zertifiziert"
+  },
+  "auditPlatform": {
+    "badge": "All-in-One-Arbeitsbereich",
+    "titleLine1": "Eine Plattform.",
+    "titleHighlight": "Volle Transparenz.",
+    "body": "Die Führung eines Unternehmens bedeutet die Koordination mit Buchhaltern, Wirtschaftsprüfern, Anwälten, Steuerberatern und Unternehmensdienstleistern. Zu oft ist diese Arbeit über E-Mails, Ordner, Tabellenkalkulationen und unzusammenhängende Systeme verstreut. VACEI bringt alles in einem strukturierten Arbeitsbereich zusammen, damit Unternehmen und Berater mit mehr Transparenz, Verantwortlichkeit und Kontrolle zusammenarbeiten können.",
+    "quoteLine1": "Professionelle Dienstleistungen erfordern eine Struktur.",
+    "quoteLine2": "VACEI gibt Ihnen diese Struktur.",
+    "clientPortalCta": "Kundenportal ausprobieren",
+    "complianceVerified": "Compliance-verifiziert",
+    "principles": [
+      {
+        "title": "Strukturierte Arbeitsabläufe",
+        "desc": "Klare Phasen, definierte Verantwortlichkeiten und Fortschrittsverfolgung für jeden Service."
+      },
+      {
+        "title": "Kontrollierte Dokumentation",
+        "desc": "Zentralisierte Dateien, organisierte Aufzeichnungen, Versionssichtbarkeit und sicherer Dokumentenaustausch."
+      },
+      {
+        "title": "Überprüfungs- und Genehmigungsebenen",
+        "desc": "Definierte Überprüfungsprozesse, nachverfolgte Kommentare und Freigabehistorie über alle Dienste hinweg."
+      },
+      {
+        "title": "Sichere Kundeninteraktion",
+        "desc": "Anfragen, Uploads, Genehmigungen und Kommunikation werden in einer kontrollierten Umgebung abgewickelt."
+      }
+    ]
+  },
+  "workspaceEntry": {
+    "activeEntities": "Aktive Einheiten",
+    "card1TitleBefore": "Erstellen Sie einen Arbeitsbereich für Ihr ",
+    "card1TitleAccent": "Unternehmen.",
+    "card1Body": "Verwalten Sie alle Ihre Berater an einem Ort. Laden Sie Dokumente hoch, verfolgen Sie Fristen, reagieren Sie auf Anfragen und koordinieren Sie professionelle Dienstleistungen von einem Dashboard aus.",
+    "whatYouCanDo": "Was Sie tun können",
+    "card1Bullets": [
+      "Mehrere Unternehmen verwalten",
+      "Dokumente zentralisieren",
+      "Compliance und Einreichungen verfolgen",
+      "Alle Berater an einem Ort behalten",
+      "Fortschritt aller Aufträge überwachen"
+    ],
+    "createWorkspaceCta": "Arbeitsbereich erstellen",
+    "oneClickSync": "Ein-Klick-Synchronisierung",
+    "newFounders": "Neue Gründer",
+    "card2Title": "Starten Sie Ihr Unternehmen und ",
+    "card2TitleAccent": "skalieren Sie ab dem ersten Tag.",
+    "card2Body": "Gründen Sie Ihr Unternehmen und zentralisieren Sie Firmengründung, Genehmigungen, Compliance und laufende Betreuung im selben Arbeitsbereich, den Sie auch zur Führung des Geschäfts verwenden werden.",
+    "startIncorporationCta": "Gründung starten",
+    "bookConsultationCta": "Beratung buchen"
+  },
+  "inviteAdvisors": {
+    "titleLine1": "Laden Sie Ihre Berater ein.",
+    "titleHighlight": "Behalten Sie alles an einem Ort.",
+    "body": "Arbeiten Sie bereits mit einem Buchhalter, Wirtschaftsprüfer, Anwalt oder Unternehmensdienstleister zusammen? Bringen Sie sie in Ihren VACEI-Arbeitsbereich und verwalten Sie Anfragen, Dokumente, Genehmigungen und Fristen in einer strukturierten Umgebung.",
+    "bullets": [
+      "Behalten Sie Ihre bestehenden Beziehungen",
+      "Zentralisieren Sie Workflows und Kommunikation",
+      "Verbessern Sie die Transparenz bei jedem Service"
+    ],
+    "createWorkspaceCta": "Arbeitsbereich erstellen",
+    "gifAlt": "Berater einladen, Berater tritt bei, gemeinsamer Arbeitsbereich",
+    "gifPlaceholderTitle": "GIF Platzhalter",
+    "gifPlaceholderHint": "Bitte laden Sie Ihr GIF hier hoch:",
+    "gifPlaceholderPath": "/public/assets/videos/Invite_Advisor.gif"
+  },
+  "howItWorks": {
+    "badge": "Wie es funktioniert",
+    "titleLine1": "Präzision in ",
+    "titleHighlight": "jeder Phase.",
+    "subtitle": "Erstellen Sie einen Arbeitsbereich, laden Sie Ihre Berater ein und verwalten Sie jedes Projekt, jedes Dokument und jede Frist auf einer strukturierten Plattform.",
+    "steps": [
+      {
+        "title": "Definieren Sie Ihren Bedarf",
+        "description": "Registrieren Sie sich und beantworten Sie einige einfache Fragen, um die benötigten Dienstleistungen Ihres Unternehmens zu definieren."
+      },
+      {
+        "title": "Erhalten Sie Angebote",
+        "description": "Vergleichen Sie Angebote von verifizierten Kanzleien und stellen Sie sicher, dass diese am besten zu Ihren Anforderungen und Ihrem Budget passen."
+      },
+      {
+        "title": "Bestimmen Sie Ihre Berater",
+        "description": "Wählen Sie mit Zuversicht aus und beauftragen Sie über unsere strukturierte digitale Umgebung."
+      },
+      {
+        "title": "Zentralisieren Sie Workflows",
+        "description": "Verfolgen Sie Fortschritte, verwalten Sie Dokumente und koordinieren Sie alles über Ihren sicheren Arbeitsbereich."
+      }
+    ]
+  },
+  "processSteps": {
+    "subjectLine": "Homepage Angebots-/Projektanfrage",
+    "form": {
+      "request": {
+        "title": "Lass uns anfangen",
+        "subtitle": "Erzählen Sie uns ein wenig über sich",
+        "primaryLabel": "Weiter",
+        "fields": {
+          "name": {
+            "label": "Vollständiger Name",
+            "placeholder": "z.B. Max Mustermann"
+          },
+          "email": {
+            "label": "E-Mail Adresse",
+            "placeholder": "max@unternehmen.de"
+          },
+          "message": {
+            "label": "Projektübersicht",
+            "placeholder": "Beschreiben Sie Ihre Anforderungen..."
+          }
+        }
+      },
+      "onboarding": {
+        "title": "Projektumfang",
+        "subtitle": "Wählen Sie die benötigten Dienste",
+        "primaryLabel": "Nächster Schritt",
+        "fields": {
+          "service": {
+            "label": "Dienstleistungsarten",
+            "placeholder": "Dienste auswählen"
+          },
+          "additionalDetails": {
+            "label": "Zusätzliche Details (optional)",
+            "placeholder": "Besondere Anforderungen..."
+          }
+        }
+      },
+      "preferences": {
+        "title": "Letzte Schritte",
+        "subtitle": "Wie sollen wir Sie kontaktieren?",
+        "primaryLabel": "Anfrage einreichen",
+        "fields": {
+          "communicationChannel": {
+            "label": "Kommunikation",
+            "placeholder": "Bevorzugter Kanal"
+          },
+          "updateCadence": {
+            "label": "Updates",
+            "placeholder": "Häufigkeit"
+          },
+          "phone": {
+            "label": "Telefonnummer (erforderlich für WhatsApp / Anruf)",
+            "placeholder": "+49 151 12345678"
+          }
+        }
+      }
+    },
+    "communicationOptions": [
+      "E-Mail",
+      "WhatsApp",
+      "Telefonanruf",
+      "Portal"
+    ],
+    "updateOptions": [
+      "Wöchentlich",
+      "Zweiwöchentlich",
+      "Monatlich",
+      "Nur dringende"
+    ],
+    "sidebarSteps": [
+      {
+        "title": "Definieren",
+        "description": "Registrieren Sie sich und teilen Sie uns mit, was Ihr Unternehmen benötigt."
+      },
+      {
+        "title": "Abstimmen",
+        "description": "Relevante Anbieter prüfen Ihre Anfrage und erstellen Angebote."
+      },
+      {
+        "title": "Ausführen",
+        "description": "Sobald Sie Ihren Anbieter ausgewählt haben, wird die Arbeit in Ihrem VACEI-Arbeitsbereich fortgesetzt."
+      }
+    ],
+    "columnTitle": "Registrieren Sie sich, um Ihr Angebot zu erhalten",
+    "columnHeadingLine1": "Beginnen Sie mit einem ",
+    "columnHeadingAccent": "strukturierten Arbeitsbereich",
+    "columnBody": "Um ein sofortiges Angebot oder Vorschläge über VACEI zu erhalten, erstellen Sie zunächst Ihren Arbeitsbereich. Dies ermöglicht es, dass Ihre Anfragen, Dokumente und Beraterkommunikation von Anfang an strukturiert bleiben.",
+    "platformPowerLabel": "Plattform-Power",
+    "platformPowerLine1": "Erleben Sie die Zukunft des",
+    "platformPowerLine2": "Unternehmensmanagements.",
+    "registerDirectly": "Direkt registrieren",
+    "errors": {
+      "fieldRequired": "{{field}} ist erforderlich.",
+      "invalidEmail": "Ungültige E-Mail-Adresse.",
+      "phoneRequired": "Eine Telefonnummer ist für diese Kommunikationsmethode erforderlich.",
+      "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    },
+    "success": {
+      "title": "Anfrage erhalten",
+      "body": "Wir haben Ihre Anfrage erhalten. Unser Team wird die Details prüfen und sich innerhalb von 24 Stunden bei Ihnen melden.",
+      "newRequest": "Neue Anfrage",
+      "registerNow": "Jetzt registrieren"
+    },
+    "submitting": "Verarbeitung...",
+    "back": "Zurück",
+    "nextStepFallback": "Nächster Schritt"
+  },
+  "beforeAfter": {
+    "badge": "Die nächste Evolution",
+    "titleLine1": "Vom Chaos zur ",
+    "titleHighlight": "Klarheit.",
+    "subtitle": "VACEI ersetzt fragmentierte Koordination durch ein intelligentes, strukturiertes Ökosystem für Geschäftsdienstleistungen.",
+    "beforeTitle": "Vor VACEI",
+    "beforeItems": [
+      "Verstreute E-Mails",
+      "Wiederholte Dokumentenanfragen",
+      "Manuelle Follow-ups",
+      "Schlechte Sichtbarkeit von Fristen",
+      "Getrennte Systeme für jeden Berater"
+    ],
+    "afterTitle": "Mit VACEI",
+    "afterItems": [
+      "Ein Arbeitsbereich",
+      "Eine Dokumentenumgebung",
+      "Ein Ort für Anfragen und Fristen",
+      "Eine verbundene Erfahrung",
+      "Bessere Transparenz und Kontrolle"
+    ],
+    "beforeGifAlt": "Vor VACEI",
+    "afterGifAlt": "Mit VACEI",
+    "hoverPlayDesktop": "Bewegen für Wiedergabe",
+    "hoverPlayMobile": "Tippen für Wiedergabe",
+    "footerLine": "Kein Raten mehr. Keine fehlenden Dateien mehr. Keine getrennten Arbeitsabläufe mehr."
+  },
+  "servicesSection": {
+    "badge": "Professionelles Ökosystem",
+    "titleLine1": "Professionelle Dienstleistungen durch ",
+    "titleHighlight": "eine verbundene Plattform",
+    "subtitle": "VACEI unterstützt Ihr Unternehmen beim Zugriff auf und der Verwaltung von professionellen Dienstleistungen über einen strukturierten Arbeitsbereich.",
+    "tabServices": "Dienstleistungen",
+    "tabProducts": "Produkte",
+    "explorePhase": "Phase erkunden",
+    "launchDashboard": "Dashboard starten",
+    "categoryService": "Dienstleistung",
+    "categoryPlatform": "Plattform",
+    "defaultSubtitle": "Strukturierte Unterstützung durch eine einzige digitale Plattform.",
+    "serviceTitles": {
+      "accounting-finance": "Finanz- & Rechnungswesen",
+      "audit-assurance": "Wirtschaftsprüfung & Assurance",
+      "corporate-csp-services": "Unternehmensdienste",
+      "advisory-growth": "Rechtsdienstleistungen",
+      "tax-compliance": "Steuerberatung & Compliance"
+    },
+    "serviceSubtitles": {
+      "accounting-finance": "Buchhaltung, Buchführungsabläufe, Dokumentenverarbeitung und strukturierte Finanzkoordination.",
+      "tax-compliance": "Steuererklärungen, Beratung, Fristen, Belege und laufende steuerliche Unterstützung.",
+      "audit-assurance": "Gesetzliche Prüfungen, Assurance-Projekte und meilensteingesteuerte Lieferung.",
+      "corporate-csp-services": "Sekretariatsdienste, Governance-Support, gesetzliche Wartung und Verwaltung.",
+      "regulated-licensing": "Unterstützung bei Lizenzanträgen, Verlängerungen und wichtigen regulatorischen Einreichungen.",
+      "advisory-growth": "Unternehmensrechtliche Unterstützung, Verträge, Transaktionen und Beratung.",
+      "vat-services": "Umsatzsteuerregistrierungen, Steuererklärungen, Compliance-Support und Hilfestellung bei indirekten Steuern.",
+      "payroll-employment": "Gehaltsabrechnung, Beschäftigungsunterstützung und Compliance-Einreichungen."
+    },
+    "products": [
+      {
+        "title": "Kundenportal",
+        "subtitle": "Dokumente, Anfragen und sichere Kommunikation.",
+        "badge": "Ausgewählt"
+      },
+      {
+        "title": "Audit-Portal",
+        "subtitle": "Strukturierte Workflows und Auditlieferung."
+      },
+      {
+        "title": "Buchhaltungsportal",
+        "subtitle": "Finanzdashboard und Echtzeit-Berichterstattung.",
+        "badge": "Neu"
+      }
+    ]
+  },
+  "marketplace": {
+    "badge": "Angebots-Marktplatz",
+    "titleLine1": "Ein Marktplatz ",
+    "titleHighlight": "basiert auf Vertrauen.",
+    "body": "Senden Sie eine Angebotsanfrage (RFP) an erstklassige Firmen. Wählen Sie zwischen lokalen, regionalen und globalen Anbietern. Der VACEI-Marktplatz bietet direkten Zugang zu einem Netzwerk verifizierter professioneller Firmen.",
+    "registerCta": "Registrieren um Angebote zu erhalten",
+    "gifAlt": "Serviceanfrage-Oberfläche",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Dienstleistung anfragen",
+        "desc": "Wählen Sie den Service, den Ihr Unternehmen benötigt, und geben Sie über Ihren sicheren Arbeitsbereich vorläufige Details an."
+      },
+      {
+        "number": "02",
+        "title": "VACEI-Koordination",
+        "desc": "Wir benachrichtigen verifizierte Partnerfirmen und koordinieren den Angebotsprozess für Qualität und Schnelligkeit."
+      },
+      {
+        "number": "03",
+        "title": "Strukturierte Angebote",
+        "desc": "Erhalten Sie standardisierte Angebote über Ihren Arbeitsbereich, sodass sie leicht zu vergleichen und zu bewerten sind."
+      },
+      {
+        "number": "04",
+        "title": "Auswählen & Beauftragen",
+        "desc": "Vergleichen Sie Optionen, wählen Sie den Berater aus, der am besten passt, und beginnen Sie den Auftrag sofort."
+      }
+    ]
+  },
+  "whyVacei": {
+    "badge": "Der VACEI-Vorteil",
+    "titleLine1": "Strukturiert. ",
+    "titleHighlight": "Sicher. Skalierbar.",
+    "subtitle": "VACEI wurde für das moderne Unternehmen entwickelt. Egal, ob Start-up oder etablierter Konzern, unsere Plattform bietet die benötigte Wachstumsstruktur.",
+    "card1Title": "Eine einzige Informationsquelle (Single Source of Truth)",
+    "card1Body": "Alle Ihre Unternehmen, Dienste, Dokumente und Berater an einem Ort. Kein Suchen mehr in E-Mails oder fragmentierten Tabellen.",
+    "card2Title": "Verifizierte Firmen",
+    "card2Body": "Wir arbeiten nur mit vorab geprüften Firmen zusammen, die unseren hohen Standards für Lieferung, Kommunikation und Expertise entsprechen.",
+    "qualityLabel": "Qualität garantiert",
+    "cta": "VACEI erleben"
+  },
+  "trust": {
+    "badge": "Sicherheit steht an erster Stelle",
+    "titleLine1": "Vertrauenswürdig für ",
+    "titleHighlight": "Unternehmen weltweit.",
+    "subtitle": "Von der Aufnahme bis zur ständigen Compliance – alles läuft über einen Arbeitsbereich. Werden Sie Teil der Zukunft des Managements professioneller Dienstleistungen.",
+    "largeCardTitleLine1": "Globale Infrastruktur ",
+    "largeCardTitleHighlight": "gebaut für Zuverlässigkeit.",
+    "largeCardBody": "VACEI bietet eine robuste digitale Umgebung für eine einheitliche Koordination, damit Ihr Unternehmen in jedem Land operativ und rechtskonform bleibt.",
+    "multiRegionLabel": "Multi-Region Redundanz",
+    "uptimeTitle": "Unvergleichliche Verfügbarkeit",
+    "uptimeBody": "Unsere Plattform arbeitet mit 99,99 % Verfügbarkeit und stellt sicher, dass Ihr Arbeitsbereich immer bereit ist.",
+    "statusCore": "Kernsysteme",
+    "statusOperational": "BETRIEBSBEREIT",
+    "statusDataSync": "Datensynchronisierung",
+    "statusSynchronized": "SYNCHRONISIERT",
+    "features": [
+      {
+        "title": "Verschlüsselung auf Bankenniveau",
+        "desc": "Alle Dokumente und Kommunikationen sind durch Ende-zu-Ende AES-256-Verschlüsselung im sicheren Tresor geschützt."
+      },
+      {
+        "title": "24/7 Enterprise-Support",
+        "desc": "Unser dediziertes Support-Team ist rund um die Uhr verfügbar, um bei der Navigation und Koordination zu helfen."
+      }
+    ],
+    "securityCta": "Sicherheit & Compliance anzeigen",
+    "footerRealTime": "Echtzeit-Schutz",
+    "footerGlobal": "Globale Infrastruktur"
+  },
+  "companySetup": {
+    "badge": "Gründung leicht gemacht",
+    "titleLine1": "Unternehmensgründung ",
+    "titleHighlight": "mühelos gestaltet.",
+    "subtitle": "Egal ob in den VAE oder weltweit, VACEI stellt Ihnen die Struktur bereit, um erfolgreich zu starten und zu wachsen.",
+    "col1Title": "Expertenrat",
+    "col1Items": [
+      "Gründungen neuer Unternehmen",
+      "Eingetragener Firmensitz und Adresse",
+      "Unternehmenssekretariat",
+      "Unternehmensaufbau & formale Pflege"
+    ],
+    "col2Title": "Dokumenten-Automatisierung",
+    "col2Items": [
+      "Echtzeit-Ansicht der Einreichungen",
+      "Nachverfolgung von Fristen",
+      "Compliance-Kalender",
+      "Gesetzliche Registerverwaltung"
+    ],
+    "col3Title": "Globale Reichweite",
+    "col3Items": [
+      "Anteilsübertragungen verwalten",
+      "Manager-/Direktorenwechsel",
+      "Strukturaktualisierungen",
+      "Unterstützung bei Expansion ins Ausland"
+    ],
+    "startIncorporationCta": "Gründung starten",
+    "bookConsultationCta": "Beratung buchen"
+  },
+  "complianceDashboard": {
+    "titleLine1": "Bleiben Sie konform. ",
+    "titleHighlight": "Seien Sie voraus.",
+    "body": "Compliance ist kein einmaliges Ereignis; es ist ein laufender Prozess. Warnungen, Unternehmensverwaltung und Updates halten Sie auf dem Laufenden.",
+    "scoreLabel": "Compliance-Bewertung",
+    "onTrack": "Auf Kurs",
+    "deadlinesHeading": "Kommende Fristen",
+    "vatTitle": "Umsatzsteueranmeldung",
+    "vatDue": "Fällig in 7 Tagen",
+    "vatStatus": "Ausstehend",
+    "annualTitle": "Jahresbericht",
+    "annualDue": "Fällig in 20 Tagen",
+    "annualStatus": "Zukünftig",
+    "footerNote": "Alles an einem Ort sichtbar – keine Tabellen, keine manuellen Tracker, kein Raten."
+  },
+  "multiCompany": {
+    "badge": "Multi-Einheiten Verwaltung",
+    "titleLine1": "Skalieren Sie ohne ",
+    "titleHighlight": "die Komplexität.",
+    "body": "Ein Unternehmen zu verwalten ist schwer. Zehn zu verwalten sollte es nicht sein. VACEI wurde für Gründer und Gruppen mit mehreren Einheiten entwickelt.",
+    "foundersHub": "Gründer-Hub",
+    "activeLabel": "Aktiv",
+    "switchLabel": "Wechseln",
+    "engagementsSummary": "32 aktive Mandate in der Gruppe",
+    "highlights": [
+      "Vereinheitlichtes Dashboard",
+      "Gruppenweite Transparenz",
+      "Sofortiger Bereichswechsel",
+      "Standardisierte Koordination"
+    ],
+    "cta": "Ihre Gruppe registrieren",
+    "mockCompanies": [
+      {
+        "name": "Atlas Holding Ltd",
+        "type": "Mutterkonzern"
+      },
+      {
+        "name": "Nova Logistics SpA",
+        "type": "Tochtergesellschaft"
+      },
+      {
+        "name": "Polaris Tech GmbH",
+        "type": "Zweigstelle"
+      },
+      {
+        "name": "Zenith Services Corp",
+        "type": "Neue Einheit"
+      }
+    ]
+  },
+  "activeEU": {
+    "badge": "Internationale Reichweite",
+    "titleLine1": "Ein strukturiertes Portal ",
+    "titleHighlight": "nach Europa.",
+    "body": "VACEI bietet die digitale Umgebung für internationale Unternehmen, um ihr europäisches Geschäft selbstbewusst zu konzipieren, zu verwalten und zu skalieren.",
+    "chips": [
+      "27 Länder",
+      "Einheitliche API",
+      "Lokale Experten"
+    ],
+    "hubAlt": "VACEI-Hub"
+  }
+}

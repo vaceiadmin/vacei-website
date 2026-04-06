@@ -1,0 +1,112 @@
+{
+  "brand": "VACEI",
+  "glossary": {
+    "getInstantQuote": "Get Instant Quote",
+    "bookDemo": "Book a Demo",
+    "partnerPortal": "Partner Portal",
+    "requestsProposals": "Requests & Proposals"
+  },
+  "language": {
+    "label": "Sprache",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch",
+    "es": "Español",
+    "it": "Italiano",
+    "nl": "Nederlands"
+  },
+  "nav": {
+    "home": "Start",
+    "platform": "Plattform",
+    "services": "Leistungen",
+    "partners": "Partner",
+    "pricing": "Preise",
+    "resources": "Ressourcen",
+    "login": "Anmelden",
+    "getQuote": "Sofortangebot",
+    "registerQuote": "Registrieren für Sofortangebot",
+    "ourServices": "Unsere Leistungen",
+    "portals": "Portale",
+    "resourcesCompany": "Ressourcen & Unternehmen",
+    "unifiedServices": "Gebündelte Leistungen",
+    "unifiedServicesBody": "Von der Gründung bis zur Audit-Readiness – optimieren Sie Abläufe mit expertengeführten Workflows.",
+    "exploreMethodology": "Methodik entdecken",
+    "securePlatform": "Sichere Plattform",
+    "securePlatformBody": "Zugriff auf Ihr Mandantenportal, KI-Audits und sichere Verwaltung von Stammdaten.",
+    "systemOk": "System OK",
+    "goToDashboard": "Zum Dashboard",
+    "auditReadiness": "Audit-Readiness",
+    "auditReadinessBody": "Konkrete Schritte zur Vorbereitung Ihrer Unterlagen für strenge Compliance-Anforderungen.",
+    "readNow": "Jetzt lesen",
+    "newGuide": "Neuer Guide",
+    "product": {
+      "aiReview": "AI Review",
+      "ourTechnology": "Unsere Technologie",
+      "cpePodcast": "CPE & Podcast"
+    },
+    "portal": {
+      "client": "Mandantenportal",
+      "accounting": "Buchhaltungsportal",
+      "audit": "Audit-Portal"
+    },
+    "resource": {
+      "insights": "Insights",
+      "howItWorks": "So funktioniert’s",
+      "about": "Über VACEI",
+      "faqs": "FAQs",
+      "contact": "Kontakt",
+      "security": "Sicherheit & Compliance"
+    },
+    "sidebar": {
+      "description": "VACEI ist eine moderne Kanzlei für Buchhaltung, Audit und Corporate Services auf einer strukturierten digitalen Plattform. Wir übernehmen Buchhaltung, Compliance, Gesellschaftsrecht und Audit end-to-end – mit eigener Technologie für Klarheit, Tempo und Transparenz.",
+      "quickActions": "Schnellaktionen",
+      "requestQuoteTitle": "Angebot anfordern",
+      "requestQuoteSubtitle": "Teilen Sie Ihre Anforderungen in wenigen Schritten.",
+      "exploreServicesTitle": "Leistungen entdecken",
+      "exploreServicesSubtitle": "Buchhaltung, Audit und Corporate Services.",
+      "contactInfo": "Kontakt",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "followUs": "Folgen Sie uns"
+    }
+  },
+  "footer": {
+    "tagline": "VACEI ist die strukturierte digitale Arbeitsumgebung, in der Unternehmen und Gründer professionelle Services, Compliance und Workflows sicher an einem Ort steuern.",
+    "platform": "Plattform",
+    "overview": "Überblick",
+    "howItWorks": "So funktioniert’s",
+    "pricing": "Preise",
+    "security": "Sicherheit & Compliance",
+    "whyVacei": "Warum VACEI",
+    "services": "Leistungen",
+    "corporate": "Corporate Services",
+    "audit": "Audit & Assurance",
+    "accounting": "Buchhaltung",
+    "tax": "Steuern & Compliance",
+    "legal": "Rechtsberatung",
+    "vatPayroll": "Umsatzsteuer & Payroll",
+    "company": "Unternehmen",
+    "about": "Über VACEI",
+    "faqs": "FAQs",
+    "insights": "Insights",
+    "whiteLabelLanding": "White-Label-Plattform",
+    "partnerPlatformLanding": "Partner-Plattform",
+    "contact": "Kontakt",
+    "cpePodcast": "CPE & Podcast",
+    "contactUs": "Kontakt",
+    "disclaimer": "Professionelle Leistungen über VACEI erbringen verifizierte Berufsträger in einem Netzwerk. VACEI stellt die digitale Umgebung bereit, um diese Mandate effizient und sicher zu steuern.",
+    "terms": "AGB",
+    "privacy": "Datenschutz",
+    "cookies": "Cookie-Richtlinie",
+    "copyright": "© 2026 What VACEI Is All right reserved"
+  },
+  "pageHeader": {
+    "home": "Start"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "body": "We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our use of cookies.",
+    "accept": "Accept",
+    "dismiss": "Dismiss"
+  }
+}

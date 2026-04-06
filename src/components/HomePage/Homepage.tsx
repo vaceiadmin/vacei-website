@@ -1,66 +1,32 @@
 "use client";
 
-import React, { useEffect } from "react";
-// import ReadyToSimplifySection from "./ReadyToSimplifySection";
-import ServicesSection from "./ServicesSection";
-import ProcessStepsSectionDark from "./ProcessStepsSectionDark";
-import CompanySetupSection from "./CompanySetupSection";
-import FaqSection from "./FaqSection";
-import HeroSection from "./HeroSection";
-// import PortalFeature from "./PortalFeature";
-import HowItWorks from "./HowItWorks";
-import BeforeAndAfterSection from "./BeforeAndAfterSection";
-import AuditPlatform from "./AuditPlatform/AuditPlatform";
-import WorkspaceEntrySection from "./WorkspaceEntrySection";
-import ComplianceDashboardSection from "./ComplianceDashboardSection";
-import ActiveEUSection from "./ActiveEUSection";
-import PlatformPowerSection from "./PlatformPowerSection";
-import MarketplaceSection from "./MarketplaceSection";
-import MultiCompanySection from "./MultiCompanySection";
-import WhyVaceiSection from "./WhyVaceiSection";
-import TrustSection from "./TrustSection";
+import React from "react";
+import HeroSection from "@/components/HomePage/HeroSection";
+import WhyVaceiSection from "@/components/HomePage/WhyVaceiSection";
+import ProcessStepsSectionDark from "@/components/HomePage/ProcessStepsSectionDark";
+import BeforeAndAfterSection from "@/components/HomePage/BeforeAndAfterSection";
+import MarketplaceSection from "@/components/HomePage/MarketplaceSection";
+import InviteAdvisorsSection from "@/components/HomePage/InviteAdvisorsSection";
+import AuditPlatform from "@/components/HomePage/AuditPlatform/AuditPlatform";
+import TrustSection from "@/components/HomePage/TrustSection";
+import ServicesSection from "@/components/HomePage/ServicesSection";
+import InsightsAndResourcesSection from "@/components/HomePage/InsightsAndResourcesSection";
+import FaqSection from "@/components/HomePage/FaqSection";
 
-import { useReduceMotion } from "@/contexts/ReduceMotionContext";
-import { isIPhone } from "@/lib/utils";
-
-const HomePage = () => {
-  const reduceMotion = useReduceMotion();
-  const iPhone = typeof window !== 'undefined' ? isIPhone() : false;
-
-  // Scroll to hash section on load (e.g. /#process-steps or /#services from navbar)
-  useEffect(() => {
-    const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
-    if (!hash) return;
-    const el = document.getElementById(hash);
-    if (el) {
-      const t = setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
-      return () => clearTimeout(t);
-    }
-  }, []);
-
+export default function Homepage() {
   return (
-    <div className="relative bg-black">
+    <div className="w-full">
       <HeroSection />
-      <AuditPlatform />
-      <WorkspaceEntrySection />
-      <HowItWorks />
+      <WhyVaceiSection />
       <ProcessStepsSectionDark />
       <BeforeAndAfterSection />
-      <PlatformPowerSection />
-      <ServicesSection />
       <MarketplaceSection />
-      <CompanySetupSection />
-      <ComplianceDashboardSection />
-      <MultiCompanySection />
-      <ActiveEUSection />
-      <WhyVaceiSection />
+      <InviteAdvisorsSection />
+      <AuditPlatform />
       <TrustSection />
-      {/* <ReadyToSimplifySection /> */}
+      <ServicesSection />
+      <InsightsAndResourcesSection />
       <FaqSection />
     </div>
   );
-};
-
-
-
-export default HomePage;
+}

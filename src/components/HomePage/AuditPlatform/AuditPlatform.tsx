@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Link from "next/link";
+import React, { useMemo, useRef } from "react";
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/common/LocalizedLink";
 import AuditPlatformBeam from "./AuditPlatformBeam";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
@@ -16,42 +17,46 @@ import {
   ArrowUpRight
 } from "lucide-react";
 
-const principles = [
-  {
-    title: "Structured Workflows",
-    desc: "Clear engagement stages, defined responsibilities, and progress tracking across every service.",
-    icon: <Workflow className="w-5 h-5" />,
-    color: "bg-blue-500/10 text-blue-600"
-  },
-  {
-    title: "Controlled Documentation",
-    desc: "Centralised files, organised records, version visibility, and secure document exchange.",
-    icon: <FileCheck className="w-5 h-5" />,
-    color: "bg-indigo-500/10 text-indigo-600"
-  },
-  {
-    title: "Review and Approval Layers",
-    desc: "Defined review flows, tracked comments, and sign-off history across services.",
-    icon: <Layers className="w-5 h-5" />,
-    color: "bg-cyan-500/10 text-cyan-600"
-  },
-  {
-    title: "Secure Client Interaction",
-    desc: "Requests, uploads, approvals, and communication handled inside a controlled environment.",
-    icon: <ShieldAlert className="w-5 h-5" />,
-    color: "bg-sky-500/10 text-sky-600"
-  }
+const principleIcons = [
+  <Workflow key="w" className="w-5 h-5" />,
+  <FileCheck key="f" className="w-5 h-5" />,
+  <Layers key="l" className="w-5 h-5" />,
+  <ShieldAlert key="s" className="w-5 h-5" />,
+];
+const principleColors = [
+  "bg-blue-500/10 text-blue-600",
+  "bg-indigo-500/10 text-indigo-600",
+  "bg-cyan-500/10 text-cyan-600",
+  "bg-sky-500/10 text-sky-600",
 ];
 
 export default function AuditPlatform() {
-  const { reduceMotion, isIPhone } = usePerformance();
+  const { t } = useTranslation("home");
+  const { reduceMotion } = usePerformance();
   const containerRef = useRef(null);
 
+  const principles = useMemo(() => {
+    const raw = t("auditPlatform.principles", { returnObjects: true }) as
+      | { title: string; desc: string }[]
+      | string;
+    const list = Array.isArray(raw) ? raw : [];
+    return list.map((p, index) => ({
+      title: p.title,
+      desc: p.desc,
+      icon: principleIcons[index],
+      color: principleColors[index] ?? principleColors[0],
+    }));
+  }, [t]);
+
   return (
-    <section
-      ref={containerRef}
-      className="relative py-16 sm:py-24 overflow-hidden bg-[#FAFBFF] rounded-[48px] overflow-hidden"
-    >
+    <div className="relative w-full">
+      {/* White background block to connect seamlessly with the above white marquee */}
+      <div className="absolute top-0 left-0 w-full h-1/2 bg-white" />
+      
+      <section
+        ref={containerRef}
+        className="relative py-16 sm:py-24 overflow-hidden bg-[#FAFBFF] rounded-[48px]"
+      >
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30" />
@@ -78,7 +83,7 @@ export default function AuditPlatform() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6"
             >
               <CheckCircle2 className="w-4 h-4 text-blue-600" />
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-700">All-in-one workspace</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-700">{t("auditPlatform.badge")}</span>
             </motion.div>
 
             <motion.h2
@@ -88,8 +93,8 @@ export default function AuditPlatform() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-8"
             >
-              One Platform. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Full Visibility.</span>
+              {t("auditPlatform.titleLine1")} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">{t("auditPlatform.titleHighlight")}</span>
             </motion.h2>
 
             <motion.p
@@ -99,14 +104,14 @@ export default function AuditPlatform() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-slate-600 leading-relaxed max-w-xl mb-12"
             >
-              Running a business means coordinating with accountants, auditors, lawyers, tax advisors, and corporate service providers. Too often, that work is scattered across emails, folders, spreadsheets, and disconnected systems. VACEI brings everything together into one structured workspace so businesses and advisors can work with more visibility, accountability, and control.
+              {t("auditPlatform.body")}
             </motion.p>
 
             {/* Principles Staggered Reveal */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 w-full">
               {principles.map((principle, index) => (
                 <motion.div
-                  key={principle.title}
+                  key={`${principle.title}-${index}`}
                   initial={{ opacity: 0, y: 30, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -150,8 +155,8 @@ export default function AuditPlatform() {
               className="mb-10 pl-4 border-l-2 border-primary-blue/30"
             >
               <p className="text-base text-slate-500 italic font-medium leading-relaxed">
-                Professional services require structure. <br className="hidden sm:block" />
-                VACEI gives you that structure.
+                {t("auditPlatform.quoteLine1")} <br className="hidden sm:block" />
+                {t("auditPlatform.quoteLine2")}
               </p>
             </motion.div>
 
@@ -165,13 +170,13 @@ export default function AuditPlatform() {
             >
               <GetInstantQuoteButton className="h-[56px] px-8 text-base shadow-xl shadow-blue-600/10 hover:shadow-blue-600/25 transition-shadow duration-500" />
 
-              <Link
+              <LocalizedLink
                 href="/portal/client-portal"
                 className="group flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-8 py-3 text-base font-bold text-slate-900 shadow-sm transition-all duration-500 hover:border-blue-400 hover:text-blue-600 hover:shadow-md h-[56px]"
               >
-                <span>Try The Client Portal</span>
+                <span>{t("auditPlatform.clientPortalCta")}</span>
                 <ArrowUpRight className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </Link>
+              </LocalizedLink>
             </motion.div>
           </div>
 
@@ -193,7 +198,7 @@ export default function AuditPlatform() {
                 <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
                   <CheckCircle2 className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-xs font-bold text-slate-800">Compliance Verified</span>
+                <span className="text-xs font-bold text-slate-800">{t("auditPlatform.complianceVerified")}</span>
               </div>
             </motion.div>
 
@@ -209,6 +214,7 @@ export default function AuditPlatform() {
 
       {/* Bottom Transition */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-    </section>
+      </section>
+    </div>
   );
 }

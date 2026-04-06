@@ -1,38 +1,36 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Play, Pause, CheckCircle2, Building2, UserPlus, FileUp, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Play, Pause, CheckCircle2, Building2, UserPlus, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { HOW_IT_WORKS_VIDEO } from "@/data/video";
 import { cn } from "@/lib/utils";
 
-const steps = [
-  {
-    title: "Define Your Scope",
-    description: "Register and answer a few simple questions to define the professional services your business needs.",
-    icon: Building2,
-    color: "from-blue-500 to-indigo-600",
-  },
-  {
-    title: "Receive Proposals",
-    description: "Compare bids from verified firms, ensuring the best fit for your requirements and budget.",
-    icon: Sparkles,
-    color: "from-indigo-500 to-purple-600",
-  },
-  {
-    title: "Appoint Your Advisors",
-    description: "Select with confidence and engage through our structured digital environment.",
-    icon: UserPlus,
-    color: "from-purple-500 to-pink-600",
-  },
-  {
-    title: "Centralize Workflows",
-    description: "Track progress, manage documents, and coordinate everything through your secure workspace.",
-    icon: LayoutDashboard,
-    color: "from-pink-500 to-orange-500",
-  },
-];
-
 const HowItWorks = () => {
+  const { t } = useTranslation("home");
   const { reduceMotion } = usePerformance();
+
+  const steps = useMemo(
+    () => {
+      const raw = t("howItWorks.steps", { returnObjects: true }) as
+        | { title: string; description: string }[]
+        | string;
+      const list = Array.isArray(raw) ? raw : [];
+      const icons = [Building2, Sparkles, UserPlus, LayoutDashboard];
+      const colors = [
+        "from-blue-500 to-indigo-600",
+        "from-indigo-500 to-purple-600",
+        "from-purple-500 to-pink-600",
+        "from-pink-500 to-orange-500",
+      ];
+      return list.map((s, i) => ({
+        title: s.title,
+        description: s.description,
+        icon: icons[i],
+        color: colors[i],
+      }));
+    },
+    [t]
+  );
   const sectionRef = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -132,15 +130,15 @@ const HowItWorks = () => {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-widest mb-6">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>How It Works</span>
+            <span>{t("howItWorks.badge")}</span>
           </div>
 
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Precision at <span className="text-primary-blue">every stage.</span>
+            {t("howItWorks.titleLine1")}<span className="text-primary-blue">{t("howItWorks.titleHighlight")}</span>
           </h2>
 
           <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
-            Create a workspace, invite your advisors, and manage every engagement, document and deadline in one structured platform.
+            {t("howItWorks.subtitle")}
           </p>
         </div>
 
