@@ -25,24 +25,49 @@ const HeroSection = () => {
         {/* Left Content Area */}
         <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
           <div className="relative mb-6">
-            <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.05] tracking-tight">
-              {t("hero.titleLine1")} <br />
-              {t("hero.titleLine2")} <br />
-              <span className="text-primary-blue">{t("hero.titleHighlight")}</span>
+            <h1 className="leading-[1.1] tracking-tight flex flex-col gap-2">
+              <span className="text-4xl sm:text-5xl font-bodoni text-white">
+                {t("hero.titleLine1")}
+              </span>
+              <span className="text-4xl sm:text-5xl font-sans font-extrabold text-white">
+                {t("hero.titleLine2")}
+              </span>
+              <span className="text-4xl sm:text-5xl font-bodoni italic text-primary-blue">
+                {t("hero.titleHighlight")}
+              </span>
             </h1>
           </div>
 
-          <div className="space-y-6 max-w-xl mt-4">
-            <p className="text-gray-400 text-base sm:text-lg leading-relaxed text-balance font-medium">
+          <div className="max-w-xl mt-6">
+            <p className="text-gray-400 text-base sm:text-[17px] leading-relaxed text-balance font-medium">
               {t("hero.body")}
-              <br /><br />
-              {t("hero.body2")}
             </p>
+          </div>
+
+          <div className="flex flex-row items-center gap-x-6 sm:gap-x-10 mt-10 w-full overflow-x-auto hide-scrollbar pb-2 sm:pb-0">
+            <div className="flex items-center gap-2.5 shrink-0">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+              </div>
+              <span className="text-gray-400 text-[14px] font-medium leading-none">{t("hero.benefit1")}</span>
+            </div>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+              </div>
+              <span className="text-gray-400 text-[14px] font-medium leading-none">{t("hero.benefit2")}</span>
+            </div>
+            <div className="flex items-center gap-2.5 shrink-0">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+              </div>
+              <span className="text-gray-400 text-[14px] font-medium leading-none">{t("hero.benefit3")}</span>
+            </div>
           </div>
 
 
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-12 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-8 mb-6">
             <LocalizedLink
               href="/quote"
               className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-gray-200 text-slate-900 px-8 py-3.5 text-[15px] font-bold shadow-[0_4px_14px_rgba(255,255,255,0.1)] transition-all hover:scale-105"
@@ -60,20 +85,7 @@ const HeroSection = () => {
             </LocalizedLink>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-8 lg:mb-0">
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary-blue"></div>
-              <span className="text-gray-400 text-sm font-medium">{t("hero.badge1")}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary-blue"></div>
-              <span className="text-gray-400 text-sm font-medium">{t("hero.badge2")}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary-blue"></div>
-              <span className="text-gray-400 text-sm font-medium">{t("hero.badge3")}</span>
-            </div>
-          </div>
+
         </div>
 
         {/* Right Visual Area */}
