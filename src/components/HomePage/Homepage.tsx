@@ -35,7 +35,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="relative bg-neutral-950">
+    <div className="relative bg-neutral-950 overflow-hidden">
       {/* Odd sections (1,3,5,…) = dark; even (2,4,6,…) = light — each block below follows this stripe */}
       <HeroSection />
       <AuditPlatform />

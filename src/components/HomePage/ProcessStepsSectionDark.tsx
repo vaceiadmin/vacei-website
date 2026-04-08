@@ -477,9 +477,15 @@ const ProcessStepsSectionDark = () => {
               <SectionTitleHero
                 variant="light"
                 className="mb-6"
-                line1={t("processSteps.columnHeadingLine1")}
-                line2={t("processSteps.columnHeadingLine2")}
-                highlight={t("processSteps.columnHeadingAccent")}
+                line1={t("processSteps.columnHeadingLine1", {
+                  defaultValue: "Start with ",
+                })}
+                line2={t("processSteps.columnMid", {
+                  defaultValue: "a structured ",
+                })}
+                highlight={t("processSteps.columnHeadingAccent", {
+                  defaultValue: "workspace.",
+                })}
               />
               <p className="text-slate-600 font-medium leading-relaxed">
                 {t("processSteps.columnBody")}
