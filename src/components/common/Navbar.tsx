@@ -421,7 +421,7 @@ const Navbar = () => {
           className={cn(
             "fixed top-2 sm:top-4 w-full px-3 sm:px-4 lg:px-8 pointer-events-none",
             widenNavForI18n
-              ? "max-w-[min(118rem,calc(100%-1rem))] xl:max-w-[126rem] 2xl:max-w-[132rem]"
+              ? "max-w-[min(128rem,calc(100%-0.5rem))] xl:max-w-[138rem] 2xl:max-w-[148rem]"
               : "max-w-7xl"
           )}
         >
@@ -506,7 +506,7 @@ const Navbar = () => {
                             className={cn(
                               `bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-white/60 p-6 overflow-hidden w-max flex gap-8`,
                               widenNavForI18n
-                                ? "min-w-[780px] max-w-[min(92vw,90rem)]"
+                                ? "min-w-[860px] max-w-[min(94vw,98rem)]"
                                 : "min-w-[650px] max-w-[90vw]"
                             )}
                           >

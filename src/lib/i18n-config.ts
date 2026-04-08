@@ -2,8 +2,8 @@ export const locales = ["en", "fr", "de", "es", "it", "nl"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
-/** Shown in the language switcher only (English available via /en and default routing). */
-export const localesForSwitcher: readonly Locale[] = ["fr", "de", "es", "it", "nl"];
+/** All supported locales in the floating language switcher (including English). */
+export const localesForSwitcher: readonly Locale[] = [...locales];
 
 export const LOCALE_COOKIE = "VACEI_LOCALE";
 export const LOCALE_STORAGE_KEY = "vacei_locale";

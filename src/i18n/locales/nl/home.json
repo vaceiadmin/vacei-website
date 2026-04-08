@@ -194,8 +194,9 @@
       { "title": "Uitvoeren", "description": "Zodra een aanbieder is gekozen, gaat het werk verder in uw VACEI-ruimte." }
     ],
     "columnTitle": "Registreren voor offerte",
-    "columnHeadingLine1": "Start met een ",
-    "columnHeadingAccent": "Gestructureerde Ruimte",
+    "columnHeadingLine1": "Start met ",
+    "columnHeadingLine2": "een gestructureerde ",
+    "columnHeadingAccent": "werkruimte.",
     "columnBody": "Maak eerst uw werkruimte aan om directe offertes of voorstellen te ontvangen. Zo blijven uw aanvragen, documenten en communicatie vanaf het begin georganiseerd.",
     "platformPowerLabel": "Platformkracht",
     "platformPowerLine1": "Ervaar de toekomst van",

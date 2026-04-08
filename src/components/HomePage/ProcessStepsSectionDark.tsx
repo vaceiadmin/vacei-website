@@ -4,6 +4,7 @@ import React, { useMemo, useState, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { SERVICE_TYPE_OPTIONS } from "@/data/serviceRequestForms"
 import { cn } from "@/lib/utils"
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero"
 
 type FormData = {
   name: string
@@ -221,16 +222,16 @@ const ProcessStepsSectionDark = () => {
     <section
       id="process-steps"
       ref={bgRef}
-      className="w-full relative overflow-hidden py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#FAFBFF] rounded-[48px]"
+      className="w-full max-w-[100%] relative overflow-x-clip overflow-y-visible py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#FAFBFF] rounded-[48px]"
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-blue/10 rounded-full blur-[120px] -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] -ml-32 -mb-32" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative z-10 w-full lg:order-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-w-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-w-0">
+          <div className="relative z-10 w-full min-w-0 lg:order-1">
             <div className="bg-[#0F111A] rounded-[2.5rem] border border-white/20 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
               <div className="p-1 sm:p-2">
                 <div className="bg-[#1A1C33]/50 rounded-[2.2rem] p-6 sm:p-8 md:p-10 relative overflow-hidden">
@@ -470,13 +471,16 @@ const ProcessStepsSectionDark = () => {
             </div>
           </div>
 
-          <div className="relative lg:pl-10 h-full flex flex-col justify-center lg:order-2">
-            <div className="mb-10">
+          <div className="relative lg:pl-10 h-full min-w-0 flex flex-col justify-center lg:order-2">
+            <div className="mb-10 min-w-0">
               <h2 className="text-sm font-black text-primary-blue uppercase tracking-[0.2em] mb-4">{t("processSteps.columnTitle")}</h2>
-              <h3 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-                {t("processSteps.columnHeadingLine1")}<br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">{t("processSteps.columnHeadingAccent")}</span>
-              </h3>
+              <SectionTitleHero
+                variant="light"
+                className="mb-6"
+                line1={t("processSteps.columnHeadingLine1")}
+                line2={t("processSteps.columnHeadingLine2")}
+                highlight={t("processSteps.columnHeadingAccent")}
+              />
               <p className="text-slate-600 font-medium leading-relaxed">
                 {t("processSteps.columnBody")}
               </p>
@@ -491,9 +495,9 @@ const ProcessStepsSectionDark = () => {
                   <div
                     key={idx}
                     className={cn(
-                      "group relative rounded-3xl p-5 sm:p-6 transition-all duration-500 border",
+                      "group relative rounded-3xl p-5 sm:p-6 transition-all duration-500 border min-w-0",
                       isActive
-                        ? "bg-white border-slate-200 shadow-xl shadow-slate-200/50 scale-[1.02] z-20"
+                        ? "bg-white border-slate-200 shadow-xl shadow-slate-200/50 lg:scale-[1.01] z-20"
                         : "bg-slate-100/80 border-slate-200/80 opacity-90 hover:opacity-100 hover:bg-slate-50"
                     )}
                   >

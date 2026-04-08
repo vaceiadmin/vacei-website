@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Libre_Bodoni, Montserrat, Nunito } from "next/font/google";
-import "@fontsource/mona-sans";
-import "./globals.css";
 import { headers } from "next/headers";
 import { LOCALE_HEADER } from "@/lib/i18n-config";
+
+const CLARITY_TAG_ID = "w8hmbtjpb8";
 
 const bodoni = Libre_Bodoni({
   subsets: ["latin"],
@@ -42,6 +43,21 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} suppressHydrationWarning>
+       <head>
+      <Script
+          id="clarity-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w8hmbtjpb8");
+            `,
+          }}
+        />
+      </head>
       <body className={`antialiased ${bodoni.variable} ${montserrat.variable} ${nunito.variable}`}>
         {children}
       </body>

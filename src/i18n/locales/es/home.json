@@ -194,8 +194,9 @@
       { "title": "Ejecutar", "description": "Una vez elegido el proveedor, el trabajo continúa en su espacio VACEI." }
     ],
     "columnTitle": "Registro para su presupuesto",
-    "columnHeadingLine1": "Empiece con un ",
-    "columnHeadingAccent": "Espacio estructurado",
+    "columnHeadingLine1": "Empiece con ",
+    "columnHeadingLine2": "un espacio ",
+    "columnHeadingAccent": "estructurado.",
     "columnBody": "Para recibir presupuestos instantáneos o propuestas, primero cree su espacio. Esto asegura que sus solicitudes, documentos y comunicación estén estructurados desde el principio.",
     "platformPowerLabel": "Poder plataforma",
     "platformPowerLine1": "Experimente el futuro de la",

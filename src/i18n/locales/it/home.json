@@ -194,8 +194,9 @@
       { "title": "Esegui", "description": "Una volta scelto il fornitore, il lavoro continua nel tuo spazio VACEI." }
     ],
     "columnTitle": "Registrati per il preventivo",
-    "columnHeadingLine1": "Inizia con uno ",
-    "columnHeadingAccent": "Spazio strutturato",
+    "columnHeadingLine1": "Inizia con ",
+    "columnHeadingLine2": "uno spazio ",
+    "columnHeadingAccent": "strutturato.",
     "columnBody": "Per ricevere preventivi istantanei o proposte, crea prima il tuo spazio di lavoro. Questo garantisce che richieste, documenti e comunicazioni restino strutturati fin dall'inizio.",
     "platformPowerLabel": "Potenza Piattaforma",
     "platformPowerLine1": "Scopri il futuro della",

@@ -194,8 +194,9 @@
       { "title": "Exécuter", "description": "Une fois l'expert choisi, le travail continue dans votre espace VACEI." }
     ],
     "columnTitle": "Inscrivez-vous pour recevoir votre devis",
-    "columnHeadingLine1": "Commencez par un ",
-    "columnHeadingAccent": "Espace Structuré",
+    "columnHeadingLine1": "Commencez par ",
+    "columnHeadingLine2": "un espace ",
+    "columnHeadingAccent": "structuré.",
     "columnBody": "Pour recevoir un devis instantané ou des propositions, créez d'abord votre espace. Cela permet à vos demandes, documents et communications de rester structurés dès le début.",
     "platformPowerLabel": "Puissance Plateforme",
     "platformPowerLine1": "Découvrez le futur de la",

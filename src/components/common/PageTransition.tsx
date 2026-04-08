@@ -23,7 +23,7 @@ export default function PageTransition({
   // No enter/exit animation when reducing motion: instant swap avoids Safari/nav bugs (empty page until refresh)
   if (reduceMotion) {
     return (
-      <div key={pathname} style={{ minHeight: "100vh", isolation: "isolate" }}>
+      <div key={pathname} className="w-full min-h-0" style={{ isolation: "isolate" }}>
         {children}
       </div>
     );
@@ -37,7 +37,8 @@ export default function PageTransition({
         animate={pageTransition.animate}
         exit={pageTransition.exit}
         transition={pageTransition.transition}
-        style={{ minHeight: "100vh", isolation: "isolate" }}
+        className="w-full min-h-0"
+        style={{ isolation: "isolate" }}
       >
         {children}
       </motion.div>
