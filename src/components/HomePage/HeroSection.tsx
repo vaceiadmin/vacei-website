@@ -5,11 +5,14 @@ import LocalizedLink from "@/components/common/LocalizedLink";
 import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 import { useTranslation } from "react-i18next";
+import { useLazyMedia } from "@/hooks/use-lazy-media";
+import { lazyImgProps } from "@/lib/lazy-media-props";
 
 const HeroSection = () => {
   const { t } = useTranslation("home");
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasVideoError, setHasVideoError] = useState(false);
+  const { ref: lazyMediaRef, shouldLoad: loadHeroVideo } = useLazyMedia();
 
   return (
     <section className="w-full relative">
@@ -107,29 +110,35 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Video */}
-                <div className="relative w-full aspect-video bg-black overflow-hidden">
+                {/* Video — MP4 loads only near viewport; GIF fallback uses native lazy decoding */}
+                <div
+                  ref={lazyMediaRef}
+                  className="relative w-full aspect-video bg-black overflow-hidden"
+                >
                   <img
                     src="/assets/videos/Main%20Render.gif"
                     alt="VACEI platform preview fallback"
+                    {...lazyImgProps}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isVideoReady && !hasVideoError ? "opacity-0" : "opacity-100"
                       }`}
                   />
-                  <video
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="none"
-                    poster="/assets/videos/Main%20Render.gif"
-                    onPlaying={() => setIsVideoReady(true)}
-                    onError={() => setHasVideoError(true)}
-                    aria-label="VACEI platform preview video"
-                  >
-                    <source src="/assets/videos/hero-banner-v1.mp4?v=20260323" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  {loadHeroVideo && (
+                    <video
+                      className="w-full h-full object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      poster="/assets/videos/Main%20Render.gif"
+                      onPlaying={() => setIsVideoReady(true)}
+                      onError={() => setHasVideoError(true)}
+                      aria-label="VACEI platform preview video"
+                    >
+                      <source src="/assets/videos/hero-banner-v1.mp4?v=20260323" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
 
               </div>

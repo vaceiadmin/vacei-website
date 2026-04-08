@@ -1280,10 +1280,10 @@
       "integrated": {
         "preparedListTitle": "Elenco voci preparate",
         "preparedRows": [
-          { "label": "Piano dei conti", "date": "12 gen 2026", "color": "#4F46E5" },
+          { "label": "Piano dei conti", "date": "12 gen 2026", "color": "#3b49e6" },
           { "label": "Registrazioni", "date": "12 gen 2026", "color": "#F59E0B", "active": true },
           { "label": "Conto economico", "date": "12 gen 2026", "color": "#10B981" },
-          { "label": "Revisione flussi di cassa", "date": "12 gen 2026", "color": "#6366F1" }
+          { "label": "Revisione flussi di cassa", "date": "12 gen 2026", "color": "#3b49e6" }
         ],
         "spendWeek": "Spesa questa settimana",
         "partnershipTitle": "Ripartizione partnership",

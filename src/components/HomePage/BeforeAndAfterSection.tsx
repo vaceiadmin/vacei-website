@@ -5,14 +5,16 @@ import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
+import { useLazyMedia } from "@/hooks/use-lazy-media";
 
 const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMobile }: { src: string, alt: string, className?: string, isDark?: boolean, playDesktop: string, playMobile: string }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [firstFrameUrl, setFirstFrameUrl] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const { ref: lazyRef, shouldLoad } = useLazyMedia();
 
   useEffect(() => {
-    // Dynamically draw the first frame of the GIF to a canvas to use as a static placeholder
+    if (!shouldLoad) return;
     const img = document.createElement("img");
     img.src = src;
     img.crossOrigin = "anonymous";
@@ -24,13 +26,13 @@ const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMo
       if (ctx) {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         try {
-          setFirstFrameUrl(canvas.toDataURL("image/jpeg", 0.9));
+          setFirstFrameUrl(canvas.toDataURL("image/jpeg", 0.85));
         } catch (e) {
           console.error("Could not capture GIF frame", e);
         }
       }
     };
-  }, [src]);
+  }, [src, shouldLoad]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -41,6 +43,7 @@ const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMo
 
   return (
     <div
+      ref={lazyRef}
       className={cn("relative w-full h-full cursor-pointer overflow-hidden group", className)}
       onMouseEnter={() => !isMobile && setIsHovered(true)}
       onMouseLeave={() => !isMobile && setIsHovered(false)}
@@ -50,14 +53,16 @@ const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMo
 
       {/* The Active GIF */}
       <div className={cn("absolute inset-0 transition-opacity duration-500 z-10", isHovered ? "opacity-100" : "opacity-0")}>
-        {isHovered && (
+        {isHovered && shouldLoad && (
           <Image
             src={src}
             alt={alt}
-            layout="fill"
-            objectFit="contain"
-            className="rounded-b-lg"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-contain rounded-b-lg"
             unoptimized
+            loading="lazy"
+            decoding="async"
           />
         )}
       </div>

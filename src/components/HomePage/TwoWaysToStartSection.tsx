@@ -5,6 +5,7 @@ import { ClipboardList, Network, FileSpreadsheet, UserCheck, UserPlus, Layers, H
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { useTranslation } from 'react-i18next';
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
+import { lazyImgProps } from "@/lib/lazy-media-props";
 
 const StepItem = ({
   title,
@@ -169,6 +170,7 @@ const TwoWaysToStartSection = () => {
                       src="/assets/videos/Request%20Service_V1.2.gif"
                       alt={t("marketplace.gifAlt")}
                       className="w-full h-full object-cover opacity-90 transition-opacity duration-500 group-hover/card:opacity-100"
+                      {...lazyImgProps}
                     />
                   </div>
                 </div>
@@ -216,6 +218,7 @@ const TwoWaysToStartSection = () => {
                       src="/assets/videos/Invite%20Advisor%20V1.2.gif"
                       alt={t("inviteAdvisors.gifAlt")}
                       className="w-full h-full object-cover opacity-90 transition-opacity duration-500 group-hover/card:opacity-100"
+                      {...lazyImgProps}
                     />
                   </div>
                 </div>

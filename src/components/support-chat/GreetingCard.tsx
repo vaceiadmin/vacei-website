@@ -43,6 +43,8 @@ export default function GreetingCard({ onChatNow, onClose }: GreetingCardProps) 
             width={220}
             height={220}
             unoptimized
+            loading="lazy"
+            decoding="async"
             className="object-cover"
           />
         </div>

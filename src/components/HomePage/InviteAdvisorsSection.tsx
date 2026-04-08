@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { CheckCircle2 } from "lucide-react";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
+import { lazyImgProps } from "@/lib/lazy-media-props";
 
 const InviteAdvisorsSection = () => {
   const { t } = useTranslation("home");
@@ -77,6 +78,7 @@ const InviteAdvisorsSection = () => {
                   src="/assets/videos/Invite%20Advisor%20V1.2.gif" 
                   alt={t("inviteAdvisors.gifAlt")} 
                   className="w-full h-full object-cover relative z-10 opacity-80 transition-opacity duration-500 group-hover:opacity-100"
+                  {...lazyImgProps}
                   onError={(e) => {
                     e.currentTarget.style.opacity = '0';
                     e.currentTarget.nextElementSibling?.classList.remove('hidden');

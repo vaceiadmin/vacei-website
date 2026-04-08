@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import { useLazyMedia } from "@/hooks/use-lazy-media";
 
 interface ServiceVideoSectionProps {
   title: string;
@@ -17,19 +18,29 @@ const ServiceVideoSection: React.FC<ServiceVideoSectionProps> = ({
 }) => {
   const { t } = useTranslation("services");
   const [sourceFailed, setSourceFailed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const effectiveVideoUrl =
+    videoUrl && !sourceFailed ? videoUrl : FALLBACK_URL;
+  const isGif = effectiveVideoUrl.toLowerCase().endsWith(".gif");
+  const { ref: lazyRef, shouldLoad } = useLazyMedia();
 
   useEffect(() => {
     setSourceFailed(false);
   }, [videoUrl]);
 
-  const effectiveVideoUrl =
-    videoUrl && !sourceFailed ? videoUrl : FALLBACK_URL;
-  const isGif = effectiveVideoUrl.toLowerCase().endsWith(".gif");
+  useEffect(() => {
+    if (!shouldLoad || isGif) return;
+    videoRef.current?.load();
+  }, [shouldLoad, isGif]);
 
   return (
     <section className="mt-6 mb-2">
       <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-8">
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#020617]">
+        <div
+          ref={lazyRef}
+          className="relative w-full aspect-video rounded-2xl overflow-hidden bg-[#020617]"
+        >
           {effectiveVideoUrl ? (
             <>
               {isGif ? (
@@ -38,19 +49,22 @@ const ServiceVideoSection: React.FC<ServiceVideoSectionProps> = ({
                   alt={title}
                   fill
                   className="object-cover"
-                  priority
+                  sizes="(max-width: 1024px) 100vw, 896px"
+                  loading="lazy"
+                  decoding="async"
                   unoptimized
                   onError={() => setSourceFailed(true)}
                 />
               ) : (
                 <video
+                  ref={videoRef}
                   className="w-full h-full object-cover"
-                  src={effectiveVideoUrl}
+                  src={shouldLoad ? effectiveVideoUrl : undefined}
                   autoPlay
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   onError={() => setSourceFailed(true)}
                 />
               )}

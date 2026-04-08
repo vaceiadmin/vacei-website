@@ -32,12 +32,12 @@ const ClientPortalFeaturesTimelineSection = ({
   );
 
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24 bg-neutral-950">
       <div>
         <FadeInUp>
           <GradientContainer
             showRadials={true}
-            backgroundColor="bg-gradient-container"
+            backgroundColor="bg-neutral-950"
             className="rounded-2xl px-4 md:px-8 py-10 md:py-12 lg:py-14"
           >
             <HowItWorksTimeline

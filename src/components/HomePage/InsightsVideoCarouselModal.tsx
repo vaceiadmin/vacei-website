@@ -121,6 +121,8 @@ const InsightsVideoCarouselModal = ({ isOpen, onClose }: Props) => {
                           alt=""
                           className="h-full w-full object-cover"
                           loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
                         />
                         {selected && (
                           <span className="absolute inset-x-0 bottom-0 h-1 bg-primary-blue" />

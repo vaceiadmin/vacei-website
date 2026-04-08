@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { ClipboardList, Network, FileSpreadsheet, UserCheck } from "lucide-react";
+import { lazyImgProps } from "@/lib/lazy-media-props";
 
 interface StepProps {
     number: string;
@@ -90,6 +91,7 @@ const MarketplaceSection = () => {
                   src="/assets/videos/Request%20Service_V1.2.gif" 
                   alt={t("marketplace.gifAlt")} 
                   className="w-full h-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500" 
+                  {...lazyImgProps}
                 />
               </div>
             </div>

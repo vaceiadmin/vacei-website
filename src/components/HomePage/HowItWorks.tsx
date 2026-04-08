@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Play, Pause, CheckCircle2, Building2, UserPlus, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { HOW_IT_WORKS_VIDEO } from "@/data/video";
+import { useLazyMedia } from "@/hooks/use-lazy-media";
 import { cn } from "@/lib/utils";
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
@@ -34,6 +35,7 @@ const HowItWorks = () => {
   );
   const sectionRef = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { ref: lazyVideoWrapRef, shouldLoad: loadHowVideo } = useLazyMedia();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -78,8 +80,13 @@ const HowItWorks = () => {
   };
 
   useEffect(() => {
+    if (!loadHowVideo) return;
+    videoRef.current?.load();
+  }, [loadHowVideo]);
+
+  useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !loadHowVideo) return;
 
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
@@ -97,7 +104,7 @@ const HowItWorks = () => {
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('timeupdate', handleTimeUpdate);
     };
-  }, []);
+  }, [loadHowVideo]);
 
   return (
     <section
@@ -233,14 +240,18 @@ const HowItWorks = () => {
           {/* Video Player Container */}
           <div className="lg:col-span-7 relative group">
             <div className="relative p-2 rounded-[40px] bg-white border border-slate-100 shadow-2xl overflow-hidden">
-              <div className="relative aspect-video rounded-[32px] overflow-hidden bg-slate-900">
+              <div
+                ref={lazyVideoWrapRef}
+                className="relative aspect-video rounded-[32px] overflow-hidden bg-slate-900"
+              >
                 <video
                   ref={videoRef}
-                  src={HOW_IT_WORKS_VIDEO}
+                  src={loadHowVideo ? HOW_IT_WORKS_VIDEO : undefined}
                   className="w-full h-full object-cover"
                   loop
                   muted={isMuted}
                   playsInline
+                  preload="none"
                 />
 
                 {!isPlaying && (

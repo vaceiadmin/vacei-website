@@ -1,8 +1,10 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import BenefitsCardsRow, { BenefitCard } from "./BenefitsCardsRow";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { useLazyMedia } from "@/hooks/use-lazy-media";
+import { lazyImgProps } from "@/lib/lazy-media-props";
 import { cn } from "@/lib/utils";
 
 interface BenefitsVideoSectionProps {
@@ -33,6 +35,12 @@ const BenefitsVideoSection = ({
     }));
 
     const isGif = videoSrc?.toLowerCase().endsWith(".gif");
+    const { ref: lazyRef, shouldLoad } = useLazyMedia();
+
+    useEffect(() => {
+        if (!shouldLoad || isGif) return;
+        videoRef.current?.load();
+    }, [shouldLoad, isGif]);
 
     const handleTogglePlay = () => {
         const video = videoRef.current;
@@ -57,21 +65,28 @@ const BenefitsVideoSection = ({
             {/* Video block */}
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 mt-2">
                 <div className="bg-primary-blue rounded-2xl p-3 md:p-4 shadow-md">
-                    <div className="relative w-full rounded-xl overflow-hidden bg-black">
+                    <div
+                        ref={lazyRef}
+                        className="relative w-full rounded-xl overflow-hidden bg-black"
+                    >
                         {isGif ? (
                             <img
                                 src={videoSrc}
                                 alt="Benefits Video Review"
                                 className="w-full h-auto"
+                                {...lazyImgProps}
                             />
                         ) : (
                             <>
                                 <video
                                     ref={videoRef}
                                     className="w-full h-auto"
-                                    src={videoSrc}
+                                    src={shouldLoad ? videoSrc : undefined}
                                     poster={posterImage}
                                     controls={false}
+                                    playsInline
+                                    preload="none"
+                                    muted
                                 />
 
                                 {/* Play overlay button */}
