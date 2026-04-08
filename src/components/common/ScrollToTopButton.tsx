@@ -33,7 +33,7 @@ const ScrollToTopButton = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.25 }}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-11 h-11 rounded-full bg-primary-blue text-white shadow-[0_12px_35px_rgba(15,23,42,0.45)] hover:bg-primary-blue-hover focus:outline-none focus:ring-2 focus:ring-white/60"
+          className="fixed bottom-28 left-6 z-[55] lg:bottom-28 lg:left-8 flex items-center justify-center w-12 h-12 rounded-full bg-primary-blue text-white border-2 border-white shadow-[0_10px_30px_rgba(59,73,230,0.45),0_0_0_1px_rgba(15,23,42,0.08)] hover:bg-primary-blue-hover focus:outline-none focus:ring-2 focus:ring-primary-blue/40 focus:ring-offset-2"
           aria-label="Scroll to top"
         >
           <svg

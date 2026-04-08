@@ -6,7 +6,46 @@ import { motion } from "framer-motion";
 import GradientContainer from "../common/GradientContainer";
 import FormStatusModal from "../common/FormStatusModal";
 
-const ContactHRForm = () => {
+interface ContactHRFormProps {
+  title?: string;
+  subtitle?: string;
+  emailLabel?: string;
+  form?: {
+    labels: {
+      name: string;
+      email: string;
+      role: string;
+      message: string;
+    };
+    placeholders: {
+      name: string;
+      email: string;
+      role: string;
+      message: string;
+    };
+    roles: {
+      audit: string;
+      tax: string;
+      corporate: string;
+      tech: string;
+      marketing: string;
+      other: string;
+    };
+    submit: string;
+    submitting: string;
+    success: string;
+    error: string;
+    modalSuccessTitle: string;
+    modalErrorTitle: string;
+  };
+}
+
+const ContactHRForm = ({
+  title,
+  subtitle,
+  emailLabel,
+  form
+}: ContactHRFormProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -53,11 +92,11 @@ const ContactHRForm = () => {
 
       setFormData({ name: "", email: "", role: "", message: "" });
       setStatusType("success");
-      setStatusMessage("Thank you! Your message has been sent to our HR team.");
+      setStatusMessage(form?.success || "");
       setStatusOpen(true);
     } catch (err) {
       console.error(err);
-      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      const msg = err instanceof Error ? err.message : (form?.error || "");
       setSubmitError(msg);
       setStatusType("error");
       setStatusMessage(msg);
@@ -72,7 +111,7 @@ const ContactHRForm = () => {
       <FormStatusModal
         open={statusOpen}
         type={statusType}
-        title={statusType === "success" ? "Message sent" : "Something went wrong"}
+        title={statusType === "success" ? (form?.modalSuccessTitle || "") : (form?.modalErrorTitle || "")}
         message={statusMessage}
         onClose={() => setStatusOpen(false)}
       />
@@ -81,13 +120,14 @@ const ContactHRForm = () => {
         <div className="text-center mb-16">
             <FadeInUp>
                 <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
-                    Join Our Talent Network
+                    {title}
                 </h2>
-                <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                    Don't see a specific role that fits? We're always looking for exceptional talent. Send us your details and tell us how you can make an impact.
-                    <br /><br />
-                    Or email us a copy of your CV on <a href="mailto:info@vacei.com" className="text-white font-semibold hover:text-primary-blue transition-colors">info@vacei.com</a>
-                </p>
+                <div className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                    <p>{subtitle}</p>
+                    <div className="mt-8">
+                      {emailLabel} <a href="mailto:info@vacei.com" className="text-white font-semibold hover:text-primary-blue transition-colors">info@vacei.com</a>
+                    </div>
+                </div>
             </FadeInUp>
         </div>
 
@@ -106,7 +146,7 @@ const ContactHRForm = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-2.5">
                                 <label htmlFor="name" className="text-sm font-semibold text-text-heading ml-1">
-                                Full Name <span className="text-primary-blue">*</span>
+                                {form?.labels.name} <span className="text-primary-blue">*</span>
                                 </label>
                                 <input
                                 type="text"
@@ -116,12 +156,12 @@ const ContactHRForm = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 className="w-full px-5 py-4 rounded-xl bg-section-light border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-primary-blue/30 focus:bg-white transition-all outline-none placeholder:text-gray-400 font-medium text-text-heading"
-                                placeholder="John Doe"
+                                placeholder={form?.placeholders.name}
                                 />
                             </div>
                             <div className="space-y-2.5">
                                 <label htmlFor="email" className="text-sm font-semibold text-text-heading ml-1">
-                                Email Address <span className="text-primary-blue">*</span>
+                                {form?.labels.email} <span className="text-primary-blue">*</span>
                                 </label>
                                 <input
                                 type="email"
@@ -131,14 +171,14 @@ const ContactHRForm = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 className="w-full px-5 py-4 rounded-xl bg-section-light border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-primary-blue/30 focus:bg-white transition-all outline-none placeholder:text-gray-400 font-medium text-text-heading"
-                                placeholder="john@example.com"
+                                placeholder={form?.placeholders.email}
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2.5">
                         <label htmlFor="role" className="text-sm font-semibold text-text-heading ml-1">
-                            Area of Interest
+                            {form?.labels.role}
                         </label>
                         <div className="relative">
                             <select
@@ -148,13 +188,13 @@ const ContactHRForm = () => {
                                 onChange={handleChange}
                                 className="w-full px-5 py-4 rounded-xl bg-section-light border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-primary-blue/30 focus:bg-white transition-all outline-none text-text-heading font-medium appearance-none"
                             >
-                                <option value="" disabled>Select a department</option>
-                                <option value="audit">Audit & Assurance</option>
-                                <option value="tax">Taxation Services</option>
-                                <option value="corporate">Corporate Services</option>
-                                <option value="tech">Technology & Engineering</option>
-                                <option value="marketing">Marketing & Sales</option>
-                                <option value="other">Other</option>
+                                <option value="" disabled>{form?.placeholders.role}</option>
+                                <option value="audit">{form?.roles.audit}</option>
+                                <option value="tax">{form?.roles.tax}</option>
+                                <option value="corporate">{form?.roles.corporate}</option>
+                                <option value="tech">{form?.roles.tech}</option>
+                                <option value="marketing">{form?.roles.marketing}</option>
+                                <option value="other">{form?.roles.other}</option>
                             </select>
                             <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +206,7 @@ const ContactHRForm = () => {
 
                         <div className="space-y-2.5">
                         <label htmlFor="message" className="text-sm font-semibold text-text-heading ml-1">
-                            Your Message / Portfolio Link
+                            {form?.labels.message}
                         </label>
                         <textarea
                             id="message"
@@ -175,7 +215,7 @@ const ContactHRForm = () => {
                             value={formData.message}
                             onChange={handleChange}
                             className="w-full px-5 py-4 rounded-xl bg-section-light border-0 ring-1 ring-gray-200 focus:ring-2 focus:ring-primary-blue/30 focus:bg-white transition-all outline-none placeholder:text-gray-400 resize-none font-medium text-text-heading"
-                            placeholder="Tell us a bit about yourself and include a link to your resume or portfolio..."
+                            placeholder={form?.placeholders.message}
                         />
                         </div>
 
@@ -188,7 +228,7 @@ const ContactHRForm = () => {
                             disabled={isSubmitting}
                             className="w-full bg-primary text-white text-lg font-bold py-4 rounded-xl hover:bg-primary-blue transition-all shadow-xl hover:shadow-primary-blue/25 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-60 disabled:cursor-not-allowed"
                         >
-                            {isSubmitting ? "Sending..." : "Send to HR Team"}
+                            {isSubmitting ? (form?.submitting) : (form?.submit)}
                             <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>

@@ -9,6 +9,7 @@ import {
   LOCALE_COOKIE,
   LOCALE_STORAGE_KEY,
   locales,
+  localesForSwitcher,
   type Locale,
 } from "@/lib/i18n-config";
 import { stripLocaleFromPathname, withLocale } from "@/lib/localized-path";
@@ -51,7 +52,6 @@ export default function LanguageSwitcher({
     router.push(target);
   }
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -66,16 +66,14 @@ export default function LanguageSwitcher({
     };
   }, [isOpen]);
 
-  // Used a bright high-contrast theme so it's always very visible over dark or light sections
   return (
-    <div 
+    <div
       ref={dropdownRef}
       className={cn(
-        "fixed bottom-6 left-6 lg:bottom-8 lg:left-8 z-[100]", 
+        "fixed bottom-6 right-6 z-[100] lg:bottom-8 lg:right-8",
         className
       )}
     >
-      {/* Dropdown Menu (Opens Upward) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -83,24 +81,25 @@ export default function LanguageSwitcher({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-full left-0 mb-4 w-48 bg-white border border-slate-200/60 rounded-2xl p-2 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] origin-bottom-left"
+            className="absolute bottom-full right-0 mb-3 min-w-[16rem] w-max max-w-[min(22rem,calc(100vw-1.5rem))] rounded-2xl border-2 border-slate-200 bg-white p-2 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.35),0_0_0_1px_rgba(59,73,230,0.12)] origin-bottom-right"
           >
             <div className="flex flex-col gap-1">
-              {locales.map((loc) => {
+              {localesForSwitcher.map((loc) => {
                 const isSelected = current === loc;
                 return (
                   <button
                     key={loc}
+                    type="button"
                     onClick={() => setLocale(loc)}
                     className={cn(
-                      "flex items-center justify-between w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold transition-all",
-                      isSelected 
-                        ? "bg-blue-50 text-blue-700" 
-                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                      "flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition-all",
+                      isSelected
+                        ? "bg-primary-blue text-white shadow-md shadow-primary-blue/25"
+                        : "text-slate-800 hover:bg-slate-100 hover:text-slate-950"
                     )}
                   >
                     <span>{t(`language.${loc}`)}</span>
-                    {isSelected && <Check className="w-4 h-4 text-blue-600 flex-shrink-0" />}
+                    {isSelected && <Check className="h-4 w-4 shrink-0 text-white" />}
                   </button>
                 );
               })}
@@ -109,27 +108,31 @@ export default function LanguageSwitcher({
         )}
       </AnimatePresence>
 
-      {/* Main Toggle Button */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "flex items-center gap-2.5 bg-white border border-slate-200/60 rounded-full pl-2 pr-4 py-2 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_50px_-15px_rgba(37,99,235,0.4)] hover:border-blue-200 transition-all duration-300 group",
-          isOpen ? "bg-slate-50 ring-4 ring-blue-500/10 border-blue-200" : ""
+          "group flex items-center gap-2.5 rounded-full border-2 border-[#3b49e6]/35 bg-white py-2 pl-2 pr-4 shadow-[0_12px_40px_-8px_rgba(15,23,42,0.28),0_0_0_1px_rgba(15,23,42,0.06)] transition-all duration-300 hover:border-[#3b49e6]/60 hover:shadow-[0_16px_44px_-8px_rgba(59,73,230,0.35)]",
+          isOpen
+            ? "border-[#3b49e6] bg-slate-50 ring-4 ring-[#3b49e6]/15"
+            : ""
         )}
-        aria-label="Change Language"
+        aria-label={`${t("language.label")} — ${t(`language.${current}`)}`}
         aria-expanded={isOpen}
+        aria-haspopup="listbox"
       >
-        <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
-          <Globe className="w-4 h-4" />
-        </div>
-        <span className="text-sm font-bold text-slate-800 tracking-wide">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#3b49e6] text-white shadow-inner shadow-black/10 ring-2 ring-white">
+          <Globe className="h-5 w-5" strokeWidth={2} aria-hidden />
+        </span>
+        <span className="min-w-0 truncate text-sm font-bold tracking-wide text-slate-900">
           {t(`language.${current}`)}
         </span>
-        <ChevronUp 
+        <ChevronUp
           className={cn(
-            "w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-transform duration-300 ml-1",
+            "ml-0.5 h-4 w-4 shrink-0 text-[#3b49e6] transition-transform duration-300 group-hover:text-[#2f3bc4]",
             isOpen ? "rotate-180" : ""
-          )} 
+          )}
+          aria-hidden
         />
       </button>
     </div>

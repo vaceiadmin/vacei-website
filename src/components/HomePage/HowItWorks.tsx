@@ -4,6 +4,7 @@ import { Play, Pause, CheckCircle2, Building2, UserPlus, LayoutDashboard, Sparkl
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { HOW_IT_WORKS_VIDEO } from "@/data/video";
 import { cn } from "@/lib/utils";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const HowItWorks = () => {
   const { t } = useTranslation("home");
@@ -133,9 +134,12 @@ const HowItWorks = () => {
             <span>{t("howItWorks.badge")}</span>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            {t("howItWorks.titleLine1")}<span className="text-primary-blue">{t("howItWorks.titleHighlight")}</span>
-          </h2>
+          <SectionTitleHero
+            variant="light"
+            className="mb-6 items-center text-center"
+            line1={t("howItWorks.titleLine1")}
+            highlight={t("howItWorks.titleHighlight")}
+          />
 
           <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
             {t("howItWorks.subtitle")}

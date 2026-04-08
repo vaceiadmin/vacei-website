@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useIsSafari } from "@/hooks/use-safari"
 import { usePerformance } from "@/contexts/ReduceMotionContext"
 import GetInstantQuoteButton from '../common/GetInstantQuoteButton'
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const CompanySetupSection = () => {
   const { t } = useTranslation('home')
@@ -35,10 +36,12 @@ const CompanySetupSection = () => {
                 {t('companySetup.badge')}
             </div>
             
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-[1.1]">
-                {t('companySetup.titleLine1')}<br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-400">{t('companySetup.titleHighlight')}</span>
-            </h2>
+            <SectionTitleHero
+                variant="dark"
+                className="mb-6 items-center text-center"
+                line1={t("companySetup.titleLine1")}
+                highlight={t("companySetup.titleHighlight")}
+            />
             <p className="text-base md:text-lg text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto">
                 {t('companySetup.subtitle')}
             </p>

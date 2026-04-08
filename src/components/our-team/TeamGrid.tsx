@@ -18,69 +18,34 @@ interface TeamMember {
   };
 }
 
-const teamMembers: TeamMember[] = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    role: "CEO & Founder",
-    image: "/assets/images/placeholder.png", // Replace with actual images or placeholders
-    bio: "Visionary leader with 15+ years of experience in fintech and business strategy.",
-  },
-  {
-    id: 2,
-    name: "David Chen",
-    role: "Chief Technology Officer",
-    image: "/assets/images/placeholder.png",
-    bio: "Tech innovator passionate about building scalable solutions and AI integration.",
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    role: "Head of Design",
-    image: "/assets/images/placeholder.png",
-    bio: "Creative director ensuring our user experience is sleek, intuitive, and beautiful.",
-  },
-  {
-    id: 4,
-    name: "Michael Brown",
-    role: "Lead Developer",
-    image: "/assets/images/placeholder.png",
-    bio: "Full-stack expert specializing in secure and high-performance web architectures.",
-  },
-   {
-    id: 5,
-    name: "Jessica Lee",
-    role: "Marketing Director",
-    image: "/assets/images/placeholder.png", // Replace with actual images or placeholders
-    bio: "Driving brand growth through strategic marketing and community engagement.",
-  },
-  {
-    id: 6,
-    name: "Robert Wilson",
-    role: "Operations Manager",
-    image: "/assets/images/placeholder.png",
-    bio: "Ensuring smooth day-to-day operations and optimizing business processes.",
-  },
-];
+interface TeamGridProps {
+  title?: string;
+  subtitle?: string;
+  members?: TeamMember[];
+}
 
-const TeamGrid = () => {
+const TeamGrid = ({ 
+  title, 
+  subtitle,
+  members = []
+}: TeamGridProps) => {
   return (
     <section className="w-full py-20 bg-background relative overflow-hidden">
       <div className="mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className="text-center mb-16">
            <FadeInUp>
             <h2 className="text-3xl md:text-5xl font-bold text-text-heading mb-4">
-               Meet Our Experts
+               {title}
             </h2>
              <p className="text-lg text-text-gray max-w-2xl mx-auto">
-              Our diverse team of professionals is dedicated to simplifying your business journey.
+              {subtitle}
             </p>
           </FadeInUp>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => (
-            <FadeInUp key={member.id} delay={index * 0.1}>
+          {members.map((member, index) => (
+            <FadeInUp key={member.id || index} delay={index * 0.1}>
               <motion.div
                 whileHover={{ y: -10 }}
                 className="group relative bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20"
@@ -97,7 +62,7 @@ const TeamGrid = () => {
                        </div>
                   </div>
                   <Image
-                    src={member.image}
+                    src={member.image || "/assets/images/placeholder.png"}
                     alt={member.name}
                     fill
                     className="object-cover object-center transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"

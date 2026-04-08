@@ -1,14 +1,17 @@
-import React from "react";
+"use client";
+
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { CheckCircle2, ShieldCheck, FileText, Users, Bell, ArrowUpRight } from "lucide-react";
 
 const PlatformPowerSection = () => {
-  const highlights = [
-    "Full visibility across every business engagement",
-    "Secure document management and historical tracking",
-    "Integrated communication with verified advisors",
-    "Real-time monitoring of filings and deadlines",
-  ];
+  const { t } = useTranslation("home");
+
+  const highlights = useMemo(
+    () => (t("platformPower.highlights", { returnObjects: true }) as string[]) ?? [],
+    [t]
+  );
 
   return (
     <section className="py-24 bg-black relative overflow-hidden rounded-[48px]">
@@ -18,13 +21,13 @@ const PlatformPowerSection = () => {
           {/* Left Content */}
           <div className="w-full lg:w-1/2">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-8">
-                Platform Intelligence
+                {t("platformPower.badge")}
             </div>
             <h2 className="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
-              A smarter way to manage <span className="text-blue-400">business services.</span>
+              {t("platformPower.titleLine1")}<span className="text-blue-400">{t("platformPower.titleHighlight")}</span>
             </h2>
             <p className="text-lg text-slate-400 mb-10 font-medium leading-relaxed">
-              VACEI provides the structure and visibility needed to coordinate with multiple professional firms, manage compliance, and scale your operations from one secure platform.
+              {t("platformPower.body")}
             </p>
 
             <div className="space-y-5 mb-12">
@@ -40,12 +43,12 @@ const PlatformPowerSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <GetInstantQuoteButton
-                text="Create Workspace"
+                text={t("platformPower.createWorkspaceCta")}
                 className="h-[56px] px-10 shadow-xl shadow-blue-600/20"
               />
               <GetInstantQuoteButton
                 variant="custom"
-                text="Register to Get Instant Quote"
+                text={t("platformPower.registerQuoteCta")}
                 bgColor="rgba(255,255,255,0.05)"
                 textColor="white"
                 borderColor="rgba(255,255,255,0.1)"
@@ -69,7 +72,7 @@ const PlatformPowerSection = () => {
                     <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
                       <ShieldCheck className="w-4 h-4" />
                     </div>
-                    <span className="font-black text-white tracking-tight text-sm">VACEI Workspace</span>
+                    <span className="font-black text-white tracking-tight text-sm">{t("platformPower.workspaceLabel")}</span>
                   </div>
                   <div className="flex gap-1.5">
                     <div className="w-2 h-2 rounded-full bg-white/20" />
@@ -87,8 +90,8 @@ const PlatformPowerSection = () => {
                         <FileText className="w-5 h-5" />
                       </div>
                       <div>
-                        <p className="text-xs font-black text-white">Audit & Assurance</p>
-                        <p className="text-[10px] text-emerald-400 font-bold uppercase">Active Engagement</p>
+                        <p className="text-xs font-black text-white">{t("platformPower.auditAssurance")}</p>
+                        <p className="text-[10px] text-emerald-400 font-bold uppercase">{t("platformPower.activeEngagement")}</p>
                       </div>
                     </div>
                     <div className="w-6 h-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400">
@@ -98,10 +101,10 @@ const PlatformPowerSection = () => {
 
                  {/* Notifications/Tasks */}
                  <div className="space-y-3">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Team Notifications</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{t("platformPower.teamNotifications")}</p>
                     {[
-                      { icon: <Bell className="w-3.5 h-3.5" />, text: "Draft Financials uploaded by auditor", time: "2m ago" },
-                      { icon: <Users className="w-3.5 h-3.5" />, text: "Tax advisor requested documents", time: "1h ago" },
+                      { icon: <Bell className="w-3.5 h-3.5" />, text: t("platformPower.notif1"), time: t("platformPower.notif1Time") },
+                      { icon: <Users className="w-3.5 h-3.5" />, text: t("platformPower.notif2"), time: t("platformPower.notif2Time") },
                     ].map((notif, i) => (
                       <div key={i} className="flex items-start gap-3">
                         <div className="w-7 h-7 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0">
@@ -118,13 +121,13 @@ const PlatformPowerSection = () => {
                  {/* Large Visual Metric */}
                  <div className="relative pt-4 text-white">
                     <div className="flex items-end justify-between mb-2">
-                       <p className="text-xs font-black">Document Compliance</p>
+                       <p className="text-xs font-black">{t("platformPower.docCompliance")}</p>
                        <p className="text-xs font-black text-blue-400">85%</p>
                     </div>
                     <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
                        <div className="w-[85%] h-full bg-blue-600 rounded-full" />
                     </div>
-                    <p className="mt-2 text-[10px] text-slate-500 font-medium italic">Everything synced with primary advisor.</p>
+                    <p className="mt-2 text-[10px] text-slate-500 font-medium italic">{t("platformPower.syncHint")}</p>
                  </div>
                </div>
             </div>
@@ -136,8 +139,8 @@ const PlatformPowerSection = () => {
                     <CheckCircle2 className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-white">On-Track</p>
-                    <p className="text-[10px] text-slate-400">2 Actions Pending</p>
+                    <p className="text-xs font-black text-white">{t("platformPower.onTrack")}</p>
+                    <p className="text-[10px] text-slate-400">{t("platformPower.actionsPending")}</p>
                   </div>
                </div>
             </div>
@@ -149,8 +152,8 @@ const PlatformPowerSection = () => {
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-900">VAT_Return_Q1.pdf</p>
-                    <p className="text-[10px] text-slate-500">Pending Review</p>
+                    <p className="text-xs font-black text-slate-900">{t("platformPower.pdfName")}</p>
+                    <p className="text-[10px] text-slate-500">{t("platformPower.pendingReview")}</p>
                   </div>
                </div>
             </div>
@@ -163,3 +166,4 @@ const PlatformPowerSection = () => {
 };
 
 export default PlatformPowerSection;
+

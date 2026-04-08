@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { Database, UserCheck, ArrowRight } from "lucide-react";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const WhyVaceiSection = () => {
    const { t } = useTranslation("home");
@@ -16,9 +17,12 @@ const WhyVaceiSection = () => {
                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-6">
                   {t("whyVacei.badge")}
                </div>
-               <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-                  {t("whyVacei.titleLine1")}<span className="text-blue-400">{t("whyVacei.titleHighlight")}</span>
-               </h2>
+               <SectionTitleHero
+                  variant="dark"
+                  className="mb-6 items-center text-center"
+                  line1={t("whyVacei.titleLine1")}
+                  highlight={t("whyVacei.titleHighlight")}
+               />
                <p className="text-lg text-slate-400 max-w-2xl mx-auto font-medium">
                   {t("whyVacei.subtitle")}
                </p>

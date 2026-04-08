@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { Mail, Phone, MapPin, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 import FormStatusModal from "@/components/common/FormStatusModal";
+import { usePagesTranslation } from "@/hooks/usePagesTranslation";
 
 const ContactForm = () => {
+  const { t } = usePagesTranslation("contact");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,17 +33,17 @@ const ContactForm = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = t("form.validation.nameRequired");
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = t("form.validation.emailRequired");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = t("form.validation.emailInvalid");
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
+      newErrors.message = t("form.validation.messageRequired");
     }
 
     setErrors(newErrors);
@@ -71,16 +73,16 @@ const ContactForm = () => {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error((data as { error?: string }).error || "Request failed");
+        throw new Error((data as { error?: string }).error || t("form.error.generic"));
       }
 
       setFormData({ name: "", email: "", message: "" });
       setStatusType("success");
-      setStatusMessage("Your message has been sent. We’ll reply as soon as we can.");
+      setStatusMessage(t("form.success.message"));
       setStatusOpen(true);
     } catch (err) {
       console.error(err);
-      const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      const msg = err instanceof Error ? err.message : t("form.error.generic");
       setSubmitError(msg);
       setStatusType("error");
       setStatusMessage(msg);
@@ -95,7 +97,7 @@ const ContactForm = () => {
       <FormStatusModal
         open={statusOpen}
         type={statusType}
-        title={statusType === "success" ? "Message sent" : "Something went wrong"}
+        title={statusType === "success" ? t("form.success.title") : t("form.error.title")}
         message={statusMessage}
         onClose={() => setStatusOpen(false)}
       />
@@ -112,14 +114,13 @@ const ContactForm = () => {
               className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100"
             >
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-medium mb-3">
-                Get in touch
+                {t("form.badge")}
               </span>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-3">
-                Send us a message
+                {t("form.title")}
               </h2>
               <p className="text-sm md:text-base text-gray mb-6 leading-relaxed">
-                Share a few details about what you&apos;re looking for and our team will
-                get back to you with next steps.
+                {t("form.description")}
               </p>
               {submitError && (
                 <p className="mb-4 text-sm text-error">{submitError}</p>
@@ -128,6 +129,7 @@ const ContactForm = () => {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name Field */}
                 <div>
+                  <label htmlFor="name" className="sr-only">{t("form.fields.name.label")}</label>
                   <input
                     type="text"
                     id="name"
@@ -137,7 +139,7 @@ const ContactForm = () => {
                     className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors hover:border-primary-blue/60 ${
                       errors.name ? "border-error" : "border-input"
                     }`}
-                    placeholder="Your name"
+                    placeholder={t("form.fields.name.placeholder")}
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-error">{errors.name}</p>
@@ -146,6 +148,7 @@ const ContactForm = () => {
 
                 {/* Email Field */}
                 <div>
+                  <label htmlFor="email" className="sr-only">{t("form.fields.email.label")}</label>
                   <input
                     type="email"
                     id="email"
@@ -155,7 +158,7 @@ const ContactForm = () => {
                     className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors hover:border-primary-blue/60 ${
                       errors.email ? "border-error" : "border-input"
                     }`}
-                    placeholder="your.email@example.com"
+                    placeholder={t("form.fields.email.placeholder")}
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-error">{errors.email}</p>
@@ -164,6 +167,7 @@ const ContactForm = () => {
 
                 {/* Message Field */}
                 <div>
+                  <label htmlFor="message" className="sr-only">{t("form.fields.message.label")}</label>
                   <textarea
                     id="message"
                     name="message"
@@ -173,7 +177,7 @@ const ContactForm = () => {
                     className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors resize-none hover:border-primary-blue/60 ${
                       errors.message ? "border-error" : "border-input"
                     }`}
-                    placeholder="Your message"
+                    placeholder={t("form.fields.message.placeholder")}
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-error">{errors.message}</p>
@@ -188,7 +192,7 @@ const ContactForm = () => {
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-primary to-primary-blue hover:from-primary-blue hover:to-primary text-white font-semibold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {isSubmitting ? t("form.submitting") : t("form.submit")}
                 </motion.button>
               </form>
             </motion.div>
@@ -202,11 +206,10 @@ const ContactForm = () => {
               className="flex flex-col justify-start"
             >
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading mb-3">
-                Contact information
+                {t("info.title")}
               </h2>
               <p className="text-sm md:text-base text-gray mb-6 leading-relaxed max-w-md">
-                Prefer email, a quick call or an in-person chat? Choose what works
-                best for you.
+                {t("info.description")}
               </p>
 
               <div className="space-y-6 mb-8">
@@ -217,13 +220,13 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-heading mb-1">
-                      Email
+                      {t("info.email.label")}
                     </p>
                     <a
-                      href="mailto:info@vacei.com"
+                      href={`mailto:${t("info.email.value")}`}
                       className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
                     >
-                      info@vacei.com
+                      {t("info.email.value")}
                     </a>
                   </div>
                 </div>
@@ -235,21 +238,18 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-heading mb-1">
-                      Phone
+                      {t("info.phone.label")}
                     </p>
                     <div className="flex flex-col leading-tight">
-                      <a
-                        href="tel:+35677142418"
-                        className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
-                      >
-                        +356 77142418
-                      </a>
-                      <a
-                        href="tel:+4407400487907"
-                        className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
-                      >
-                        +44 07400 487907
-                      </a>
+                      {((t("info.phone.values", { returnObjects: true }) as unknown) as string[] || []).map((phone, idx) => (
+                        <a
+                          key={idx}
+                          href={`tel:${phone.replace(/\s+/g, "")}`}
+                          className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
+                        >
+                          {phone}
+                        </a>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -261,10 +261,10 @@ const ContactForm = () => {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-heading mb-1">
-                      Address
+                      {t("info.address.label")}
                     </p>
                     <p className="text-sm md:text-base text-gray">
-                      A4, Triq San Giljan, San Gwann, Malta.
+                      {t("info.address.value")}
                     </p>
                   </div>
                 </div>
@@ -273,7 +273,7 @@ const ContactForm = () => {
               {/* Call to Action */}
               <div className="mt-auto">
                 <p className="text-base md:text-lg font-semibold text-heading mb-4">
-                  Prefer to talk?
+                  {t("info.cta.title")}
                 </p>
                 <motion.a
                   whileHover={{ scale: 1.02, y: -1 }}
@@ -283,7 +283,7 @@ const ContactForm = () => {
                   rel="noreferrer"
                   className="bg-purple-bg hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
                 >
-                  <span>Book a free 15-minute call</span>
+                  <span>{t("info.cta.button")}</span>
                   <PhoneCall className="w-5 h-5" />
                 </motion.a>
               </div>

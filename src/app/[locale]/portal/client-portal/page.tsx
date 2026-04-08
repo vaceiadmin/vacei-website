@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import PageHeader from "@/components/common/PageHeader";
 import { usePagesTranslation } from "@/hooks/usePagesTranslation";
 import ClientPortalOverviewSection from "@/components/client-portal/ClientPortalOverviewSection";
@@ -8,38 +8,54 @@ import ClientPortalFeaturesTimelineSection from "@/components/client-portal/Clie
 import PortalFeature from "@/components/services/PortalFeature";
 import { FadeInUp } from "@/components/common/Animations";
 
+const ROUTE = "portal/client-portal";
+
 const ClientPortalPage = () => {
-  const { t } = usePagesTranslation("portal/client-portal");
+  const { t } = usePagesTranslation(ROUTE);
+
+  const paragraphs = useMemo(() => {
+    const raw = t("overview.paragraphs", { returnObjects: true });
+    return Array.isArray(raw) ? (raw as string[]) : [];
+  }, [t]);
+
+  const bulletItems = useMemo(() => {
+    const raw = t("feature.bulletItems", { returnObjects: true });
+    return Array.isArray(raw) ? (raw as string[]) : [];
+  }, [t]);
+
   return (
     <main className="min-h-screen bg-background">
       <div className="w-full">
-        <PageHeader title={t("pageHeader.title")} breadcrumbs={[{ label: t("pageHeader.breadcrumbs.0.label") }]} />
+        <PageHeader
+          title={t("pageHeader.title")}
+          breadcrumbs={[{ label: t("pageHeader.breadcrumbs.0.label") }]}
+        />
       </div>
 
       <FadeInUp>
-        <ClientPortalOverviewSection />
+        <ClientPortalOverviewSection
+          variant="client"
+          i18nRouteKey={ROUTE}
+          heading={t("overview.heading")}
+          paragraphs={paragraphs}
+        />
       </FadeInUp>
       <FadeInUp delay={0.2}>
         <PortalFeature
           variant="upload-dashboard"
           portalImage="/assets/images/image copy.png"
-          sectionLabel="Our services"
-          heading="Task and Documents Upload"
-          description="The portal allows you to upload documents securely and respond to requests easily."
-          bulletIntro="You can:"
-          bulletItems={[
-            "Upload invoices, receipts and supporting documents",
-            "Respond to accounting, compliance or audit requests",
-            "View what's pending, completed or overdue",
-            "Keep documents organised and accessible at all times",
-          ]}
-          closingText="Documents remain organised and accessible at all times, so your team and the VACEI team always have the information they need."
-          bottomTitle="Client Portal"
-          bottomDescription="Documents, tasks, deadlines and communication in one place."
+          sectionLabel={t("feature.sectionLabel")}
+          heading={t("feature.heading")}
+          description={t("feature.description")}
+          bulletIntro={t("feature.bulletIntro")}
+          bulletItems={bulletItems}
+          closingText={t("feature.closingText")}
+          bottomTitle={t("feature.bottomTitle")}
+          bottomDescription={t("feature.bottomDescription")}
         />
       </FadeInUp>
       <FadeInUp delay={0.4}>
-        <ClientPortalFeaturesTimelineSection />
+        <ClientPortalFeaturesTimelineSection routeKey={ROUTE} />
       </FadeInUp>
     </main>
   );

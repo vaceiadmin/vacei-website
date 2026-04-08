@@ -7,6 +7,7 @@ import LiquidSurface from "../common/background";
 
 
 interface WLCTASectionProps {
+  badge: string;
   title: string;
   subtitle: string;
   ctaText: string;
@@ -14,6 +15,7 @@ interface WLCTASectionProps {
 }
 
 const WLCTASection: React.FC<WLCTASectionProps> = ({
+  badge,
   title,
   subtitle,
   ctaText,
@@ -55,7 +57,7 @@ const WLCTASection: React.FC<WLCTASectionProps> = ({
             className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-black tracking-widest uppercase text-xs"
           >
             <Sparkles className="w-4 h-4 text-yellow-300" />
-            {title}
+            {badge}
           </motion.div>
 
           <motion.h2
@@ -65,7 +67,7 @@ const WLCTASection: React.FC<WLCTASectionProps> = ({
             transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight"
           >
-            Transform Your Firm Today
+            {title}
           </motion.h2>
 
           <motion.p

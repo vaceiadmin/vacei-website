@@ -8,6 +8,7 @@ import AuditPlatformBeam from "./AuditPlatformBeam";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import {
   CheckCircle2,
   Workflow,
@@ -86,16 +87,19 @@ export default function AuditPlatform() {
               <span className="text-xs font-bold uppercase tracking-widest text-blue-700">{t("auditPlatform.badge")}</span>
             </motion.div>
 
-            <motion.h2
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-8"
+              className="mb-8"
             >
-              {t("auditPlatform.titleLine1")} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">{t("auditPlatform.titleHighlight")}</span>
-            </motion.h2>
+              <SectionTitleHero
+                variant="light"
+                line1={t("auditPlatform.titleLine1")}
+                highlight={t("auditPlatform.titleHighlight")}
+              />
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

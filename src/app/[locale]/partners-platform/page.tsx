@@ -129,6 +129,7 @@ const PartnersPlatformPage = () => {
 
       {/* Final CTA Section */}
       <WLCTASection
+        badge="Partner Network"
         title="Start Receiving Clients"
         subtitle="VACEI is the operating system for professional services — combining accounting, audit, tax, legal, and compliance into one unified platform. Book your demo today."
         ctaText="Book a Demo"

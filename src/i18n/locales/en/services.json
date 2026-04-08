@@ -836,5 +836,12 @@
     },
     "primaryCtaText": "Discuss a Corporate Transaction",
     "secondaryCtaText": "Request a Quote"
+  },
+  "shared": {
+    "videoLabel": "Service overview video",
+    "videoPlaceholder": "Reserved space for a small, silent looping video for this service. The page layout remains fully balanced even if no video is added yet.",
+    "ctaTitle": "Ready to streamline your workflow?",
+    "ctaBody": "Get started with VACEI today and experience the difference of a structured delivery platform.",
+    "ctaButton": "Get Started"
   }
 }

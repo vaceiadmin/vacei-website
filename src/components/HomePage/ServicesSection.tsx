@@ -8,6 +8,7 @@ import { servicesData } from "@/data/servicesData";
 import { useIsSafari } from "@/hooks/use-safari";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 interface BaseCard {
     id: string | number;
@@ -124,10 +125,12 @@ const ServicesSection = () => {
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[10px] font-black tracking-widest text-blue-600 uppercase mb-6">
                             {t("servicesSection.badge")}
                         </div>
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-6">
-                            {t("servicesSection.titleLine1")} <br />
-                            <em className="italic text-[#1a5cd7] font-bodoni font-medium">{t("servicesSection.titleHighlight")}</em>
-                        </h2>
+                        <SectionTitleHero
+                            variant="light"
+                            className="mb-6"
+                            line1={t("servicesSection.titleLine1")}
+                            highlight={t("servicesSection.titleHighlight")}
+                        />
                         <p className="text-lg text-slate-500 font-medium leading-relaxed">
                             {t("servicesSection.subtitle")}
                         </p>

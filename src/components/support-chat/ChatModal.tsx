@@ -2,15 +2,11 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import TypingIndicator from "./TypingIndicator";
 
 export type Message = { role: "user" | "bot"; content: string };
 
-const BOT_WELCOME = "Hi 👋 How can I help you today?";
-const BOT_ASK_NAME = "Great, who should we address our reply to?";
-const BOT_ASK_EMAIL = "Thanks! What's the best email to reach you on?";
-const BOT_SUCCESS =
-  "Thank you for your time. Our support team will review this conversation and contact you as soon as possible.";
 const TYPING_DELAY_MS = 800;
 
 interface ChatModalProps {
@@ -20,6 +16,7 @@ interface ChatModalProps {
 }
 
 export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) {
+  const { t } = useTranslation("common");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [botTyping, setBotTyping] = useState(false);
@@ -27,8 +24,6 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [issue, setIssue] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -42,16 +37,14 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
     setName("");
     setEmail("");
     setIssue("");
-    setSubmitted(false);
-    setSubmitError(null);
     setInput("");
     setBotTyping(true);
-    const t = setTimeout(() => {
-      setMessages([{ role: "bot", content: BOT_WELCOME }]);
+    const timer = setTimeout(() => {
+      setMessages([{ role: "bot", content: t("supportChat.botWelcome") }]);
       setBotTyping(false);
     }, TYPING_DELAY_MS);
-    return () => clearTimeout(t);
-  }, [open]);
+    return () => clearTimeout(timer);
+  }, [open, t]);
 
   useEffect(() => {
     scrollToBottom();
@@ -63,13 +56,12 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
     if (!trimmed || botTyping) return;
 
     if (step === "welcome") {
-      // First user message – treat as main issue/intent
       setIssue(trimmed);
       setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
       setInput("");
       setBotTyping(true);
       setTimeout(() => {
-        setMessages((prev) => [...prev, { role: "bot", content: BOT_ASK_NAME }]);
+        setMessages((prev) => [...prev, { role: "bot", content: t("supportChat.botAskName") }]);
         setBotTyping(false);
         setStep("name");
       }, TYPING_DELAY_MS);
@@ -81,7 +73,7 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
       setInput("");
       setBotTyping(true);
       setTimeout(() => {
-        setMessages((prev) => [...prev, { role: "bot", content: BOT_ASK_EMAIL }]);
+        setMessages((prev) => [...prev, { role: "bot", content: t("supportChat.botAskEmail") }]);
         setBotTyping(false);
       }, TYPING_DELAY_MS);
       setStep("email");
@@ -105,19 +97,11 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
         }),
       })
         .then((res) => {
-          if (!res.ok) return res.json().then((d) => Promise.reject(new Error(d.error || "Failed")));
-          setSubmitted(true);
-          setMessages((prev) => [...prev, { role: "bot", content: BOT_SUCCESS }]);
+          if (!res.ok) return res.json().then((d) => Promise.reject(new Error(d.error || t("supportChat.submitErrorFailed"))));
+          setMessages((prev) => [...prev, { role: "bot", content: t("supportChat.botSuccess") }]);
         })
-        .catch((err) => {
-          setSubmitError(err?.message || "Failed to submit.");
-          setMessages((prev) => [
-            ...prev,
-            {
-              role: "bot",
-              content: "We couldn't send your request. Please try again or email us at info@vacei.com.",
-            },
-          ]);
+        .catch(() => {
+          setMessages((prev) => [...prev, { role: "bot", content: t("supportChat.botErrorSend") }]);
         })
         .finally(() => {
           setBotTyping(false);
@@ -147,7 +131,6 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
         transition={{ duration: 0.25, ease: "easeOut" }}
         className="relative w-full max-w-md h-[85vh] sm:h-[600px] sm:max-h-[85vh] rounded-t-2xl sm:rounded-2xl bg-white shadow-2xl flex flex-col overflow-hidden"
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50/80">
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-full bg-[#1e2040] flex items-center justify-center text-white">
@@ -160,13 +143,13 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
                 />
               </svg>
             </div>
-            <span className="font-semibold text-gray-900">Support</span>
+            <span className="font-semibold text-gray-900">{t("supportChat.headerTitle")}</span>
           </div>
           <button
             type="button"
             onClick={onClose}
             className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-200 text-gray-600 transition-colors"
-            aria-label="Close chat"
+            aria-label={t("supportChat.closeChatAria")}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -174,11 +157,7 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
           </button>
         </div>
 
-        {/* Messages */}
-        <div
-          ref={scrollRef}
-          className="flex-1 overflow-y-auto p-4 space-y-4"
-        >
+        <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map((msg, i) => (
             <div
               key={i}
@@ -202,7 +181,6 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
           )}
         </div>
 
-        {/* Input or done actions */}
         {step === "done" ? (
           <div className="p-4 border-t border-gray-100">
             <button
@@ -210,7 +188,7 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
               onClick={onRestart}
               className="w-full py-3 rounded-xl bg-[#1e2040] hover:bg-[#2a2d55] text-white font-semibold text-sm transition-colors"
             >
-              Start new chat
+              {t("supportChat.startNewChat")}
             </button>
           </div>
         ) : (
@@ -221,7 +199,7 @@ export default function ChatModal({ open, onClose, onRestart }: ChatModalProps) 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={botTyping}
-                placeholder="Type a message..."
+                placeholder={t("supportChat.inputPlaceholder")}
                 className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1e2040]/30 focus:border-[#1e2040] disabled:opacity-60 text-sm"
               />
               <button

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/common/LocalizedLink";
 
 const COOKIE_NAME = "vacei_cookie_consent";
 
@@ -46,6 +47,12 @@ export default function CookieConsentBanner() {
             <div className="flex-1 text-sm sm:text-[13px] leading-relaxed">
               <p className="font-semibold mb-1">{t("cookieConsent.title")}</p>
               <p className="text-white/80">{t("cookieConsent.body")}</p>
+              <LocalizedLink
+                href="/cookie-policy"
+                className="mt-2 inline-block text-xs font-semibold text-white/90 underline underline-offset-2 hover:text-white"
+              >
+                {t("cookieConsent.policyLink")}
+              </LocalizedLink>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 self-stretch sm:self-auto">
               <button

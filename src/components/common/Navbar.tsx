@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/common/LocalizedLink";
 
 import { stripLocaleFromPathname } from "@/lib/localized-path";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n-config";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ShieldCheck, BookOpen, Layers } from "lucide-react";
@@ -22,6 +24,12 @@ const Navbar = () => {
   const pathname = usePathname();
   const { t } = useTranslation("common");
   const barePath = stripLocaleFromPathname(pathname);
+
+  const activeLocale: Locale = useMemo(() => {
+    const seg = pathname.split("/").filter(Boolean)[0];
+    return seg && isLocale(seg) ? seg : defaultLocale;
+  }, [pathname]);
+  const widenNavForI18n = activeLocale !== "en";
   const [servicesOpen, setServicesOpen] = useState(false);
   const [portalsOpen, setPortalsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
@@ -409,7 +417,14 @@ const Navbar = () => {
   return (
     <>
       <div className="flex justify-center w-full relative z-[60]">
-        <nav className="fixed top-2 sm:top-4 w-full max-w-7xl px-3 sm:px-4 lg:px-8 pointer-events-none">
+        <nav
+          className={cn(
+            "fixed top-2 sm:top-4 w-full px-3 sm:px-4 lg:px-8 pointer-events-none",
+            widenNavForI18n
+              ? "max-w-[min(118rem,calc(100%-1rem))] xl:max-w-[126rem] 2xl:max-w-[132rem]"
+              : "max-w-7xl"
+          )}
+        >
           {/* Navbar Container – sleek floating pill layout */}
           <motion.div
             initial={false}
@@ -487,7 +502,14 @@ const Navbar = () => {
                           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-6 z-50 origin-top pointer-events-auto"
                         >
-                          <div className={`bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-white/60 p-6 overflow-hidden min-w-[650px] w-max max-w-[90vw] flex gap-8`}>
+                          <div
+                            className={cn(
+                              `bg-white/95 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.12)] border border-white/60 p-6 overflow-hidden w-max flex gap-8`,
+                              widenNavForI18n
+                                ? "min-w-[780px] max-w-[min(92vw,90rem)]"
+                                : "min-w-[650px] max-w-[90vw]"
+                            )}
+                          >
                             {link.dropdownId === "services" ? (
                               <>
                                 <div className="flex-1 min-w-[280px]">

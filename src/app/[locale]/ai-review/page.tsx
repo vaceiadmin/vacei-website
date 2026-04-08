@@ -13,6 +13,12 @@ import { usePagesTranslation } from "@/hooks/usePagesTranslation";
 const AIReviewPage = () => {
   const { t } = usePagesTranslation("ai-review");
 
+  const hero = useMemo(() => t("hero", { returnObjects: true }) as any, [t]);
+  const demo = useMemo(() => t("demo", { returnObjects: true }) as any, [t]);
+  const portalFeature = useMemo(() => t("portalFeature", { returnObjects: true }) as any, [t]);
+  const output = useMemo(() => t("output", { returnObjects: true }) as any, [t]);
+  const videoBenefits = useMemo(() => t("video_benefits", { returnObjects: true }) as any, [t]);
+
   const aiReviewServiceFeatures = useMemo(
     () => ({
       title: t("serviceFeatures.title"),
@@ -32,10 +38,14 @@ const AIReviewPage = () => {
       </div>
 
       <FadeInUp>
-        <AIReviewFeature />
+        <AIReviewFeature hero={hero} demo={demo} />
       </FadeInUp>
       <FadeInUp delay={0.2}>
-        <PortalFeature portalImage="/assets/images/Frame 1618872451.png" />
+        <PortalFeature 
+          portalImage="/assets/images/Frame 1618872451.png" 
+          variant="technology"
+          {...portalFeature}
+        />
       </FadeInUp>
       <FadeInUp delay={0.4}>
         <ServiceFeatures
@@ -45,10 +55,10 @@ const AIReviewPage = () => {
         />
       </FadeInUp>
       <FadeInUp delay={0.6}>
-        <ReviewOutputSection />
+        <ReviewOutputSection output={output} />
       </FadeInUp>
       <FadeInUp delay={0.8}>
-        <BenefitsVideoSection />
+        <BenefitsVideoSection cards={videoBenefits} />
       </FadeInUp>
     </main>
   );

@@ -20,9 +20,9 @@ interface WLProcessProps {
 const WLProcess: React.FC<WLProcessProps> = ({ 
   sectionTitle, 
   steps,
-  tagline = "Step by Step",
-  description = "We've streamlined the entire white-label onboarding process into four simple phases.",
-  highlightWord = "Works"
+  tagline,
+  description,
+  highlightWord
 }) => {
   return (
     <section className="py-20 bg-[#F8F9FC] relative overflow-hidden">

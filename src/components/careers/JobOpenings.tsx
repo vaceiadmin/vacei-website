@@ -14,52 +14,29 @@ interface Job {
   link: string;
 }
 
-const jobs: Job[] = [
-  {
-    id: 1,
-    title: "Senior Audit Associate",
-    department: "Audit & Assurance",
-    location: "Singapore",
-    type: "Full-time",
-    link: "#", // Replace with actual application link
-  },
-  {
-    id: 2,
-    title: "Corporate Secretarial Executive",
-    department: "Corporate Services",
-    location: "Singapore",
-    type: "Full-time",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Tax Consultant",
-    department: "Taxation",
-    location: "Hybrid / Singapore",
-    type: "Full-time",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "Frontend Developer",
-    department: "Technology",
-    location: "Remote",
-    type: "Full-time",
-    link: "#",
-  },
-];
+interface JobOpeningsProps {
+  title?: string;
+  subtitle?: string;
+  applyNowText?: string;
+  jobs?: Job[];
+}
 
-const JobOpenings = () => {
+const JobOpenings = ({ 
+  title, 
+  subtitle,
+  applyNowText,
+  jobs = []
+}: JobOpeningsProps) => {
   return (
     <section className="w-full py-20 bg-background relative overflow-hidden">
       <div className="mx-auto px-4 md:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className="text-center mb-16">
           <FadeInUp>
             <h2 className="text-3xl md:text-5xl font-bold text-text-heading mb-4">
-              Open Positions
+              {title}
             </h2>
             <p className="text-lg text-text-gray max-w-2xl mx-auto">
-              Ready to make an impact? Explore our current opportunities and find your next role at VACEI.
+              {subtitle}
             </p>
           </FadeInUp>
         </div>
@@ -97,7 +74,7 @@ const JobOpenings = () => {
                     href={job.link}
                     className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-primary-blue transition-colors shadow-md hover:shadow-primary-blue/30 w-full md:w-auto"
                   >
-                    Apply Now
+                    {applyNowText}
                     <svg className="ml-2 -mr-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </Link>
                 </div>

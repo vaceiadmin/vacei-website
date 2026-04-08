@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const ComplianceDashboardSection = () => {
   const { t } = useTranslation("home");
@@ -17,9 +18,12 @@ const ComplianceDashboardSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
           <div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-              {t("complianceDashboard.titleLine1")}<span className="text-blue-600">{t("complianceDashboard.titleHighlight")}</span>
-            </h2>
+            <SectionTitleHero
+              variant="light"
+              className="mb-6"
+              line1={t("complianceDashboard.titleLine1")}
+              highlight={t("complianceDashboard.titleHighlight")}
+            />
             <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-xl font-medium">
               {t("complianceDashboard.body")}
             </p>

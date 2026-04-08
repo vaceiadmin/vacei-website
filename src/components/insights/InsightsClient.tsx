@@ -1,17 +1,28 @@
-
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CategoryFilter from "./CategoryFilter";
 import InsightCard from "./InsightCard";
 import { insightsData, insightCategories } from "@/data/insightsData";
 import { FadeInUp } from "@/components/common/Animations";
-import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { usePagesTranslation } from "@/hooks/usePagesTranslation";
+import { INSIGHT_CATEGORY_I18N_KEY } from "@/lib/insight-category-labels";
 
 const InsightsClient = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
+  const { t } = usePagesTranslation("insights");
+
+  const categoryLabel = useCallback(
+    (cat: string) => {
+      if (cat === "All") return t("allTopics");
+      const key = INSIGHT_CATEGORY_I18N_KEY[cat];
+      return key ? t(`categories.${key}`) : cat;
+    },
+    [t]
+  );
 
   const isSimple = isIPhone || isLowPerformance;
 
@@ -28,6 +39,7 @@ const InsightsClient = () => {
         categories={insightCategories}
         activeCategory={activeCategory}
         onSelectCategory={setActiveCategory}
+        getLabel={categoryLabel}
       />
     </div>
   );
@@ -66,14 +78,13 @@ const InsightsClient = () => {
 
   const noResults = (
     <div className="text-center py-20">
-      <p className="text-xl text-text-gray">
-        No articles found in this category yet.
-      </p>
+      <p className="text-xl text-text-gray">{t("noCategoryArticles")}</p>
       <button
+        type="button"
         onClick={() => setActiveCategory("All")}
         className="mt-4 text-primary-blue hover:underline font-medium"
       >
-        View all articles
+        {t("viewAllArticles")}
       </button>
     </div>
   );

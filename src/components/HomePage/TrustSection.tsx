@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ShieldCheck, Lock, Headset, Zap, Globe, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 
 const TrustSection = () => {
@@ -68,16 +69,20 @@ const TrustSection = () => {
               <span>{t("trust.badge")}</span>
           </motion.div>
           
-          <motion.h2 
+          <motion.div 
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
              viewport={{ once: true }}
              transition={{ delay: 0.1 }}
-             className="text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 mb-8 tracking-tight leading-[1.05]"
+             className="mb-8"
           >
-            {t("trust.titleLine1")}<br />
-            <span className="text-blue-600">{t("trust.titleHighlight")}</span>
-          </motion.h2>
+            <SectionTitleHero
+              variant="light"
+              className="items-center text-center"
+              line1={t("trust.titleLine1")}
+              highlight={t("trust.titleHighlight")}
+            />
+          </motion.div>
           
           <motion.p 
              initial={{ opacity: 0, y: 20 }}

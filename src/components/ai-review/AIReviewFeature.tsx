@@ -8,8 +8,37 @@ import { FadeInUp, StaggerContainer } from "../common/Animations";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
 
-const AIReviewFeature = () => {
+interface AIReviewFeatureProps {
+  hero: {
+    title: string;
+    p1: string;
+    p2: string;
+    p3: string;
+  };
+  demo: {
+    file_ready: string;
+    file_name: string;
+    categories_title: string;
+    categories: string[];
+    btn_generate: string;
+    upload_title: string;
+    upload_drop: string;
+    upload_click: string;
+    upload_limit: string;
+    results_title: string;
+    correct_items: string;
+    critical_errors: string;
+    labels: {
+      general: string;
+      balance_sheet: string;
+    };
+  };
+}
+
+const AIReviewFeature = ({ hero, demo }: AIReviewFeatureProps) => {
   const { isIPhone, isLowPerformance } = usePerformance();
+
+  const categories = demo.categories || [];
 
   return (
     <section className="w-full py-16 md:py-24 relative overflow-hidden">
@@ -60,7 +89,7 @@ const AIReviewFeature = () => {
                 >
                   <div className="text-left space-y-3">
                     <TextAnimation
-                      text="File ready for analysis"
+                      text={demo.file_ready}
                       as="h3"
                       className="font-semibold text-heading text-[13px] leading-tight"
                     />
@@ -70,7 +99,7 @@ const AIReviewFeature = () => {
                       </div>
                       <div className="min-w-0 flex flex-col">
                         <p className="text-[11px] font-semibold text-heading truncate max-w-[120px]">
-                          Vacei Audit LTD - Draft FS...
+                          {demo.file_name}
                         </p>
                         <p className="text-[10px] text-gray-400">0.25 MB</p>
                       </div>
@@ -87,17 +116,10 @@ const AIReviewFeature = () => {
 
                   <div className="text-left space-y-3">
                     <h3 className="font-semibold text-heading text-[13px] leading-tight">
-                      Select Test Categories
+                      {demo.categories_title}
                     </h3>
                     <div className="grid grid-cols-2 gap-y-3 gap-x-2">
-                      {[
-                        { label: "Audit Report", checked: false },
-                        { label: "Balance Sheet", checked: false },
-                        { label: "General Info", checked: false },
-                        { label: "Notes & Policy", checked: false },
-                        { label: "Presentation", checked: false },
-                        { label: "All Test", checked: true },
-                      ].map((item, idx) => (
+                      {categories.map((label, idx) => (
                         <div
                           key={idx}
                           className="flex items-center gap-2 group cursor-pointer"
@@ -105,15 +127,15 @@ const AIReviewFeature = () => {
                           <div
                             className={cn(
                               "w-4 h-4 rounded-full border flex items-center justify-center shrink-0 transition-colors",
-                              item.checked ? "border-primary bg-primary" : "border-input group-hover:border-input"
+                              label === categories[categories.length - 1] ? "border-primary bg-primary" : "border-input group-hover:border-input"
                             )}
                           >
-                            {item.checked && (
+                            {label === categories[categories.length - 1] && (
                               <Check className="w-2.5 h-2.5 text-white stroke-3" />
                             )}
                           </div>
                           <span className="text-[10px] text-gray-500 font-medium whitespace-nowrap">
-                            {item.label}
+                            {label}
                           </span>
                         </div>
                       ))}
@@ -127,7 +149,7 @@ const AIReviewFeature = () => {
                     transition={isIPhone || isLowPerformance ? {} : { duration: 2, repeat: Infinity }}
                     className="mt-auto w-full py-2.5 bg-primary hover:bg-hero transition-all rounded-lg text-white text-[11px] font-semibold shadow-md shadow-primary-blue"
                   >
-                    Generate Analysis Report
+                    {demo.btn_generate}
                   </motion.button>
                 </motion.div>
 
@@ -153,7 +175,7 @@ const AIReviewFeature = () => {
                   )}
                   
                   <TextAnimation
-                    text="Upload Financial Statements"
+                    text={demo.upload_title}
                     as="h3"
                     className="font-semibold text-heading text-[13px] mb-5 w-[80%] leading-relaxed"
                   />
@@ -163,14 +185,14 @@ const AIReviewFeature = () => {
                     </div>
                     <div className="space-y-1">
                       <p className="text-[11px] font-bold text-heading">
-                        Drop your PDF here or
+                        {demo.upload_drop}
                       </p>
                       <p className="text-[11px] font-bold text-heading">
-                        click browser
+                        {demo.upload_click}
                       </p>
                     </div>
                     <p className="text-[9px] text-gray-400">
-                      Support PDF files up to 10MB
+                      {demo.upload_limit}
                     </p>
                   </div>
                 </motion.div>
@@ -189,14 +211,14 @@ const AIReviewFeature = () => {
                   className="bg-white rounded-2xl p-6 shadow-md md:col-span-2 mt-1 border border-gray-100/50"
                 >
                   <h3 className="font-semibold text-heading text-[13px] mb-4 text-left">
-                    Audit Result
+                    {demo.results_title}
                   </h3>
 
                   <div className="space-y-4">
                     {/* Success Section */}
                     <div className="space-y-2 text-left">
                       <p className="text-[11px] font-bold text-emerald-500">
-                        Confirm Correct Items
+                        {demo.correct_items}
                       </p>
                       <motion.div 
                         initial={{ opacity: 0, x: -10 }}
@@ -217,7 +239,7 @@ const AIReviewFeature = () => {
                           </span>
                         </div>
                         <span className="px-2 py-1 bg-gray-100 rounded text-[9px] font-bold text-gray-500 uppercase tracking-wide shrink-0 ml-3">
-                          GENERAL
+                          {demo.labels.general}
                         </span>
                       </motion.div>
                     </div>
@@ -225,7 +247,7 @@ const AIReviewFeature = () => {
                     {/* Error Section */}
                     <div className="space-y-2 text-left">
                       <p className="text-[11px] font-bold text-red-500">
-                        Critical Errors
+                        {demo.critical_errors}
                       </p>
                       <motion.div 
                         initial={{ opacity: 0, x: -10 }}
@@ -250,7 +272,7 @@ const AIReviewFeature = () => {
                           </span>
                         </div>
                         <span className="px-2 py-1 bg-red-50 rounded text-[9px] font-bold text-red-500 uppercase tracking-wide shrink-0 ml-3">
-                          BALANCE SHEET
+                          {demo.labels.balance_sheet}
                         </span>
                       </motion.div>
                     </div>
@@ -263,24 +285,20 @@ const AIReviewFeature = () => {
           {/* Right Column - Content */}
           <FadeInUp delay={0.3} className="space-y-4 text-left">
             <TextAnimation
-              text="Auditor-designed financial statement review"
+              text={hero.title}
               as="h2"
               className="text-2xl md:text-4xl font-semibold text-primary leading-[1.15]"
             />
 
             <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
               <p>
-                VACEI AI Review is an auditor-designed review tool built to
-                support the review of financial statements.
+                {hero.p1}
               </p>
               <p>
-                Reviewing financial statements takes time.
-                <br />
-                And even experienced teams can miss small details.
+                {hero.p2}
               </p>
               <p>
-                VACEI AI Review keeps the review process structured, focused,
-                and reliable, without replacing professional judgement.
+                {hero.p3}
               </p>
             </div>
           </FadeInUp>

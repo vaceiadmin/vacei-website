@@ -4,7 +4,8 @@
     "getInstantQuote": "Get Instant Quote",
     "bookDemo": "Book a Demo",
     "partnerPortal": "Partner Portal",
-    "requestsProposals": "Requests & Proposals"
+    "requestsProposals": "Requests & Proposals",
+    "learnMore": "Learn More"
   },
   "language": {
     "label": "Language",
@@ -103,9 +104,28 @@
   "pageHeader": {
     "home": "Home"
   },
+  "supportChat": {
+    "greetingTitle": "Need help?",
+    "greetingSubtitle": "How can I help you?",
+    "chatNow": "Chat now",
+    "getQuote": "Get a quote",
+    "closeAria": "Close",
+    "launcherAria": "Open support chat",
+    "headerTitle": "Support",
+    "closeChatAria": "Close chat",
+    "botWelcome": "Hi 👋 How can I help you today?",
+    "botAskName": "Great, who should we address our reply to?",
+    "botAskEmail": "Thanks! What's the best email to reach you on?",
+    "botSuccess": "Thank you for your time. Our support team will review this conversation and contact you as soon as possible.",
+    "botErrorSend": "We couldn't send your request. Please try again or email us at info@vacei.com.",
+    "submitErrorFailed": "Failed to submit.",
+    "startNewChat": "Start new chat",
+    "inputPlaceholder": "Type a message..."
+  },
   "cookieConsent": {
     "title": "We use cookies",
     "body": "We use cookies to improve your experience and analyze traffic. By clicking “Accept”, you agree to our use of cookies.",
+    "policyLink": "Cookie policy",
     "accept": "Accept",
     "dismiss": "Dismiss"
   }

@@ -14,11 +14,19 @@ export interface HowItWorksStep {
   image: string;
 }
 
+export type HowItWorksTimelineHeader = {
+  badge: string;
+  title: string;
+  subtitle: string;
+};
+
 interface HowItWorksTimelineProps {
   steps: HowItWorksStep[];
   backgroundClassName?: string;
   mode?: "light" | "dark";
   showHeader?: boolean;
+  /** Localized header when `showHeader` is true */
+  sectionHeader?: HowItWorksTimelineHeader;
 }
 
 const HowItWorksTimeline = ({
@@ -26,6 +34,7 @@ const HowItWorksTimeline = ({
   backgroundClassName = "bg-section-light",
   mode = "light",
   showHeader = true,
+  sectionHeader,
 }: HowItWorksTimelineProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const isDark = mode === "dark";
@@ -34,10 +43,10 @@ const HowItWorksTimeline = ({
     <section className={`${backgroundClassName} py-16 lg:py-24 overflow-hidden`}>
       <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Header (optional) */}
-        {showHeader && (
+        {showHeader && sectionHeader && (
           <FadeInUp className="text-center mb-14 lg:mb-16">
             <SectionBadge
-              text="How it works"
+              text={sectionHeader.badge}
               className={
                 isDark
                   ? "border-white/60 !text-white/80"
@@ -49,16 +58,14 @@ const HowItWorksTimeline = ({
                 isDark ? "text-white" : "text-heading"
               }`}
             >
-              Overview
+              {sectionHeader.title}
             </h2>
             <p
               className={`mt-3 text-sm md:text-base max-w-2xl mx-auto leading-relaxed ${
                 isDark ? "text-light-gray" : "text-gray"
               }`}
             >
-              VACEI is designed to be simple to start and easy to work with.
-              From the first enquiry to ongoing delivery, everything follows a
-              clear and structured process.
+              {sectionHeader.subtitle}
             </p>
           </FadeInUp>
         )}

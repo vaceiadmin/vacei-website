@@ -2,14 +2,15 @@
 
 import React from 'react';
 import { format } from 'date-fns';
-import { Calendar, Clock, User, ArrowLeft, Share2, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { Calendar, Clock, User, Share2, ArrowUpRight } from 'lucide-react';
+import LocalizedLink from '@/components/common/LocalizedLink';
 import Image from 'next/image';
 import { BlogPost } from '@/utils/blog';
 import MarkdownRenderer from './MarkdownRenderer';
 import PageHeader from '@/components/common/PageHeader';
 import { cn } from '@/lib/utils';
 import { usePerformance } from '@/contexts/ReduceMotionContext';
+import { usePagesTranslation } from '@/hooks/usePagesTranslation';
 
 interface BlogTemplateProps {
   blog: BlogPost;
@@ -18,6 +19,7 @@ interface BlogTemplateProps {
 
 const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) => {
   const { isIPhone, isLowPerformance } = usePerformance();
+  const { t } = usePagesTranslation('insights');
 
   const handleShare = () => {
     if (navigator.share) {
@@ -27,12 +29,12 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
+      alert(t('article.linkCopied'));
     }
   };
 
   const breadcrumbs = [
-    { label: "Insights", href: "/insights" },
+    { label: t('pageHeader.breadcrumbs.0.label'), href: '/insights' },
     { label: blog.title }
   ];
 
@@ -92,19 +94,19 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
               <div className="sticky top-32 space-y-8">
                 {/* Author Card */}
                 <div className="bg-background rounded-2xl p-6 border border-gray-100">
-                  <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans">WRITTEN BY</h4>
+                  <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans">{t('article.writtenBy')}</h4>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-full bg-primary-blue/10 flex items-center justify-center">
                       <User className="w-6 h-6 text-primary-blue" />
                     </div>
                     <div>
                       <p className="font-bold text-text-heading leading-tight">{blog.author}</p>
-                      <p className="text-xs text-text-gray mt-0.5">VACEI Insights Team</p>
+                      <p className="text-xs text-text-gray mt-0.5">{t('article.teamLine')}</p>
                     </div>
                   </div>
                   <div className="space-y-3 pt-4 border-t border-gray-200/50">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-gray font-sans">Published</span>
+                      <span className="text-text-gray font-sans">{t('article.published')}</span>
                       <span className="font-bold text-text-heading font-sans">{format(new Date(blog.date), 'MMM dd, yyyy')}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
@@ -116,14 +118,14 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
 
                 {/* Share Sidebar Action */}
                 <div className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm">
-                  <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans">SHARE INSIGHT</h4>
+                  <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans">{t('article.shareInsight')}</h4>
                   <div className="flex gap-3">
                     <button
                       onClick={handleShare}
                       className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary-blue text-white rounded-xl hover:bg-primary-blue-hover transition-all font-bold font-sans text-sm shadow-lg shadow-primary-blue/20"
                     >
                       <Share2 className="w-4 h-4" />
-                      Copy Link
+                      {t('article.copyLink')}
                     </button>
                   </div>
                 </div>
@@ -131,7 +133,7 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
                 {/* Tags Sidebar */}
                 {blog.tags && blog.tags.length > 0 && (
                   <div className="p-1">
-                    <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans px-2">TAGS</h4>
+                    <h4 className="text-[10px] uppercase tracking-widest font-extrabold text-text-gray/40 mb-4 font-sans px-2">{t('article.tagsHeading')}</h4>
                     <div className="flex flex-wrap gap-2">
                       {blog.tags.map((tag, index) => (
                         <span
@@ -151,15 +153,15 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
                     <ArrowUpRight className="w-24 h-24" />
                   </div>
                   <div className="relative z-10">
-                    <h4 className="font-bold text-lg mb-2">Need an Audit?</h4>
-                    <p className="text-sm text-blue-100 mb-6">Connect with licensed auditors and streamline your compliance today.</p>
-                    <Link 
-                      href="/portals" 
+                    <h4 className="font-bold text-lg mb-2">{t('article.needAuditTitle')}</h4>
+                    <p className="text-sm text-blue-100 mb-6">{t('article.needAuditBody')}</p>
+                    <LocalizedLink 
+                      href="/quote" 
                       className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-primary-blue rounded-xl font-bold text-sm hover:gap-3 transition-all"
                     >
-                      Get Started
+                      {t('article.getStarted')}
                       <ArrowUpRight className="w-4 h-4" />
-                    </Link>
+                    </LocalizedLink>
                   </div>
                 </div>
               </div>
@@ -177,19 +179,19 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
               <div className="flex items-end justify-between mb-12">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold text-text-heading mb-4 font-sans">
-                    Related Insights
+                    {t('article.relatedTitle')}
                   </h2>
                   <p className="text-text-gray font-sans max-w-xl">
-                    More structured thinking from the VACEI team on professional growth and compliance.
+                    {t('article.relatedSubtitle')}
                   </p>
                 </div>
-                <Link
+                <LocalizedLink
                   href="/insights"
                   className="hidden md:inline-flex items-center gap-2 text-primary-blue font-bold hover:gap-3 transition-all font-sans"
                 >
-                  View all insights
+                  {t('article.viewAllInsights')}
                   <ArrowUpRight className="w-5 h-5" />
-                </Link>
+                </LocalizedLink>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -201,10 +203,10 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
                       (isIPhone || isLowPerformance) && "hover:translate-y-0"
                     )}
                   >
-                    <Link href={`/insights/${relatedBlog.slug}`} className="flex flex-col h-full p-6 md:p-8">
+                    <LocalizedLink href={`/insights/${relatedBlog.slug}`} className="flex flex-col h-full p-6 md:p-8">
                       <div className="flex items-center justify-between mb-4">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-primary-blue/5 text-primary-blue group-hover:bg-white/20 group-hover:text-white transition-colors duration-300">
-                          {relatedBlog.tags ? relatedBlog.tags[0] : 'Insight'}
+                          {relatedBlog.tags ? relatedBlog.tags[0] : t('article.defaultTag')}
                         </span>
                         <div className="flex items-center text-xs text-text-gray/70 group-hover:text-white/70 font-sans transition-colors duration-300">
                           <Calendar className="w-3.5 h-3.5 mr-1" />
@@ -228,19 +230,19 @@ const BlogTemplate: React.FC<BlogTemplateProps> = ({ blog, relatedBlogs = [] }) 
                           <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-primary-blue transition-colors duration-300" />
                         </div>
                       </div>
-                    </Link>
+                    </LocalizedLink>
                   </article>
                 ))}
               </div>
 
               <div className="mt-12 text-center md:hidden">
-                <Link
+                <LocalizedLink
                   href="/insights"
                   className="inline-flex items-center gap-2 text-primary-blue font-bold font-sans"
                 >
-                  View all insights
+                  {t('article.viewAllInsights')}
                   <ArrowUpRight className="w-5 h-5" />
-                </Link>
+                </LocalizedLink>
               </div>
             </div>
           </div>

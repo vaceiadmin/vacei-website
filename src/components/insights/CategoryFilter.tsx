@@ -10,12 +10,15 @@ interface CategoryFilterProps {
   categories: string[];
   activeCategory: string;
   onSelectCategory: (category: string) => void;
+  /** UI label (defaults to raw category value) */
+  getLabel?: (category: string) => string;
 }
 
 const CategoryFilter = ({
   categories,
   activeCategory,
   onSelectCategory,
+  getLabel = (c) => c,
 }: CategoryFilterProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { isIPhone, isLowPerformance } = usePerformance();
@@ -53,7 +56,7 @@ const CategoryFilter = ({
                   }
                 `}
               >
-                {category}
+                {getLabel(category)}
                 {isActive && !isIPhone && !isLowPerformance && (
                   <motion.div
                     layoutId="activeCategoryHighlight"

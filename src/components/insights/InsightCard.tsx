@@ -1,30 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState, useCallback } from "react";
+import LocalizedLink from "@/components/common/LocalizedLink";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 import { InsightArticle } from "@/data/insightsData";
 import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import { usePagesTranslation } from "@/hooks/usePagesTranslation";
+import { INSIGHT_CATEGORY_I18N_KEY } from "@/lib/insight-category-labels";
 
 interface InsightCardProps {
   article: InsightArticle;
   index: number;
 }
 
-const InsightCard = ({ article, index }: InsightCardProps) => {
+const InsightCard = ({ article, index: _index }: InsightCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
+  const { t } = usePagesTranslation("insights");
+
+  const categoryLabel = useCallback(
+    (cat: string) => {
+      const key = INSIGHT_CATEGORY_I18N_KEY[cat];
+      return key ? t(`categories.${key}`) : cat;
+    },
+    [t]
+  );
 
   const cardClass = "group relative flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-primary-blue/30 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary-blue/5";
 
   const cardContent = (
     <>
-      <Link href={`/insights/${article.slug}`} className="flex flex-col h-full p-6 md:p-8">
+      <LocalizedLink href={`/insights/${article.slug}`} className="flex flex-col h-full p-6 md:p-8">
         <div className="flex items-center justify-between mb-4">
           <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300 ${isHovered ? "bg-primary-blue text-white" : "bg-primary-blue/5 text-primary-blue"}`}>
-            {article.category}
+            {categoryLabel(article.category)}
           </span>
           <div className="flex items-center text-xs text-text-gray/70">
             <Calendar className="w-3 h-3 mr-1" />
@@ -47,7 +58,7 @@ const InsightCard = ({ article, index }: InsightCardProps) => {
             <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors duration-300" />
           </div>
         </div>
-      </Link>
+      </LocalizedLink>
     </>
   );
 

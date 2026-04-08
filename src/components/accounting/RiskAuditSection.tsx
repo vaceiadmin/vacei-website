@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { CreditCard, PiggyBank } from 'lucide-react'
 import SectionBadge from '@/components/common/SectionBadge'
 import { FadeInUp, StaggerContainer } from '../common/Animations'
+import { usePagesTranslation } from '@/hooks/usePagesTranslation'
 
 interface BulletList {
     items: string[]
@@ -45,94 +46,6 @@ interface RiskAuditSectionProps {
     rightOverlayCard?: RightOverlayCardProps
 }
 
-// ACCOUNTING VARIANT DEFAULTS
-const accountingIntroBullets: BulletList = {
-    items: [
-        'Posting and reconciliation activities follow defined workflows',
-        'Internal review layers ensure accuracy before outputs are finalised',
-        'Changes, adjustments, and approvals are traceable',
-    ],
-}
-
-const accountingLeftCards: DetailCard[] = [
-    {
-        title: 'VAT & payroll management',
-        subtitle: 'VAT and payroll are embedded into the monthly workflow.',
-        bullets: [
-            'Preparation and review steps are clearly defined',
-            'Supporting documentation is stored centrally',
-            'Deadlines are tracked to avoid last-minute pressure',
-            'Compliance activities are delivered on time and with appropriate checks.',
-        ],
-    },
-    {
-        title: 'Accounting & banking integrations',
-        subtitle:
-            'Where applicable, the Accounting Portal integrates with accounting and banking systems.',
-        bullets: [
-            'These integrations reduce manual data entry',
-            'Improve reconciliation accuracy',
-            'Provide better visibility over transactions and balances.',
-        ],
-    },
-]
-
-const accountingRightOverlayCard: RightOverlayCardProps = {
-    header: 'My Account',
-    totalLabel: 'Total Balance',
-    totalValue: '€2,568.00',
-    totalAccentColor: '#16A34A',
-    sections: [
-        {
-            title: 'Bank Accounts',
-            rows: [
-                { label: 'Savings', value: '€800.22', note: 'Updated recently' },
-                { label: 'Checking', value: '€1,456.00', note: 'Updated recently' },
-            ],
-        },
-        {
-            title: 'Credit Cards',
-            rows: [
-                { label: 'Visa', value: '€00', note: 'Updated recently' },
-                { label: 'Checking', value: '-€157.75', note: 'Updated recently' },
-            ],
-        },
-    ],
-}
-
-// AUDIT VARIANT DEFAULTS
-const auditIntroBullets: BulletList = {
-    items: [
-        'Use of firm-defined procedures',
-        'Risk-based procedures generated using client data',
-        'Hybrid approaches that combine firm methodologies with additional risk-focused procedures',
-    ],
-}
-
-const auditLeftCards: DetailCard[] = [
-    {
-        title: 'ISQM & quality management',
-        subtitle: 'Quality management is embedded directly into the audit process.',
-        bullets: [
-            'ISQM policies and procedures documented within the portal',
-            'Mapping of quality requirements to audit workflows',
-            'Ongoing visibility over implementation and compliance',
-            'This allows quality to be monitored continuously, not only at the final review stage.',
-        ],
-    },
-    {
-        title: 'KYC & client onboarding',
-        subtitle:
-            'Client onboarding and compliance are managed in a structured and consistent way.',
-        bullets: [
-            'Configurable KYC templates',
-            'Clients complete required information through the Client Portal',
-            'All compliance documentation stored centrally',
-            'This ensures regulatory requirements are met from the start of each engagement.',
-        ],
-    },
-]
-
 const RiskAuditSection = ({
     variant = 'accounting',
     badgeText,
@@ -144,31 +57,41 @@ const RiskAuditSection = ({
     backgroundImageSrc,
     rightOverlayCard,
 }: RiskAuditSectionProps) => {
+    const { t } = usePagesTranslation('accounting')
     const isAudit = variant === 'audit'
 
-    const effectiveBadge = badgeText || (isAudit ? 'RISK BASRD AUDIT' : 'RISK BASED AUDIT')
-    const effectiveHeading =
-        heading ||
-        (isAudit ? 'Risk - based audit Procedures' : 'Posting, reconciliations & accuracy')
-    const effectiveIntro =
-        intro ||
-        (isAudit
-            ? 'The portal supports different approaches to audit methodology, depending on the engagement:'
-            : 'Accounting work is performed within controlled processes.')
+    // Localized defaults
+    const defaultIntroBullets = {
+        items: (t(isAudit ? 'intro_bullets_audit' : 'intro_bullets_accounting', { returnObjects: true }) as unknown as string[]) || []
+    }
 
-    const effectiveIntroBullets =
-        introBullets || (isAudit ? auditIntroBullets : accountingIntroBullets)
-    const effectiveLeftCards = leftCards || (isAudit ? auditLeftCards : accountingLeftCards)
+    const defaultLeftCards = (t(isAudit ? 'left_cards_audit' : 'left_cards_accounting', { returnObjects: true }) as unknown as DetailCard[]) || []
+
+    const defaultRightOverlay = {
+        header: t('right_overlay.header'),
+        totalLabel: t('right_overlay.total_label'),
+        totalValue: t('right_overlay.total_value'),
+        totalAccentColor: '#16A34A',
+        sections: (t('right_overlay.sections', { returnObjects: true }) as unknown as any[]) || []
+    }
+
+    const effectiveBadge = badgeText || t(isAudit ? 'badge_audit' : 'badge_accounting')
+    const effectiveHeading = heading || t(isAudit ? 'heading_audit' : 'heading_accounting')
+    const effectiveIntro = intro || t(isAudit ? 'intro_audit' : 'intro_accounting')
+
+    const effectiveIntroBullets = introBullets || defaultIntroBullets
+    const effectiveLeftCards = leftCards || defaultLeftCards
     const effectiveBackground =
         backgroundImageSrc ||
         (isAudit ? '/assets/images/Rectangle 34624210 (2).png' : '/assets/images/Rectangle 34624210 (1).png')
-    const effectiveRightOverlay = rightOverlayCard || accountingRightOverlayCard
+    const effectiveRightOverlay = rightOverlayCard || defaultRightOverlay
 
     const getSectionIcon = (title: string) => {
-        if (title.toLowerCase().includes('bank')) return PiggyBank
-        if (title.toLowerCase().includes('credit')) return CreditCard
+        if (title?.toLowerCase().includes('bank')) return PiggyBank
+        if (title?.toLowerCase().includes('credit')) return CreditCard
         return null
     }
+
     return (
         <section className="py-16 lg:py-24 overflow-hidden">
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
@@ -205,7 +128,7 @@ const RiskAuditSection = ({
                         </div>
 
                         <p className="text-xs md:text-[13px] text-gray leading-relaxed max-w-xl">
-                            This reduces errors, rework, and inconsistencies across periods.
+                            {t('footer_note')}
                         </p>
 
                         {/* Two detail cards */}
@@ -306,7 +229,7 @@ const RiskAuditSection = ({
                                         </div>
 
                                         <div className="space-y-4 flex-1">
-                                            {effectiveRightOverlay.sections.map((section, idx) => {
+                                            {effectiveRightOverlay.sections.map((section: any, idx: number) => {
                                                 const Icon = getSectionIcon(section.title)
                                                 return (
                                                     <div
@@ -326,7 +249,7 @@ const RiskAuditSection = ({
                                                             </p>
                                                         </div>
                                                         <div className="space-y-2">
-                                                            {section.rows.map((row, rowIdx) => (
+                                                            {section.rows.map((row: any, rowIdx: number) => (
                                                                 <div
                                                                     key={rowIdx}
                                                                     className="flex items-center justify-between text-[11px]"
@@ -373,5 +296,3 @@ const RiskAuditSection = ({
 }
 
 export default RiskAuditSection
-
-

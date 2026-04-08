@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMobile }: { src: string, alt: string, className?: string, isDark?: boolean, playDesktop: string, playMobile: string }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -98,10 +99,12 @@ const BeforeAndAfterSection = () => {
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
             <span className="text-[11px] font-black text-blue-400 uppercase tracking-widest">{t('beforeAfter.badge')}</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.1] mb-6">
-            {t('beforeAfter.titleLine1')}<br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-400">{t('beforeAfter.titleHighlight')}</span>
-          </h2>
+          <SectionTitleHero
+            variant="dark"
+            className="mb-6 items-center text-center"
+            line1={t("beforeAfter.titleLine1")}
+            highlight={t("beforeAfter.titleHighlight")}
+          />
           <p className="mt-4 text-lg font-medium text-slate-400 max-w-2xl mx-auto">
             {t('beforeAfter.subtitle')}
           </p>

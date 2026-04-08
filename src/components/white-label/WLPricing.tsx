@@ -11,6 +11,13 @@ interface WLPricingProps {
   description: string;
   features: string[];
   ctaText: string;
+  badgeText?: string;
+  startsFromText?: string;
+  footnoteText?: string;
+  capabilitiesText?: string;
+  fullAccessText?: string;
+  trustedAcrossEuropeText?: string;
+  partnerLabelText?: string;
   onCtaClick?: () => void;
 }
 
@@ -21,6 +28,13 @@ const WLPricing: React.FC<WLPricingProps> = ({
   description,
   features,
   ctaText,
+  badgeText,
+  startsFromText,
+  footnoteText,
+  capabilitiesText,
+  fullAccessText,
+  trustedAcrossEuropeText,
+  partnerLabelText,
   onCtaClick,
 }) => {
   return (
@@ -40,7 +54,7 @@ const WLPricing: React.FC<WLPricingProps> = ({
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary-blue/5 text-primary-blue font-bold tracking-widest uppercase text-[12px] border border-primary-blue/10 backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4" />
-            Flexible Investment Model
+            {badgeText}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -78,7 +92,7 @@ const WLPricing: React.FC<WLPricingProps> = ({
               {/* Price Column */}
               <div className="w-full lg:w-[45%] flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-10">
                 <div className="space-y-4">
-                  <span className="text-sm font-black text-primary-blue/60 uppercase tracking-[0.3em] ml-1">Starts From</span>
+                  <span className="text-sm font-black text-primary-blue/60 uppercase tracking-[0.3em] ml-1">{startsFromText}</span>
                   <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-baseline gap-x-4 gap-y-1">
                     <span className="text-6xl sm:text-7xl md:text-8xl font-black text-text-dark tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-text-dark to-text-dark/80 whitespace-nowrap">
                       {price}
@@ -102,7 +116,7 @@ const WLPricing: React.FC<WLPricingProps> = ({
                   </button>
 
                   <p className="text-sm font-semibold text-gray/40 lg:ml-2">
-                    No hidden setup fees. Scale as you grow.
+                    {footnoteText}
                   </p>
                 </div>
               </div>
@@ -113,9 +127,9 @@ const WLPricing: React.FC<WLPricingProps> = ({
 
                 <div className="relative bg-white/40 backdrop-blur-xl rounded-[3rem] border border-white/60 p-10 lg:p-12 shadow-xl shadow-gray-200/20 space-y-10">
                   <div className="flex items-center justify-between border-b border-gray-100 pb-8">
-                    <h4 className="text-2xl font-black text-text-dark">Capabilities</h4>
+                    <h4 className="text-2xl font-black text-text-dark">{capabilitiesText}</h4>
                     <div className="px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-600 text-[11px] font-black uppercase tracking-wider border border-emerald-100">
-                      Full Access
+                      {fullAccessText}
                     </div>
                   </div>
 
@@ -160,8 +174,8 @@ const WLPricing: React.FC<WLPricingProps> = ({
                       ))}
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[13px] font-black text-text-dark tracking-tight uppercase">Trusted across Europe</span>
-                      <span className="text-[12px] font-bold text-gray/40">Official Partner for Leading Firms</span>
+                      <span className="text-[13px] font-black text-text-dark tracking-tight uppercase">{trustedAcrossEuropeText}</span>
+                      <span className="text-[12px] font-bold text-gray/40">{partnerLabelText}</span>
                     </div>
                   </div>
                 </div>

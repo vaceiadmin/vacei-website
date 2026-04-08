@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 interface ServiceVideoSectionProps {
   title: string;
@@ -14,6 +15,7 @@ const ServiceVideoSection: React.FC<ServiceVideoSectionProps> = ({
   title,
   videoUrl,
 }) => {
+  const { t } = useTranslation("services");
   const [sourceFailed, setSourceFailed] = useState(false);
 
   useEffect(() => {
@@ -59,7 +61,7 @@ const ServiceVideoSection: React.FC<ServiceVideoSectionProps> = ({
               {/* Title text */}
               <div className="absolute left-5 bottom-5 z-10 max-w-[70%]">
                 <p className="text-xs uppercase tracking-[0.16em] text-white/70 mb-1">
-                  Service overview video
+                  {t("shared.videoLabel")}
                 </p>
                 <h2 className="text-white text-lg md:text-xl font-medium leading-snug line-clamp-2">
                   {title}
@@ -69,9 +71,7 @@ const ServiceVideoSection: React.FC<ServiceVideoSectionProps> = ({
           ) : (
             <div className="relative w-full h-full border border-dashed border-white/20 bg-slate-900 flex items-center justify-center">
               <p className="text-xs md:text-sm text-slate-200/70 text-center px-6">
-                Reserved space for a small, silent looping video for this
-                service. The page layout remains fully balanced even if no video
-                is added yet.
+                {t("shared.videoPlaceholder")}
               </p>
             </div>
           )}

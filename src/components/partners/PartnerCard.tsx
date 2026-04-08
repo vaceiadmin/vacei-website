@@ -3,19 +3,30 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Handshake, Layers, Puzzle, TrendingUp, type LucideIcon } from "lucide-react";
 
 interface PartnerCardProps {
   title: string;
   description: string;
   link: string;
+  learnMoreText?: string;
   iconIndex?: number;
   delay?: number;
 }
 
 const icons: LucideIcon[] = [Handshake, Layers, Puzzle, TrendingUp];
 
-const PartnerCard = ({ title, description, link, iconIndex = 0, delay = 0 }: PartnerCardProps) => {
+const PartnerCard = ({ 
+  title, 
+  description, 
+  link, 
+  learnMoreText,
+  iconIndex = 0, 
+  delay = 0 
+}: PartnerCardProps) => {
+  const { t } = useTranslation("common");
+  const ctaLabel = learnMoreText ?? t("glossary.learnMore");
   const Icon = icons[iconIndex % icons.length];
 
   return (
@@ -72,7 +83,7 @@ const PartnerCard = ({ title, description, link, iconIndex = 0, delay = 0 }: Par
             href={link}
             className="inline-flex items-center text-primary-blue font-semibold text-sm group-hover:underline decoration-2 underline-offset-4 transition-all"
           >
-            Learn More
+            {ctaLabel}
             <svg
               className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"

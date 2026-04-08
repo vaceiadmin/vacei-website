@@ -47,26 +47,26 @@ const CustomCursor = () => {
         };
         checkMobile();
 
-        if (!isMobile) {
-            window.addEventListener("mousemove", handleMouseMove);
-            window.addEventListener("mousedown", handleMouseDown);
-            window.addEventListener("mouseup", handleMouseUp);
-            window.addEventListener("mouseover", handleMouseOver);
-            
-            // Hide the default cursor
-            document.body.style.cursor = "none";
-            const allElements = document.querySelectorAll("a, button, [role='button'], .cursor-pointer");
-            allElements.forEach(el => (el as HTMLElement).style.cursor = "none");
+        const mobile = window.matchMedia("(max-width: 768px)").matches || "ontouchstart" in window;
+        if (mobile) {
+            return;
         }
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mousedown", handleMouseDown);
+        window.addEventListener("mouseup", handleMouseUp);
+        window.addEventListener("mouseover", handleMouseOver);
+
+        document.documentElement.classList.add("vacei-custom-cursor");
 
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("mousedown", handleMouseDown);
             window.removeEventListener("mouseup", handleMouseUp);
             window.removeEventListener("mouseover", handleMouseOver);
-            document.body.style.cursor = "auto";
+            document.documentElement.classList.remove("vacei-custom-cursor");
         };
-    }, [handleMouseMove, handleMouseDown, handleMouseUp, handleMouseOver, isMobile]);
+    }, [handleMouseMove, handleMouseDown, handleMouseUp, handleMouseOver]);
 
     if (isMobile || !isVisible) return null;
 

@@ -1,30 +1,19 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 
-const FAQ_ITEMS = [
-  {
-    title: "Clarity",
-    desc: "Complete visibility over engagements, documents, and deadlines in a single hub.",
-  },
-  {
-    title: "Structure",
-    desc: "Defined workflows ensure professional services are delivered consistently.",
-  },
-  {
-    title: "Collaboration",
-    desc: "Work with multiple advisors seamlessly through one secure platform.",
-  },
-  {
-    title: "Control",
-    desc: "Track compliance, filings, and operations from a central dashboard.",
-  },
-];
-
 const FaqSection = () => {
+  const { t } = useTranslation("home");
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { reduceMotion } = usePerformance();
+
+  const faqItems = useMemo(() => {
+    return (t("faqSection.items", { returnObjects: true }) as any[]) ?? [];
+  }, [t]);
 
   return (
     <section id="faq" className="relative w-full py-24 lg:py-32 bg-background overflow-hidden flex items-center min-h-[90vh] lg:min-h-[100vh] rounded-t-[48px] z-20">
@@ -44,21 +33,21 @@ const FaqSection = () => {
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div>
               <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-widest mb-6">
-                Why VACEI
+                {t("faqSection.badge")}
               </span>
               <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-                Structured <br />
+                {t("faqSection.title")} <br />
                 <span className="text-blue-600">
-                    Collaboration
+                    {t("faqSection.titleHighlight")}
                 </span>
               </h2>
               <p className="text-base text-slate-500 font-medium mb-10 max-w-sm leading-relaxed">
-                Unlock clarity and control with a unified digital workspace tailored for professional services.
+                {t("faqSection.subtitle")}
               </p>
             </div>
 
             <div className="space-y-3">
-              {FAQ_ITEMS.map((item, index) => {
+              {faqItems.map((item, index) => {
                 const isOpen = openIndex === index;
                 return (
                   <div
@@ -119,13 +108,13 @@ const FaqSection = () => {
               <div className="absolute top-10 -right-4 lg:right-0 w-[220px] lg:w-[280px] rounded-3xl bg-white border border-slate-100 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] z-20">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-[9px] font-black tracking-widest text-blue-600 uppercase">Financial Health</span>
+                    <span className="text-[9px] font-black tracking-widest text-blue-600 uppercase">{t("faqSection.healthLabel")}</span>
                     <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                   </div>
                   <div className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">€ 23,691.29</div>
                   <div className="flex items-center gap-1.5">
                     <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded-md">▲ +12.4%</span>
-                    <span className="text-[10px] text-slate-400 font-bold">Growth</span>
+                    <span className="text-[10px] text-slate-400 font-bold">{t("faqSection.growthLabel")}</span>
                   </div>
                   <div className="h-12 flex items-end gap-1.5 mt-2">
                     {[35, 65, 50, 85, 60, 95, 75].map((h, i) => (
@@ -142,7 +131,7 @@ const FaqSection = () => {
               {/* Equity Card */}
               <div className="absolute bottom-16 -left-4 lg:left-0 w-[190px] lg:w-[240px] rounded-3xl bg-white border border-slate-200 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] z-20">
                     <div className="flex flex-col gap-4">
-                  <span className="text-[9px] font-black tracking-widest text-purple-600 uppercase">Cap Table State</span>
+                  <span className="text-[9px] font-black tracking-widest text-purple-600 uppercase">{t("faqSection.equityLabel")}</span>
                   <div className="flex items-center gap-4">
                     <div className="relative h-14 w-14 flex items-center justify-center">
                        <svg className="h-full w-full rotate-[-90deg]">
@@ -160,7 +149,7 @@ const FaqSection = () => {
                        <span className="absolute text-xs font-black text-slate-900">50%</span>
                         </div>
                         <div>
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Issued Cap</div>
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{t("faqSection.issuedCap")}</div>
                       <div className="text-lg font-black text-slate-900">€ 150.0k</div>
                         </div>
                       </div>
@@ -176,7 +165,7 @@ const FaqSection = () => {
                         </svg>
                       </div>
                    <div className="flex flex-col">
-                      <span className="text-[8px] font-black text-blue-600 tracking-[0.2em] uppercase mb-0.5">Direct Support</span>
+                      <span className="text-[8px] font-black text-blue-600 tracking-[0.2em] uppercase mb-0.5">{t("faqSection.supportLabel")}</span>
                       <span className="text-sm font-black text-slate-900 tracking-wide">+356 77142418</span>
                       <span className="text-sm font-black text-slate-900 tracking-wide">+44 07400 487907</span>
                 </div>

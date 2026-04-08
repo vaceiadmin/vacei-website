@@ -1,67 +1,57 @@
- 'use client'
-import React, { useRef, useState } from 'react'
-import Image from 'next/image'
-import { Play } from 'lucide-react'
-import BenefitsCardsRow, { BenefitCard } from './BenefitsCardsRow'
-import { usePerformance } from "@/contexts/ReduceMotionContext"
-import { cn } from "@/lib/utils"
-
-const defaultCards: BenefitCard[] = [
-    {
-        icon: '/assets/images/image 98.png',
-        title: 'Supporting professional judgement',
-        description:
-            'VACEI AI Review is designed to support, not replace, professional judgement. It reduces manual checking and highlights areas requiring attention, while all conclusions and decisions remain with the professional team.',
-    },
-    {
-        icon: '/assets/images/image 103.png',
-        title: 'Built for audit-level review',
-        description:
-            'VACEI AI Review reflects audit-style thinking and practical review workflows. It is designed to support: accuracy, completeness, consistency and professional presentation.',
-    },
-    {
-        icon: '/assets/images/image 102.png',
-        title: 'Innovative solutions',
-        description:
-            'We stay ahead of the curve, leveraging cutting-edge technologies and strategies to keep you competitive in a marketplace.',
-    },
-]
+"use client";
+import React, { useRef, useState } from "react";
+import { Play } from "lucide-react";
+import BenefitsCardsRow, { BenefitCard } from "./BenefitsCardsRow";
+import { usePerformance } from "@/contexts/ReduceMotionContext";
+import { cn } from "@/lib/utils";
 
 interface BenefitsVideoSectionProps {
-    cards?: BenefitCard[]
-    videoSrc?: string
-    posterImage?: string
+    cards: BenefitCard[];
+    videoSrc?: string;
+    posterImage?: string;
 }
 
 const BenefitsVideoSection = ({
-    cards = defaultCards,
-    videoSrc = '/assets/videos/services/V11-Ai FS Review GIF.gif',
-    posterImage = '/assets/images/RectangleV.png',
+    cards,
+    videoSrc = "/assets/videos/services/V11-Ai FS Review GIF.gif",
+    posterImage = "/assets/images/RectangleV.png",
 }: BenefitsVideoSectionProps) => {
-    const videoRef = useRef<HTMLVideoElement | null>(null)
-    const [isPlaying, setIsPlaying] = useState(false)
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
     const { isIPhone, isLowPerformance } = usePerformance();
-    
-    const isGif = videoSrc.toLowerCase().endsWith('.gif')
+
+    // Add icons manually since they are not in the translation but are part of the UI structure
+    const icons = [
+        '/assets/images/image 98.png',
+        '/assets/images/image 103.png',
+        '/assets/images/image 102.png'
+    ];
+
+    const cardsWithIcons = cards.map((card, idx) => ({
+        ...card,
+        icon: card.icon || icons[idx] || icons[0]
+    }));
+
+    const isGif = videoSrc?.toLowerCase().endsWith(".gif");
 
     const handleTogglePlay = () => {
-        const video = videoRef.current
-        if (!video) return
+        const video = videoRef.current;
+        if (!video) return;
 
         if (video.paused) {
-            video.play()
-            setIsPlaying(true)
+            video.play();
+            setIsPlaying(true);
         } else {
-            video.pause()
-            setIsPlaying(false)
+            video.pause();
+            setIsPlaying(false);
         }
-    }
+    };
 
     return (
         <section className="bg-background py-16 lg:py-20">
             {/* Top row: three cards using reusable component */}
-           <div className='py-12'>
-            <BenefitsCardsRow cards={cards} />
+           <div className="py-12">
+                <BenefitsCardsRow cards={cardsWithIcons} />
             </div>
 
             {/* Video block */}
@@ -89,7 +79,7 @@ const BenefitsVideoSection = ({
                                     type="button"
                                     onClick={handleTogglePlay}
                                     className="absolute inset-0 flex items-center justify-center focus:outline-none"
-                                    aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                                    aria-label={isPlaying ? "Pause video" : "Play video"}
                                 >
                                     <div className={cn(
                                         "w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center shadow-xl border border-white/70 transition-colors",
@@ -108,10 +98,10 @@ const BenefitsVideoSection = ({
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default BenefitsVideoSection
+export default BenefitsVideoSection;
 
 
 

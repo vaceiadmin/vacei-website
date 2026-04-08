@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import OrbitingCircles from "@/components/ui/orbiting-circles";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 // Helper component for premium country markers
 const CountryMarker = ({ code, className }: { code: string; className?: string }) => (
@@ -48,12 +49,11 @@ const ActiveEUSection = () => {
                             {t("activeEU.badge")}
                         </div>
 
-                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.05]">
-                            {t("activeEU.titleLine1")}<br />
-                            <span className="text-blue-600">
-                                {t("activeEU.titleHighlight")}
-                            </span>
-                        </h2>
+                        <SectionTitleHero
+                            variant="light"
+                            line1={t("activeEU.titleLine1")}
+                            highlight={t("activeEU.titleHighlight")}
+                        />
 
                         <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl font-medium">
                             {t("activeEU.body")}

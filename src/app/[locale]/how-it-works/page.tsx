@@ -22,6 +22,15 @@ const HowItWorksPage = () => {
     [t]
   );
 
+  const sectionHeader = useMemo(
+    () => ({
+      badge: t("timelineSection.badge"),
+      title: t("timelineSection.title"),
+      subtitle: t("timelineSection.subtitle"),
+    }),
+    [t]
+  );
+
   return (
     <main className="min-h-screen bg-background">
       <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
@@ -29,7 +38,7 @@ const HowItWorksPage = () => {
       </div>
 
       <FadeInUp>
-        <HowItWorksTimeline steps={steps} />
+        <HowItWorksTimeline steps={steps} sectionHeader={sectionHeader} />
       </FadeInUp>
       <FadeInUp delay={0.2}>
         <OngoingSupportSection />

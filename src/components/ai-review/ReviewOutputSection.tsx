@@ -8,8 +8,35 @@ import { FadeInUp, StaggerContainer } from "../common/Animations";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
 
-const ReviewOutputSection = () => {
+interface ReviewOutputSectionProps {
+  output: {
+    badge: string;
+    heading: string;
+    subheading: string;
+    report_features: {
+      title: string;
+      items: string[];
+    };
+    marking_features: {
+      title: string;
+      items: string[];
+    };
+    footer_text: string;
+    demo_result: {
+      title: string;
+      status: string;
+      items: string[];
+      label: string;
+    };
+  };
+}
+
+const ReviewOutputSection = ({ output }: ReviewOutputSectionProps) => {
   const { isIPhone, isLowPerformance } = usePerformance();
+
+  const reportFeatures = output.report_features.items || [];
+  const markingFeatures = output.marking_features.items || [];
+  const demoItems = output.demo_result.items || [];
 
   return (
     <section className="bg-section-light py-16 lg:py-24 relative overflow-hidden">
@@ -42,14 +69,14 @@ const ReviewOutputSection = () => {
           {/* Left: Text and cards */}
           <StaggerContainer className="space-y-6 text-left">
             <FadeInUp>
-              <SectionBadge text="Review output" className="text-heading" />
+              <SectionBadge text={output.badge} className="text-heading" />
               <TextAnimation
-                text="Review output"
+                text={output.heading}
                 as="h2"
                 className="mt-4 text-3xl md:text-4xl font-semibold text-heading leading-tight"
               />
               <p className="mt-2 text-sm md:text-base text-gray max-w-md leading-relaxed">
-                Within minutes, a structured review report is generated.
+                {output.subheading}
               </p>
             </FadeInUp>
 
@@ -57,12 +84,12 @@ const ReviewOutputSection = () => {
               {/* The report is */}
               <FadeInUp className="bg-white rounded-2xl shadow-premium border border-gray-100 px-5 py-5 flex-1 min-w-[230px]">
                 <TextAnimation
-                  text="The report is:"
+                  text={output.report_features.title}
                   as="h3"
                   className="text-sm md:text-base font-bold text-heading mb-3"
                 />
                 <ul className="space-y-3 text-sm text-gray">
-                  {["Clear", "Actionable", "Easy to work through"].map(
+                  {reportFeatures.map(
                     (item, i) => (
                       <motion.li 
                         key={i} 
@@ -90,12 +117,12 @@ const ReviewOutputSection = () => {
               {/* Each item is marked as */}
               <FadeInUp delay={0.2} className="bg-white rounded-2xl shadow-premium border border-gray-100 px-5 py-5 flex-1 min-w-[230px]">
                 <TextAnimation
-                  text="Each item is marked as:"
+                  text={output.marking_features.title}
                   as="h3"
                   className="text-sm md:text-base font-bold text-heading mb-3"
                 />
                 <ul className="space-y-3 text-sm text-gray">
-                  {["Confirmed", "Disclosed", "Flagged for review"].map(
+                  {markingFeatures.map(
                     (item, i) => (
                       <motion.li 
                         key={i} 
@@ -122,8 +149,7 @@ const ReviewOutputSection = () => {
             </div>
 
             <p className="text-xs md:text-sm text-gray max-w-lg leading-relaxed">
-              This allows teams to resolve issues efficiently and with
-              confidence.
+              {output.footer_text}
             </p>
           </StaggerContainer>
 
@@ -159,7 +185,7 @@ const ReviewOutputSection = () => {
               >
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-[13px] font-bold text-heading">
-                    Audit Result
+                    {output.demo_result.title}
                   </p>
                   <span className={cn(
                     "w-2 h-2 rounded-full bg-red-500",
@@ -167,15 +193,11 @@ const ReviewOutputSection = () => {
                   )}></span>
                 </div>
                 <p className="text-[11px] font-bold text-red-500 mb-4 bg-red-50 py-1 px-3 rounded-full w-fit">
-                  Critical Errors
+                  {output.demo_result.status}
                 </p>
 
                 <div className="space-y-3">
-                  {[
-                    "CS01 - Profit for the year does...",
-                    "CS01 - Profit for the year does...",
-                    "CS01 - Profit for the year does...",
-                  ].map((item, idx) => (
+                  {demoItems.map((item, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: 10 }}
@@ -192,7 +214,7 @@ const ReviewOutputSection = () => {
                         </span>
                       </div>
                       <span className="ml-3 px-2 py-0.5 rounded bg-white text-[9px] font-bold text-gray-500 uppercase tracking-widest border border-gray-100">
-                        Balance
+                        {output.demo_result.label}
                       </span>
                     </motion.div>
                   ))}

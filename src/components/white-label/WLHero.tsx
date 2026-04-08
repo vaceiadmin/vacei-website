@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import NextImage from "next/image";
+import { useTranslation } from "react-i18next";
 import LiquidSurface from "../common/background";
 
 
@@ -11,6 +12,8 @@ interface WLHeroProps {
   subtitle: string;
   overview: string;
   ctaText: string;
+  secondaryCtaText?: string;
+  previewAlt?: string;
   onCtaClick?: () => void;
   imagePlaceholder?: string;
   highlightWords?: string[];
@@ -21,14 +24,20 @@ const WLHero: React.FC<WLHeroProps> = ({
   subtitle,
   overview,
   ctaText,
+  secondaryCtaText,
+  previewAlt,
   onCtaClick,
-  imagePlaceholder = "/assets/images/portal.png",
-  highlightWords = ["Your", "Own", "Branded"],
+  imagePlaceholder,
+  highlightWords = [],
 }) => {
+  const { t } = useTranslation("pages");
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const y2 = useTransform(scrollY, [0, 500], [0, -100]);
   const rotate = useTransform(scrollY, [0, 500], [0, 4]);
+
+  const currentImage = imagePlaceholder || "/assets/images/portal.png";
+  const currentAlt = previewAlt || t("white-label-platform.hero.previewAlt");
 
   return (
     <section className="relative w-full overflow-hidden bg-[#111235]">
@@ -81,11 +90,11 @@ const WLHero: React.FC<WLHeroProps> = ({
                   onClick={onCtaClick}
                   className="group relative px-12 py-6 bg-white text-primary-blue rounded-3xl font-black text-xl overflow-hidden transition-all duration-300 hover:shadow-[0_25px_50px_rgba(0,0,0,0.3)] active:scale-95"
                 >
-                  <span className="relative z-10">Request a Demo</span>
+                  <span className="relative z-10">{ctaText}</span>
                 </button>
 
                 <button className="px-12 py-6 bg-transparent border-2 border-white/20 text-white rounded-3xl font-black text-xl hover:bg-white/10 transition-all duration-300">
-                  See Platform
+                  {secondaryCtaText}
                 </button>
               </div>
             </motion.div>
@@ -104,8 +113,8 @@ const WLHero: React.FC<WLHeroProps> = ({
             >
               <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-slate-100 relative group">
                 <NextImage
-                  src={imagePlaceholder}
-                  alt="VACEI white-label dashboard preview"
+                  src={currentImage}
+                  alt={currentAlt}
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />

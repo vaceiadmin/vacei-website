@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import GetInstantQuoteButton from "@/components/common/GetInstantQuoteButton";
 import { LayoutDashboard, CheckCircle2 } from "lucide-react";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const MultiCompanySection = () => {
   const { t } = useTranslation("home");
@@ -89,9 +90,12 @@ const MultiCompanySection = () => {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-8">
                 {t("multiCompany.badge")}
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
-              {t("multiCompany.titleLine1")}<span className="text-blue-400">{t("multiCompany.titleHighlight")}</span>
-            </h2>
+            <SectionTitleHero
+              variant="dark"
+              className="mb-8"
+              line1={t("multiCompany.titleLine1")}
+              highlight={t("multiCompany.titleHighlight")}
+            />
             <p className="text-lg text-slate-400 mb-10 font-medium leading-relaxed">
               {t("multiCompany.body")}
             </p>

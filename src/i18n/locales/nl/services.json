@@ -1,106 +1,98 @@
 {
   "accounting-finance": {
-    "title": "Accounting & Finance",
+    "title": "Boekhouding & Financiën",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Accounting & Finance"
-      }
+      { "label": "Diensten" },
+      { "label": "Boekhouding & Financiën" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Ongoing Accounting & Finance support for your business – from bookkeeping to senior financial oversight.",
-      "VACEI manages accounting, reporting, and CFO support so your numbers stay accurate, timely, and clear.",
-      "Work is fully managed by VACEI and delivered through your client portal."
+      "Doorlopende ondersteuning op het gebied van Boekhouding & Financiën voor uw onderneming – van administratie tot senior financieel toezicht.",
+      "VACEI beheert de boekhouding, rapportage en CFO-ondersteuning, zodat uw cijfers nauwkeurig, tijdig en helder blijven.",
+      "Het werk wordt volledig door VACEI beheerd en geleverd via uw cliëntenportaal."
     ],
     "featuresSection": {
-      "title": "What we cover in Accounting & Finance",
-      "subtitle": "Request a tailored quote based on your accounting, reporting, and CFO needs.",
+      "title": "Wat wij dekken in Boekhouding & Financiën",
+      "subtitle": "Vraag een offerte op maat aan op basis van uw behoeften voor boekhouding, rapportage en CFO.",
       "features": [
         {
-          "title": "Accounting & reporting",
+          "title": "Boekhouding & rapportage",
           "items": [
-            "Online bookkeeping",
-            "Accounting and financial management",
-            "Management accounts",
-            "Financial reporting and analysis"
+            "Online boekhouden",
+            "Boekhoudkundig en financieel beheer",
+            "Management rapportages",
+            "Financiële rapportage en analyse"
           ]
         },
         {
-          "title": "Financial planning & oversight",
+          "title": "Financiële planning & toezicht",
           "items": [
-            "Cash flow monitoring and forecasting",
-            "Budgeting and performance tracking"
+            "Cashflow monitoring en prognose",
+            "Budgettering en volgen van prestaties"
           ]
         },
         {
-          "title": "CFO & fractional CFO",
+          "title": "CFO & interim CFO",
           "items": [
-            "Financial oversight and guidance",
-            "Support for management decision-making",
-            "Financial readiness for audit, banking, or investment",
-            "Ongoing coordination with accounting and compliance functions"
+            "Financieel toezicht en begeleiding",
+            "Ondersteuning bij besluitvorming door management",
+            "Financiële voorbereiding op audit, bank of investering",
+            "Doorlopende coördinatie met boekhoud- en compliance-functies"
           ]
         }
       ]
     }
   },
   "tax-compliance": {
-    "title": "Tax & Compliance",
+    "title": "Belasting & Compliance",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Tax & Compliance"
-      }
+      { "label": "Diensten" },
+      { "label": "Belasting & Compliance" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Ongoing support for your business tax, payroll, and statutory filings.",
-      "VACEI manages VAT, payroll, registrations, and key deadlines so obligations are handled correctly and on time.",
-      "Everything is coordinated through your client portal for clear tracking and peace of mind."
+      "Doorlopende ondersteuning voor uw vennootschapsbelasting, loonadministratie en wettelijke deponeringen.",
+      "VACEI beheert btw, loonadministratie, registraties en belangrijke deadlines zodat verplichtingen correct en op tijd worden afgehandeld.",
+      "Alles wordt gecoördineerd via uw cliëntenportaal voor heldere opvolging en gemoedsrust."
     ],
     "featuresSection": {
-      "title": "Complete tax and compliance management",
-      "subtitle": "Get a quote based on your VAT, payroll, and filing requirements",
+      "title": "Volledig belasting- en compliancebeheer",
+      "subtitle": "Ontvang een offerte op basis van uw btw-, loonadministratie- en deponeringseisen",
       "features": [
         {
-          "title": "VAT Services",
+          "title": "Btw-diensten",
           "items": [
-            "VAT registration and deregistration",
-            "Monthly/quarterly VAT return preparation",
-            "VAT compliance reviews and optimization",
-            "EC Sales List and Intrastat reporting"
+            "Btw-registratie en de-registratie",
+            "Maandelijkse/kwartaal btw-aangifte voorbereiding",
+            "Btw-compliance reviews en optimalisatie",
+            "Opgaaf ICP en Intrastat rapportage"
           ]
         },
         {
-          "title": "Payroll & Employment",
+          "title": "Loonadministratie & Werkgeverschap",
           "items": [
-            "Payroll processing and payslip generation",
-            "PAYE and social security contributions",
-            "Employment contract compliance",
-            "Annual FS3 and FS7 submissions"
+            "Salarisverwerking en genereren van loonstroken",
+            "Loonbelasting en sociale zekerheidsbijdragen",
+            "Naleving van arbeidsovereenkomsten",
+            "Jaarlijkse indieningen (FS3 en FS7 equivalenten)"
           ]
         },
         {
-          "title": "Regulatory Filings",
+          "title": "Wettelijke Deponeringen",
           "items": [
-            "Annual return submissions to Registry of Companies",
-            "Tax return preparation and submission",
-            "Deadline tracking and compliance monitoring",
-            "Authority correspondence management"
+            "Jaarlijkse indieningen bij het Handelsregister",
+            "Voorbereiding en indiening vennootschapsbelasting",
+            "Deadline tracking en compliance monitoring",
+            "Beheer van correspondentie met autoriteiten"
           ]
         },
         {
-          "title": "Who It's For",
+          "title": "Voor wie het is",
           "items": [
-            "Companies with ongoing tax obligations",
-            "Businesses requiring payroll management",
-            "Organizations needing compliance support",
-            "Companies seeking deadline management"
+            "Bedrijven met doorlopende belastingverplichtingen",
+            "Bedrijven die loonadministratie nodig hebben",
+            "Organisaties die ondersteuning bij compliance zoeken",
+            "Bedrijven die grip willen op hun deadlines"
           ]
         }
       ]
@@ -109,732 +101,657 @@
   "audit-assurance": {
     "title": "Audit & Assurance",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Audit & Assurance"
-      }
+      { "label": "Diensten" },
+      { "label": "Audit & Assurance" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Audit and Assurance services cover statutory audits and structured financial reviews.",
-      "VACEI delivers audits through a clear, organised process that provides visibility, predictable timelines and documented outcomes.",
-      "Audit work is coordinated by VACEI and supported by structured workflows through the platform, minimizing disruption to your operations."
+      "Audit- en Assurance-diensten omvatten wettelijke audits en gestructureerde financiële reviews.",
+      "VACEI levert audits via een helder, georganiseerd proces dat inzicht, voorspelbare tijdlijnen en gedocumenteerde resultaten biedt.",
+      "Auditwerk wordt gecoördineerd door VACEI en ondersteund door gestructureerde werkstromen via het platform, waardoor verstoring van uw operatie tot een minimum wordt beperkt."
     ],
     "featuresSection": {
-      "title": "Structured audit and assurance services",
-      "subtitle": "Request a quote based on your audit requirements and engagement scope",
+      "title": "Gestructureerde audit- en assurance-diensten",
+      "subtitle": "Vraag een offerte aan op basis van uw auditeisen en de omvang van de opdracht",
       "features": [
         {
-          "title": "Audit Services",
+          "title": "Auditdiensten",
           "items": [
-            "Statutory audit of financial statements",
-            "Independent review engagements",
-            "Agreed-upon procedures",
-            "Special purpose audits"
+            "Wettelijke controle van jaarrekeningen",
+            "Beoordelingsopdrachten (revieuws)",
+            "Afgesproken specifieke werkzaamheden (procedures)",
+            "Audits voor specifieke doeleinden"
           ]
         },
         {
-          "title": "Assurance Work",
+          "title": "Assurance Werk",
           "items": [
-            "Financial statement reviews",
-            "Due diligence support",
-            "Internal control assessments",
-            "Compliance audits"
+            "Review van financiële overzichten",
+            "Due diligence ondersteuning",
+            "Beoordeling interne controles",
+            "Nalevingsaudits (compliance)"
           ]
         },
         {
-          "title": "Process & Workflow",
+          "title": "Proces & Workflow",
           "items": [
-            "Structured audit workflows through platform",
-            "Document management and evidence gathering",
-            "Real-time progress tracking",
-            "Automated testing and validation"
+            "Gestructureerde auditwerkstromen via platform",
+            "Documentbeheer en verzamelen van bewijsmateriaal",
+            "Realtime voortgang volgen",
+            "Geautomatiseerd testen en validatie"
           ]
         },
         {
-          "title": "Who It's For",
+          "title": "Voor wie het is",
           "items": [
-            "Companies requiring statutory audits",
-            "Businesses preparing for investment",
-            "Organizations needing assurance",
-            "Entities with regulatory audit requirements"
+            "Bedrijven die wettelijke controles nodig hebben",
+            "Bedrijven die zich voorbereiden op investeringen",
+            "Organisaties die zekerheid behoeven",
+            "Entiteiten met reglementaire auditeisen"
           ]
         }
       ]
     }
   },
   "corporate-csp-services": {
-    "title": "Corporate & CSP Services",
+    "title": "Zakelijke & CSP Diensten",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Corporate & CSP Services"
-      }
+      { "label": "Diensten" },
+      { "label": "Zakelijke & CSP Diensten" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Ongoing corporate services for Malta companies, including registered office and statutory support.",
-      "VACEI keeps your company maintained, compliant, and documented throughout the year.",
-      "All work is delivered through a structured process and client portal."
+      "Doorlopende zakelijke diensten voor bedrijven in Malta, inclusief statutaire zetel en wettelijke ondersteuning.",
+      "VACEI zorgt dat uw bedrijf het hele jaar door actueel, compliant en gedocumenteerd blijft.",
+      "Al het werk wordt geleverd via een gestructureerd proces en cliëntenportaal."
     ],
     "featuresSection": {
-      "title": "What we cover in Corporate & CSP Services",
-      "subtitle": "Request a tailored quote based on the level of corporate administration required.",
+      "title": "Wat wij dekken in Zakelijke & CSP Diensten",
+      "subtitle": "Vraag een offerte aan op maat van de benodigde bedrijfsomvang.",
       "features": [
         {
-          "title": "CSP core services",
+          "title": "CSP kerndiensten",
           "items": [
-            "Registered Office (mandatory) and annual renewal",
-            "Company Secretary services (appointment and renewal)",
-            "Director services (natural person / corporate director where applicable)",
-            "Nominee director / nominee shareholder services (where applicable)"
+            "Statutaire Zetel (verplicht) en jaarlijkse verlenging",
+            "Company Secretarial diensten (benoeming en verlenging)",
+            "Directiediensten (natuurlijk persoon / corporate waar van toepassing)",
+            "Nominee director / nominee shareholder (waar van toepassing)"
           ]
         },
         {
-          "title": "Governance & statutory maintenance",
+          "title": "Governance & statutair onderhoud",
           "items": [
-            "Statutory registers maintenance (directors, shareholders, charges)",
-            "Beneficial Ownership (UBO) monitoring and updates",
-            "MBR filings support (Annual Return A1 and statutory forms)",
-            "Company documentation maintenance (resolutions, share certificates, core statutory documents)"
+            "Onderhoud van statutaire registers (bestuurders, aandeelhouders, pandrechten)",
+            "UBO (Ultimate Beneficial Owner) monitoring en updates",
+            "Ondersteuning bij MBR-indieningen (Jaarlijkse opgave A1 en formulieren)",
+            "Onderhoud bedrijfsdocumentatie (besluiten, aandeelbewijzen, kernstukken)"
           ]
         },
         {
-          "title": "Substance & compliance",
+          "title": "Substantie & compliance",
           "items": [
-            "Substance coordination and documentation support",
-            "Compliance oversight and readiness support",
-            "CSP compliance reviews (as required)"
+            "Coördinatie van substantie en documentatie-ondersteuning",
+            "Toezicht op naleving en ondersteuning bij gereedheid",
+            "CSP compliance reviews (indien nodig)"
           ]
         },
         {
-          "title": "Optional add-ons",
+          "title": "Optionele extra's",
           "items": [
-            "Registered Office mail handling (scan / forward)",
-            "Certified true copies and apostille coordination",
-            "Bank liaison support (KYC coordination and confirmations)",
-            "Director / officer confirmations and declarations"
+            "Postbehandeling statutaire zetel (scannen / doorsturen)",
+            "Gecertificeerde kopieën en apostille coördinatie",
+            "Ondersteuning bij bankcontacten (KYC coördinatie)",
+            "Bestuursverklaringen en bevestigingen"
           ]
         }
       ]
     }
   },
   "regulated-licensing": {
-    "title": "Regulated & Licensing",
+    "title": "Gereguleerd & Licenties",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Regulated & Licensing"
-      }
+      { "label": "Diensten" },
+      { "label": "Gereguleerd & Licenties" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Support for businesses that operate in regulated environments or require formal licences.",
-      "VACEI manages licence applications, renewals, and key regulatory submissions with authorities.",
-      "Work is delivered through clear, structured workflows."
+      "Ondersteuning voor bedrijven die opereren in gereguleerde omgevingen of formele licenties nodig hebben.",
+      "VACEI beheert licentieaanvragen, verlengingen en belangrijke wettelijke indieningen bij autoriteiten.",
+      "Werk wordt geleverd via heldere, gestructureerde werkstromen."
     ],
     "featuresSection": {
-      "title": "Regulated & licensing support",
-      "subtitle": "Request a quote based on your licensing and regulatory requirements.",
+      "title": "Gereguleerd & licentieondersteuning",
+      "subtitle": "Vraag een offerte aan op basis van uw licentie- en regelgevingseisen.",
       "features": [
         {
-          "title": "Licensing Services",
+          "title": "Licentiediensten",
           "items": [
-            "License application preparation and submission",
-            "Renewal management and tracking",
-            "Compliance monitoring and reporting",
-            "Authority correspondence coordination"
+            "Voorbereiding en indiening licentieaanvragen",
+            "Beheer en tracking van verlengingen",
+            "Compliance monitoring en rapportage",
+            "Coördinatie correspondentie met autoriteiten"
           ]
         },
         {
-          "title": "Regulatory Support",
+          "title": "Reglementaire ondersteuning",
           "items": [
-            "Regulatory framework analysis",
-            "Compliance gap assessments",
-            "Ongoing compliance monitoring",
-            "Regulatory change management"
+            "Analyse van wettelijke kaders",
+            "Beoordeling van compliance gaps",
+            "Doorlopende monitoring van naleving",
+            "Beheer van regelgevingswijzigingen"
           ]
         },
         {
-          "title": "Industries Served",
+          "title": "Sectoren",
           "items": [
-            "Financial services and investment firms",
-            "Gaming and gambling operators",
-            "Real estate and property developers",
-            "Professional services requiring licenses"
+            "Financiële dienstverleners en investeringsmaatschappijen",
+            "Gaming en kansspelen",
+            "Vastgoed en projectontwikkelaars",
+            "Vrije beroepen die licenties behoeven"
           ]
         },
         {
-          "title": "Who It's For",
+          "title": "Voor wie het is",
           "items": [
-            "Businesses operating in regulated sectors",
-            "Companies requiring formal authorizations",
-            "Organizations needing license management",
-            "Entities with ongoing regulatory obligations"
+            "Bedrijven in gereguleerde sectoren",
+            "Bedrijven die formele autorisaties nodig hebben",
+            "Organisaties die licentiebeheer zoeken",
+            "Entiteiten met doorlopende reglementaire verplichtingen"
           ]
         }
       ]
     }
   },
   "advisory-growth": {
-    "title": "Advisory & Growth",
+    "title": "Advisory & Groei",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Advisory & Growth"
-      }
+      { "label": "Diensten" },
+      { "label": "Advisory & Groei" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Advisory & Growth support for businesses beyond day-to-day compliance.",
-      "VACEI helps you plan, grow, and navigate key decisions with financial and regulatory aspects aligned.",
-      "Work is delivered alongside your core accounting, tax, corporate, and audit setup for consistency."
+      "Advisory & Groei ondersteuning voor bedrijven bovenop de dagelijkse compliance.",
+      "VACEI helpt u plannen, groeien en navigeren bij belangrijke beslissingen, waarbij financiële en reglementaire aspecten op één lijn worden gebracht.",
+      "Het werk wordt geleverd naast uw vaste boekhoud-, fiscale en audit-setup voor maximale consistentie."
     ],
     "featuresSection": {
-      "title": "Advisory & growth services",
-      "subtitle": "Request a quote or discuss advisory and growth support for your business.",
+      "title": "Advisory & groei diensten",
+      "subtitle": "Bespreek of vraag een offerte aan voor advisory en groei-ondersteuning.",
       "features": [
         {
-          "title": "Business planning & strategy",
+          "title": "Bedrijfsplanning & strategie",
           "items": [
-            "Business plans for bank financing",
-            "Business plans for grant applications",
-            "Business plans for investor presentations",
-            "Internal planning and forecasting"
+            "Businessplannen voor bankfinanciering",
+            "Businessplannen voor subsidieaanvragen",
+            "Businessplannen voor investeerderspresentaties",
+            "Interne planning en prognoses"
           ]
         },
         {
-          "title": "Grants & funding",
+          "title": "Subsidies & financiering",
           "items": [
-            "AI grants",
-            "Business development grants",
-            "Employment and incentive schemes",
-            "Grant eligibility assessment and application support"
+            "KI-subsidies",
+            "Business development subsidies",
+            "Werkgelegenheids- en stimuleringsregelingen",
+            "Toetsing deelname en ondersteuning bij aanvraag"
           ]
         },
         {
-          "title": "Projects & transactions support",
+          "title": "Project- & transactieondersteuning",
           "items": [
-            "Transaction support and coordination",
-            "Project-based advisory engagements",
-            "Structuring support aligned with regulatory and financial requirements (with external legal advisors where required)"
+            "Transactieondersteuning en coördinatie",
+            "Projectmatige adviesopdrachten",
+            "Structureringsadvies gericht op reglementaire en financiële eisen"
           ]
         }
       ]
     }
   },
   "company-structure-corporate-changes": {
-    "title": "Company Structure & Corporate Changes",
+    "title": "Bedrijfsstructuur & Statutaire Wijzigingen",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Company Structure & Corporate Changes"
-      }
+      { "label": "Diensten" },
+      { "label": "Bedrijfsstructuur & Wijzigingen" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Project-based support for changes to your company’s legal, ownership, or management structure.",
-      "VACEI prepares documentation, coordinates filings, and ensures each change is compliant and properly recorded.",
-      "This is separate from ongoing Corporate (CSP) Services and handled as a defined project."
+      "Projectmatige ondersteuning bij wijzigingen in de juridische, eigendoms- of bestuursstructuur van uw bedrijf.",
+      "VACEI bereidt documentatie voor, coördineert indieningen en zorgt dat elke wijziging compliant en correct wordt vastgelegd.",
+      "Dit staat los van doorlopende Zakelijke Diensten en wordt als afzonderlijk project behandeld."
     ],
     "featuresSection": {
-      "title": "What we cover in Company Structure & Corporate Changes",
-      "subtitle": "Request a quote based on the specific corporate change or project.",
+      "title": "Wat wij dekken in Bedrijfsstructuur & Wijzigingen",
+      "subtitle": "Vraag een offerte aan op basis van de specifieke wijziging of het project.",
       "features": [
         {
-          "title": "Ownership & capital changes",
+          "title": "Eigendom & kapitaalwijzigingen",
           "items": [
-            "Share transfers",
-            "Share capital increases, reductions, and reclassifications",
-            "Shareholder changes and updates"
+            "Aandelenoverdrachten",
+            "Kapitaalverhogingen, -verminderingen en herrubriceringen",
+            "Wijzigingen en updates van aandeelhouders"
           ]
         },
         {
-          "title": "Management & company details",
+          "title": "Bestuur & bedrijfsgegevens",
           "items": [
-            "Director appointments and resignations",
-            "Company name changes",
-            "Amendments to company objects or memorandum"
+            "Benoemingen en ontslag van bestuurders",
+            "Wijziging van bedrijfsnaam",
+            "Wijzigingen in bedrijfsdoelstellingen of statuten"
           ]
         },
         {
-          "title": "Restructuring & complex projects",
+          "title": "Restructurering & complexe projecten",
           "items": [
-            "Group restructuring",
-            "Pre-merger structuring",
-            "Re-domiciliation (where applicable)",
-            "Cross-border mergers (project-based, multi-stage)"
+            "Groepsherstructurering",
+            "Pre-merger structurering",
+            "Zetelverplaatsing (re-domiciliation, indien van toepassing)",
+            "Grensoverschrijdende fusies (projectmatig, meerfasig)"
           ]
         }
       ]
     }
   },
   "liquidation-wind-down": {
-    "title": "Liquidation & Wind-Down",
+    "title": "Liquidatie & Afwikkeling",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Liquidation & Wind-Down"
-      }
+      { "label": "Diensten" },
+      { "label": "Liquidatie & Afwikkeling" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Support for companies that are closing, restructuring, or no longer operating.",
-      "VACEI manages the liquidation or wind-down process so statutory requirements and filings are completed correctly."
+      "Ondersteuning voor bedrijven die sluiten, herstructureren of niet langer operatief zijn.",
+      "VACEI beheert het liquidatie- of afwikkelingsproces zodat wettelijke eisen en indieningen correct worden voltooid."
     ],
     "featuresSection": {
-      "title": "Complete liquidation and wind-down services",
-      "subtitle": "Request a quote based on the type of liquidation or wind-down required",
+      "title": "Volledige liquidatie- en afwikkelingsdiensten",
+      "subtitle": "Vraag een offerte aan op basis van het type liquidatie of afwikkeling",
       "features": [
         {
-          "title": "Voluntary Liquidation",
+          "title": "Vrijwillige Liquidatie",
           "items": [
-            "Members' voluntary liquidation (MVL)",
-            "Creditors' voluntary liquidation (CVL)",
-            "Liquidation planning and execution",
-            "Asset realization and distribution"
+            "Vrijwillige liquidatie door aandeelhouders (MVL)",
+            "Vrijwillige liquidatie door schuldeisers (CVL)",
+            "Liquidatieplanning en uitvoering",
+            "Realisatie en distributie van activa"
           ]
         },
         {
-          "title": "Strike-Off & Dissolution",
+          "title": "Uitschrijving & Dissolutie",
           "items": [
-            "Dormant company strike-off",
-            "Voluntary dissolution procedures",
-            "Final accounts preparation",
-            "Registrar of Companies filings"
+            "Uitschrijving van slapende vennootschappen",
+            "Vrijwillige ontbindingsprocedures",
+            "Voorbereiding van de slotrekening",
+            "Indieningen bij het Handelsregister"
           ]
         },
         {
-          "title": "Wind-Down Services",
+          "title": "Afwikkelingsdiensten",
           "items": [
-            "Business closure planning",
-            "Employee termination support",
-            "Contract termination management",
-            "Final compliance and filings"
+            "Planning van bedrijfsbeëindiging",
+            "Ondersteuning bij ontslag werknemers",
+            "Beheer beëindigen van contracten",
+            "Laatste compliance en indieningen"
           ]
         },
         {
-          "title": "Who It's For",
+          "title": "Voor wie het is",
           "items": [
-            "Companies ceasing operations",
-            "Dormant or inactive companies",
-            "Businesses requiring formal liquidation",
-            "Groups restructuring or exiting entities"
+            "Bedrijven die activiteiten staken",
+            "Slapende of inactieve bedrijven",
+            "Bedrijven die formele liquidatie behoeven",
+            "Groepen die entiteiten herstructureren of opheffen"
           ]
         }
       ]
     }
   },
   "international-business-structuring-expansion": {
-    "title": "International Business Structures",
+    "title": "Internationale Bedrijfsstructuren",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "International Business Structures "
-      }
+      { "label": "Diensten" },
+      { "label": "Internationale Bedrijfsstructuren" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Support for designing and managing international business structures.",
-      "VACEI helps you set up and coordinate group structures, entities, and banking in a compliant, tax-aware way.",
-      "Work is coordinated through the VACEI portal so you can see and manage cross-border structures in one place."
+      "Ondersteuning bij het ontwerpen en beheren van internationale bedrijfsstructuren.",
+      "VACEI helpt u bij het opzetten en coördineren van groepsstructuren, entiteiten en banking op een conforme manier.",
+      "Alles wordt gecoördineerd via het VACEI-portaal zodat u grensoverschrijdende structuren op één plek beheert."
     ],
     "featuresSection": {
-      "title": "Our international structuring services",
-      "subtitle": "Discuss your international structure or request a quote through one controlled portal.",
+      "title": "Onze internationale structureringsdiensten",
+      "subtitle": "Bespreek uw internationale structuur of vraag een offerte aan via één gecontroleerd portaal.",
       "features": [
         {
-          "title": "Group & holding structures",
+          "title": "Groeps- & holdingstructuren",
           "items": [
-            "Group and holding company structuring",
-            "Shareholding and ownership optimisation",
-            "Profit flow and dividend planning within legal frameworks",
-            "Substance and governance alignment",
-            "Clear documentation and defensible rationale for all structures"
+            "Structurering van groepen en holdings",
+            "Optimalisatie van eigendom en aandelen",
+            "Winststroom- en dividendplanning binnen wettelijke kaders",
+            "Afstemming van substantie en governance",
+            "Heldere documentatie en onderbouwing voor alle structuren"
           ]
         },
         {
-          "title": "International incorporation & expansion",
+          "title": "Internationale oprichting & expansie",
           "items": [
-            "Company incorporation in Malta",
-            "EU operating companies and subsidiaries",
-            "Expansion planning for international operations",
-            "Coordination with local advisors where required",
-            "Central management of new entities within the wider group structure"
+            "Oprichting van bedrijven in Malta",
+            "EU-werkmaatschappijen en dochterondernemingen",
+            "Expansieplanning voor internationale operaties",
+            "Coördinatie met lokale adviseurs waar nodig",
+            "Centraal beheer van nieuwe entiteiten binnen de groepsstructuur"
           ]
         },
         {
-          "title": "Banking & payments support",
+          "title": "Ondersteuning bij banken & betalingen",
           "items": [
-            "Introductions to EU and international banks",
-            "EMI and fintech onboarding",
-            "Multi-currency account setup",
-            "Support for complex or previously rejected banking applications",
-            "Banking support integrated with group structure and compliance"
+            "Introducties bij EU- en internationale banken",
+            "Onboarding bij EMI's en fintech-aanbieders",
+            "Inrichting van multi-currency accounts",
+            "Support bij complexe of eerder afgewezen bankaanvragen",
+            "Bankondersteuning geïntegreerd met groepsstructuur en compliance"
           ]
         },
         {
-          "title": "Cross-border tax & compliance",
+          "title": "Grensoverschrijdende belasting & compliance",
           "items": [
-            "International tax coordination across group entities",
-            "VAT registrations and ongoing VAT compliance",
-            "Payroll and employment structuring",
-            "Audit coordination across group entities",
-            "Holistic planning so tax, operations and reporting stay aligned"
+            "Internationale fiscale coördinatie over groepsentiteiten",
+            "Btw-registraties en doorlopende btw-compliance",
+            "Structurering van loonadministratie en werkgeverschap",
+            "Audit-coördinatie over groepsentiteiten",
+            "Holistische planning zodat belastingen, operaties en rapportage op één lijn blijven"
           ]
         },
         {
-          "title": "Ongoing group management",
+          "title": "Doorlopend groepsbeheer",
           "items": [
-            "Group accounting oversight",
-            "Intercompany tracking and reconciliation",
-            "Consolidated visibility across entities",
-            "Continuous compliance monitoring",
-            "Structures kept manageable, transparent, and compliant as you grow"
+            "Toezicht op groepsboekhouding",
+            "Intercompany tracking en reconciliatie",
+            "Geconsolideerd zicht op entiteiten",
+            "Continue monitoring van naleving",
+            "Structuren blijven beheersbaar, transparant en compliant terwijl u groeit"
           ]
         }
       ]
     },
-    "primaryCtaText": "Discuss My International Structure",
-    "secondaryCtaText": "Request a Quote"
+    "primaryCtaText": "Bespreek Mijn Internationale Structuur",
+    "secondaryCtaText": "Offerte Aanvragen"
   },
   "crypto-digital-assets": {
-    "title": "Crypto & Digital Assets",
+    "title": "Crypto & Digitale Activa",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Crypto & Digital Assets"
-      }
+      { "label": "Diensten" },
+      { "label": "Crypto & Digitale Activa" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Support for structuring, banking, and compliance around crypto and digital asset activity.",
-      "VACEI helps you align crypto holdings with lawful tax structuring, banking access, and compliance requirements."
+      "Ondersteuning bij structurering, banking en compliance rond crypto en digitale activa.",
+      "VACEI helpt u cryptobezit in lijn te brengen met wettige belastingstructuren, banktoegang en compliance-eisen."
     ],
     "featuresSection": {
-      "title": "Crypto & digital asset structuring services",
-      "subtitle": "Discuss your crypto structure or request a quote using the same secure process.",
+      "title": "Crypto & digitale activa structureringsdiensten",
+      "subtitle": "Bespreek uw cryptostructuur of vraag een offerte aan via hetzelfde beveiligde proces.",
       "features": [
         {
-          "title": "Crypto structuring & wealth",
+          "title": "Crypto structurering & vermogen",
           "items": [
-            "Review how crypto assets are currently held",
-            "Assess personal, company, and group-level structuring",
-            "Separate trading, investment, and operational activities",
-            "Design structures for lawful tax efficiency and risk management",
-            "Align crypto holdings with residence, substance, and governance requirements"
+            "beoordeling van hoe cryptobezit momenteel wordt gehouden",
+            "Beoordeling van persoonlijke, bedrijfs- en groepsstructurering",
+            "Scheiding van handel, investeringen en operationele activiteiten",
+            "Ontwerp van structuren voor wettige belastingefficiëntie en risicobeheer",
+            "Afstemming van cryptobezit met verblijfs-, substantie- en governance-eisen"
           ]
         },
         {
           "title": "Crypto–fiat banking & cash-out",
           "items": [
-            "Assess crypto activity, transaction history, and risk profile",
-            "Prepare clients for bank or EMI onboarding",
-            "Support documentation, explanations, and compliance readiness",
-            "Introduce suitable EU and international banks or EMIs",
-            "Assist with structuring crypto to fiat conversion flows and ongoing banking support"
+            "Beoordeling van crypto-activiteit, transactiehistorie en risicoprofiel",
+            "Voorbereiding van cliënten op bank- of EMI-onboarding",
+            "Ondersteuning bij documentatie en compliance-gereedheid",
+            "Introductie bij geschikte EU- en internationale banken of EMI's",
+            "Assistentie bij het structureren van crypto-naar-fiat flows"
           ]
         },
         {
-          "title": "Accounting, tax & compliance",
+          "title": "Boekhouding, belasting & compliance",
           "items": [
-            "Accounting treatment of crypto assets and transactions",
-            "Tax reporting aligned with applicable rules and classifications",
-            "VAT considerations where applicable",
-            "Audit coordination where crypto exposure exists",
-            "Documentation and record keeping suitable for future review"
+            "Boekhoudkundige verwerking van cryptobezit en transacties",
+            "Belastingrapportage in lijn met toepasselijke regels",
+            "Btw-overwegingen waar van toepassing",
+            "Audit-coördinatie bij crypto-blootstelling",
+            "Documentatie en verslaglegging geschikt voor toekomstige toetsing"
           ]
         }
       ]
     },
-    "primaryCtaText": "Discuss My Crypto Structure",
-    "secondaryCtaText": "Request a Quote"
+    "primaryCtaText": "Bespreek Mijn Cryptostructuur",
+    "secondaryCtaText": "Offerte Aanvragen"
   },
   "audit-readiness": {
-    "title": "Audit Readiness",
+    "title": "Audit-gereedheid",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Audit Readiness"
-      }
+      { "label": "Diensten" },
+      { "label": "Audit-gereedheid" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Preparation support so your records and documentation are ready before the audit starts.",
-      "VACEI reviews records, documentation, and processes so audits are smoother, faster, and less disruptive."
+      "Voorbereidingssteun zodat uw administratie en documentatie klaar zijn voordat de audit begint.",
+      "VACEI beoordeelt dossiers, documenten en processen zodat audits soepeler, sneller en met minder verstoring verlopen."
     ],
     "featuresSection": {
-      "title": "What we cover in audit readiness",
-      "subtitle": "Prepare for audit using one structured process coordinated through the VACEI portal.",
+      "title": "Wat wij dekken in audit-gereedheid",
+      "subtitle": "Bereid u voor op de audit met een gestructureerd proces via het VACEI-portaal.",
       "features": [
         {
-          "title": "Financial records",
+          "title": "Financiële dossiers",
           "items": [
-            "Review of bookkeeping and accounting records",
-            "Assessment of period-end adjustments and balances",
-            "Identification of gaps, inconsistencies, or unsupported figures",
-            "Alignment between trial balance, management accounts, and statutory formats",
-            "Financial data made complete, consistent, and ready for audit review"
+            "Review van boekhoudkundige vastleggingen",
+            "Beoordeling van overlopende posten en saldi aan einde periode",
+            "Identificatie van hiaten, inconsistenties of onvoldoende onderbouwde cijfers",
+            "Aansluiting tussen kolommenbalans, managementcijfers en jaarrekeningformats",
+            "Financiële gegevens compleet en gereed maken voor auditreview"
           ]
         },
         {
-          "title": "Documentation & evidence",
+          "title": "Documentatie & bewijsvoering",
           "items": [
-            "Review of supporting documentation for key balances",
-            "Structuring of audit-ready document files",
-            "Mapping of evidence to financial statement line items",
-            "Identification of missing or weak support",
-            "Reduced time spent responding to audit queries and follow‑ups"
+            "Review van onderbouwende documentatie voor belangrijke posten",
+            "Strukturering van audit-ready dossiermappen",
+            "Mappen van bewijslast aan posten in de jaarrekening",
+            "Identificatie van ontbrekende of zwakke onderbouwing",
+            "Tijd besparen bij het beantwoorden van auditvragen"
           ]
         },
         {
-          "title": "Corporate & compliance alignment",
+          "title": "Statutaire & compliance-afstemming",
           "items": [
-            "Review of statutory and corporate records",
-            "Alignment of share capital, ownership, and governance documentation",
-            "Confirmation of consistency between corporate records and financial statements",
-            "Compliance readiness checks where applicable",
-            "Early resolution of common corporate vs financial misalignments"
+            "Review van statutaire en bedrijfsrecords",
+            "Afstemming van kapitaal, eigendom en governance documentatie",
+            "Bevestiging van consistentie tussen bedrijfsgegevens en jaarrekening",
+            "Toetsen van afwikkeling van eerdere compliance-punten",
+            "Vroegtijdige oplossing van gangbare verschillen tussen corporate en finance"
           ]
         },
         {
-          "title": "Internal controls & process",
+          "title": "Interne controles & processen",
           "items": [
-            "High-level review of accounting and approval processes",
-            "Identification of control gaps affecting audit risk",
-            "Practical recommendations to strengthen documentation and approval trails",
-            "Focus on changes that reduce audit issues, not theoretical controls"
+            "High-level review van boekhoud- en goedkeuringsprocessen",
+            "Identificatie van zwaktes die het auditrisico beïnvloeden",
+            "Praktische aanbevelingen om audittrails te versterken",
+            "Focus op wijzigingen die auditvragen verminderen, geen theoretische controles"
           ]
         },
         {
-          "title": "Pre-audit issue resolution",
+          "title": "Oplossen van punten vóór de audit",
           "items": [
-            "Identification of potential audit findings in advance",
-            "Support in resolving issues before audit fieldwork",
-            "Coordination with management on corrective actions",
-            "Documentation of resolutions for audit reference"
+            "Vooraf identificeren van potentiële auditbevindingen",
+            "Ondersteuning bij het oplossen van punten voor de audit begint",
+            "Coördinatie met management over herstelmaatregelen",
+            "Vastleggen van oplossingen ter referentie voor de auditor"
           ]
         }
       ]
     },
-    "primaryCtaText": "Prepare for Audit",
-    "secondaryCtaText": "Request a Quote"
+    "primaryCtaText": "Voorbereiden op Audit",
+    "secondaryCtaText": "Offerte Aanvragen"
   },
   "group-consolidation": {
-    "title": "Group & Consolidation",
+    "title": "Groep & Consolidatie",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Group & Consolidation"
-      }
+      { "label": "Diensten" },
+      { "label": "Groep & Consolidatie" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Group & Consolidation support for businesses with multiple entities.",
-      "VACEI coordinates group reporting, intercompany alignment, and consolidation so information is consistent and usable."
+      "Groep & Consolidatie ondersteuning voor bedrijven met meerdere entiteiten.",
+      "VACEI coördineert groepsrapportage, intercompany afstemming en consolidatie zodat informatie bruikbaar is."
     ],
     "featuresSection": {
-      "title": "What we cover in group & consolidation",
-      "subtitle": "Discuss group reporting or request a quote for group-level support.",
+      "title": "Wat wij dekken in groep & consolidatie",
+      "subtitle": "Bespreek groepsrapportage of vraag een offerte aan voor support op groepsniveau.",
       "features": [
         {
-          "title": "Group structure & reporting",
+          "title": "Groepsstructuur & rapportage",
           "items": [
-            "Review of group structure and entity relationships",
-            "Definition of group reporting requirements",
-            "Alignment of accounting policies across entities",
-            "Establishment of consolidation methodology",
-            "Consistent, repeatable approach to group reporting"
+            "Beoordeling van groepsstructuur en relaties tussen entiteiten",
+            "Definitie van groepsrapportage-eisen",
+            "Afstemming van waarderingsgrondslagen tussen entiteiten",
+            "Vaststellen van consolidatiemethodiek",
+            "Consistente, herhaalbare aanpak voor groepsrapportage"
           ]
         },
         {
-          "title": "Intercompany accounting",
+          "title": "Intercompany boekhouding",
           "items": [
-            "Identification of intercompany transactions and balances",
-            "Coordination of intercompany agreements and flows",
-            "Reconciliation of intercompany balances across entities",
-            "Resolution of mismatches and inconsistencies",
-            "Clear intercompany tracking to support audits and lenders"
+            "Identificatie van intercompany transacties en saldi",
+            "Coördinatie van intercompany overeenkomsten en flows",
+            "Aansluiting van intercompany saldi over alle entiteiten",
+            "Oplossen van verschillen en inconsistenties",
+            "Heldere intercompany tracking ter ondersteuning van audits"
           ]
         },
         {
-          "title": "Group consolidation",
+          "title": "Groepsconsolidatie",
           "items": [
-            "Preparation of consolidated financial information",
-            "Elimination of intercompany balances and transactions",
-            "Consolidation across multiple currencies where applicable",
-            "Support for group management reporting",
-            "Consolidation outputs aligned with underlying entity data"
+            "Voorbereiding van geconsolideerde financiële informatie",
+            "Eliminatie van intercompany saldi en transacties",
+            "Consolidatie over verschillende valuta waar nodig",
+            "Support bij groepsmanagement rapportage",
+            "Consolidatie-outputs aangesloten op onderliggende entiteitsdata"
           ]
         },
         {
-          "title": "Ongoing group oversight",
+          "title": "Doorlopend groepstoezicht",
           "items": [
-            "Periodic group-level review of entity reporting",
-            "Monitoring of changes affecting consolidation",
-            "Coordination with local accounting teams or advisors",
-            "Continuous improvement of group reporting processes"
+            "Periodieke review op groepsniveau van entiteitsrapportages",
+            "Monitoring van wijzigingen die de consolidatie beïnvloeden",
+            "Coördinatie met lokale accountants of adviseurs",
+            "Continue verbetering van groepsrapportageprocessen"
           ]
         }
       ]
     },
-    "primaryCtaText": "Discuss Group Reporting",
-    "secondaryCtaText": "Request a Quote"
+    "primaryCtaText": "Bespreek Groepsrapportage",
+    "secondaryCtaText": "Offerte Aanvragen"
   },
   "banking-payments-support": {
-    "title": "Banking & Payments Support",
+    "title": "Support bij Banken & Betalingen",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Banking & Payments Support"
-      }
+      { "label": "Diensten" },
+      { "label": "Support bij Banken & Betalingen" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Support for accessing and maintaining reliable banking and payment solutions.",
-      "VACEI prepares documentation, coordinates onboarding, and supports ongoing banking and payments requirements."
+      "Ondersteuning voor het verkrijgen en behouden van betrouwbare bank- en betaaloplossingen.",
+      "VACEI bereidt documentatie voor, coördineert onboarding en ondersteunt bij doorlopende bankzaken."
     ],
     "featuresSection": {
-      "title": "What we cover in banking & payments support",
-      "subtitle": "Discuss banking support or request a quote using one structured process.",
+      "title": "Wat wij dekken in support banken & betalingen",
+      "subtitle": "Bespreek bankondersteuning of vraag een offerte aan via een gestructureerd proces.",
       "features": [
         {
-          "title": "Banking readiness",
+          "title": "Bank-gereedheid",
           "items": [
-            "Review of business activity, structure, and risk profile",
-            "Assessment of banking challenges or prior rejections",
-            "Identification of suitable banking or payment routes",
-            "Alignment of business model with banking expectations",
-            "Realistic positioning before any applications are made"
+            "Review van bedrijfsactiviteit, structuur en risicoprofiel",
+            "Beoordeling van bankuitdagingen of eerdere afwijzingen",
+            "Identificatie van geschikte bank- of betaalroutes",
+            "Afstemming van businessmodel op bankverwachtingen",
+            "Realistische positionering voordat een aanvraag wordt gedaan"
           ]
         },
         {
-          "title": "Bank & EMI introductions",
+          "title": "Introducties bij Banken & EMI's",
           "items": [
-            "Introductions to EU and international banks",
-            "Introductions to electronic money institutions and fintech providers",
-            "Coordination of onboarding processes",
-            "Support throughout the application lifecycle",
-            "Introductions based on suitability and jurisdiction (approvals remain at bank discretion)"
+            "Introducties bij EU- en internationale banken",
+            "Introducties bij EMI's en fintech-aanbieders",
+            "Coördinatie van onboardingprocessen",
+            "Support gedurende de gehele aanvraagcyclus",
+            "Introducties op basis van geschiktheid (acceptatie blijft bij de instelling)"
           ]
         },
         {
-          "title": "Documentation & compliance",
+          "title": "Documentatie & compliance",
           "items": [
-            "Preparation of KYC and onboarding documentation",
-            "Coordination of business explanations and supporting narratives",
-            "Alignment of corporate, accounting, and tax documentation",
-            "Support for responding to follow-up queries from institutions",
-            "Well‑prepared documentation to improve onboarding efficiency"
+            "Voorbereiding van KYC- en onboardingdocumentatie",
+            "Coördinatie van zakelijke toelichtingen",
+            "Afstemming van corporate, boekhoudkundige en fiscale stukken",
+            "Support bij het beantwoorden van vervolgvragen",
+            "Goed voorbereide dossiers om de doorlooptijd te verkorten"
           ]
         },
         {
-          "title": "Payment flows & operations",
+          "title": "Betaalstromen & operatie",
           "items": [
-            "Structuring of incoming and outgoing payment flows",
-            "Support for multi-currency account setups",
-            "Coordination of payment processing solutions",
-            "Ongoing support for operational banking requirements"
+            "Strukturering van inkomende en uitgaande geldstromen",
+            "Support bij inrichting multi-currency accounts",
+            "Coördinatie van betaalverwerkingsoplossingen",
+            "Doorlopende steun bij operationele bankzaken"
           ]
         },
         {
-          "title": "Banking compliance support",
+          "title": "Ondersteuning bij bankcompliance",
           "items": [
-            "Support with periodic bank reviews and updates",
-            "Coordination of information requests",
-            "Assistance with changes to activity or structure",
-            "Ongoing documentation maintenance to reduce account risk"
+            "Steun bij periodieke bank-reviews en updates",
+            "Coördinatie van informatieverzoeken",
+            "Assistentie bij wijziging van activiteit of structuur",
+            "Maintenance van documentatie om rekeningrisico te minimaliseren"
           ]
         }
       ]
     },
-    "primaryCtaText": "Discuss Banking Support",
-    "secondaryCtaText": "Request a Quote"
+    "primaryCtaText": "Bespreek Bankondersteuning",
+    "secondaryCtaText": "Offerte Aanvragen"
   },
   "corporate-transactions": {
-    "title": "Corporate Transactions",
+    "title": "Zakelijke Transacties",
     "breadcrumbs": [
-      {
-        "label": "Services"
-      },
-      {
-        "label": "Corporate Transactions"
-      }
+      { "label": "Diensten" },
+      { "label": "Zakelijke Transacties" }
     ],
-    "descriptionHeading": "What It Is",
+    "descriptionHeading": "Wat het is",
     "descriptionParagraphs": [
-      "Support for defined corporate transactions such as ownership changes, restructurings, and other one-off events.",
-      "VACEI coordinates documentation, filings, and stakeholders so each transaction is executed accurately and clearly."
+      "Ondersteuning bij zakelijke transacties zoals eigendomswijzigingen en herstructureringen.",
+      "VACEI coördineert documentatie, indieningen en stakeholders voor een accuraat verloop."
     ],
     "featuresSection": {
-      "title": "What we cover in corporate transactions",
-      "subtitle": "Discuss a corporate transaction or request a quote for a defined project.",
+      "title": "Wat wij dekken in zakelijke transacties",
+      "subtitle": "Bespreek een transactie of vraag een offerte aan voor een specifiek project.",
       "features": [
         {
-          "title": "Ownership & shareholding",
+          "title": "Eigendom & aandeelhouders",
           "items": [
-            "Share transfers between individuals or entities",
-            "Changes to ownership percentages",
-            "Entry or exit of shareholders",
-            "Capital increases, reductions, and reclassifications",
-            "All ownership changes documented, filed, and aligned with records"
-          ]
-        },
-        {
-          "title": "Corporate changes & amendments",
-          "items": [
-            "Director appointments and resignations",
-            "Changes to company name or registered details",
-            "Amendments to company objects or memorandum",
-            "Updates to governance and control structures",
-            "Consistency maintained across statutory, accounting, and compliance records"
-          ]
-        },
-        {
-          "title": "Restructuring & strategic transactions",
-          "items": [
-            "Group restructurings",
-            "Pre-transaction structuring support",
-            "Preparation for mergers, acquisitions, or disposals",
-            "Cross-border transaction coordination",
-            "Coordination alongside external legal and tax advisors where required"
-          ]
-        },
-        {
-          "title": "Transaction coordination",
-          "items": [
-            "Preparation and review of corporate documentation",
-            "Coordination of filings with authorities",
-            "Liaison with advisors, shareholders, and counterparties",
-            "Tracking of transaction milestones and completion steps",
-            "Efficient, well‑documented transaction execution"
+            "Aandelenoverdrachten tussen personen of entiteiten",
+            "Wijziging in eigendomspercentages",
+            "In- of uittreden van aandeelhouders"
           ]
         }
       ]
-    },
-    "primaryCtaText": "Discuss a Corporate Transaction",
-    "secondaryCtaText": "Request a Quote"
+    }
+  },
+  "shared": {
+    "videoLabel": "Service-overzichtsvideo",
+    "videoPlaceholder": "Gereserveerde ruimte voor een korte, stille video in lus. De opmaak blijft in balans als er nog geen video is.",
+    "ctaTitle": "Klaar om uw workflow te stroomlijnen?",
+    "ctaBody": "Start vandaag met VACEI en ervaar een gestructureerd delivery-platform.",
+    "ctaButton": "Aan de slag"
   }
 }

@@ -13,7 +13,22 @@
     "demoCta": "Book a Demo",
     "badge1": "27 EU Countries",
     "badge2": "Verified Firms Only",
-    "badge3": "ISO 27001 Certified"
+    "badge3": "ISO 27001 Certified",
+    "marquee": [
+      "Accounting & Bookkeeping",
+      "Audit & Assurance",
+      "Tax & Compliance",
+      "Legal Services",
+      "VAT & Payroll",
+      "Corporate Services"
+    ]
+  },
+  "heroLeft": {
+    "scrollDown": "Scroll Down",
+    "title": "What Vacei Is",
+    "body": "VACEI is a modern accounting, audit and corporate services firm built around one structured digital platform. We handle accounting, compliance, corporate and audit work end to end, using our own technology to deliver clarity, speed and visibility. VACEI is not DIY software and not a marketplace. We are a professional firm that does the work for you, supported by a secure client portal.",
+    "footerTitle": "Dedicated teams. Clear accountability.",
+    "footerBody": "Every client is supported by a named VACEI team."
   },
   "auditPlatform": {
     "badge": "All-in-one workspace",
@@ -70,9 +85,10 @@
     "titleHighlight": "Keep everything in one place.",
     "body": "Already working with an accountant, auditor, lawyer, or corporate service provider? Bring them into your VACEI workspace and manage requests, documents, approvals, and deadlines in one structured environment.",
     "bullets": [
-      "Keep your existing relationships",
-      "Centralise workflows and communication",
-      "Improve visibility across every service"
+      "Keep your existing advisor relationships",
+      "Centralise documents, requests, and approvals",
+      "Track deadlines and services in one place",
+      "Create a clearer and more professional workflow for everyone involved"
     ],
     "createWorkspaceCta": "Create Workspace",
     "gifAlt": "Invite advisor, advisor joins, shared workspace",
@@ -102,7 +118,40 @@
         "title": "Centralize Workflows",
         "description": "Track progress, manage documents, and coordinate everything through your secure workspace."
       }
-    ]
+    ],
+    "twoWaysToStart": {
+      "badge": "GET STARTED YOUR WAY",
+      "titleLine1": "Two ways to ",
+      "titleHighlight": "get started",
+      "subtitle": "Whether you need to find a new provider or already work with trusted advisors, VACEI gives you one structured workspace to manage everything in one place.",
+      "marketplaceBadge": "MARKETPLACE",
+      "recommendedBadge": "RECOMMENDED",
+      "marketplaceTitle": "Find the right advisor",
+      "marketplaceSubtitle": "Submit a request and receive structured proposals from verified firms. Compare options and choose the right partner.",
+      "inviteBadge": "INVITE",
+      "inviteTitle": "Work with your advisors",
+      "inviteSubtitle": "Already have trusted advisors? Bring them into your structured workspace to manage everything in one place.",
+      "inviteFlowSteps": [
+        {
+          "title": "Invite Your Advisor",
+          "desc": "Easily invite your existing accountant, auditor, or advisor to join your workspace and stay connected."
+        },
+        {
+          "title": "Advisor Joins Workspace",
+          "desc": "Your advisor securely joins your company profile, gaining access to relevant documents and requests."
+        },
+        {
+          "title": "Centralised Collaboration",
+          "desc": "Work together in one place — share documents, manage requests, and track progress seamlessly."
+        },
+        {
+          "title": "Manage & Grow Relationship",
+          "desc": "Maintain your existing relationship while benefiting from a more structured and efficient workflow."
+        }
+      ],
+      "footerCta": "Create Workspace",
+      "footerNote": "Get started in 2 minutes"
+    }
   },
   "processSteps": {
     "subjectLine": "Homepage quote / project request",
@@ -386,5 +435,144 @@
     "body": "VACEI provides the digital environment for international businesses and founders to incorporate, manage, and scale their European operations with confidence.",
     "chips": ["27 Countries", "Unified API", "Local Experts"],
     "hubAlt": "VACEI Hub"
+  },
+  "footerCta": {
+    "badge": "Join the Future",
+    "titleLine1": "Ready to simplify your ",
+    "titleHighlight": "business services?",
+    "body": "Join the businesses and founders managing their European operations through VACEI's structured digital workspace.",
+    "quoteCta": "Get Instant Quote",
+    "demoCta": "Book a Demo"
+  },
+  "platformPower": {
+    "badge": "Platform Intelligence",
+    "titleLine1": "A smarter way to manage ",
+    "titleHighlight": "business services.",
+    "body": "VACEI provides the structure and visibility needed to coordinate with multiple professional firms, manage compliance, and scale your operations from one secure platform.",
+    "highlights": [
+      "Full visibility across every business engagement",
+      "Secure document management and historical tracking",
+      "Integrated communication with verified advisors",
+      "Real-time monitoring of filings and deadlines"
+    ],
+    "createWorkspaceCta": "Create Workspace",
+    "registerQuoteCta": "Register to Get Instant Quote",
+    "workspaceLabel": "VACEI Workspace",
+    "auditAssurance": "Audit & Assurance",
+    "activeEngagement": "Active Engagement",
+    "teamNotifications": "Team Notifications",
+    "notif1": "Draft Financials uploaded by auditor",
+    "notif1Time": "2m ago",
+    "notif2": "Tax advisor requested documents",
+    "notif2Time": "1h ago",
+    "docCompliance": "Document Compliance",
+    "syncHint": "Everything synced with primary advisor.",
+    "onTrack": "On-Track",
+    "actionsPending": "2 Actions Pending",
+    "pdfName": "VAT_Return_Q1.pdf",
+    "pendingReview": "Pending Review"
+  },
+  "portalFeature": {
+    "featureLabel": "Feature",
+    "features": [
+      {
+        "title": "Bookkeeping that powers everything else",
+        "description": "Your bookkeeping runs continuously in the background. You upload documents – our team posts, reconciles, and reviews everything. Once bookkeeping is complete, VAT, tax, audit and reporting can proceed smoothly.",
+        "content": [
+          "Monthly bookkeeping status",
+          "Missing documents clearly listed",
+          "Bank and ledger reconciled",
+          "Ready for VAT and audit"
+        ],
+        "buttonText": "See How Bookkeeping Works"
+      },
+      {
+        "title": "VAT & payroll filings, period by period",
+        "description": "VAT and payroll run on fixed periods. Each submission is tracked, prepared, submitted, and archived automatically. If nothing changes, you simply confirm – and we take care of the rest.",
+        "content": [
+          "VAT periods with due dates",
+          "Payroll runs per month",
+          "Submission confirmations",
+          "No-change confirmations"
+        ],
+        "buttonText": "See VAT & Payroll in Action"
+      },
+      {
+        "title": "Corporate & CSP services with expiry tracking",
+        "description": "Corporate services don't run monthly – they expire. Directorships, registered office, and company secretary services are monitored by expiry date. Renewals are triggered automatically – with reminders and billing.",
+        "content": [
+          "Active corporate services",
+          "Expiry dates clearly shown",
+          "Renewal alerts before deadlines",
+          "No missed obligations"
+        ],
+        "buttonText": "View Corporate Services"
+      }
+    ]
+  },
+  "insightsResources": {
+    "badge": "INSIGHTS & RESOURCES",
+    "titleLine1": "Practical insights",
+    "titleHighlight": "for modern businesses",
+    "subtitle": "Explore short videos, guides, and articles on accounting, audit, compliance, and business operations — designed to help businesses stay organised, informed, and ready to scale.",
+    "viewAll": "View all resources",
+    "watchVideo": "Watch video",
+    "readMore": "Read more",
+    "videoModalEyebrow": "VACEI insights",
+    "videoModalHint": "Select a video to play",
+    "videoModalCloseAria": "Close video",
+    "videoPlaylist": [
+      { "title": "Platform introduction" },
+      { "title": "Compliance walkthrough" }
+    ],
+    "resources": [
+      {
+        "type": "Article",
+        "category": "Audit & Accounting",
+        "title": "How to prepare your business for a seamless audit",
+        "desc": "Discover the exact documents, workflows, and timelines required to navigate the audit process without friction."
+      },
+      {
+        "type": "Video",
+        "category": "Compliance",
+        "title": "3-minute guide to European corporate compliance",
+        "desc": "Watch a quick breakdown of exactly what documents and deadlines you need to manage when operating in the EU."
+      },
+      {
+        "type": "Guide",
+        "category": "Business Operations",
+        "title": "The ultimate checklist for scaling your operations",
+        "desc": "Use this comprehensive checklist to ensure your legal, accounting, and operational infrastructure is ready to scale."
+      }
+    ]
+  },
+  "faqSection": {
+    "badge": "Why VACEI",
+    "title": "Structured ",
+    "titleHighlight": "Collaboration",
+    "subtitle": "Unlock clarity and control with a unified digital workspace tailored for professional services.",
+    "items": [
+      {
+        "title": "Clarity",
+        "desc": "Complete visibility over engagements, documents, and deadlines in a single hub."
+      },
+      {
+        "title": "Structure",
+        "desc": "Defined workflows ensure professional services are delivered consistently."
+      },
+      {
+        "title": "Collaboration",
+        "desc": "Work with multiple advisors seamlessly through one secure platform."
+      },
+      {
+        "title": "Control",
+        "desc": "Track compliance, filings, and operations from a central dashboard."
+      }
+    ],
+    "healthLabel": "Financial Health",
+    "growthLabel": "Growth",
+    "equityLabel": "Cap Table State",
+    "issuedCap": "Issued Cap",
+    "supportLabel": "Direct Support"
   }
 }

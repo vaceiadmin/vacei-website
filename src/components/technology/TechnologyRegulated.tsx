@@ -5,42 +5,34 @@ import GradientContainer from "@/components/common/GradientContainer";
 import { motion } from "framer-motion";
 import TextAnimation from "../common/TextAnimation";
 
-const TechnologyRegulated = () => {
-  const features = [
-    "Role-based access and permissions",
-    "Controlled workflows and approvals",
-    "Documentation and traceability",
-    "Compliance with professional and regulatory standards",
-  ];
+interface WorkspaceCard {
+  title: string;
+  description: string;
+  status?: string;
+  links: string[];
+}
 
-  const workspaceCards = [
-    {
-      id: 1,
-      title: "Bookkeeping",
-      description: "Monthly books, reconciliation and reports",
-      status: "Waiting",
-      links: ["Open workspace", "Open"],
-    },
-    {
-      id: 2,
-      title: "Documentation",
-      description: "Central document vault and request",
-      links: ["Open", "Open workspace"],
-    },
-    {
-      id: 3,
-      title: "Bookkeeping workspace",
-      description: "Central document vault and request",
-      links: ["Open", "Open workspace"],
-    },
-    {
-      id: 4,
-      title: "Audit workspace",
-      description: "Engagement, PBCs, queries, reports",
-      links: ["Open", "Open workspace"],
-    },
-  ];
+interface TechnologyRegulatedProps {
+  title: string;
+  intro: string;
+  features: string[];
+  footer: string;
+  availabilityTitle: string;
+  availabilityDescription: string;
+  handleTitle: string;
+  workspaceCards: WorkspaceCard[];
+}
 
+const TechnologyRegulated = ({
+  title,
+  intro,
+  features,
+  footer,
+  availabilityTitle,
+  availabilityDescription,
+  handleTitle,
+  workspaceCards,
+}: TechnologyRegulatedProps) => {
   return (
     <section className="py-16 lg:py-24 w-full">
       <GradientContainer
@@ -62,14 +54,14 @@ const TechnologyRegulated = () => {
               className="space-y-6"
             >
               <TextAnimation
-                text="Designed for regulated environments"
+                text={title}
                 as="h2"
                 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-heading leading-tight"
               />
 
               <div className="space-y-4">
                 <p className="text-sm md:text-base text-gray leading-relaxed">
-                  All technology used by VACEI is designed to support:
+                  {intro}
                 </p>
 
                 <ul className="space-y-3">
@@ -98,20 +90,17 @@ const TechnologyRegulated = () => {
               </div>
 
               <p className="text-sm md:text-base text-gray leading-relaxed">
-                Technology supports the work – final responsibility always
-                remains with the assigned professionals.
+                {footer}
               </p>
 
               <div className="space-y-3 pt-4">
                 <TextAnimation
-                  text="Availability for firms"
+                  text={availabilityTitle}
                   as="h3"
                   className="text-lg md:text-xl font-semibold text-heading"
                 />
                 <p className="text-sm md:text-base text-gray leading-relaxed">
-                  Selected components of our technology environment may also be
-                  made available to firms through partnerships, licensing, or
-                  reseller arrangements.
+                  {availabilityDescription}
                 </p>
               </div>
             </motion.div>
@@ -167,7 +156,7 @@ const TechnologyRegulated = () => {
                   >
                     {/* Title */}
                     <TextAnimation
-                      text="WE Carefully Handle"
+                      text={handleTitle}
                       as="h3"
                       className="text-lg font-semibold text-heading mb-6"
                     />
@@ -176,7 +165,7 @@ const TechnologyRegulated = () => {
                     <div className="space-y-3">
                       {workspaceCards.map((card, index) => (
                         <motion.div
-                          key={card.id}
+                          key={index}
                           initial={{ opacity: 0, y: 20 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}

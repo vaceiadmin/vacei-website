@@ -816,3 +816,15 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Custom cursor: avoid per-element inline styles (React hydration / reconciliation). */
+html.vacei-custom-cursor body {
+  cursor: none;
+}
+
+html.vacei-custom-cursor body a,
+html.vacei-custom-cursor body button,
+html.vacei-custom-cursor body [role="button"],
+html.vacei-custom-cursor body .cursor-pointer {
+  cursor: none;
+}

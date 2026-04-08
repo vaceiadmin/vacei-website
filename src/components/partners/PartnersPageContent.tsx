@@ -54,6 +54,7 @@ const PartnersPageContent = () => {
                 title={model.title}
                 description={model.description}
                 link={model.link}
+                learnMoreText={t("learnMore")}
                 iconIndex={model.iconIndex}
                 delay={index * 0.1}
               />

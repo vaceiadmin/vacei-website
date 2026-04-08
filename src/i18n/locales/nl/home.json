@@ -3,444 +3,576 @@
     "titleLine1": "Ontvang voorstellen.",
     "titleLine2": "Kies uw adviseurs.",
     "titleHighlight": "Beheer alles.",
-    "body": "VACEI is de gestructureerde digitale werkplek waar bedrijven professionele diensten kunnen aanvragen, voorstellen van geverifieerde kantoren ontvangen en documenten, compliance en workflows op één plek beheren.",
-    "body2": "Registreer één keer voor uw offerte, nodig uw adviseurs uit en beheer alles via één veilig platform.",
-    "footnote": "Van onboarding tot doorlopende compliance loopt alles via één workspace.",
-    "quoteCta": "Registreren voor directe offerte",
-    "demoCta": "Demo boeken",
-    "badge1": "27 EU-landen",
-    "badge2": "Alleen geverifieerde kantoren",
-    "badge3": "ISO 27001 gecertificeerd"
+    "body": "De gestructureerde digitale werkruimte waar bedrijven professionele diensten aanvragen, voorstellen ontvangen van geverifieerde kantoren en documenten, compliance en workflows beheren — alles op één plek.",
+    "body2": "Schrijf u eenmalig in om uw offerte te ontvangen, nodig uw adviseurs uit en beheer alles via een beveiligd platform.",
+    "benefit1": "Gratis registratie",
+    "benefit2": "Geen creditcard nodig",
+    "benefit3": "Duurt 2 minuten",
+    "footnote": "Van onboarding tot doorlopende naleving, alles in één werkruimte.",
+    "quoteCta": "Registreer voor Directe Offerte",
+    "demoCta": "Boek een Demo",
+    "badge1": "27 EU-Landen",
+    "badge2": "Alleen Geverifieerde Kantoren",
+    "badge3": "ISO 27001 Gecertificeerd",
+    "marquee": [
+      "Boekhouding & Administratie",
+      "Audit & Assurance",
+      "Belasting & Compliance",
+      "Juridische Diensten",
+      "Btw & Loonadministratie",
+      "Zakelijke Diensten"
+    ]
+  },
+  "heroLeft": {
+    "scrollDown": "Scroll omlaag",
+    "title": "What Vacei Is",
+    "body": "VACEI is een modern kantoor voor accountancy, audit en corporate services rond één gestructureerd digitaal platform. Wij verzorgen accountancy, compliance, corporate en audit end-to-end met eigen technologie voor duidelijkheid, snelheid en inzicht. VACEI is geen doe-het-zelf-software en geen marketplace. Wij zijn een professioneel kantoor dat het werk voor u doet, met een veilig cliëntenportaal.",
+    "footerTitle": "Toegewezen teams. Duidelijke verantwoordelijkheid.",
+    "footerBody": "Elke klant wordt ondersteund door een vast VACEI-team."
   },
   "auditPlatform": {
-    "badge": "All-in-one workspace",
-    "titleLine1": "One Platform.",
-    "titleHighlight": "Full Visibility.",
-    "body": "Running a business means coordinating with accountants, auditors, lawyers, tax advisors, and corporate service providers. Too often, that work is scattered across emails, folders, spreadsheets, and disconnected systems. VACEI brings everything together into one structured workspace so businesses and advisors can work with more visibility, accountability, and control.",
-    "quoteLine1": "Professional services require structure.",
-    "quoteLine2": "VACEI gives you that structure.",
-    "clientPortalCta": "Try The Client Portal",
-    "complianceVerified": "Compliance Verified",
+    "badge": "Alles-in-één werkruimte",
+    "titleLine1": "Eén Platform.",
+    "titleHighlight": "Volledig Zicht.",
+    "body": "Een bedrijf runnen betekent coördineren met accountants, auditors, advocaten en bedrijfsadviseurs. Te vaak is dit werk verspreid over e-mails, mappen en spreadsheets. VACEI brengt alles samen in een gestructureerde ruimte, zodat bedrijven en adviseurs kunnen werken met meer zichtbaarheid, verantwoordelijkheid en controle.",
+    "quoteLine1": "Professionele diensten vereisen structuur.",
+    "quoteLine2": "VACEI biedt u die structuur.",
+    "clientPortalCta": "Probeer Cliëntenportaal",
+    "complianceVerified": "Compliance Geverifieerd",
     "principles": [
       {
-        "title": "Structured Workflows",
-        "desc": "Clear engagement stages, defined responsibilities, and progress tracking across every service."
+        "title": "Gestructureerde Workflows",
+        "desc": "Heldere opdrachtfasen, gedefinieerde verantwoordelijkheden en voortgangsbewaking per dienst."
       },
       {
-        "title": "Controlled Documentation",
-        "desc": "Centralised files, organised records, version visibility, and secure document exchange."
+        "title": "Gecontroleerde Documentatie",
+        "desc": "Gecentraliseerde bestanden, georganiseerde dossiers, versiebeheer en veilige documentuitwisseling."
       },
       {
-        "title": "Review and Approval Layers",
-        "desc": "Defined review flows, tracked comments, and sign-off history across services."
+        "title": "Review- en Goedkeuringslagen",
+        "desc": "Gedefinieerde reviewstromen, bijgehouden opmerkingen en historie van aftekeningen voor alle diensten."
       },
       {
-        "title": "Secure Client Interaction",
-        "desc": "Requests, uploads, approvals, and communication handled inside a controlled environment."
+        "title": "Veilige Cliëntinteractie",
+        "desc": "Verzoeken, uploads, goedkeuringen en communicatie beheerd in een gecontroleerde omgeving."
       }
     ]
   },
   "workspaceEntry": {
-    "activeEntities": "Active Entities",
-    "card1TitleBefore": "Create a workspace for your ",
-    "card1TitleAccent": "business.",
-    "card1Body": "Manage all your advisors in one place. Upload documents, track deadlines, respond to requests, and coordinate professional services from one dashboard.",
-    "whatYouCanDo": "What you can do",
+    "activeEntities": "Actieve Entiteiten",
+    "card1TitleBefore": "Maak een werkruimte voor uw ",
+    "card1TitleAccent": "onderneming.",
+    "card1Body": "Beheer al uw adviseurs op één plek. Upload documenten, volg deadlines, reageer op verzoeken en coördineer professionele diensten vanuit één dashboard.",
+    "whatYouCanDo": "Wat u kunt doen",
     "card1Bullets": [
-      "Manage multiple companies",
-      "Centralise documents",
-      "Track compliance and filings",
-      "Keep all advisors in one place",
-      "Monitor progress across engagements"
+      "Beheer meerdere bedrijven",
+      "Centraliseer documenten",
+      "Volg compliance en deponeringen",
+      "Houd adviseurs op één plek",
+      "Monitor voortgang van opdrachten"
     ],
-    "createWorkspaceCta": "Create Workspace",
-    "oneClickSync": "One-click Sync",
-    "newFounders": "New Founders",
-    "card2Title": "Start your company and ",
-    "card2TitleAccent": "scale from day one.",
-    "card2Body": "Set up your company and centralise incorporation, approvals, compliance, and ongoing support in the same workspace you will use to run the business.",
-    "startIncorporationCta": "Start Incorporation",
-    "bookConsultationCta": "Book a Consultation"
+    "createWorkspaceCta": "Maak Werkruimte Aan",
+    "oneClickSync": "Synchronisatie in één klik",
+    "newFounders": "Nieuwe Oprichters",
+    "card2Title": "Lanceer uw onderneming en ",
+    "card2TitleAccent": "schaal vanaf de eerste dag.",
+    "card2Body": "Richt uw bedrijf op en centraliseer de formatie, goedkeuringen, compliance en doorlopende ondersteuning in dezelfde werkruimte als waarin u de business beheert.",
+    "startIncorporationCta": "Start Bedrijfsvorming",
+    "bookConsultationCta": "Boek een Consultatie"
   },
   "inviteAdvisors": {
-    "titleLine1": "Invite your advisors.",
-    "titleHighlight": "Keep everything in one place.",
-    "body": "Already working with an accountant, auditor, lawyer, or corporate service provider? Bring them into your VACEI workspace and manage requests, documents, approvals, and deadlines in one structured environment.",
+    "titleLine1": "Nodig uw adviseurs uit.",
+    "titleHighlight": "Houd alles op één plek.",
+    "body": "Werkt u al samen met een accountant, auditor of advocaat? Breng ze naar uw VACEI-ruimte en beheer verzoeken, documenten, goedkeuringen en deadlines in een gestructureerde omgeving.",
     "bullets": [
-      "Keep your existing relationships",
-      "Centralise workflows and communication",
-      "Improve visibility across every service"
+      "Behoud uw bestaande adviseursrelaties",
+      "Centraliseer documenten, verzoeken en goedkeuringen",
+      "Volg deadlines en diensten op dezelfde plek",
+      "Creëer een heldere, professionele werkwijze voor iedereen"
     ],
-    "createWorkspaceCta": "Create Workspace",
-    "gifAlt": "Invite advisor, advisor joins, shared workspace",
-    "gifPlaceholderTitle": "GIF Placeholder",
-    "gifPlaceholderHint": "Please upload your GIF to:",
+    "createWorkspaceCta": "Maak Werkruimte Aan",
+    "gifAlt": "Nodig adviseur uit, adviseur sluit aan, gedeelde ruimte",
+    "gifPlaceholderTitle": "Video/GIF-plek",
+    "gifPlaceholderHint": "Upload hier uw GIF:",
     "gifPlaceholderPath": "/public/assets/videos/Invite_Advisor.gif"
   },
   "howItWorks": {
-    "badge": "How It Works",
-    "titleLine1": "Precision at ",
-    "titleHighlight": "every stage.",
-    "subtitle": "Create a workspace, invite your advisors, and manage every engagement, document and deadline in one structured platform.",
+    "badge": "Hoe het werkt",
+    "titleLine1": "Precisie in ",
+    "titleHighlight": "elke fase.",
+    "subtitle": "Creëer een ruimte, nodig adviseurs uit en beheer elke opdracht, elk document en elke deadline op een gestructureerd platform.",
     "steps": [
       {
-        "title": "Define Your Scope",
-        "description": "Register and answer a few simple questions to define the professional services your business needs."
+        "title": "Reikwijdte bepalen",
+        "description": "Schrijf u in en beantwoord vragen over de professionele diensten die uw onderneming nodig heeft."
       },
       {
-        "title": "Receive Proposals",
-        "description": "Compare bids from verified firms, ensuring the best fit for your requirements and budget."
+        "title": "Voorstellen ontvangen",
+        "description": "Vergelijk aanbiedingen van geverifieerde kantoren en kies de beste match voor uw wensen en budget."
       },
       {
-        "title": "Appoint Your Advisors",
-        "description": "Select with confidence and engage through our structured digital environment."
+        "title": "Adviseurs benoemen",
+        "description": "Kies met vertrouwen en contracteer adviseurs via onze gestructureerde digitale omgeving."
       },
       {
-        "title": "Centralize Workflows",
-        "description": "Track progress, manage documents, and coordinate everything through your secure workspace."
+        "title": "Workflows centraliseren",
+        "description": "Volg voortgang, beheer documenten en coördineer alles via uw beveiligde ruimte."
       }
-    ]
+    ],
+    "twoWaysToStart": {
+      "badge": "START OP UW MANIER",
+      "titleLine1": "Twee manieren om te ",
+      "titleHighlight": "starten",
+      "subtitle": "Of u nu een nieuwe aanbieder zoekt of met vertrouwde adviseurs werkt, VACEI biedt de structuur om alles te beheren.",
+      "marketplaceBadge": "MARKTPLAATS",
+      "recommendedBadge": "AANBEVOLEN",
+      "marketplaceTitle": "Vind de juiste adviseur",
+      "marketplaceSubtitle": "Dien een verzoek in en ontvang gestructureerde voorstellen van geverifieerde kantoren. Vergelijk opties en kies de beste partner.",
+      "inviteBadge": "UITNODIGEN",
+      "inviteTitle": "Werk met uw eigen adviseurs",
+      "inviteSubtitle": "Heeft u al vertrouwde adviseurs? Breng ze naar uw gestructureerde werkruimte om alles op één plek te beheren.",
+      "inviteFlowSteps": [
+        {
+          "title": "Nodig uw adviseur uit",
+          "desc": "Nodig eenvoudig uw huidige accountant, auditor of adviseur uit om mee te doen in uw werkruimte en verbonden te blijven."
+        },
+        {
+          "title": "Adviseur neemt deel aan de werkruimte",
+          "desc": "Uw adviseur voegt zich veilig bij het bedrijfsprofiel en krijgt toegang tot relevante documenten en verzoeken."
+        },
+        {
+          "title": "Gecentraliseerde samenwerking",
+          "desc": "Werk samen op één plek — deel documenten, beheer verzoeken en volg de voortgang naadloos."
+        },
+        {
+          "title": "Relatie beheren en laten groeien",
+          "desc": "Behoud uw bestaande relatie en profiteer tegelijk van een gestructureerdere en efficiëntere manier van werken."
+        }
+      ],
+      "footerCta": "Maak Werkruimte Aan",
+      "footerNote": "Start in 2 minuten"
+    }
   },
   "processSteps": {
-    "subjectLine": "Homepage quote / project request",
+    "subjectLine": "Homepage Offerte / Projectaanvraag",
     "form": {
       "request": {
-        "title": "Let's Start",
-        "subtitle": "Tell us a bit about yourself",
-        "primaryLabel": "Continue",
+        "title": "Laten we beginnen",
+        "subtitle": "Vertel ons wat over uzelf",
+        "primaryLabel": "Doorgaan",
         "fields": {
-          "name": {
-            "label": "Full Name",
-            "placeholder": "e.g. John Doe"
-          },
-          "email": {
-            "label": "Email Address",
-            "placeholder": "john@company.com"
-          },
-          "message": {
-            "label": "Project Brief",
-            "placeholder": "Describe your needs..."
-          }
+          "name": { "label": "Volledige Naam", "placeholder": "bv: Jan Jansen" },
+          "email": { "label": "E-mailadres", "placeholder": "jan@bedrijf.nl" },
+          "message": { "label": "Projectomschrijving", "placeholder": "Beschrijf uw behoeften..." }
         }
       },
       "onboarding": {
-        "title": "Project Scope",
-        "subtitle": "Choose the services you need",
-        "primaryLabel": "Next Step",
+        "title": "Projectomvang",
+        "subtitle": "Kies de vereiste diensten",
+        "primaryLabel": "Volgende Stap",
         "fields": {
-          "service": {
-            "label": "Service Types",
-            "placeholder": "Select services"
-          },
-          "additionalDetails": {
-            "label": "Additional details (optional)",
-            "placeholder": "Any specific requirements..."
-          }
+          "service": { "label": "Diensttypen", "placeholder": "Selecteer diensten" },
+          "additionalDetails": { "label": "Extra details (optioneel)", "placeholder": "Specifieke wensen..." }
         }
       },
       "preferences": {
-        "title": "Final Touches",
-        "subtitle": "How should we contact you?",
-        "primaryLabel": "Submit Request",
+        "title": "Afronding",
+        "subtitle": "Hoe moeten wij contact opnemen?",
+        "primaryLabel": "Aanvraag Verzenden",
         "fields": {
-          "communicationChannel": {
-            "label": "Communication",
-            "placeholder": "Preferred Channel"
-          },
-          "updateCadence": {
-            "label": "Updates",
-            "placeholder": "Frequency"
-          },
-          "phone": {
-            "label": "Phone Number (required for WhatsApp / Phone Call)",
-            "placeholder": "+356 1234 5678"
-          }
+          "communicationChannel": { "label": "Communicatie", "placeholder": "Voorkeurskanaal" },
+          "updateCadence": { "label": "Updates", "placeholder": "Frequentie" },
+          "phone": { "label": "Telefoonnummer (verplicht voor WhatsApp / Bellen)", "placeholder": "+31 6 12 34 56 78" }
         }
       }
     },
-    "communicationOptions": [
-      "Email",
-      "WhatsApp",
-      "Phone Call",
-      "Portal"
-    ],
-    "updateOptions": [
-      "Weekly",
-      "Bi-weekly",
-      "Monthly",
-      "Urgent Only"
-    ],
+    "communicationOptions": ["E-mail", "WhatsApp", "Bellen", "Portaal"],
+    "updateOptions": ["Wekelijks", "Elke 2 weken", "Maandelijks", "Alleen Urgent"],
     "sidebarSteps": [
-      {
-        "title": "Define",
-        "description": "Register and tell us what your business needs."
-      },
-      {
-        "title": "Match",
-        "description": "Relevant providers review your request and prepare proposals."
-      },
-      {
-        "title": "Execute",
-        "description": "Once you choose your provider, the work continues inside your VACEI workspace."
-      }
+      { "title": "Definiëren", "description": "Schrijf u in en vertel ons wat uw bedrijf nodig heeft." },
+      { "title": "Match", "description": "Geselecteerde aanbieders bekijken uw aanvraag en maken voorstellen." },
+      { "title": "Uitvoeren", "description": "Zodra een aanbieder is gekozen, gaat het werk verder in uw VACEI-ruimte." }
     ],
-    "columnTitle": "Register to receive your quote",
-    "columnHeadingLine1": "Start with a ",
-    "columnHeadingAccent": "Structured Workspace",
-    "columnBody": "To receive an instant quote or proposals through VACEI, you first create your workspace. This allows your requests, documents, and advisor communication to stay structured from the beginning.",
-    "platformPowerLabel": "Platform Power",
-    "platformPowerLine1": "Experience the future of",
-    "platformPowerLine2": "corporate management.",
-    "registerDirectly": "Register Directly",
+    "columnTitle": "Registreren voor offerte",
+    "columnHeadingLine1": "Start met een ",
+    "columnHeadingAccent": "Gestructureerde Ruimte",
+    "columnBody": "Maak eerst uw werkruimte aan om directe offertes of voorstellen te ontvangen. Zo blijven uw aanvragen, documenten en communicatie vanaf het begin georganiseerd.",
+    "platformPowerLabel": "Platformkracht",
+    "platformPowerLine1": "Ervaar de toekomst van",
+    "platformPowerLine2": "bedrijfsvoering.",
+    "registerDirectly": "Direct registreren",
     "errors": {
-      "fieldRequired": "{{field}} is required.",
-      "invalidEmail": "Invalid email address.",
-      "phoneRequired": "Phone number is required for this communication method.",
-      "generic": "Something went wrong. Please try again."
+      "fieldRequired": "{{field}} is verplicht.",
+      "invalidEmail": "Ongeldig e-mailadres.",
+      "phoneRequired": "Telefoonnummer is verplicht voor deze contactmethode.",
+      "generic": "Er is iets misgegaan. Probeer het later opnieuw."
     },
     "success": {
-      "title": "Request Received",
-      "body": "We've received your request. Our team will review the details and get back to you within 24 hours.",
-      "newRequest": "New Request",
-      "registerNow": "Register Now"
+      "title": "Aanvraag Ontvangen",
+      "body": "Wij hebben uw aanvraag ontvangen. Ons team bekijkt de details en neemt binnen 24 uur contact met u op.",
+      "newRequest": "Nieuwe Aanvraag",
+      "registerNow": "Nu Registreren"
     },
-    "submitting": "Processing...",
-    "back": "Back",
-    "nextStepFallback": "Next Step"
+    "submitting": "Verwerken...",
+    "back": "Terug",
+    "nextStepFallback": "Volgende Stap"
   },
   "beforeAfter": {
-    "badge": "The Next Evolution",
-    "titleLine1": "From chaos to ",
-    "titleHighlight": "clarity.",
-    "subtitle": "VACEI replaces fragmented coordination with one intelligent, structured ecosystem for business services.",
-    "beforeTitle": "Before VACEI",
+    "badge": "De Nieuwe Evolutie",
+    "titleLine1": "Van chaos naar ",
+    "titleHighlight": "helderheid.",
+    "subtitle": "VACEI vervangt gefragmenteerde coördinatie door een intelligent, gestructureerd ecosysteem voor bedrijfsdiensten.",
+    "beforeTitle": "Vóór VACEI",
     "beforeItems": [
-      "Scattered emails",
-      "Repeated document requests",
-      "Manual follow-ups",
-      "Poor deadline visibility",
-      "Separate systems for each advisor"
+      "Verspreide e-mails",
+      "Herhaaldelijke documentverzoeken",
+      "Handmatig achter zaken aan gaan",
+      "Slecht zicht op deadlines",
+      "Aparte systemen per adviseur"
     ],
-    "afterTitle": "With VACEI",
+    "afterTitle": "Met VACEI",
     "afterItems": [
-      "One workspace",
-      "One document environment",
-      "One place to track requests and deadlines",
-      "One connected experience across providers",
-      "Better visibility and control across the business"
+      "Eén werkruimte",
+      "Eén documentaire omgeving",
+      "Eén plek voor verzoeken en deadlines",
+      "Verbonden ervaring tussen adviseurs",
+      "Beter zicht en meer controle op de business"
     ],
-    "beforeGifAlt": "Before VACEI",
-    "afterGifAlt": "With VACEI",
-    "hoverPlayDesktop": "Hover to Play",
-    "hoverPlayMobile": "Tap to Play",
-    "footerLine": "No more guessing. No more missing files. No more disconnected workflows."
+    "beforeGifAlt": "Vóór VACEI",
+    "afterGifAlt": "Met VACEI",
+    "hoverPlayDesktop": "Hover om af te spelen",
+    "hoverPlayMobile": "Tik om af te spelen",
+    "footerLine": "Geen giswerk meer. Geen ontbrekende bestanden meer. Geen losse eindjes meer."
   },
   "servicesSection": {
-    "badge": "Professional Ecosystem",
-    "titleLine1": "Professional services through ",
-    "titleHighlight": "one connected platform",
-    "subtitle": "VACEI helps your business access and manage professional services through one structured workspace.",
-    "tabServices": "Services",
-    "tabProducts": "Products",
-    "explorePhase": "Explore Phase",
-    "launchDashboard": "Launch Dashboard",
-    "categoryService": "Service",
+    "badge": "Professioneel Ecosysteem",
+    "titleLine1": "Diensten via een ",
+    "titleHighlight": "verbonden platform",
+    "subtitle": "VACEI helpt uw onderneming professionele diensten te benaderen en beheren via een gestructureerde werkruimte.",
+    "tabServices": "Diensten",
+    "tabProducts": "Producten",
+    "explorePhase": "Exploratie-fase",
+    "launchDashboard": "Lanceer Dashboard",
+    "categoryService": "Dienst",
     "categoryPlatform": "Platform",
-    "defaultSubtitle": "Structured support delivered through one digital platform.",
+    "defaultSubtitle": "Gestructureerde ondersteuning via één digitaal portaal.",
     "serviceTitles": {
-      "accounting-finance": "Accounting & Bookkeeping",
+      "accounting-finance": "Boekhouding & Financiën",
       "audit-assurance": "Audit & Assurance",
-      "corporate-csp-services": "Corporate Services",
-      "advisory-growth": "Legal Services",
-      "tax-compliance": "Tax Advisory & Compliance"
+      "corporate-csp-services": "Zakelijke Diensten",
+      "advisory-growth": "Juridische Diensten",
+      "tax-compliance": "Belasting & Compliance"
     },
     "serviceSubtitles": {
-      "accounting-finance": "Accounting support, bookkeeping workflows, document handling, and structured financial coordination.",
-      "tax-compliance": "Tax filings, advisory work, deadlines, supporting records, and ongoing tax support.",
-      "audit-assurance": "Statutory audits, assurance engagements, working paper coordination, and milestone-driven delivery.",
-      "corporate-csp-services": "Company secretarial services, governance support, statutory maintenance, and corporate administration.",
-      "regulated-licensing": "Support for licence applications, renewals and key regulatory submissions.",
-      "advisory-growth": "Corporate legal support, contracts, transactions, advisory, and cross-border structuring support.",
-      "vat-services": "VAT registrations, VAT returns, compliance support, and indirect tax assistance.",
-      "payroll-employment": "Payroll administration, employment support, and compliance filings."
+      "accounting-finance": "Boekhoudkundige ondersteuning, administratieve stromen, documentbeheer en financiële coördinatie.",
+      "tax-compliance": "Aangiften, advies, deadlines en doorlopende ondersteuning.",
+      "audit-assurance": "Wettelijke controles, zekerheidsopdrachten, coördinatie van werkdossiers en oplevering per mijlpaal.",
+      "corporate-csp-services": "Bedrijfssecretariaat, governance, statutair onderhoud en administratie.",
+      "regulated-licensing": "Ondersteuning bij licentieaanvragen, verlengingen en belangrijke wettelijke indieningen.",
+      "advisory-growth": "Juridische ondersteuning voor bedrijven, contracten, transacties en advies.",
+      "vat-services": "Btw-registraties, aangiften en ondersteuning bij indirecte belastingen.",
+      "payroll-employment": "Loonadministratie, ondersteuning bij personeelszaken en compliance-indieningen."
     },
     "products": [
       {
-        "title": "Client Portal",
-        "subtitle": "Documents, queries, and secure communication.",
-        "badge": "Featured"
+        "title": "Cliëntenportaal",
+        "subtitle": "Documenten, verzoeken en veilige communicatie.",
+        "badge": "Uitgelicht"
       },
       {
-        "title": "Audit Portal",
-        "subtitle": "Structured workflows and audit delivery."
+        "title": "Auditportaal",
+        "subtitle": "Gestructureerde workflows en auditlevering."
       },
       {
-        "title": "Accounting Portal",
-        "subtitle": "Real-time financial dashboard and reporting.",
-        "badge": "New"
+        "title": "Boekhoudportaal",
+        "subtitle": "Realtime financieel dashboard en rapportage.",
+        "badge": "Nieuw"
       }
     ]
   },
   "marketplace": {
-    "badge": "Proposal Marketplace",
-    "titleLine1": "A marketplace ",
-    "titleHighlight": "built on trust.",
-    "body": "Send out a Request for Proposal (RFP) to top-tier firms. Choose between local, regional, and global providers. The VACEI Marketplace gives you direct access to a network of verified professional firms.",
-    "registerCta": "Register to Get Proposals",
-    "gifAlt": "Request Service Interface",
+    "badge": "Voorstellen Marktplaats",
+    "titleLine1": "Een marktplaats gebaseerd ",
+    "titleHighlight": "op vertrouwen.",
+    "body": "Stuur een Request for Proposal (RFP) naar topkantoren. Kies uit lokale, regionale en wereldwijde aanbieders. De VACEI Marktplaats geeft u direct toegang tot een geverifieerd netwerk.",
+    "registerCta": "Registreren voor Voorstellen",
+    "gifAlt": "Interface voor dienstaanvraag",
     "steps": [
       {
         "number": "01",
-        "title": "Request Service",
-        "desc": "Select the service your business needs and provide preliminary details through your secure workspace."
+        "title": "Dienst Aanvragen",
+        "desc": "Kies de dienst en geef de eerste details door via uw beveiligde ruimte."
       },
       {
         "number": "02",
-        "title": "VACEI Coordination",
-        "desc": "We notify verified partner firms and coordinate the proposal process to ensure quality and speed."
+        "title": "VACEI Coördinatie",
+        "desc": "Wij informeren geverifieerde partners en coördineren het proces voor kwaliteit."
       },
       {
         "number": "03",
-        "title": "Structured Proposals",
-        "desc": "Receive standardized proposals through your workspace, making them easy to compare and evaluate."
+        "title": "Gestructureerde Voorstellen",
+        "desc": "Ontvang gestandaardiseerde aanbiedingen via uw werkruimte, makkelijk te vergelijken."
       },
       {
         "number": "04",
-        "title": "Choose & Engage",
-        "desc": "Compare options, choose the advisor that best fits your needs, and start the engagement immediately."
+        "title": "Kiezen & Engage",
+        "desc": "Vergelijk opties, kies de juiste adviseur en start direct met het werk."
       }
     ]
   },
   "whyVacei": {
-    "badge": "The VACEI Advantage",
-    "titleLine1": "Structured. ",
-    "titleHighlight": "Secure. Scalable.",
-    "subtitle": "VACEI is built for the modern business. Whether you're a startup or an established group, our platform provides the structure you need to grow.",
+    "badge": "Het VACEI Voordeel",
+    "titleLine1": "Gestructureerd. ",
+    "titleHighlight": "Veilig. Schaalbaar.",
+    "body": "VACEI is gebouwd voor het moderne bedrijfsleven. Of u nu een startup bent of een gevestigde groep, ons platform biedt de structuur om te groeien.",
     "card1Title": "Single Source of Truth",
-    "card1Body": "All your companies, services, documents, and advisors in one place. No more searching through emails or fragmented spreadsheets.",
-    "card2Title": "Verified Firms",
-    "card2Body": "We only work with pre-vetted firms that meet our high standards for delivery, communication, and technical expertise.",
-    "qualityLabel": "Quality Guaranteed",
-    "cta": "Experience VACEI"
+    "card1Body": "Al uw entiteiten, diensten, documenten en adviseurs op één plek. Niet meer zoeken in e-mails.",
+    "card2Title": "Geverifieerde Kantoren",
+    "card2Body": "Wij werken alleen met vooraf goedgekeurde kantoren die aan onze hoge standaarden voldoen.",
+    "qualityLabel": "Kwaliteit Gegarandeerd",
+    "cta": "Ontdek de Ervaring"
   },
   "trust": {
-    "badge": "Security First",
-    "titleLine1": "Trusted by ",
-    "titleHighlight": "Businesses Worldwide.",
-    "subtitle": "From onboarding to ongoing compliance, everything runs through one workspace. Join the future of professional services management.",
-    "largeCardTitleLine1": "Global Infrastructure ",
-    "largeCardTitleHighlight": "Built for Reliability.",
-    "largeCardBody": "VACEI provides a resilient digital environment for unified coordination, ensuring your business stays operational and compliant across every territory.",
-    "multiRegionLabel": "Multi-Region Redundancy",
-    "uptimeTitle": "Unmatched Uptime",
-    "uptimeBody": "Our platform operates at 99.99% availability, ensuring your workspace is always ready when you need it.",
-    "statusCore": "Core Systems",
-    "statusOperational": "OPERATIONAL",
-    "statusDataSync": "Data Sync",
-    "statusSynchronized": "SYNCHRONIZED",
+    "badge": "Veiligheid Voorop",
+    "titleLine1": "Vertrouwd door ",
+    "titleHighlight": "wereldwijde bedrijven.",
+    "subtitle": "Van onboarding tot doorlopende compliance, alles in één beveiligde ruimte. Sluit u aan bij de toekomst van zakelijk beheer.",
+    "largeCardTitleLine1": "Wereldwijde Infrastructuur, ",
+    "largeCardTitleHighlight": "Betrouwbaar Ontworpen.",
+    "largeCardBody": "VACEI biedt een veerkrachtige digitale omgeving voor uniforme coördinatie, zodat uw business overal ter wereld door kan gaan.",
+    "multiRegionLabel": "Multi-Regio Redundantie",
+    "uptimeTitle": "Ongeëvenaarde Uptime",
+    "uptimeBody": "Ons platform opereert met een 99,99% beschikbaarheidsgarantie, zodat uw werkruimte altijd klaar staat.",
+    "statusCore": "Core Systemen",
+    "statusOperational": "OPERATIONEEL",
+    "statusDataSync": "Datasynchronisatie",
+    "statusSynchronized": "GESYNCHRONISEERD",
     "features": [
       {
-        "title": "Bank-Grade Encryption",
-        "desc": "All documents and communications are protected with end-to-end AES-256 encryption within a secure digital vault."
+        "title": "Bancaire Versleuteling",
+        "desc": "Alle documenten en communicatie beschermd door AES-256 in een digitale kluis."
       },
       {
-        "title": "24/7 Enterprise Support",
-        "desc": "Our dedicated support team is available around the clock to assist with platform navigation and coordination."
+        "title": "Enterprise Support 24/7",
+        "desc": "Toegewijd supportteam dag en nacht beschikbaar voor navigatie en coördinatie."
       }
     ],
-    "securityCta": "View Security & Compliance",
-    "footerRealTime": "Real-time Protection",
-    "footerGlobal": "Global Infrastructure"
+    "securityCta": "Bekijk Veiligheid & Compliance",
+    "footerRealTime": "Realtime bescherming",
+    "footerGlobal": "Wereldwijde Infra"
   },
   "companySetup": {
-    "badge": "Incorporation Made Simple",
-    "titleLine1": "Incorporation ",
-    "titleHighlight": "made effortless.",
-    "subtitle": "Whether you're setting up in the UAE or globally, VACEI provides the structure you need to launch and grow.",
-    "col1Title": "Expert Guidance",
+    "badge": "Eenvoudige Bedrijfsvorming",
+    "titleLine1": "Moeiteloze ",
+    "titleHighlight": "oprichting.",
+    "subtitle": "Of u nu start in de Emiraten of wereldwijd, VACEI biedt de structuur om te lanceren en te groeien.",
+    "col1Title": "Deskundig Advies",
     "col1Items": [
-      "New Company Incorporations",
-      "Registered Office & Address",
-      "Company Secretarial",
-      "Entity setup & Statutory maintenance"
+      "Nieuwe bedrijfsvormingen",
+      "Statutaire zetel & domicile",
+      "Bedrijfssecretariaat",
+      "Setup & Statutair onderhoud"
     ],
-    "col2Title": "Document Automation",
+    "col2Title": "Document Automatisering",
     "col2Items": [
-      "Real-time visibility into filings",
+      "Realtime zicht op deponeringen",
       "Deadline tracking",
-      "Compliance calendar setup",
-      "Statutory register management"
+      "Compliance kalender",
+      "Beheer van statutaire registers"
     ],
-    "col3Title": "Global Reach",
+    "col3Title": "Wereldwijd Bereik",
     "col3Items": [
-      "Manage share transfers",
-      "Director changes",
-      "Structure updates",
-      "Cross-border expansion support"
+      "Aandelenoverdrachten beheren",
+      "Bestuurswijzigingen doorvoeren",
+      "Structuur-updates",
+      "Ondersteuning internationale expansie"
     ],
-    "startIncorporationCta": "Start Incorporation",
-    "bookConsultationCta": "Book a Consultation"
+    "startIncorporationCta": "Start Bedrijfsvorming",
+    "bookConsultationCta": "Boek een Consultatie"
   },
   "complianceDashboard": {
-    "titleLine1": "Stay compliant. ",
-    "titleHighlight": "Stay ahead.",
-    "body": "Compliance isn't a one-time event; it's an ongoing process. Automated alerts, entity management, and regulatory updates keep you in the loop.",
+    "titleLine1": "Blijf compliant. ",
+    "titleHighlight": "Blijf voorop.",
+    "body": "Compliance is geen eenmalige actie, maar een continu proces. Automatische meldingen, entiteitsbeheer en updates houden u op de hoogte.",
     "scoreLabel": "Compliance Score",
-    "onTrack": "On track",
-    "deadlinesHeading": "Upcoming Deadlines",
-    "vatTitle": "VAT Filing",
-    "vatDue": "Due in 7 days",
-    "vatStatus": "Pending",
-    "annualTitle": "Annual Return",
-    "annualDue": "Due in 20 days",
-    "annualStatus": "Scheduled",
-    "footerNote": "Everything visible in one place—no spreadsheets, no manual trackers, no guessing."
+    "onTrack": "Op Schema",
+    "deadlinesHeading": "Aankomende Deadlines",
+    "vatTitle": "Btw-aangifte",
+    "vatDue": "Verloop over 7 dagen",
+    "vatStatus": "In afwachting",
+    "annualTitle": "Jaarrekening Deponering",
+    "annualDue": "Verloopt over 20 dagen",
+    "annualStatus": "Gepland",
+    "footerNote": "Alles zichtbaar op één plek – geen spreadsheets of handmatige lijstjes meer."
   },
   "multiCompany": {
-    "badge": "Multi-Entity Management",
-    "titleLine1": "Scale without ",
-    "titleHighlight": "the complexity.",
-    "body": "Managing one company is hard. Managing ten shouldn't be. VACEI is built for founders and groups managing multiple entities.",
-    "foundersHub": "Founders Hub",
-    "activeLabel": "Active",
-    "switchLabel": "Switch",
-    "engagementsSummary": "32 Active Engagements across Group",
+    "badge": "Multi-Entiteit Beheer",
+    "titleLine1": "Schaal zonder ",
+    "titleHighlight": "complexiteit.",
+    "body": "Eén bedrijf runnen is lastig. Tien runnen zou dat niet moeten zijn. VACEI is gebouwd voor oprichters en groepen met meerdere entiteiten.",
+    "foundersHub": "Oprichters Hub",
+    "activeLabel": "Actief",
+    "switchLabel": "Wisselen",
+    "engagementsSummary": "32 actieve opdrachten in de groep",
     "highlights": [
       "Unified Founders Dashboard",
-      "Group-Level Visibility",
-      "Instant Workspace Switching",
-      "Standardised Coordination"
+      "Zichtbaarheid op groepsniveau",
+      "Direct tussen ruimtes wisselen",
+      "Gestandaardiseerde coördinatie"
     ],
-    "cta": "Register Your Group",
+    "cta": "Registreer uw Groep",
     "mockCompanies": [
-      {
-        "name": "Atlas Holding Ltd",
-        "type": "Parent Group"
-      },
-      {
-        "name": "Nova Logistics SpA",
-        "type": "Subsidiary"
-      },
-      {
-        "name": "Polaris Tech GmbH",
-        "type": "Branch Office"
-      },
-      {
-        "name": "Zenith Services Corp",
-        "type": "New Entity"
-      }
+      { "name": "Atlas Holding Ltd", "type": "Moedermaatschappij" },
+      { "name": "Nova Logistics SpA", "type": "Dochteronderneming" },
+      { "name": "Polaris Tech GmbH", "type": "Branch Office" },
+      { "name": "Zenith Services Corp", "type": "Nieuwe Entiteit" }
     ]
   },
   "activeEU": {
-    "badge": "International Reach",
-    "titleLine1": "A structured gateway ",
-    "titleHighlight": "to Europe.",
-    "body": "VACEI provides the digital environment for international businesses and founders to incorporate, manage, and scale their European operations with confidence.",
-    "chips": [
-      "27 Countries",
-      "Unified API",
-      "Local Experts"
-    ],
+    "badge": "Internationaal Bereik",
+    "titleLine1": "Een gestructureerde poort ",
+    "titleHighlight": "naar Europa.",
+    "body": "VACEI biedt de digitale omgeving voor wereldwijde oprichters om hun Europese operaties met vertrouwen te lanceren en te schalen.",
+    "chips": ["27 Landen", "Unified API", "Lokale Experts"],
     "hubAlt": "VACEI Hub"
+  },
+  "footerCta": {
+    "badge": "Join the Future",
+    "titleLine1": "Klaar om uw zakelijke ",
+    "titleHighlight": "diensten te vereenvoudigen?",
+    "body": "Sluit u aan bij bedrijven en oprichters die hun Europese operaties beheren via de gestructureerde werkruimte van VACEI.",
+    "quoteCta": "Ontvang Directe Offerte",
+    "demoCta": "Boek een Demo"
+  },
+  "platformPower": {
+    "badge": "Platform Intelligentie",
+    "titleLine1": "Een slimmere manier om ",
+    "titleHighlight": "zakelijke diensten te beheren.",
+    "body": "VACEI biedt de structuur en transparantie die nodig zijn om te coördineren met meerdere professionele firma's, compliance te beheren en uw activiteiten te schalen via een veilig platform.",
+    "highlights": [
+      "Volledige zichtbaarheid bij elke zakelijke opdracht",
+      "Veilig documentbeheer en historische tracking",
+      "Geïntegreerde communicatie met geverifieerde adviseurs",
+      "Real-time monitoring van depot en deadlines"
+    ],
+    "createWorkspaceCta": "Werkruimte maken",
+    "registerQuoteCta": "Registreren voor offerte",
+    "workspaceLabel": "VACEI Werkruimte",
+    "auditAssurance": "Audit & Assurance",
+    "activeEngagement": "Actieve opdracht",
+    "teamNotifications": "Team meldingen",
+    "notif1": "Concept jaarrekening geüpload door auditor",
+    "notif1Time": "2 min geleden",
+    "notif2": "Belastingadviseur heeft documenten opgevraagd",
+    "notif2Time": "1 uur geleden",
+    "docCompliance": "Document Compliance",
+    "syncHint": "Alles gesynchroniseerd met de hoofdadviseur.",
+    "onTrack": "Op schema",
+    "actionsPending": "2 acties in afwachting",
+    "pdfName": "BTW_Kwartaal1.pdf",
+    "pendingReview": "Review in afwachting"
+  },
+  "portalFeature": {
+    "featureLabel": "Functie",
+    "features": [
+      {
+        "title": "Boekhouding die al het andere aandrijft",
+        "description": "Uw boekhouding draait continu op de achtergrond. U uploadt documenten — ons team boekt, scant en controle overal alles. Zodra de boekhouding is voltooid, kunnen BTW, belastingen, audit en rapportage soepel verlopen.",
+        "content": [
+          "Maandelijkse boekhoudstatus",
+          "Ontbrekende documenten duidelijk vermeld",
+          "Banken en grootboeken afgestemd",
+          "Klaar voor BTW en Audit"
+        ],
+        "buttonText": "Hoe boekhouding werkt"
+      },
+      {
+        "title": "BTW en Salarisadministratie, periode na periode",
+        "description": "BTW en salarisadministratie draaien op vaste cycli. Elke indiening wordt automatisch gevolgd, voorbereid, ingediend en gearchiveerd. Als er niets verandert, bevestigt u gewoon — en wij regelen de rest.",
+        "content": [
+          "BTW-periodes met vervaldata",
+          "Loonstroken per maand",
+          "Bevestigingen van indiening",
+          "Bevestigingen 'geen wijziging'"
+        ],
+        "buttonText": "BTW & Salarisadministratie in actie"
+      },
+      {
+        "title": "Bedrijfsdiensten met vervaltermijn tracking",
+        "description": "Bedrijfsdiensten zijn niet maandelijks — ze hebben een vervaldatum. Bestuursfuncties, maatschappelijke zetel en secretariaatsdiensten worden gecontroleerd op vervaldatum. Verlengingen worden automatisch geactiveerd — met herinneringen en facturering.",
+        "content": [
+          "Actieve bedrijfsdiensten",
+          "Vervaldata duidelijk in beeld",
+          "Verlengingswaarschuwingen voor deadlines",
+          "Nul gemiste verplichtingen"
+        ],
+        "buttonText": "Bekijk bedrijfsdiensten"
+      }
+    ]
+  },
+  "insightsResources": {
+    "badge": "INZICHTEN & BRONNEN",
+    "titleLine1": "Praktische inzichten",
+    "titleHighlight": "voor moderne bedrijven",
+    "subtitle": "Ontdek korte video's, gidsen en artikelen over boekhouding, audit, compliance en bedrijfsactiviteiten — ontworpen om bedrijven te helpen georganiseerd, geïnformeerd en klaar om te schalen te blijven.",
+    "viewAll": "Bekijk alle bronnen",
+    "watchVideo": "Video bekijken",
+    "readMore": "Lees meer",
+    "videoModalEyebrow": "VACEI-inzichten",
+    "videoModalHint": "Kies een video",
+    "videoModalCloseAria": "Video sluiten",
+    "videoPlaylist": [
+      { "title": "Platformintroductie" },
+      { "title": "Compliance-rondleiding" }
+    ],
+    "resources": [
+      {
+        "type": "Artikel",
+        "category": "Audit & Boekhouding",
+        "title": "Hoe u uw bedrijf voorbereidt op een naadloze audit",
+        "desc": "Ontdek de exacte documenten, workflows en tijdlijnen die nodig zijn om het auditproces zonder wrijving te doorlopen."
+      },
+      {
+        "type": "Video",
+        "category": "Compliance",
+        "title": "3-minuten gids voor Europese corporate compliance",
+        "desc": "Bekijk een kort overzicht van welke documenten en deadlines u moet beheren wanneer u in de EU actief bent."
+      },
+      {
+        "type": "Gids",
+        "category": "Bedrijfsvoering",
+        "title": "De ultieme checklist voor het schalen van uw activiteiten",
+        "desc": "Gebruik deze uitgebreide checklist om ervoor te zorgen dat uw juridische, boekhoudkundige en operationele infrastructuur klaar is om te schalen."
+      }
+    ]
+  },
+  "faqSection": {
+    "badge": "Waarom VACEI",
+    "title": "Gestructureerde ",
+    "titleHighlight": "Samenwerking",
+    "subtitle": "Krijg duidelijkheid en controle met een uniforme digitale werkruimte die is afgestemd op professionele diensten.",
+    "items": [
+      {
+        "title": "Duidelijkheid",
+        "desc": "Volledige zichtbaarheid van opdrachten, documenten en deadlines in één hub."
+      },
+      {
+        "title": "Structuur",
+        "desc": "Gedefinieerde workflows zorgen ervoor dat professionele diensten consistent worden geleverd."
+      },
+      {
+        "title": "Samenwerking",
+        "desc": "Werk naadloos samen met meerdere adviseurs via één veilig platform."
+      },
+      {
+        "title": "Controle",
+        "desc": "Volg compliance, indieningen en activiteiten via een centraal dashboard."
+      }
+    ],
+    "healthLabel": "Financiële Gezondheid",
+    "growthLabel": "Groei",
+    "equityLabel": "Status van de cap table",
+    "issuedCap": "Uitgegeven Kapitaal",
+    "supportLabel": "Directe Ondersteuning"
   }
 }
