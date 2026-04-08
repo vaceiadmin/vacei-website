@@ -84,10 +84,10 @@ const TechnologyComponent = ({
 
               {/* Read More Button - Fixed at Bottom */}
               <div className="flex items-center gap-2 mt-auto flex-shrink-0 cursor-pointer group h-[28px] sm:h-[30px] lg:h-[32px]">
-                <span className="text-purple-bg font-semibold text-xs sm:text-sm lg:text-base group-hover:underline">
+                <span className="text-primary-blue font-semibold text-xs sm:text-sm lg:text-base group-hover:underline">
                   {readMoreText}
                 </span>
-                <div className="w-7 h-7 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-purple-bg flex items-center justify-center group-hover:bg-purple-hover transition-colors">
+                <div className="w-7 h-7 sm:w-7 sm:h-7 lg:w-8 lg:h-8 rounded-full bg-primary-blue flex items-center justify-center group-hover:bg-primary-blue-hover transition-colors">
                   <ArrowRight className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-white" />
                 </div>
               </div>

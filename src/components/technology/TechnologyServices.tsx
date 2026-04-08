@@ -134,7 +134,7 @@ const TechnologyServices = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-purple-bg rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col justify-center relative overflow-hidden"
+                className="bg-primary-blue rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col justify-center relative overflow-hidden"
               >
                 {/* Quote Icon Top Left */}
                 <motion.div

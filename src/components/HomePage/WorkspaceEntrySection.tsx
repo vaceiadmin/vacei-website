@@ -25,7 +25,7 @@ const WorkspaceEntrySection = () => {
       {/* Premium Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden text-blue-500/20">
         <div className="absolute top-[-10%] left-[10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[20%] right-[0%] w-[35%] h-[35%] bg-indigo-600/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[20%] right-[0%] w-[35%] h-[35%] bg-blue-600/10 rounded-full blur-[100px]" />
 
         <svg className="absolute top-20 right-10 w-64 h-64 opacity-10" viewBox="0 0 200 200" fill="none">
           <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
@@ -109,7 +109,7 @@ const WorkspaceEntrySection = () => {
             )}>
               <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
               {/* Subtle Interior Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/[0.03] to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/[0.03] to-transparent pointer-events-none" />
               <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen animate-pulse-subtle" />
 
               <div className="relative z-10 flex flex-col h-full">

@@ -50,7 +50,7 @@ const HowItWorksTimeline = ({
               className={
                 isDark
                   ? "border-white/60 !text-white/80"
-                  : "border-purple-bg text-heading"
+                  : "border-primary-blue text-heading"
               }
             />
             <h2
@@ -75,9 +75,9 @@ const HowItWorksTimeline = ({
           {/* Center dashed + animated solid line (desktop) */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
             <div className="relative w-[2px] h-full">
-              <div className="absolute inset-0 border-l-2 border-dashed border-purple-bg" />
+              <div className="absolute inset-0 border-l-2 border-dashed border-primary-blue" />
               <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] bg-purple-bg"
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] bg-primary-blue"
                 style={{ originY: 0 }}
                 initial={{ height: 0 }}
                 animate={{
@@ -133,11 +133,11 @@ const HowItWorksTimeline = ({
                         animate={
                           isCompleted || isActive
                             ? {
-                                borderColor: "var(--purple-bg)",
-                                backgroundColor: "var(--purple-bg)",
+                                borderColor: "var(--primary-blue)",
+                                backgroundColor: "var(--primary-blue)",
                               }
                             : {
-                                borderColor: "var(--purple-bg)",
+                                borderColor: "var(--primary-blue)",
                                 backgroundColor: "var(--background)",
                               }
                         }

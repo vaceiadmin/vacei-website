@@ -48,7 +48,7 @@ const FaqCategorized = ({
        {!isIPhone && !isLowPerformance && (
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div className="absolute top-[30%] left-[-10%] w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[80px]" />
-            <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-50/50 rounded-full blur-[80px]" />
+            <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[80px]" />
         </div>
        )}
 

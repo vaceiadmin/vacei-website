@@ -76,7 +76,7 @@ const FallBeamBackground: React.FC<FallBeamBackgroundProps> = ({
             case 'cyan-400': return 'rgba(34, 211, 238, 0.8)';
             case 'blue-400': return 'rgba(96, 165, 250, 0.8)';
             case 'red-400': return 'rgba(248, 113, 113, 0.8)';
-            case 'indigo-400': return 'rgba(129, 140, 248, 0.8)';
+            case 'indigo-400': return 'rgba(59, 73, 230, 0.75)';
             default: return 'rgba(59, 73, 230, 0.8)';
         }
     };

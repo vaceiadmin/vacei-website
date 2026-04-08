@@ -69,7 +69,7 @@ const PortalFeature = () => {
                                     <div className={`relative aspect-square md:aspect-[4/3] rounded-[2.5rem] bg-primary/90 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-2xl"} border border-white/20 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-700 group-hover:bg-primary/95 group-hover:border-white/30 group-hover:shadow-[0_40px_80px_-20px_rgba(59,73,230,0.4)] overflow-visible`}>
                                         
                                         {/* Internal Glow - Enhanced */}
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/20 via-transparent to-purple-500/20 opacity-60 rounded-[2.5rem]" />
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/20 via-transparent to-blue-600/20 opacity-60 rounded-[2.5rem]" />
                                         
                                         {/* Subtle inner border glow */}
                                         <div className="absolute inset-0 rounded-[2.5rem] ring-1 ring-white/10 pointer-events-none" />
@@ -98,7 +98,7 @@ const PortalFeature = () => {
                                     {!isIPhone && !isLowPerformance && (
                                         <>
                                             <div className={`absolute -inset-12 bg-primary-blue/30 blur-[100px] -z-10 rounded-full opacity-30 group-hover:opacity-70 transition-opacity duration-700 ${isReversed ? "left-0" : "right-0"}`} />
-                                            <div className={`absolute -inset-8 bg-purple-500/20 blur-[60px] -z-10 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${isReversed ? "right-0" : "left-0"}`} />
+                                            <div className={`absolute -inset-8 bg-primary-blue/20 blur-[60px] -z-10 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-700 ${isReversed ? "right-0" : "left-0"}`} />
                                         </>
                                     )}
                                 </div>

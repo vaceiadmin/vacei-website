@@ -136,7 +136,7 @@ const ContactForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors hover:border-primary-blue/60 ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors hover:border-primary-blue/60 ${
                       errors.name ? "border-error" : "border-input"
                     }`}
                     placeholder={t("form.fields.name.placeholder")}
@@ -155,7 +155,7 @@ const ContactForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors hover:border-primary-blue/60 ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors hover:border-primary-blue/60 ${
                       errors.email ? "border-error" : "border-input"
                     }`}
                     placeholder={t("form.fields.email.placeholder")}
@@ -174,7 +174,7 @@ const ContactForm = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-bg transition-colors resize-none hover:border-primary-blue/60 ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-blue transition-colors resize-none hover:border-primary-blue/60 ${
                       errors.message ? "border-error" : "border-input"
                     }`}
                     placeholder={t("form.fields.message.placeholder")}
@@ -190,7 +190,7 @@ const ContactForm = () => {
                   whileTap={{ scale: 0.98, y: 0 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary to-primary-blue hover:from-primary-blue hover:to-primary text-white font-semibold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+                  className="w-full bg-primary-blue hover:bg-primary-blue-hover text-white font-semibold py-3 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
                 >
                   {isSubmitting ? t("form.submitting") : t("form.submit")}
                 </motion.button>
@@ -215,7 +215,7 @@ const ContactForm = () => {
               <div className="space-y-6 mb-8">
                 {/* Email */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-primary-blue rounded-full flex items-center justify-center shrink-0">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -224,7 +224,7 @@ const ContactForm = () => {
                     </p>
                     <a
                       href={`mailto:${t("info.email.value")}`}
-                      className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
+                      className="text-sm md:text-base text-gray hover:text-primary-blue transition-colors"
                     >
                       {t("info.email.value")}
                     </a>
@@ -233,7 +233,7 @@ const ContactForm = () => {
 
                 {/* Phone */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-primary-blue rounded-full flex items-center justify-center shrink-0">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -245,7 +245,7 @@ const ContactForm = () => {
                         <a
                           key={idx}
                           href={`tel:${phone.replace(/\s+/g, "")}`}
-                          className="text-sm md:text-base text-gray hover:text-purple-bg transition-colors"
+                          className="text-sm md:text-base text-gray hover:text-primary-blue transition-colors"
                         >
                           {phone}
                         </a>
@@ -256,7 +256,7 @@ const ContactForm = () => {
 
                 {/* Address */}
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-primary-blue rounded-full flex items-center justify-center shrink-0">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -281,7 +281,7 @@ const ContactForm = () => {
                   href="https://calendly.com/vacei-info/new-meeting"
                   target="_blank"
                   rel="noreferrer"
-                  className="bg-purple-bg hover:bg-purple-500 text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                  className="bg-primary-blue hover:bg-primary-blue-hover text-white font-semibold py-4 px-6 rounded-full transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
                 >
                   <span>{t("info.cta.button")}</span>
                   <PhoneCall className="w-5 h-5" />

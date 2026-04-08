@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const typeColorClass: Record<string, string> = {
   emerald: "text-emerald-400",
   blue: "text-blue-400",
-  purple: "text-purple-400",
+  purple: "text-primary-blue",
 };
 
 const InsightsAndResourcesSection = () => {
@@ -33,7 +33,7 @@ const InsightsAndResourcesSection = () => {
         color: "blue",
       },
       {
-        icon: <BookOpen className="w-5 h-5 text-purple-400" />,
+        icon: <BookOpen className="w-5 h-5 text-primary-blue" />,
         href: "/insights/scaling-operations-checklist",
         color: "purple",
       },

@@ -51,7 +51,7 @@ const TrustSection = () => {
       {/* Dynamic Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-400/15 rounded-full blur-[160px] animate-pulse-subtle" />
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-indigo-400/20 rounded-full blur-[120px]" />
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/20 rounded-full blur-[120px]" />
         <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-400/10 rounded-full blur-[120px]" />
       </div>
 
@@ -107,7 +107,7 @@ const TrustSection = () => {
           >
             {/* Immersive Background */}
             <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-50 transition-opacity pointer-events-none">
-               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-transparent to-indigo-50/60" />
+               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-transparent to-blue-100/60" />
             </div>
 
             {/* Scan Line Effect */}

@@ -26,7 +26,7 @@ const principleIcons = [
 ];
 const principleColors = [
   "bg-blue-500/10 text-blue-600",
-  "bg-indigo-500/10 text-indigo-600",
+  "bg-primary-blue/10 text-primary-blue",
   "bg-cyan-500/10 text-cyan-600",
   "bg-sky-500/10 text-sky-600",
 ];
@@ -62,11 +62,11 @@ export default function AuditPlatform() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30" />
         <div className="absolute -top-[10%] -left-[5%] w-[40%] h-[40%] bg-blue-50 rounded-full blur-[100px] opacity-60" />
-        <div className="absolute bottom-[10%] -right-[5%] w-[35%] h-[40%] bg-indigo-50 rounded-full blur-[100px] opacity-60" />
+        <div className="absolute bottom-[10%] -right-[5%] w-[35%] h-[40%] bg-blue-50 rounded-full blur-[100px] opacity-60" />
 
         {/* Subtle Grid */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `radial-gradient(#3b82f6 0.5px, transparent 0.5px)`,
+          backgroundImage: `radial-gradient(#3b49e6 0.5px, transparent 0.5px)`,
           backgroundSize: '24px 24px'
         }} />
       </div>
@@ -194,7 +194,7 @@ export default function AuditPlatform() {
               className="relative aspect-square lg:aspect-[4/4] rounded-[40px] bg-white border border-slate-100 shadow-[0_40px_100px_-20px_rgba(59,130,246,0.15)] flex items-center justify-center overflow-hidden"
             >
               {/* Internal Beams Container */}
-              <div className="absolute inset-0 z-0 opacity-[0.4] bg-gradient-to-br from-blue-50/20 via-transparent to-indigo-50/20" />
+              <div className="absolute inset-0 z-0 opacity-[0.4] bg-gradient-to-br from-blue-50/20 via-transparent to-blue-100/20" />
               <AuditPlatformBeam className="w-full h-full relative z-10" />
 
               {/* Ambient decoration */}

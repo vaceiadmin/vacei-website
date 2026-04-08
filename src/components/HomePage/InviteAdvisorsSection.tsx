@@ -17,7 +17,7 @@ const InviteAdvisorsSection = () => {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent opacity-50" />
         <div className="absolute -top-[10%] -left-[5%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] opacity-60 mix-blend-screen" />
-        <div className="absolute bottom-[10%] -right-[5%] w-[30%] h-[40%] bg-indigo-600/10 rounded-full blur-[100px] opacity-40 mix-blend-screen" />
+        <div className="absolute bottom-[10%] -right-[5%] w-[30%] h-[40%] bg-blue-600/10 rounded-full blur-[100px] opacity-40 mix-blend-screen" />
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
           backgroundSize: '32px 32px'
@@ -31,7 +31,7 @@ const InviteAdvisorsSection = () => {
           <div className="w-full lg:w-1/2 flex flex-col items-start">
             <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-white leading-[1.1] mb-6 tracking-tight">
               {t("inviteAdvisors.titleLine1")} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">{t("inviteAdvisors.titleHighlight")}</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">{t("inviteAdvisors.titleHighlight")}</span>
             </h2>
             
             <p className="text-lg text-slate-400 leading-relaxed mb-10 font-medium max-w-xl">

@@ -226,7 +226,7 @@ const ProcessStepsSectionDark = () => {
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-blue/10 rounded-full blur-[120px] -mr-48 -mt-48" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] -ml-32 -mb-32" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] -ml-32 -mb-32" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-w-0">
@@ -548,7 +548,7 @@ const ProcessStepsSectionDark = () => {
               })}
             </div>
 
-            <div className="mt-12 p-8 rounded-[2rem] bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-100 text-slate-900 relative overflow-hidden">
+            <div className="mt-12 p-8 rounded-[2rem] bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-100 text-slate-900 relative overflow-hidden">
               <div className="relative z-10">
                 <p className="text-blue-600 text-xs font-black uppercase tracking-widest mb-2">{t("processSteps.platformPowerLabel")}</p>
                 <p className="text-lg font-bold leading-snug text-slate-800">
@@ -564,7 +564,7 @@ const ProcessStepsSectionDark = () => {
                 href="https://devclient.vacei.com/onboarding" 
                 className="group relative flex w-full items-center justify-center h-16 rounded-[1.5rem] bg-slate-900 border border-slate-800 text-white font-black tracking-wide text-sm transition-all hover:bg-slate-800 hover:border-primary-blue/50 overflow-hidden shadow-lg"
               >
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-blue/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-blue/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 uppercase flex items-center gap-3">
                   {t("processSteps.registerDirectly")}
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>

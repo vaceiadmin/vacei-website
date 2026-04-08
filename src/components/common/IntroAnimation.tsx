@@ -164,11 +164,11 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
               {/* Floating Corner Dots - Optimized */}
               {(isIPhone || isLowPerformance ? [
                 { x: -100, y: -100, delay: 0, color: 'bg-primary-blue' },
-                { x: 100, y: 100, delay: 1, color: 'bg-purple-400' },
+                { x: 100, y: 100, delay: 1, color: 'bg-primary-blue' },
               ] : [
                 { x: -100, y: -100, delay: 0, color: 'bg-primary-blue' },
                 { x: 100, y: -100, delay: 0.5, color: 'bg-cyan-400' },
-                { x: 100, y: 100, delay: 1, color: 'bg-purple-400' },
+                { x: 100, y: 100, delay: 1, color: 'bg-primary-blue' },
                 { x: -100, y: 100, delay: 1.5, color: 'bg-primary-blue' },
               ]).map((dot, index) => (
                 <motion.div

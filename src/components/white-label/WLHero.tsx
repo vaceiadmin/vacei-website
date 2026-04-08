@@ -47,7 +47,7 @@ const WLHero: React.FC<WLHeroProps> = ({
           scheme={5}
           speed={1.4}
           intensity={1.5}
-          colors={["#3b49e6", "#6366f1", "#8b5cf6", "#3b49e6", "#4f46e5", "#4338ca"]}
+          colors={["#3b49e6", "#4a5feb", "#5b6ef5", "#3b49e6", "#2f3bc4", "#2536a8"]}
           darkNavyColor="#3b49e6"
           showCursor={false}
         />
@@ -73,7 +73,7 @@ const WLHero: React.FC<WLHeroProps> = ({
                 {subtitle.split(' ').map((word, i) => (
                   <span key={i} className="inline-block mr-[0.25em]">
                     {highlightWords.includes(word) ? (
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
                         {word}
                       </span>
                     ) : word}

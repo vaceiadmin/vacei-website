@@ -58,7 +58,7 @@ const PodcastSection = () => {
                   key={row.id}
                   onMouseEnter={() => setActiveRowId(row.id)}
                   className={`flex flex-col md:flex-row border-t border-white/10 transition-all duration-300 cursor-pointer ${
-                    isActive ? "bg-purple-bg/80" : "bg-gradient-to-r from-hero to-hero"
+                    isActive ? "bg-primary-blue/80" : "bg-gradient-to-r from-hero to-hero"
                   } ${isFirst ? "border-t-0" : ""}`}
                 >
                   <div className="md:w-1/4 px-5 py-4 flex items-start md:items-center md:border-r border-white/10">

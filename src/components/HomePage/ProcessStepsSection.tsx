@@ -217,9 +217,9 @@ const ProcessStepsSection = () => {
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[120px] -mr-48 -mt-48" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-50/40 rounded-full blur-[100px] -ml-32 -mb-32" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-50/40 rounded-full blur-[100px] -ml-32 -mb-32" />
         <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `radial-gradient(#3b82f6 0.5px, transparent 0.5px)`,
+          backgroundImage: `radial-gradient(#3b49e6 0.5px, transparent 0.5px)`,
           backgroundSize: '32px 32px'
         }} />
       </div>
@@ -469,7 +469,7 @@ const ProcessStepsSection = () => {
               <h2 className="text-sm font-black text-blue-600 uppercase tracking-[0.2em] mb-4">Workflow Progress</h2>
               <h3 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
                 Real-time <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">Onboarding State</span>
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-blue-800">Onboarding State</span>
               </h3>
             </div>
 
@@ -544,7 +544,7 @@ const ProcessStepsSection = () => {
                 href="https://devclient.vacei.com/onboarding" 
                 className="group relative flex w-full items-center justify-center h-16 rounded-[1.5rem] bg-white border-2 border-slate-200 text-slate-900 font-black tracking-wide text-sm transition-all hover:bg-slate-50 hover:border-blue-300 overflow-hidden"
               >
-                <div className="absolute inset-0 w-full h-full bg-linear-to-r from-blue-50 to-indigo-50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 w-full h-full bg-linear-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative z-10 uppercase flex items-center gap-3">
                   Register Directly
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>

@@ -208,7 +208,7 @@ const QuoteProcess = () => {
                 {/* Decorative Elements */}
                 {!isIPhone && !isLowPerformance && (
                   <>
-                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-purple-200/30 rounded-full blur-2xl -z-10" />
+                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-200/30 rounded-full blur-2xl -z-10" />
                     <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200/30 rounded-full blur-2xl -z-10" />
                   </>
                 )}

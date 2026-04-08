@@ -59,7 +59,7 @@ const ReviewOutputSection = ({ output }: ReviewOutputSectionProps) => {
               scale: [1, 1.1, 1]
             }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-purple-500/5 blur-[120px] rounded-full"
+            className="absolute -bottom-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-blue/5 blur-[120px] rounded-full"
           />
         </div>
       )}

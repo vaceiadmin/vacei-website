@@ -79,7 +79,7 @@ function AnimatedFeatureVisual({ index }: { index: number }) {
             {isSimple && (
                 <div className="absolute inset-0 overflow-hidden rounded-[2.5rem]">
                     <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-primary-blue/10 rounded-full blur-[60px]" />
-                    <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-500/10 rounded-full blur-[50px]" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-blue/10 rounded-full blur-[50px]" />
                     {/* Fixed decorative rings */}
                     <div className="absolute top-1/2 left-1/2 w-48 h-48 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 opacity-40 shadow-[inset_0_0_20px_rgba(255,255,255,0.02)]" />
                     <div className="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary-blue/10 opacity-30 shadow-[0_0_15px_rgba(59,73,230,0.1)]" />
@@ -114,7 +114,7 @@ function AnimatedFeatureVisual({ index }: { index: number }) {
                         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
                     />
                     <motion.div
-                        className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-purple-500/25 blur-[60px]"
+                        className="absolute bottom-1/4 right-1/4 w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-primary-blue/25 blur-[60px]"
                         animate={{
                             x: [0, -25, 15, 0],
                             y: [0, 20, -10, 0],
@@ -286,7 +286,7 @@ const FeatureSection = ({ features, className = '', useGridLayout = false }: Fea
                                 bgColor="var(--card-hover-overlay)"
                                 textColor="white"
                                 className={cn(
-                                    "px-8 lg:px-10 py-4 rounded-full font-bold shadow-xl shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/40",
+                                    "px-8 lg:px-10 py-4 rounded-full font-bold shadow-xl shadow-primary-blue/25 transition-all duration-300 hover:shadow-primary-blue/40",
                                     !isIPhone && !isLowPerformance && "hover:scale-105"
                                 )}
                             />

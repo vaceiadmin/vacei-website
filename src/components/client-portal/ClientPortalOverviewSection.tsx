@@ -163,7 +163,7 @@ const ClientPortalOverviewSection = ({
                       >
                         <span
                           className="h-2.5 w-2.5 rounded-full border-[2px] border-white"
-                          style={{ backgroundColor: item.color ?? "#6366F1" }}
+                          style={{ backgroundColor: item.color ?? "#3b49e6" }}
                         />
                       </span>
                       <div className="flex flex-col leading-tight">
@@ -203,12 +203,12 @@ const ClientPortalOverviewSection = ({
               <div className="flex items-center gap-4">
                 <div className="relative h-20 w-20 md:h-24 md:w-24">
                   <div className="absolute inset-0 rounded-full bg-success" />
-                  <div className="absolute bottom-1 left-0 h-10 w-10 rounded-full bg-[#4F46E5]" />
+                  <div className="absolute bottom-1 left-0 h-10 w-10 rounded-full bg-primary-blue" />
                   <div className="absolute bottom-0 right-0 h-9 w-9 rounded-full bg-progress-purple" />
                 </div>
                 <div className="flex flex-col gap-1 text-[10px] text-gray">
                   <span className="inline-flex items-center gap-1">
-                    <span className="h-2 w-2 rounded-full bg-[#4F46E5]" /> 23
+                    <span className="h-2 w-2 rounded-full bg-primary-blue" /> 23
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <span className="h-2 w-2 rounded-full bg-success" /> 89.7

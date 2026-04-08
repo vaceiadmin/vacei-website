@@ -203,7 +203,7 @@ const TechnologyRegulated = ({
                                 {card.links.map((link, linkIndex) => (
                                   <button
                                     key={linkIndex}
-                                    className="text-xs text-purple-bg hover:underline font-medium"
+                                    className="text-xs text-primary-blue hover:underline font-medium"
                                   >
                                     {link}
                                   </button>

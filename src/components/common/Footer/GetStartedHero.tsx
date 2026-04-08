@@ -21,7 +21,7 @@ const GetStartedHero = () => {
         <div className="relative overflow-hidden rounded-3xl bg-[#030712] border border-white/5 shadow-2xl">
           {/* Dynamic Background Elements */}
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 blur-[100px] -z-10" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-600/10 blur-[100px] -z-10" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 blur-[100px] -z-10" />
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 sm:py-20 lg:py-24 max-w-4xl mx-auto">
@@ -31,7 +31,7 @@ const GetStartedHero = () => {
 
             <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] mb-8">
               {t("footerCta.titleLine1")} <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-indigo-400 to-blue-500">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-blue-500 to-blue-600">
                 {t("footerCta.titleHighlight")}
               </span>
             </h2>

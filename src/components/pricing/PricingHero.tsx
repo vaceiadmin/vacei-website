@@ -69,8 +69,8 @@ const PricingHero = () => {
           <div className="hidden lg:block relative">
             <div className="relative">
               <div className="relative w-full aspect-square">
-                <div className="absolute top-8 right-0 w-[85%] h-[85%] bg-linear-to-br from-purple-100 to-blue-100 rounded-3xl shadow-xl transform rotate-6 opacity-60" />
-                <div className="absolute top-4 right-4 w-[90%] h-[90%] bg-linear-to-br from-blue-50 to-purple-50 rounded-3xl shadow-2xl transform rotate-3 opacity-80" />
+                <div className="absolute top-8 right-0 w-[85%] h-[85%] bg-linear-to-br from-blue-100 to-blue-50 rounded-3xl shadow-xl transform rotate-6 opacity-60" />
+                <div className="absolute top-4 right-4 w-[90%] h-[90%] bg-linear-to-br from-blue-50 to-blue-100 rounded-3xl shadow-2xl transform rotate-3 opacity-80" />
 
                 <div
                   className={cn(
@@ -112,7 +112,7 @@ const PricingHero = () => {
               {!isIPhone && !isLowPerformance && (
                 <>
                   <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-blue-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
-                  <div className="absolute -top-12 -left-12 w-48 h-48 bg-purple-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
+                  <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-200/30 rounded-full blur-3xl -z-10 pointer-events-none" />
                 </>
               )}
             </div>

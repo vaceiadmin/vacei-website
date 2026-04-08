@@ -116,7 +116,7 @@ const ServicesSection = () => {
             {/* Abstract Background Decoration */}
             <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
                 <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-blue-50 rounded-full blur-[120px]" />
-                <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-indigo-50 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-blue-50 rounded-full blur-[120px]" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -29,7 +29,7 @@ const WLCTASection: React.FC<WLCTASectionProps> = ({
           scheme={5}
           speed={1.4}
           intensity={1.5}
-          colors={["#3b49e6", "#6366f1", "#8b5cf6", "#3b49e6", "#4f46e5", "#4338ca"]}
+          colors={["#3b49e6", "#4a5feb", "#5b6ef5", "#3b49e6", "#2f3bc4", "#2536a8"]}
           darkNavyColor="#3b49e6"
           showCursor={false}
         />

@@ -18,10 +18,10 @@ const HowItWorks = () => {
       const list = Array.isArray(raw) ? raw : [];
       const icons = [Building2, Sparkles, UserPlus, LayoutDashboard];
       const colors = [
-        "from-blue-500 to-indigo-600",
-        "from-indigo-500 to-purple-600",
-        "from-purple-500 to-pink-600",
-        "from-pink-500 to-orange-500",
+        "from-blue-600 to-blue-800",
+        "from-blue-500 to-blue-700",
+        "from-blue-700 to-slate-800",
+        "from-slate-700 to-blue-900",
       ];
       return list.map((s, i) => ({
         title: s.title,
@@ -110,19 +110,19 @@ const HowItWorks = () => {
           className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-50 rounded-full blur-[160px]"
         />
         <div
-          className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-50 rounded-full blur-[160px]"
+          className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-blue-50 rounded-full blur-[160px]"
         />
 
         {/* Abstract Data Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.08] text-primary-blue" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path
-            d="M0 20 Q 25 10, 50 20 T 100 20" stroke="#3b82f6" strokeWidth="0.05" fill="none"
+            d="M0 20 Q 25 10, 50 20 T 100 20" stroke="currentColor" strokeWidth="0.05" fill="none"
           />
           <path
-            d="M0 50 Q 25 40, 50 50 T 100 50" stroke="#3b82f6" strokeWidth="0.05" fill="none"
+            d="M0 50 Q 25 40, 50 50 T 100 50" stroke="currentColor" strokeWidth="0.05" fill="none"
           />
           <path
-            d="M0 80 Q 25 70, 50 80 T 100 80" stroke="#3b82f6" strokeWidth="0.05" fill="none"
+            d="M0 80 Q 25 70, 50 80 T 100 80" stroke="currentColor" strokeWidth="0.05" fill="none"
           />
         </svg>
       </div>

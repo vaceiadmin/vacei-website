@@ -27,7 +27,7 @@ const BenefitsCardsRow = ({ cards, columns = 3 }: BenefitsCardsRowProps) => {
                     {cards.map((card, index) => (
                         <div
                             key={index}
-                            className="bg-purple-bg rounded-2xl px-7 py-8 text-left text-white shadow-md"
+                            className="bg-primary-blue rounded-2xl px-7 py-8 text-left text-white shadow-md"
                         >
                             <div className="w-16 h-16 rounded-2xl bg-benefit-icon border border-benefit-icon flex items-center justify-center mb-5">
                                 <Image

@@ -61,7 +61,8 @@ const GetInstantQuoteButton = ({
       <Link
         href={href || "https://calendly.com/vacei-info/new-meeting"}
         className={`
-          inline-flex items-center gap-2 bg-transparent border-2 border-white hover:bg-white/10 text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium transform hover:-translate-y-0.5
+          inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium transform hover:-translate-y-0.5
+          ${hasShadow ? 'shadow-[0_4px_30px_var(--primary-blue-shadow)] hover:shadow-[0_6px_40px_var(--primary-blue-shadow)]' : ''}
           ${className}
         `}
       >

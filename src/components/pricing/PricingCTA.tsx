@@ -22,13 +22,13 @@ const PricingCTA = () => {
       {!isIPhone && !isLowPerformance && (
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[80px]" />
-          <div className="absolute bottom-[-10%] right-[10%] w-[600px] h-[600px] bg-purple-100/30 rounded-full blur-[80px]" />
+          <div className="absolute bottom-[-10%] right-[10%] w-[600px] h-[600px] bg-blue-100/30 rounded-full blur-[80px]" />
         </div>
       )}
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8 z-10">
         <FadeInUp>
-          <div className="relative bg-purple-bg rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20">
+          <div className="relative bg-primary-blue rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/20">
             <div className="absolute inset-0 opacity-10">
               <div
                 className="absolute inset-0"

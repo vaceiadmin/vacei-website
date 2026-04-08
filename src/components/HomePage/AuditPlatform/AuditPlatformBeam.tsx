@@ -202,7 +202,7 @@ export default function AuditPlatformBeam({
         pathColor="#94a3b8"
         pathOpacity={0.1}
         gradientStartColor="#ef4444"
-        gradientStopColor="#3b82f6"
+        gradientStopColor="#3b49e6"
       />
       <AnimatedBeam
         containerRef={containerRef}
@@ -215,7 +215,7 @@ export default function AuditPlatformBeam({
         pathColor="#94a3b8"
         pathOpacity={0.1}
         gradientStartColor="#22c55e"
-        gradientStopColor="#3b82f6"
+        gradientStopColor="#3b49e6"
       />
       <AnimatedBeam
         containerRef={containerRef}
@@ -227,8 +227,8 @@ export default function AuditPlatformBeam({
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.1}
-        gradientStartColor="#3b82f6"
-        gradientStopColor="#3b82f6"
+        gradientStartColor="#3b49e6"
+        gradientStopColor="#3b49e6"
       />
 
 
@@ -242,8 +242,8 @@ export default function AuditPlatformBeam({
         curvature={15}
         pathColor="#94a3b8"
         pathOpacity={0.1}
-        gradientStartColor="#3b82f6"
-        gradientStopColor="#6366f1"
+        gradientStartColor="#3b49e6"
+        gradientStopColor="#3b49e6"
       />
       <AnimatedBeam
         containerRef={containerRef}
@@ -255,8 +255,8 @@ export default function AuditPlatformBeam({
         curvature={0}
         pathColor="#94a3b8"
         pathOpacity={0.1}
-        gradientStartColor="#3b82f6"
-        gradientStopColor="#6366f1"
+        gradientStartColor="#3b49e6"
+        gradientStopColor="#3b49e6"
       />
       <AnimatedBeam
         containerRef={containerRef}
@@ -268,8 +268,8 @@ export default function AuditPlatformBeam({
         curvature={-15}
         pathColor="#94a3b8"
         pathOpacity={0.1}
-        gradientStartColor="#3b82f6"
-        gradientStopColor="#6366f1"
+        gradientStartColor="#3b49e6"
+        gradientStopColor="#3b49e6"
       />
 
 
@@ -284,8 +284,8 @@ export default function AuditPlatformBeam({
         pathColor="#94a3b8"
         pathOpacity={0.15}
         pathWidth={3}
-        gradientStartColor="#6366f1"
-        gradientStopColor="#3b82f6"
+        gradientStartColor="#3b49e6"
+        gradientStopColor="#3b49e6"
       />
 
     </div>

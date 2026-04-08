@@ -56,7 +56,7 @@ const BenefitsVideoSection = ({
 
             {/* Video block */}
             <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 mt-2">
-                <div className="bg-purple-bg rounded-2xl p-3 md:p-4 shadow-md">
+                <div className="bg-primary-blue rounded-2xl p-3 md:p-4 shadow-md">
                     <div className="relative w-full rounded-xl overflow-hidden bg-black">
                         {isGif ? (
                             <img

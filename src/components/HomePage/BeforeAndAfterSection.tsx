@@ -157,7 +157,7 @@ const BeforeAndAfterSection = () => {
 
           {/* Card 2: After */}
           <div className="relative z-10 flex flex-col group/card h-full w-full">
-            <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-[2.5rem] blur-xl opacity-40 group-hover/card:opacity-60 transition duration-500 animate-pulse-slow pointer-events-none" />
+            <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-blue-800 rounded-[2.5rem] blur-xl opacity-40 group-hover/card:opacity-60 transition duration-500 animate-pulse-slow pointer-events-none" />
             
             <div className="relative w-full h-full flex flex-col bg-[#020410] rounded-[2rem] border border-blue-500/30 overflow-hidden shadow-2xl transition-all duration-500 group-hover/card:-translate-y-2">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />

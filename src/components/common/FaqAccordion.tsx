@@ -41,7 +41,7 @@ const FaqAccordion = ({
        {!isIPhone && !isLowPerformance && (
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute top-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[80px]" />
-          <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-[80px]" />
+          <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] bg-blue-100/40 rounded-full blur-[80px]" />
         </div>
        )}
 

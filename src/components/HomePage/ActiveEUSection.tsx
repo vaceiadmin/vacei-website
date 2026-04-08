@@ -34,7 +34,7 @@ const ActiveEUSection = () => {
         <section className="relative w-full py-24 bg-[#FAFBFF] overflow-hidden rounded-[48px]">
             {/* Background Decorative Element */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-400/15 blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-1/2 h-full bg-indigo-400/10 blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-1/2 h-full bg-blue-500/10 blur-[120px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">

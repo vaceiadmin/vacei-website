@@ -20,7 +20,7 @@ const FaqSection = () => {
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[50%] h-[50%] bg-blue-50 rounded-full blur-[160px]" />
-        <div className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-indigo-50 rounded-full blur-[160px]" />
+        <div className="absolute bottom-0 right-1/4 w-[50%] h-[50%] bg-blue-50 rounded-full blur-[160px]" />
         <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay">
           <Image src="/assets/images/Noise.png" alt="Noise" fill className="object-cover" />
         </div>
@@ -131,7 +131,7 @@ const FaqSection = () => {
               {/* Equity Card */}
               <div className="absolute bottom-16 -left-4 lg:left-0 w-[190px] lg:w-[240px] rounded-3xl bg-white border border-slate-200 p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] z-20">
                     <div className="flex flex-col gap-4">
-                  <span className="text-[9px] font-black tracking-widest text-purple-600 uppercase">{t("faqSection.equityLabel")}</span>
+                  <span className="text-[9px] font-black tracking-widest text-primary-blue uppercase">{t("faqSection.equityLabel")}</span>
                   <div className="flex items-center gap-4">
                     <div className="relative h-14 w-14 flex items-center justify-center">
                        <svg className="h-full w-full rotate-[-90deg]">

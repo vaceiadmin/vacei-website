@@ -193,7 +193,7 @@ const PortalFeature = ({
                 </div>
 
                 {/* Quote Card */}
-                <div className="bg-purple-bg rounded-2xl p-6 shadow-sm flex flex-col justify-center relative overflow-hidden h-full transition-transform duration-300 hover:scale-[1.02]">
+                <div className="bg-primary-blue rounded-2xl p-6 shadow-sm flex flex-col justify-center relative overflow-hidden h-full transition-transform duration-300 hover:scale-[1.02]">
                   {/* Quote Icon Top Left */}
                   <div className="absolute top-4 left-4 opacity-30">
                     <Image

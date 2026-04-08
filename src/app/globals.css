@@ -9,18 +9,17 @@
   /* Primary color definition */
   --primary: #242748;
 
-  /* Theme colors from design */
+  /* Theme colors — single brand blue (#3b49e6); legacy “purple-*” tokens map to this family */
   --primary-blue: #3b49e6;
   --gradient-blue-1: #a9b0ff;
   --gradient-blue-2: #a3aaff;
   --text-dark: #26294a;
-  --purple-logo: #8b5cf6;
-  --purple-bg: #6f74b8;
-  /* Purple for VACEI logo */
+  --purple-logo: #3b49e6;
+  --purple-bg: #3b49e6;
 
   /* Navbar Button Colors */
-  --navbar-btn-bg: #3640ad;
-  --navbar-btn-border: #8993ff;
+  --navbar-btn-bg: #3b49e6;
+  --navbar-btn-border: #7c88ff;
 
   /* Section Background Colors */
   --section-bg-light: #d8e5e5;
@@ -28,16 +27,16 @@
   /* Hero Section Colors */
   --hero-bg: #111235;
   --hero-bg-dark: #1e2040;
-  --hero-glow: #989fea;
-  --gradient-container: #1e1e2f;
+  --hero-glow: #7c8ce8;
+  --gradient-container: #151c38;
 
   /* Button and Interactive Colors */
   --primary-blue-hover: #2f3bc4;
-  --button-indigo: #4f46e5;
-  --tab-active: #525ceb;
-  --tab-active-hover: #4048b8;
-  --card-hover-overlay: #3d4494;
-  --card-bg: #2a2d55;
+  --button-indigo: #3b49e6;
+  --tab-active: #3b49e6;
+  --tab-active-hover: #2f3bc4;
+  --card-hover-overlay: #3544a8;
+  --card-bg: #1e2748;
 
   /* Text Colors */
   --text-heading: #181c42;
@@ -46,33 +45,33 @@
   /* Background Colors */
   --icon-bg: #eff0f6;
   --dark-hover: #0f1229;
-  --purple-hover: #5a5f9a;
+  --purple-hover: #2f3bc4;
 
   /* Status Colors */
   --success: #4ade80;
   --error: #f87171;
-  --progress-purple: #c2c7ff;
+  --progress-purple: #c7d4ff;
 
   /* Additional Colors */
-  --footer-hero-bg: #1e174a;
+  --footer-hero-bg: #111235;
   --text-light-gray: #9ea3c0;
 
-  /* Benefit / icon accent (replaces hardcoded #5D63AA, #565CA4) */
-  --benefit-icon-bg: #5d63aa;
-  --benefit-icon-border: #565ca4;
+  /* Benefit / icon accent */
+  --benefit-icon-bg: #3b49e6;
+  --benefit-icon-border: #2f3bc4;
 
-  /* Sidebar / overlay (for glass and panels) */
-  --sidebar-bg-start: #26294a;
-  --sidebar-bg-end: #1a1d35;
+  /* Sidebar / overlay — deep blue (no violet tint) */
+  --sidebar-bg-start: #0f2a52;
+  --sidebar-bg-end: #0a1836;
   --overlay-bg: rgba(0, 0, 0, 0.3);
   /* Scrollbar accents (sidebar + drawers) */
   --scrollbar-sidebar-thumb: linear-gradient(
     180deg,
     #5b67ff 0%,
-    var(--primary-blue) 45%,
-    #7c3aed 100%
+    var(--primary-blue) 50%,
+    #2f3bc4 100%
   );
-  --scrollbar-sidebar-glow: rgba(91, 103, 255, 0.45);
+  --scrollbar-sidebar-glow: rgba(59, 73, 230, 0.45);
   --scrollbar-sidebar-track: rgba(255, 255, 255, 0.06);
 
   /* Form / input (no hardcoded hex in components) */
@@ -149,7 +148,7 @@
 /* Nav — custom scrollbars (desktop sidebar gradient panel + mobile drawer) */
 .nav-sidebar-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #6366f1 var(--scrollbar-sidebar-track);
+  scrollbar-color: var(--primary-blue) var(--scrollbar-sidebar-track);
 }
 
 .nav-sidebar-scrollbar::-webkit-scrollbar {
@@ -180,11 +179,11 @@
 .nav-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     180deg,
-    #7c83ff 0%,
-    #4f5dff 50%,
-    #8b5cf6 100%
+    #7c88ff 0%,
+    var(--primary-blue) 50%,
+    #2a36b0 100%
   );
-  box-shadow: 0 0 18px rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 18px rgba(59, 73, 230, 0.55);
 }
 
 .nav-drawer-scrollbar {
@@ -203,14 +202,14 @@
 }
 
 .nav-drawer-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #93a0ff 0%, var(--primary-blue) 55%, #4f46e5 100%);
+  background: linear-gradient(180deg, #93a0ff 0%, var(--primary-blue) 55%, #2f3bc4 100%);
   border-radius: 100px;
   border: 2px solid #f1f5f9;
   box-shadow: 0 1px 6px rgba(59, 73, 230, 0.2);
 }
 
 .nav-drawer-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #a5b0ff 0%, #525ceb 100%);
+  background: linear-gradient(180deg, #a5b0ff 0%, var(--primary-blue-hover) 100%);
 }
 
 /* Utility Classes for Background Colors */

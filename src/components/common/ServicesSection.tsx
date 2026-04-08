@@ -201,7 +201,7 @@ const ServicesSection = () => {
                         href={item.link}
                         bgColor="var(--button-indigo)"
                         textColor="white"
-                        className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
+                        className="shadow-lg shadow-primary-blue/30 text-xs px-6 py-2"
                       />
                     </div>
 
@@ -227,7 +227,7 @@ const ServicesSection = () => {
                             href={item.link}
                             bgColor="var(--button-indigo)"
                             textColor="white"
-                            className="shadow-lg shadow-indigo-500/30 text-xs px-6 py-2"
+                            className="shadow-lg shadow-primary-blue/30 text-xs px-6 py-2"
                           />
                         </div>
 

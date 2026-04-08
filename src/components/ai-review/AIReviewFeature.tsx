@@ -65,7 +65,7 @@ const AIReviewFeature = ({ hero, demo }: AIReviewFeatureProps) => {
                     scale: [1.1, 1, 1.1]
                   }}
                   transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-purple-500/10 blur-[100px] rounded-full"
+                  className="absolute bottom-0 right-0 w-[60%] h-[60%] bg-primary-blue/10 blur-[100px] rounded-full"
                 />
               </div>
             )}
