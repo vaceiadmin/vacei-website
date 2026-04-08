@@ -7,7 +7,7 @@ export const HERO_MAIN_GIF = `${SERVICE_VIDEOS_BASE_PATH}/Main Render.gif`;
 /** How It Works section - Vacei (2) X2V2.mp4, no poster */
 export const HOW_IT_WORKS_VIDEO = `${SERVICE_VIDEOS_BASE_PATH}/Vacei (2) X2V2.mp4`;
 
-/** Insights & Resources home section — YouTube IDs for the watch-video modal carousel (order matches `home.json` → `insightsResources.videoPlaylist`) */
+/** Insights & Resources home section — YouTube IDs for the inline video gallery (order matches `home.json` → `insightsResources.videoPlaylist`) */
 export const INSIGHTS_RESOURCES_YOUTUBE_IDS = [
   "DaI1KCACrDU",
   "Um5C34Iblfs",
