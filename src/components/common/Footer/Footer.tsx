@@ -25,7 +25,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="w-full relative overflow-hidden mt-48">
+    <footer className="w-full relative overflow-hidden ">
       {/* Split background: top white, bottom light grey */}
       <div className="absolute inset-0 -z-20 bg-white " />
       <div className="absolute top-0 left-0 right-0 h-[260px] md:h-[300px] -z-10 bg-background" />

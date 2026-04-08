@@ -1,6 +1,6 @@
 "use client";
 
-import React, { forwardRef, useRef, useImperativeHandle } from "react";
+import React, { forwardRef, useRef, useImperativeHandle, useEffect, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
@@ -14,7 +14,6 @@ import {
   ShieldCheck, 
   User
 } from "lucide-react";
-import { useIsSafari } from "@/hooks/use-safari";
 import { useReduceMotion, usePerformance } from "@/contexts/ReduceMotionContext";
 
 
@@ -25,32 +24,31 @@ const Circle = forwardRef<
   HTMLDivElement,
   { className?: string; children?: React.ReactNode; label?: string; delay?: number }
 >(({ className, children, label, delay = 0 }, ref) => {
-  const innerRef = useRef<HTMLDivElement>(null);
-  const isInView = useDirectionalInView(innerRef);
-  const isSafari = useIsSafari();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const circleRef = useRef<HTMLDivElement>(null);
+  const isInView = useDirectionalInView(rootRef);
   const { reduceMotion, isIPhone, isLowPerformance } = usePerformance();
-  
-  // Expose both refs (internal for observation, passed for external linking)
-  useImperativeHandle(ref, () => innerRef.current!);
+
+  // Beams measure circle centers; labels stay outside this ref box
+  useImperativeHandle(ref, () => circleRef.current!);
 
   if (reduceMotion) {
     return (
-      <div 
-        ref={innerRef}
-        className="flex flex-col items-center gap-1 sm:gap-1.5 min-w-[50px] sm:min-w-[70px]"
+      <div
+        ref={rootRef}
+        className="flex min-w-[50px] flex-col items-center gap-1 sm:min-w-[70px] sm:gap-1.5"
       >
         <div
+          ref={circleRef}
           className={cn(
-            "z-10 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:shadow-lg hover:shadow-primary-blue/10 hover:border-primary-blue/30 hardware-accelerated",
+            "z-10 flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hardware-accelerated sm:h-14 sm:w-14",
             className
           )}
         >
-          <div className="scale-75 sm:scale-100">
-            {children}
-          </div>
+          <div className="scale-75 sm:scale-100">{children}</div>
         </div>
         {label && (
-          <span className="text-[7px] sm:text-[9px] font-bold text-gray-500 uppercase tracking-tight sm:tracking-wider text-center max-w-[55px] sm:max-w-[80px] leading-tight">
+          <span className="max-w-[55px] text-center text-[7px] font-bold uppercase leading-tight tracking-tight text-gray-500 sm:max-w-[80px] sm:text-[9px] sm:tracking-wider">
             {label}
           </span>
         )}
@@ -59,37 +57,37 @@ const Circle = forwardRef<
   }
 
   return (
-    <motion.div 
-      ref={innerRef}
+    <motion.div
+      ref={rootRef}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.5, delay: isIPhone ? 0 : delay * 0.1 }}
-      className="flex flex-col items-center gap-1 sm:gap-1.5 min-w-[50px] sm:min-w-[70px]"
+      className="flex min-w-[50px] flex-col items-center gap-1 sm:min-w-[70px] sm:gap-1.5"
     >
-
       <motion.div
-        animate={isInView && !isIPhone && !isLowPerformance ? {
-          y: [0, -6, 0],
-        } : { y: 0 }}
+        ref={circleRef}
+        animate={
+          isInView && !isIPhone && !isLowPerformance
+            ? {
+                y: [0, -6, 0],
+              }
+            : { y: 0 }
+        }
         transition={{
           duration: 4,
-          repeat: 0, 
+          repeat: 0,
           ease: "easeInOut",
           delay: delay,
         }}
-
         className={cn(
-          "z-10 flex h-10 w-10 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:shadow-lg hover:shadow-primary-blue/10 hover:border-primary-blue/30 hardware-accelerated",
+          "z-10 flex h-10 w-10 items-center justify-center rounded-full border border-gray-100 bg-white shadow-sm transition-all hover:scale-110 hover:border-primary-blue/30 hover:shadow-lg hover:shadow-primary-blue/10 hardware-accelerated sm:h-14 sm:w-14",
           className
         )}
       >
-
-        <div className="scale-75 sm:scale-100">
-          {children}
-        </div>
+        <div className="scale-75 sm:scale-100">{children}</div>
       </motion.div>
       {label && (
-        <span className="text-[7px] sm:text-[9px] font-bold text-gray-500 uppercase tracking-tight sm:tracking-wider text-center max-w-[55px] sm:max-w-[80px] leading-tight">
+        <span className="max-w-[55px] text-center text-[7px] font-bold uppercase leading-tight tracking-tight text-gray-500 sm:max-w-[80px] sm:text-[9px] sm:tracking-wider">
           {label}
         </span>
       )}
@@ -106,8 +104,7 @@ export default function AuditPlatformBeam({
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { isIPhone, isLowPerformance } = usePerformance();
-  const isSafari = useIsSafari();
-  
+
   // Refs for logic flow
 
   // Column 1: Docs
@@ -125,6 +122,20 @@ export default function AuditPlatformBeam({
   
   // Column 4: Client
   const clientRef = useRef<HTMLDivElement>(null);
+
+  /** Fine-tune Portal→Client beam on narrow widths after circle-only refs */
+  const [portalClientEndY, setPortalClientEndY] = useState(0);
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 640) setPortalClientEndY(-4);
+      else if (w < 1024) setPortalClientEndY(-2);
+      else setPortalClientEndY(0);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   return (
     <div
@@ -180,11 +191,16 @@ export default function AuditPlatformBeam({
           </Circle>
         </div>
 
-        {/* Column 4: Client */}
-        <div className="flex flex-col justify-center h-full">
-          <Circle ref={clientRef} label="Client" delay={2}>
-            <div className="bg-primary-blue/10 rounded-full p-1 sm:p-2">
-              <User className="w-5 h-5 sm:w-7 sm:h-7 text-primary-blue" />
+        {/* Column 4: Client — match Portal circle size on mobile for visual parity */}
+        <div className="flex h-full flex-col justify-center">
+          <Circle
+            ref={clientRef}
+            label="Client"
+            delay={2}
+            className="h-14 w-14 border-primary-blue/25 bg-white shadow-md sm:h-20 sm:w-20 sm:shadow-2xl"
+          >
+            <div className="rounded-full bg-primary-blue/10 p-1.5 sm:p-2">
+              <User className="h-6 w-6 text-primary-blue sm:h-7 sm:w-7" />
             </div>
           </Circle>
         </div>
@@ -286,6 +302,7 @@ export default function AuditPlatformBeam({
         pathWidth={3}
         gradientStartColor="#3b49e6"
         gradientStopColor="#3b49e6"
+        endYOffset={portalClientEndY}
       />
 
     </div>

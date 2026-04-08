@@ -197,12 +197,14 @@ export default function AuditPlatform() {
               <div className="absolute inset-0 z-0 opacity-[0.4] bg-gradient-to-br from-blue-50/20 via-transparent to-blue-100/20" />
               <AuditPlatformBeam className="w-full h-full relative z-10" />
 
-              {/* Ambient decoration */}
-              <div className="absolute bottom-10 right-10 p-4 rounded-2xl bg-white/80 backdrop-blur-md border border-blue-100 shadow-lg flex items-center gap-3 animate-bounce-subtle pointer-events-none">
-                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
-                  <CheckCircle2 className="w-4 h-4 text-white" />
+              {/* Ambient decoration — tucked right on mobile to clear diagram nodes */}
+              <div className="pointer-events-none absolute bottom-6 right-1.5 z-20 flex max-w-[calc(100%-0.75rem)] items-center gap-2 rounded-2xl border border-blue-100 bg-white/90 p-3 shadow-lg backdrop-blur-md animate-bounce-subtle sm:bottom-8 sm:right-3 sm:gap-3 sm:p-4 lg:bottom-10 lg:right-10">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 sm:h-8 sm:w-8">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-white sm:h-4 sm:w-4" />
                 </div>
-                <span className="text-xs font-bold text-slate-800">{t("auditPlatform.complianceVerified")}</span>
+                <span className="text-[10px] font-bold leading-tight text-slate-800 sm:text-xs">
+                  {t("auditPlatform.complianceVerified")}
+                </span>
               </div>
             </motion.div>
 

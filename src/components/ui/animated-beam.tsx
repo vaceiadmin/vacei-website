@@ -110,6 +110,7 @@ export const AnimatedBeam = ({
 
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
+      updatePath();
     }
 
     return () => {

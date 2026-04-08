@@ -16,7 +16,7 @@ const GetStartedHero = () => {
   const { t } = useTranslation("home");
 
   return (
-    <section className="relative z-50 w-full overflow-hidden py-12 lg:py-20">
+    <section className="relative z-40 w-full min-w-0 py-12 max-lg:overflow-visible lg:overflow-hidden lg:py-20 mt-48">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="relative overflow-hidden rounded-3xl bg-[#030712] border border-white/5 shadow-2xl">
           {/* Dynamic Background Elements */}
