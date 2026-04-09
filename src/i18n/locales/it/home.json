@@ -30,34 +30,7 @@
     "footerTitle": "Team dedicati. Chiara responsabilità.",
     "footerBody": "Ogni cliente è seguito da un team VACEI dedicato."
   },
-  "auditPlatform": {
-    "badge": "Area di lavoro tutto-in-uno",
-    "titleLine1": "Una Piattaforma.",
-    "titleHighlight": "Visibilità Totale.",
-    "body": "Gestire un'attività significa coordinarsi con contabili, revisori, avvocati e servizi aziendali. Troppo spesso questo lavoro è disperso tra e-mail, cartelle e fogli di calcolo. VACEI raggruppa tutto in un unico spazio strutturato in modo che aziende e consulenti possano lavorare con più visibilità, responsabilità e controllo.",
-    "quoteLine1": "I servizi professionali richiedono struttura.",
-    "quoteLine2": "VACEI ti offre questa struttura.",
-    "clientPortalCta": "Prova il Portale Clienti",
-    "complianceVerified": "Conformità Verificata",
-    "principles": [
-      {
-        "title": "Flussi di Lavoro Strutturati",
-        "desc": "Fasi chiare dell'incarico, responsabilità definite e tracciamento del progresso per ogni servizio."
-      },
-      {
-        "title": "Documentazione Controllata",
-        "desc": "File centralizzati, record organizzati, visibilità delle versioni e scambio sicuro di documenti."
-      },
-      {
-        "title": "Livelli di Revisione e Approvazione",
-        "desc": "Flussi di revisione definiti, commenti tracciati e storico delle firme per tutti i servizi."
-      },
-      {
-        "title": "Interazione Sicura con il Cliente",
-        "desc": "Richieste, caricamenti, approvazioni e comunicazioni gestiti in un ambiente controllato."
-      }
-    ]
-  },
+  "auditPlatform": {},
   "workspaceEntry": {
     "activeEntities": "Entità Attive",
     "card1TitleBefore": "Crea un'area di lavoro per la tua ",
@@ -98,27 +71,9 @@
   },
   "howItWorks": {
     "badge": "Come funziona",
-    "titleLine1": "Precisione in ",
-    "titleHighlight": "ogni fase.",
-    "subtitle": "Crea uno spazio, invita i consulenti e gestisci ogni incarico, documento e scadenza su una piattaforma strutturata.",
-    "steps": [
-      {
-        "title": "Definisci l'ambito",
-        "description": "Registrati e rispondi a domande per definire i servizi professionali necessari alla tua attività."
-      },
-      {
-        "title": "Ricevi proposte",
-        "description": "Confronta le offerte di studi verificati, garantendo la migliore corrispondenza con i tuoi bisogni."
-      },
-      {
-        "title": "Nomina i consulenti",
-        "description": "Scegli con fiducia e ingaggia i professionisti tramite il nostro ambiente digitale strutturato."
-      },
-      {
-        "title": "Centralizza i flussi",
-        "description": "Monitora il progresso, gestisci i documenti e coordina tutto tramite il tuo spazio sicuro."
-      }
-    ],
+    "titleLine1": "Semplice. Strutturato.",
+    "titleHighlight": "Gestito.",
+    "subtitle": "",
     "twoWaysToStart": {
       "badge": "INIZIA COME PREFERISCI",
       "titleLine1": "Due modi per ",

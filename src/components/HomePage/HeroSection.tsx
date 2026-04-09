@@ -13,6 +13,9 @@ const HeroSection = () => {
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasVideoError, setHasVideoError] = useState(false);
   const { ref: lazyMediaRef, shouldLoad: loadHeroVideo } = useLazyMedia();
+  const titleLine2 = t("hero.titleLine2").trim();
+  const titleHighlight = t("hero.titleHighlight").trim();
+  const multiLineHeadline = Boolean(titleLine2 || titleHighlight);
 
   return (
     <section className="w-full relative">
@@ -29,22 +32,39 @@ const HeroSection = () => {
           <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
             <div className="relative mb-6">
               <h1 className="leading-[1.1] tracking-tight flex flex-col gap-2">
-                <span className="text-4xl sm:text-5xl font-bodoni text-white">
-                  {t("hero.titleLine1")}
-                </span>
-                <span className="text-4xl sm:text-5xl font-sans font-extrabold text-white">
-                  {t("hero.titleLine2")}
-                </span>
-                <span className="text-4xl sm:text-5xl font-bodoni italic text-primary-blue">
-                  {t("hero.titleHighlight")}
-                </span>
+                {multiLineHeadline ? (
+                  <>
+                    <span className="text-4xl sm:text-5xl font-bodoni text-white">
+                      {t("hero.titleLine1")}
+                    </span>
+                    {titleLine2 ? (
+                      <span className="text-4xl sm:text-5xl font-sans font-extrabold text-white">
+                        {titleLine2}
+                      </span>
+                    ) : null}
+                    {titleHighlight ? (
+                      <span className="text-4xl sm:text-5xl font-bodoni italic text-primary-blue">
+                        {titleHighlight}
+                      </span>
+                    ) : null}
+                  </>
+                ) : (
+                  <span className="text-4xl sm:text-5xl font-sans font-extrabold text-white">
+                    {t("hero.titleLine1")}
+                  </span>
+                )}
               </h1>
             </div>
 
-            <div className="max-w-xl mt-6">
+            <div className="max-w-xl mt-6 space-y-4">
               <p className="text-gray-400 text-base sm:text-[17px] leading-relaxed text-balance font-medium">
                 {t("hero.body")}
               </p>
+              {t("hero.body2").trim() ? (
+                <p className="text-gray-300 text-base sm:text-[17px] leading-relaxed text-balance font-medium">
+                  {t("hero.body2")}
+                </p>
+              ) : null}
             </div>
 
 
@@ -184,6 +204,15 @@ const HeroSection = () => {
           ))}
         </div>
       </div>
+
+      {/* Trust / positioning strip */}
+      {t("hero.trustStrip").trim() ? (
+        <div className="w-full bg-[#FAFBFF] border-b border-slate-100 py-5 sm:py-6">
+          <p className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-600 text-sm sm:text-[15px] font-medium leading-relaxed">
+            {t("hero.trustStrip")}
+          </p>
+        </div>
+      ) : null}
     </section>
   );
 };

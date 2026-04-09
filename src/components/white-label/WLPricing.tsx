@@ -47,15 +47,17 @@ const WLPricing: React.FC<WLPricingProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-20 space-y-6">
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary-blue/5 text-primary-blue font-bold tracking-widest uppercase text-[12px] border border-primary-blue/10 backdrop-blur-sm"
-          >
-            <Sparkles className="w-4 h-4" />
-            {badgeText}
-          </motion.span>
+          {badgeText?.trim() ? (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary-blue/5 text-primary-blue font-bold tracking-widest uppercase text-[12px] border border-primary-blue/10 backdrop-blur-sm"
+            >
+              <Sparkles className="w-4 h-4" />
+              {badgeText}
+            </motion.span>
+          ) : null}
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +94,11 @@ const WLPricing: React.FC<WLPricingProps> = ({
               {/* Price Column */}
               <div className="w-full lg:w-[45%] flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-10">
                 <div className="space-y-4">
-                  <span className="text-sm font-black text-primary-blue/60 uppercase tracking-[0.3em] ml-1">{startsFromText}</span>
+                  {startsFromText?.trim() ? (
+                    <span className="text-sm font-black text-primary-blue/60 uppercase tracking-[0.3em] ml-1">
+                      {startsFromText}
+                    </span>
+                  ) : null}
                   <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-baseline gap-x-4 gap-y-1">
                     <span className="text-6xl sm:text-7xl md:text-8xl font-black text-text-dark tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-text-dark to-text-dark/80 whitespace-nowrap">
                       {price}

@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Play, Pause, CheckCircle2, Building2, UserPlus, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, CheckCircle2, ClipboardList, Network, LayoutDashboard, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { HOW_IT_WORKS_VIDEO } from "@/data/video";
 import { useLazyMedia } from "@/hooks/use-lazy-media";
@@ -17,12 +17,11 @@ const HowItWorks = () => {
         | { title: string; description: string }[]
         | string;
       const list = Array.isArray(raw) ? raw : [];
-      const icons = [Building2, Sparkles, UserPlus, LayoutDashboard];
+      const icons = [ClipboardList, Network, LayoutDashboard];
       const colors = [
         "from-blue-600 to-blue-800",
         "from-blue-500 to-blue-700",
         "from-blue-700 to-slate-800",
-        "from-slate-700 to-blue-900",
       ];
       return list.map((s, i) => ({
         title: s.title,
@@ -148,9 +147,11 @@ const HowItWorks = () => {
             highlight={t("howItWorks.titleHighlight")}
           />
 
-          <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
-            {t("howItWorks.subtitle")}
-          </p>
+          {t("howItWorks.subtitle").trim() ? (
+            <p className="text-lg md:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed">
+              {t("howItWorks.subtitle")}
+            </p>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">

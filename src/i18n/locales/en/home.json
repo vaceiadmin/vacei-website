@@ -1,16 +1,17 @@
 {
   "hero": {
-    "titleLine1": "Receive proposals.",
-    "titleLine2": "Choose your advisors.",
-    "titleHighlight": "Manage everything.",
-    "body": "The structured digital workspace where businesses request professional services, receive proposals from verified firms, and manage documents, compliance, and workflows — all in one place.",
-    "body2": "Register once to receive your quote, invite your advisors, and manage everything through one secure platform.",
+    "titleLine1": "Manage all your business services — in one place",
+    "titleLine2": "",
+    "titleHighlight": "",
+    "body": "Handle accounting, audit, legal, and compliance through one structured platform — powered by a global network of professional firms.",
+    "body2": "Everything is managed for you — with full visibility and control.",
     "benefit1": "Free to register",
     "benefit2": "No credit card required",
     "benefit3": "Takes 2 minutes",
     "footnote": "From onboarding to ongoing compliance, everything runs through one workspace.",
-    "quoteCta": "Register to Get Instant Quote",
+    "quoteCta": "Get Instant Quote",
     "demoCta": "Book a Demo",
+    "trustStrip": "A structured client workspace — powered by a curated global network of verified professional firms.",
     "badge1": "27 EU Countries",
     "badge2": "Verified Firms Only",
     "badge3": "ISO 27001 Certified",
@@ -19,7 +20,6 @@
       "Audit & Assurance",
       "Tax & Compliance",
       "Legal Services",
-      "VAT & Payroll",
       "Corporate Services"
     ]
   },
@@ -32,45 +32,43 @@
   },
   "auditPlatform": {
     "badge": "All-in-one workspace",
-    "titleLine1": "One Platform.",
-    "titleHighlight": "Full Visibility.",
-    "body": "Running a business means coordinating with accountants, auditors, lawyers, tax advisors, and corporate service providers. Too often, that work is scattered across emails, folders, spreadsheets, and disconnected systems. VACEI brings everything together into one structured workspace so businesses and advisors can work with more visibility, accountability, and control.",
-    "quoteLine1": "Professional services require structure.",
-    "quoteLine2": "VACEI gives you that structure.",
+    "titleLine1": "Full visibility. Structured delivery.",
+    "titleHighlight": "Complete control.",
+    "body": "Structured workflows, centralised documentation, and complete oversight — so you always know where things stand.",
+    "quoteLine1": "Professional services, coordinated for you — without the noise.",
+    "quoteLine2": "",
     "clientPortalCta": "Try The Client Portal",
     "complianceVerified": "Compliance Verified",
     "principles": [
       {
-        "title": "Structured Workflows",
-        "desc": "Clear engagement stages, defined responsibilities, and progress tracking across every service."
+        "title": "Structured workflows",
+        "desc": "Every service follows a clear process with defined steps and visibility"
       },
       {
-        "title": "Controlled Documentation",
-        "desc": "Centralised files, organised records, version visibility, and secure document exchange."
+        "title": "Centralised documentation",
+        "desc": "All files and records in one secure workspace"
       },
       {
-        "title": "Review and Approval Layers",
-        "desc": "Defined review flows, tracked comments, and sign-off history across services."
+        "title": "Clear communication",
+        "desc": "Requests, updates, and approvals handled in one place"
       },
       {
-        "title": "Secure Client Interaction",
-        "desc": "Requests, uploads, approvals, and communication handled inside a controlled environment."
+        "title": "Complete oversight",
+        "desc": "Track progress, deadlines, and deliverables in real time"
       }
     ]
   },
   "workspaceEntry": {
+    "sectionTitleLine1": "One workspace for your business —",
+    "sectionTitleHighlight": "and all your services",
+    "sectionBody": "Managing accounting, audit, legal, and compliance shouldn’t be fragmented.\n\nVACEI brings everything into one structured platform — where your services, documents, and deadlines are managed in one place.\n\nNo emails. No scattered files. No uncertainty.",
     "activeEntities": "Active Entities",
-    "card1TitleBefore": "Create a workspace for your ",
-    "card1TitleAccent": "business.",
-    "card1Body": "Manage all your advisors in one place. Upload documents, track deadlines, respond to requests, and coordinate professional services from one dashboard.",
+    "card1TitleBefore": "Your business — ",
+    "card1TitleAccent": "fully organised",
+    "card1Body": "Create a workspace for your business and manage everything in one place.\n\nYour services, documents, and advisors are structured through one platform — giving you full control without complexity.",
+    "card1CoordinationNote": "All services are coordinated through VACEI and delivered through a network of trusted firms.",
     "whatYouCanDo": "What you can do",
-    "card1Bullets": [
-      "Manage multiple companies",
-      "Centralise documents",
-      "Track compliance and filings",
-      "Keep all advisors in one place",
-      "Monitor progress across engagements"
-    ],
+    "card1Bullets": [],
     "createWorkspaceCta": "Create Workspace",
     "oneClickSync": "One-click Sync",
     "newFounders": "New Founders",
@@ -98,25 +96,21 @@
   },
   "howItWorks": {
     "badge": "How It Works",
-    "titleLine1": "Precision at ",
-    "titleHighlight": "every stage.",
-    "subtitle": "Create a workspace, invite your advisors, and manage every engagement, document and deadline in one structured platform.",
+    "titleLine1": "Simple. Structured.",
+    "titleHighlight": "Managed.",
+    "subtitle": "",
     "steps": [
       {
-        "title": "Define Your Scope",
-        "description": "Register and answer a few simple questions to define the professional services your business needs."
+        "title": "Submit your request",
+        "description": "Tell us what your business needs"
       },
       {
-        "title": "Receive Proposals",
-        "description": "Compare bids from verified firms, ensuring the best fit for your requirements and budget."
+        "title": "We coordinate everything",
+        "description": "Your services are managed through VACEI"
       },
       {
-        "title": "Appoint Your Advisors",
-        "description": "Select with confidence and engage through our structured digital environment."
-      },
-      {
-        "title": "Centralize Workflows",
-        "description": "Track progress, manage documents, and coordinate everything through your secure workspace."
+        "title": "Track everything in one place",
+        "description": "Monitor progress, documents, and deadlines"
       }
     ],
     "twoWaysToStart": {
@@ -249,7 +243,7 @@
     "badge": "Professional Ecosystem",
     "titleLine1": "Professional services through ",
     "titleHighlight": "one connected platform",
-    "subtitle": "VACEI helps your business access and manage professional services through one structured workspace.",
+    "subtitle": "Accounting, audit, legal, compliance, and corporate services — structured in one place.",
     "tabServices": "Services",
     "tabProducts": "Products",
     "explorePhase": "Explore Phase",
@@ -262,17 +256,17 @@
       "audit-assurance": "Audit & Assurance",
       "corporate-csp-services": "Corporate Services",
       "advisory-growth": "Legal Services",
-      "tax-compliance": "Tax Advisory & Compliance"
+      "tax-compliance": "Tax & Compliance"
     },
     "serviceSubtitles": {
-      "accounting-finance": "Accounting support, bookkeeping workflows, document handling, and structured financial coordination.",
-      "tax-compliance": "Tax filings, advisory work, deadlines, supporting records, and ongoing tax support.",
-      "audit-assurance": "Statutory audits, assurance engagements, working paper coordination, and milestone-driven delivery.",
-      "corporate-csp-services": "Company secretarial services, governance support, statutory maintenance, and corporate administration.",
-      "regulated-licensing": "Support for licence applications, renewals and key regulatory submissions.",
-      "advisory-growth": "Corporate legal support, contracts, transactions, advisory, and cross-border structuring support.",
-      "vat-services": "VAT registrations, VAT returns, compliance support, and indirect tax assistance.",
-      "payroll-employment": "Payroll administration, employment support, and compliance filings."
+      "accounting-finance": "Bookkeeping, records, and financial coordination.",
+      "tax-compliance": "Filings, deadlines, and ongoing compliance support.",
+      "audit-assurance": "Statutory audit and assurance engagements.",
+      "corporate-csp-services": "Governance, statutory maintenance, and corporate administration.",
+      "regulated-licensing": "Licence applications, renewals, and regulatory filings.",
+      "advisory-growth": "Contracts, transactions, and corporate legal support.",
+      "vat-services": "VAT registration, returns, and indirect tax.",
+      "payroll-employment": "Payroll and employment compliance."
     },
     "products": [
       {
@@ -392,9 +386,9 @@
     "bookConsultationCta": "Book a Consultation"
   },
   "complianceDashboard": {
-    "titleLine1": "Stay compliant. ",
-    "titleHighlight": "Stay ahead.",
-    "body": "Compliance isn't a one-time event; it's an ongoing process. Automated alerts, entity management, and regulatory updates keep you in the loop.",
+    "titleLine1": "Everything visible. ",
+    "titleHighlight": "Nothing missed.",
+    "body": "Track deadlines, filings, and compliance across your business — all from one dashboard.",
     "scoreLabel": "Compliance Score",
     "onTrack": "On track",
     "deadlinesHeading": "Upcoming Deadlines",
@@ -404,7 +398,7 @@
     "annualTitle": "Annual Return",
     "annualDue": "Due in 20 days",
     "annualStatus": "Scheduled",
-    "footerNote": "Everything visible in one place—no spreadsheets, no manual trackers, no guessing."
+    "footerNote": "No spreadsheets. No manual tracking. No surprises."
   },
   "multiCompany": {
     "badge": "Multi-Entity Management",
@@ -441,9 +435,18 @@
     "badge": "Join the Future",
     "titleLine1": "Ready to simplify your ",
     "titleHighlight": "business services?",
-    "body": "Join the businesses and founders managing their European operations through VACEI's structured digital workspace.",
+    "body": "Join businesses managing their accounting, audit, legal, and compliance through one structured platform — powered by a global network of firms.",
     "quoteCta": "Get Instant Quote",
     "demoCta": "Book a Demo"
+  },
+  "vaceiNetwork": {
+    "badge": "The VACEI Network",
+    "titleLine1": "Powered by the ",
+    "titleHighlight": "VACEI Network",
+    "body": "Behind every service is a curated global network of verified professional firms.\n\nVACEI coordinates delivery through this network — ensuring you receive the right expertise without managing multiple providers.",
+    "cta": "Get Instant Quote",
+    "gifAlt": "VACEI network and service coordination",
+    "steps": []
   },
   "platformPower": {
     "badge": "Platform Intelligence",

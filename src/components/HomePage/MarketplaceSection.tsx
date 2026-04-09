@@ -35,7 +35,7 @@ const Step = ({ number, title, desc, icon, isLast }: StepProps) => (
 const MarketplaceSection = () => {
   const { t } = useTranslation("home");
   const steps = useMemo(() => {
-    const raw = t("marketplace.steps", { returnObjects: true }) as
+    const raw = t("vaceiNetwork.steps", { returnObjects: true }) as
       | { number: string; title: string; desc: string }[]
       | string;
     const list = Array.isArray(raw) ? raw : [];
@@ -56,28 +56,40 @@ const MarketplaceSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-          
-          {/* Header & Intro */}
-          <div className="w-full lg:w-1/3">
-             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-8">
-                {t("marketplace.badge")}
+        <div
+          className={
+            steps.length > 0
+              ? "flex flex-col gap-16 lg:gap-24 lg:flex-row lg:items-start"
+              : "flex flex-col gap-12 lg:gap-16 lg:flex-row lg:items-start"
+          }
+        >
+          {/* Copy + CTA */}
+          <div className={steps.length > 0 ? "w-full lg:w-1/3 shrink-0" : "w-full lg:w-1/2"}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest border border-blue-500/20 mb-8">
+              {t("vaceiNetwork.badge")}
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tight">
-              {t("marketplace.titleLine1")}<span className="text-blue-400">{t("marketplace.titleHighlight")}</span>
+              {t("vaceiNetwork.titleLine1")}
+              <span className="text-blue-400">{t("vaceiNetwork.titleHighlight")}</span>
             </h2>
-            <p className="text-lg text-slate-400 mb-10 font-medium leading-relaxed">
-              {t("marketplace.body")}
+            <p className="text-lg text-slate-400 mb-10 font-medium leading-relaxed whitespace-pre-line">
+              {t("vaceiNetwork.body")}
             </p>
-             <GetInstantQuoteButton
-              text={t("marketplace.registerCta")}
+            <GetInstantQuoteButton
+              text={t("vaceiNetwork.cta")}
               className="h-[56px] px-10 shadow-xl shadow-blue-600/20"
             />
+          </div>
 
-            {/* Request Service GIF Presentation */}
-            <div className="mt-12 relative rounded-2xl overflow-hidden bg-[#1D1E30] border border-white/10 shadow-2xl transition-transform duration-700 hover:scale-[1.02] w-full max-w-[420px]">
-              {/* Browser Header */}
+          {/* Visual — right column on large screens (or below on mobile) */}
+          <div
+            className={
+              steps.length > 0
+                ? "w-full lg:w-2/3 flex flex-col gap-12"
+                : "w-full lg:w-1/2 flex flex-col justify-center lg:min-h-[min(520px,50vh)]"
+            }
+          >
+            <div className="relative rounded-2xl overflow-hidden bg-[#1D1E30] border border-white/10 shadow-2xl transition-transform duration-700 hover:scale-[1.01] w-full max-w-[520px] lg:max-w-none mx-auto lg:ml-auto lg:mr-0">
               <div className="h-8 w-full bg-[#181926] border-b border-white/5 flex items-center px-4 justify-between relative">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
@@ -85,37 +97,28 @@ const MarketplaceSection = () => {
                   <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
                 </div>
               </div>
-              
               <div className="relative w-full bg-[#050505] overflow-hidden">
-                <img 
-                  src="/assets/videos/Request%20Service_V1.2.gif" 
-                  alt={t("marketplace.gifAlt")} 
-                  className="w-full h-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500" 
+                <img
+                  src="/assets/videos/Request%20Service_V1.2.gif"
+                  alt={t("vaceiNetwork.gifAlt")}
+                  className="w-full h-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500"
                   {...lazyImgProps}
                 />
               </div>
             </div>
-          </div>
 
-          {/* Timeline Steps */}
-          <div className="w-full lg:w-2/3">
-             <div className="bg-[#0D0F18] backdrop-blur-xl p-8 md:p-16 rounded-[3rem] border border-white/15 shadow-2xl relative overflow-hidden">
-                {/* Interior Gradient */}
+            {steps.length > 0 ? (
+              <div className="bg-[#0D0F18] backdrop-blur-xl p-8 md:p-16 rounded-[3rem] border border-white/15 shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/[0.03] to-transparent pointer-events-none" />
                 <div className="space-y-4">
-                   {steps.map((step, i) => (
-                     <Step 
-                        key={i} 
-                        {...step} 
-                        isLast={i === steps.length - 1} 
-                      />
-                   ))}
+                  {steps.map((step, i) => (
+                    <Step key={i} {...step} isLast={i === steps.length - 1} />
+                  ))}
                 </div>
-             </div>
+              </div>
+            ) : null}
           </div>
-
         </div>
-
       </div>
     </section>
   );

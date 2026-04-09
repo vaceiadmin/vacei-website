@@ -30,34 +30,7 @@
     "footerTitle": "Équipes dédiées. Responsabilité claire.",
     "footerBody": "Chaque client est accompagné par une équipe VACEI nommée."
   },
-  "auditPlatform": {
-    "badge": "Espace de travail tout-en-un",
-    "titleLine1": "Une Plateforme.",
-    "titleHighlight": "Visibilité Totale.",
-    "body": "Diriger une entreprise signifie coordonner des comptables, des auditeurs, des avocats et des conseillers. Trop souvent, ce travail est dispersé (e-mails, dossiers, tableurs). VACEI regroupe tout dans un espace structuré pour que les entreprises et les conseillers puissent travailler avec plus de visibilité, de responsabilité et de contrôle.",
-    "quoteLine1": "Les services professionnels exigent de la structure.",
-    "quoteLine2": "VACEI vous apporte cette structure.",
-    "clientPortalCta": "Essayer le Portail Client",
-    "complianceVerified": "Conformité Vérifiée",
-    "principles": [
-      {
-        "title": "Flux de Travail Structurés",
-        "desc": "Étapes de mission claires, responsabilités définies et suivi des progrès pour chaque service."
-      },
-      {
-        "title": "Documentation Contrôlée",
-        "desc": "Fichiers centralisés, dossiers organisés, visibilité des versions et échange sécurisé de documents."
-      },
-      {
-        "title": "Niveaux de Revue et d'Approbation",
-        "desc": "Flux de revue définis, commentaires suivis et historique des signatures pour tous les services."
-      },
-      {
-        "title": "Interaction Client Sécurisée",
-        "desc": "Demandes, téléchargements, approbations et communications gérés dans un environnement contrôlé."
-      }
-    ]
-  },
+  "auditPlatform": {},
   "workspaceEntry": {
     "activeEntities": "Entités Actives",
     "card1TitleBefore": "Créez un espace de travail pour votre ",
@@ -98,27 +71,9 @@
   },
   "howItWorks": {
     "badge": "Comment ça marche",
-    "titleLine1": "Précision à ",
-    "titleHighlight": "chaque étape.",
-    "subtitle": "Créez un espace, invitez vos conseillers et gérez chaque mission, document et échéance sur une plateforme structurée.",
-    "steps": [
-      {
-        "title": "Définissez votre périmètre",
-        "description": "Inscrivez-vous et répondez à quelques questions pour définir les services professionnels dont votre entreprise a besoin."
-      },
-      {
-        "title": "Recevez des propositions",
-        "description": "Comparez les offres de cabinets vérifiés, garantissant ainsi la meilleure adéquation avec vos besoins et votre budget."
-      },
-      {
-        "title": "Désignez vos conseillers",
-        "description": "Choisissez en toute confiance et engagez-les via notre environnement numérique structuré."
-      },
-      {
-        "title": "Centralisez les flux",
-        "description": "Suivez les progrès, gérez les documents et coordonnez tout via votre espace sécurisé."
-      }
-    ],
+    "titleLine1": "Simple. Structuré.",
+    "titleHighlight": "Géré.",
+    "subtitle": "",
     "twoWaysToStart": {
       "badge": "COMMENCEZ À VOTRE FAÇON",
       "titleLine1": "Deux manières de ",

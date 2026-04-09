@@ -21,6 +21,7 @@ import MultiCompanySection from "./MultiCompanySection";
 import WhyVaceiSection from "./WhyVaceiSection";
 import TrustSection from "./TrustSection";
 import InsightsAndResourcesSection from "./InsightsAndResourcesSection";
+import MarketplaceSection from "./MarketplaceSection";
 
 const HomePage = () => {
   // Scroll to hash section on load (e.g. /#process-steps or /#services from navbar)
@@ -41,6 +42,7 @@ const HomePage = () => {
       <AuditPlatform />
       <WorkspaceEntrySection />
       <HowItWorks />
+      <MarketplaceSection />
       <TwoWaysToStartSection />
       <ProcessStepsSectionDark />
       <BeforeAndAfterSection />

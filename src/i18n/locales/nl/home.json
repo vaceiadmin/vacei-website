@@ -30,34 +30,7 @@
     "footerTitle": "Toegewezen teams. Duidelijke verantwoordelijkheid.",
     "footerBody": "Elke klant wordt ondersteund door een vast VACEI-team."
   },
-  "auditPlatform": {
-    "badge": "Alles-in-één werkruimte",
-    "titleLine1": "Eén Platform.",
-    "titleHighlight": "Volledig Zicht.",
-    "body": "Een bedrijf runnen betekent coördineren met accountants, auditors, advocaten en bedrijfsadviseurs. Te vaak is dit werk verspreid over e-mails, mappen en spreadsheets. VACEI brengt alles samen in een gestructureerde ruimte, zodat bedrijven en adviseurs kunnen werken met meer zichtbaarheid, verantwoordelijkheid en controle.",
-    "quoteLine1": "Professionele diensten vereisen structuur.",
-    "quoteLine2": "VACEI biedt u die structuur.",
-    "clientPortalCta": "Probeer Cliëntenportaal",
-    "complianceVerified": "Compliance Geverifieerd",
-    "principles": [
-      {
-        "title": "Gestructureerde Workflows",
-        "desc": "Heldere opdrachtfasen, gedefinieerde verantwoordelijkheden en voortgangsbewaking per dienst."
-      },
-      {
-        "title": "Gecontroleerde Documentatie",
-        "desc": "Gecentraliseerde bestanden, georganiseerde dossiers, versiebeheer en veilige documentuitwisseling."
-      },
-      {
-        "title": "Review- en Goedkeuringslagen",
-        "desc": "Gedefinieerde reviewstromen, bijgehouden opmerkingen en historie van aftekeningen voor alle diensten."
-      },
-      {
-        "title": "Veilige Cliëntinteractie",
-        "desc": "Verzoeken, uploads, goedkeuringen en communicatie beheerd in een gecontroleerde omgeving."
-      }
-    ]
-  },
+  "auditPlatform": {},
   "workspaceEntry": {
     "activeEntities": "Actieve Entiteiten",
     "card1TitleBefore": "Maak een werkruimte voor uw ",
@@ -98,27 +71,9 @@
   },
   "howItWorks": {
     "badge": "Hoe het werkt",
-    "titleLine1": "Precisie in ",
-    "titleHighlight": "elke fase.",
-    "subtitle": "Creëer een ruimte, nodig adviseurs uit en beheer elke opdracht, elk document en elke deadline op een gestructureerd platform.",
-    "steps": [
-      {
-        "title": "Reikwijdte bepalen",
-        "description": "Schrijf u in en beantwoord vragen over de professionele diensten die uw onderneming nodig heeft."
-      },
-      {
-        "title": "Voorstellen ontvangen",
-        "description": "Vergelijk aanbiedingen van geverifieerde kantoren en kies de beste match voor uw wensen en budget."
-      },
-      {
-        "title": "Adviseurs benoemen",
-        "description": "Kies met vertrouwen en contracteer adviseurs via onze gestructureerde digitale omgeving."
-      },
-      {
-        "title": "Workflows centraliseren",
-        "description": "Volg voortgang, beheer documenten en coördineer alles via uw beveiligde ruimte."
-      }
-    ],
+    "titleLine1": "Eenvoudig. Gestructureerd.",
+    "titleHighlight": "Beheerd.",
+    "subtitle": "",
     "twoWaysToStart": {
       "badge": "START OP UW MANIER",
       "titleLine1": "Twee manieren om te ",

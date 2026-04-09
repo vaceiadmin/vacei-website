@@ -30,34 +30,7 @@
     "footerTitle": "Equipos dedicados. Responsabilidad clara.",
     "footerBody": "Cada cliente cuenta con un equipo VACEI asignado."
   },
-  "auditPlatform": {
-    "badge": "Espacio de trabajo todo en uno",
-    "titleLine1": "Una Plataforma.",
-    "titleHighlight": "Visibilidad Total.",
-    "body": "Dirigir un negocio significa coordinar con contadores, auditores, abogados y servicios corporativos. A menudo, este trabajo está disperso en correos, carpetas y hojas de cálculo. VACEI agrupa todo en un espacio estructurado para que las empresas y asesores trabajen con más visibilidad, responsabilidad y control.",
-    "quoteLine1": "Los servicios profesionales requieren estructura.",
-    "quoteLine2": "VACEI le da esa estructura.",
-    "clientPortalCta": "Probar Portal de Clientes",
-    "complianceVerified": "Cumplimiento Verificado",
-    "principles": [
-      {
-        "title": "Flujos de Trabajo Estructurados",
-        "desc": "Etapas claras de los encargos, responsabilidades definidas y seguimiento del progreso por servicio."
-      },
-      {
-        "title": "Documentación Controlada",
-        "desc": "Archivos centralizados, registros organizados, visibilidad de versiones y envío seguro de documentos."
-      },
-      {
-        "title": "Capas de Revisión y Aprobación",
-        "desc": "Flujos de revisión definidos, comentarios rastreados e historial de firmas para todos los servicios."
-      },
-      {
-        "title": "Interacción Segura con el Cliente",
-        "desc": "Solicitudes, cargas, aprobaciones y comunicaciones manejadas en un entorno controlado."
-      }
-    ]
-  },
+  "auditPlatform": {},
   "workspaceEntry": {
     "activeEntities": "Entidades Activas",
     "card1TitleBefore": "Cree un espacio de trabajo para su ",
@@ -98,27 +71,9 @@
   },
   "howItWorks": {
     "badge": "Cómo funciona",
-    "titleLine1": "Precisión en ",
-    "titleHighlight": "cada etapa.",
-    "subtitle": "Cree su espacio, invite asesores y gestione cada encargo, documento y plazo en una plataforma estructurada.",
-    "steps": [
-      {
-        "title": "Defina su alcance",
-        "description": "Regístrese y responda preguntas para definir los servicios profesionales que su negocio necesita."
-      },
-      {
-        "title": "Reciba propuestas",
-        "description": "Compare ofertas de firmas verificadas, asegurando el mejor encaje para sus requisitos y presupuesto."
-      },
-      {
-        "title": "Nombre a sus asesores",
-        "description": "Elija con confianza y contrate a través de nuestro entorno digital estructurado."
-      },
-      {
-        "title": "Centralice flujos",
-        "description": "Rastree el progreso, gestione documentos y coordine todo a través de su espacio seguro."
-      }
-    ],
+    "titleLine1": "Simple. Estructurado.",
+    "titleHighlight": "Gestionado.",
+    "subtitle": "",
     "twoWaysToStart": {
       "badge": "EMPIECE A SU MANERA",
       "titleLine1": "Dos formas de ",

@@ -11,7 +11,11 @@ interface WLCTASectionProps {
   title: string;
   subtitle: string;
   ctaText: string;
+  secondaryCtaText?: string;
   onCtaClick?: () => void;
+  onSecondaryCtaClick?: () => void;
+  /** Fine print below the buttons */
+  footerLine?: string;
 }
 
 const WLCTASection: React.FC<WLCTASectionProps> = ({
@@ -19,7 +23,10 @@ const WLCTASection: React.FC<WLCTASectionProps> = ({
   title,
   subtitle,
   ctaText,
+  secondaryCtaText,
   onCtaClick,
+  onSecondaryCtaClick,
+  footerLine,
 }) => {
   return (
     <section className="py-20 bg-primary-blue relative overflow-hidden">
@@ -85,16 +92,37 @@ const WLCTASection: React.FC<WLCTASectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="pt-4"
+            className="pt-4 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4"
           >
             <button
+              type="button"
               onClick={onCtaClick}
-              className="group relative px-16 py-6 bg-white text-primary-blue rounded-[2rem] font-black text-xl shadow-[0_30px_60px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden flex items-center justify-center gap-4 mx-auto"
+              className="group relative px-16 py-6 bg-white text-primary-blue rounded-[2rem] font-black text-xl shadow-[0_30px_60px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden flex items-center justify-center gap-4"
             >
               {ctaText}
               <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform duration-300" />
             </button>
+            {secondaryCtaText ? (
+              <button
+                type="button"
+                onClick={onSecondaryCtaClick ?? onCtaClick}
+                className="px-14 py-6 rounded-[2rem] font-black text-xl border-2 border-white/40 text-white hover:bg-white/10 transition-all duration-300"
+              >
+                {secondaryCtaText}
+              </button>
+            ) : null}
           </motion.div>
+
+          {footerLine?.trim() ? (
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-sm sm:text-base text-white/70 max-w-3xl mx-auto leading-relaxed pt-6 border-t border-white/10 mt-8"
+            >
+              {footerLine}
+            </motion.p>
+          ) : null}
         </div>
       </div>
 

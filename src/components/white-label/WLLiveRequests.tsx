@@ -15,10 +15,22 @@ interface LiveRequest {
 
 interface WLLiveRequestsProps {
   sectionTitle: string;
+  /** Intro copy below the title (supports \\n\\n paragraphs with whitespace-pre-line) */
+  intro?: string;
+  badgeLabel?: string;
+  updatedLabel?: string;
+  footerNote?: string;
   requests: LiveRequest[];
 }
 
-const WLLiveRequests: React.FC<WLLiveRequestsProps> = ({ sectionTitle, requests }) => {
+const WLLiveRequests: React.FC<WLLiveRequestsProps> = ({
+  sectionTitle,
+  intro = "Real-time engagement opportunities currently available on the VACEI network.",
+  badgeLabel = "Live Feed",
+  updatedLabel = "Updated 2 minutes ago",
+  footerNote = "Join the platform to access full details and submit proposals.",
+  requests,
+}) => {
   return (
     <section className="py-24 bg-[#FAFBFF] relative overflow-hidden">
       {/* Background decoration */}
@@ -35,13 +47,13 @@ const WLLiveRequests: React.FC<WLLiveRequestsProps> = ({ sectionTitle, requests 
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-600 text-[10px] font-black tracking-widest uppercase border border-red-500/20">
                 <Circle className="w-2 h-2 fill-current animate-pulse" />
-                Live Feed
+                {badgeLabel}
               </div>
               <h2 className="text-4xl sm:text-5xl font-black text-text-dark tracking-tight leading-tight">
                 {sectionTitle}
               </h2>
-              <p className="text-xl text-gray/70 font-medium">
-                Real-time engagement opportunities currently available on the VACEI network.
+              <p className="text-xl text-gray/70 font-medium whitespace-pre-line leading-relaxed">
+                {intro}
               </p>
             </motion.div>
           </div>
@@ -52,7 +64,7 @@ const WLLiveRequests: React.FC<WLLiveRequestsProps> = ({ sectionTitle, requests 
              viewport={{ once: true }}
              className="text-sm font-bold text-primary-blue bg-primary-blue/5 px-6 py-3 rounded-2xl border border-primary-blue/10"
           >
-            Updated 2 minutes ago
+            {updatedLabel}
           </motion.div>
         </div>
 
@@ -116,8 +128,8 @@ const WLLiveRequests: React.FC<WLLiveRequestsProps> = ({ sectionTitle, requests 
         </div>
         
         <div className="mt-16 text-center">
-          <p className="text-gray/50 text-sm font-medium">
-            Join the platform to access full details and submit proposals.
+          <p className="text-gray/50 text-sm font-medium whitespace-pre-line">
+            {footerNote}
           </p>
         </div>
       </div>

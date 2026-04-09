@@ -13,12 +13,15 @@ interface BentoItem {
 interface WLBentoGridProps {
   sectionTitle: string;
   sectionSubtitle?: string;
+  /** Optional paragraph under the main title */
+  sectionDescription?: string;
   items: BentoItem[];
 }
 
 const WLBentoGrid: React.FC<WLBentoGridProps> = ({
   sectionTitle,
   sectionSubtitle,
+  sectionDescription,
   items,
 }) => {
   // Balanced layout for 5 items: 2 wide on top, 3 smaller on bottom
@@ -44,19 +47,31 @@ const WLBentoGrid: React.FC<WLBentoGridProps> = ({
           >
             {sectionTitle}
           </motion.h2>
+          {sectionDescription?.trim() ? (
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-lg sm:text-xl text-gray/70 max-w-3xl mx-auto font-medium leading-relaxed"
+            >
+              {sectionDescription}
+            </motion.p>
+          ) : null}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-8">
           {items.map((item, index) => {
             const Icon = item.icon;
-            // Map items to specific spans for a balanced 6-item layout
+            // Map items to specific spans for balanced layouts (6–7 capability cards)
             const spans = [
-              "md:col-span-3 lg:col-span-6", // Item 1 (Wide)
-              "md:col-span-3 lg:col-span-6", // Item 2 (Wide)
-              "md:col-span-2 lg:col-span-4", // Item 3
-              "md:col-span-2 lg:col-span-4", // Item 4
-              "md:col-span-2 lg:col-span-4", // Item 5
-              "md:col-span-6 lg:col-span-12", // Item 6 (Full Width)
+              "md:col-span-3 lg:col-span-6",
+              "md:col-span-3 lg:col-span-6",
+              "md:col-span-2 lg:col-span-4",
+              "md:col-span-2 lg:col-span-4",
+              "md:col-span-2 lg:col-span-4",
+              "md:col-span-3 lg:col-span-6",
+              "md:col-span-3 lg:col-span-6",
+              "md:col-span-6 lg:col-span-12",
             ];
 
             return (

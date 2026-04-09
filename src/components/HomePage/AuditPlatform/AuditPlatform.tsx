@@ -106,7 +106,7 @@ export default function AuditPlatform() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg text-slate-600 leading-relaxed max-w-xl mb-12"
+              className="text-lg text-slate-600 leading-relaxed max-w-xl mb-12 whitespace-pre-line"
             >
               {t("auditPlatform.body")}
             </motion.p>
@@ -151,18 +151,26 @@ export default function AuditPlatform() {
               ))}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="mb-10 pl-4 border-l-2 border-primary-blue/30"
-            >
-              <p className="text-base text-slate-500 italic font-medium leading-relaxed">
-                {t("auditPlatform.quoteLine1")} <br className="hidden sm:block" />
-                {t("auditPlatform.quoteLine2")}
-              </p>
-            </motion.div>
+            {(t("auditPlatform.quoteLine1").trim() || t("auditPlatform.quoteLine2").trim()) ? (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="mb-10 pl-4 border-l-2 border-primary-blue/30"
+              >
+                <p className="text-base text-slate-500 italic font-medium leading-relaxed">
+                  {t("auditPlatform.quoteLine1")}
+                  {t("auditPlatform.quoteLine2").trim() ? (
+                    <>
+                      {" "}
+                      <br className="hidden sm:block" />
+                      {t("auditPlatform.quoteLine2")}
+                    </>
+                  ) : null}
+                </p>
+              </motion.div>
+            ) : null}
 
             {/* CTA's */}
             <motion.div

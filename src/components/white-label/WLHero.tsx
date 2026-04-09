@@ -8,13 +8,19 @@ import LiquidSurface from "../common/background";
 
 
 interface WLHeroProps {
+  /** Small uppercase label in the pill above the headline */
   title: string;
+  /** Main headline (H1) */
   subtitle: string;
   overview: string;
   ctaText: string;
   secondaryCtaText?: string;
-  previewAlt?: string;
+  /** When "plain", the headline is rendered as one line/block (no per-word highlight). */
+  headlineVariant?: "words" | "plain";
+  trustLine?: string;
   onCtaClick?: () => void;
+  onSecondaryCtaClick?: () => void;
+  previewAlt?: string;
   imagePlaceholder?: string;
   highlightWords?: string[];
 }
@@ -25,8 +31,11 @@ const WLHero: React.FC<WLHeroProps> = ({
   overview,
   ctaText,
   secondaryCtaText,
+  headlineVariant = "words",
+  trustLine,
   previewAlt,
   onCtaClick,
+  onSecondaryCtaClick,
   imagePlaceholder,
   highlightWords = [],
 }) => {
@@ -69,33 +78,52 @@ const WLHero: React.FC<WLHeroProps> = ({
                 {title}
               </div>
 
-              <h1 className="text-5xl sm:text-7xl font-black text-white leading-[1] mb-10 tracking-tight">
-                {subtitle.split(' ').map((word, i) => (
-                  <span key={i} className="inline-block mr-[0.25em]">
-                    {highlightWords.includes(word) ? (
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
-                        {word}
-                      </span>
-                    ) : word}
-                  </span>
-                ))}
+              <h1 className="text-5xl sm:text-7xl font-black text-white leading-[1.1] mb-10 tracking-tight">
+                {headlineVariant === "plain" ? (
+                  <span className="block">{subtitle}</span>
+                ) : (
+                  subtitle.split(" ").map((word, i) => (
+                    <span key={i} className="inline-block mr-[0.25em]">
+                      {highlightWords.includes(word) ? (
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
+                          {word}
+                        </span>
+                      ) : (
+                        word
+                      )}
+                    </span>
+                  ))
+                )}
               </h1>
 
-              <p className="text-xl lg:text-2xl text-blue-100/80 max-w-xl leading-relaxed mb-14 font-medium">
+              <p className="text-xl lg:text-2xl text-blue-100/80 max-w-xl leading-relaxed mb-8 font-medium">
                 {overview}
               </p>
 
+              {trustLine ? (
+                <p className="text-base sm:text-lg text-white/70 max-w-xl leading-relaxed mb-10 font-medium border-l-2 border-white/25 pl-4">
+                  {trustLine}
+                </p>
+              ) : null}
+
               <div className="flex flex-col sm:flex-row gap-6">
                 <button
+                  type="button"
                   onClick={onCtaClick}
                   className="group relative px-12 py-6 bg-white text-primary-blue rounded-3xl font-black text-xl overflow-hidden transition-all duration-300 hover:shadow-[0_25px_50px_rgba(0,0,0,0.3)] active:scale-95"
                 >
                   <span className="relative z-10">{ctaText}</span>
                 </button>
 
-                <button className="px-12 py-6 bg-transparent border-2 border-white/20 text-white rounded-3xl font-black text-xl hover:bg-white/10 transition-all duration-300">
-                  {secondaryCtaText}
-                </button>
+                {secondaryCtaText ? (
+                  <button
+                    type="button"
+                    onClick={onSecondaryCtaClick ?? onCtaClick}
+                    className="px-12 py-6 bg-transparent border-2 border-white/20 text-white rounded-3xl font-black text-xl hover:bg-white/10 transition-all duration-300"
+                  >
+                    {secondaryCtaText}
+                  </button>
+                ) : null}
               </div>
             </motion.div>
           </div>

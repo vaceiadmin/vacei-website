@@ -6,6 +6,7 @@ import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
 
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
 const WorkspaceEntrySection = () => {
   const { t } = useTranslation("home");
@@ -39,6 +40,21 @@ const WorkspaceEntrySection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {(t("workspaceEntry.sectionTitleLine1").trim() || t("workspaceEntry.sectionTitleHighlight").trim()) && (
+          <div className="max-w-4xl mb-14 lg:mb-16">
+            <SectionTitleHero
+              variant="dark"
+              line1={t("workspaceEntry.sectionTitleLine1")}
+              highlight={t("workspaceEntry.sectionTitleHighlight")}
+            />
+            {t("workspaceEntry.sectionBody").trim() ? (
+              <p className="mt-6 text-slate-400 text-[15px] sm:text-base leading-relaxed font-medium whitespace-pre-line">
+                {t("workspaceEntry.sectionBody")}
+              </p>
+            ) : null}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
           
           {/* Card 1: Existing Company (Dark Glassmorphic) */}
@@ -71,19 +87,28 @@ const WorkspaceEntrySection = () => {
                   </span>
                 </h3>
 
-                <p className="text-[15px] text-slate-400 leading-relaxed mb-6 max-w-md font-medium">
+                <p className="text-[15px] text-slate-400 leading-relaxed mb-4 max-w-md font-medium whitespace-pre-line">
                   {t("workspaceEntry.card1Body")}
                 </p>
+                {t("workspaceEntry.card1CoordinationNote").trim() ? (
+                  <p className="text-[14px] text-slate-500 leading-relaxed mb-6 max-w-md font-medium border-l-2 border-blue-500/30 pl-4">
+                    {t("workspaceEntry.card1CoordinationNote")}
+                  </p>
+                ) : null}
 
-                <div className="space-y-3 mb-auto">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">{t("workspaceEntry.whatYouCanDo")}</h4>
-                  {card1Bullets.map((text, idx) => (
-                    <div key={idx} className="flex items-center gap-3 text-sm font-bold text-slate-400 group-hover:text-slate-300 transition-colors duration-500">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-400 transition-all duration-500 shadow-[0_0_8px_rgba(59,130,246,0)] group-hover:shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
-                      {text}
-                    </div>
-                  ))}
-                </div>
+                {card1Bullets.length > 0 ? (
+                  <div className="space-y-3 mb-auto">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">{t("workspaceEntry.whatYouCanDo")}</h4>
+                    {card1Bullets.map((text, idx) => (
+                      <div key={idx} className="flex items-center gap-3 text-sm font-bold text-slate-400 group-hover:text-slate-300 transition-colors duration-500">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-400 transition-all duration-500 shadow-[0_0_8px_rgba(59,130,246,0)] group-hover:shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
+                        {text}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mb-auto" />
+                )}
 
                 <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
                   <GetInstantQuoteButton

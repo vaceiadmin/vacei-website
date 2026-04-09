@@ -4,30 +4,24 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 import { withLocale } from "@/lib/localized-path";
+import { motion } from "framer-motion";
 import WLHero from "@/components/white-label/WLHero";
 import WLBentoGrid from "@/components/white-label/WLBentoGrid";
 import WLProcess from "@/components/white-label/WLProcess";
 import WLInteractiveCards from "@/components/white-label/WLInteractiveCards";
-import WLUseCaseDisplay from "@/components/white-label/WLUseCaseDisplay";
 import WLPricing from "@/components/white-label/WLPricing";
 import WLCTASection from "@/components/white-label/WLCTASection";
 import FallBeamBackground from "@/components/common/FallBeam";
 import WLLiveRequests from "@/components/white-label/WLLiveRequests";
-import { 
-  Users, 
-  Workflow, 
-  FileText, 
-  Calendar, 
-  ShieldCheck,
-  Zap,
-  CheckCircle2,
+import {
+  Users,
+  Workflow,
+  FileText,
+  Calendar,
+  Wrench,
+  Layers,
   TrendingUp,
   Layout,
-  Briefcase,
-  Search,
-  MessageSquare,
-  FileSearch,
-  Clock
 } from "lucide-react";
 
 const PartnersPlatformPage = () => {
@@ -43,97 +37,226 @@ const PartnersPlatformPage = () => {
   ];
 
   const howItWorks = [
-    { id: 1, title: "Join the platform", description: "Quick onboarding to set up your firm profile and service areas." },
-    { id: 2, title: "Add your existing clients", description: "Bring your current portfolio into a structured, unified workspace." },
-    { id: 3, title: "Receive new service requests", description: "Get matched with real client requests looking for your expertise." },
-    { id: 4, title: "Deliver and manage", description: "Use professional workflows to deliver services and manage engagements." },
+    {
+      id: 1,
+      title: "Join the VACEI Platform",
+      description: "Set up your firm profile and service areas.",
+    },
+    {
+      id: 2,
+      title: "Bring Your Clients",
+      description: "Onboard your existing clients into a structured workspace.",
+    },
+    {
+      id: 3,
+      title: "Deliver Through VACEI",
+      description: "Manage documents, workflows, and service delivery in one system.",
+    },
+    {
+      id: 4,
+      title: "Access the Network",
+      description: "Expand your capabilities through the VACEI Network when additional expertise is required.",
+    },
   ];
 
-  const whyJoin = [
-    { id: 1, title: "Get New Clients", description: "Receive targeted requests across accounting, audit, tax, and legal service lines.", icon: Search },
-    { id: 2, title: "Manage All Clients", description: "A centralised digital workspace for all documents, communication, and filings.", icon: Layout },
-    { id: 3, title: "Deliver Efficiently", description: "Handle multiple service lines and complex engagements in one unified platform.", icon: TrendingUp },
+  const coreValue = [
+    {
+      id: 1,
+      title: "Manage Your Clients",
+      description:
+        "Operate all your client relationships in one structured platform — documents, workflows, and deadlines in one place.",
+      icon: Users,
+    },
+    {
+      id: 2,
+      title: "Deliver Services Efficiently",
+      description:
+        "Use built-in tools for accounting, audit, compliance, and service delivery — all within your workspace.",
+      icon: Workflow,
+    },
+    {
+      id: 3,
+      title: "Capture More Opportunities",
+      description:
+        "Receive your clients’ requests directly and expand your services through trusted partners or the VACEI Network when needed.",
+      icon: TrendingUp,
+    },
   ];
 
   const capabilities = [
-    { id: 1, title: "Client workspaces", description: "Secure environments for every client with dedicated portals." },
-    { id: 2, title: "Document tracking", description: "Automated requests and status tracking for all client files." },
-    { id: 3, title: "Engagement workflows", description: "Standardised steps for accounting, audit, and legal delivery." },
-    { id: 4, title: "Compliance calendar", description: "Never miss a deadline with automated filing alerts." },
-    { id: 5, title: "Proposal system", description: "Professional quoting and onboarding for new client requests." },
-    { id: 6, title: "Unified platform", description: "One login for all your service lines and client relationships." },
+    {
+      id: 1,
+      title: "Client Workspaces",
+      description: "Structured environments for managing every client engagement",
+      icon: Layout,
+    },
+    {
+      id: 2,
+      title: "Document & Request Management",
+      description: "Track all client documentation and requests in one place",
+      icon: FileText,
+    },
+    {
+      id: 3,
+      title: "Engagement Workflows",
+      description: "Standardised delivery across accounting, audit, legal, and compliance",
+      icon: Workflow,
+    },
+    {
+      id: 4,
+      title: "Compliance Tracking",
+      description: "Automated deadlines and filing visibility",
+      icon: Calendar,
+    },
+    {
+      id: 5,
+      title: "Built-in Service Tools",
+      description: "Accounting integrations, audit working papers, OCR, and automation tools",
+      icon: Wrench,
+    },
+    {
+      id: 6,
+      title: "Unified Platform",
+      description: "One system for all service lines and client relationships",
+      icon: Layers,
+    },
+  ];
+
+  const pricingFeatures = [
+    "Full client workspaces",
+    "Access to the VACEI Network",
+    "Built-in audit tools",
+    "Built-in accounting tools",
+    "Document and request management",
+    "Workflow and compliance tracking",
+    "Unlimited service delivery",
   ];
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Hero Section */}
       <WLHero
-        title="VACEI Partner Platform"
-        subtitle="Get Clients and Manage Them — All in One Platform"
-        overview="Receive real client requests. Manage accounting, audit, legal, and compliance engagements in one structured workspace. No commissions. No complexity. Just growth."
+        title="Partner Platform"
+        subtitle="Run your firm on VACEI — and access new client opportunities"
+        overview="Receive your clients’ service requests directly through your portal. Handle them internally, allocate them to a trusted partner, or access the VACEI Network for additional expertise — all while remaining in control of the client relationship."
+        trustLine="Join a curated global network of professional firms — powered by a structured platform"
         ctaText="Book a Demo"
-        highlightWords={["Get", "Clients", "All", "One"]}
+        secondaryCtaText="Apply to Join"
+        headlineVariant="plain"
+        highlightWords={[]}
         onCtaClick={goContact}
+        onSecondaryCtaClick={goContact}
       />
 
       <div className="relative">
         <FallBeamBackground beamColorClass="primary-blue" lineCount={25} className="z-0" />
-        
+
         <div className="relative z-10">
-          {/* Live Requests Section */}
           <WLLiveRequests
-            sectionTitle="Live Client Requests"
+            badgeLabel="Live Opportunities"
+            sectionTitle="Opportunities Across the VACEI Network"
+            intro={
+              "A snapshot of service needs across the VACEI Network.\n\nOpportunities are accessed in a controlled way — ensuring firms maintain ownership of their clients while expanding their reach when needed."
+            }
             requests={liveRequests}
           />
 
-          {/* Why Firms Join Section */}
           <WLInteractiveCards
-            sectionSubtitle="Why Firms Join VACEI"
-            sectionTitle="The Professional Firm OS"
-            items={whyJoin}
+            sectionTitle="Run your firm. Expand your reach. Stay in control."
+            items={coreValue}
           />
 
-          {/* How It Works Section */}
+          {/* Control & ownership */}
+          <section className="py-20 bg-white relative overflow-hidden border-y border-gray-100">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl sm:text-5xl font-black text-text-dark tracking-tight mb-8"
+              >
+                Control & Ownership Built In
+              </motion.h2>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 }}
+                className="text-lg text-gray/80 font-medium leading-relaxed space-y-4 text-left sm:text-center"
+              >
+                <p>Your firm remains in control of every client relationship.</p>
+                <p>All service requests from your clients come directly to you. You decide how they are handled — whether internally, through a trusted partner, or via the VACEI Network.</p>
+                <p className="font-black text-text-dark pt-2">Nothing is routed externally unless you choose.</p>
+              </motion.div>
+            </div>
+          </section>
+
           <WLProcess
-            sectionTitle="How It Works"
-            tagline="Streamlined Participation"
-            description="Our platform connects professional firms with client needs through a simple, structured 4-step process."
+            tagline="How It Works"
+            sectionTitle="Simple. Structured. Scalable."
             steps={howItWorks}
           />
 
-          {/* Capabilities Section - Using Bento Grid for 6 items */}
           <WLBentoGrid
-             sectionTitle="Platform Capabilities"
-             sectionSubtitle="Full Suite of Tools"
-             items={capabilities.map(c => ({...c, icon: ShieldCheck}))}
+            sectionSubtitle="Platform capabilities"
+            sectionTitle="Built to Run Your Firm"
+            sectionDescription="VACEI is not just a portal — it is where your firm delivers its services."
+            items={capabilities}
           />
 
-          {/* Pricing Section */}
+          <section className="py-20 bg-[#F4F6F9] relative overflow-hidden">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary-blue/5 text-primary-blue font-black tracking-widest uppercase text-[10px] border border-primary-blue/10 mb-6">
+                The network
+              </span>
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl sm:text-5xl font-black text-text-dark tracking-tight mb-8"
+              >
+                Powered by the VACEI Network
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-lg text-gray/80 font-medium leading-relaxed whitespace-pre-line"
+              >
+                {
+                  "VACEI connects your firm to a curated global network of professional firms.\n\nAccess additional expertise, collaborate across jurisdictions, and expand your service offering — all within a structured and controlled environment."
+                }
+              </motion.p>
+            </div>
+          </section>
+
           <WLPricing
-            title="Professional Pricing"
-            price="150"
-            period="– 350 / month"
-            description="Simple, transparent subscription. We don't take a cut of your growth."
-            features={[
-              "100% Revenue Retention",
-              "No Commissions",
-              "Unlimited Client Capacity",
-              "All Platform Modules Included",
-              "Dedicated Account Support"
-            ]}
-            ctaText="Start Now"
+            badgeText="Pricing"
+            title="Simple, scalable pricing"
+            description="Run your firm, manage your clients, and access the VACEI Network — all in one platform."
+            price="€4"
+            period="per client / month"
+            startsFromText=""
+            footnoteText="Includes access to the VACEI Network, audit tools, accounting tools, and your full client workspace."
+            features={pricingFeatures}
+            capabilitiesText="Includes"
+            fullAccessText="Full access"
+            ctaText="Book a Demo"
+            trustedAcrossEuropeText="Trusted by partner firms"
+            partnerLabelText="Across the VACEI Network"
             onCtaClick={goContact}
           />
         </div>
       </div>
 
-      {/* Final CTA Section */}
       <WLCTASection
         badge="Partner Network"
-        title="Start Receiving Clients"
-        subtitle="VACEI is the operating system for professional services — combining accounting, audit, tax, legal, and compliance into one unified platform. Book your demo today."
+        title="Join a curated global network of professional firms"
+        subtitle="Run your firm on a structured platform, maintain full control of your clients, and access new opportunities through the VACEI Network."
         ctaText="Book a Demo"
+        secondaryCtaText="Apply to Join"
         onCtaClick={goContact}
+        onSecondaryCtaClick={goContact}
+        footerLine="Professional services are delivered by each firm through the VACEI platform, with optional collaboration through the VACEI Network when required."
       />
     </main>
   );

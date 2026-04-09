@@ -13,9 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     locales.map((l) => [l, `${base}/${l}${path}`]),
   ) as Record<string, string>;
 
-  const title = "VACEI Partner Platform | Get Clients & Manage Engagements";
+  const title = "VACEI Partner Platform | Run Your Firm & Grow Through the Network";
   const description =
-    "Join the VACEI partner platform: receive client requests, manage engagements in one workspace, transparent pricing with no commissions. Book a demo.";
+    "Run your firm on VACEI: receive client requests in your portal, stay in control of relationships, and access the VACEI Network when you need more expertise. Book a demo or apply to join.";
 
   return {
     title,

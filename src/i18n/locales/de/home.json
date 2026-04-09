@@ -30,34 +30,7 @@
     "footerTitle": "Feste Teams. Klare Verantwortung.",
     "footerBody": "Jeder Mandant wird von einem benannten VACEI-Team betreut."
   },
-  "auditPlatform": {
-    "badge": "All-in-one-Arbeitsplatz",
-    "titleLine1": "Eine Plattform.",
-    "titleHighlight": "Volle Sichtbarkeit.",
-    "body": "Ein Unternehmen zu führen bedeutet, sich mit Buchhaltern, Wirtschaftsprüfern, Anwälten, Steuerberatern und Firmendienstleistern abzustimmen. Zu oft ist diese Arbeit über E-Mails, Ordner, Tabellenkalkulationen und isolierte Systeme verstreut. VACEI führt alles in einem strukturierten Arbeitsbereich zusammen, damit Unternehmen und Berater mit mehr Sichtbarkeit, Rechenschaftspflicht und Kontrolle arbeiten können.",
-    "quoteLine1": "Professionelle Dienstleistungen erfordern Struktur.",
-    "quoteLine2": "VACEI gibt Ihnen diese Struktur.",
-    "clientPortalCta": "Kundenportal testen",
-    "complianceVerified": "Compliance verifiziert",
-    "principles": [
-      {
-        "title": "Strukturierte Arbeitsabläufe",
-        "desc": "Klare Phasen des Auftrags, definierte Verantwortlichkeiten und Fortschrittsverfolgung bei jeder Dienstleistung."
-      },
-      {
-        "title": "Kontrollierte Dokumentation",
-        "desc": "Zentralisierte Dateien, organisierte Aufzeichnungen, Versionssichtbarkeit und sicherer Dokumentenaustausch."
-      },
-      {
-        "title": "Prüf- und Genehmigungsebenen",
-        "desc": "Definierte Prüfungsabläufe, verfolgte Kommentare und Freigabeverlauf über alle Dienste hinweg."
-      },
-      {
-        "title": "Sichere Kundeninteraktion",
-        "desc": "Anfragen, Uploads, Genehmigungen und Kommunikation werden in einer kontrollierten Umgebung abgewickelt."
-      }
-    ]
-  },
+  "auditPlatform": {},
   "workspaceEntry": {
     "activeEntities": "Aktive Einheiten",
     "card1TitleBefore": "Erstellen Sie einen Arbeitsbereich für Ihr ",
@@ -98,27 +71,9 @@
   },
   "howItWorks": {
     "badge": "Wie es funktioniert",
-    "titleLine1": "Präzision in ",
-    "titleHighlight": "jeder Phase.",
-    "subtitle": "Erstellen Sie einen Arbeitsbereich, laden Sie Ihre Berater ein und verwalten Sie jeden Auftrag, jedes Dokument und jede Frist auf einer strukturierten Plattform.",
-    "steps": [
-      {
-        "title": "Umfang definieren",
-        "description": "Registrieren Sie sich und beantworten Sie ein paar einfache Fragen, um die professionellen Dienstleistungen zu definieren, die Ihr Unternehmen benötigt."
-      },
-      {
-        "title": "Angebote erhalten",
-        "description": "Vergleichen Sie Gebote von verifizierten Firmen und stellen Sie sicher, dass sie am besten zu Ihren Anforderungen und Ihrem Budget passen."
-      },
-      {
-        "title": "Ihre Berater ernennen",
-        "description": "Wählen Sie mit Zuversicht und beauftragen Sie sie über unsere strukturierte digitale Umgebung."
-      },
-      {
-        "title": "Abläufe zentralisieren",
-        "description": "Verfolgen Sie den Fortschritt, verwalten Sie Dokumente und koordinieren Sie alles über Ihren sicheren Arbeitsbereich."
-      }
-    ],
+    "titleLine1": "Einfach. Strukturiert.",
+    "titleHighlight": "Betreut.",
+    "subtitle": "",
     "twoWaysToStart": {
       "badge": "STARTEN SIE AUF IHRE WEISE",
       "titleLine1": "Zwei Wege für den ",

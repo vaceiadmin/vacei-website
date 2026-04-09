@@ -49,9 +49,11 @@ const WLProcess: React.FC<WLProcessProps> = ({
                   </span>
                 ))}
               </h2>
-              <p className="text-lg text-gray/80 font-medium leading-relaxed max-w-sm">
-                {description}
-              </p>
+              {description?.trim() ? (
+                <p className="text-lg text-gray/80 font-medium leading-relaxed max-w-sm">
+                  {description}
+                </p>
+              ) : null}
               <div className="w-16 h-1 w-full bg-gradient-to-r from-primary-blue to-transparent rounded-full opacity-30" />
             </motion.div>
           </div>
