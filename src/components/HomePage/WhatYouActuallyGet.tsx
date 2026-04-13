@@ -41,9 +41,9 @@ function WhatYouGetGlyph({
   );
 }
 
-const cardSurface = (isDark: boolean) =>
+const cardSurfaceMobile = (isDark: boolean) =>
   cn(
-    "overflow-hidden rounded-[1.75rem] border transition-colors",
+    "rounded-[1.75rem] border transition-colors overflow-visible md:overflow-hidden",
     isDark
       ? "border-white/20 bg-gradient-to-b from-[#12141c] to-[#0a0c12] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
       : "border-slate-200/90 bg-gradient-to-b from-white to-slate-50 shadow-[0_16px_40px_-16px_rgba(15,23,42,0.18)] ring-1 ring-slate-200/80"
@@ -86,7 +86,7 @@ const WhatYouActuallyGet = ({ isDark = true }: { isDark?: boolean }) => {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 md:gap-16 lg:grid-cols-2 lg:gap-32">
+        <div className="grid min-w-0 grid-cols-1 items-center gap-12 md:gap-16 lg:grid-cols-2 lg:gap-32">
           {/* Left Section: Title and Paragraph */}
           <div className="space-y-8 lg:space-y-12">
             <div className="space-y-5 sm:space-y-6">
@@ -126,28 +126,32 @@ const WhatYouActuallyGet = ({ isDark = true }: { isDark?: boolean }) => {
           </div>
 
           {/* Mobile / tablet: stacked list (no CardSwap) */}
-          <div className="lg:hidden w-full">
-            <div className="mx-auto flex max-h-[min(70vh,640px)] flex-col gap-3 overflow-y-auto pr-1 sm:gap-4 [scrollbar-width:thin]">
+          <div className="min-w-0 w-full lg:hidden">
+            <div className="mx-auto flex max-h-[min(70vh,640px)] min-w-0 w-full flex-col gap-3 overflow-y-auto overflow-x-hidden pr-1 [scrollbar-width:thin] sm:gap-4">
               {items.map((item, i) => {
                 const Icon = cardIcons[i % cardIcons.length];
                 return (
                   <article
                     key={`mobile-${i}`}
-                    className={cn("relative px-4 pb-4 pt-3.5 sm:px-5 sm:pb-5 sm:pt-4", cardSurface(isDark))}
+                    className={cn(
+                      "relative min-w-0 w-full px-3 pb-4 pt-3.5 sm:px-5 sm:pb-5 sm:pt-4",
+                      cardSurfaceMobile(isDark)
+                    )}
                   >
                     <div
                       className={cn(
-                        "pointer-events-none absolute left-8 right-8 top-0 h-[2px] rounded-full sm:left-10 sm:right-10",
+                        "pointer-events-none absolute left-6 right-6 top-0 h-[2px] rounded-full sm:left-10 sm:right-10",
                         isDark
                           ? "bg-gradient-to-r from-transparent via-blue-500/45 to-transparent"
                           : "bg-gradient-to-r from-transparent via-blue-500/35 to-transparent"
                       )}
                       aria-hidden
                     />
-                    <div className="flex gap-3 sm:gap-4">
+                    {/* Column on phones so copy uses full width and wraps; row from md up */}
+                    <div className="flex min-w-0 flex-col gap-3 md:flex-row md:items-start md:gap-4">
                       <div
                         className={cn(
-                          "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl shadow-md sm:h-14 sm:w-14 sm:rounded-2xl",
+                          "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl shadow-md md:h-14 md:w-14 md:rounded-2xl",
                           isDark
                             ? "bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/25"
                             : "bg-blue-50 text-blue-600 shadow-sm ring-1 ring-blue-100"
@@ -155,10 +159,10 @@ const WhatYouActuallyGet = ({ isDark = true }: { isDark?: boolean }) => {
                       >
                         <WhatYouGetGlyph icon={Icon} size="sm" />
                       </div>
-                      <div className="min-w-0 flex-1 space-y-2">
+                      <div className="min-w-0 w-full flex-1 space-y-2 overflow-visible">
                         <h3
                           className={cn(
-                            "text-base font-black leading-snug tracking-tight sm:text-lg",
+                            "whitespace-normal break-words text-base font-black leading-snug tracking-tight text-pretty sm:text-lg",
                             isDark ? "text-white" : "text-slate-900"
                           )}
                         >
@@ -166,7 +170,7 @@ const WhatYouActuallyGet = ({ isDark = true }: { isDark?: boolean }) => {
                         </h3>
                         <p
                           className={cn(
-                            "text-sm font-medium leading-relaxed sm:text-[15px]",
+                            "whitespace-normal break-words text-sm font-medium leading-relaxed sm:text-[15px]",
                             isDark ? "text-slate-400" : "text-slate-600"
                           )}
                         >
@@ -174,7 +178,7 @@ const WhatYouActuallyGet = ({ isDark = true }: { isDark?: boolean }) => {
                         </p>
                         <div
                           className={cn(
-                            "flex items-center gap-2 border-t pt-3 sm:gap-3 sm:pt-3.5",
+                            "flex min-w-0 flex-wrap items-center gap-2 border-t pt-3 sm:gap-3 sm:pt-3.5",
                             isDark ? "border-white/10" : "border-slate-200"
                           )}
                         >
