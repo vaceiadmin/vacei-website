@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { useLazyMedia } from "@/hooks/use-lazy-media";
+import { XCircle, CheckCircle2, PlayCircle, Check, X } from "lucide-react";
 
 const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMobile }: { src: string, alt: string, className?: string, isDark?: boolean, playDesktop: string, playMobile: string }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -49,7 +50,7 @@ const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMo
       onMouseLeave={() => !isMobile && setIsHovered(false)}
       onClick={() => isMobile && setIsHovered((prev) => !prev)}
     >
-      <div className={cn("absolute inset-0 z-0", isDark ? "bg-[#0a0d1d]" : "bg-white")} />
+      <div className={cn("absolute inset-0 z-0", isDark ? "bg-[#05050A]" : "bg-white")} />
 
       {/* The Active GIF */}
       <div className={cn("absolute inset-0 transition-opacity duration-500 z-10", isHovered ? "opacity-100" : "opacity-0")}>
@@ -76,14 +77,12 @@ const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMo
         )}
 
         {/* Play Overlay Indicator */}
-        <div className={cn("absolute inset-0 flex items-center justify-center backdrop-blur-[2px] transition-all duration-500", !isMobile && "group-hover:opacity-0", isDark ? "bg-black/40" : "bg-white/40")}>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <div className={cn("w-16 h-16 rounded-full flex items-center justify-center shadow-2xl backdrop-blur-md transform transition-transform duration-500 group-hover:scale-125", isDark ? "bg-blue-600 text-white shadow-blue-500/30" : "bg-white text-blue-600 shadow-[0_10px_30px_rgba(0,0,0,0.1)]")}>
-              <svg className="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-            </div>
-            <span className={cn("text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg", isDark ? "bg-[#0e1222]/80 border border-white/10 text-white" : "bg-white/80 border border-slate-200 text-slate-800")}>
-              {isMobile ? playMobile : playDesktop}
-            </span>
+        <div className={cn("absolute inset-0 flex items-center justify-center transition-all duration-500 z-20 pointer-events-none", !isMobile && "group-hover:opacity-0", isDark ? "bg-black/10" : "bg-white/10")}>
+          <div className={cn("flex items-center gap-3 px-5 py-3 rounded-full backdrop-blur-xl shadow-2xl transition-transform duration-500 group-hover:scale-105 border", isDark ? "bg-black/60 border-white/10" : "bg-white/80 border-slate-200 shadow-xl shadow-black/5")}>
+             <PlayCircle className={cn("w-5 h-5", isDark ? "text-white" : "text-blue-600")} />
+             <span className={cn("text-[11px] font-bold uppercase tracking-widest", isDark ? "text-white" : "text-slate-800")}>
+               {isMobile ? playMobile : playDesktop}
+             </span>
           </div>
         </div>
       </div>
@@ -91,66 +90,100 @@ const HoverPlayGif = ({ src, alt, className, isDark = false, playDesktop, playMo
   );
 };
 
-const BeforeAndAfterSection = () => {
+const BeforeAndAfterSection = ({ isDark = false }: { isDark?: boolean }) => {
   const { t } = useTranslation('home');
   return (
-    <section className="pt-32 pb-24 sm:pt-24 lg:py-32 bg-black relative overflow-hidden isolate z-0 rounded-[48px]">
+    <section className={cn(
+        "py-24 sm:py-32 relative overflow-hidden isolate z-0 mb-12 sm:mb-20 rounded-[48px]",
+        isDark && "mx-4 sm:mx-6 lg:mx-8",
+        isDark ? "bg-[#05050A] text-white shadow-2xl" : "bg-[#FAFBFF] text-slate-900 border border-slate-100 shadow-xl shadow-blue-500/5"
+    )}>
       {/* Background Decor */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className={cn(
+        "absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] rounded-full blur-[120px] pointer-events-none -z-10",
+        isDark ? "bg-blue-600/10" : "bg-blue-400/5"
+      )} />
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full max-w-7xl">
-        <div className="text-center mb-20 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-sm mb-6">
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-            <span className="text-[11px] font-black text-blue-400 uppercase tracking-widest">{t('beforeAfter.badge')}</span>
+        <div className="text-center mb-16 lg:mb-24 max-w-3xl mx-auto space-y-6">
+          <div className={cn(
+            "inline-flex items-center gap-2 px-4 py-1.5 rounded-full border",
+            isDark ? "bg-white/5 border-white/10" : "bg-blue-50 border-blue-100"
+          )}>
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+            <span className="text-[11px] font-black text-blue-500 uppercase tracking-widest">{t('beforeAfter.badge')}</span>
           </div>
           <SectionTitleHero
-            variant="dark"
-            className="mb-6 items-center text-center"
+            variant={isDark ? "dark" : "light"}
+            className="items-center text-center"
             line1={t("beforeAfter.titleLine1")}
             highlight={t("beforeAfter.titleHighlight")}
           />
-          <p className="mt-4 text-lg font-medium text-slate-400 max-w-2xl mx-auto">
+          <p className={cn(
+            "text-xl font-medium max-w-2xl mx-auto opacity-70",
+            isDark ? "text-slate-400" : "text-slate-600"
+          )}>
             {t('beforeAfter.subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 w-full h-auto lg:h-[600px] xl:h-[650px] items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
           
-          {/* Card 1: Before */}
-          <div className="relative z-10 flex flex-col group/card h-full w-full">
-            <div className="absolute -inset-1 bg-gradient-to-tr from-slate-200 to-slate-100 rounded-[2.5rem] blur-xl opacity-50 group-hover/card:opacity-70 transition duration-500 pointer-events-none" />
-            
-            <div className="relative w-full h-full flex flex-col bg-white rounded-[2rem] border border-slate-200 overflow-hidden shadow-xl transition-all duration-500 group-hover/card:-translate-y-2">
-              <div className="p-8 border-b border-slate-100 flex items-start justify-between bg-slate-50 shrink-0">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500 font-bold">&times;</span>
-                    <h4 className="text-2xl font-black text-slate-900">{t('beforeAfter.beforeTitle')}</h4>
-                  </div>
-                  <ul className="space-y-2">
+          {/* Card 1: Before (De-emphasized) */}
+          <div className="group/card relative flex flex-col h-full">
+            <div className={cn(
+              "relative h-full flex flex-col rounded-[2.5rem] border overflow-hidden transition-all duration-500 opacity-80 hover:opacity-100",
+              isDark ? "bg-[#0a0a0a] border-white/5" : "bg-slate-50 border-slate-200 shadow-sm"
+            )}>
+              <div className={cn(
+                "p-8 lg:p-10 border-b flex flex-col gap-6",
+                isDark ? "border-white/5 bg-[#050505]" : "border-slate-200 bg-white/50"
+              )}>
+                <div className="flex items-center gap-4">
+                    <div className={cn(
+                      "w-12 h-12 rounded-2xl flex items-center justify-center border",
+                      isDark ? "bg-white/5 text-slate-400 border-white/10" : "bg-slate-100 text-slate-500 border-slate-200"
+                    )}>
+                        <XCircle className="w-6 h-6" />
+                    </div>
+                    <h4 className={cn(
+                      "text-2xl lg:text-3xl font-black tracking-tight",
+                      isDark ? "text-slate-300" : "text-slate-600"
+                    )}>{t('beforeAfter.beforeTitle')}</h4>
+                </div>
+                <div className="flex flex-col gap-3">
                     {(t('beforeAfter.beforeItems', { returnObjects: true }) as string[]).map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm font-medium text-slate-500">
-                        <div className="w-1 h-1 rounded-full bg-slate-300" />
-                        {item}
-                      </li>
+                      <div key={idx} className={cn("flex items-start gap-3 text-sm font-medium", isDark ? "text-slate-500" : "text-slate-500")}>
+                        <div className={cn("flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5", isDark ? "bg-white/5 text-slate-600" : "bg-slate-200 text-slate-400")}>
+                           <X className="w-3 h-3" />
+                        </div>
+                        <span className="leading-snug">{item}</span>
+                      </div>
                     ))}
-                  </ul>
                 </div>
               </div>
 
-              {/* Window Wrapper */}
-              <div className="p-4 sm:p-8 bg-slate-100/50 flex-1 flex flex-col justify-center items-center w-full">
-                <div className="rounded-xl overflow-hidden bg-white border border-slate-200 shadow-sm w-full">
-                  <div className="h-8 bg-slate-50 border-b border-slate-100 flex items-center px-4 gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+              <div className={cn(
+                "p-6 sm:p-10 flex-1 flex flex-col justify-center items-center relative overflow-hidden",
+                isDark ? "bg-[#050505]" : "bg-slate-50"
+              )}>
+                <div className={cn(
+                  "rounded-2xl overflow-hidden border w-full relative z-10 transition-transform duration-500 group-hover/card:scale-[1.02]",
+                  isDark ? "bg-[#000] border-white/10" : "bg-white border-slate-200 shadow-sm"
+                )}>
+                  <div className={cn(
+                    "h-8 border-b flex items-center px-4 gap-1.5",
+                    isDark ? "bg-[#111] border-white/5" : "bg-slate-100 border-slate-200"
+                  )}>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] opacity-30" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] opacity-30" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] opacity-30" />
                   </div>
-                  <div className="relative w-full aspect-video bg-white overflow-hidden p-[2px]">
+                  <div className={cn("relative aspect-video p-1", isDark ? "bg-[#0a0a0a]" : "bg-white")}>
                     <HoverPlayGif
                       src="/assets/videos/Before.gif"
                       alt={t('beforeAfter.beforeGifAlt')}
+                      isDark={isDark}
                       playDesktop={t('beforeAfter.hoverPlayDesktop')}
                       playMobile={t('beforeAfter.hoverPlayMobile')}
                     />
@@ -160,44 +193,63 @@ const BeforeAndAfterSection = () => {
             </div>
           </div>
 
-          {/* Card 2: After */}
-          <div className="relative z-10 flex flex-col group/card h-full w-full">
-            <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600 to-blue-800 rounded-[2.5rem] blur-xl opacity-40 group-hover/card:opacity-60 transition duration-500 animate-pulse-slow pointer-events-none" />
+          {/* Card 2: After (Highlighted) */}
+          <div className="group/card relative flex flex-col h-full z-10">
+            <div className={cn(
+              "absolute -inset-1.5 rounded-[2.5rem] blur-[20px] opacity-20 group-hover/card:opacity-40 transition duration-700 pointer-events-none",
+              isDark ? "bg-primary-blue" : "bg-blue-400"
+            )} />
             
-            <div className="relative w-full h-full flex flex-col bg-[#020410] rounded-[2rem] border border-blue-500/30 overflow-hidden shadow-2xl transition-all duration-500 group-hover/card:-translate-y-2">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] pointer-events-none" />
+            <div className={cn(
+              "relative h-full flex flex-col rounded-[2.5rem] border overflow-hidden transition-all duration-700",
+              isDark ? "bg-black border-blue-500/30 shadow-[0_0_50px_rgba(37,99,235,0.15)]" : "bg-white border-blue-500/40 shadow-2xl shadow-blue-500/10"
+            )}>
+              <div className={cn("absolute top-0 right-0 w-64 h-64 blur-[100px] pointer-events-none", isDark ? "bg-blue-500/10" : "bg-blue-400/20")} />
 
-              <div className="p-8 border-b border-white/10 flex items-start justify-between relative z-10 bg-white/5 backdrop-blur-sm shrink-0">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30">&#10003;</span>
-                    <h4 className="text-2xl font-black text-white">{t('beforeAfter.afterTitle')}</h4>
-                  </div>
-                  <ul className="space-y-2">
+              <div className={cn(
+                "p-8 lg:p-10 border-b flex flex-col gap-6 backdrop-blur-md relative z-10",
+                isDark ? "border-white/10 bg-white/5" : "border-slate-100 bg-blue-50/50"
+              )}>
+                <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/40">
+                        <CheckCircle2 className="w-6 h-6" />
+                    </div>
+                    <h4 className={cn("text-2xl lg:text-3xl font-black tracking-tight", isDark ? "text-white" : "text-slate-900")}>{t('beforeAfter.afterTitle')}</h4>
+                </div>
+                <div className="flex flex-col gap-3">
                     {(t('beforeAfter.afterItems', { returnObjects: true }) as string[]).map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm font-medium text-blue-300/80">
-                        <div className="w-1 h-1 rounded-full bg-blue-500" />
-                        {item}
-                      </li>
+                      <div key={idx} className={cn("flex items-start gap-3 text-sm font-bold", isDark ? "text-slate-200" : "text-slate-800")}>
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mt-0.5">
+                           <Check className="w-3 h-3" />
+                        </div>
+                        <span className="leading-snug">{item}</span>
+                      </div>
                     ))}
-                  </ul>
                 </div>
               </div>
 
-              {/* Window Wrapper */}
-              <div className="p-4 sm:p-8 bg-black/20 flex-1 flex flex-col justify-center items-center w-full relative">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-500/20 rounded-full blur-[60px] pointer-events-none" />
-                <div className="rounded-xl overflow-hidden bg-[#0e1222] border border-white/10 shadow-xl relative z-10 w-full">
-                  <div className="h-8 bg-white/5 border-b border-white/10 flex items-center px-4 gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+              <div className={cn(
+                "p-6 sm:p-10 flex-1 flex flex-col justify-center items-center relative overflow-hidden",
+                isDark ? "bg-[#050505]" : "bg-white"
+              )}>
+                <div className="absolute inset-0 bg-blue-500/5 blur-[50px] pointer-events-none" />
+                <div className={cn(
+                  "rounded-2xl overflow-hidden border shadow-2xl relative z-10 w-full transition-transform duration-500 group-hover/card:scale-[1.02]",
+                  isDark ? "bg-[#000] border-white/10" : "bg-white border-slate-200"
+                )}>
+                  <div className={cn(
+                    "h-8 border-b flex items-center px-4 gap-1.5",
+                    isDark ? "bg-[#111] border-white/5" : "bg-slate-50 border-slate-100"
+                  )}>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
                   </div>
-                  <div className="relative w-full aspect-video bg-[#0a0d1d] overflow-hidden p-[2px]">
+                  <div className={cn("relative aspect-video p-1", isDark ? "bg-black" : "bg-white")}>
                     <HoverPlayGif
                       src="/assets/videos/After.gif"
                       alt={t('beforeAfter.afterGifAlt')}
-                      isDark={true}
+                      isDark={isDark}
                       playDesktop={t('beforeAfter.hoverPlayDesktop')}
                       playMobile={t('beforeAfter.hoverPlayMobile')}
                     />
@@ -208,8 +260,12 @@ const BeforeAndAfterSection = () => {
           </div>
 
         </div>
-        <div className="mt-16 text-center">
-            <p className="text-lg font-bold text-slate-300">
+        
+        <div className="mt-20 text-center">
+            <p className={cn(
+                "text-2xl font-bodoni italic opacity-60",
+                isDark ? "text-slate-300" : "text-slate-600"
+            )}>
               {t('beforeAfter.footerLine')}
             </p>
         </div>

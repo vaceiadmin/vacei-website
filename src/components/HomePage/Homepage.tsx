@@ -2,26 +2,25 @@
 
 import React, { useEffect } from "react";
 // import ReadyToSimplifySection from "./ReadyToSimplifySection";
-import ServicesSection from "./ServicesSection";
-import ProcessStepsSectionDark from "./ProcessStepsSectionDark";
-import CompanySetupSection from "./CompanySetupSection";
-import FaqSection from "./FaqSection";
 import HeroSection from "./HeroSection";
-// import PortalFeature from "./PortalFeature";
-import HowItWorks from "./HowItWorks";
-import TwoWaysToStartSection from "./TwoWaysToStartSection";
-import BeforeAndAfterSection from "./BeforeAndAfterSection";
-import AuditPlatform from "./AuditPlatform/AuditPlatform";
-import WorkspaceEntrySection from "./WorkspaceEntrySection";
-import ComplianceDashboardSection from "./ComplianceDashboardSection";
+import InteractiveBlock from "./InteractiveBlock";
+import CoreStatement from "./CoreStatement";
+import ValueSection from "./ValueSection";
+import KeyBenefits from "./KeyBenefits";
+import PositioningLine from "./PositioningLine";
+import WhatYouActuallyGet from "./WhatYouActuallyGet";
+import FlexibilitySection from "./FlexibilitySection";
+import ProcessStepsSectionDark from "./ProcessStepsSectionDark";
+import GlobalDeliverySection from "./GlobalDeliverySection";
 import ActiveEUSection from "./ActiveEUSection";
-import PlatformPowerSection from "./PlatformPowerSection";
-
-import MultiCompanySection from "./MultiCompanySection";
-import WhyVaceiSection from "./WhyVaceiSection";
-import TrustSection from "./TrustSection";
+import RealTimeControl from "./RealTimeControl";
+import BeforeAndAfterSection from "./BeforeAndAfterSection";
+import TwoWaysToStartSection from "./TwoWaysToStartSection";
+import ConversionSection from "./ConversionSection";
+import CallOptionSection from "./CallOptionSection";
+import WorkspaceEntrySection from "./WorkspaceEntrySection";
 import InsightsAndResourcesSection from "./InsightsAndResourcesSection";
-import MarketplaceSection from "./MarketplaceSection";
+import FinalSection from "./FinalSection";
 
 const HomePage = () => {
   // Scroll to hash section on load (e.g. /#process-steps or /#services from navbar)
@@ -36,28 +35,63 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="relative bg-neutral-950 overflow-hidden">
-      {/* Odd sections (1,3,5,…) = dark; even (2,4,6,…) = light — each block below follows this stripe */}
-      <HeroSection />
-      <AuditPlatform />
-      <WorkspaceEntrySection />
-      <HowItWorks />
-      <MarketplaceSection />
-      <TwoWaysToStartSection />
-      <ProcessStepsSectionDark />
-      <BeforeAndAfterSection />
-      {/* <PlatformPowerSection /> */}
-      <ServicesSection />
+    <div className="relative bg-[#020205] overflow-hidden">
+      {/* 1. HeroSection — odd → isDark false */}
+      <HeroSection isDark={false} />
 
-      <CompanySetupSection />
-      <ComplianceDashboardSection />
-      <MultiCompanySection />
-      <ActiveEUSection />
-      <WhyVaceiSection />
-      <TrustSection />
-      <InsightsAndResourcesSection />
-      {/* <ReadyToSimplifySection /> */}
-      {/* <FaqSection /> */}
+      {/* 2. Interactive Block — even → isDark true */}
+      <InteractiveBlock isDark={true} />
+
+      {/* 3. Core Statement */}
+      <CoreStatement isDark={false} />
+
+      {/* 4. Value Section */}
+      <ValueSection isDark={true} />
+
+      {/* 5. Key Benefits */}
+      <KeyBenefits isDark={false} />
+
+      {/* 6. Positioning Line */}
+      <PositioningLine isDark={true} />
+
+      {/* 7. What You Actually Get */}
+      <WhatYouActuallyGet isDark={false} />
+
+      {/* 8. Workspace Entry Section */}
+      <WorkspaceEntrySection isDark={true} />
+
+      {/* 9. Flexibility Section */}
+      <FlexibilitySection isDark={false} />
+
+      {/* 10. Process Steps */}
+      <ProcessStepsSectionDark isDark={true} />
+
+      {/* 11. Global Delivery */}
+      <GlobalDeliverySection isDark={false} />
+
+      {/* 12. ActiveEU Section (Light) */}
+      {/* <ActiveEUSection isDark={false} /> */}
+
+      {/* 13. Real-Time Control (Dark) */}
+      <RealTimeControl isDark={true} />
+
+      {/* 14. Before & After (Light) */}
+      <BeforeAndAfterSection isDark={false} />
+
+      {/* 14b. Two ways to start — spotlight card (Dark) */}
+      <TwoWaysToStartSection isDark={true} />
+
+      {/* 15. Conversion Section (Dark) */}
+      <ConversionSection isDark={false} />
+
+      {/* 16. Call Option (Light) */}
+      <CallOptionSection isDark={true} />
+
+      {/* 17. Insights & Resources (Dark) */}
+      <InsightsAndResourcesSection isDark={false} />
+
+      {/* 18. Final Section (Light) */}
+      <FinalSection isDark={true} />
     </div>
   );
 };

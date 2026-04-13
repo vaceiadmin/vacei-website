@@ -179,18 +179,24 @@ const Navbar = () => {
         return;
       }
 
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // Homepage uses a light hero: keep nav in “dark text on light bar” until well past the hero
+      if (barePath === "/" || barePath === "") {
+        if (scrollY < 200) {
+          setIsDarkBackground(false);
+          return;
+        }
+      }
+
       // PERFORMANCE: Skip expensive background detection on iPhone/low-performance devices
       if (isIPhone || isLowPerformance) {
-        const scrollY = window.scrollY || window.pageYOffset;
-        // On iPhone, we simplify: if scrolled more than a bit, we usually want a solid look or specific theme
-        // For VACEI, most pages start with a dark hero, so we can often default to darkBackground=true if at top
-        // or just use a fixed threshold. Let's use 50px as a threshold for "scrolled" state.
-        setIsDarkBackground(scrollY < 50);
+        // Light hero at top: use dark link text (isDarkBackground false). Past hero, allow contrast flip.
+        setIsDarkBackground(scrollY >= 200);
         return;
       }
 
       const navbarRect = navbar.getBoundingClientRect();
-      const scrollY = window.scrollY || window.pageYOffset;
       const isAtTop = scrollY < 10; // Consider "at top" if scrolled less than 10px
 
       // At the top of the page, check navbar's own background and body background
@@ -309,7 +315,7 @@ const Navbar = () => {
       window.removeEventListener('scroll', throttledHandleScroll);
       window.removeEventListener('resize', handleScroll);
     };
-  }, []);
+  }, [barePath, isIPhone, isLowPerformance]);
 
   const navLinks = useMemo(
     () => [
@@ -439,10 +445,10 @@ const Navbar = () => {
             initial={false}
             className={`relative pointer-events-auto w-full mx-auto rounded-full ${
               isMobile
-                ? "bg-white border border-gray-200/80 text-text-dark"
+                ? "bg-white border border-gray-200/80 text-black"
                 : useDarkNavbarTheme
                   ? `bg-white/10 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-white/20 text-white`
-                  : `bg-white/80 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-gray-200/60 text-text-dark`
+                  : `bg-white/80 ${isIPhone || isLowPerformance ? "" : "backdrop-blur-xl"} border border-gray-200/60 text-black`
             } shadow-lg shadow-black/5 px-4  sm:px-6 lg:px-8 transition-all duration-300`}
           >
             <div className="flex items-center justify-between min-h-[56px] sm:min-h-[64px] lg:min-h-[80px]">
@@ -474,7 +480,7 @@ const Navbar = () => {
                   >
                     <LocalizedLink
                       href={link.href}
-                      className={`${useDarkNavbarTheme ? "text-white" : "text-text-dark"} font-normal text-[15px] ${useDarkNavbarTheme ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (useDarkNavbarTheme ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
+                      className={`${useDarkNavbarTheme ? "text-white" : "text-black"} font-normal text-[15px] ${useDarkNavbarTheme ? "hover:text-primary-blue/80" : "hover:text-primary-blue"} transition-colors flex items-center gap-1 ${link.isOpen ? (useDarkNavbarTheme ? "text-primary-blue/80" : "text-primary-blue") : ""}`}
                       onClick={(e) => {
                         if (link.hasDropdown) {
                           e.preventDefault();
@@ -531,7 +537,7 @@ const Navbar = () => {
                                         className="block px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/item"
                                         onClick={() => link.setIsOpen?.(false)}
                                       >
-                                        <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                        <div className="text-[14px] font-medium text-black group-hover/item:text-primary-blue transition-colors">
                                           {service.title}
                                         </div>
                                       </LocalizedLink>
@@ -566,7 +572,7 @@ const Navbar = () => {
                                         className="block px-4 py-3 rounded-xl hover:bg-gray-50 transition-colors group/item"
                                         onClick={() => link.setIsOpen?.(false)}
                                       >
-                                        <div className="text-[15px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                        <div className="text-[15px] font-medium text-black group-hover/item:text-primary-blue transition-colors">
                                           {item.label}
                                         </div>
                                       </LocalizedLink>
@@ -607,7 +613,7 @@ const Navbar = () => {
                                         className="block px-4 py-2.5 rounded-xl hover:bg-gray-50 transition-colors group/item"
                                         onClick={() => link.setIsOpen?.(false)}
                                       >
-                                        <div className="text-[14px] font-medium text-text-dark group-hover/item:text-primary-blue transition-colors">
+                                        <div className="text-[14px] font-medium text-black group-hover/item:text-primary-blue transition-colors">
                                           {item.label}
                                         </div>
                                       </LocalizedLink>
@@ -649,7 +655,7 @@ const Navbar = () => {
                     href="https://client.vacei.com/onboarding"
                     className={`flex items-center justify-center ${useDarkNavbarTheme
                         ? "text-white/90 hover:text-white"
-                        : "text-text-dark/80 hover:text-primary-blue"
+                        : "text-black/90 hover:text-primary-blue"
                       } font-medium text-[15px] transition-colors px-2`}
                   >
                     <span>{t("nav.login")}</span>
@@ -680,20 +686,20 @@ const Navbar = () => {
                 >
                   <motion.div
                     animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 8 : 0 }}
-                    className={`h-0.5 ${useDarkNavbarTheme ? "bg-white" : "bg-text-dark"} w-6`}
+                    className={`h-0.5 ${useDarkNavbarTheme ? "bg-white" : "bg-black"} w-6`}
                   />
                   <motion.div
                     animate={{ opacity: mobileMenuOpen ? 0 : 1 }}
                     className="relative w-6 h-0.5"
                   >
                     <div
-                      className={`absolute left-0 h-full ${useDarkNavbarTheme ? "bg-white" : "bg-text-dark"} transition-all duration-300 ease-out`}
+                      className={`absolute left-0 h-full ${useDarkNavbarTheme ? "bg-white" : "bg-black"} transition-all duration-300 ease-out`}
                       style={{ width: !isMobile && hamburgerHover ? 24 : 16.8 }}
                     />
                   </motion.div>
                   <motion.div
                     animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -8 : 0 }}
-                    className={`h-0.5 ${useDarkNavbarTheme ? "bg-white" : "bg-text-dark"} w-6`}
+                    className={`h-0.5 ${useDarkNavbarTheme ? "bg-white" : "bg-black"} w-6`}
                   />
                 </button>
               </div>
@@ -752,7 +758,7 @@ const Navbar = () => {
                     <div className="flex items-center justify-between py-3">
                       <LocalizedLink
                         href={link.href}
-                        className="text-text-dark font-medium text-base hover:text-primary-blue transition-colors flex-1"
+                        className="text-black font-medium text-base hover:text-primary-blue transition-colors flex-1"
                         onClick={(e) => {
                           if (link.hasDropdown) {
                             e.preventDefault();
@@ -798,7 +804,7 @@ const Navbar = () => {
                                 <LocalizedLink
                                   key={service.id}
                                   href={`/services/${service.slug}`}
-                                  className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
+                                  className="block py-2.5 text-sm font-medium text-black hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {service.title}
@@ -809,7 +815,7 @@ const Navbar = () => {
                                 <LocalizedLink
                                   key={item.href}
                                   href={item.href}
-                                  className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
+                                  className="block py-2.5 text-sm font-medium text-black hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {item.label}
@@ -820,7 +826,7 @@ const Navbar = () => {
                                 <LocalizedLink
                                   key={item.href}
                                   href={item.href}
-                                  className="block py-2.5 text-sm font-medium text-text-dark hover:text-primary-blue rounded-lg pl-3 transition-colors"
+                                  className="block py-2.5 text-sm font-medium text-black hover:text-primary-blue rounded-lg pl-3 transition-colors"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {item.label}
@@ -835,7 +841,7 @@ const Navbar = () => {
                 <div className="mt-6 pt-4 border-t border-gray-200 space-y-3">
                   <LocalizedLink
                     href="https://client.vacei.com/onboarding"
-                    className="flex w-full items-center justify-center rounded-xl border border-gray-200 bg-white py-3 text-[15px] font-medium text-text-dark transition-colors hover:border-primary-blue/40 hover:text-primary-blue"
+                    className="flex w-full items-center justify-center rounded-xl border border-gray-200 bg-white py-3 text-[15px] font-medium text-black transition-colors hover:border-primary-blue/40 hover:text-primary-blue"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {t("nav.login")}

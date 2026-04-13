@@ -1,79 +1,94 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import LocalizedLink from "@/components/common/LocalizedLink";
 import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 import { useTranslation } from "react-i18next";
 import { useLazyMedia } from "@/hooks/use-lazy-media";
 import { lazyImgProps } from "@/lib/lazy-media-props";
+import { cn } from "@/lib/utils";
 
-const HeroSection = () => {
+const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
   const { t } = useTranslation("home");
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasVideoError, setHasVideoError] = useState(false);
   const { ref: lazyMediaRef, shouldLoad: loadHeroVideo } = useLazyMedia();
-  const titleLine2 = t("hero.titleLine2").trim();
-  const titleHighlight = t("hero.titleHighlight").trim();
-  const multiLineHeadline = Boolean(titleLine2 || titleHighlight);
+  const trustPillLabels = useMemo(
+    () => (t("hero.trustPillLabels", { returnObjects: true }) as string[]) ?? [],
+    [t]
+  );
 
   return (
     <section className="w-full relative">
       <GradientContainer
-        backgroundColor="bg-black"
-        className="relative min-h-[90vh] lg:min-h-screen flex items-center pt-28 sm:pt-32 pb-24 rounded-b-[48px] overflow-hidden"
-        radialOpacity={0.6}
+        backgroundColor={isDark ? "bg-black" : "bg-white"}
+        roundedClassName="rounded-none"
+        showNoise={false}
+        className={cn(
+          "relative flex min-h-0 flex-col justify-center pt-24 pb-10 sm:min-h-[88vh] sm:pt-28 sm:pb-16 lg:min-h-screen lg:pb-32 overflow-hidden",
+          !isDark && "border-x-0 border-t-0 border-b border-slate-100 shadow-none sm:shadow-none"
+        )}
+        radialOpacity={isDark ? 0.38 : 0.2}
         leftPositionClass="-top-[5%] -left-[5%]"
         rightPositionClass="-bottom-[5%] -right-[5%]"
       >
-        <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-8 px-5 sm:px-6 sm:gap-10 lg:flex-row lg:items-center lg:gap-8 lg:px-8">
 
           {/* Left Content Area */}
-          <div className="w-full lg:w-[48%] flex flex-col items-start text-left relative z-20">
-            <div className="relative mb-6">
-              <h1 className="leading-[1.1] tracking-tight flex flex-col gap-2">
-                {multiLineHeadline ? (
-                  <>
-                    <span className="text-4xl sm:text-5xl font-bodoni text-white">
-                      {t("hero.titleLine1")}
-                    </span>
-                    {titleLine2 ? (
-                      <span className="text-4xl sm:text-5xl font-sans font-extrabold text-white">
-                        {titleLine2}
-                      </span>
-                    ) : null}
-                    {titleHighlight ? (
-                      <span className="text-4xl sm:text-5xl font-bodoni italic text-primary-blue">
-                        {titleHighlight}
-                      </span>
-                    ) : null}
-                  </>
-                ) : (
-                  <span className="text-4xl sm:text-5xl font-sans font-extrabold text-white">
-                    {t("hero.titleLine1")}
-                  </span>
-                )}
+          <div className="relative z-20 flex w-full flex-col items-start text-left lg:w-[48%]">
+            <div className="relative mb-4 sm:mb-6">
+              <h1 className="flex flex-col gap-1.5 tracking-tight sm:gap-2">
+                <span
+                  className={cn(
+                    "text-[1.625rem] font-bodoni leading-[1.15] sm:text-4xl md:text-5xl",
+                    isDark ? "text-white" : "text-slate-900"
+                  )}
+                >
+                  {t("hero.titleLine1")}
+                </span>
+                <span
+                  className={cn(
+                    "text-[1.625rem] font-sans font-extrabold leading-[1.15] sm:text-4xl md:text-5xl",
+                    isDark ? "text-white" : "text-slate-900"
+                  )}
+                >
+                  {t("hero.titleLine2")}
+                </span>
+                <span className="font-bodoni text-[1.625rem] italic leading-[1.15] text-primary-blue sm:text-4xl md:text-5xl">
+                  {t("hero.titleHighlight")}
+                </span>
               </h1>
             </div>
 
-            <div className="max-w-xl mt-6 space-y-4">
-              <p className="text-gray-400 text-base sm:text-[17px] leading-relaxed text-balance font-medium">
+            <div className="mt-4 max-w-xl space-y-3 sm:mt-6 sm:space-y-4">
+              <p
+                className={cn(
+                  "text-base leading-relaxed text-balance font-medium sm:text-lg md:text-xl",
+                  isDark ? "text-gray-400" : "text-slate-600"
+                )}
+              >
                 {t("hero.body")}
               </p>
-              {t("hero.body2").trim() ? (
-                <p className="text-gray-300 text-base sm:text-[17px] leading-relaxed text-balance font-medium">
-                  {t("hero.body2")}
-                </p>
-              ) : null}
+              <p
+                className={cn(
+                  "text-[15px] leading-relaxed text-balance font-medium sm:text-base md:text-[17px]",
+                  isDark ? "text-gray-300" : "text-slate-700"
+                )}
+              >
+                {t("hero.body2")}
+              </p>
             </div>
 
-
-
-
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-8 mb-6">
+            <div className="mb-6 mt-8 flex w-full flex-col gap-3 sm:mb-8 sm:mt-10 sm:flex-row sm:gap-4 sm:w-auto">
               <LocalizedLink
                 href="/quote"
-                className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-gray-200 text-slate-900 px-8 py-3.5 text-[15px] font-bold shadow-[0_4px_14px_rgba(255,255,255,0.1)] transition-all hover:scale-105"
+                className={cn(
+                  "group flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[15px] font-bold transition-all hover:scale-105 active:scale-95 sm:w-auto sm:px-10 sm:py-4",
+                  isDark
+                    ? "bg-gradient-to-b from-white to-gray-200 text-slate-900 shadow-[0_10px_20px_rgba(255,255,255,0.1)]"
+                    : "bg-gradient-to-b from-blue-600 to-blue-700 text-white shadow-[0_12px_28px_-6px_rgba(37,99,235,0.45)] ring-1 ring-blue-500/30 hover:from-blue-500 hover:to-blue-600"
+                )}
               >
                 <span>{t("hero.quoteCta")}</span>
                 <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
@@ -81,39 +96,64 @@ const HeroSection = () => {
 
               <LocalizedLink
                 href="/contact"
-                className="group flex items-center justify-center gap-2 rounded-full border border-gray-700 bg-[#0A0A0F]/50 text-white px-8 py-3.5 text-[15px] font-medium transition-all hover:bg-white/5 hover:border-gray-500 hover:scale-105"
+                className={cn(
+                  "group flex w-full items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-[15px] font-medium transition-all hover:scale-105 active:scale-95 sm:w-auto sm:px-10 sm:py-4",
+                  isDark
+                    ? "border-gray-700 bg-[#0A0A0F]/50 text-white hover:bg-white/5 hover:border-gray-500"
+                    : "border-blue-200/80 bg-white text-blue-700 shadow-sm shadow-blue-500/10 hover:bg-blue-50/90 hover:border-blue-300"
+                )}
               >
                 <span>{t("hero.demoCta")}</span>
                 <ArrowRight className="w-4 h-4 ml-1 text-primary-blue transition-transform group-hover:translate-x-1" />
               </LocalizedLink>
             </div>
 
-
-            <div className="flex flex-row items-center gap-x-6 sm:gap-x-10  w-full overflow-x-auto hide-scrollbar pb-2 sm:pb-0">
+            <div className="hide-scrollbar flex w-full flex-row flex-wrap items-center gap-x-5 gap-y-3 overflow-x-auto pb-1 sm:gap-x-10 sm:pb-0">
               <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+                <div className="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></div>
                 </div>
-                <span className="text-gray-400 text-[14px] font-medium leading-none">{t("hero.benefit1")}</span>
+                <span
+                  className={cn(
+                    "text-[14px] font-medium leading-none",
+                    isDark ? "text-gray-400" : "text-slate-600"
+                  )}
+                >
+                  {t("hero.benefit1")}
+                </span>
               </div>
               <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+                <div className="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></div>
                 </div>
-                <span className="text-gray-400 text-[14px] font-medium leading-none">{t("hero.benefit2")}</span>
+                <span
+                  className={cn(
+                    "text-[14px] font-medium leading-none",
+                    isDark ? "text-gray-400" : "text-slate-600"
+                  )}
+                >
+                  {t("hero.benefit2")}
+                </span>
               </div>
               <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+                <div className="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></div>
                 </div>
-                <span className="text-gray-400 text-[14px] font-medium leading-none">{t("hero.benefit3")}</span>
+                <span
+                  className={cn(
+                    "text-[14px] font-medium leading-none",
+                    isDark ? "text-gray-400" : "text-slate-600"
+                  )}
+                >
+                  {t("hero.benefit3")}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Right Visual Area */}
-          <div className="w-full lg:w-[50%] relative flex justify-center items-center mt-12 lg:mt-0">
-            <div className="relative w-full max-w-[650px] mx-auto">
+          <div className="relative mt-6 flex w-full max-w-lg justify-center self-center sm:mt-10 lg:mt-0 lg:w-[50%] lg:max-w-none">
+            <div className="relative mx-auto w-full max-w-[min(100%,520px)] lg:max-w-[650px]">
 
               {/* Main Browser Window Wrapper */}
               <div className="relative rounded-2xl overflow-hidden bg-[#1D1E30] border border-white/10 shadow-2xl z-10 transition-transform duration-700 hover:scale-[1.02]">
@@ -167,11 +207,28 @@ const HeroSection = () => {
               <div className="absolute -top-4 -right-4 w-14 h-14 bg-[#181926] rounded-2xl border border-white/10 flex items-center justify-center shadow-2xl z-20 hidden sm:flex">
                 <div className="w-6 h-6 rounded-full border-2 border-primary-blue border-r-transparent animate-spin" />
               </div>
-
-
             </div>
           </div>
         </div>
+
+        {/* Trust strip: in-flow on small screens to avoid overlap with floating UI; absolute on md+ */}
+        {t("hero.trustStrip").trim() ? (
+          <div className="relative z-30 mx-auto mt-8 w-full max-w-4xl px-4 sm:mt-10 md:absolute md:-bottom-20 md:left-1/2 md:mt-0 md:-translate-x-1/2 lg:-bottom-24">
+            <div className="flex flex-col items-stretch justify-center gap-3 rounded-2xl border border-white/20 bg-white/95 px-5 py-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:rounded-full sm:px-8 md:px-10">
+              {trustPillLabels.map((label, i) => (
+                <React.Fragment key={`${label}-${i}`}>
+                  {i > 0 ? <div className="hidden h-4 w-px bg-slate-200 sm:block" /> : null}
+                  <div className="flex items-center gap-3 group">
+                    <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] font-black group-hover:scale-110 transition-transform">
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <span className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900">{label}</span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </GradientContainer>
 
       <style dangerouslySetInnerHTML={{
@@ -185,8 +242,8 @@ const HeroSection = () => {
         }
       `}} />
 
-      {/* Bottom Services Strip (Marquee) */}
-      <div className="w-full bg-white relative py-6 sm:py-8 border-b border-gray-100 overflow-hidden">
+      {/* Bottom Services Strip (Marquee) — extra top padding on md+ clears the absolutely positioned trust strip */}
+      <div className="relative mt-2 w-full overflow-hidden rounded-b-4xl border-b border-gray-100 bg-white pt-6 sm:pt-8  pb-6 sm:pb-8">
         {/* Subtle fade effect on the edges */}
         <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
         <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
@@ -205,14 +262,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Trust / positioning strip */}
-      {t("hero.trustStrip").trim() ? (
-        <div className="w-full bg-[#FAFBFF] border-b border-slate-100 py-5 sm:py-6">
-          <p className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-600 text-sm sm:text-[15px] font-medium leading-relaxed">
-            {t("hero.trustStrip")}
-          </p>
-        </div>
-      ) : null}
     </section>
   );
 };

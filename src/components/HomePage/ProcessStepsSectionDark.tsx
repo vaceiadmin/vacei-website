@@ -35,7 +35,7 @@ type FormStep = {
   subtitle?: string
 }
 
-const ProcessStepsSectionDark = () => {
+const ProcessStepsSectionDark = ({ isDark = false }: { isDark?: boolean }) => {
   const { t } = useTranslation("home")
   const bgRef = useRef(null)
 
@@ -222,7 +222,10 @@ const ProcessStepsSectionDark = () => {
     <section
       id="process-steps"
       ref={bgRef}
-      className="w-full max-w-[100%] relative overflow-x-clip overflow-y-visible py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate bg-[#FAFBFF] rounded-[48px]"
+      className={cn(
+        "w-full max-w-[100%] relative overflow-x-clip overflow-y-visible py-12 sm:py-16 lg:py-20 scroll-mt-20 isolate mx-4 sm:mx-6 lg:mx-8 mb-12 sm:mb-20 rounded-[48px]",
+        isDark ? "bg-[#05050A] text-white shadow-2xl" : "bg-[#FAFBFF] text-slate-900 border border-slate-100 shadow-xl shadow-blue-500/5"
+      )}
     >
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-blue/10 rounded-full blur-[120px] -mr-48 -mt-48" />
@@ -475,7 +478,7 @@ const ProcessStepsSectionDark = () => {
             <div className="mb-10 min-w-0">
               <h2 className="text-sm font-black text-primary-blue uppercase tracking-[0.2em] mb-4">{t("processSteps.columnTitle")}</h2>
               <SectionTitleHero
-                variant="light"
+                variant={isDark ? "dark" : "light"}
                 className="mb-6"
                 line1={t("processSteps.columnHeadingLine1", {
                   defaultValue: "Start with ",
@@ -487,7 +490,7 @@ const ProcessStepsSectionDark = () => {
                   defaultValue: "workspace.",
                 })}
               />
-              <p className="text-slate-600 font-medium leading-relaxed">
+              <p className={cn("font-medium leading-relaxed", isDark ? "text-slate-400" : "text-slate-600")}>
                 {t("processSteps.columnBody")}
               </p>
             </div>

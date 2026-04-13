@@ -5,7 +5,11 @@ import { usePerformance } from '@/contexts/ReduceMotionContext'
 interface GradientContainerProps {
     children?: React.ReactNode
     className?: string
+    /** Corner radius; default keeps marketing curves. Use `rounded-none` for flush edges. */
+    roundedClassName?: string
     showRadials?: boolean
+    /** Fine grain overlay (Noise.png). Disable for cleaner light heroes and less GPU work on mobile. */
+    showNoise?: boolean
     backgroundColor?: string
     radialImage?: string
     radialOpacity?: number
@@ -20,7 +24,9 @@ interface GradientContainerProps {
 const GradientContainer = ({ 
     children, 
     className = "", 
+    roundedClassName = "rounded-[32px] md:rounded-[48px]",
     showRadials = true, 
+    showNoise = true,
     backgroundColor, 
     radialImage,
     radialOpacity,
@@ -47,7 +53,7 @@ const GradientContainer = ({
         <div
             className={`
                 relative w-full ${bgColor} ${className}
-                rounded-[32px] md:rounded-[48px] 
+                ${roundedClassName}
                 overflow-hidden
             `}
         >
@@ -84,15 +90,17 @@ const GradientContainer = ({
                 )}
 
                 {/* Noise Overlay - mix-blend-mode is VERY expensive on iOS Safari/Chrome */}
-                <div className={`absolute inset-0 z-[1] opacity-50 ${isIPhone || isLowPerformance ? 'mix-blend-normal' : 'mix-blend-soft-light'}`}>
-                    <Image
-                        src="/assets/images/Noise.png"
-                        alt="Noise Overlay"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                </div>
+                {showNoise ? (
+                    <div className={`absolute inset-0 z-[1] opacity-50 ${isIPhone || isLowPerformance ? 'mix-blend-normal' : 'mix-blend-soft-light'}`}>
+                        <Image
+                            src="/assets/images/Noise.png"
+                            alt=""
+                            fill
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                ) : null}
             </div>
 
             {/* Content */}

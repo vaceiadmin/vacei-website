@@ -11,7 +11,7 @@ import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 import { ReduceMotionProvider } from "@/contexts/ReduceMotionContext";
 import { ScrollProvider } from "@/contexts/ScrollContext";
 import { TopLoader } from "@/components/common/TopLoader";
-import CustomCursor from "@/components/common/CustomCursor";
+// import CustomCursor from "@/components/common/CustomCursor";
 import { Suspense } from "react";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import { I18nProvider } from "@/components/i18n/I18nProvider";
@@ -50,7 +50,7 @@ export default async function LocaleLayout({
               <ScrollToTopButton />
               <SupportChat />
               <LanguageSwitcher />
-              <CustomCursor />
+              {/* <CustomCursor /> */}
               <CookieConsentBanner />
             </SmoothScroll>
           </ScrollProvider>

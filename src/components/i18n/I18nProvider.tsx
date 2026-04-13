@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import i18n from "i18next";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import type { Locale } from "@/lib/i18n-config";
@@ -29,10 +29,10 @@ export function I18nProvider({
   children: React.ReactNode;
 }) {
   ensureI18nShell();
-  if (i18n.resolvedLanguage !== locale) {
-    void i18n.changeLanguage(locale);
-  }
-  useEffect(() => {
+  // Never call changeLanguage during render — it notifies subscribers and triggers setState
+  // in children while React is still rendering this tree. useLayoutEffect runs after commit,
+  // before paint, so language matches the route with minimal flash.
+  useLayoutEffect(() => {
     void i18n.changeLanguage(locale);
   }, [locale]);
   return (

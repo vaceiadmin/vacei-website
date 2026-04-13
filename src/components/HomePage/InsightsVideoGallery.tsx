@@ -18,14 +18,15 @@ import {
 } from "@/data/video";
 import { cn } from "@/lib/utils";
 
-const LOGO_SRC = "/assets/images/Logo.png";
-
-/** Load iframe when block is near viewport (~1.5 screens ahead). */
 const IO_ROOT_MARGIN = "150px 0px 200px 0px";
 
 type PlaylistItem = { title: string };
 
-function InsightsVideoGalleryInner() {
+type InsightsVideoGalleryProps = {
+  isDark?: boolean;
+};
+
+function InsightsVideoGalleryInner({ isDark = true }: InsightsVideoGalleryProps) {
   const { t } = useTranslation("home");
   const headingId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -81,77 +82,50 @@ function InsightsVideoGalleryInner() {
   }, []);
 
   const currentTitle =
-    playlist[activeIndex]?.title ?? t("insightsResources.videoModalEyebrow");
+    playlist[activeIndex]?.title ?? t("insightsResources.videoModalHint");
 
   const posterSrc = youtubeThumbUrl(activeId);
 
   return (
     <div
       id="insights-video-gallery"
-      className="mt-20 scroll-mt-28"
+      className="mt-10 scroll-mt-28 sm:mt-12"
       aria-labelledby={headingId}
     >
+      <h2 id={headingId} className="sr-only">
+        {t("insightsResources.videoModalHint")}
+      </h2>
       <div
         ref={rootRef}
         className={cn(
           "relative overflow-hidden rounded-[2rem]",
-          "border border-white/[0.07]",
-          "bg-gradient-to-b from-[#11131c] via-[#0c0d12] to-[#08090c]",
-          "shadow-[0_24px_80px_-24px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.04)_inset]",
-          "before:pointer-events-none before:absolute before:inset-0 before:rounded-[2rem]",
-          "before:bg-[radial-gradient(ellipse_90%_55%_at_50%_-30%,rgba(59,130,246,0.14),transparent_55%)]"
+          isDark
+            ? "border border-white/[0.1] bg-gradient-to-b from-[#11131c] via-[#0c0d12] to-[#08090c] shadow-[0_24px_80px_-24px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.05)_inset] before:pointer-events-none before:absolute before:inset-0 before:rounded-[2rem] before:bg-[radial-gradient(ellipse_90%_55%_at_50%_-30%,rgba(59,130,246,0.12),transparent_55%)]"
+            : "border border-slate-200/90 bg-gradient-to-b from-white via-slate-50/80 to-white shadow-[0_24px_60px_-20px_rgba(15,23,42,0.12),0_0_0_1px_rgba(255,255,255,0.9)_inset] before:pointer-events-none before:absolute before:inset-0 before:rounded-[2rem] before:bg-[radial-gradient(ellipse_90%_55%_at_50%_-20%,rgba(59,130,246,0.08),transparent_55%)]"
         )}
       >
-        {/* Header */}
-        <div className="relative border-b border-white/[0.06] px-5 py-6 sm:px-8 sm:py-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-4 sm:gap-5">
-              <div
-                className={cn(
-                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl",
-                  "bg-gradient-to-br from-blue-500/25 to-blue-600/10",
-                  "ring-1 ring-blue-400/25 shadow-lg shadow-blue-950/50"
-                )}
-                aria-hidden
-              >
-                <Play className="h-5 w-5 text-blue-400 pl-0.5" strokeWidth={2} />
-              </div>
-              <div className="min-w-0 pt-0.5">
-                <h2
-                  id={headingId}
-                  className="m-0 text-[10px] font-black uppercase tracking-[0.2em] text-blue-400/95"
-                >
-                  {t("insightsResources.videoModalEyebrow")}
-                </h2>
-                <p className="mt-2 max-w-xl text-base font-medium leading-snug text-slate-200 sm:text-lg">
-                  {t("insightsResources.videoModalHint")}
-                </p>
-              </div>
-            </div>
-            <div className="flex shrink-0 items-center gap-3 pl-[4.25rem] sm:pl-0">
-              <img
-                src={LOGO_SRC}
-                alt=""
-                width={120}
-                height={36}
-                loading="lazy"
-                decoding="async"
-                className="h-8 w-auto object-contain object-left opacity-90 sm:h-9"
-              />
-            </div>
-          </div>
-        </div>
-
         <div className="relative flex min-h-0 flex-col lg:flex-row">
-          {/* Player */}
           <div className="order-1 flex min-h-0 flex-1 flex-col lg:order-2">
-            <div className="border-b border-white/[0.06] bg-black/35 px-4 py-3.5 sm:px-6">
+            <div
+              className={cn(
+                "border-b px-4 py-3.5 sm:px-6",
+                isDark ? "border-white/[0.08] bg-black/35" : "border-slate-200/80 bg-white/90"
+              )}
+            >
               <div className="flex min-w-0 items-baseline justify-between gap-3">
-                <h3 className="truncate text-sm font-semibold text-white sm:text-base">
+                <h3
+                  className={cn(
+                    "truncate text-sm font-semibold sm:text-base",
+                    isDark ? "text-white" : "text-slate-900"
+                  )}
+                >
                   {currentTitle}
                 </h3>
                 <span
-                  className="shrink-0 tabular-nums text-[11px] font-medium uppercase tracking-wider text-slate-500"
+                  className={cn(
+                    "shrink-0 tabular-nums text-[11px] font-medium uppercase tracking-wider",
+                    isDark ? "text-slate-500" : "text-slate-500"
+                  )}
                   aria-live="polite"
                 >
                   {activeIndex + 1} / {ids.length}
@@ -159,14 +133,18 @@ function InsightsVideoGalleryInner() {
               </div>
             </div>
 
-            <div className="relative flex-1 bg-[#020203] p-3 sm:p-4 lg:p-5">
+            <div
+              className={cn(
+                "relative flex-1 p-3 sm:p-4 lg:p-5",
+                isDark ? "bg-[#020203]" : "bg-slate-100/80"
+              )}
+            >
               <div
                 className={cn(
                   "relative overflow-hidden rounded-2xl",
-                  "ring-1 ring-white/[0.08]",
-                  "shadow-[0_32px_64px_-32px_rgba(0,0,0,0.9)]",
-                  "before:pointer-events-none before:absolute before:inset-0 before:z-[1] before:rounded-2xl",
-                  "before:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]"
+                  isDark
+                    ? "ring-1 ring-white/[0.08] shadow-[0_32px_64px_-32px_rgba(0,0,0,0.9)] before:pointer-events-none before:absolute before:inset-0 before:z-[1] before:rounded-2xl before:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]"
+                    : "ring-1 ring-slate-200/90 shadow-[0_20px_50px_-24px_rgba(15,23,42,0.2)]"
                 )}
               >
                 <div className="relative aspect-video w-full min-h-[200px] bg-black sm:min-h-[260px]">
@@ -185,7 +163,10 @@ function InsightsVideoGalleryInner() {
                     <button
                       type="button"
                       onClick={onPosterActivate}
-                      className="group/poster absolute inset-0 z-0 flex h-full w-full flex-col items-center justify-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className={cn(
+                        "group/poster absolute inset-0 z-0 flex h-full w-full flex-col items-center justify-center overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+                        isDark ? "focus-visible:ring-offset-[#0c0d12]" : "focus-visible:ring-offset-slate-100"
+                      )}
                       aria-label={t("insightsResources.watchVideo")}
                     >
                       <img
@@ -213,15 +194,12 @@ function InsightsVideoGalleryInner() {
             </div>
           </div>
 
-          {/* Playlist */}
           <aside
             className={cn(
-              "order-2 border-t border-white/[0.06] bg-black/40 lg:order-1 lg:w-[min(100%,280px)] lg:shrink-0 lg:border-t-0 lg:border-r",
-              "flex flex-row gap-3 overflow-x-auto p-4 sm:p-5",
-              "lg:flex-col lg:overflow-y-auto lg:overflow-x-visible",
+              "order-2 flex flex-row gap-3 overflow-x-auto border-t p-4 sm:p-5 lg:order-1 lg:w-[min(100%,280px)] lg:shrink-0 lg:flex-col lg:overflow-y-auto lg:overflow-x-visible lg:border-r lg:border-t-0",
               "[scrollbar-width:thin] [scrollbar-color:rgba(100,116,139,0.35)_transparent]",
-              "max-h-[min(42vh,24rem)] lg:max-h-[min(70vh,520px)]",
-              "snap-x snap-mandatory lg:snap-none"
+              "max-h-[min(42vh,24rem)] snap-x snap-mandatory lg:max-h-[min(70vh,520px)] lg:snap-none",
+              isDark ? "border-white/[0.06] bg-black/40" : "border-slate-200/80 bg-slate-50/90"
             )}
             aria-label={t("insightsResources.videoModalHint")}
           >
@@ -238,19 +216,26 @@ function InsightsVideoGalleryInner() {
                   aria-label={label}
                   aria-current={selected ? "true" : undefined}
                   className={cn(
-                    "group/thumb flex shrink-0 snap-start flex-col gap-2.5 rounded-2xl p-2 text-left transition-all duration-300",
-                    "w-[min(260px,78vw)] lg:w-full",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d12]",
+                    "group/thumb flex w-[min(260px,78vw)] shrink-0 snap-start flex-col gap-2.5 rounded-2xl p-2 text-left transition-all duration-300 lg:w-full",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 focus-visible:ring-offset-2",
+                    isDark ? "focus-visible:ring-offset-[#0c0d12]" : "focus-visible:ring-offset-slate-100",
                     selected
-                      ? "bg-gradient-to-b from-blue-500/15 to-blue-600/5 shadow-[0_0_0_1px_rgba(59,130,246,0.45),0_12px_40px_-12px_rgba(59,130,246,0.35)]"
-                      : "bg-white/[0.03] hover:bg-white/[0.06] hover:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)]"
+                      ? isDark
+                        ? "bg-gradient-to-b from-blue-500/20 to-blue-600/10 shadow-[0_0_0_1px_rgba(59,130,246,0.55),0_12px_40px_-12px_rgba(59,130,246,0.35)]"
+                        : "bg-white shadow-[0_0_0_1px_rgba(59,130,246,0.45),0_14px_36px_-14px_rgba(37,99,235,0.25)]"
+                      : isDark
+                        ? "bg-white/[0.05] hover:bg-white/[0.09] hover:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)]"
+                        : "bg-white/80 hover:bg-white hover:shadow-md"
                   )}
                 >
                   <div
                     className={cn(
                       "relative aspect-video w-full overflow-hidden rounded-xl",
-                      "ring-1 ring-white/10",
-                      selected ? "ring-2 ring-blue-500/50" : "group-hover/thumb:ring-white/20"
+                      selected
+                        ? "ring-2 ring-blue-500/60"
+                        : isDark
+                          ? "ring-1 ring-white/20"
+                          : "ring-1 ring-slate-300/80"
                     )}
                   >
                     <img
@@ -263,16 +248,14 @@ function InsightsVideoGalleryInner() {
                     />
                     <div
                       className={cn(
-                        "absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent",
-                        "opacity-90 transition-opacity duration-300",
+                        "absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-90 transition-opacity duration-300",
                         selected ? "opacity-100" : "opacity-70 group-hover/thumb:opacity-90"
                       )}
                     />
                     {!selected && (
                       <span
                         className={cn(
-                          "absolute inset-0 flex items-center justify-center",
-                          "opacity-0 transition duration-300 group-hover/thumb:opacity-100"
+                          "absolute inset-0 flex items-center justify-center opacity-0 transition duration-300 group-hover/thumb:opacity-100"
                         )}
                         aria-hidden
                       >
@@ -282,7 +265,7 @@ function InsightsVideoGalleryInner() {
                       </span>
                     )}
                     {selected && (
-                      <span className="absolute bottom-2 left-2 right-2 flex items-center gap-1.5 rounded-md bg-blue-600/90 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg backdrop-blur-sm">
+                      <span className="absolute bottom-2 left-2 right-2 flex items-center gap-1.5 rounded-md bg-blue-600/95 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg backdrop-blur-sm">
                         <span className="relative flex h-1.5 w-1.5">
                           <span className="absolute inline-flex h-full w-full motion-safe:animate-ping rounded-full bg-white opacity-60" />
                           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
@@ -293,8 +276,14 @@ function InsightsVideoGalleryInner() {
                   </div>
                   <span
                     className={cn(
-                      "px-0.5 text-[13px] font-semibold leading-snug tracking-tight line-clamp-2",
-                      selected ? "text-white" : "text-slate-300 group-hover/thumb:text-slate-100"
+                      "line-clamp-2 px-0.5 text-[13px] font-semibold leading-snug tracking-tight",
+                      selected
+                        ? isDark
+                          ? "text-white"
+                          : "text-slate-900"
+                        : isDark
+                          ? "text-slate-300 group-hover/thumb:text-slate-100"
+                          : "text-slate-600 group-hover/thumb:text-slate-900"
                     )}
                   >
                     {label}

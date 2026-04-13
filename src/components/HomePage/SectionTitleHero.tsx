@@ -26,7 +26,7 @@ export function SectionTitleHero({
 }: SectionTitleHeroProps) {
   const body = variant === "dark" ? "text-white" : "text-neutral-900";
   const scale =
-    "text-3xl sm:text-4xl md:text-5xl lg:text-6xl";
+    "text-3xl sm:text-4xl lg:text-5xl";
 
   return (
     <Tag
