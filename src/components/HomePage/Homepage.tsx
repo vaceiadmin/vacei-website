@@ -79,19 +79,19 @@ const HomePage = () => {
       <BeforeAndAfterSection isDark={false} />
 
       {/* 14b. Two ways to start — spotlight card (Dark) */}
-      <TwoWaysToStartSection isDark={true} />
+      {/* <TwoWaysToStartSection isDark={true} /> */}
 
       {/* 15. Conversion Section (Dark) */}
-      <ConversionSection isDark={false} />
+      <ConversionSection isDark={true} />
 
       {/* 16. Call Option (Light) */}
-      <CallOptionSection isDark={true} />
+      <CallOptionSection isDark={false} />
 
       {/* 17. Insights & Resources (Dark) */}
-      <InsightsAndResourcesSection isDark={false} />
+      <InsightsAndResourcesSection isDark={true} />
 
       {/* 18. Final Section (Light) */}
-      <FinalSection isDark={true} />
+      <FinalSection isDark={false} />
     </div>
   );
 };

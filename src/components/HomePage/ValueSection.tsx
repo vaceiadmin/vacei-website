@@ -285,8 +285,64 @@ const ValueSection = ({ isDark = false }: { isDark?: boolean }) => {
               {/* Dynamic Content Preview Area */}
               <div className="p-10 space-y-8 h-full overflow-hidden">
                  <div className="grid grid-cols-2 gap-6">
-                    <div className={cn("h-32 rounded-2xl transition-colors", isDark ? "bg-[#0a0a0a]" : "bg-slate-50", !isLoaded && "animate-pulse")} />
-                    <div className={cn("h-32 rounded-2xl transition-colors", isDark ? "bg-[#0a0a0a]" : "bg-slate-50", !isLoaded && "animate-pulse")} />
+                    <div
+                      className={cn(
+                        "h-32 rounded-2xl border p-6 transition-colors relative overflow-hidden",
+                        isDark ? "bg-[#0a0a0a] border-white/10" : "bg-white border-slate-100 shadow-sm",
+                        !isLoaded && "animate-pulse"
+                      )}
+                    >
+                      {!isLoaded ? (
+                        <div className="h-full w-full" />
+                      ) : (
+                        <div className="h-full flex flex-col justify-between">
+                          <div className="flex items-center justify-between">
+                            <p className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
+                              Open requests
+                            </p>
+                            <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center border", isDark ? "bg-white/5 border-white/10 text-blue-300" : "bg-blue-50 border-blue-100 text-blue-600")}>
+                              <FileText className="w-4 h-4" />
+                            </div>
+                          </div>
+                          <div className="flex items-end justify-between">
+                            <p className={cn("text-3xl font-black leading-none", isDark ? "text-white" : "text-slate-900")}>6</p>
+                            <span className={cn("text-[10px] font-bold px-2 py-1 rounded-full border", isDark ? "bg-blue-500/10 text-blue-300 border-blue-500/20" : "bg-blue-50 text-blue-600 border-blue-200")}>
+                              Active
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      <div className={cn("pointer-events-none absolute -right-10 -top-10 w-40 h-40 rounded-full blur-[60px]", isDark ? "bg-blue-600/10" : "bg-blue-400/10")} />
+                    </div>
+                    <div
+                      className={cn(
+                        "h-32 rounded-2xl border p-6 transition-colors relative overflow-hidden",
+                        isDark ? "bg-[#0a0a0a] border-white/10" : "bg-white border-slate-100 shadow-sm",
+                        !isLoaded && "animate-pulse"
+                      )}
+                    >
+                      {!isLoaded ? (
+                        <div className="h-full w-full" />
+                      ) : (
+                        <div className="h-full flex flex-col justify-between">
+                          <div className="flex items-center justify-between">
+                            <p className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
+                              Team online
+                            </p>
+                            <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center border", isDark ? "bg-white/5 border-white/10 text-emerald-300" : "bg-emerald-50 border-emerald-100 text-emerald-600")}>
+                              <Users className="w-4 h-4" />
+                            </div>
+                          </div>
+                          <div className="flex items-end justify-between">
+                            <p className={cn("text-3xl font-black leading-none", isDark ? "text-white" : "text-slate-900")}>3</p>
+                            <span className={cn("text-[10px] font-bold px-2 py-1 rounded-full border", isDark ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/20" : "bg-emerald-50 text-emerald-600 border-emerald-200")}>
+                              Live
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      <div className={cn("pointer-events-none absolute -right-10 -top-10 w-40 h-40 rounded-full blur-[60px]", isDark ? "bg-emerald-600/10" : "bg-emerald-400/10")} />
+                    </div>
                  </div>
                  
                  <div className={cn(

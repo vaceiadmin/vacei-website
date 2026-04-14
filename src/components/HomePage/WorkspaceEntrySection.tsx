@@ -1,17 +1,18 @@
 import React, { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/common/LocalizedLink";
-import { ArrowRight, Building2, Rocket, Sparkles, LayoutPanelLeft, MousePointerClick, ShieldCheck, Zap } from "lucide-react";
+import { Building2, Rocket, Sparkles } from "lucide-react";
 import { usePerformance } from "@/contexts/ReduceMotionContext";
 import { cn } from "@/lib/utils";
 
 import GetInstantQuoteButton from "../common/GetInstantQuoteButton";
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 
-const WorkspaceEntrySection = ({ isDark = true }: { isDark?: boolean }) => {
+/** Pre-redesign workspace section (always dark glass UI). `isDark` kept for call-site compatibility. */
+const WorkspaceEntrySection = ({ isDark: _isDark = true }: { isDark?: boolean }) => {
   const { t } = useTranslation("home");
   const { reduceMotion } = usePerformance();
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   const card1Bullets = useMemo(
     () => (t("workspaceEntry.card1Bullets", { returnObjects: true }) as string[]) ?? [],
@@ -21,171 +22,203 @@ const WorkspaceEntrySection = ({ isDark = true }: { isDark?: boolean }) => {
   return (
     <section
       ref={sectionRef}
-      className={cn(
-        "relative py-24 lg:py-32 overflow-hidden mx-4 sm:mx-6 lg:mx-8 mb-12 sm:mb-20",
-        isDark ? "bg-[#05050A] rounded-[48px] text-white shadow-2xl" : "bg-[#FAFBFF] rounded-[48px] text-slate-900 border border-slate-100 shadow-xl shadow-blue-500/5"
-      )}
+      className="relative w-full overflow-hidden rounded-[48px] bg-black py-16 lg:py-24"
     >
-      {/* Background Polish */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className={cn(
-          "absolute top-0 right-0 w-1/2 h-full blur-[120px] opacity-20",
-          isDark ? "bg-blue-600/30" : "bg-blue-400/20"
-        )} />
-        <div className={cn(
-          "absolute bottom-0 left-0 w-1/2 h-full blur-[120px] opacity-20",
-          isDark ? "bg-blue-500/10" : "bg-blue-600/10"
-        )} />
+      {/* Premium Background Elements */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden text-blue-500/20">
+        <div className="absolute left-[10%] top-[-10%] h-[40%] w-[40%] animate-pulse rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute bottom-[20%] right-[0%] h-[35%] w-[35%] rounded-full bg-blue-600/10 blur-[100px]" />
+
+        <svg className="absolute right-10 top-20 h-64 w-64 opacity-10" viewBox="0 0 200 200" fill="none" aria-hidden>
+          <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" />
+          <path d="M100 20V180M20 100H180" stroke="currentColor" strokeWidth="0.5" />
+        </svg>
+
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "48px 48px",
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-4xl mx-auto mb-16 lg:mb-24">
-          <SectionTitleHero
-            variant={isDark ? "dark" : "light"}
-            line1={t("workspaceEntry.sectionTitleLine1")}
-            highlight={t("workspaceEntry.sectionTitleHighlight")}
-            className="items-center"
-          />
-          <p className={cn(
-             "mt-6 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto",
-             isDark ? "text-slate-400" : "text-slate-600"
-          )}>
-            {t("workspaceEntry.sectionBody")}
-          </p>
-        </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {(t("workspaceEntry.sectionTitleLine1").trim() || t("workspaceEntry.sectionTitleHighlight").trim()) && (
+          <div className="mb-14 max-w-4xl lg:mb-16">
+            <SectionTitleHero
+              variant="dark"
+              line1={t("workspaceEntry.sectionTitleLine1")}
+              highlight={t("workspaceEntry.sectionTitleHighlight")}
+            />
+            {t("workspaceEntry.sectionBody").trim() ? (
+              <p className="mt-6 whitespace-pre-line text-[15px] font-medium leading-relaxed text-slate-400 sm:text-base">
+                {t("workspaceEntry.sectionBody")}
+              </p>
+            ) : null}
+          </div>
+        )}
 
-        <div className={cn(
-            "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12",
-            isDark ? "bg-transparent" : "bg-transparent"
-        )}>
-          
-          {/* Card 1: Existing Company */}
-          <div className="group relative">
-            <div className={cn(
-                "relative z-10 h-full p-8 sm:p-12 lg:p-14 rounded-[3rem] border transition-all duration-700 hover:-translate-y-2 overflow-hidden flex flex-col justify-between gap-10",
-                isDark ? "bg-[#0A0A0F] border-white/5 hover:border-blue-500/40 shadow-2xl" : "bg-white border-slate-100 shadow-xl shadow-blue-500/5 hover:border-blue-500/40"
-            )}>
-                 {/* Card Glow */}
-                 <div className="absolute -inset-20 bg-blue-500/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-14">
+          {/* Card 1: Existing Company (Dark Glassmorphic) */}
+          <div className="group relative h-full">
+            <div
+              className={cn(
+                "relative h-full overflow-hidden rounded-[40px] border border-white/10 bg-[#0F111A] p-8 backdrop-blur-2xl transition-all duration-700 sm:p-10 lg:p-12",
+                !reduceMotion &&
+                  "hover:-translate-y-2 hover:border-blue-500/30 hover:bg-[#151825] hover:shadow-[0_48px_100px_-24px_rgba(59,130,246,0.15)]"
+              )}
+            >
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/[0.03] to-transparent" />
+              <div className="absolute left-0 top-0 h-full w-1.5 bg-blue-600/20 transition-colors duration-700 group-hover:bg-blue-600/60" />
 
-                 <div className="relative z-10 space-y-8">
-                    <div className="flex items-center gap-4">
-                       <div className="w-14 h-14 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-500 border border-blue-500/20 shadow-inner">
-                          <Building2 className="w-7 h-7" />
-                       </div>
-                       <div className="flex flex-col">
-                           <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{t("workspaceEntry.card1MicroLabel")}</span>
-                           <span className="text-xs font-bold text-blue-500">{t("workspaceEntry.card1MicroAccent")}</span>
-                       </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h3 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-                        {t("workspaceEntry.card1TitleBefore")}<span className="text-blue-500">{t("workspaceEntry.card1TitleAccent")}</span>
-                      </h3>
-                      <p className={cn(
-                        "text-lg font-medium leading-relaxed opacity-70",
-                        isDark ? "text-slate-400" : "text-slate-600"
-                      )}>
-                        {t("workspaceEntry.card1Body")}
-                      </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h4 className="text-[10px] font-black uppercase tracking-[0.4em] opacity-30">{t("workspaceEntry.keyCapabilitiesHeading")}</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
-                        {card1Bullets.map((text, idx) => (
-                          <div key={idx} className="flex items-center gap-3 group/item">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)] group-hover/item:scale-150 transition-transform" />
-                            <span className="text-sm font-bold opacity-80 group-hover/item:opacity-100 transition-opacity">{text}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                 </div>
-
-                <div className="relative z-10 pt-8 mt-auto flex flex-col sm:flex-row items-center gap-8 border-t border-white/5">
-                   <GetInstantQuoteButton
-                      text={t("workspaceEntry.createWorkspaceCta")}
-                      href="https://client.vacei.com/onboarding"
-                      className="h-16 px-10 rounded-2xl w-full sm:w-auto text-base"
-                   />
-                   <div className="flex items-center gap-3 opacity-40 group-hover:opacity-100 transition-opacity">
-                      <div className="w-10 h-10 rounded-full border border-current flex items-center justify-center">
-                          <MousePointerClick className="w-4 h-4" />
-                      </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest">{t("workspaceEntry.oneClickSync")}</span>
-                   </div>
+              <div className="relative z-10 flex h-full flex-col">
+                <div className="mb-6 flex items-center gap-4">
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-500/20 transition-all duration-700 group-hover:rotate-3 group-hover:scale-110 group-hover:shadow-blue-500/40">
+                    <Building2 className="relative z-10 h-7 w-7" />
+                    <div className="absolute inset-0 rounded-2xl bg-blue-400 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-40" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-400/80 transition-colors duration-500 group-hover:text-blue-400">
+                      {t("workspaceEntry.activeEntities")}
+                    </span>
+                  </div>
                 </div>
+
+                <h3 className="mb-6 text-2xl font-extrabold leading-[1.2] text-white sm:text-4xl">
+                  {t("workspaceEntry.card1TitleBefore")}
+                  <span className="relative inline-block text-blue-400">
+                    {t("workspaceEntry.card1TitleAccent")}
+                    <svg className="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 200 8" fill="none" aria-hidden>
+                      <path d="M1 7C50 2 150 2 199 7" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </h3>
+
+                <p className="mb-4 max-w-md whitespace-pre-line text-[15px] font-medium leading-relaxed text-slate-400">
+                  {t("workspaceEntry.card1Body")}
+                </p>
+                {t("workspaceEntry.card1CoordinationNote").trim() ? (
+                  <p className="mb-6 max-w-md border-l-2 border-blue-500/30 pl-4 text-[14px] font-medium leading-relaxed text-slate-500">
+                    {t("workspaceEntry.card1CoordinationNote")}
+                  </p>
+                ) : null}
+
+                {card1Bullets.length > 0 ? (
+                  <div className="mb-auto space-y-3">
+                    <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                      {t("workspaceEntry.whatYouCanDo")}
+                    </h4>
+                    {card1Bullets.map((text, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-3 text-sm font-bold text-slate-400 transition-colors duration-500 group-hover:text-slate-300"
+                      >
+                        <div className="h-1.5 w-1.5 rounded-full bg-blue-500/40 shadow-[0_0_8px_rgba(59,130,246,0)] transition-all duration-500 group-hover:bg-blue-400 group-hover:shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
+                        {text}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mb-auto" />
+                )}
+
+                <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
+                  <GetInstantQuoteButton
+                    text={t("workspaceEntry.createWorkspaceCta")}
+                    href="https://client.vacei.com/onboarding"
+                    className="h-[52px] px-8 text-sm"
+                  />
+
+                  <div className="flex items-center gap-2.5 rounded-full border border-blue-500/30 bg-blue-900/40 px-4 py-1.5">
+                    <Sparkles className="h-3.5 w-3.5 animate-pulse text-blue-400" />
+                    <span className="text-[11px] font-bold text-blue-300">{t("workspaceEntry.oneClickSync")}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Card 2: New Company */}
+          {/* Card 2: New Company (Deep Dark) */}
           <div className="group relative">
-            <div className={cn(
-                "relative z-10 h-full p-8 sm:p-12 lg:p-14 rounded-[3rem] border transition-all duration-700 hover:-translate-y-2 overflow-hidden flex flex-col justify-between gap-10",
-                isDark ? "bg-[#0F111A] border-white/5 hover:border-emerald-500/40 shadow-2xl" : "bg-slate-50 border-slate-100 shadow-xl hover:bg-white hover:border-emerald-500/40"
-            )}>
-                 {/* Card Glow */}
-                 <div className="absolute -inset-20 bg-emerald-500/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div
+              className={cn(
+                "relative h-full overflow-hidden rounded-[40px] border border-white/10 bg-[#121421] p-8 transition-all duration-700 sm:p-10 lg:p-12",
+                !reduceMotion &&
+                  "hover:-translate-y-2 hover:border-blue-500/40 hover:bg-[#181B2D] hover:shadow-[0_48px_120px_-24px_rgba(59,73,230,0.4)]"
+              )}
+            >
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{ backgroundImage: `url('https://www.transparenttextures.com/patterns/carbon-fibre.png')` }}
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-blue-600/[0.03] to-transparent" />
+              <div className="animate-pulse-subtle absolute -right-32 -top-32 h-96 w-96 rounded-full bg-blue-600/10 blur-[120px] mix-blend-screen" />
 
-                 <div className="relative z-10 space-y-8">
-                    <div className="flex items-center gap-4">
-                       <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 border border-emerald-500/20 shadow-inner">
-                          <Rocket className="w-7 h-7" />
-                       </div>
-                       <div className="flex flex-col">
-                           <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{t("workspaceEntry.card2MicroLabel")}</span>
-                           <span className="text-xs font-bold text-emerald-500">{t("workspaceEntry.card2MicroAccent")}</span>
-                       </div>
+              <div className="relative z-10 flex h-full flex-col">
+                <div className="mb-6 flex items-center gap-4">
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-blue-400 shadow-inner backdrop-blur-md transition-all duration-700 group-hover:-rotate-3 group-hover:scale-110 group-hover:border-blue-400/30 group-hover:shadow-blue-400/20">
+                    <Rocket className="relative z-10 h-7 w-7" />
+                    <div className="absolute inset-0 rounded-2xl bg-blue-600/20 opacity-0 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-100/50 transition-colors duration-500 group-hover:text-blue-400">
+                      {t("workspaceEntry.newFounders")}
+                    </span>
+                  </div>
+                </div>
+
+                <h3 className="mb-6 text-2xl font-extrabold leading-[1.2] text-white sm:text-4xl">
+                  {t("workspaceEntry.card2Title")}
+                  <span className="relative inline-block text-blue-400">
+                    {t("workspaceEntry.card2TitleAccent")}
+                    <svg className="absolute -bottom-1.5 left-0 w-full" viewBox="0 0 200 8" fill="none" aria-hidden>
+                      <path d="M1 7C50 2 150 2 199 7" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </h3>
+
+                <p className="mb-auto max-w-md text-base font-medium leading-relaxed text-blue-100/40">
+                  {t("workspaceEntry.card2Body")}
+                </p>
+
+                {t("workspaceEntry.builderBadge").trim() || t("workspaceEntry.builderDescription").trim() ? (
+                  <div className="mt-8 rounded-[28px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
+                    <div className="flex items-center gap-2.5">
+                      <Sparkles className="h-4 w-4 text-blue-400" />
+                      <span className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-300/80">
+                        {t("workspaceEntry.builderBadge")}
+                      </span>
                     </div>
-
-                    <div className="space-y-4">
-                      <h3 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-                        {t("workspaceEntry.card2Title")}<span className="text-emerald-500">{t("workspaceEntry.card2TitleAccent")}</span>
-                      </h3>
-                      <p className={cn(
-                        "text-lg font-medium leading-relaxed opacity-70",
-                        isDark ? "text-slate-400" : "text-slate-600"
-                      )}>
-                        {t("workspaceEntry.card2Body")}
+                    {t("workspaceEntry.builderDescription").trim() ? (
+                      <p className="mt-3 text-[14px] font-medium leading-relaxed text-blue-100/45">
+                        {t("workspaceEntry.builderDescription")}
                       </p>
-                    </div>
+                    ) : null}
+                  </div>
+                ) : null}
 
-                    <div className="p-6 rounded-3xl bg-blue-500/5 border border-blue-500/10 space-y-4 transform transition-transform group-hover:scale-[1.02] duration-500">
-                       <div className="flex items-center gap-3">
-                          <Sparkles className="w-4 h-4 text-blue-400" />
-                          <span className="text-xs font-black uppercase tracking-widest text-blue-400">{t("workspaceEntry.builderBadge")}</span>
-                       </div>
-                       <p className="text-sm opacity-70 font-medium">{t("workspaceEntry.builderDescription")}</p>
-                    </div>
-                 </div>
-
-                <div className="relative z-10 pt-8 mt-auto flex flex-col sm:flex-row items-center gap-4 border-t border-white/5">
+                <div className="mt-10 flex flex-wrap items-center gap-4">
                   <GetInstantQuoteButton
                     text={t("workspaceEntry.startIncorporationCta")}
                     href="https://client.vacei.com/onboarding"
-                    className={cn(
-                      "h-16 px-10 rounded-2xl border-none w-full sm:w-auto text-base",
-                      isDark ? "bg-white text-slate-900 hover:bg-emerald-50" : "bg-slate-900 text-white hover:bg-slate-800"
-                    )}
+                    className="h-[52px] border-none bg-white px-8 text-sm text-slate-900 shadow-white/5 hover:bg-slate-50"
                     hasShadow={false}
                   />
                   <LocalizedLink
                     href="/contact"
-                    className={cn(
-                      "h-16 px-8 rounded-2xl border font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center w-full sm:w-auto",
-                      isDark ? "bg-white/5 border-white/10 text-white hover:bg-white/10" : "bg-white border-slate-200 text-slate-900 hover:bg-slate-100 shadow-sm"
-                    )}
+                    className="flex h-[52px] items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/10"
                   >
                     {t("workspaceEntry.bookConsultationCta")}
                   </LocalizedLink>
                 </div>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
+
+      <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-24 w-full bg-gradient-to-t from-black to-transparent opacity-80" />
     </section>
   );
 };

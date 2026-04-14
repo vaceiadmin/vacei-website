@@ -212,7 +212,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
         </div>
 
         {/* Trust strip: in-flow on small screens to avoid overlap with floating UI; absolute on md+ */}
-        {t("hero.trustStrip").trim() ? (
+        {/* {t("hero.trustStrip").trim() ? (
           <div className="relative z-30 mx-auto mt-8 w-full max-w-4xl px-4 sm:mt-10 md:absolute md:-bottom-20 md:left-1/2 md:mt-0 md:-translate-x-1/2 lg:-bottom-24">
             <div className="flex flex-col items-stretch justify-center gap-3 rounded-2xl border border-white/20 bg-white/95 px-5 py-4 shadow-[0_20px_50px_rgba(0,0,0,0.12)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:rounded-full sm:px-8 md:px-10">
               {trustPillLabels.map((label, i) => (
@@ -228,7 +228,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
               ))}
             </div>
           </div>
-        ) : null}
+        ) : null} */}
       </GradientContainer>
 
       <style dangerouslySetInnerHTML={{

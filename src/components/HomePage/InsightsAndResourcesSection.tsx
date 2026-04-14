@@ -162,7 +162,7 @@ const InsightsAndResourcesSection = ({ isDark = true }: { isDark?: boolean }) =>
           })}
         </div>
 
-        <InsightsVideoGallery isDark={true} />
+        <InsightsVideoGallery isDark={false} />
 
         {/* Bottom Action */}
         <div className="mt-12 text-center">
