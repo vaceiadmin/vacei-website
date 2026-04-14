@@ -3,7 +3,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { Check, Settings, BarChart3, Clock, Milestone, Users, Calendar, ArrowUpRight, FileText, ArrowRight } from "lucide-react";
+import { Check, Settings, BarChart3, Clock, Milestone, Users, Calendar, ArrowUpRight, FileText, ArrowRight, Play, Pause } from "lucide-react";
 import { useInView } from "framer-motion";
 
 const ValueSection = ({ isDark = false }: { isDark?: boolean }) => {
@@ -11,8 +11,12 @@ const ValueSection = ({ isDark = false }: { isDark?: boolean }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [hasTriggeredInitial, setHasTriggeredInitial] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [progress, setProgress] = React.useState(0);
+  const [duration, setDuration] = React.useState(0);
   
   const mockRef = React.useRef(null);
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const isInView = useInView(mockRef, { amount: 0.25 });
 
   React.useEffect(() => {
@@ -34,6 +38,41 @@ const ValueSection = ({ isDark = false }: { isDark?: boolean }) => {
     const timer = setTimeout(() => setIsLoaded(true), 500);
     return () => clearTimeout(timer);
   }, [activeIndex]);
+
+  const togglePlayback = async () => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (el.paused) {
+      try {
+        await el.play();
+        setIsPlaying(true);
+      } catch {
+        // ignore autoplay / user-gesture restrictions
+      }
+    } else {
+      el.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const onTimeUpdate = () => {
+    const el = videoRef.current;
+    if (!el || !Number.isFinite(el.duration) || el.duration <= 0) return;
+    setProgress((el.currentTime / el.duration) * 100);
+  };
+
+  const onLoadedMetadata = () => {
+    const el = videoRef.current;
+    if (!el || !Number.isFinite(el.duration)) return;
+    setDuration(el.duration);
+  };
+
+  const seekTo = (pct: number) => {
+    const el = videoRef.current;
+    if (!el || !Number.isFinite(el.duration) || el.duration <= 0) return;
+    el.currentTime = (pct / 100) * el.duration;
+    setProgress(pct);
+  };
 
 
 
@@ -259,132 +298,159 @@ const ValueSection = ({ isDark = false }: { isDark?: boolean }) => {
             </div>
           </div>
 
-          {/* Right: Dashboard Mockup Preview */}
+          {/* Right: Dashboard Mockup Preview (disabled) */}
+          {/*
+            <div ref={mockRef} className="relative lg:h-[600px] group">
+              ...
+            </div>
+          */}
+
+          {/* Right: Explainer video (play / pause) */}
           <div ref={mockRef} className="relative lg:h-[600px] group">
             <div className="absolute -inset-10 bg-primary-blue/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            
-            <div className={cn(
-              "relative h-full w-full rounded-[2.5rem] border overflow-hidden transition-all duration-700",
-              isDark
-                ? "border-white/15 bg-[#0c0f18] shadow-[0_28px_70px_-20px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.06)_inset,0_0_60px_-10px_rgba(59,130,246,0.12)]"
-                : "border-slate-200 bg-white shadow-2xl"
-            )}>
-              {/* Fake UI Header */}
-              <div className={cn(
-                "h-14 border-b flex items-center px-8 gap-4",
-                isDark ? "border-white/10 bg-[#12151f]" : "bg-slate-50 border-slate-100"
-              )}>
+
+            <div
+              className={cn(
+                "relative h-full w-full overflow-hidden rounded-[2.5rem] border transition-all duration-700",
+                isDark
+                  ? "border-white/15 bg-[#0c0f18] shadow-[0_28px_70px_-20px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.06)_inset,0_0_60px_-10px_rgba(59,130,246,0.12)]"
+                  : "border-slate-200 bg-white shadow-2xl"
+              )}
+            >
+              <div
+                className={cn(
+                  "flex items-center justify-between gap-4 border-b px-8 h-14",
+                  isDark ? "border-white/10 bg-[#12151f]" : "bg-slate-50 border-slate-100"
+                )}
+              >
                 <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/20" />
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f56]/30" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]/30" />
+                  <div className="w-3 h-3 rounded-full bg-[#27c93f]/30" />
                 </div>
-                <div className="h-4 w-32 rounded-full bg-slate-400/10" />
+                <div className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
+                  VACEI EXPLAINER
+                </div>
               </div>
 
-              {/* Dynamic Content Preview Area */}
-              <div className="p-10 space-y-8 h-full overflow-hidden">
-                 <div className="grid grid-cols-2 gap-6">
-                    <div
-                      className={cn(
-                        "h-32 rounded-2xl border p-6 transition-colors relative overflow-hidden",
-                        isDark ? "bg-[#0a0a0a] border-white/10" : "bg-white border-slate-100 shadow-sm",
-                        !isLoaded && "animate-pulse"
-                      )}
-                    >
-                      {!isLoaded ? (
-                        <div className="h-full w-full" />
-                      ) : (
-                        <div className="h-full flex flex-col justify-between">
-                          <div className="flex items-center justify-between">
-                            <p className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
-                              Open requests
-                            </p>
-                            <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center border", isDark ? "bg-white/5 border-white/10 text-blue-300" : "bg-blue-50 border-blue-100 text-blue-600")}>
-                              <FileText className="w-4 h-4" />
-                            </div>
-                          </div>
-                          <div className="flex items-end justify-between">
-                            <p className={cn("text-3xl font-black leading-none", isDark ? "text-white" : "text-slate-900")}>6</p>
-                            <span className={cn("text-[10px] font-bold px-2 py-1 rounded-full border", isDark ? "bg-blue-500/10 text-blue-300 border-blue-500/20" : "bg-blue-50 text-blue-600 border-blue-200")}>
-                              Active
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                      <div className={cn("pointer-events-none absolute -right-10 -top-10 w-40 h-40 rounded-full blur-[60px]", isDark ? "bg-blue-600/10" : "bg-blue-400/10")} />
-                    </div>
-                    <div
-                      className={cn(
-                        "h-32 rounded-2xl border p-6 transition-colors relative overflow-hidden",
-                        isDark ? "bg-[#0a0a0a] border-white/10" : "bg-white border-slate-100 shadow-sm",
-                        !isLoaded && "animate-pulse"
-                      )}
-                    >
-                      {!isLoaded ? (
-                        <div className="h-full w-full" />
-                      ) : (
-                        <div className="h-full flex flex-col justify-between">
-                          <div className="flex items-center justify-between">
-                            <p className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
-                              Team online
-                            </p>
-                            <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center border", isDark ? "bg-white/5 border-white/10 text-emerald-300" : "bg-emerald-50 border-emerald-100 text-emerald-600")}>
-                              <Users className="w-4 h-4" />
-                            </div>
-                          </div>
-                          <div className="flex items-end justify-between">
-                            <p className={cn("text-3xl font-black leading-none", isDark ? "text-white" : "text-slate-900")}>3</p>
-                            <span className={cn("text-[10px] font-bold px-2 py-1 rounded-full border", isDark ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/20" : "bg-emerald-50 text-emerald-600 border-emerald-200")}>
-                              Live
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                      <div className={cn("pointer-events-none absolute -right-10 -top-10 w-40 h-40 rounded-full blur-[60px]", isDark ? "bg-emerald-600/10" : "bg-emerald-400/10")} />
-                    </div>
-                 </div>
-                 
-                 <div className={cn(
-                   "relative h-72 w-full rounded-2xl border flex flex-col p-6 sm:p-8 transition-all duration-500",
-                   isDark ? "border-white/15" : "border-slate-200",
-                   !isLoaded ? "border-dashed items-center justify-center text-center" : (isDark ? "bg-white/[0.04] shadow-inner shadow-black/40" : "bg-slate-50/50")
-                 )}>
-                    {!isLoaded ? (
-                      <>
-                        <div className={cn(
-                            "w-20 h-20 rounded-full border-4 border-primary-blue/20 border-t-primary-blue animate-spin mb-6",
-                            "transition-all duration-700 ease-out"
-                        )} />
-                        <p className="text-sm font-black uppercase tracking-[0.2em] text-primary-blue mb-2">Live Service Engine</p>
-                        <p className={cn("text-xs font-medium max-w-[200px]", isDark ? "text-slate-500" : "text-slate-400")}>
-                            Processing real-time operational data for your business.
-                        </p>
-                      </>
-                    ) : (
-                      <div className="w-full h-full animate-in fade-in zoom-in-95 duration-500 flex flex-col">
-                        <div className="flex justify-between items-center mb-6">
-                          <p className="text-sm font-black uppercase tracking-[0.2em] text-primary-blue">Active Sync</p>
-                          <div className="flex gap-2">
-                              <div className="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black rounded-full border border-emerald-500/20">SYNCED</div>
-                              <div className="px-3 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-black rounded-full border border-blue-500/20">V2.4 ACTIVE</div>
-                          </div>
-                        </div>
-                        <div className={cn(
-                          "flex-1 rounded-xl border p-6 relative overflow-hidden",
-                          isDark ? "border-white/12 bg-[#111318] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)]" : "border-slate-100 bg-white shadow-sm"
-                        )}>
-                          {renderDashboardContent(activeIndex, isDark)}
-                        </div>
-                      </div>
-                    )}
-                 </div>
+              <div className="relative h-full p-6 sm:p-8">
+                <div
+                  className={cn(
+                    "relative overflow-hidden rounded-2xl border",
+                    isDark ? "border-white/10 bg-black" : "border-slate-200 bg-black"
+                  )}
+                >
+                  <video
+                    ref={videoRef}
+                    className="w-full aspect-video object-cover"
+                    src="/assets/videos/Vacei_Explainer_V1.mp4"
+                    playsInline
+                    preload="metadata"
+                    onTimeUpdate={onTimeUpdate}
+                    onLoadedMetadata={onLoadedMetadata}
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                  />
 
-                 <div className="space-y-4">
-                    <div className={cn("h-4 w-full rounded-full", isDark ? "bg-white/5" : "bg-slate-50")} />
-                    <div className={cn("h-4 w-3/4 rounded-full", isDark ? "bg-white/5" : "bg-slate-50")} />
-                    <div className={cn("h-4 w-1/2 rounded-full", isDark ? "bg-white/5" : "bg-slate-50")} />
-                 </div>
+                  <button
+                    type="button"
+                    onClick={() => void togglePlayback()}
+                    className={cn(
+                      "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
+                      isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
+                    )}
+                    aria-label={isPlaying ? "Pause video" : "Play video"}
+                  >
+                    <div
+                      className={cn(
+                        "flex items-center gap-3 rounded-full border px-5 py-3 shadow-2xl backdrop-blur-xl",
+                        isDark
+                          ? "bg-black/60 border-white/10 text-white"
+                          : "bg-white/80 border-slate-200 text-slate-900 shadow-black/5"
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          "flex h-10 w-10 items-center justify-center rounded-full",
+                          isDark ? "bg-white/10" : "bg-slate-900"
+                        )}
+                      >
+                        {isPlaying ? (
+                          <Pause className={cn("w-5 h-5", isDark ? "text-white" : "text-white")} />
+                        ) : (
+                          <Play className={cn("w-5 h-5 ml-0.5", isDark ? "text-white" : "text-white")} />
+                        )}
+                      </div>
+                      <span className="text-[11px] font-black uppercase tracking-[0.25em]">
+                        {isPlaying ? "PAUSE" : "PLAY"}
+                      </span>
+                    </div>
+                  </button>
+
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                  <div className="absolute inset-x-5 bottom-4">
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => void togglePlayback()}
+                        className={cn(
+                          "flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur-md",
+                          isDark
+                            ? "bg-white/5 border-white/10 text-white hover:bg-white/10"
+                            : "bg-white/70 border-white/40 text-slate-900 hover:bg-white"
+                        )}
+                        aria-label={isPlaying ? "Pause" : "Play"}
+                      >
+                        {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+                      </button>
+
+                      <input
+                        aria-label="Seek video"
+                        type="range"
+                        min={0}
+                        max={100}
+                        step={0.1}
+                        value={Number.isFinite(progress) ? progress : 0}
+                        onChange={(e) => seekTo(Number(e.target.value))}
+                        className="w-full accent-blue-500"
+                      />
+
+                      <div className={cn("shrink-0 text-[10px] font-black tabular-nums", isDark ? "text-slate-300" : "text-slate-100")}>
+                        {duration > 0 ? `${Math.round(duration / 60)}:${String(Math.round(duration % 60)).padStart(2, "0")}` : "0:00"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-7 grid grid-cols-2 gap-4">
+                  <div
+                    className={cn(
+                      "rounded-2xl border p-5",
+                      isDark ? "border-white/10 bg-white/[0.03]" : "border-slate-100 bg-white"
+                    )}
+                  >
+                    <p className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
+                      Built for control
+                    </p>
+                    <p className={cn("mt-2 text-sm font-bold leading-relaxed", isDark ? "text-slate-200" : "text-slate-800")}>
+                      One workspace for services, docs, deadlines.
+                    </p>
+                  </div>
+                  <div
+                    className={cn(
+                      "rounded-2xl border p-5",
+                      isDark ? "border-white/10 bg-white/[0.03]" : "border-slate-100 bg-white"
+                    )}
+                  >
+                    <p className={cn("text-[10px] font-black uppercase tracking-[0.25em]", isDark ? "text-slate-500" : "text-slate-400")}>
+                      Delivered by experts
+                    </p>
+                    <p className={cn("mt-2 text-sm font-bold leading-relaxed", isDark ? "text-slate-200" : "text-slate-800")}>
+                      A dedicated team coordinating everything.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

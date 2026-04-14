@@ -129,32 +129,32 @@ const BeforeAndAfterSection = ({ isDark = false }: { isDark?: boolean }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
           
-          {/* Card 1: Before (De-emphasized) */}
+          {/* Card 1: Before (Light) */}
           <div className="group/card relative flex flex-col h-full">
             <div className={cn(
               "relative h-full flex flex-col rounded-[2.5rem] border overflow-hidden transition-all duration-500 opacity-80 hover:opacity-100",
-              isDark ? "bg-[#0a0a0a] border-white/5" : "bg-slate-50 border-slate-200 shadow-sm"
+              "bg-white border-slate-200 shadow-sm"
             )}>
               <div className={cn(
                 "p-8 lg:p-10 border-b flex flex-col gap-6",
-                isDark ? "border-white/5 bg-[#050505]" : "border-slate-200 bg-white/50"
+                "border-slate-200 bg-slate-50/70"
               )}>
                 <div className="flex items-center gap-4">
                     <div className={cn(
                       "w-12 h-12 rounded-2xl flex items-center justify-center border",
-                      isDark ? "bg-white/5 text-slate-400 border-white/10" : "bg-slate-100 text-slate-500 border-slate-200"
+                      "bg-white text-slate-500 border-slate-200 shadow-sm"
                     )}>
                         <XCircle className="w-6 h-6" />
                     </div>
                     <h4 className={cn(
                       "text-2xl lg:text-3xl font-black tracking-tight",
-                      isDark ? "text-slate-300" : "text-slate-600"
+                      "text-slate-700"
                     )}>{t('beforeAfter.beforeTitle')}</h4>
                 </div>
                 <div className="flex flex-col gap-3">
                     {(t('beforeAfter.beforeItems', { returnObjects: true }) as string[]).map((item, idx) => (
-                      <div key={idx} className={cn("flex items-start gap-3 text-sm font-medium", isDark ? "text-slate-500" : "text-slate-500")}>
-                        <div className={cn("flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5", isDark ? "bg-white/5 text-slate-600" : "bg-slate-200 text-slate-400")}>
+                      <div key={idx} className={cn("flex items-start gap-3 text-sm font-medium text-slate-600")}>
+                        <div className={cn("flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-slate-200 text-slate-500")}>
                            <X className="w-3 h-3" />
                         </div>
                         <span className="leading-snug">{item}</span>
@@ -165,25 +165,25 @@ const BeforeAndAfterSection = ({ isDark = false }: { isDark?: boolean }) => {
 
               <div className={cn(
                 "p-6 sm:p-10 flex-1 flex flex-col justify-center items-center relative overflow-hidden",
-                isDark ? "bg-[#050505]" : "bg-slate-50"
+                "bg-white"
               )}>
                 <div className={cn(
                   "rounded-2xl overflow-hidden border w-full relative z-10 transition-transform duration-500 group-hover/card:scale-[1.02]",
-                  isDark ? "bg-[#000] border-white/10" : "bg-white border-slate-200 shadow-sm"
+                  "bg-white border-slate-200 shadow-sm"
                 )}>
                   <div className={cn(
                     "h-8 border-b flex items-center px-4 gap-1.5",
-                    isDark ? "bg-[#111] border-white/5" : "bg-slate-100 border-slate-200"
+                    "bg-slate-100 border-slate-200"
                   )}>
                     <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] opacity-30" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] opacity-30" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] opacity-30" />
                   </div>
-                  <div className={cn("relative aspect-video p-1", isDark ? "bg-[#0a0a0a]" : "bg-white")}>
+                  <div className={cn("relative aspect-video p-1 bg-white")}>
                     <HoverPlayGif
                       src="/assets/videos/Before.gif"
                       alt={t('beforeAfter.beforeGifAlt')}
-                      isDark={isDark}
+                      isDark={false}
                       playDesktop={t('beforeAfter.hoverPlayDesktop')}
                       playMobile={t('beforeAfter.hoverPlayMobile')}
                     />
@@ -193,33 +193,33 @@ const BeforeAndAfterSection = ({ isDark = false }: { isDark?: boolean }) => {
             </div>
           </div>
 
-          {/* Card 2: After (Highlighted) */}
+          {/* Card 2: After (Dark + highlighted) */}
           <div className="group/card relative flex flex-col h-full z-10">
             <div className={cn(
-              "absolute -inset-1.5 rounded-[2.5rem] blur-[20px] opacity-20 group-hover/card:opacity-40 transition duration-700 pointer-events-none",
-              isDark ? "bg-primary-blue" : "bg-blue-400"
+              "absolute -inset-2 rounded-[2.75rem] blur-[22px] opacity-25 group-hover/card:opacity-45 transition duration-700 pointer-events-none",
+              "bg-primary-blue"
             )} />
             
             <div className={cn(
-              "relative h-full flex flex-col rounded-[2.5rem] border overflow-hidden transition-all duration-700",
-              isDark ? "bg-black border-blue-500/30 shadow-[0_0_50px_rgba(37,99,235,0.15)]" : "bg-white border-blue-500/40 shadow-2xl shadow-blue-500/10"
+              "relative h-full flex flex-col rounded-[2.75rem] border overflow-hidden transition-all duration-700",
+              "bg-[#05050A] border-blue-500/35 ring-1 ring-blue-500/15 shadow-[0_0_60px_rgba(37,99,235,0.18)]"
             )}>
-              <div className={cn("absolute top-0 right-0 w-64 h-64 blur-[100px] pointer-events-none", isDark ? "bg-blue-500/10" : "bg-blue-400/20")} />
+              <div className={cn("absolute top-0 right-0 w-64 h-64 blur-[100px] pointer-events-none bg-blue-500/10")} />
 
               <div className={cn(
-                "p-8 lg:p-10 border-b flex flex-col gap-6 backdrop-blur-md relative z-10",
-                isDark ? "border-white/10 bg-white/5" : "border-slate-100 bg-blue-50/50"
+                "p-8 lg:p-10 border-b flex flex-col gap-6 backdrop-blur-md relative z-10 rounded-t-4xl",
+                "border-white/10 bg-white/5"
               )}>
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/40">
                         <CheckCircle2 className="w-6 h-6" />
                     </div>
-                    <h4 className={cn("text-2xl lg:text-3xl font-black tracking-tight", isDark ? "text-white" : "text-slate-900")}>{t('beforeAfter.afterTitle')}</h4>
+                    <h4 className={cn("text-2xl lg:text-3xl font-black tracking-tight text-white")}>{t('beforeAfter.afterTitle')}</h4>
                 </div>
                 <div className="flex flex-col gap-3">
                     {(t('beforeAfter.afterItems', { returnObjects: true }) as string[]).map((item, idx) => (
-                      <div key={idx} className={cn("flex items-start gap-3 text-sm font-bold", isDark ? "text-slate-200" : "text-slate-800")}>
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mt-0.5">
+                      <div key={idx} className={cn("flex items-start gap-3 text-sm font-bold text-slate-200")}>
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center mt-0.5">
                            <Check className="w-3 h-3" />
                         </div>
                         <span className="leading-snug">{item}</span>
@@ -230,26 +230,26 @@ const BeforeAndAfterSection = ({ isDark = false }: { isDark?: boolean }) => {
 
               <div className={cn(
                 "p-6 sm:p-10 flex-1 flex flex-col justify-center items-center relative overflow-hidden",
-                isDark ? "bg-[#050505]" : "bg-white"
+                "bg-[#050505]"
               )}>
                 <div className="absolute inset-0 bg-blue-500/5 blur-[50px] pointer-events-none" />
                 <div className={cn(
                   "rounded-2xl overflow-hidden border shadow-2xl relative z-10 w-full transition-transform duration-500 group-hover/card:scale-[1.02]",
-                  isDark ? "bg-[#000] border-white/10" : "bg-white border-slate-200"
+                  "bg-[#000] border-white/10"
                 )}>
                   <div className={cn(
                     "h-8 border-b flex items-center px-4 gap-1.5",
-                    isDark ? "bg-[#111] border-white/5" : "bg-slate-50 border-slate-100"
+                    "bg-[#111] border-white/5"
                   )}>
                     <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
                   </div>
-                  <div className={cn("relative aspect-video p-1", isDark ? "bg-black" : "bg-white")}>
+                  <div className={cn("relative aspect-video p-1 bg-black")}>
                     <HoverPlayGif
                       src="/assets/videos/After.gif"
                       alt={t('beforeAfter.afterGifAlt')}
-                      isDark={isDark}
+                      isDark={true}
                       playDesktop={t('beforeAfter.hoverPlayDesktop')}
                       playMobile={t('beforeAfter.hoverPlayMobile')}
                     />

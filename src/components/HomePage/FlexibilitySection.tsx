@@ -4,9 +4,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import { Layers, MousePointer2, UserPlus, Info } from "lucide-react";
+import { lazyImgProps } from "@/lib/lazy-media-props";
+import { useLazyMedia } from "@/hooks/use-lazy-media";
 
 const FlexibilitySection = ({ isDark = false }: { isDark?: boolean }) => {
   const { t } = useTranslation("home");
+  const { ref: lazyRef, shouldLoad } = useLazyMedia();
 
   return (
     <section className={cn(
@@ -76,6 +79,42 @@ const FlexibilitySection = ({ isDark = false }: { isDark?: boolean }) => {
                 )}>
                   {t("flexibility.advisorsBody")}
                 </p>
+
+                {/* GIF preview (reused from the two-ways section) */}
+                <div
+                  ref={lazyRef}
+                  className={cn(
+                    "relative overflow-hidden rounded-[2rem] border",
+                    isDark ? "border-white/10 bg-black/30" : "border-slate-200 bg-slate-50"
+                  )}
+                >
+                  <div className={cn("h-9 border-b flex items-center px-4 gap-2", isDark ? "border-white/10 bg-white/5" : "border-slate-200 bg-white")}>
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                    </div>
+                    <span className={cn("ml-2 text-[10px] font-medium", isDark ? "text-white/40" : "text-slate-500")}>
+                      client.vacei.com
+                    </span>
+                  </div>
+                  <div className="relative w-full aspect-video">
+                    {shouldLoad ? (
+                      <img
+                        src="/assets/videos/Invite%20Advisor%20V1.2.gif"
+                        alt="VACEI workspace preview"
+                        className="w-full h-full object-cover object-top"
+                        {...lazyImgProps}
+                      />
+                    ) : (
+                      <div className={cn("w-full h-full animate-pulse", isDark ? "bg-white/5" : "bg-slate-100")} />
+                    )}
+                    <div className={cn(
+                      "pointer-events-none absolute inset-0 bg-gradient-to-t",
+                      isDark ? "from-[#0A0B10] via-transparent to-transparent" : "from-white/70 via-transparent to-transparent"
+                    )} />
+                  </div>
+                </div>
                 
                 <div className={cn(
                   "mt-10 flex items-center gap-4 p-6 rounded-2xl border text-[13px] font-bold leading-relaxed",

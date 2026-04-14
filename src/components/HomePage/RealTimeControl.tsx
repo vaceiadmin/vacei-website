@@ -3,10 +3,43 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, LayoutDashboard, FileText, Calendar, MessageSquare, Clock, ShieldCheck, Zap } from "lucide-react";
+import Image from "next/image";
+import {
+  CheckCircle2,
+  LayoutDashboard,
+  FileText,
+  Calendar,
+  MessageSquare,
+  Clock,
+  ShieldCheck,
+  Zap,
+  Search,
+  ArrowLeft,
+  History,
+  Plus,
+  Check,
+  BadgePercent,
+  Scale,
+  Landmark,
+  Cpu,
+  BriefcaseBusiness,
+  BookOpenCheck,
+  FolderOpen,
+} from "lucide-react";
+
+function capFirst(s: string) {
+  const trimmed = (s ?? "").trim();
+  if (!trimmed) return trimmed;
+  return trimmed[0].toUpperCase() + trimmed.slice(1);
+}
 
 const RealTimeControl = ({ isDark = true }: { isDark?: boolean }) => {
   const { t } = useTranslation("home");
+
+  const SHOW_PORTAL_MOCK = false;
+
+  const [selected, setSelected] = React.useState<string[]>(["VAT", "Accounting"]);
+  const [company, setCompany] = React.useState("Cleven-Company");
 
   const icons = [
     LayoutDashboard,
@@ -22,6 +55,27 @@ const RealTimeControl = ({ isDark = true }: { isDark?: boolean }) => {
 
   const items = (t("realTimeControl.items", { returnObjects: true }) as string[] || []);
 
+  const serviceTiles = [
+    { key: "VAT", icon: BadgePercent },
+    { key: "Accounting", icon: BookOpenCheck },
+    { key: "Audit", icon: Search },
+    { key: "Payroll", icon: Clock },
+    { key: "Corporate & CSP Services", icon: BriefcaseBusiness },
+    { key: "Legal", icon: Scale },
+    { key: "Projects & Transactions", icon: FolderOpen },
+    { key: "Technology", icon: Cpu },
+    { key: "Grants & Incentives", icon: Landmark },
+    { key: "MBR", icon: LayoutDashboard },
+    { key: "CFO", icon: LayoutDashboard },
+    { key: "TAX", icon: BadgePercent },
+    { key: "Liquidation", icon: BriefcaseBusiness },
+    { key: "Tax Advisory", icon: ShieldCheck },
+  ];
+
+  const toggleSelected = (k: string) => {
+    setSelected((prev) => (prev.includes(k) ? prev.filter((x) => x !== k) : [...prev, k]));
+  };
+
   return (
     <section className={cn(
       "relative py-24 sm:py-32 overflow-hidden mx-4 sm:mx-6 lg:mx-8 mb-12 sm:mb-20",
@@ -34,52 +88,225 @@ const RealTimeControl = ({ isDark = true }: { isDark?: boolean }) => {
           <div className="relative group order-2 lg:order-1">
             <div className="absolute -inset-10 bg-primary-blue/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
             
-            <div className={cn(
-              "relative rounded-[3.5rem] border overflow-hidden shadow-3xl transition-all duration-700 group-hover:scale-[1.02]",
-              isDark ? "bg-[#050505] border-white/10" : "bg-slate-50 border-slate-200"
-            )}>
-              {/* Fake Dashboard Header */}
+            {/* OPTION A: Portal mock (toggle SHOW_PORTAL_MOCK to re-enable) */}
+            {SHOW_PORTAL_MOCK ? (
               <div className={cn(
-                "h-16 border-b flex items-center px-10 justify-between",
-                isDark ? "bg-white/5 border-white/10" : "bg-slate-50 border-slate-100"
+                "relative rounded-[3.5rem] border overflow-hidden shadow-3xl transition-all duration-700 group-hover:scale-[1.02]",
+                "bg-white border-white/10"
               )}>
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400/40" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400/40" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400/40" />
-                </div>
-                <div className="flex items-center gap-4">
-                    <div className="flex -space-x-2">
-                        {[1, 2, 3].map(i => (
-                            <div key={i} className="w-7 h-7 rounded-full border-2 border-slate-800 bg-slate-700" />
-                        ))}
+                {/* Portal Header */}
+                <div
+                  className={cn(
+                    "flex items-center justify-between gap-6 border-b px-6 py-5 sm:px-8",
+                    "bg-[#0b1220] border-white/10"
+                  )}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className={cn(
+                        "h-10 w-10 rounded-xl flex items-center justify-center shrink-0",
+                        "bg-amber-500 text-black"
+                      )}
+                    >
+                      <FileText className="h-5 w-5" />
                     </div>
-                    <div className="h-4 w-px bg-slate-500/20" />
-                    <span className="text-[10px] uppercase font-black tracking-widest text-slate-500">Live Workspace</span>
-                </div>
-              </div>
-
-              {/* Fake Dashboard Content */}
-              <div className="p-10 sm:p-14 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {items.slice(0, 4).map((item, i) => (
-                  <div key={i} className={cn(
-                    "flex flex-col gap-5 p-7 rounded-[2.5rem] border transition-all duration-500 hover:translate-x-1",
-                    isDark ? "bg-white/5 border-white/5 hover:border-primary-blue/30 shadow-inner" : "bg-white border-slate-200 shadow-sm hover:border-blue-500/30 hover:shadow-md"
-                  )}>
-                    <div className={cn(
-                        "w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-lg",
-                        isDark ? "bg-primary-blue/10 text-primary-blue" : "bg-blue-50 text-blue-600"
-                    )}>
-                        {icons[i] && React.createElement(icons[i], { className: "w-6 h-6" })}
-                    </div>
-                    <div className="space-y-1">
-                        <span className="text-sm font-black tracking-tight leading-tight block">{item}</span>
-                        <div className="h-1 w-8 bg-blue-500/20 rounded-full" />
+                    <div className="min-w-0">
+                      <p className={cn("text-lg font-black leading-tight truncate text-white")}>
+                        Global Service Request
+                      </p>
+                      <p className={cn("text-[12px] font-medium truncate text-slate-300")}>
+                        Submit service requests for any of your incorporated companies.
+                      </p>
                     </div>
                   </div>
-                ))}
+
+                  <div className="hidden sm:flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setCompany((c) => (c === "Cleven-Company" ? "VACEI-Holdings" : "Cleven-Company"))}
+                      className={cn(
+                        "h-9 px-3 rounded-xl border text-[11px] font-black tracking-tight flex items-center gap-2",
+                        "bg-white/10 border-white/10 text-white hover:bg-white/15"
+                      )}
+                    >
+                      {company}
+                    </button>
+                    <button
+                      type="button"
+                      className={cn(
+                        "h-9 px-3 rounded-xl border text-[11px] font-black tracking-tight flex items-center gap-2",
+                        "bg-white/10 border-white/10 text-white hover:bg-white/15"
+                      )}
+                    >
+                      <History className="h-4 w-4" />
+                      View History
+                    </button>
+                    <button
+                      type="button"
+                      className={cn(
+                        "h-9 px-3 rounded-xl border text-[11px] font-black tracking-tight flex items-center gap-2",
+                        "bg-white/10 border-white/10 text-white hover:bg-white/15"
+                      )}
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      Back
+                    </button>
+                  </div>
+                </div>
+
+                {/* Portal Body */}
+                <div className={cn("p-5 sm:p-8 bg-slate-50")}>
+                  <div className="grid grid-cols-12 gap-4 sm:gap-5">
+                    {/* Tiles */}
+                    <div className="col-span-12 lg:col-span-8 space-y-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {serviceTiles.map((tile) => {
+                          const Icon = tile.icon;
+                          const active = selected.includes(tile.key);
+                          return (
+                            <button
+                              key={tile.key}
+                              type="button"
+                              onClick={() => toggleSelected(tile.key)}
+                              className={cn(
+                                "group min-w-0 flex items-center gap-3 rounded-2xl border px-3.5 py-3 text-left transition-all duration-300",
+                                active
+                                  ? "bg-blue-50 border-blue-300 shadow-[0_18px_40px_-22px_rgba(37,99,235,0.20)]"
+                                  : "bg-white border-slate-200 hover:bg-white hover:border-slate-300 hover:shadow-[0_14px_34px_-22px_rgba(15,23,42,0.25)]"
+                              )}
+                            >
+                              <div
+                                className={cn(
+                                  "h-9 w-9 shrink-0 rounded-xl border flex items-center justify-center transition-colors",
+                                  active
+                                    ? "bg-blue-600 text-white border-blue-500"
+                                    : "bg-slate-50 text-slate-700 border-slate-200"
+                                )}
+                              >
+                                <Icon className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden />
+                              </div>
+                              <span
+                                className={cn(
+                                  "min-w-0 flex-1 text-[11px] font-black leading-snug tracking-tight text-slate-900",
+                                  "whitespace-normal break-words",
+                                  "line-clamp-2"
+                                )}
+                                title={tile.key}
+                              >
+                                {tile.key}
+                              </span>
+                              {active ? (
+                                <span className={cn("ml-auto h-5 w-5 rounded-full flex items-center justify-center bg-blue-100 text-blue-700")}>
+                                  <Check className="h-3.5 w-3.5" />
+                                </span>
+                              ) : null}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Summary */}
+                    <div className="col-span-12 lg:col-span-4">
+                      <div className={cn("rounded-[2.25rem] border p-6 sm:p-7 bg-[#0b1220] border-white/10")}>
+                        <p className={cn("text-lg font-black text-white")}>Summary</p>
+                        <p className={cn("mt-5 text-[10px] font-black uppercase tracking-[0.25em] text-slate-400")}>
+                          Services selected
+                        </p>
+                        {selected.length ? (
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {selected.map((s) => (
+                              <span
+                                key={s}
+                                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-black text-slate-100"
+                              >
+                                <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                                <span className="max-w-[12rem] truncate">{s}</span>
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="mt-2 text-sm font-bold text-slate-500">No services selected yet</div>
+                        )}
+
+                        <div className={cn("my-6 h-px bg-white/10")} />
+
+                        <p className={cn("text-[10px] font-black uppercase tracking-[0.25em] text-slate-400")}>
+                          Request for
+                        </p>
+                        <div className={cn("mt-2 rounded-2xl border px-4 py-3 flex items-center gap-3 bg-white/10 border-white/10")}>
+                          <div className={cn("h-9 w-9 rounded-xl border flex items-center justify-center bg-white/10 border-white/10 text-white")}>
+                            <BriefcaseBusiness className="h-4 w-4" />
+                          </div>
+                          <span className={cn("text-[12px] font-black text-white")}>{company}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Full-width empty state */}
+                    <div className="col-span-12">
+                      <div className="relative overflow-hidden rounded-[2.25rem] border bg-white border-slate-200">
+                        <div
+                          className="absolute inset-0 pointer-events-none opacity-[0.05]"
+                          style={{
+                            backgroundImage: "radial-gradient(circle at 2px 2px, #0f172a 1px, transparent 0)",
+                            backgroundSize: "48px 48px",
+                          }}
+                        />
+                        <div className="flex min-h-[240px] items-center justify-center px-6 py-12 text-center">
+                          <div className="space-y-3 max-w-sm">
+                            <div className="mx-auto h-16 w-16 rounded-full border flex items-center justify-center bg-slate-50 border-slate-200 text-slate-900">
+                              <Plus className="h-7 w-7" />
+                            </div>
+                            <p className="text-lg font-black tracking-tight text-slate-900">Select services to start</p>
+                            <p className="text-sm font-medium leading-relaxed text-slate-600">
+                              Choose services from the list above and complete the details for each request.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              /* OPTION B: Screenshot mock (current) */
+              <div
+                className={cn(
+                  "relative overflow-hidden rounded-[3.5rem] border shadow-3xl transition-all duration-700 group-hover:scale-[1.01]",
+                  "border-white/10 bg-[#0b1220]"
+                )}
+              >
+                {/* Simple browser chrome */}
+                <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-4 sm:px-8">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
+                      client.vacei.com
+                    </span>
+                  </div>
+                  <span className="hidden sm:block text-[10px] font-black uppercase tracking-[0.25em] text-slate-500">
+                    Portal preview
+                  </span>
+                </div>
+
+                <div className="relative aspect-16/10 w-full bg-black">
+                  <Image
+                    src="/assets/images/WhatsApp Image 2026-04-14 at 3.18.30 PM.jpeg"
+                    alt="Portal preview screenshot"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-contain object-center"
+                    priority={false}
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right: Content */}
@@ -115,7 +342,7 @@ const RealTimeControl = ({ isDark = true }: { isDark?: boolean }) => {
                     "text-lg font-bold tracking-tight",
                     isDark ? "text-slate-200" : "text-slate-800"
                   )}>
-                    {item}
+                    {capFirst(item)}
                   </span>
                 </div>
               ))}
@@ -128,7 +355,7 @@ const RealTimeControl = ({ isDark = true }: { isDark?: boolean }) => {
                 <div className="flex items-center gap-3">
                     <ShieldCheck className="w-5 h-5 text-emerald-500" />
                     <p className={cn(
-                        "text-lg font-black tracking-tight uppercase tracking-[0.25em]",
+                        "text-lg font-black uppercase tracking-[0.25em]",
                         isDark ? "text-slate-500" : "text-slate-400"
                     )}>
                         {t("realTimeControl.footer")}

@@ -26,7 +26,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
         roundedClassName="rounded-none"
         showNoise={false}
         className={cn(
-          "relative flex min-h-0 flex-col justify-center pt-24 pb-10 sm:min-h-[88vh] sm:pt-28 sm:pb-16 lg:min-h-screen lg:pb-32 overflow-hidden",
+          "relative flex min-h-0 flex-col justify-center pt-24 pb-10 sm:min-h-[88vh] sm:pt-28 sm:pb-16 lg:min-h-screen  overflow-hidden",
           !isDark && "border-x-0 border-t-0 border-b border-slate-100 shadow-none sm:shadow-none"
         )}
         radialOpacity={isDark ? 0.38 : 0.2}
@@ -243,7 +243,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
       `}} />
 
       {/* Bottom Services Strip (Marquee) — extra top padding on md+ clears the absolutely positioned trust strip */}
-      <div className="relative mt-2 w-full overflow-hidden rounded-b-4xl border-b border-gray-100 bg-white pt-6 sm:pt-8  pb-6 sm:pb-8">
+      <div className="relative mt-0 w-full overflow-hidden rounded-b-4xl border-b border-gray-100 bg-white pt-6 sm:pt-8  pb-6 sm:pb-8">
         {/* Subtle fade effect on the edges */}
         <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
         <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
