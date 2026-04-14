@@ -296,7 +296,7 @@ const RealTimeControl = ({ isDark = true }: { isDark?: boolean }) => {
 
                 <div className="relative aspect-16/10 w-full bg-black">
                   <Image
-                    src="/assets/images/WhatsApp Image 2026-04-14 at 3.18.30 PM.jpeg"
+                    src="/assets/images/Gemini_Generated_Image_qv092qqv092qqv09.png"
                     alt="Portal preview screenshot"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"

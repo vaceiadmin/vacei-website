@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import LocalizedLink from "@/components/common/LocalizedLink";
 import { ArrowRight } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
+import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { useTranslation } from "react-i18next";
 import { useLazyMedia } from "@/hooks/use-lazy-media";
 import { lazyImgProps } from "@/lib/lazy-media-props";
@@ -19,66 +20,37 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
     [t]
   );
 
-  return (
-    <section className="w-full relative">
-      <GradientContainer
-        backgroundColor={isDark ? "bg-black" : "bg-white"}
-        roundedClassName="rounded-none"
-        showNoise={false}
-        className={cn(
-          "relative flex min-h-0 flex-col justify-center pt-24 pb-10 sm:min-h-[88vh] sm:pt-28 sm:pb-16 lg:min-h-screen  overflow-hidden",
-          !isDark && "border-x-0 border-t-0 border-b border-slate-100 shadow-none sm:shadow-none"
-        )}
-        radialOpacity={isDark ? 0.38 : 0.2}
-        leftPositionClass="-top-[5%] -left-[5%]"
-        rightPositionClass="-bottom-[5%] -right-[5%]"
-      >
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-8 px-5 sm:px-6 sm:gap-10 lg:flex-row lg:items-center lg:gap-8 lg:px-8">
+  const heroShellClass = cn(
+    "relative flex min-h-0 flex-col justify-center pt-24 pb-10 sm:min-h-[88vh] sm:pt-28 sm:pb-16 lg:min-h-screen overflow-hidden"
+  );
 
-          {/* Left Content Area */}
-          <div className="relative z-20 flex w-full flex-col items-start text-left lg:w-[48%]">
-            <div className="relative mb-4 sm:mb-6">
-              <h1 className="flex flex-col gap-1.5 tracking-tight sm:gap-2">
-                <span
-                  className={cn(
-                    "text-[1.625rem] font-bodoni leading-[1.15] sm:text-4xl md:text-5xl",
-                    isDark ? "text-white" : "text-slate-900"
-                  )}
-                >
-                  {t("hero.titleLine1")}
-                </span>
-                <span
-                  className={cn(
-                    "text-[1.625rem] font-sans font-extrabold leading-[1.15] sm:text-4xl md:text-5xl",
-                    isDark ? "text-white" : "text-slate-900"
-                  )}
-                >
-                  {t("hero.titleLine2")}
-                </span>
-                <span className="font-bodoni text-[1.625rem] italic leading-[1.15] text-primary-blue sm:text-4xl md:text-5xl">
-                  {t("hero.titleHighlight")}
-                </span>
-              </h1>
-            </div>
+  const heroBodyClass = cn(
+    "max-w-xl text-balance leading-relaxed font-medium opacity-70",
+    isDark
+      ? "text-base sm:text-lg text-slate-300"
+      : "text-base sm:text-lg lg:text-xl text-slate-600"
+  );
 
-            <div className="mt-4 max-w-xl space-y-3 sm:mt-6 sm:space-y-4">
-              <p
-                className={cn(
-                  "text-base leading-relaxed text-balance font-medium sm:text-lg md:text-xl",
-                  isDark ? "text-gray-400" : "text-slate-600"
-                )}
-              >
-                {t("hero.body")}
-              </p>
-              <p
-                className={cn(
-                  "text-[15px] leading-relaxed text-balance font-medium sm:text-base md:text-[17px]",
-                  isDark ? "text-gray-300" : "text-slate-700"
-                )}
-              >
-                {t("hero.body2")}
-              </p>
-            </div>
+  const heroMain = (
+    <>
+    <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-8 px-5 sm:px-6 sm:gap-10 lg:flex-row lg:items-center lg:gap-8 lg:px-8">
+      {/* Left Content Area */}
+      <div className="relative z-20 flex w-full flex-col items-start text-left lg:w-[48%]">
+        <div className="relative mb-4 sm:mb-6">
+          <SectionTitleHero
+            as="h1"
+            variant={isDark ? "dark" : "light"}
+            line1={t("hero.titleLine1")}
+            line2={t("hero.titleLine2")}
+            highlight={t("hero.titleHighlight")}
+            className="items-start gap-2 [&>span:first-child]:font-sans [&>span:first-child]:font-extrabold"
+          />
+        </div>
+
+        <div className="mt-4 max-w-xl space-y-3 sm:mt-6 sm:space-y-4">
+          <p className={heroBodyClass}>{t("hero.body")}</p>
+          <p className={heroBodyClass}>{t("hero.body2")}</p>
+        </div>
 
             <div className="mb-6 mt-8 flex w-full flex-col gap-3 sm:mb-8 sm:mt-10 sm:flex-row sm:gap-4 sm:w-auto">
               <LocalizedLink
@@ -229,7 +201,40 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
             </div>
           </div>
         ) : null} */}
-      </GradientContainer>
+    </>
+  );
+
+  return (
+    <section className="w-full relative">
+      {isDark ? (
+        <GradientContainer
+          backgroundColor="bg-black"
+          roundedClassName="rounded-none"
+          showNoise={false}
+          className={heroShellClass}
+          radialOpacity={0.38}
+          leftPositionClass="-top-[5%] -left-[5%]"
+          rightPositionClass="-bottom-[5%] -right-[5%]"
+        >
+          {heroMain}
+        </GradientContainer>
+      ) : (
+        <div
+          className={cn(
+            heroShellClass,
+            "border-b border-slate-100 bg-[#FAFBFF] shadow-none sm:shadow-none"
+          )}
+        >
+          {/* Right-side blue wash (matches reference screenshot) */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-[58%] bg-linear-to-l from-blue-500/10 via-blue-400/5 to-transparent" />
+          <div className="pointer-events-none absolute right-[-12%] top-[-10%] h-[520px] w-[520px] rounded-full bg-blue-500/10 blur-[80px]" />
+          <div className="pointer-events-none absolute right-[10%] top-[15%] h-[380px] w-[380px] rounded-full bg-sky-400/10 blur-[90px]" />
+
+          <div className="pointer-events-none absolute right-0 top-0 h-[800px] w-[800px] rounded-full bg-blue-400/5 opacity-20 blur-[150px]" />
+          <div className="pointer-events-none absolute -bottom-32 -left-[15%] h-[560px] w-[560px] rounded-full bg-violet-400/8 opacity-25 blur-[130px]" />
+          {heroMain}
+        </div>
+      )}
 
       <style dangerouslySetInnerHTML={{
         __html: `
