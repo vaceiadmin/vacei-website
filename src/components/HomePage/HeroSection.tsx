@@ -148,7 +148,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                   className="relative w-full aspect-square overflow-hidden"
                 >
                   <img
-                    src="/assets/videos/Banner GIF 2-new.mp4"
+                    src="/assets/videos/Main%20Render.gif?v=1"
                     alt="VACEI platform preview fallback"
                     {...lazyImgProps}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isVideoReady && !hasVideoError ? "opacity-0" : "opacity-100"
@@ -162,12 +162,12 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                       muted
                       playsInline
                       preload="metadata"
-                      poster="/assets/videos/Banner GIF 2-new.mp4"
+                      poster="/assets/videos/Main%20Render.gif?v=1"
                       onPlaying={() => setIsVideoReady(true)}
                       onError={() => setHasVideoError(true)}
                       aria-label="VACEI platform preview video"
                     >
-                      <source src="/assets/videos/Banner GIF 2-new.mp4" type="video/mp4" />
+                      <source src="/assets/videos/Banner GIF 2-new.mp4?v=1" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   )}
