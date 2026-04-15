@@ -7,7 +7,6 @@ import GradientContainer from "@/components/common/GradientContainer";
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { useTranslation } from "react-i18next";
 import { useLazyMedia } from "@/hooks/use-lazy-media";
-import { lazyImgProps } from "@/lib/lazy-media-props";
 import { cn } from "@/lib/utils";
 
 const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
@@ -142,27 +141,26 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                   </div>
                 </div> */}
 
-                {/* Video — MP4 loads only near viewport; GIF fallback uses native lazy decoding */}
+                {/* Video — MP4 loads near viewport. Do not use MP4 as <img> or poster; browsers require image formats there. */}
                 <div
                   ref={lazyMediaRef}
-                  className="relative w-full aspect-square overflow-hidden"
+                  className="relative w-full aspect-square overflow-hidden bg-slate-100"
                 >
-                  <img
-                    src="/assets/videos/banner-gip-2-new.mp4"
-                    alt="VACEI platform preview fallback"
-                    {...lazyImgProps}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isVideoReady && !hasVideoError ? "opacity-0" : "opacity-100"
-                      }`}
+                  <div
+                    aria-hidden
+                    className={cn(
+                      "absolute inset-0 bg-linear-to-br from-slate-100 via-slate-50 to-blue-50 transition-opacity duration-300",
+                      isVideoReady && !hasVideoError ? "opacity-0 pointer-events-none" : "opacity-100"
+                    )}
                   />
                   {loadHeroVideo && (
                     <video
-                      className="w-full h-full object-cover"
+                      className="relative z-1 h-full w-full object-cover"
                       autoPlay
                       loop
                       muted
                       playsInline
                       preload="metadata"
-                      poster="/assets/videos/banner-gip-2-new.mp4"
                       onPlaying={() => setIsVideoReady(true)}
                       onError={() => setHasVideoError(true)}
                       aria-label="VACEI platform preview video"
