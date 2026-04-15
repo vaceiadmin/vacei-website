@@ -27,7 +27,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "VACEI – Accounting, Audit, Legal & Corporate Services Platform",
+  title: "Global Accounting, Tax, Audit — and More. Done for You.",
   description:
     "VACEI is a structured digital platform for accounting, audit, legal and corporate services. Get a dedicated team, full visibility, and one place for documents, deadlines, and communication.",
   icons: {

@@ -35,7 +35,12 @@
       "Takes 2 minutes",
       "No commitment required",
       "Receive your quote within 24 hours"
-    ]
+    ],
+    "typeDemo": {
+      "companyName": "Acme Global Ltd",
+      "country": "United Arab Emirates",
+      "services": "Accounting & Bookkeeping"
+    }
   },
   "coreStatement": {
     "text": "We manage everything your business needs — from incorporation to compliance — anywhere in the world.",
