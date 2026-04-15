@@ -14,7 +14,8 @@
     "i18n:manual-export": "node scripts/manual-locale-export.mjs",
     "i18n:manual-import": "node scripts/manual-locale-import.mjs",
     "i18n:manual-export-all": "node scripts/manual-locale-export.mjs all",
-    "i18n:manual-import-all": "node scripts/manual-locale-import.mjs all"
+    "i18n:manual-import-all": "node scripts/manual-locale-import.mjs all",
+    "git:lfs-push-all": "git lfs push --all origin"
   },
   "dependencies": {
     "@fontsource/mona-sans": "^5.2.8",
