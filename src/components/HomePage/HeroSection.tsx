@@ -148,7 +148,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                   className="relative w-full aspect-square overflow-hidden"
                 >
                   <img
-                    src="/assets/videos/Main%20Render.gif"
+                    src="/assets/videos/Banner GIF 2-new.mp4"
                     alt="VACEI platform preview fallback"
                     {...lazyImgProps}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isVideoReady && !hasVideoError ? "opacity-0" : "opacity-100"
@@ -162,7 +162,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                       muted
                       playsInline
                       preload="metadata"
-                      poster="/assets/videos/Main%20Render.gif"
+                      poster="/assets/videos/Banner GIF 2-new.mp4"
                       onPlaying={() => setIsVideoReady(true)}
                       onError={() => setHasVideoError(true)}
                       aria-label="VACEI platform preview video"
