@@ -58,8 +58,8 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                 className={cn(
                   "group flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[15px] font-bold transition-all hover:scale-105 active:scale-95 sm:w-auto sm:px-10 sm:py-4",
                   isDark
-                    ? "bg-gradient-to-b from-white to-gray-200 text-slate-900 shadow-[0_10px_20px_rgba(255,255,255,0.1)]"
-                    : "bg-gradient-to-b from-blue-600 to-blue-700 text-white shadow-[0_12px_28px_-6px_rgba(37,99,235,0.45)] ring-1 ring-blue-500/30 hover:from-blue-500 hover:to-blue-600"
+                    ? "bg-linear-to-b from-white to-gray-200 text-slate-900 shadow-[0_10px_20px_rgba(255,255,255,0.1)]"
+                    : "bg-linear-to-b from-blue-600 to-blue-700 text-white shadow-[0_12px_28px_-6px_rgba(37,99,235,0.45)] ring-1 ring-blue-500/30 hover:from-blue-500 hover:to-blue-600"
                 )}
               >
                 <span>{t("hero.quoteCta")}</span>
@@ -128,10 +128,10 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
             <div className="relative mx-auto w-full max-w-[min(100%,520px)] lg:max-w-[650px]">
 
               {/* Main Browser Window Wrapper */}
-              <div className="relative rounded-2xl overflow-hidden bg-[#1D1E30] border border-white/10 shadow-2xl z-10 transition-transform duration-700 hover:scale-[1.02]">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl z-10 transition-transform duration-700">
 
                 {/* Browser Header */}
-                <div className="h-10 w-full bg-[#181926] border-b border-white/5 flex items-center px-4 justify-between relative">
+                {/* <div className="h-10 w-full bg-[#181926] border-b border-white/5 flex items-center px-4 justify-between relative">
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
                     <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
@@ -140,12 +140,12 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                   <div className="absolute left-1/2 -translate-x-1/2 bg-black/20 px-6 py-1 rounded-md flex items-center justify-center">
                     <span className="text-[10px] text-white/40 tracking-widest font-mono">vacei.com</span>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Video — MP4 loads only near viewport; GIF fallback uses native lazy decoding */}
                 <div
                   ref={lazyMediaRef}
-                  className="relative w-full aspect-video bg-black overflow-hidden"
+                  className="relative w-full aspect-square overflow-hidden"
                 >
                   <img
                     src="/assets/videos/Main%20Render.gif"
@@ -167,18 +167,17 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                       onError={() => setHasVideoError(true)}
                       aria-label="VACEI platform preview video"
                     >
-                      <source src="/assets/videos/hero-banner-v1.mp4?v=20260323" type="video/mp4" />
+                      <source src="/assets/videos/Banner GIF 2-new.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   )}
                 </div>
-
               </div>
 
               {/* Glowing circle floating element top-right outside */}
-              <div className="absolute -top-4 -right-4 w-14 h-14 bg-[#181926] rounded-2xl border border-white/10 flex items-center justify-center shadow-2xl z-20 hidden sm:flex">
+              {/* <div className="absolute -top-4 -right-4 w-14 h-14 bg-[#181926] rounded-2xl border border-white/10 flex items-center justify-center shadow-2xl z-20 hidden sm:flex">
                 <div className="w-6 h-6 rounded-full border-2 border-primary-blue border-r-transparent animate-spin" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -225,13 +224,14 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
             "border-b border-slate-100 bg-[#FAFBFF] shadow-none sm:shadow-none"
           )}
         >
-          {/* Right-side blue wash (matches reference screenshot) */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-[58%] bg-linear-to-l from-blue-500/10 via-blue-400/5 to-transparent" />
-          <div className="pointer-events-none absolute right-[-12%] top-[-10%] h-[520px] w-[520px] rounded-full bg-blue-500/10 blur-[80px]" />
-          <div className="pointer-events-none absolute right-[10%] top-[15%] h-[380px] w-[380px] rounded-full bg-sky-400/10 blur-[90px]" />
+          {/* Left-side blue wash (moved from right) */}
+          {/* Left-side blue wash (moved from right) */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-[42%] bg-linear-to-r from-blue-500/10 via-blue-400/5 to-transparent" />
+          <div className="pointer-events-none absolute left-[-8%] top-[-10%] h-[420px] w-[420px] rounded-full bg-blue-500/10 blur-[80px]" />
+          <div className="pointer-events-none absolute left-[5%] top-[15%] h-[280px] w-[280px] rounded-full bg-sky-400/10 blur-[90px]" />
 
-          <div className="pointer-events-none absolute right-0 top-0 h-[800px] w-[800px] rounded-full bg-blue-400/5 opacity-20 blur-[150px]" />
-          <div className="pointer-events-none absolute -bottom-32 -left-[15%] h-[560px] w-[560px] rounded-full bg-violet-400/8 opacity-25 blur-[130px]" />
+          <div className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] rounded-full bg-blue-400/5 opacity-20 blur-[150px]" />
+          <div className="pointer-events-none absolute -bottom-32 -right-[10%] h-[460px] w-[460px] rounded-full bg-violet-400/8 opacity-25 blur-[130px]" />
           {heroMain}
         </div>
       )}
