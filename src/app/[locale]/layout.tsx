@@ -3,7 +3,8 @@ import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import PageTransition from "@/components/common/PageTransition";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
-import IntroAnimationGate from "@/components/common/IntroAnimationGate";
+// import IntroAnimationGate from "@/components/common/IntroAnimationGate";
+import MainGifLoaderGate from "@/components/common/MainGifLoaderGate";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import CookieConsentBanner from "@/components/common/CookieConsentBanner";
 import SupportChat from "@/components/support-chat/SupportChat";
@@ -42,17 +43,19 @@ export default async function LocaleLayout({
         </Suspense>
         <ReduceMotionProvider>
           <ScrollProvider>
-            <IntroAnimationGate />
-            <SmoothScroll>
-              <Navbar />
-              <PageTransition>{children}</PageTransition>
-              <Footer />
-              <ScrollToTopButton />
-              <SupportChat />
-              <LanguageSwitcher />
-              {/* <CustomCursor /> */}
-              <CookieConsentBanner />
-            </SmoothScroll>
+            {/* <IntroAnimationGate /> */}
+            <MainGifLoaderGate>
+              <SmoothScroll>
+                <Navbar />
+                <PageTransition>{children}</PageTransition>
+                <Footer />
+                <ScrollToTopButton />
+                <SupportChat />
+                <LanguageSwitcher />
+                {/* <CustomCursor /> */}
+                <CookieConsentBanner />
+              </SmoothScroll>
+            </MainGifLoaderGate>
           </ScrollProvider>
         </ReduceMotionProvider>
       </I18nProvider>
