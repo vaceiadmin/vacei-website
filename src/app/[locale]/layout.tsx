@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import PageTransition from "@/components/common/PageTransition";
@@ -21,6 +22,15 @@ import { isLocale, locales, type Locale } from "@/lib/i18n-config";
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
+export const metadata: Metadata = {
+  title: "Vacei | Accounting, Audit & Corporate Services Platform",
+  description:
+    "VACEI is a structured digital platform for accounting, audit, legal and corporate services. Get a dedicated team, full visibility, and one place for documents, deadlines, and communication.",
+  icons: {
+    icon: "/favicon.png",
+  },
+};
+
 
 export default async function LocaleLayout({
   children,
