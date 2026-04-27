@@ -27,9 +27,30 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Global Accounting, Tax, Audit — and More. Done for You.",
+  metadataBase: new URL("https://vacei.com"),
+  title: {
+    default: "Global Accounting, Tax, Audit — and More. Done for You.",
+    template: "%s",
+  },
   description:
     "VACEI is a structured digital platform for accounting, audit, legal and corporate services. Get a dedicated team, full visibility, and one place for documents, deadlines, and communication.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "Global Accounting, Tax, Audit — and More. Done for You.",
+    description:
+      "VACEI is a structured digital platform for accounting, audit, legal and corporate services. Get a dedicated team, full visibility, and one place for documents, deadlines, and communication.",
+    siteName: "VACEI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Global Accounting, Tax, Audit — and More. Done for You.",
+    description:
+      "VACEI is a structured digital platform for accounting, audit, legal and corporate services. Get a dedicated team, full visibility, and one place for documents, deadlines, and communication.",
+  },
   icons: {
     icon: "/favicon.png",
   },

@@ -343,7 +343,7 @@ const ValueSection = ({ isDark = false }: { isDark?: boolean }) => {
                   <video
                     ref={videoRef}
                     className="w-full aspect-video object-cover"
-                    src="/assets/videos/Vacei_Explainer_V1.mp4"
+                    src="/assets/videos/Vacei%20(2)%20X2V2.mp4"
                     playsInline
                     preload="metadata"
                     onTimeUpdate={onTimeUpdate}

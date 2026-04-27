@@ -457,7 +457,7 @@ const Navbar = () => {
                 <div className="flex items-center justify-center">
                   <Image
                     src={Logo}
-                    alt="VACEI Logo"
+                    alt="VACEI"
                     width={100}
                     height={70}
                     className="object-contain w-20 h-12 sm:w-24 sm:h-14 lg:w-[100px] lg:h-[70px]"
@@ -734,7 +734,7 @@ const Navbar = () => {
                 <LocalizedLink href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                   <Image
                     src={Logo}
-                    alt="VACEI Logo"
+                    alt="VACEI"
                     width={120}
                     height={56}
                     className="object-contain h-10 w-auto"
@@ -900,7 +900,7 @@ const Navbar = () => {
                     <div className=" flex items-center justify-center">
                       <Image
                         src={Logo}
-                        alt="VACEI Logo"
+                        alt="VACEI"
                         width={150}
                         height={80}
                         className="object-contain"
