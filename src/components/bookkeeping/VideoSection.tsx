@@ -61,7 +61,6 @@ export default function VideoSection() {
               playsInline
               className="video-embed"
               preload="metadata"
-              poster="/assets/images/placeholder.png"
               onError={() => setIsError(true)}
               onLoadStart={() => setIsLoading(true)}
               onCanPlay={() => setIsLoading(false)}
