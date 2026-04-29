@@ -223,17 +223,16 @@
 .video-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0); transition: background 0.3s ease; pointer-events: none; z-index: 2; }
 .video-frame:hover .video-overlay { background: rgba(0, 0, 0, 0.1); }
 
-.video-ctrl-btn { pointer-events: auto; width: 80px; height: 80px; border-radius: 50%; background: rgba(59, 130, 246, 0.9); color: white; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); opacity: 0; transform: scale(0.8); }
-
-.video-ctrl-btn.visible { opacity: 1; transform: scale(1); }
+.video-ctrl-btn { pointer-events: auto; width: 80px; height: 80px; border-radius: 50%; background: rgba(59, 130, 246, 0.9); color: white; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4); opacity: 1; transform: scale(1); }
 .video-ctrl-btn:hover { background: rgba(59, 130, 246, 1); transform: scale(1.1); box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5); }
 
 /* Play icon state */
 .video-ctrl-btn .play-icon { margin-left: 4px; }
 
-/* Hide play button when playing, but show pause on hover */
+/* Hide play button when playing, but show on hover or while loading */
 .video-frame.is-playing .video-ctrl-btn { opacity: 0; transform: scale(0.8); }
-.video-frame.is-playing:hover .video-ctrl-btn { opacity: 1; transform: scale(1); }
+.video-frame.is-playing:hover .video-ctrl-btn,
+.video-frame.is-loading .video-ctrl-btn { opacity: 1; transform: scale(1); }
 
 .video-points { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; margin-bottom: 20px; padding: 0; }
 .video-points li { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--text-secondary); }
