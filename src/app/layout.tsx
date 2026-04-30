@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Libre_Bodoni, Montserrat, Nunito } from "next/font/google";
 import "@fontsource/mona-sans";
 import "./globals.css";
+import "@/components/bookkeeping/bookkeeping.css";
 import { headers } from "next/headers";
 import { LOCALE_HEADER } from "@/lib/i18n-config";
 

@@ -1,9 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
 
-// Import CSS specific to this page
-import "@/components/bookkeeping/bookkeeping.css";
-
 // Import all components
 import HeroSection from "@/components/bookkeeping/HeroSection";
 import TrustStrip from "@/components/bookkeeping/TrustStrip";

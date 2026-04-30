@@ -401,7 +401,7 @@ const Navbar = () => {
       useCompactNav
         ? [
             { label: t("nav.resource.insights"), href: "/insights" },
-            { label: "Bookkeeping", href: "/services/bookkeeping" },
+            { label: t("nav.resource.bookkeeping"), href: "/bookkeeping" },
             { label: t("nav.product.aiReview"), href: "/ai-review" },
             { label: t("nav.resource.howItWorks"), href: "/how-it-works" },
             { label: t("nav.resource.about"), href: "/about" },
@@ -412,7 +412,7 @@ const Navbar = () => {
           ]
         : [
             { label: t("nav.resource.insights"), href: "/insights" },
-            { label: "Bookkeeping", href: "/services/bookkeeping" },
+            { label: t("nav.resource.bookkeeping"), href: "/bookkeeping" },
             { label: t("nav.product.aiReview"), href: "/ai-review" },
             { label: t("nav.resource.howItWorks"), href: "/how-it-works" },
             { label: t("nav.resource.about"), href: "/about" },

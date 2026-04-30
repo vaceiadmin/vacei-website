@@ -1,12 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function HeroSection() {
   const { t } = useTranslation("services");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          obs.disconnect();
+        }
+      },
+      { root: null, rootMargin: "250px 0px", threshold: 0.01 }
+    );
+
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <div className="hero-wrap">
@@ -91,16 +113,18 @@ export default function HeroSection() {
                 <foreignObject x="96" y="30" width="684" height="414" clipPath="url(#vscr)">
                   <div
                     style={{
-                      width: "684px",
-                      height: "414px",
+                      width: "100%",
+                      height: "100%",
                       overflow: "hidden",
                     }}
                   >
                     <video
+                      ref={videoRef}
                       autoPlay
                       loop
                       muted
                       playsInline
+                      preload="none"
                       style={{
                         width: "100%",
                         height: "100%",
@@ -108,7 +132,9 @@ export default function HeroSection() {
                         display: "block",
                       }}
                     >
-                      <source src="/assets/videos/hero-video.mp4" type="video/mp4" />
+                      {shouldLoadVideo && (
+                        <source src="/assets/videos/hero-video.mp4" type="video/mp4" />
+                      )}
                     </video>
                   </div>
                 </foreignObject>
