@@ -57,6 +57,7 @@ export default function PortalTabsAccountingMalta() {
   const [mobileNav, setMobileNav] = useState(false);
   const gid = useId().replace(/:/g, "");
   const pillBtnRefs = useRef<Partial<Record<TabKey, HTMLButtonElement | null>>>({});
+  const pillsScrollRef = useRef<HTMLDivElement>(null);
 
   const switchTab = useCallback((next: TabKey) => {
     if (next === tab) return;
@@ -86,8 +87,15 @@ export default function PortalTabsAccountingMalta() {
 
   useEffect(() => {
     if (!mobileNav) return;
-    const el = pillBtnRefs.current[tab];
-    el?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const row = pillsScrollRef.current;
+    const btn = pillBtnRefs.current[tab];
+    if (!row || !btn) return;
+    const targetLeft = btn.offsetLeft + btn.offsetWidth / 2 - row.clientWidth / 2;
+    const maxScroll = Math.max(0, row.scrollWidth - row.clientWidth);
+    row.scrollTo({
+      left: Math.max(0, Math.min(targetLeft, maxScroll)),
+      behavior: "smooth",
+    });
   }, [tab, mobileNav]);
 
   useEffect(() => {
@@ -125,7 +133,7 @@ export default function PortalTabsAccountingMalta() {
           <p>{t(`${pt}intro.p`)}</p>
         </div>
 
-        <div className="sel-pills" role="tablist" aria-label={t(`${pt}ariaTablist`)}>
+        <div ref={pillsScrollRef} className="sel-pills" role="tablist" aria-label={t(`${pt}ariaTablist`)}>
           {TAB_ORDER.map((key) => {
             const m = pillMeta[key];
             const active = tab === key;

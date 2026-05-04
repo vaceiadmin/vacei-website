@@ -3287,6 +3287,12 @@ svg.spark {
 
 /* Responsive — portal tabs: keep a single active panel (absolute stack); do not use position:static on panels */
 @media(max-width: 700px) {
+  .sel-inner {
+    overflow-x: clip;
+    padding-left: max(16px, 4vw);
+    padding-right: max(16px, 4vw);
+  }
+
   .sel-intro {
     padding: 56px 0 28px;
   }
@@ -3301,10 +3307,10 @@ svg.spark {
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     padding: 4px 0 12px;
-    margin: 0 calc(-1 * min(5vw, 24px)) 36px;
-    padding-left: min(5vw, 24px);
-    padding-right: min(5vw, 24px);
+    margin: 0 0 36px;
     scrollbar-width: thin;
+    max-width: 100%;
+    min-width: 0;
   }
 
   .sel-pills::-webkit-scrollbar {
@@ -3388,6 +3394,11 @@ svg.spark {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+  }
+
+  .portal-window {
+    max-width: 100%;
+    min-width: 0;
   }
 
   .pn-grid-4 {
