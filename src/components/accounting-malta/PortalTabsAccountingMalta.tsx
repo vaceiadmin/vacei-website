@@ -54,7 +54,9 @@ export default function PortalTabsAccountingMalta() {
   );
 
   const [tab, setTab] = useState<TabKey>("bank");
+  const [mobileNav, setMobileNav] = useState(false);
   const gid = useId().replace(/:/g, "");
+  const pillBtnRefs = useRef<Partial<Record<TabKey, HTMLButtonElement | null>>>({});
 
   const switchTab = useCallback((next: TabKey) => {
     if (next === tab) return;
@@ -75,7 +77,21 @@ export default function PortalTabsAccountingMalta() {
   }, []);
 
   useEffect(() => {
-    if (!isInView) return;
+    const mq = window.matchMedia("(max-width: 700px)");
+    const sync = () => setMobileNav(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (!mobileNav) return;
+    const el = pillBtnRefs.current[tab];
+    el?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [tab, mobileNav]);
+
+  useEffect(() => {
+    if (!isInView || mobileNav) return;
 
     const interval = setInterval(() => {
       setTab((prev) => {
@@ -83,10 +99,10 @@ export default function PortalTabsAccountingMalta() {
         const nextIndex = (currentIndex + 1) % TAB_ORDER.length;
         return TAB_ORDER[nextIndex];
       });
-    }, 4000); // Switch every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
-  }, [isInView]);
+  }, [isInView, mobileNav]);
 
   return (
     <section ref={sectionRef} className="sel-section sct-dark entrance-fade-up">
@@ -116,6 +132,9 @@ export default function PortalTabsAccountingMalta() {
             return (
               <button
                 key={key}
+                ref={(node) => {
+                  pillBtnRefs.current[key] = node;
+                }}
                 type="button"
                 role="tab"
                 aria-selected={active}
