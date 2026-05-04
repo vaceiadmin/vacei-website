@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { CLIENT_ONBOARDING_URL } from "@/lib/external-links";
 
 export default function PricingSection() {
   const { t } = useTranslation("services");
@@ -229,9 +230,9 @@ export default function PricingSection() {
           </div>
 
           <div className="pp-cta-row">
-            <Link href="/contact" className="pp-btn pp-btn-primary" id="ppCta">
+            <a href={CLIENT_ONBOARDING_URL} className="pp-btn pp-btn-primary" id="ppCta">
               {activePkg.cta}
-            </Link>
+            </a>
             <Link href="/contact" className="pp-btn pp-btn-outline">
               {t("bookkeeping.pricing.viewAll")}
             </Link>
@@ -259,9 +260,9 @@ export default function PricingSection() {
               {t("bookkeeping.pricing.ctaDesc")}
             </p>
           </div>
-          <Link href="/contact" className="pcta-btn">
+          <a href={CLIENT_ONBOARDING_URL} className="pcta-btn">
             {t("bookkeeping.pricing.ctaBtn")}
-          </Link>
+          </a>
         </div>
       </div>
     </section>

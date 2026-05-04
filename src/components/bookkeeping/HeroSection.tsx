@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { CALENDLY_DEMO_URL, CLIENT_ONBOARDING_URL } from "@/lib/external-links";
 
 export default function HeroSection() {
   const { t } = useTranslation("services");
@@ -48,11 +48,16 @@ export default function HeroSection() {
           </p>
           <div className="cta-stack">
             <div className="cta-row">
-              <Link href="/contact" className="btn-primary">
+              <a href={CLIENT_ONBOARDING_URL} className="btn-primary">
                 {t("bookkeeping.hero.btnPrimary")}
                 <ArrowRight size={16} />
-              </Link>
-              <a href="#demo" className="btn-outline-light">
+              </a>
+              <a
+                href={CALENDLY_DEMO_URL}
+                className="btn-outline-light"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Play size={16} fill="currentColor" />
                 {t("bookkeeping.hero.btnOutline")}
               </a>

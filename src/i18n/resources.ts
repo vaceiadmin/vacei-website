@@ -50,6 +50,17 @@ import nlPagesContent from "@/i18n/locales/nl/pages-content.json";
 import nlPagesPricingExtra from "@/i18n/locales/nl/pages-pricing-extra.json";
 import nlServices from "@/i18n/locales/nl/services.json";
 
+import enAccountingMalta from "@/i18n/locales/en/accounting-malta.json";
+import frAccountingMalta from "@/i18n/locales/fr/accounting-malta.json";
+import deAccountingMalta from "@/i18n/locales/de/accounting-malta.json";
+import esAccountingMalta from "@/i18n/locales/es/accounting-malta.json";
+import itAccountingMalta from "@/i18n/locales/it/accounting-malta.json";
+import nlAccountingMalta from "@/i18n/locales/nl/accounting-malta.json";
+
+const enServicesWithAccountingMalta = mergeLocaleJson(enServices, {
+  accountingMalta: enAccountingMalta,
+});
+
 /** English pages = scaffold + route copy + pricing blocks (`pages-pricing-extra.json`). */
 const enPages = mergeLocaleJson(mergeLocaleJson(enPagesCore, enPagesContent), enPagesPricingExtra);
 
@@ -73,37 +84,47 @@ export const resources = {
     common: enCommon, 
     home: enHome, 
     pages: enPages,
-    services: enServices
+    services: enServicesWithAccountingMalta,
   },
   fr: {
     common: mergeLocaleJson(enCommon, frCommon),
     home: mergeLocaleJson(enHome, frHome),
     pages: frPages,
-    services: mergeLocaleJson(enServices, frServices),
+    services: mergeLocaleJson(mergeLocaleJson(enServices, frServices), {
+      accountingMalta: mergeLocaleJson(enAccountingMalta, frAccountingMalta),
+    }),
   },
   de: {
     common: mergeLocaleJson(enCommon, deCommon),
     home: mergeLocaleJson(enHome, deHome),
     pages: dePages,
-    services: mergeLocaleJson(enServices, deServices),
+    services: mergeLocaleJson(mergeLocaleJson(enServices, deServices), {
+      accountingMalta: mergeLocaleJson(enAccountingMalta, deAccountingMalta),
+    }),
   },
   es: {
     common: mergeLocaleJson(enCommon, esCommon),
     home: mergeLocaleJson(enHome, esHome),
     pages: esPages,
-    services: mergeLocaleJson(enServices, esServices),
+    services: mergeLocaleJson(mergeLocaleJson(enServices, esServices), {
+      accountingMalta: mergeLocaleJson(enAccountingMalta, esAccountingMalta),
+    }),
   },
   it: {
     common: mergeLocaleJson(enCommon, itCommon),
     home: mergeLocaleJson(enHome, itHome),
     pages: itPages,
-    services: mergeLocaleJson(enServices, itServices),
+    services: mergeLocaleJson(mergeLocaleJson(enServices, itServices), {
+      accountingMalta: mergeLocaleJson(enAccountingMalta, itAccountingMalta),
+    }),
   },
   nl: {
     common: mergeLocaleJson(enCommon, nlCommon),
     home: mergeLocaleJson(enHome, nlHome),
     pages: nlPages,
-    services: mergeLocaleJson(enServices, nlServices),
+    services: mergeLocaleJson(mergeLocaleJson(enServices, nlServices), {
+      accountingMalta: mergeLocaleJson(enAccountingMalta, nlAccountingMalta),
+    }),
   },
 } satisfies Resource;
 

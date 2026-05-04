@@ -402,6 +402,7 @@ const Navbar = () => {
         ? [
             { label: t("nav.resource.insights"), href: "/insights" },
             { label: t("nav.resource.bookkeeping"), href: "/bookkeeping" },
+            { label: t("nav.resource.accountingMalta"), href: "/accounting-malta" },
             { label: t("nav.product.aiReview"), href: "/ai-review" },
             { label: t("nav.resource.howItWorks"), href: "/how-it-works" },
             { label: t("nav.resource.about"), href: "/about" },
@@ -413,6 +414,7 @@ const Navbar = () => {
         : [
             { label: t("nav.resource.insights"), href: "/insights" },
             { label: t("nav.resource.bookkeeping"), href: "/bookkeeping" },
+            { label: t("nav.resource.accountingMalta"), href: "/accounting-malta" },
             { label: t("nav.product.aiReview"), href: "/ai-review" },
             { label: t("nav.resource.howItWorks"), href: "/how-it-works" },
             { label: t("nav.resource.about"), href: "/about" },

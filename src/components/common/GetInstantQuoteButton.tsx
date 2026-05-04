@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import LocalizedLink from '@/components/common/LocalizedLink'
+import { CALENDLY_DEMO_URL, CLIENT_ONBOARDING_URL } from '@/lib/external-links'
 
 interface GetInstantQuoteButtonProps {
   hasShadow?: boolean
@@ -33,7 +34,7 @@ const GetInstantQuoteButton = ({
   if (variant === 'custom') {
     return (
       <LocalizedLink
-        href={href || "https://client.vacei.com/onboarding"}
+        href={href || CLIENT_ONBOARDING_URL}
         className={`
           inline-flex items-center gap-2 px-6 py-3 rounded-full transition-all text-[15px] font-medium 
           ${bgColor ? '' : 'bg-primary-blue hover:bg-primary-blue-hover'}
@@ -59,7 +60,7 @@ const GetInstantQuoteButton = ({
   if (variant === 'book-demo') {
     return (
       <Link
-        href={href || "https://calendly.com/vacei-info/new-meeting"}
+        href={href || CALENDLY_DEMO_URL}
         className={`
           inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium transform hover:-translate-y-0.5
           ${hasShadow ? 'shadow-[0_4px_30px_var(--primary-blue-shadow)] hover:shadow-[0_6px_40px_var(--primary-blue-shadow)]' : ''}
@@ -76,7 +77,7 @@ const GetInstantQuoteButton = ({
 
   return (
     <LocalizedLink
-      href={href || "https://client.vacei.com/onboarding"}
+      href={href || CLIENT_ONBOARDING_URL}
       className={`
         inline-flex items-center gap-2 bg-primary-blue hover:bg-primary-blue-hover text-white px-6 py-3 rounded-full transition-all text-[15px] font-medium 
         ${hasShadow ? 'shadow-[0_4px_30px_var(--primary-blue-shadow)] hover:shadow-[0_6px_40px_var(--primary-blue-shadow)] transform hover:-translate-y-0.5' : ''}
