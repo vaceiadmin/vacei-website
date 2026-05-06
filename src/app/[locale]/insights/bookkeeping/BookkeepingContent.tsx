@@ -399,6 +399,95 @@ export default function BookkeepingContent({ relatedBlogs = [] }: { relatedBlogs
               />
             </section>
 
+            {/* FRESHBOOKS */}
+            <section id="freshbooks" className="pt-12">
+              <h2 className="font-lora text-3xl md:text-4xl font-bold text-gray-900 mb-6">4. FreshBooks — Best for Service Businesses</h2>
+              <SoftwareCard 
+                id="card-fresh"
+                name="FreshBooks"
+                logo="F"
+                logoBg="bg-[#1DB954]"
+                tagline="Invoicing-first accounting for freelancers, consultants, and service businesses"
+                rating="4.1"
+                badge="✨ Easiest to Use"
+                badgeClass="bg-emerald-50 text-emerald-700"
+                scores={[
+                  { label: "Ease of use", value: 9.5 },
+                  { label: "VAT compliance", value: 7.2 },
+                  { label: "Reporting", value: 7.5 },
+                  { label: "Value", value: 8.4 }
+                ]}
+                pros={[
+                  "Simplest, most intuitive interface available",
+                  "Excellent invoicing and client management",
+                  "Time tracking built in — great for consultants",
+                  "Good mobile app for receipts on the go"
+                ]}
+                cons={[
+                  "Not built for double-entry accounting — limited for companies",
+                  "Weak Malta VAT support — requires workarounds",
+                  "No meaningful bank reconciliation workflow",
+                  "Not suitable for statutory audit preparation"
+                ]}
+                pricing={{ main: "From €14/mo", note: "Lite plan" }}
+                bestFor="Freelancers, consultants, and very small service businesses in Malta who primarily need invoicing and basic expense tracking."
+              />
+            </section>
+
+            {/* WAVE */}
+            <section id="wave" className="pt-12">
+              <h2 className="font-lora text-3xl md:text-4xl font-bold text-gray-900 mb-6">5. Wave — Best Free Option</h2>
+              <SoftwareCard 
+                id="card-wave"
+                name="Wave"
+                logo="W"
+                logoBg="bg-[#0C6EFD]"
+                tagline="Free cloud accounting — genuinely useful for the very smallest businesses"
+                rating="3.6"
+                badge="💰 Free"
+                badgeClass="bg-pink-50 text-pink-700"
+                pros={[
+                  "Completely free for core accounting features",
+                  "Decent invoicing and receipt scanning",
+                  "Reasonable reports for a free tool"
+                ]}
+                cons={[
+                  "No meaningful Malta VAT support",
+                  "No direct bank feeds for Maltese banks",
+                  "Limited accountant collaboration",
+                  "Not suitable for statutory compliance",
+                  "Support is poor — community forum only"
+                ]}
+                pricing={{ main: "Free", note: "Core accounting" }}
+                bestFor="Sole traders and very early-stage Malta businesses who need basic expense tracking and invoicing. Not recommended for limited companies."
+              />
+            </section>
+
+            {/* MISSING SECTION */}
+            <section id="missing" className="reveal opacity-0 translate-y-4 pt-16">
+              <h2 className="font-lora text-3xl font-bold text-gray-900 mb-6">What Every Software Option Is Missing</h2>
+              <div className="prose prose-slate max-w-none prose-p:text-gray-600 prose-p:leading-[1.8] prose-p:text-[17px] prose-strong:text-gray-900 prose-strong:font-bold">
+                <p>Here's the uncomfortable truth about every tool on this list: they are all software. And software does not do your bookkeeping. You do. Or someone competent at your company does. Or you pay an accountant to do it using the software as their tool.</p>
+                <p>Most Malta businesses using self-managed accounting software have at least one of these problems:</p>
+                <ul className="grid grid-cols-1 gap-2 list-none p-0 mt-6">
+                  {[
+                    "Transactions categorised incorrectly — sometimes for months",
+                    "VAT returns calculated on inaccurate data — leading to penalties",
+                    "Bank accounts not reconciled — so cash doesn't match the books",
+                    "Management accounts that don't exist — leaving you blind",
+                    "Year-end panic when records aren't in order for the auditor"
+                  ].map((err, i) => (
+                    <li key={i} className="flex gap-4 p-4 bg-red-50/50 rounded-xl border border-red-100/50 text-gray-700 text-[15px]">
+                      <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center text-red-600 shrink-0 mt-0.5"><X size={12} strokeWidth={3} /></div>
+                      {err}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-8">The software isn't the problem. The absence of a competent person maintaining it consistently is.</p>
+              </div>
+            </section>
+
+
             {/* COMPARISON TABLE */}
             <section id="comparison" className="reveal opacity-0 translate-y-4 pt-12">
               <h2 className="font-lora text-3xl font-bold text-gray-900 mb-8">Head-to-Head Comparison</h2>
@@ -484,7 +573,27 @@ export default function BookkeepingContent({ relatedBlogs = [] }: { relatedBlogs
               </div>
             </section>
 
+            {/* VERDICT */}
+            <section id="verdict" className="reveal opacity-0 translate-y-4 pb-16">
+              <h2 className="font-lora text-3xl font-bold text-gray-900 mb-8">Our Verdict: Which Should You Choose?</h2>
+              <div className="space-y-6">
+                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-4">If you're choosing software only</h4>
+                  <p className="text-[17px] text-gray-600 leading-relaxed">
+                    Use <span className="font-bold text-gray-900">QuickBooks Online</span> for most Malta businesses — it's VACEI's platform of choice, with the best reporting depth and VAT compliance. <span className="font-bold text-gray-900">Xero</span> is an excellent alternative with a cleaner interface, and a VACEI direct integration is coming. If you have payroll complexity, look at Sage. If you're a freelancer, FreshBooks is the simplest entry point.
+                  </p>
+                </div>
+                <div className="bg-primary-blue/5 border border-primary-blue/10 rounded-2xl p-8">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest text-primary-blue/60 mb-4">If you want your accounting actually handled</h4>
+                  <p className="text-[17px] text-gray-600 leading-relaxed">
+                    <span className="font-bold text-gray-900">VACEI</span> is the only option on this list where a qualified team manages everything for you. The portal gives you the visibility you'd get from logging into Xero — without any of the work. For Malta businesses that want clean books, accurate VAT returns, and monthly management accounts without doing it themselves, VACEI is the right answer.
+                  </p>
+                </div>
+              </div>
+            </section>
+
             {/* FAQ */}
+
             <section id="faq" className="reveal opacity-0 translate-y-4 pb-12">
               <h2 className="font-lora text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
               <div className="space-y-3">
@@ -528,9 +637,13 @@ export default function BookkeepingContent({ relatedBlogs = [] }: { relatedBlogs
                   { label: "QuickBooks Online", href: "#quickbooks", num: "1" },
                   { label: "Xero", href: "#xero", num: "2" },
                   { label: "Sage Business Cloud", href: "#sage", num: "3" },
+                  { label: "FreshBooks", href: "#freshbooks", num: "4" },
+                  { label: "Wave", href: "#wave", num: "5" },
                   { label: "Comparison Table", href: "#comparison", num: "→" },
+                  { label: "Missing Logic", href: "#missing", num: "!" },
                   { label: "VACEI Model", href: "#vacei", num: "★" },
                   { label: "Verdict & FAQs", href: "#faq", num: "→" },
+
                 ].map(item => (
                   <a key={item.href} href={item.href} className="toc-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-500 hover:bg-primary-blue/5 hover:text-primary-blue transition-all border-l-2 border-transparent [&.active]:bg-primary-blue/5 [&.active]:text-primary-blue [&.active]:border-primary-blue [&.active]:font-bold">
                     <span className="text-[10px] w-4 opacity-50">{item.num}</span>
