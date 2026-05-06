@@ -14,19 +14,45 @@ interface BlogListingProps {
   blogs: BlogPost[];
 }
 
+const STATIC_INSIGHTS: BlogPost[] = [
+  {
+    slug: 'bookkeeping',
+    title: 'Best Bookkeeping Software for Malta Businesses in 2026',
+    date: '2026-05-06',
+    excerpt:
+      "Xero, QuickBooks, Sage, FreshBooks, or Wave? We review the best bookkeeping software for Malta businesses — and explain why software alone isn't enough.",
+    content: '',
+    readingTime: '8 min read',
+    tags: ['Bookkeeping', 'Software', 'Malta'],
+    author: 'VACEI Team',
+  },
+];
+
 const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
   const { isIPhone, isLowPerformance } = usePerformance();
   const { t } = usePagesTranslation('insights');
 
+  const mergedBlogs = React.useMemo(() => {
+    const seen = new Set<string>();
+    const merged: BlogPost[] = [];
+    for (const b of [...STATIC_INSIGHTS, ...blogs]) {
+      if (!b?.slug) continue;
+      if (seen.has(b.slug)) continue;
+      seen.add(b.slug);
+      merged.push(b);
+    }
+    return merged;
+  }, [blogs]);
+
   // Get all unique tags
   const allTags = Array.from(
-    new Set(blogs.flatMap(blog => blog.tags || []))
+    new Set(mergedBlogs.flatMap(blog => blog.tags || []))
   ).sort();
 
   // Filter blogs based on search and tag
-  const filteredBlogs = blogs.filter(blog => {
+  const filteredBlogs = mergedBlogs.filter(blog => {
     const matchesSearch = blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          blog.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTag = !selectedTag || blog.tags?.includes(selectedTag);
@@ -177,7 +203,7 @@ const BlogListing: React.FC<BlogListingProps> = ({ blogs }) => {
           {filteredBlogs.length > 0 && (
             <div className="text-center mt-16">
               <p className="text-sm text-text-gray font-sans">
-                {t('showingArticles', { current: filteredBlogs.length, total: blogs.length })}
+                {t('showingArticles', { current: filteredBlogs.length, total: mergedBlogs.length })}
               </p>
             </div>
           )}
