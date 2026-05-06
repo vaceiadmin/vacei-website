@@ -16,7 +16,7 @@ export default function PricingSection() {
       title: t("bookkeeping.pricing.pkg0.title"),
       price: (
         <>
-          €350<sub>{t("bookkeeping.pricing.month")}</sub>
+          €140<sub>{t("bookkeeping.pricing.month")}</sub>
         </>
       ),
       desc: t("bookkeeping.pricing.pkg0.desc"),
@@ -39,7 +39,7 @@ export default function PricingSection() {
       title: t("bookkeeping.pricing.pkg1.title"),
       price: (
         <>
-          €600<sub>{t("bookkeeping.pricing.month")}</sub>
+          €350<sub>{t("bookkeeping.pricing.month")}</sub>
         </>
       ),
       desc: t("bookkeeping.pricing.pkg1.desc"),
@@ -65,7 +65,7 @@ export default function PricingSection() {
       title: t("bookkeeping.pricing.pkg2.title"),
       price: (
         <>
-          €950<sub>{t("bookkeeping.pricing.month")}</sub>
+          €700<sub>{t("bookkeeping.pricing.month")}</sub>
         </>
       ),
       desc: t("bookkeeping.pricing.pkg2.desc"),
@@ -84,32 +84,6 @@ export default function PricingSection() {
       cta: t("bookkeeping.pricing.pkg2.cta"),
       badge: t("bookkeeping.pricing.pkg2.badge"),
       pos: t("bookkeeping.pricing.pkg2.pos"),
-    },
-    {
-      id: 3,
-      label: t("bookkeeping.pricing.pkg3.label"),
-      title: t("bookkeeping.pricing.pkg3.title"),
-      price: (
-        <>
-          €1,800<sub>{t("bookkeeping.pricing.month")}</sub>
-        </>
-      ),
-      desc: t("bookkeeping.pricing.pkg3.desc"),
-      includes: [
-        t("bookkeeping.pricing.pkg3.inc1"),
-        t("bookkeeping.pricing.pkg3.inc2"),
-        t("bookkeeping.pricing.pkg3.inc3"),
-        t("bookkeeping.pricing.pkg3.inc4"),
-        t("bookkeeping.pricing.pkg3.inc5"),
-        t("bookkeeping.pricing.pkg3.inc6"),
-        t("bookkeeping.pricing.pkg3.inc7"),
-        t("bookkeeping.pricing.pkg3.inc8"),
-        t("bookkeeping.pricing.pkg3.inc9"),
-      ].filter(Boolean),
-      bestFor: t("bookkeeping.pricing.pkg3.bestFor"),
-      cta: t("bookkeeping.pricing.pkg3.cta"),
-      badge: t("bookkeeping.pricing.pkg3.badge"),
-      pos: t("bookkeeping.pricing.pkg3.pos"),
     },
   ];
 

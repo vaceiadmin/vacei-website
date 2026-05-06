@@ -1538,7 +1538,7 @@
 
 .price-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-top: 44px;
 }
@@ -1593,6 +1593,7 @@
   border-radius: 100px;
   white-space: nowrap;
   letter-spacing: .04em;
+  z-index: 10;
 }
 
 .p-name {

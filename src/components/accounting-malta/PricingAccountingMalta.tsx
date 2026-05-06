@@ -92,31 +92,6 @@ export default function PricingAccountingMalta() {
               </li>
             </ul>
           </div>
-          <div className="p-card">
-            <div className="p-name">{t(`${p}p4Name`)}</div>
-            <div className="p-desc">{t(`${p}p4Desc`)}</div>
-            <div className="p-price">{t(`${p}p4Price`)}</div>
-            <div className="p-from">{t(`${p}p4From`)}</div>
-            <div className="p-div" />
-            <ul className="p-feats">
-              <li className="pf">
-                <span className="pf-dot">✓</span>
-                {t(`${p}p4f1`)}
-              </li>
-              <li className="pf">
-                <span className="pf-dot">✓</span>
-                {t(`${p}p4f2`)}
-              </li>
-              <li className="pf">
-                <span className="pf-dot">✓</span>
-                {t(`${p}p4f3`)}
-              </li>
-              <li className="pf">
-                <span className="pf-dot">✓</span>
-                {t(`${p}p4f4`)}
-              </li>
-            </ul>
-          </div>
         </div>
         <p className="accounting-malta-pricing-foot">
           {t(`${p}foot`)}{" "}
