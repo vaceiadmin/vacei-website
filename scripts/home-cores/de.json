@@ -334,8 +334,8 @@
     "videoNowPlaying": "Wird abgespielt",
     "videoModalCloseAria": "Video schließen",
     "videoPlaylist": [
-      { "title": "Plattform-Einführung" },
-      { "title": "Compliance-Überblick" }
+      { "title": "Das moderne Unternehmen" },
+      { "title": "Wie KI das Gleichgewicht zwischen Beruf und Privatleben wirklich verbessert" }
     ],
     "resources": [
       {
@@ -346,9 +346,9 @@
       },
       {
         "type": "Video",
-        "category": "Compliance",
-        "title": "3-Minuten-Guide: europäische Corporate Compliance",
-        "desc": "Kurz erklärt: welche Dokumente und Fristen in der EU relevant sind."
+        "category": "Insights",
+        "title": "Zwei kurze Videos von Vacei",
+        "desc": "Was schiefgehen kann, wenn Wachstum ohne die passenden Grundlagen läuft, und wie KI Teams spürbar entlasten kann—wählen Sie einen Clip in der Playlist unten."
       },
       {
         "type": "Leitfaden",

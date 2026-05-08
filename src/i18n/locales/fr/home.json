@@ -377,10 +377,10 @@
     "videoModalCloseAria": "Fermer la vidéo",
     "videoPlaylist": [
       {
-        "title": "Introduction à la plateforme"
+        "title": "L’entreprise moderne"
       },
       {
-        "title": "Parcours conformité"
+        "title": "Comment l’IA améliore réellement l’équilibre vie pro / vie perso"
       }
     ],
     "resources": [
@@ -392,9 +392,9 @@
       },
       {
         "type": "Vidéo",
-        "category": "Conformité",
-        "title": "Guide 3 minutes : conformité des sociétés en Europe",
-        "desc": "Les documents et échéances à maîtriser lorsque vous opérez dans l’UE."
+        "category": "Insights",
+        "title": "Deux courtes vidéos Vacei",
+        "desc": "Ce qui peut se gripper lorsqu’une entreprise mise sur la taille sans les fondations adaptées, et comment l’IA peut soulager concrètement les équipes : choisissez une vidéo dans la playlist ci-dessous."
       },
       {
         "type": "Guide",

@@ -42,7 +42,7 @@ const InsightsAndResourcesSection = ({ isDark = true }: { isDark?: boolean }) =>
       },
       {
         icon: <Play className={cn("w-5 h-5 pl-0.5", isDark ? "text-blue-400" : "text-blue-600")} />,
-        href: "#insights-video-gallery",
+        href: "/#insights-video-gallery",
         color: "blue",
         ctaWatchVideo: true,
       },
@@ -154,8 +154,12 @@ const InsightsAndResourcesSection = ({ isDark = true }: { isDark?: boolean }) =>
               </div>
             );
 
+            const href = item.href || "#";
+            /** Next.js defaults to scrolling to top on navigation; that prevents # targets from aligning. */
+            const disableScrollReset = href.includes("#");
+
             return (
-              <LocalizedLink key={index} href={item.href || "#"}>
+              <LocalizedLink key={index} href={href} scroll={disableScrollReset ? false : undefined}>
                 {CardContent}
               </LocalizedLink>
             );

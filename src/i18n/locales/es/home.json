@@ -377,10 +377,10 @@
     "videoModalCloseAria": "Cerrar vídeo",
     "videoPlaylist": [
       {
-        "title": "Introducción a la plataforma"
+        "title": "La empresa moderna"
       },
       {
-        "title": "Recorrido de cumplimiento"
+        "title": "Cómo la IA mejora de verdad el equilibrio entre vida laboral y personal"
       }
     ],
     "resources": [
@@ -392,9 +392,9 @@
       },
       {
         "type": "Vídeo",
-        "category": "Cumplimiento",
-        "title": "Guía de 3 minutos: cumplimiento societario en Europa",
-        "desc": "Qué documentos y plazos debe gestionar al operar en la UE."
+        "category": "Insights",
+        "title": "Dos vídeos breves de Vacei",
+        "desc": "Qué suele fallar al escalar sin los cimientos adecuados y cómo la IA puede aliviar de forma real la carga del equipo — elija uno en la lista de reproducción de abajo."
       },
       {
         "type": "Guía",

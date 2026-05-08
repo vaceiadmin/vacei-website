@@ -334,8 +334,8 @@
     "videoNowPlaying": "Nu aan het afspelen",
     "videoModalCloseAria": "Video sluiten",
     "videoPlaylist": [
-      { "title": "Platformintroductie" },
-      { "title": "Compliance-rondleiding" }
+      { "title": "Het moderne bedrijf" },
+      { "title": "Hoe AI het werk-privé-evenwicht echt verbetert" }
     ],
     "resources": [
       {
@@ -346,9 +346,9 @@
       },
       {
         "type": "Video",
-        "category": "Compliance",
-        "title": "3-minutengids: Europese corporate compliance",
-        "desc": "Een kort overzicht van documenten en deadlines bij activiteiten in de EU."
+        "category": "Insights",
+        "title": "Twee korte video’s van Vacei",
+        "desc": "Wat spaak kan lopen bij schalen zonder de juiste basis, en hoe AI teams merkbaar kan ontlasten — kies een video in de afspeellijst hieronder."
       },
       {
         "type": "Gids",

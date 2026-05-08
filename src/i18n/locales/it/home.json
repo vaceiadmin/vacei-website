@@ -377,10 +377,10 @@
     "videoModalCloseAria": "Chiudi video",
     "videoPlaylist": [
       {
-        "title": "Introduzione alla piattaforma"
+        "title": "L’impresa moderna"
       },
       {
-        "title": "Tour sulla conformità"
+        "title": "Come l'intelligenza artificiale migliora davvero l'equilibrio vita-lavoro"
       }
     ],
     "resources": [
@@ -392,9 +392,9 @@
       },
       {
         "type": "Video",
-        "category": "Conformità",
-        "title": "Guida di 3 minuti alla conformità societaria europea",
-        "desc": "Documenti e scadenze da gestire quando operate nell’UE."
+        "category": "Insight",
+        "title": "Due video veloci dal team Vacei",
+        "desc": "Cosa si rompe quando si scala senza basi solide e come l'IA può alleggerire davvero il carico sulla squadra: scegli il video nell'playlist sotto."
       },
       {
         "type": "Guida",

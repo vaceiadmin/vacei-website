@@ -339,8 +339,8 @@
     "videoNowPlaying": "Now playing",
     "videoModalCloseAria": "Close video",
     "videoPlaylist": [
-      { "title": "Platform introduction" },
-      { "title": "Compliance walkthrough" }
+      { "title": "The Modern Business" },
+      { "title": "How AI Actually Improves Work-Life Balance" }
     ],
     "resources": [
       {
@@ -351,9 +351,9 @@
       },
       {
         "type": "Video",
-        "category": "Compliance",
-        "title": "3-minute guide to European corporate compliance",
-        "desc": "Watch a quick breakdown of exactly what documents and deadlines you need to manage when operating in the EU."
+        "category": "Insights",
+        "title": "Two short explainers from Vacei",
+        "desc": "What breaks when scaling without the right foundations, and how AI can meaningfully ease pressure on teams—pick a track in the playlist below."
       },
       {
         "type": "Guide",
