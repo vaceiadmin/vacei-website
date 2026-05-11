@@ -271,13 +271,33 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
 
       <div
         className={cn(
-          "relative mt-0 w-full border-b border-t",
+          "relative mt-0 w-full overflow-hidden border-b border-t",
           isDark
-            ? "border-slate-800 border-t-slate-800 bg-slate-950"
-            : "border-slate-200/70 border-t-slate-200/80 bg-[#F8F9FA] shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"
+            ? "border-white/10 border-t-white/10 bg-black"
+            : "border-slate-100 border-t-slate-100 bg-[#FAFBFF]"
         )}
       >
-        <div className="mx-auto flex w-full max-w-7xl min-w-0">
+        {isDark ? (
+          <>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-[45%] bg-linear-to-r from-blue-500/12 via-blue-500/5 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-[45%] bg-linear-to-l from-blue-500/12 via-blue-500/5 to-transparent" />
+            <div className="pointer-events-none absolute right-[-15%] top-1/2 h-[140%] max-h-[120px] w-[min(55%,280px)] -translate-y-1/2 rounded-full bg-blue-500/15 blur-[48px]" />
+            <div className="pointer-events-none absolute left-[-10%] bottom-0 h-[90px] w-[200px] rounded-full bg-blue-600/10 blur-2xl" />
+            <div className="pointer-events-none absolute right-[-10%] bottom-0 h-[90px] w-[200px] rounded-full bg-blue-600/10 blur-2xl" />
+          </>
+        ) : (
+          <>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-[40%] bg-linear-to-r from-blue-500/10 via-blue-400/5 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-[40%] bg-linear-to-l from-blue-500/10 via-blue-400/5 to-transparent" />
+            <div className="pointer-events-none absolute left-[-6%] top-[-120%] h-[200px] w-[240px] rounded-full bg-blue-500/10 blur-3xl" />
+            <div className="pointer-events-none absolute right-[-6%] top-[-120%] h-[200px] w-[240px] rounded-full bg-blue-500/10 blur-3xl" />
+            <div className="pointer-events-none absolute left-[8%] top-[-80%] h-[140px] w-[180px] rounded-full bg-sky-400/10 blur-[56px]" />
+            <div className="pointer-events-none absolute right-[8%] top-[-80%] h-[140px] w-[180px] rounded-full bg-sky-400/10 blur-[56px]" />
+            <div className="pointer-events-none absolute -bottom-16 left-[-8%] h-[120px] w-[min(55%,260px)] rounded-full bg-violet-400/8 blur-[48px]" />
+            <div className="pointer-events-none absolute -bottom-16 right-[-8%] h-[120px] w-[min(55%,260px)] rounded-full bg-violet-400/8 blur-[48px]" />
+          </>
+        )}
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl min-w-0">
           {serviceStripItems.map(({ key, Icon }, index) => (
             <div
               key={key}
