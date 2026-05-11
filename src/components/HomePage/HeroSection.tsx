@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import LocalizedLink from "@/components/common/LocalizedLink";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { useTranslation } from "react-i18next";
@@ -48,7 +48,9 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
 
         <div className="mt-4 max-w-xl space-y-3 sm:mt-6 sm:space-y-4">
           <p className={heroBodyClass}>{t("hero.body")}</p>
-          <p className={heroBodyClass}>{t("hero.body2")}</p>
+          {String(t("hero.body2")).trim() ? (
+            <p className={heroBodyClass}>{t("hero.body2")}</p>
+          ) : null}
         </div>
 
             <div className="mb-6 mt-8 flex w-full flex-col gap-3 sm:mb-8 sm:mt-10 sm:flex-row sm:gap-4 sm:w-auto">
@@ -80,45 +82,35 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
             </div>
 
             <div className="hide-scrollbar flex w-full flex-row flex-wrap items-center gap-x-5 gap-y-3 overflow-x-auto pb-1 sm:gap-x-10 sm:pb-0">
-              <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></div>
+              {(["benefit1", "benefit2", "benefit3"] as const).map((key) => (
+                <div key={key} className="flex shrink-0 items-center gap-2.5">
+                  <div
+                    className={cn(
+                      "flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border",
+                      isDark
+                        ? "border-white/15 bg-white/6"
+                        : "border-slate-200/90 bg-white"
+                    )}
+                  >
+                    <Check
+                      className={cn(
+                        "h-2.5 w-2.5",
+                        isDark ? "text-blue-400" : "text-primary-blue"
+                      )}
+                      strokeWidth={2.5}
+                      aria-hidden
+                    />
+                  </div>
+                  <span
+                    className={cn(
+                      "text-[14px] font-medium leading-none",
+                      isDark ? "text-gray-400" : "text-slate-600"
+                    )}
+                  >
+                    {t(`hero.${key}`)}
+                  </span>
                 </div>
-                <span
-                  className={cn(
-                    "text-[14px] font-medium leading-none",
-                    isDark ? "text-gray-400" : "text-slate-600"
-                  )}
-                >
-                  {t("hero.benefit1")}
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></div>
-                </div>
-                <span
-                  className={cn(
-                    "text-[14px] font-medium leading-none",
-                    isDark ? "text-gray-400" : "text-slate-600"
-                  )}
-                >
-                  {t("hero.benefit2")}
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5 shrink-0">
-                <div className="w-5 h-5 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></div>
-                </div>
-                <span
-                  className={cn(
-                    "text-[14px] font-medium leading-none",
-                    isDark ? "text-gray-400" : "text-slate-600"
-                  )}
-                >
-                  {t("hero.benefit3")}
-                </span>
-              </div>
+              ))}
             </div>
           </div>
 
