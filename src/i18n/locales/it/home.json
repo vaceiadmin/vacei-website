@@ -10,6 +10,12 @@
     "benefit1": "Esperto dedicato",
     "benefit2": "Una piattaforma",
     "benefit3": "Visibilità in tempo reale",
+    "serviceStrip": {
+      "bookkeeping": "Contabilità",
+      "audit": "Revisione",
+      "payroll": "Payroll",
+      "incorporation": "Costituzione"
+    },
     "marquee": [
       "Costituzione",
       "Contabilità",

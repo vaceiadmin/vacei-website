@@ -10,6 +10,12 @@
     "benefit1": "Persönlicher Ansprechpartner",
     "benefit2": "Eine Plattform",
     "benefit3": "Echtzeit-Transparenz",
+    "serviceStrip": {
+      "bookkeeping": "Buchhaltung",
+      "audit": "Prüfung",
+      "payroll": "Lohn",
+      "incorporation": "Gründung"
+    },
     "marquee": [
       "Gründung",
       "Buchhaltung",

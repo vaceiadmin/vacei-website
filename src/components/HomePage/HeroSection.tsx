@@ -1,8 +1,15 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import LocalizedLink from "@/components/common/LocalizedLink";
-import { ArrowRight, Check } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  Check,
+  FileText,
+  Search,
+  UserCircle,
+} from "lucide-react";
 import GradientContainer from "@/components/common/GradientContainer";
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { useTranslation } from "react-i18next";
@@ -14,10 +21,13 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
   const [isVideoReady, setIsVideoReady] = useState(false);
   const [hasVideoError, setHasVideoError] = useState(false);
   const { ref: lazyMediaRef, shouldLoad: loadHeroVideo } = useLazyMedia();
-  const trustPillLabels = useMemo(
-    () => (t("hero.trustPillLabels", { returnObjects: true }) as string[]) ?? [],
-    [t]
-  );
+
+  const serviceStripItems = [
+    { key: "bookkeeping" as const, Icon: FileText },
+    { key: "audit" as const, Icon: Search },
+    { key: "payroll" as const, Icon: UserCircle },
+    { key: "incorporation" as const, Icon: Building2 },
+  ];
 
   const heroShellClass = cn(
     "relative flex min-h-0 flex-col justify-center pt-24 pb-10 sm:min-h-[88vh] sm:pt-28 sm:pb-16 lg:min-h-screen overflow-hidden"
@@ -226,6 +236,7 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
         </div>
       )}
 
+      {/* Marquee keyframes (kept for reference; strip below is static)
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes marquee {
@@ -236,10 +247,10 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
           animation: marquee 30s linear infinite;
         }
       `}} />
+      */}
 
-      {/* Bottom Services Strip (Marquee) — extra top padding on md+ clears the absolutely positioned trust strip */}
+      {/* Bottom Services Strip (Marquee) — replaced by static four-column bar
       <div className="relative mt-0 w-full overflow-hidden rounded-b-4xl border-b border-gray-100 bg-white pt-6 sm:pt-8  pb-6 sm:pb-8">
-        {/* Subtle fade effect on the edges */}
         <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
         <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
@@ -252,6 +263,57 @@ const HeroSection = ({ isDark = false }: { isDark?: boolean }) => {
                   <span className="text-slate-700 font-bold text-[13px] sm:text-[14px] uppercase tracking-wider whitespace-nowrap">{service}</span>
                 </div>
               ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      */}
+
+      <div
+        className={cn(
+          "relative mt-0 w-full border-b border-t",
+          isDark
+            ? "border-slate-800 border-t-slate-800 bg-slate-950"
+            : "border-slate-200/70 border-t-slate-200/80 bg-[#F8F9FA] shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"
+        )}
+      >
+        <div className="mx-auto flex w-full max-w-7xl min-w-0">
+          {serviceStripItems.map(({ key, Icon }, index) => (
+            <div
+              key={key}
+              className={cn(
+                "flex min-h-[72px] min-w-0 flex-1 items-center justify-center px-1.5 py-5 sm:min-h-[80px] sm:px-3 sm:py-6 md:px-5",
+                index > 0 &&
+                  (isDark ? "border-l border-slate-800/90" : "border-l border-slate-200/90")
+              )}
+            >
+              <div className="flex min-w-0 max-w-full items-center justify-center gap-2 sm:gap-2.5 md:gap-3">
+                <div
+                  className={cn(
+                    "flex size-9 shrink-0 items-center justify-center rounded-[10px] border sm:size-10",
+                    isDark
+                      ? "border-blue-500/35 bg-blue-500/10"
+                      : "border-blue-200/90 bg-blue-50"
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      "size-[17px] sm:size-[18px]",
+                      isDark ? "text-blue-400" : "text-blue-600"
+                    )}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                </div>
+                <span
+                  className={cn(
+                    "min-w-0 max-w-[9.5rem] text-left text-[10px] font-bold uppercase leading-snug tracking-[0.06em] sm:max-w-none sm:text-[11px] md:text-xs lg:text-[13px]",
+                    isDark ? "text-slate-100" : "text-slate-900"
+                  )}
+                >
+                  {t(`hero.serviceStrip.${key}`)}
+                </span>
+              </div>
             </div>
           ))}
         </div>

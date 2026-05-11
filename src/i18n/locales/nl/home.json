@@ -10,6 +10,12 @@
     "benefit1": "Toegewijde expert",
     "benefit2": "Eén platform",
     "benefit3": "Realtime inzicht",
+    "serviceStrip": {
+      "bookkeeping": "Boekhouding",
+      "audit": "Audit",
+      "payroll": "Loon",
+      "incorporation": "Oprichting"
+    },
     "marquee": [
       "Oprichting",
       "Boekhouding",

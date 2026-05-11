@@ -10,6 +10,12 @@
     "benefit1": "Dedicated Expert",
     "benefit2": "One Platform",
     "benefit3": "Real-time Visibility",
+    "serviceStrip": {
+      "bookkeeping": "Bookkeeping",
+      "audit": "Audit",
+      "payroll": "Payroll",
+      "incorporation": "Incorporation"
+    },
     "marquee": [
       "Incorporation",
       "Bookkeeping",

@@ -10,6 +10,12 @@
     "benefit1": "Expert dédié",
     "benefit2": "Une plateforme",
     "benefit3": "Visibilité en temps réel",
+    "serviceStrip": {
+      "bookkeeping": "Comptabilité",
+      "audit": "Audit",
+      "payroll": "Paie",
+      "incorporation": "Création d’entreprise"
+    },
     "marquee": [
       "Création d’entreprise",
       "Comptabilité",
