@@ -44,8 +44,9 @@ export function getBlogBySlug(slug: string): BlogPost | null {
         const wordCount = content.split(/\s+/).length;
         const readingTime = Math.ceil(wordCount / 200);
 
-        // Extract excerpt from first paragraph
-        const excerpt = content.split('\n\n')[0].replace(/[#*`]/g, '');
+        const excerptFromContent = content.split('\n\n')[0]?.replace(/[#*`]/g, '').trim() || '';
+        const excerpt =
+            typeof data.excerpt === 'string' && data.excerpt.trim() ? data.excerpt.trim() : excerptFromContent;
 
         return {
             slug,
@@ -79,7 +80,9 @@ export function getAllBlogs(): BlogPost[] {
                 const wordCount = content.split(/\s+/).length;
                 const readingTime = Math.ceil(wordCount / 200);
 
-                const excerpt = content.split('\n\n')[0].replace(/[#*`]/g, '');
+                const excerptFromContent = content.split('\n\n')[0]?.replace(/[#*`]/g, '').trim() || '';
+                const excerpt =
+                    typeof data.excerpt === 'string' && data.excerpt.trim() ? data.excerpt.trim() : excerptFromContent;
 
                 return {
                     slug,
