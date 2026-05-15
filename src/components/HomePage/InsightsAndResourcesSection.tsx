@@ -2,11 +2,12 @@
 
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
-import { Play, ArrowRight, FileText, BookOpen } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/common/LocalizedLink";
 import { SectionTitleHero } from "@/components/HomePage/SectionTitleHero";
 import { cn } from "@/lib/utils";
+import { BlogPost } from "@/utils/blog";
 
 const InsightsVideoGallery = dynamic(
   () => import("@/components/HomePage/InsightsVideoGallery"),
@@ -28,36 +29,49 @@ const typeColorClass: Record<string, string> = {
   purple: "text-primary-blue",
 };
 
-const InsightsAndResourcesSection = ({ isDark = true }: { isDark?: boolean }) => {
+const cardColors = ["emerald", "blue", "purple"] as const;
+
+interface InsightsAndResourcesSectionProps {
+  isDark?: boolean;
+  recentBlogs?: BlogPost[];
+}
+
+const InsightsAndResourcesSection = ({
+  isDark = true,
+  recentBlogs = [],
+}: InsightsAndResourcesSectionProps) => {
   const { t } = useTranslation("home");
 
   const resourcesList = useMemo(() => {
-    const raw =
-      (t("insightsResources.resources", { returnObjects: true }) as any[]) || [];
-    const config = [
-      {
-        icon: <FileText className={cn("w-5 h-5", isDark ? "text-emerald-400" : "text-emerald-600")} />,
-        href: "/insights/preparing-for-seamless-audit",
-        color: "emerald",
-      },
-      {
-        icon: <Play className={cn("w-5 h-5 pl-0.5", isDark ? "text-blue-400" : "text-blue-600")} />,
-        href: "/#insights-video-gallery",
-        color: "blue",
-        ctaWatchVideo: true,
-      },
-      {
-        icon: <BookOpen className={cn("w-5 h-5", isDark ? "text-primary-blue" : "text-blue-600")} />,
-        href: "/insights/scaling-operations-checklist",
-        color: "purple",
-      },
-    ];
+    const articleType = t("insightsResources.articleType", { defaultValue: "Article" });
 
-    return raw.map((r, i) => ({
-      ...r,
-      ...config[i],
-    }));
-  }, [t, isDark]);
+    return recentBlogs.slice(0, 3).map((blog, index) => {
+      const color = cardColors[index % cardColors.length];
+      const iconColor =
+        color === "emerald"
+          ? isDark
+            ? "text-emerald-400"
+            : "text-emerald-600"
+          : color === "blue"
+            ? isDark
+              ? "text-blue-400"
+              : "text-blue-600"
+            : isDark
+              ? "text-primary-blue"
+              : "text-blue-600";
+
+      return {
+        slug: blog.slug,
+        type: articleType,
+        category: blog.tags?.[0] || "Insight",
+        title: blog.title,
+        desc: blog.excerpt,
+        href: `/insights/${blog.slug}`,
+        color,
+        icon: <FileText className={cn("w-5 h-5", iconColor)} />,
+      };
+    });
+  }, [recentBlogs, isDark, t]);
 
   return (
     <section className={cn(
@@ -93,9 +107,19 @@ const InsightsAndResourcesSection = ({ isDark = true }: { isDark?: boolean }) =>
           </p>
         </div>
 
-        {/* Grid of Resource Placeholder Cards */}
+        {/* Latest insights from blog pipeline */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {resourcesList.map((item, index) => {
+          {resourcesList.length === 0 ? (
+            <p
+              className={cn(
+                "col-span-full text-center text-sm font-medium",
+                isDark ? "text-slate-500" : "text-slate-400"
+              )}
+            >
+              {t("insightsResources.noPosts", { defaultValue: "No insights published yet." })}
+            </p>
+          ) : null}
+          {resourcesList.map((item) => {
             const CardContent = (
               <div className={cn(
                 "flex flex-col h-full border rounded-3xl p-8 transition-all duration-300 group shadow-2xl hover:shadow-[0_20px_40px_-20px_rgba(59,130,246,0.15)] cursor-pointer",
@@ -146,20 +170,14 @@ const InsightsAndResourcesSection = ({ isDark = true }: { isDark?: boolean }) =>
                     "mt-auto flex items-center gap-2 text-sm font-bold transition-colors",
                     isDark ? "text-slate-300 group-hover:text-white" : "text-slate-500 group-hover:text-blue-600"
                 )}>
-                  {"ctaWatchVideo" in item && item.ctaWatchVideo
-                    ? t("insightsResources.watchVideo")
-                    : t("insightsResources.readMore")}
+                  {t("insightsResources.readMore")}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             );
 
-            const href = item.href || "#";
-            /** Next.js defaults to scrolling to top on navigation; that prevents # targets from aligning. */
-            const disableScrollReset = href.includes("#");
-
             return (
-              <LocalizedLink key={index} href={href} scroll={disableScrollReset ? false : undefined}>
+              <LocalizedLink key={item.slug} href={item.href}>
                 {CardContent}
               </LocalizedLink>
             );

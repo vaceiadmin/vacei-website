@@ -340,6 +340,8 @@
     "viewAll": "View all resources",
     "watchVideo": "Watch video",
     "readMore": "Read more",
+    "articleType": "Article",
+    "noPosts": "No insights published yet.",
     "videoModalEyebrow": "VACEI insights",
     "videoModalHint": "Select a video to play",
     "videoNowPlaying": "Now playing",

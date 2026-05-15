@@ -21,8 +21,13 @@ import CallOptionSection from "./CallOptionSection";
 import WorkspaceEntrySection from "./WorkspaceEntrySection";
 import InsightsAndResourcesSection from "./InsightsAndResourcesSection";
 import FinalSection from "./FinalSection";
+import { BlogPost } from "@/utils/blog";
 
-const HomePage = () => {
+interface HomePageProps {
+  recentBlogs?: BlogPost[];
+}
+
+const HomePage = ({ recentBlogs = [] }: HomePageProps) => {
   // Scroll to hash section on load (e.g. /#process-steps or /#services from navbar)
   useEffect(() => {
     const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
@@ -88,7 +93,7 @@ const HomePage = () => {
       <CallOptionSection isDark={false} />
 
       {/* 17. Insights & Resources (Dark) */}
-      <InsightsAndResourcesSection isDark={true} />
+      <InsightsAndResourcesSection isDark={true} recentBlogs={recentBlogs} />
 
       {/* 18. Final Section (Light) */}
       <FinalSection isDark={false} />
